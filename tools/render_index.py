@@ -21,11 +21,11 @@ for v in plugins:
 lines += ['', '新增快照只读验证见 [docs/expanded-read-validation.json](docs/expanded-read-validation.json)：API Key 环境已识别全部市场条目，并逐项读取插件详情；未调用安装接口或执行 MCP。', '']
 (ROOT / 'README.md').write_text('\n'.join(lines) + '\n')
 
-notices = ['# 来源与许可', '', '各插件内容按原始许可再分发。本仓库没有为所有插件统一改换许可。原始文件、作者字段、版权声明和已附带的 LICENSE / NOTICE 文件保留不变。', '', 'catalog.json 记录每个文件的 SHA-256 和获取来源。LICENSES/ 提供相关标准许可正文；它们不替代各包已有的版权和第三方声明。', '', '| 插件 | 版本 | 原始作者 | 声明的许可 | 来源类型 |', '|---|---|---|---|---|']
+notices = ['# 来源与许可', '', '各插件内容按原始许可再分发。本仓库没有为所有插件统一改换许可。原始作者字段、版权声明和已附带的 LICENSE / NOTICE 文件保留。少数文件按上游 Git 属性统一换行符；未改动代码语义。', '', 'catalog.json 记录每个文件的 SHA-256 和获取来源；originalFileSha256 记录换行符规范化前的哈希。LICENSES/ 提供相关标准许可正文；它们不替代各包已有的版权和第三方声明。', '', '| 插件 | 版本 | 原始作者 | 声明的许可 | 来源类型 |', '|---|---|---|---|---|']
 for v in plugins:
     a = v.get('author') or {}
     author = a.get('name', 'See original plugin manifest') if isinstance(a, dict) else str(a)
     notices.append(f"| {v['name']} | {v['version']} | {author.replace('|', '/')} | {v['declaredLicense']} | {v['sourceKind']} |")
-notices += ['', '## 获取来源', '', '公开源码包来自 https://github.com/openai/plugins，revision 保存在各包的 upstreamGitRevision 字段。部分更新版本来自已安装云端包；后续包直接从 ChatGPT Global 插件服务下载，原始包 ID、版本和归档哈希保存在 catalog.json。', '', '插件文件未修改。仓库仅增加市场、来源说明、标准许可正文与验证工具。带 CC-BY-4.0 的内容保留原作者署名并提供许可链接；GPL 包保留其原始源文件和许可。', '', '标准许可原文：', '', '- MIT：https://opensource.org/license/mit', '- Apache-2.0：https://www.apache.org/licenses/LICENSE-2.0', '- GPL-3.0：https://www.gnu.org/licenses/gpl-3.0.html', '- CC-BY-4.0：https://creativecommons.org/licenses/by/4.0/legalcode', '', '品牌、商标及远程服务权限不因包再分发而改变。作者信息用于注明来源，不表示作者为本缓存仓库背书。', '']
+notices += ['', '## 获取来源', '', '公开源码包来自 https://github.com/openai/plugins，revision 保存在各包的 upstreamGitRevision 字段。部分更新版本来自已安装云端包；后续包直接从 ChatGPT Global 插件服务下载，原始包 ID、版本和归档哈希保存在 catalog.json。', '', '仓库增加市场、来源说明、标准许可正文与验证工具。换行符规范化的文件和包在 catalog.json 中明确记录。带 CC-BY-4.0 的内容保留原作者署名并提供许可链接；GPL 包保留其原始源文件和许可。', '', '标准许可原文：', '', '- MIT：https://opensource.org/license/mit', '- Apache-2.0：https://www.apache.org/licenses/LICENSE-2.0', '- GPL-3.0：https://www.gnu.org/licenses/gpl-3.0.html', '- CC-BY-4.0：https://creativecommons.org/licenses/by/4.0/legalcode', '', '品牌、商标及远程服务权限不因包再分发而改变。作者信息用于注明来源，不表示作者为本缓存仓库背书。', '']
 (ROOT / 'NOTICE.md').write_text('\n'.join(notices))
 print(json.dumps({'packages': len(plugins), 'bytes': byte_count, 'licenses': licenses}, ensure_ascii=False))
