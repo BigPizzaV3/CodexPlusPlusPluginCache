@@ -17,7 +17,9 @@ codex plugin add google-drive@codex-plus-public-cache
 
 API Key 模式可以安装这里的插件包与 Skills。带 `.app.json` 的插件仍可能依赖 ChatGPT 托管连接器；包安装成功不表示远程工具已连接。MCP 服务也可能需要独立凭据或运行环境。
 
-已用 Codex CLI 0.160.1、隔离的 API Key 登录验证：41 个插件全部安装并启用，加载 366 个 Skills，加载错误为 0。未使用 ChatGPT 凭据；未执行云端连接器和 MCP 工具。
+市场条目的授权策略统一设为 `ON_USE`（首次使用时授权）。原生 Codex 安装流程仍可能为启用的 MCP 服务自动打开 OAuth 登录页；这个字段不能保证阻止此行为。仅注册市场不会安装或启用全部插件，建议按需安装。原始插件包文件保持不变。
+
+已用 Codex CLI 0.160.1、隔离的 API Key 登录验证：41 个插件全部安装并启用，加载 366 个 Skills，加载错误为 0。未使用 ChatGPT 凭据；未执行云端连接器和 MCP 工具。初次测试触发了 12 个 OAuth 页面；未点击授权确认，测试页已关闭。源码确认安装会启动启用的 MCP 服务的 OAuth 流程，与市场授权策略分别处理。
 
 ## 更新
 
@@ -35,6 +37,7 @@ codex plugin add google-drive@codex-plus-public-cache
 - [LICENSES/](LICENSES/)：标准许可正文；各包原有的许可文件继续保留。
 - `python3 tools/validate_cache.py`：检查市场、原始文件哈希、许可集和引用路径。
 - [docs/validation.json](docs/validation.json)：隔离环境下的 API Key 安装验证结果。
+- [docs/git-validation.json](docs/git-validation.json)：从已发布 GitHub 仓库取得快照并安装四个样本的验证结果。
 
 ## 插件列表
 

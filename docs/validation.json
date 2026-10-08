@@ -177,5 +177,12 @@
   "cloudConnectorExecutionTested": false,
   "mcpExecutionTested": false,
   "originalAuthAndConfigUnchanged": true,
-  "isolatedCredentialFileCreated": false
+  "isolatedCredentialFileCreated": false,
+  "installationSideEffects": {
+    "oauthAuthorizationPagesOpened": 12,
+    "authorizationConfirmationClicked": false,
+    "temporaryPagesClosed": true,
+    "marketplaceAuthPolicyChangedAfterTest": "ON_USE",
+    "nativeMcpOauthIndependentOfMarketplaceAuthPolicy": true
+  }
 }

@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-08",
+  "runtime": "codex-cli 0.160.1",
+  "authentication": "apiKey",
+  "chatgptCredentialsPresent": false,
+  "knownCredentialScan": "passed",
+  "source": "https://github.com/BigPizzaV3/CodexPlusPlusPluginCache.git",
+  "tests": [
+    {
+      "name": "gmail",
+      "installed": true
+    },
+    {
+      "name": "google-calendar",
+      "installed": true
+    },
+    {
+      "name": "google-drive",
+      "installed": true
+    },
+    {
+      "name": "superpowers",
+      "installed": true
+    }
+  ],
+  "recognizedInstalledCount": 4,
+  "recognizedEnabledCount": 4,
+  "recognizedSkillCount": 19,
+  "skillLoadErrors": 0,
+  "cloudConnectorExecutionTested": false,
+  "mcpExecutionTested": false,
+  "originalAuthAndConfigUnchanged": true,
+  "isolatedCredentialFileCreated": false
+}
