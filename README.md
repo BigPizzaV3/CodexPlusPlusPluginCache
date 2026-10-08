@@ -572,5 +572,17 @@ codex plugin add google-drive@codex-plus-public-cache
 | zuora-coding-agent | 1.5.4 | 40 | MIT | 无 |
 | zzzops | 2.1.0 | 9 | Apache-2.0 | 无 |
 
+## 大仓库的注册方式
+
+完整快照较大；Codex CLI 0.160.1 的市场刷新 Git clone 有 30 秒超时，较慢网络可能无法直接完成。可先用普通 Git 克隆，再注册本地 Git 工作目录：
+
+```sh
+git clone --depth 1 https://github.com/BigPizzaV3/CodexPlusPlusPluginCache.git
+cd CodexPlusPlusPluginCache
+codex plugin marketplace add "$PWD"
+```
+
+这种方式仍从 GitHub 获取插件文件，更新时在该目录运行 `git pull --ff-only`。
+
 新增快照只读验证见 [docs/expanded-read-validation.json](docs/expanded-read-validation.json)：API Key 环境已识别全部市场条目，并逐项读取插件详情；未调用安装接口或执行 MCP。
 
