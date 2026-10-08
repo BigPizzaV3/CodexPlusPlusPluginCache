@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-08",
+  "runtime": "codex-cli 0.160.1",
+  "authentication": "apiKey",
+  "chatgptCredentialsPresent": false,
+  "knownCredentialScan": "passed",
+  "tests": [
+    {
+      "name": "atlassian-rovo",
+      "installed": true
+    },
+    {
+      "name": "boltz-api-cli",
+      "installed": true
+    },
+    {
+      "name": "build-ios-apps",
+      "installed": true
+    },
+    {
+      "name": "build-macos-apps",
+      "installed": true
+    },
+    {
+      "name": "build-web-apps",
+      "installed": true
+    },
+    {
+      "name": "build-web-data-visualization",
+      "installed": true
+    },
+    {
+      "name": "chatcut",
+      "installed": true
+    },
+    {
+      "name": "circleci",
+      "installed": true
+    },
+    {
+      "name": "clickup",
+      "installed": true
+    },
+    {
+      "name": "cloudflare",
+      "installed": true
+    },
+    {
+      "name": "coderabbit",
+      "installed": true
+    },
+    {
+      "name": "expo",
+      "installed": true
+    },
+    {
+      "name": "game-studio",
+      "installed": true
+    },
+    {
+      "name": "github",
+      "installed": true
+    },
+    {
+      "name": "gmail",
+      "installed": true
+    },
+    {
+      "name": "google-calendar",
+      "installed": true
+    },
+    {
+      "name": "google-drive",
+      "installed": true
+    },
+    {
+      "name": "granola",
+      "installed": true
+    },
+    {
+      "name": "hyperframes",
+      "installed": true
+    },
+    {
+      "name": "linear",
+      "installed": true
+    },
+    {
+      "name": "mixpanel-headless",
+      "installed": true
+    },
+    {
+      "name": "ngs-analysis",
+      "installed": true
+    },
+    {
+      "name": "notion",
+      "installed": true
+    },
+    {
+      "name": "nvidia",
+      "installed": true
+    },
+    {
+      "name": "outlook-calendar",
+      "installed": true
+    },
+    {
+      "name": "outlook-email",
+      "installed": true
+    },
+    {
+      "name": "plugin-eval",
+      "installed": true
+    },
+    {
+      "name": "posthog",
+      "installed": true
+    },
+    {
+      "name": "remotion",
+      "installed": true
+    },
+    {
+      "name": "sentry",
+      "installed": true
+    },
+    {
+      "name": "sharepoint",
+      "installed": true
+    },
+    {
+      "name": "slack",
+      "installed": true
+    },
+    {
+      "name": "supabase",
+      "installed": true
+    },
+    {
+      "name": "superpowers",
+      "installed": true
+    },
+    {
+      "name": "teams",
+      "installed": true
+    },
+    {
+      "name": "temporal",
+      "installed": true
+    },
+    {
+      "name": "test-android-apps",
+      "installed": true
+    },
+    {
+      "name": "twilio-developer-kit",
+      "installed": true
+    },
+    {
+      "name": "vercel",
+      "installed": true
+    },
+    {
+      "name": "zoom",
+      "installed": true
+    },
+    {
+      "name": "zotero",
+      "installed": true
+    }
+  ],
+  "recognizedInstalledCount": 41,
+  "recognizedEnabledCount": 41,
+  "recognizedSkillCount": 366,
+  "skillLoadErrors": 0,
+  "cloudConnectorExecutionTested": false,
+  "mcpExecutionTested": false,
+  "originalAuthAndConfigUnchanged": true,
+  "isolatedCredentialFileCreated": false
+}

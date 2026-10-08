@@ -1,0 +1,8 @@
+.env
+.env.*
+auth.json
+config.toml
+__pycache__/
+*.pyc
+.validation/
+.DS_Store
