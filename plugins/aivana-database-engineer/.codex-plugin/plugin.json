@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Aivana GmbH",
+    "url": "https://www.aivana-gmbh.ai"
+  },
+  "description": "AI-native, governance-first SQL Server and PostgreSQL orchestration plugin.",
+  "homepage": "https://www.aivana-gmbh.ai",
+  "interface": {
+    "brandColor": "#10A37F",
+    "brandColorDark": "#5CEFCB",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Investigate slow SQL Server or PostgreSQL queries. Show evidence, risks, and verification steps. Do not change production."
+    ],
+    "developerName": "Aivana GmbH",
+    "displayName": "Aivana Database Engineer",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Aivana Database Engineer by Aivana GmbH helps Codex investigate SQL Server and PostgreSQL databases using measured evidence, repeatable tests, business-result checks, and controlled lab changes. Production changes remain blocked. Learn more at https://www.aivana-gmbh.ai.",
+    "privacyPolicyURL": "https://aivana-gmbh.ai/Privacy",
+    "shortDescription": "Analyze database performance",
+    "supportURL": "https://aivana-gmbh.ai/Contact",
+    "termsOfServiceURL": "https://aivana-gmbh.ai/Terms",
+    "websiteURL": "https://www.aivana-gmbh.ai"
+  },
+  "keywords": [
+    "sqlserver",
+    "postgres",
+    "database",
+    "performance",
+    "governance",
+    "devops"
+  ],
+  "license": "MIT",
+  "name": "aivana-database-engineer",
+  "repository": "https://github.com/rweisssieker-xp/SQLSERVER-POSTGRES-Plugin",
+  "skills": "./skills/",
+  "version": "1.1.0"
+}

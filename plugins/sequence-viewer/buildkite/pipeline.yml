@@ -1,0 +1,196 @@
+steps:
+  - label: ":microscope: Sequence plugin and scientific platform (Linux)"
+    key: "sequence-viewer:scientific-platform-linux"
+    agents:
+      queue: applied-bk-agent-openai
+    timeout_in_minutes: 40
+    commands:
+      - 'export TMPDIR="$$PWD/.viewer-ci/sequence-$${BUILDKITE_JOB_ID:-local}"'
+      - 'mkdir -p "$${TMPDIR}"'
+      - 'export NVM_DIR="$${TMPDIR}/nvm"'
+      - . ./chatgpt/oai-maintained-plugins/plugins/scientific-viewer-platform/scripts/install-nvm.sh
+      - corepack enable pnpm
+      - cd chatgpt/oai-maintained-plugins/plugins/sequence-viewer
+      - pnpm install --frozen-lockfile --config.confirmModulesPurge=false
+      - 'ln -s "$$PWD/node_modules" ../scientific-viewer-platform/node_modules'
+      - pnpm exec tsc --noEmit
+      - >-
+        pnpm exec vitest run
+        src/compressed-file-name.test.ts
+        src/file-kind.test.ts
+        src/plugin-manifest.test.ts
+        src/server.test.ts
+        src/sequence/file-kind.test.ts
+        src/msa/file-kind.test.ts
+        src/views/app.test.tsx
+        src/views/app-native.test.tsx
+        src/views/app-resource-loading.test.tsx
+        src/viewer-operations.test.ts
+        src/export-actions-workspace.test.tsx
+        src/incremental-export-validator.test.ts
+        src/workbench-exports.test.ts
+        src/workspace-browser-protocol.test.ts
+        src/workspace-track-browser.test.ts
+        src/workspace-atomic-publisher.test.ts
+        src/workspace-export-publisher.test.ts
+        src/server-workbench-store.test.ts
+        src/server-workbench-upload.test.ts
+        src/chat-file-resource.test.ts
+        src/indexed-sequence-parser.test.ts
+        src/bam-decoder.test.ts
+        src/cram-decoder.test.ts
+        src/persistent/durable-viewer-state.test.ts
+        src/persistent/native-workspace-publisher.test.ts
+        src/persistent/recovery-adapter.test.ts
+        src/persistent/scientific-data-client.test.ts
+        src/persistent/streaming-source-replacement.test.ts
+        src/persistent/session-adapter.test.ts
+        src/scientific-platform.test.ts
+        --maxWorkers=1 --no-file-parallelism
+        --testTimeout=600000 --hookTimeout=600000
+      - >-
+        pnpm exec vitest run
+        --root ../scientific-viewer-platform
+        tests/sequence
+        --maxWorkers=1 --no-file-parallelism
+        --testTimeout=600000 --hookTimeout=600000
+
+  - label: ":windows: Sequence plugin and scientific platform (Windows)"
+    key: "sequence-viewer:scientific-platform-windows"
+    depends_on: "scientific-viewer-platform:prepare-merge-checkout"
+    agents:
+      queue: applied-bk-agent-windows
+    timeout_in_minutes: 40
+    env:
+      BUILDKITE_CLEAN_CHECKOUT: "true"
+      BUILDKITE_SKIP_CHECKOUT: "true"
+    commands:
+      - '$$ErrorActionPreference = "Stop"'
+      - "$$PSNativeCommandUseErrorActionPreference = $$true"
+      - &sequence_viewer_merge_checkout |
+        if (-not $$env:BUILDKITE_BUILD_PATH) {
+          throw "The Sequence viewer checkout requires Buildkite's writable build path."
+        }
+        $$scientificViewerBootstrapRoot = Join-Path $$env:BUILDKITE_BUILD_PATH (
+          "svt-" + [System.Guid]::NewGuid().ToString("N").Substring(0, 8)
+        )
+        New-Item -ItemType Directory -Force -Path $$scientificViewerBootstrapRoot | Out-Null
+        $$env:TEMP = $$scientificViewerBootstrapRoot
+        $$env:TMP = $$scientificViewerBootstrapRoot
+        try {
+          $$scientificViewerCheckoutRoot = Join-Path $$env:TEMP "scientific-viewer-checkout-$$env:BUILDKITE_JOB_ID"
+          New-Item -ItemType Directory -Force -Path $$scientificViewerCheckoutRoot | Out-Null
+          buildkite-agent artifact download --step "scientific-viewer-platform:prepare-merge-checkout" "chatgpt/oai-maintained-plugins/plugins/scientific-viewer-platform/scripts/checkout-merge-bundle.ps1" $$scientificViewerCheckoutRoot
+          if ($$LASTEXITCODE -ne 0) {
+            throw "Could not download the scientific viewer merge checkout helper."
+          }
+          $$scientificViewerCheckout = Join-Path $$scientificViewerCheckoutRoot "chatgpt/oai-maintained-plugins/plugins/scientific-viewer-platform/scripts/checkout-merge-bundle.ps1"
+          . $$scientificViewerCheckout -SparsePath @(
+            "chatgpt/oai-maintained-plugins/plugins/sequence-viewer",
+            "chatgpt/oai-maintained-plugins/plugins/scientific-viewer-platform"
+          )
+          $$sequenceViewerTempRoot = Join-Path (Get-Location).Path ".scientific-sequence/$$env:BUILDKITE_JOB_ID"
+          New-Item -ItemType Directory -Force -Path $$sequenceViewerTempRoot | Out-Null
+          $$env:TEMP = $$sequenceViewerTempRoot
+          $$env:TMP = $$sequenceViewerTempRoot
+        } finally {
+          if (Test-Path -LiteralPath $$scientificViewerBootstrapRoot) {
+            Remove-Item -LiteralPath $$scientificViewerBootstrapRoot -Recurse -Force
+          }
+        }
+        Get-PSDrive -Name (Get-Item "$$env:TEMP").PSDrive.Name | Select-Object Name, Free, Used
+      - ./chatgpt/oai-maintained-plugins/plugins/scientific-viewer-platform/scripts/install-node.ps1
+      - corepack enable
+      - cd chatgpt/oai-maintained-plugins/plugins/sequence-viewer
+      - pnpm install --frozen-lockfile --config.confirmModulesPurge=false
+      - 'New-Item -ItemType Junction -Path "../scientific-viewer-platform/node_modules" -Target (Resolve-Path "node_modules") | Out-Null'
+      - pnpm exec tsc --noEmit
+      - >-
+        pnpm exec vitest run
+        src/compressed-file-name.test.ts
+        src/file-kind.test.ts
+        src/plugin-manifest.test.ts
+        src/server.test.ts
+        src/sequence/file-kind.test.ts
+        src/msa/file-kind.test.ts
+        src/views/app.test.tsx
+        src/views/app-native.test.tsx
+        src/views/app-resource-loading.test.tsx
+        src/viewer-operations.test.ts
+        src/export-actions-workspace.test.tsx
+        src/incremental-export-validator.test.ts
+        src/workbench-exports.test.ts
+        src/workspace-browser-protocol.test.ts
+        src/workspace-track-browser.test.ts
+        src/workspace-atomic-publisher.test.ts
+        src/workspace-export-publisher.test.ts
+        src/server-workbench-store.test.ts
+        src/server-workbench-upload.test.ts
+        src/chat-file-resource.test.ts
+        src/indexed-sequence-parser.test.ts
+        src/bam-decoder.test.ts
+        src/cram-decoder.test.ts
+        src/persistent/durable-viewer-state.test.ts
+        src/persistent/native-workspace-publisher.test.ts
+        src/persistent/recovery-adapter.test.ts
+        src/persistent/scientific-data-client.test.ts
+        src/persistent/streaming-source-replacement.test.ts
+        src/persistent/session-adapter.test.ts
+        src/scientific-platform.test.ts
+        --maxWorkers=1 --no-file-parallelism
+        --testTimeout=600000 --hookTimeout=600000
+      - >-
+        pnpm exec vitest run
+        --root ../scientific-viewer-platform
+        tests/sequence
+        --maxWorkers=1 --no-file-parallelism
+        --testTimeout=600000 --hookTimeout=600000
+
+  - label: ":microscope: Sequence actual 6 GiB BGZF qualification (Linux)"
+    key: "sequence-viewer:physical-bgzf-linux"
+    agents:
+      queue: applied-bk-agent-openai
+    timeout_in_minutes: 90
+    env:
+      SCIENTIFIC_SEQUENCE_HUGE_FILE_E2E: "1"
+    commands:
+      - 'export TMPDIR="$$PWD/.viewer-ci/sequence-$${BUILDKITE_JOB_ID:-local}"'
+      - 'mkdir -p "$${TMPDIR}"'
+      - 'export NVM_DIR="$${TMPDIR}/nvm"'
+      - . ./chatgpt/oai-maintained-plugins/plugins/scientific-viewer-platform/scripts/install-nvm.sh
+      - corepack enable pnpm
+      - cd chatgpt/oai-maintained-plugins/plugins/sequence-viewer
+      - pnpm install --frozen-lockfile --config.confirmModulesPurge=false
+      - 'ln -s "$$PWD/node_modules" ../scientific-viewer-platform/node_modules'
+      - >-
+        pnpm exec vitest run
+        --root ../scientific-viewer-platform
+        tests/sequence/scientific-sequence-huge-physical.test.ts
+        --maxWorkers=1 --no-file-parallelism --maxConcurrency=1
+        --testTimeout=600000 --hookTimeout=600000
+
+  - label: ":windows: Sequence actual 6 GiB BGZF qualification (Windows)"
+    key: "sequence-viewer:physical-bgzf-windows"
+    depends_on: "scientific-viewer-platform:prepare-merge-checkout"
+    agents:
+      queue: applied-bk-agent-windows
+    timeout_in_minutes: 90
+    env:
+      BUILDKITE_CLEAN_CHECKOUT: "true"
+      BUILDKITE_SKIP_CHECKOUT: "true"
+      SCIENTIFIC_SEQUENCE_HUGE_FILE_E2E: "1"
+    commands:
+      - '$$ErrorActionPreference = "Stop"'
+      - "$$PSNativeCommandUseErrorActionPreference = $$true"
+      - *sequence_viewer_merge_checkout
+      - ./chatgpt/oai-maintained-plugins/plugins/scientific-viewer-platform/scripts/install-node.ps1
+      - corepack enable
+      - cd chatgpt/oai-maintained-plugins/plugins/sequence-viewer
+      - pnpm install --frozen-lockfile --config.confirmModulesPurge=false
+      - 'New-Item -ItemType Junction -Path "../scientific-viewer-platform/node_modules" -Target (Resolve-Path "node_modules") | Out-Null'
+      - >-
+        pnpm exec vitest run
+        --root ../scientific-viewer-platform
+        tests/sequence/scientific-sequence-huge-physical.test.ts
+        --maxWorkers=1 --no-file-parallelism --maxConcurrency=1
+        --testTimeout=600000 --hookTimeout=600000

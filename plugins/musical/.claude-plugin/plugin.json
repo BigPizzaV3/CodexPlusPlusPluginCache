@@ -1,0 +1,21 @@
+{
+  "name": "musical",
+  "displayName": "Musical",
+  "version": "0.1.0",
+  "description": "Interactive music theory teacher and practice coach. Chords, intervals, scales and modes, key signatures, rhythm and notation.",
+  "author": {
+    "name": "Nico Tejera",
+    "url": "https://github.com/nicoten"
+  },
+  "homepage": "https://musical.nicotejera.com/ai/",
+  "repository": "https://github.com/nicoten/musical-plugin",
+  "license": "MIT",
+  "keywords": [
+    "music",
+    "music-theory",
+    "education",
+    "practice",
+    "ear-training",
+    "notation"
+  ]
+}

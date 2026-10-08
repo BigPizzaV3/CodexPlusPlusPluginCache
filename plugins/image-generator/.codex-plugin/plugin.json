@@ -1,0 +1,45 @@
+{
+  "author": {
+    "email": "support@b12.io",
+    "name": "B12",
+    "url": "https://www.b12.io"
+  },
+  "description": "Generate the images a website needs, at the size each slot expects and as a set that matches. Hero and OG images, section and product shots, blog thumbnails and headshot placeholders \u2014 every file named, sized, and shipped with alt text, plus an optional B12 website to put them on.",
+  "homepage": "https://www.b12.io",
+  "interface": {
+    "brandColor": "#4B22E8",
+    "brandColorDark": "#4B22E8",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Create a hero image for my website",
+      "Generate images for my services page",
+      "Make an OG image for my blog post"
+    ],
+    "developerName": "B12",
+    "displayName": "Image Generator",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Say what you're making and where the image goes, and it generates the image at the exact size you need: 1920\u00d71080 for a hero, 1200\u00d7630 for an OG image, 400\u00d7400 for a headshot, no cropping or resizing after. Ask for several and it keeps them consistent, same lighting, palette, camera distance, and grade across every shot, so three service images look like one shoot rather than three stock photos.\n\nEvery file comes with alt text written as a real description, a hyphenated filename that says what the picture is, and no text baked into the image, because words inside a picture can't be edited or translated later. The files are yours to use anywhere. When you want somewhere to put them, it can generate a hosted website on B12 in the same colors, and you upload the images to it.",
+    "privacyPolicyURL": "https://www.b12.io/privacy-policy/",
+    "shortDescription": "Website images, ready to use",
+    "supportURL": "https://www.b12.io/contact-us/",
+    "termsOfServiceURL": "https://www.b12.io/terms-of-service/",
+    "websiteURL": "https://www.b12.io"
+  },
+  "keywords": [
+    "images",
+    "photography",
+    "illustration",
+    "social",
+    "b12",
+    "website"
+  ],
+  "license": "Apache-2.0",
+  "name": "image-generator",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

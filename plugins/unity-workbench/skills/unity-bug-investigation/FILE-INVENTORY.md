@@ -1,0 +1,33 @@
+# File Inventory
+
+- `README.md`
+- `SKILL.md`
+- `foundations/change-safety.md`
+- `foundations/evidence-first-debugging.md`
+- `foundations/hypothesis-management.md`
+- `foundations/instrumentation.md`
+- `foundations/reproduction-and-baselines.md`
+- `frameworks/networking/fishnet.md`
+- `frameworks/networking/fusion.md`
+- `frameworks/networking/mirror.md`
+- `frameworks/networking/netcode-for-gameobjects.md`
+- `frameworks/rendering/hdrp.md`
+- `frameworks/rendering/urp.md`
+- `references/capability-requirements.md`
+- `references/hypothesis-log-template.md`
+- `references/reproduction-template.md`
+- `references/root-cause-report-template.md`
+- `references/validation-strategy.md`
+- `specializations/build-and-platform.md`
+- `specializations/editor-and-imports.md`
+- `specializations/exceptions-and-crashes.md`
+- `specializations/gameplay-and-state.md`
+- `specializations/input.md`
+- `specializations/intermittent-and-timing.md`
+- `specializations/multiplayer.md`
+- `specializations/performance.md`
+- `specializations/physics-and-movement.md`
+- `specializations/rendering-and-vfx.md`
+- `specializations/save-and-persistence.md`
+- `specializations/scenes-prefabs-serialization.md`
+- `specializations/ui-and-localization.md`

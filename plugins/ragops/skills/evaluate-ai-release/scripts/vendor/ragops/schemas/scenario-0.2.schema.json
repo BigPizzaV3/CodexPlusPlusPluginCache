@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/scenario-0.2.schema.json",
+  "title": "RAGOps scenario 0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "name", "thresholds", "cases"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["citation_coverage", "citation_precision", "lexical_groundedness", "max_latency_ms", "max_cost_usd"],
+      "properties": {
+        "citation_coverage": {"type": "number", "minimum": 0, "maximum": 1},
+        "citation_precision": {"type": "number", "minimum": 0, "maximum": 1},
+        "lexical_groundedness": {"type": "number", "minimum": 0, "maximum": 1},
+        "max_latency_ms": {"type": "integer", "minimum": 0},
+        "max_cost_usd": {"type": "number", "minimum": 0}
+      }
+    },
+    "redteam": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "forbidden_output_terms": {"type": "array", "items": {"type": "string"}},
+        "require_human_approval_for_external_actions": {"type": "boolean"},
+        "external_action_markers": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "question", "evidence", "required_citation_ids", "category", "severity", "language"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "question": {"type": "string", "minLength": 1},
+          "evidence": {"type": "array", "items": {"type": "string"}},
+          "required_citation_ids": {"type": "array", "items": {"type": "string"}},
+          "category": {"type": "string", "minLength": 1},
+          "severity": {"enum": ["low", "medium", "high", "critical"]},
+          "language": {"type": "string", "minLength": 2},
+          "tags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "attack_category": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

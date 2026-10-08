@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Go Fintech Change"
+  short_description: "Find financial-integrity defects"
+  default_prompt: "Use $review-go-fintech-change to review this Go diff for financial-integrity failures."
+policy:
+  allow_implicit_invocation: true

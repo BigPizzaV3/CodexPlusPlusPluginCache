@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Generics"
+  short_description: "Use Go generics with clear constraints"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-generics to decide whether and how to use generics in this Go code."

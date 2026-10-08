@@ -1,0 +1,30 @@
+{
+  "author": {
+    "name": "PatchworkMD",
+    "url": "https://github.com/PatchworkMD/app-design-research"
+  },
+  "description": "Design, build, test, and prepare native iPhone apps for release with evidence-based guidance.",
+  "homepage": "https://catalog.patchworkmd.dev/",
+  "interface": {
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Help me design, build, test, and prepare my iPhone app for release. Use original design and verify each step."
+    ],
+    "developerName": "PatchworkMD",
+    "displayName": "Hugging App",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Turn your ideas, screenshots, and code into original native iPhone apps. Get practical guidance for SwiftUI and UIKit, accessible interfaces, widgets, Live Activities, testing, and release preparation. Review up to three prioritized improvements with clear evidence and validation steps. Building and shipping use your available development tools and require your approval; this plugin does not independently publish apps or fetch third-party design libraries.",
+    "privacyPolicyURL": "https://github.com/PatchworkMD/app-design-research/blob/main/PRIVACY.md",
+    "shortDescription": "Build & Ship IOS Apps",
+    "supportURL": "https://github.com/PatchworkMD/app-design-research/issues",
+    "termsOfServiceURL": "https://github.com/PatchworkMD/app-design-research/blob/main/TERMS.md",
+    "websiteURL": "https://catalog.patchworkmd.dev/"
+  },
+  "license": "MIT",
+  "name": "app-design-research",
+  "repository": "https://github.com/PatchworkMD/app-design-research",
+  "skills": "./skills/",
+  "version": "0.1.5"
+}

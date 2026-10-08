@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Benjamin Haire",
+    "url": "https://github.com/theisegoria"
+  },
+  "description": "Author, convert, safely merge, preview, repair, and validate portable mind maps.",
+  "homepage": "https://github.com/theisegoria/chatgpt-skill-plugins",
+  "interface": {
+    "brandColor": "#6750A4",
+    "brandColorDark": "#725BAF",
+    "capabilities": [
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create a rich portable mind map from these notes in several open formats.",
+      "Safely merge these mind maps by stable ID and report every conflict or metadata loss.",
+      "Import this GraphML or Mermaid mind map and create a script-free structural preview."
+    ],
+    "developerName": "Benjamin Michael Haire",
+    "displayName": "Portable Mind Maps",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Author, round-trip, safely merge, diff, reorder, preview, repair, and export deterministic mind maps as JSON, rich Markdown, OPML, FreeMind XML, Mermaid source, and GraphML with explicit conversion-loss reports.",
+    "privacyPolicyURL": "https://github.com/theisegoria/chatgpt-skill-plugins/blob/main/PRIVACY.md",
+    "shortDescription": "Create portable mind maps",
+    "supportURL": "https://github.com/theisegoria/chatgpt-skill-plugins/issues",
+    "termsOfServiceURL": "https://github.com/theisegoria/chatgpt-skill-plugins/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/theisegoria/chatgpt-skill-plugins"
+  },
+  "keywords": [
+    "mind-map",
+    "opml",
+    "freemind",
+    "markdown"
+  ],
+  "license": "Apache-2.0",
+  "name": "portable-mindmaps",
+  "repository": "https://github.com/theisegoria/chatgpt-skill-plugins",
+  "skills": "./skills/",
+  "version": "2.1.0"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "okrdev",
+  "version": "0.8.4",
+  "description": "OKRs as markdown files in your own repo, with an AI coach that checks new work against your key results, pre-drafts weekly check-ins, and parks distractions.",
+  "author": {
+    "name": "Alex Chisholm",
+    "url": "https://github.com/backedbydata-co"
+  },
+  "homepage": "https://okrdev.com",
+  "repository": "https://github.com/backedbydata-co/okrdev",
+  "license": "MIT",
+  "keywords": [
+    "okr",
+    "objectives",
+    "key-results",
+    "goals",
+    "planning",
+    "check-ins",
+    "retrospective",
+    "prioritization",
+    "focus",
+    "project-management"
+  ]
+}

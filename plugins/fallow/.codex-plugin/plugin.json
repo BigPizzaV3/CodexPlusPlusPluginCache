@@ -1,0 +1,49 @@
+{
+  "author": {
+    "email": "bart@fallow.tools",
+    "name": "Bart Waardenburg",
+    "url": "https://github.com/fallow-rs"
+  },
+  "description": "Local-first codebase intelligence for TypeScript and JavaScript using fallow",
+  "homepage": "https://fallow.tools",
+  "interface": {
+    "brandColor": "#1C1B1C",
+    "brandColorDark": "#E4E3E4",
+    "capabilities": [
+      "Static analysis",
+      "Code review",
+      "Local workflow",
+      "Impact summaries"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Audit this codebase for changed-code risk and cleanup opportunities.",
+      "Review this branch with fallow and prioritize what needs attention.",
+      "Show the latest Fallow Impact summary for this project."
+    ],
+    "developerName": "Bart Waardenburg",
+    "displayName": "Fallow Code Analysis",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Fallow gives Codex fast, local-first codebase analysis for TypeScript and JavaScript. Audit changed-code risk, find dead code and unused dependencies, detect duplication and complexity hotspots, inspect architecture boundaries, and prioritize safe cleanup. Fallow Impact explains the latest full-project issue count, its comparable trend, and findings cleared while tracking. Optional cloud and product telemetry workflows run only after explicit user action.",
+    "privacyPolicyURL": "https://fallow.tools/privacy",
+    "shortDescription": "Local JS/TS code analysis",
+    "supportURL": "https://github.com/fallow-rs/fallow/issues",
+    "termsOfServiceURL": "https://fallow.tools/terms",
+    "websiteURL": "https://fallow.tools/plugins?utm_source=openai&utm_medium=plugin-directory"
+  },
+  "keywords": [
+    "fallow",
+    "dead-code",
+    "duplication",
+    "complexity",
+    "static-analysis",
+    "javascript",
+    "typescript"
+  ],
+  "license": "MIT",
+  "name": "fallow",
+  "repository": "https://github.com/fallow-rs/fallow-skills",
+  "skills": "./skills/",
+  "version": "1.2.23"
+}

@@ -1,0 +1,49 @@
+{
+  "author": {
+    "name": "CiberTribu",
+    "url": "https://cibertribu.com/"
+  },
+  "description": "Analiza una tarea antes de ejecutarla y recomienda la superficie, el modelo y el razonamiento adecuados.",
+  "homepage": "https://cibertribu.com/",
+  "interface": {
+    "brandColor": "#4C9F1B",
+    "brandColorDark": "#91E460",
+    "capabilities": [
+      "Task analysis",
+      "Surface recommendation",
+      "Model recommendation",
+      "Reasoning recommendation",
+      "Relative consumption estimate"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Analiza esta tarea antes de ejecutarla y recomienda Chat, Work o Codex, modelo y razonamiento.",
+      "Compara Chat, Work y Codex para esta tarea y explica por qu\u00e9 gana la opci\u00f3n recomendada.",
+      "Optimiza esta tarea para reducir consumo sin perder calidad y no la ejecutes todav\u00eda."
+    ],
+    "developerName": "AR Grupo",
+    "displayName": "AI Router",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "AI Router analiza una tarea antes de ejecutarla y recomienda la combinaci\u00f3n adecuada de Chat, Work o Codex, modelo y razonamiento. Compara las tres superficies, explica el criterio y estima el consumo relativo mediante la r\u00fabrica R1. La configuraci\u00f3n se aplica manualmente y la tarea original no contin\u00faa hasta recibir una confirmaci\u00f3n inequ\u00edvoca.",
+    "privacyPolicyURL": "https://argrupo.es/legal/politica-de-privacidad/",
+    "shortDescription": "Enrutador de tareas de IA",
+    "supportURL": "https://argrupo.es/contacto/",
+    "termsOfServiceURL": "https://argrupo.es/condiciones-generales/",
+    "websiteURL": "https://argrupo.es/"
+  },
+  "keywords": [
+    "ai",
+    "routing",
+    "chat",
+    "codex",
+    "work",
+    "models",
+    "reasoning",
+    "cost-optimization"
+  ],
+  "license": "MIT",
+  "name": "ai-router",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

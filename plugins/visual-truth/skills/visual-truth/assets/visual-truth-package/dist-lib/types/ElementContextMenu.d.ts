@@ -1,0 +1,33 @@
+type ContextMenuPosition = {
+    x: number;
+    y: number;
+};
+type ElementContextMenuProps = {
+    position: ContextMenuPosition;
+    canEditText: boolean;
+    canPasteStyles: boolean;
+    canPasteElement: boolean;
+    canRestructure: boolean;
+    multiSelected: boolean;
+    grouped: boolean;
+    locked: boolean;
+    onEditText: () => void;
+    onCopyStyles: () => void;
+    onPasteStyles: () => void;
+    onCopyElement: () => void;
+    onPasteElement: () => void;
+    onMoveLayer: (direction: 1 | -1) => void;
+    onMoveSibling: (direction: 1 | -1) => void;
+    onDuplicate: () => void;
+    onRemove: () => void;
+    onHide: () => void;
+    onReset: () => void;
+    onRename: () => void;
+    onLock: () => void;
+    onSaveSection: () => void;
+    onGroup: () => void;
+    onUngroup: () => void;
+    onMakeItCode: () => void;
+};
+export declare function ElementContextMenu({ position, canEditText, canPasteStyles, canPasteElement, canRestructure, multiSelected, grouped, locked, onEditText, onCopyStyles, onPasteStyles, onCopyElement, onPasteElement, onMoveLayer, onMoveSibling, onDuplicate, onRemove, onHide, onReset, onRename, onLock, onSaveSection, onGroup, onUngroup, onMakeItCode }: ElementContextMenuProps): import("react").JSX.Element;
+export type { ContextMenuPosition };

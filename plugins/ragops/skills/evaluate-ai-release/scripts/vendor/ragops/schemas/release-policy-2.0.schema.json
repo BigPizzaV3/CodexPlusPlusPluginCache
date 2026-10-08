@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/release-policy-2.0.schema.json",
+  "title": "RAGOps release policy 2.0 normalized JSON form",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "release", "metrics", "slices", "tails", "waivers"],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "release": {"type": "object"},
+    "metrics": {"type": "array"},
+    "slices": {"type": "array"},
+    "tails": {"type": "array"},
+    "waivers": {"type": "array"}
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "cerebrium",
+  "description": "Official Cerebrium agent skills: deploy and operate serverless GPU and CPU workloads from an agent, with verified cerebrium.toml, hardware, deployment and troubleshooting guidance.",
+  "version": "0.1.0",
+  "owner": {
+    "name": "Cerebrium",
+    "email": "support@cerebrium.ai",
+    "url": "https://github.com/CerebriumAI"
+  },
+  "plugins": [
+    {
+      "name": "cerebrium",
+      "displayName": "Cerebrium (Official)",
+      "description": "One Cerebrium skill (workflow, rules, endpoint shapes) with on-demand references for the CLI surface, cerebrium.toml, hardware and regions, and troubleshooting, bundling the read-only Cerebrium docs MCP.",
+      "source": "./",
+      "category": "deployment",
+      "skills": [
+        "./skills/cerebrium"
+      ]
+    }
+  ]
+}

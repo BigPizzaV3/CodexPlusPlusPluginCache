@@ -1,0 +1,26 @@
+{
+  "name": "dreamer",
+  "version": "1.2.0",
+  "description": "Resume work from checked evidence and propose durable preferences from repeated feedback.",
+  "author": {
+    "name": "Austin Wise"
+  },
+  "license": "MIT",
+  "keywords": ["hermes", "codex", "opencode", "dreamer", "receipts", "recovery"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Dreamer",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png",
+    "shortDescription": "Resume work and learn from repeated feedback",
+    "longDescription": "Check work receipts against current files, build bounded resume cards, and propose working preferences with independent source evidence. Includes a local Python helper and a review-first learning skill. No hosted service or automatic memory writes.",
+    "developerName": "Austin Wise",
+    "category": "Productivity",
+    "capabilities": ["Read-only"],
+    "defaultPrompt": [
+      "Validate this receipt without changing state.",
+      "Build a redacted resume card.",
+      "Review these feedback files and propose preferences without saving them."
+    ]
+  }
+}

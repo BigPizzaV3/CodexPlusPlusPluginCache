@@ -1,0 +1,26 @@
+{
+  "schema": "codex.powerbi.processRulePack.v1",
+  "id": "lead-to-opportunity",
+  "process": "LeadToOpportunity",
+  "displayName": "Lead to Opportunity",
+  "kpiTerms": ["lead", "opportunity", "pipeline", "conversion", "sales funnel"],
+  "objects": [
+    { "name": "Lead", "aliases": ["lead"], "fields": [
+      { "name": "leadId", "aliases": ["LeadId"], "required": true },
+      { "name": "createdDate", "aliases": ["CreatedDate", "CreatedOn"], "required": true },
+      { "name": "status", "aliases": ["Status", "LeadStatus"], "required": false }
+    ] },
+    { "name": "Opportunity", "aliases": ["opportunity", "deal"], "fields": [
+      { "name": "opportunityId", "aliases": ["OpportunityId", "DealId"], "required": true },
+      { "name": "leadId", "aliases": ["LeadId"], "required": false },
+      { "name": "createdDate", "aliases": ["CreatedDate", "CreatedOn"], "required": true },
+      { "name": "amount", "aliases": ["Amount", "PipelineAmount"], "required": false }
+    ] }
+  ],
+  "rules": [
+    { "id": "l2o.lead.id.required", "type": "requiredField", "severity": "High", "object": "Lead", "field": "leadId", "description": "Lead is missing identifier.", "ownerHint": "Sales operations owner", "recommendedAction": "Correct lead key before funnel conversion reporting.", "releaseImpact": "No-Go" },
+    { "id": "l2o.lead.created.required", "type": "requiredField", "severity": "High", "object": "Lead", "field": "createdDate", "description": "Lead is missing creation date.", "ownerHint": "Sales operations owner", "recommendedAction": "Backfill lead creation date.", "releaseImpact": "No-Go" },
+    { "id": "l2o.opportunity.lead.orphan", "type": "orphan", "severity": "Medium", "object": "Opportunity", "field": "leadId", "parentObject": "Lead", "parentField": "leadId", "description": "Opportunity references missing lead.", "ownerHint": "Sales operations owner", "recommendedAction": "Confirm sourced opportunity or correct lead key.", "releaseImpact": "Warn" },
+    { "id": "l2o.opportunity.amount.nonnegative", "type": "nonNegative", "severity": "Medium", "object": "Opportunity", "field": "amount", "description": "Opportunity amount is negative.", "ownerHint": "Sales operations owner", "recommendedAction": "Confirm credit or adjustment treatment.", "releaseImpact": "Warn" }
+  ]
+}

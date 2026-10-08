@@ -1,0 +1,20 @@
+{
+  "name": "brancha",
+  "version": "0.2.0",
+  "description": "A local branching canvas for exploring, comparing, and refining creative directions with AI agents.",
+  "author": {
+    "name": "Sider AI",
+    "email": "support@chatnext.ai",
+    "url": "https://brancha.ai"
+  },
+  "homepage": "https://brancha.ai",
+  "repository": "https://github.com/Sider-ai/brancha",
+  "license": "MIT",
+  "keywords": [
+    "creative-canvas",
+    "branching",
+    "ideation",
+    "design",
+    "agent"
+  ]
+}

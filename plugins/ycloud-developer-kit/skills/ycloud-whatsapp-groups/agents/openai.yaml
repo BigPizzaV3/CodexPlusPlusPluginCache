@@ -1,0 +1,6 @@
+interface:
+  display_name: "YCloud WhatsApp Groups"
+  short_description: "Design or implement WhatsApp group operations"
+  default_prompt: "Use $ycloud-whatsapp-groups to design or implement contract-aware WhatsApp group management with mock-only mutations."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,45 @@
+{
+  "author": {
+    "email": "support@nightviz.ai",
+    "name": "NightVision Security, Inc.",
+    "url": "https://nightviz.ai"
+  },
+  "description": "NightVision application security workflows for local development and CI/CD.",
+  "homepage": "https://nightviz.ai",
+  "interface": {
+    "capabilities": [
+      "API discovery",
+      "DAST scan configuration",
+      "CI/CD security guidance",
+      "Finding triage"
+    ],
+    "category": "Security",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Discover APIs in this repository with NightVision.",
+      "Configure a NightVision scan for this application.",
+      "Triage these NightVision scan findings."
+    ],
+    "developerName": "NightVision Security, Inc.",
+    "displayName": "NightVision",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Guide NightVision API discovery, DAST scan configuration, CI/CD integration, and security-finding triage using the local NightVision CLI.",
+    "privacyPolicyURL": "https://nightviz.ai/privacy",
+    "shortDescription": "Secure apps with NightVision",
+    "termsOfServiceURL": "https://nightviz.ai/terms",
+    "websiteURL": "https://nightviz.ai"
+  },
+  "keywords": [
+    "application-security",
+    "dast",
+    "api-security",
+    "openapi",
+    "nightvision"
+  ],
+  "license": "Apache-2.0",
+  "name": "nightvision",
+  "repository": "https://github.com/nvsecurity/nightvision-mcp",
+  "skills": "./skills/",
+  "version": "0.2.0"
+}

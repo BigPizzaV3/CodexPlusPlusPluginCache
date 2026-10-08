@@ -1,0 +1,9 @@
+interface:
+  display_name: Context Engineering
+  short_description: Optimizes agent context setup
+  default_prompt: Use $context-engineering for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

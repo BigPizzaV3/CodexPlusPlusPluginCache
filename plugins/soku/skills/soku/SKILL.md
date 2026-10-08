@@ -1,0 +1,184 @@
+---
+name: soku
+description: >-
+  Use when calling Soku CLI capabilities from a shell: auth, workspace
+  selection, ads/GA4/PostHog data reads, typed ads writes, SEO Hosting,
+  automations, Context Hub files, temporary file publishing, brand skills,
+  third-party egress,
+  review-gated writes, skill installation, or CLI updates.
+license: MIT
+---
+
+# Soku CLI
+
+Written against Soku CLI release 0.1.0-alpha.18. If `soku --version` reports a
+newer release, run `soku changelog --since` that release before relying on
+details here.
+
+The `soku` CLI is the shell-native way for an AI agent to use Soku from your
+coding agent or any terminal. It talks to Soku over `/api/cli/*`; no MCP
+host is required. Treat this file as the router. Load the relevant reference
+file before acting on a detailed workflow.
+
+## Reference Router
+
+Read only the reference files needed for the user's task:
+
+| Task | Read |
+| --- | --- |
+| First-time setup, expired token, workspace selection, org/brand ambiguity | `references/auth-workspace.md` |
+| Ads, GA4, or PostHog reads; raw `soku call`; command discovery | `references/data-capabilities.md` and `references/capability-flow.md` |
+| Meta/Google/ChatGPT Ads writes, uploads, bulk create, review-gated approval | `references/ads-write.md` |
+| SEO Hosting, automations, Context Hub files, temporary public file URLs | `references/seo-automation-files.md` |
+| Third-party APIs through server-side credential injection; security rules | `references/egress-security.md` |
+| Installing, updating, or removing Soku-managed local skills; finding out what an upgrade changed | `references/skills-updates.md` |
+
+For an installed business skill such as `soku-ads-report`, read that skill too.
+Business skills carry their own "Running this skill with the Soku CLI" section.
+
+## Prerequisite: The CLI Must Be Installed
+
+This skill only describes the `soku` command; it does not contain it. Check
+first:
+
+```bash
+soku --version
+```
+
+If the command is missing, install it (Node.js 20 or newer is required) and
+check again:
+
+```bash
+npm i -g @soku-ai/cli
+soku --version
+```
+
+If npm says `@soku-ai/cli` is not found, report that the official package is
+unavailable. Do not invent an unofficial package name.
+
+When this skill arrived as a marketplace plugin, the CLI may also have
+installed its own copy under `~/.claude/skills/soku/`,
+`~/.codex/skills/soku/`, or `~/.cursor/skills/soku/`. Both copies are the same
+document at possibly different versions. The copy the CLI installed is refreshed
+together with the binary, so when the two disagree, prefer that one, and treat
+`soku --help` and `soku changelog` as the authority over either copy.
+
+## Default Flow
+
+1. Check auth/workspace state:
+
+```bash
+soku auth status
+soku workspace status
+```
+
+2. If auth is missing or expired, use the agent split-flow from
+`references/auth-workspace.md`.
+
+3. If the workspace is not ready, resolve and select the remote Soku brand:
+
+```bash
+soku workspace resolve <brand>
+soku workspace use-brand <brand>
+```
+
+4. Pick the reference for the task. Do not infer Soku org/brand from the current
+local repo directory.
+
+5. Inspect command help before unfamiliar calls:
+
+```bash
+soku --help
+soku <namespace> --help
+soku <namespace> <action> --help
+```
+
+6. Run the command and parse JSON output. In non-TTY contexts, success is
+`{"ok":true,"data":...}` and errors are `{"ok":false,"error":...}`.
+
+## Non-Negotiable Rules
+
+- **Confirm the target brand immediately before any write, and read it back
+  after.** Run `soku workspace status` in the same turn as the write — not
+  earlier in the session — and check the reported brand is the one the user
+  named (its `source` field tells you whether saved config or a `SOKU_BRAND_ID`
+  environment variable decided it, which is what you would have to change). The
+  CLI keeps whatever brand was selected last, and it does not follow the brand
+  the user is looking at in the web app, so a brand confirmed three turns ago
+  proves nothing about this write. After the write, read the object back
+  (`soku automation get`, `soku context list`, `soku seo-hosting pages list`)
+  and confirm it landed where you intended. A write into the wrong brand
+  succeeds silently and looks identical to a correct one; the read-back is the
+  only thing that tells them apart.
+- Never print or persist the Soku access token.
+- Never ask the user to paste third-party provider keys for covered providers.
+- Do not fail just because an upstream provider key env var is unset. Use
+  `soku egress -- curl ...` for covered third-party APIs.
+- A human must authorize every review-gated write — but don't force a
+  copy-paste. If your harness prompts for explicit human confirmation before
+  each shell command (a per-command permission prompt), you MAY run
+  `soku review approve <id>` yourself after showing the user the diff/summary;
+  that confirmation prompt is the human gate. Never allowlist or auto-approve
+  `soku review approve`/`deny`, and never approve a write the user has not seen.
+  If your harness runs commands without per-command human confirmation, do NOT
+  self-approve — surface the `review_id` for the user to run.
+- Pass user values as separate argv elements. Do not build a shell command by
+  string-concatenating untrusted values.
+- Do not scan local repo files, `AGENTS.md`, or `context/` folders for Soku
+  workspace state unless the user explicitly asks about local files.
+- When a command prints a hint, follow it before retrying. Do not loop blindly.
+
+## Exit Codes
+
+| Exit | Meaning | What to do |
+| --- | --- | --- |
+| 0 | Success | Parse `data`. |
+| 1 | Usage or no workspace | Fix args, or run `soku workspace status` / `use-brand`. |
+| 2 | Auth missing, expired, or revoked | Run `soku auth login --no-wait`. |
+| 4 | Not found or unknown capability | Re-check `soku --help` / `soku <ns> --help`. |
+| 5 | Runtime or network failure | Retry if transient; if behind a proxy set `ALL_PROXY`. |
+
+## Capability Discovery
+
+Typed command names are kebab-case:
+
+```bash
+soku ads query-single-dimension --help
+```
+
+Raw `soku call` action names use registry snake_case:
+
+```bash
+soku call ads query_single_dimension --payload '{"account_id":"123","dimension":"campaign"}'
+```
+
+Prefer typed commands when they exist. Use `soku call` only as a forward-compatible
+escape hatch for a newer action or an action not yet exposed ergonomically.
+
+## Installed Skill Names
+
+The bundled CLI meta skill is named `soku`. Business skills are installed with a
+Soku prefix, for example `soku-ads-report` and `soku-google-ads`.
+
+```bash
+soku skill list
+soku skill install ads-report google-ads
+soku skill status
+```
+
+When asking an AI client to invoke a business skill, write
+`use @soku-ads-report skill`, not `@ads-report`.
+
+## Updating This Skill
+
+`soku update skills` refreshes the bundled `soku` meta skill and every installed
+Soku-managed business skill recorded in `.soku-skills.json`. It also refreshes
+legacy meta-only installs that have `soku/SKILL.md` but no manifest, so older
+installations receive this `references/` directory.
+
+`soku update cli` also silently refreshes an already-installed global `soku`
+meta skill as an npm postinstall side effect. Its JSON result carries
+`mustRereadMetaSkill: true` plus `metaSkillRefreshed: [<paths>]` when that
+happened. After running `soku update cli`, check that field: if true, re-read
+this file (and `references/`) from the listed path before continuing — do not
+keep acting on this session's previously loaded copy of this skill.

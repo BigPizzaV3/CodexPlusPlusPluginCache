@@ -1,0 +1,37 @@
+{
+  "author": {
+    "name": "Austin Wise"
+  },
+  "description": "Resume work from checked evidence and propose durable preferences from repeated feedback.",
+  "interface": {
+    "capabilities": [
+      "Read-only"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Find unfinished tasks to complete and spin up a plan with threads to complete them. ",
+      "Resume tasks.",
+      "Archive old tasks and improve our workflow."
+    ],
+    "developerName": "PatchworkMD",
+    "displayName": "Dreamer",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Check work receipts against current files, build bounded resume cards, and propose working preferences with independent source evidence. Includes a local Python helper and a review-first learning skill. No hosted service or automatic memory writes.",
+    "shortDescription": "Resume work. Review feedback. ",
+    "supportURL": "https://x.com/patchworkmd",
+    "websiteURL": "https://patchworkmd.dev"
+  },
+  "keywords": [
+    "hermes",
+    "codex",
+    "opencode",
+    "dreamer",
+    "receipts",
+    "recovery"
+  ],
+  "license": "MIT",
+  "name": "dreamer",
+  "skills": "./skills/",
+  "version": "1.2.0"
+}

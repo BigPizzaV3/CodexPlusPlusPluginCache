@@ -1,0 +1,31 @@
+{
+  "author": {
+    "name": "Support Investigator contributors"
+  },
+  "description": "Evidence-first investigation of technical customer and product issues.",
+  "interface": {
+    "capabilities": [
+      "Analyze",
+      "Investigate"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Investigate this technical support issue using available evidence.",
+      "Rank the likely causes and identify the next checks that can distinguish between them.",
+      "Identify what is known, what evidence is missing, and what should be verified next. Draft a customer-safe escalation note."
+    ],
+    "developerName": "John Rose S",
+    "displayName": "Product Support Investigator",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Product Support Investigator helps support and engineering teams investigate Jira incidents systematically instead of jumping from an error message directly to a root-cause conclusion.\n\nIt gathers evidence from Jira issue details, comments, changelog history, linked issues, and bounded related issue signals. The investigator separates confirmed observations from hypotheses, identifies missing evidence, and recommends what should be verified next.\n\nUse it to:\n\u2022 Validate reported incidents before drawing conclusions\n\u2022 Organize Jira evidence into a structured investigation\n\u2022 Identify missing information and competing hypotheses\n\u2022 Determine practical verification steps\n\u2022 Investigate without modifying Jira issues\n\nThe Community Edition is free and open source. The Jira integration is read-only and does not require Datadog, Zendesk, or another external observability platform.\n",
+    "privacyPolicyURL": "https://github.com/johnroselearning/product-support-investigator-community/blob/main/PRIVACY.md",
+    "shortDescription": "Investigate Before You Guess",
+    "supportURL": "https://github.com/johnroselearning/product-support-investigator-community/issues",
+    "termsOfServiceURL": "https://github.com/johnroselearning/product-support-investigator-community/blob/main/TERMS.md",
+    "websiteURL": "https://nightingalecompass.com"
+  },
+  "name": "product-support-investigator",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

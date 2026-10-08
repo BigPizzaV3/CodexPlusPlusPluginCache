@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">gophers mascot</title>
+  <rect width="128" height="128" rx="28" fill="#62d4dc"/>
+  <circle cx="38" cy="43" r="17" fill="#c58d58"/>
+  <circle cx="90" cy="43" r="17" fill="#c58d58"/>
+  <ellipse cx="64" cy="72" rx="43" ry="42" fill="#d6a26d"/>
+  <circle cx="49" cy="64" r="6" fill="#071513"/>
+  <circle cx="79" cy="64" r="6" fill="#071513"/>
+  <ellipse cx="64" cy="77" rx="10" ry="8" fill="#071513"/>
+  <path d="M50 91c8 7 20 7 28 0" fill="none" stroke="#071513" stroke-width="5" stroke-linecap="round"/>
+  <rect x="57" y="88" width="7" height="14" rx="2" fill="#f2ecd8"/>
+  <rect x="65" y="88" width="7" height="14" rx="2" fill="#f2ecd8"/>
+</svg>

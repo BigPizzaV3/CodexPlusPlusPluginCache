@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "provenance": "Pinned source rebuild and actual linker/source/header closure; not inferred from the original opaque npm WASM.",
+  "sdk": {
+    "version": "4.0.13",
+    "revision": "2659582941bef14008476903f48941909db1b196",
+    "releaseBuildRevision": "32b8ae819674cb42b8ac2191afeb9571e33ad5e2",
+    "host": {
+      "platform": "darwin",
+      "arch": "arm64"
+    },
+    "compilerRebuiltFromSource": false
+  },
+  "pinnedInputs": {
+    "path": "runtime/openjpeg-wasm/pinned-inputs.json",
+    "sha256": "ac38989d004651683dbc28698dc1a50115d198f1ee0a05393622cca6b1d5ac9b"
+  },
+  "rebuildFiles": [
+    {
+      "path": "runtime/openjpeg-wasm/scripts/prepare-sdk.mjs",
+      "sha256": "4879564c3d2cb13116387d8f3b09d151a44e1479423a340790a7114f94ddef77"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/scripts/rebuild-native.mjs",
+      "sha256": "fbdd94afbbd0861cd99b4623fd26a9d2672535fc7b469d687eaffdd27c3de168"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/scripts/create-decoder.mjs",
+      "sha256": "f20455b37a29fd45f7959461333eacf85f8f5b2e53c7d09d86bdfa896875407c"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/scripts/qualify-decoder.mjs",
+      "sha256": "d4fa7ec029af2a1f20a48fbcdfa69244d532d2f3290df315b23ce6d755c81804"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/scripts/package-evidence.mjs",
+      "sha256": "5e032442a75d75519cdd417d019023a41ad2b56aa554fb0862cecec55b4fa4f4"
+    }
+  ],
+  "qualification": {
+    "receipt": {
+      "path": "runtime/openjpeg-wasm/evidence/decoder-qualification.json",
+      "sha256": "31096eb3fcc67a98017172f4b1d1c72799adb9743206eec8343972b3f5fdf14e"
+    },
+    "checksPassed": 27,
+    "pixelComparisons": 12,
+    "genuineAperioComparisons": 2,
+    "actualResourcePathForced": true,
+    "noNativeExecutable": true,
+    "platformValuesAreSimulatedOnCurrentHost": true,
+    "productionHostAcceptance": "not performed"
+  },
+  "reproducibility": {
+    "path": "runtime/openjpeg-wasm/evidence/reproducibility.json",
+    "sha256": "b8f80bfa5445748c2d7f4b20a6a5d72b02a71da2e2ebc3ad6f20097fa4b439df"
+  },
+  "boundary": "Source/license evidence and controlled runtime validation only; no legal opinion, production-host acceptance, customer acceptance, patent clearance or publication authorization.",
+  "outputs": [
+    {
+      "path": "node_modules/.cache/slide-openjpeg-wasm/openjpeg.wasm",
+      "bytes": 252699,
+      "sha256": "0ea7c89a77749d4ef91f07e9bf1eb963e36d32c5864c3caeb420d40336c1d952"
+    }
+  ],
+  "components": [
+    {
+      "name": "OpenJPEG",
+      "version": "2.5.4",
+      "license": "BSD-2-Clause",
+      "sourceUrl": "https://github.com/uclouvain/openjpeg/tree/6c4a29b00211eb0430fa0e5e890f1ce5c80f409f"
+    },
+    {
+      "name": "Mozilla pdf.js.openjpeg native decoder and buffer-stream integration",
+      "version": "0.0.1",
+      "license": "BSD-2-Clause",
+      "sourceUrl": "https://github.com/mozilla/pdf.js.openjpeg/tree/f73c6ec70ce6368361599458e47cfcb133b7fec2"
+    },
+    {
+      "name": "Emscripten allocator and native runtime",
+      "version": "4.0.13",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/emscripten-core/emscripten/tree/2659582941bef14008476903f48941909db1b196/system/lib"
+    },
+    {
+      "name": "musl libc Emscripten variant",
+      "version": "1.2.5 (Emscripten 4.0.13 snapshot)",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/emscripten-core/emscripten/tree/2659582941bef14008476903f48941909db1b196/system/lib/libc/musl"
+    },
+    {
+      "name": "LLVM compiler-rt Emscripten snapshot",
+      "version": "Emscripten 4.0.13 snapshot",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "sourceUrl": "https://github.com/emscripten-core/emscripten/tree/2659582941bef14008476903f48941909db1b196/system/lib/compiler-rt"
+    },
+    {
+      "name": "LLVM libc++abi Emscripten snapshot",
+      "version": "Emscripten 4.0.13 snapshot",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "sourceUrl": "https://github.com/emscripten-core/emscripten/tree/2659582941bef14008476903f48941909db1b196/system/lib/libcxxabi"
+    },
+    {
+      "name": "LLVM libc++ atomic support header",
+      "version": "Emscripten 4.0.13 snapshot",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "sourceUrl": "https://github.com/emscripten-core/emscripten/blob/2659582941bef14008476903f48941909db1b196/system/lib/libcxx/src/include/atomic_support.h"
+    },
+    {
+      "name": "LLVM Clang intrinsic and support headers",
+      "version": "177f27d22092cb64e871e6cd2f8981d24e823186",
+      "license": "Apache-2.0 WITH LLVM-exception",
+      "sourceUrl": "https://github.com/llvm/llvm-project/tree/177f27d22092cb64e871e6cd2f8981d24e823186/clang/lib/Headers"
+    },
+    {
+      "name": "WASI Preview 1 ABI declarations header",
+      "version": "2c2fc9a2fddd0927a66f1c142e65c8dab6f5c5d7",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://github.com/emscripten-core/emscripten/blob/2659582941bef14008476903f48941909db1b196/system/include/wasi/api.h"
+    }
+  ],
+  "headerOnlyComponentNames": ["WASI Preview 1 ABI declarations header"],
+  "sourceEvidence": [
+    {
+      "path": "runtime/openjpeg-wasm/evidence/native-build.json",
+      "sha256": "7082ad9c50a20a1e4fec9975b845b1ec0c55e3c73b2e9a8ae8274dc94e934771"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/reproducibility-build.json",
+      "sha256": "d0b092a1b2bc7aced2cd58f6328b869e1e7175f99974730b82fdeb3f57651467"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/openjpeg-source-inventory.json",
+      "sha256": "414726b2116d49294ffc836f0f640aa6178c030905add0ca92f434f51638feca"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-component-evidence.json",
+      "sha256": "efebdab3afe5550128dbd22a58414c51eb37fc8ad14d2c67370ec4d455d3ed17"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/portable-evidence-index.json",
+      "sha256": "0cc2fb6482d119578a2f785f65c0d3f15fecdf4f315436858b4a7a1a2b9e43ad"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-runtime-contributing-sources.json",
+      "sha256": "ba5dbd5726b92c6100d17f139245fcc0963977875d53e391895e1acabb445fa1"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-compiled-header-provenance.json",
+      "sha256": "614acf69a626e009a977e1bbc6ab96c4da48b243583360f4f85be99a09deaa02"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-merged-rodata-proof.json",
+      "sha256": "fd4ab7428d5bf61d9e91f86c19b892179a7aa515d42e94d7c0a6de9367fc95f8"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/notice-aggregate-normalization.json",
+      "sha256": "bd83f7008cf89c3c2e8f4833785778728201e63df1ec936efee90113662dc531"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/packaging-verification.json",
+      "sha256": "b0751050d31c87e93352131505f715bc85ceb70a0754134b0a7d2fe6ec007583"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-merged-rodata-proof/input-mergeable-segments-0000-0127.json",
+      "sha256": "57bbf1295421c716a7ee24d0f27cf8af373dcd7fab6d984a35099900c3cfae41"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-merged-rodata-proof/input-mergeable-segments-0128-0255.json",
+      "sha256": "1a4e971c1a5e56fa7a35787713cc1a67387a13fc9af98e2ac8760a1acebd0759"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-merged-rodata-proof/input-mergeable-segments-0256-0383.json",
+      "sha256": "8d29ccdefde0106ec58ffb738b04972744887160c0756333a189a30f39d33753"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-merged-rodata-proof/input-mergeable-segments-0384-0486.json",
+      "sha256": "5b9726b74060ba34740f572124596d99ee5ab63d81ef5f192a9accb35c3482fb"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-merged-rodata-proof/pieces-0000-0127.json",
+      "sha256": "bf7bd5f5c1e5e66f4b41258c2505bb25d926229b5c1285a4f521e6b008a5ad82"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-merged-rodata-proof/pieces-0128-0255.json",
+      "sha256": "2a680bd8c08f8c56668fca4967b0dbc99371edf34a7c1d38d7ecd6821e4893a5"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-merged-rodata-proof/pieces-0256-0329.json",
+      "sha256": "e6f131d286a9d07ccdc33b3fac91d8198ef0fb7baa27626dd9288b840ece0b67"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/openjpeg-source-inventory/linked-archive-members-0000-0020.json",
+      "sha256": "37a36e3c59983acf6ee79805d43940623c209370c38076f3196980d5cdba5c48"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/openjpeg-source-inventory/compiler-observed-sources-and-headers-0000-0053.json",
+      "sha256": "523b0afae42197f0fd811c4a2895beb566d5bdc09525ddc6fcce3c692019c53c"
+    }
+  ],
+  "memory": {
+    "initialBytes": 16777216,
+    "maximumBytes": 2147483648,
+    "wasmAssetLimitBytes": 1048576
+  }
+}

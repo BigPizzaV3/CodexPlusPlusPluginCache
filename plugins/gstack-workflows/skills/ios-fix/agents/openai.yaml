@@ -1,0 +1,8 @@
+interface:
+  display_name: "iOS Fix"
+  short_description: "Investigate and fix iOS defects with regression checks on a compatible local device workflow."
+  default_prompt: "Use iOS Fix for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

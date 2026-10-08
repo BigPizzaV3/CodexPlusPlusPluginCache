@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Terraform"
+  short_description: "Terraform plans, state and resource moves"
+  default_prompt: "Use $vibe-terraform to audit the selected terraform boundary."

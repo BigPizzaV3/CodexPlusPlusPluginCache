@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Control Flow"
+  short_description: "Write clear Go branches, loops, and switches"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-control-flow to simplify and review this Go control flow."

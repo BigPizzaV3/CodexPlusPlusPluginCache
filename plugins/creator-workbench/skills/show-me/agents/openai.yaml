@@ -1,0 +1,7 @@
+interface:
+  display_name: Show Me
+  short_description: Render visual plans, comparisons, and reports
+  brand_color: '#E45B32'
+  default_prompt: Use $show-me to render this plan, comparison, or decision surface as a visual artifact.
+policy:
+  allow_implicit_invocation: true

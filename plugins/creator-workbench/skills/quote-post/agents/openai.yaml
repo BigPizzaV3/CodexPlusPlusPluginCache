@@ -1,0 +1,7 @@
+interface:
+  display_name: Quote Post
+  short_description: Create quote-led posts and visual briefs
+  brand_color: '#E45B32'
+  default_prompt: Use $quote-post to create a quote-led post and matching visual brief.
+policy:
+  allow_implicit_invocation: true

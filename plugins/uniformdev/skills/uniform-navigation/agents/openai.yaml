@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uniform Navigation"
+  short_description: "Build headers, mega menus and nav drawers"
+  default_prompt: "Build a mega menu with $uniform-navigation"

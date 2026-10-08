@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "muratmirgun",
+    "url": "https://github.com/muratmirgun"
+  },
+  "description": "Production-grade Go programming skills for AI coding agents.",
+  "homepage": "https://muratmirgun.github.io/gophers/",
+  "interface": {
+    "brandColor": "#00ADD8",
+    "brandColorDark": "#27D4FF",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Review this Go change for bugs, race conditions, and idiomatic design.",
+      "Design a clean, testable Go package API for this requirement.",
+      "Diagnose this Go issue and propose a minimal, well-tested fix."
+    ],
+    "developerName": "Murat Mirg\u00fcn Ercan",
+    "displayName": "Gophers",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Get focused guidance for writing, reviewing, testing, and improving Go code. Use 26 skills covering APIs, concurrency, databases, error handling, observability, performance, documentation, and idiomatic design.",
+    "privacyPolicyURL": "https://muratmirgun.github.io/gophers/privacy.html",
+    "shortDescription": "Production-grade Go skills",
+    "termsOfServiceURL": "https://muratmirgun.github.io/gophers/terms.html",
+    "websiteURL": "https://muratmirgun.github.io/gophers/"
+  },
+  "keywords": [
+    "go",
+    "golang",
+    "skills",
+    "code-review",
+    "testing",
+    "concurrency",
+    "observability"
+  ],
+  "license": "MIT",
+  "name": "gophers",
+  "repository": "https://github.com/muratmirgun/gophers",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

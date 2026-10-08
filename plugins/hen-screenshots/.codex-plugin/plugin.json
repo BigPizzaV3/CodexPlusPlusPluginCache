@@ -1,0 +1,44 @@
+{
+  "author": {
+    "email": "hensell@hensell.dev",
+    "name": "Hensell",
+    "url": "https://hensell.dev"
+  },
+  "description": "Create app-store screenshots, portfolio mockups and Play banners from local images. Export PNGs and editable Hen projects.",
+  "homepage": "https://screenshots.hensell.dev/",
+  "interface": {
+    "brandColor": "#B64C35",
+    "brandColorDark": "#CA6049",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create store screenshots from my captures.",
+      "Make a portfolio mockup with my app screenshots.",
+      "Export my Hen project in English and Spanish."
+    ],
+    "developerName": "HENSELL FRANCISCO ESPINOZA ESPINOZA",
+    "displayName": "Hen Screenshots",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Create App Store screenshots, Google Play screenshots and banners, and portfolio mockups from your own images. Choose phone, tablet, desktop, multi-device, or linked panorama templates, including fixed isometric device poses. Export full-size opaque RGB PNGs, a preview, files organized by language, and an editable .henscreenshots project for the free web studio. Version 0.2.4 preserves copied typography from the web studio, including font weights, scale, line height, and supporting-text opacity, and supports these attributes in design specifications. It also supports studio projects with custom background images. To reuse a personal template, open it in the web studio and download a .henscreenshots project; the plugin does not access your browser library or import .hentemplate files directly. Hen Screenshots is free and MIT-licensed. This is a local Codex workflow: it requires Node.js 22.12+ and a one-time dependency setup with internet access. Rendering then runs offline. Hen does not upload captures or require an API key. Your agent provider\u2019s plan and data policies still apply. Supports PNG, JPEG, and still WebP inputs. Users should review captions, crops, and store requirements before publishing.",
+    "privacyPolicyURL": "https://github.com/Hensell/hen-screenshots/blob/plugin-v0.2.4/plugins/hen-screenshots/PRIVACY.md",
+    "shortDescription": "Create screenshots and mockups",
+    "supportURL": "https://github.com/Hensell/hen-screenshots/issues",
+    "websiteURL": "https://screenshots.hensell.dev/"
+  },
+  "keywords": [
+    "screenshots",
+    "mockups",
+    "app-store",
+    "google-play",
+    "local"
+  ],
+  "license": "MIT",
+  "name": "hen-screenshots",
+  "repository": "https://github.com/Hensell/hen-screenshots",
+  "skills": "./skills",
+  "version": "0.2.4"
+}

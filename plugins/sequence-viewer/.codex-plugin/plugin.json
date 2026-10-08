@@ -1,0 +1,51 @@
+{
+  "name": "sequence-viewer",
+  "version": "0.1.43",
+  "description": "Inspect, analyze, safely edit, and compare biological sequences and alignments.",
+  "author": {
+    "name": "OpenAI",
+    "email": "support@openai.com",
+    "url": "https://openai.com/"
+  },
+  "homepage": "https://openai.com/",
+  "repository": "https://github.com/openai/plugins",
+  "license": "MIT",
+  "keywords": [
+    "sequence",
+    "alignment",
+    "msa",
+    "fasta",
+    "fastq",
+    "genbank",
+    "embl",
+    "snapgene",
+    "sanger",
+    "abif",
+    "scf",
+    "a3m",
+    "stockholm",
+    "bioinformatics"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Biological Sequence & Alignment Viewer",
+    "shortDescription": "Inspect, analyze, and compare biological sequences and alignments in Codex.",
+    "longDescription": "Biological Sequence & Alignment Viewer helps you inspect, analyze, safely edit, and compare FASTA, GenBank, EMBL, FASTQ, multiple sequence alignments, Sanger ABIF/SCF traces, and supported SnapGene DNA files. Navigate linear or circular records, manage annotations, translate with the right genetic code, find ORFs, explore primers and restriction digests, inspect measured chromatogram signals, align or edit copies, build graphical guide trees, load mapped variant/read evidence, export reproducible artifacts, restore sessions, and ask follow-up questions grounded in authoritative live viewer state. Unsupported binary revisions and source metadata are reported explicitly.",
+    "developerName": "OpenAI",
+    "category": "Scientific Research",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://openai.com/",
+    "privacyPolicyURL": "https://openai.com/policies/privacy-policy/",
+    "termsOfServiceURL": "https://openai.com/policies/terms-of-use/",
+    "defaultPrompt": [
+      "Fetch ENA DRR037765 first 500 reads to active workspace; open and report live length range, GC, Q30, and subset provenance",
+      "Fetch UniProt P01116/P01111/P01112 alignment; map conserved motifs to KRAS, compute distances/tree, publish Newick to workspace",
+      "Fetch NCBI NC_001416.1 to active workspace; open it, map cI to OR1–OR3, and translate cI with code 11"
+    ],
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
+    "brandColor": "#3F8F83",
+    "screenshots": []
+  }
+}

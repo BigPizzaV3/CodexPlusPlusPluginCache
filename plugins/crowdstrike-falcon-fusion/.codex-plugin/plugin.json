@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "CrowdStrike",
+    "url": "https://github.com/CrowdStrike"
+  },
+  "description": "CrowdStrike Falcon Fusion skills for authoring, deploying, and executing Fusion workflows. Includes live action discovery, YAML authoring with schema validation, workflow import and release, execution monitoring, and Falcon Next-Gen SIEM lookup files.",
+  "homepage": "https://github.com/CrowdStrike/fusion-skills",
+  "interface": {
+    "brandColor": "#E01F3D",
+    "brandColorDark": "#E01F3D",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create a Falcon Fusion workflow",
+      "Automate a CrowdStrike response",
+      "Troubleshoot a Fusion workflow"
+    ],
+    "developerName": "CrowdStrike",
+    "displayName": "CrowdStrike Falcon Fusion",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Discover live Falcon Fusion actions, author workflow YAML with schema validation, import and release workflow definitions to a CID, trigger and monitor executions, and manage Falcon Next-Gen SIEM lookup files.",
+    "shortDescription": "Build Falcon Fusion workflows",
+    "websiteURL": "https://github.com/CrowdStrike/fusion-skills"
+  },
+  "keywords": [
+    "crowdstrike",
+    "falcon",
+    "fusion",
+    "soar",
+    "workflow",
+    "automation",
+    "security"
+  ],
+  "license": "MIT",
+  "name": "crowdstrike-falcon-fusion",
+  "repository": "https://github.com/CrowdStrike/fusion-skills",
+  "skills": "./skills/",
+  "version": "1.2.0"
+}

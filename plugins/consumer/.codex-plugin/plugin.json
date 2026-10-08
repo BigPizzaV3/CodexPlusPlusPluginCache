@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Consumer complaint drafting, deficiency and product liability analysis, compensation quantification, and opposite-party reply skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#E76F51",
+    "brandColorDark": "#E76F51",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Draft a consumer complaint over this defective product.",
+      "Test whether these facts amount to deficiency in service.",
+      "Quantify this compensation claim head by head."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Consumer",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Five reusable legal workflows covering consumer complaint drafting, deficiency and unfair-trade-practice analysis, compensation quantification, opposite-party replies, and product liability exposure.",
+    "shortDescription": "Consumer law workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "consumer",
+    "product-liability",
+    "complaints",
+    "compensation"
+  ],
+  "license": "MIT",
+  "name": "consumer",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

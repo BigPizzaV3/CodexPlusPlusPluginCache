@@ -1,0 +1,3 @@
+[
+  { "id": "gateway-refresh", "name": "Refresh Gateway", "status": "Degraded", "owner": "ops.owner@example.com" }
+]

@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Create Images"
+  short_description: "Create images, posters and art"
+  default_prompt: "Use $pixverse-create-image to create a standalone image from my idea and references."
+policy:
+  allow_implicit_invocation: true

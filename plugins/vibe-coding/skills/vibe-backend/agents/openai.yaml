@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · APIs & bots"
+  short_description: "API contracts and bot interaction flows"
+  default_prompt: "Use $vibe-backend to audit the selected apis & bots boundary."

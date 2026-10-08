@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "Saul Mart\u00ed"
+  },
+  "description": "Create motion-rich Awwwards-style frontend experiences using the dedicated GPT Taste GSAP workflow plus production frontend quality support.",
+  "interface": {
+    "brandColor": "#22C55E",
+    "brandColorDark": "#3ADD76",
+    "capabilities": [
+      "High-motion Awwwards UI"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Create an Awwwards-style page with advanced GSAP motion",
+      "Add cinematic scroll interactions to this frontend",
+      "Design a motion-rich premium portfolio"
+    ],
+    "developerName": "Saul Mart\u00ed",
+    "displayName": "MotionDesign",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Create motion-rich Awwwards-style frontend experiences using the dedicated GPT Taste GSAP workflow plus production frontend quality support.",
+    "shortDescription": "High-motion Awwwards UI"
+  },
+  "keywords": [
+    "engineering-suite",
+    "motion-design",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "engineering-suite-motion-design",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

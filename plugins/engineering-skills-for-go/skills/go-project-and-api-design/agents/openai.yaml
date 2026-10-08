@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Project and API Design"
+  short_description: "Shape packages, APIs, and dependencies"
+  default_prompt: "Use $go-project-and-api-design to design this Go package or API boundary."
+policy:
+  allow_implicit_invocation: true

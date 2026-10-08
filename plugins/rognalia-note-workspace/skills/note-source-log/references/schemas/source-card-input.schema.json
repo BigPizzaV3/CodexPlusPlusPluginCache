@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:source-card-input:1",
+  "title": "note Workspace source card input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "source_log_ids",
+    "kind",
+    "statement_type",
+    "summary",
+    "topics",
+    "public_scope"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "source_card_id": {"type": "string", "pattern": "^src-[a-z0-9]{8,32}$"},
+    "source_log_ids": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^log-[0-9]{8}-[a-z0-9]{8,24}$"}
+    },
+    "kind": {"enum": ["event", "observation", "emotion", "decision", "quote", "change", "question", "other"]},
+    "statement_type": {"enum": ["fact", "experience", "inference", "unknown"]},
+    "summary": {"type": "string", "minLength": 1, "maxLength": 4000},
+    "exact_words": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "minLength": 1, "maxLength": 20000}
+      ]
+    },
+    "topics": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 4000}
+    },
+    "public_scope": {"enum": ["private", "confirm_before_use", "public"]},
+    "status": {"enum": ["active", "archived"]}
+  }
+}

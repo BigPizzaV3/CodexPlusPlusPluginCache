@@ -1,0 +1,7 @@
+interface:
+  display_name: Workspace Operator
+  short_description: Work safely with local workspace files
+  brand_color: '#E45B32'
+  default_prompt: Use $host-workspace-operator to inspect and modify the current workspace safely for this task.
+policy:
+  allow_implicit_invocation: true

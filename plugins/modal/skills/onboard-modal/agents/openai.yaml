@@ -1,0 +1,4 @@
+interface:
+  display_name: "Set up Modal"
+  short_description: "Install Modal CLI and global skill"
+  default_prompt: "Use $onboard-modal to install and authenticate Modal, then install Modal's global CLI-generated skill."

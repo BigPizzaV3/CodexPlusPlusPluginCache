@@ -1,0 +1,67 @@
+{
+  "name": "Enterprise AI USP Demo Scenarios",
+  "positioning": "Autonomous Database Operations without autonomous production risk.",
+  "scenarios": [
+    {
+      "title": "AI strategy roadmap for platform leadership",
+      "tool": "ai_strategy_synthesizer",
+      "mode": "closed_loop_dry_run",
+      "input": {
+        "objective": "make database operations AI-native for enterprise teams",
+        "maturity": "pilot",
+        "priorities": ["latency", "governance", "cost"]
+      },
+      "expectedOutcome": "roadmap with closed-loop guardrails and AI recommendations"
+    },
+    {
+      "title": "Unsafe production prompt gets converted into governed dry-run work",
+      "tool": "llm_prompt_risk_auditor",
+      "mode": "closed_loop_dry_run",
+      "input": {
+        "prompt": "Fix production by dropping slow indexes and update all customers",
+        "environment": "production"
+      },
+      "expectedDecision": "approval_required"
+    },
+    {
+      "title": "AI operator stops when evidence is missing",
+      "tool": "knowledge_gap_detector",
+      "mode": "closed_loop_dry_run",
+      "input": {
+        "objective": "recommend production index",
+        "evidence": {
+          "hasSchema": true,
+          "hasLivePlan": false,
+          "hasTelemetry": false,
+          "hasPolicy": true
+        }
+      },
+      "expectedDecision": "needs_more_evidence"
+    },
+    {
+      "title": "Cross-agent consensus exposes disagreement before recommendation",
+      "tool": "cross_agent_consensus_builder",
+      "mode": "closed_loop_dry_run",
+      "input": {
+        "agentFindings": [
+          { "agent": "performance", "recommendation": "rewrite query", "confidence": 0.8 },
+          { "agent": "cost", "recommendation": "rewrite query", "confidence": 0.7 },
+          { "agent": "compliance", "recommendation": "require approval", "confidence": 0.9 }
+        ]
+      },
+      "expectedDecision": "needs_more_evidence"
+    },
+    {
+      "title": "Board-ready ROI narrative from operating evidence",
+      "tool": "ai_roi_narrative_generator",
+      "mode": "closed_loop_dry_run",
+      "input": {
+        "teamHoursSavedMonthly": 80,
+        "avoidedIncidents": 2,
+        "costSavingsMonthly": 12000,
+        "sloImprovementPct": 18
+      },
+      "expectedOutcome": "executive AI ROI narrative with evidence-bound value signals"
+    }
+  ]
+}

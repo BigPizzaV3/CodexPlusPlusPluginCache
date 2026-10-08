@@ -1,0 +1,49 @@
+{
+  "author": {
+    "email": "team@fastrepl.com",
+    "name": "Fastrepl",
+    "url": "https://anarlog.so"
+  },
+  "description": "Search local Anarlog meetings or connect to Cloud with OAuth.",
+  "homepage": "https://docs.anarlog.so/agents/overview",
+  "interface": {
+    "brandColor": "#74540F",
+    "brandColorDark": "#F0D08B",
+    "capabilities": [
+      "Find meetings",
+      "Read notes and summaries",
+      "Read bounded transcript excerpts",
+      "Review recurring meeting history",
+      "Export complete meeting records"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Summarize my latest Anarlog meeting.",
+      "What action items came out of my planning meeting?",
+      "Compare the last three meetings in this recurring series."
+    ],
+    "developerName": "Fastrepl, Inc",
+    "displayName": "Anarlog",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Find Anarlog meetings and read notes, summaries, participants, action items, bounded transcript excerpts, and recurring history. On your computer, use the local Anarlog CLI or local MCP, including unsynced changes. Remote agents can use an independently connected Anarlog Cloud service through OAuth. Cloud access requires personal or paid-Team Pro access and explicit Cloud API & Connectors opt-in, and reads separately uploaded snapshots. This skill does not connect your account by itself. Export complete meeting records when requested.",
+    "privacyPolicyURL": "https://anarlog.so/privacy",
+    "shortDescription": "Query your meeting notes",
+    "supportURL": "https://docs.anarlog.so/help",
+    "termsOfServiceURL": "https://anarlog.so/terms",
+    "websiteURL": "https://anarlog.so"
+  },
+  "keywords": [
+    "meetings",
+    "notes",
+    "transcripts",
+    "productivity",
+    "mcp",
+    "oauth"
+  ],
+  "license": "MIT",
+  "name": "anarlog",
+  "repository": "https://github.com/fastrepl/anarlog/tree/main/agent-plugins/anarlog",
+  "skills": "./skills",
+  "version": "1.3.0"
+}

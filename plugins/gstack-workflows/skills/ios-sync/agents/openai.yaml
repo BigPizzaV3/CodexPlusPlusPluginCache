@@ -1,0 +1,8 @@
+interface:
+  display_name: "iOS Sync"
+  short_description: "Regenerate native iOS debug bridge artifacts only on a compatible local host."
+  default_prompt: "Use iOS Sync for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

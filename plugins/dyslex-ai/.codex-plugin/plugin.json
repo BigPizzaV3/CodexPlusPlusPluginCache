@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Firou",
+    "url": "https://github.com/Firou91"
+  },
+  "description": "Accessibility skills plugin for AI agents. Improves readability, instruction decoding, typo tolerance, and technical context handling on top of Superpowers.",
+  "homepage": "https://github.com/Firou91/dyslex.ai#readme",
+  "interface": {
+    "brandColor": "#2563EB",
+    "brandColorDark": "#2563EB",
+    "capabilities": [
+      "Skills",
+      "Accessibility",
+      "Readability"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "i writ this but word get mix and i cant see if sens is good pls make it clear but dont change my idee",
+      "eror in terminal i dont undrstand it say many line and my brain block pls tell me what broke where and next thing",
+      "big task too much text i lose order pls cut in small step first second third and say what no need now"
+    ],
+    "developerName": "Firou",
+    "displayName": "Dyslex.ai",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Dyslex.ai packages accessibility-focused skills for AI agents. It requires Superpowers to be installed and loaded before use. The skills help agents clarify ambiguous instructions, preserve technical tokens, explain errors and diffs, and produce easier-to-read responses without claiming medical diagnosis or treatment.",
+    "shortDescription": "Clearer agent interactions.",
+    "websiteURL": "https://github.com/Firou91/dyslex.ai"
+  },
+  "keywords": [
+    "accessibility",
+    "dyslexia",
+    "dyslexai",
+    "agent-skills",
+    "codex",
+    "superpowers",
+    "readability"
+  ],
+  "license": "Apache-2.0",
+  "name": "dyslex-ai",
+  "repository": "https://github.com/Firou91/dyslex.ai",
+  "skills": "./skills/",
+  "version": "0.3.7"
+}

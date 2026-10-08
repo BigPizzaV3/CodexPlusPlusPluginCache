@@ -1,0 +1,6 @@
+interface:
+  display_name: "Xray"
+  short_description: "Run autonomous, read-only, evidence-backed local quality QA."
+  default_prompt: "Use $forgemind-xray to assess the current application with safe local checks and explicit GUI evidence gaps."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,28 @@
+data_pdb_boundary_identities
+loop_
+_atom_site.group_PDB
+_atom_site.id
+_atom_site.type_symbol
+_atom_site.label_atom_id
+_atom_site.label_alt_id
+_atom_site.label_comp_id
+_atom_site.label_asym_id
+_atom_site.label_entity_id
+_atom_site.label_seq_id
+_atom_site.pdbx_PDB_ins_code
+_atom_site.Cartn_x
+_atom_site.Cartn_y
+_atom_site.Cartn_z
+_atom_site.occupancy
+_atom_site.B_iso_or_equiv
+_atom_site.auth_seq_id
+_atom_site.auth_comp_id
+_atom_site.auth_asym_id
+_atom_site.auth_atom_id
+_atom_site.pdbx_PDB_model_num
+ATOM A101 C CA . GLY LA 1 49 ? 0.000 0.000 0.000 1.00 10.00 9999 GLY A CA 7
+ATOM 000205 C CA A SER LA 1 50 A 2.000 0.000 0.000 0.55 11.00 12345 SER A CA 7
+ATOM ALT-B C CA B SER LA 1 50 A 2.200 0.200 0.000 0.45 11.50 12345 SER A CA 7
+ATOM 900719925474099312345 C CA . THR LA 1 51 B 4.000 0.000 0.000 1.00 12.00 -1000 THR A CA 7
+ATOM '  spaced id  ' O O . GLY LA 1 52 ? 7.000 0.000 0.000 1.00 13.00 0 GLY A O 7
+#

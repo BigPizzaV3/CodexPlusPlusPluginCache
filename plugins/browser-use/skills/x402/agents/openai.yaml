@@ -1,0 +1,9 @@
+interface:
+  display_name: "x402"
+  short_description: "Review x402 Browser Use integrations"
+  default_prompt: "Use $x402 to explain or review this x402 Browser Use integration without handling secrets or initiating transactions."
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

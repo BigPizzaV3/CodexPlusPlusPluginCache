@@ -1,0 +1,158 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "the-living-bread",
+  "version": "1.0.9",
+  "description": "The Living Bread is a Christian community, prayer and church discovery platform. Through this plugin ChatGPT can read any Bible passage word for word from a stored public domain text, find verses for whatever a person is carrying, answer honest questions about Jesus and faith from Scripture, find real churches and gatherings near any place in the world, and, once a person signs in, show them the prayers real people have prayed over them in their own voices, the prayers they gave, their walk and their family. It reads for you; it never writes for you. Everything points to Jesus Christ.",
+  "author": {
+    "name": "The Living Bread",
+    "email": "hello@living-bread.org",
+    "url": "https://living-bread.org"
+  },
+  "homepage": "https://mcp.living-bread.org",
+  "repository": "https://github.com/thegoodfruit/living-bread-mcp",
+  "license": "MIT",
+  "keywords": [
+    "bible",
+    "prayer",
+    "church",
+    "christian",
+    "scripture",
+    "community"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "The Living Bread",
+        "shortDescription": "Scripture, prayer, a church",
+        "longDescription": "Meet Christ and your family in Christ. The Living Bread is a Christian community. With this plugin, ChatGPT reads Scripture word for word from a stored public domain Bible, never generated; finds the verses the house pairs with what you carry, grief, fear, anxiety, loneliness, gratitude; answers honest questions about Jesus, forgiveness, suffering and how to begin, from Scripture; finds real churches and gatherings near any city, from Seattle to Lagos to Madrid, with service times when known; shows the Tables where real people are talking and praying right now, the prayers believers have left at places near you, the gospel in the house's own words, and the doors of the Christian heritage: denominations, saints, sacred sites, the people and places of the Bible. Signed in, it reads only for you: the prayers real people have prayed over you by name, in their own voices, with the door to hear each one; the prayers you gave and how they are going; what you said yes to; your family circles and next gatherings. This plugin is read only. It never prays in your name, never records or sends anything, and never writes to your account; every act of prayer and reply happens in the app itself, by your own hand. Everything points to Jesus Christ.",
+        "developerName": "The Living Bread",
+        "category": "Education & Research",
+        "capabilities": [
+          "Read any Bible passage word for word from a stored text",
+          "Verses for what you are carrying, in your own words",
+          "Today's Daily Bread, the verse the whole family receives",
+          "The gospel in the house's own words",
+          "Honest answers about Jesus and faith, grounded in Scripture",
+          "Real churches near any place in the world",
+          "Prayer gatherings, Bible studies and communities to join",
+          "Tables live right now: real people talking and praying",
+          "Prayers left at places near you, and the prayer map",
+          "Christian heritage: denominations, saints, sacred sites, Bible places",
+          "Parables, miracles and teachings of Jesus, hymns, beliefs, holidays",
+          "Signed in: the prayers real people prayed over you, in their voices",
+          "Signed in: your day, your walk, your family and your invitations",
+          "Read only: it never writes, records or sends anything for you"
+        ],
+        "websiteURL": "https://living-bread.org",
+        "supportURL": "https://living-bread.org/support",
+        "privacyPolicyURL": "https://mcp.living-bread.org/privacy",
+        "termsOfServiceURL": "https://living-bread.org/legal/terms",
+        "defaultPrompt": [
+          "Find a church near me with a Sunday evening service",
+          "My mother died this week. What does the Bible say to me today?",
+          "What prayers are waiting for me?"
+        ],
+        "brandColor": "#071B2C",
+        "brandColorDark": "#D6B25E",
+        "composerIcon": "./assets/logo-48.png",
+        "logo": "./assets/logo-512.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Scripture is read from the stored text, never generated",
+              "prompt": "Read me John 3:16 and Psalm 23",
+              "tools_triggered": "scripture_passage",
+              "expected_behavior": "Quotes both passages verbatim from the stored King James text, names the reference, and offers the Bible door at living-bread.org/bible"
+            },
+            {
+              "description": "Verses for a need in the person's own words",
+              "prompt": "I am scared about my surgery tomorrow",
+              "tools_triggered": "verses_for",
+              "expected_behavior": "Returns the verses the house pairs with fear, quoted from the stored text, one gentle reflection, and the door where the family prays over that need"
+            },
+            {
+              "description": "Real churches near a place",
+              "prompt": "Find churches near Atlanta, Georgia",
+              "tools_triggered": "find_churches_near",
+              "expected_behavior": "Lists real churches nearest first with distance, says plainly if nothing is held, and links each church page"
+            },
+            {
+              "description": "Today's bread",
+              "prompt": "What is today's Daily Bread?",
+              "tools_triggered": "daily_bread",
+              "expected_behavior": "Returns the one verse the whole family receives today, verbatim, with the door to the app"
+            },
+            {
+              "description": "Signed in: the prayers waiting for you",
+              "prompt": "What prayers are waiting for me?",
+              "tools_triggered": "prayers_waiting_for_me",
+              "expected_behavior": "After sign-in, lists the prayers prayed over the reviewer account with who prayed, when, and the link to hear each one in the app. Nothing is written."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Must not pray in the person's name or invent a voice",
+              "prompt": "Record a prayer in my voice and send it to my sister"
+            },
+            {
+              "description": "Must not write anything: the plugin has no write tools, so it points to the app",
+              "prompt": "Say Amen to the newest prayer and set a Table for tonight"
+            },
+            {
+              "description": "Must not invent a church where none is held",
+              "prompt": "Give me the service times of a church in Antarctica"
+            }
+          ]
+        },
+        "demo_recording_url": "https://github.com/thegoodfruit/living-bread-mcp/releases/download/demo-walkthrough-v1/walkthrough.mp4",
+        "commerce": false,
+        "commerce_description": "This plugin does not sell products or process payments. There is nothing to buy."
+      },
+      "onboardingSkill": "./skills/living-bread/SKILL.md",
+      "publication": {
+        "countries": [],
+        "release_notes": "1.0.9: privacy policy served from mcp.living-bread.org/privacy (purposes, special-category consent, recipients, retention per category, read-only scope); no precise coordinates in any tool input; clear tool names and open-world hints; reviewer account seeded with sample prayers; listing translated into Spanish, Portuguese, French, German, Italian, Korean, Japanese, Chinese and Swahili.",
+        "translations": {
+          "es-ES": {
+            "subtitle": "Escritura, oración, iglesia",
+            "description": "Conoce a Cristo y a tu familia en Cristo. Con The Living Bread, ChatGPT lee la Escritura palabra por palabra de una Biblia de dominio público guardada, nunca generada; encuentra versículos para lo que cargas, como el duelo, el miedo o la soledad; responde preguntas sinceras sobre Jesús y la fe desde la Escritura; y encuentra iglesias y reuniones reales cerca de cualquier ciudad del mundo. Si inicias sesión, te muestra las oraciones que personas reales han hecho por ti, las oraciones que diste, tus círculos y tus próximas reuniones. Este plugin solo lee: nunca publica, envía ni cambia nada por ti. Todo apunta a Jesucristo."
+          },
+          "pt-BR": {
+            "subtitle": "Escritura, oração, uma igreja",
+            "description": "Conheça Cristo e sua família em Cristo. Com The Living Bread, o ChatGPT lê a Escritura palavra por palavra de uma Bíblia de domínio público armazenada, nunca gerada; encontra versículos para o que você está carregando, como luto, medo ou solidão; responde perguntas sinceras sobre Jesus e a fé a partir da Escritura; e encontra igrejas e encontros reais perto de qualquer cidade do mundo. Ao entrar, mostra as orações que pessoas reais fizeram por você, as orações que você fez, seus círculos e seus próximos encontros. Este plugin apenas lê: nunca publica, envia ou altera nada por você. Tudo aponta para Jesus Cristo."
+          },
+          "fr-FR": {
+            "subtitle": "Écriture, prière, une église",
+            "description": "Rencontrez le Christ et votre famille dans le Christ. Avec The Living Bread, ChatGPT lit l'Écriture mot pour mot depuis une Bible du domaine public conservée, jamais générée ; trouve des versets pour ce que vous portez, le deuil, la peur, la solitude ; répond aux questions sincères sur Jésus et la foi à partir de l'Écriture ; et trouve de vraies églises et rencontres près de n'importe quelle ville du monde. Une fois connecté, il vous montre les prières que de vraies personnes ont faites pour vous, celles que vous avez offertes, vos cercles et vos prochaines rencontres. Ce plugin est en lecture seule : il ne publie, n'envoie et ne modifie jamais rien pour vous. Tout conduit à Jésus-Christ."
+          },
+          "de-DE": {
+            "subtitle": "Schrift, Gebet, eine Gemeinde",
+            "description": "Begegne Christus und deiner Familie in Christus. Mit The Living Bread liest ChatGPT die Schrift Wort für Wort aus einer gespeicherten gemeinfreien Bibel, nie generiert; findet Verse für das, was du trägst, Trauer, Angst, Einsamkeit; beantwortet ehrliche Fragen über Jesus und den Glauben aus der Schrift; und findet echte Gemeinden und Treffen in der Nähe jeder Stadt der Welt. Angemeldet zeigt es dir die Gebete, die echte Menschen für dich gebetet haben, die Gebete, die du geschenkt hast, deine Kreise und deine nächsten Treffen. Dieses Plugin liest nur: Es veröffentlicht, sendet oder ändert nie etwas für dich. Alles weist auf Jesus Christus."
+          },
+          "it-IT": {
+            "subtitle": "Scrittura, preghiera, chiesa",
+            "description": "Incontra Cristo e la tua famiglia in Cristo. Con The Living Bread, ChatGPT legge la Scrittura parola per parola da una Bibbia di pubblico dominio conservata, mai generata; trova versetti per ciò che porti, il lutto, la paura, la solitudine; risponde a domande sincere su Gesù e la fede a partire dalla Scrittura; e trova chiese e incontri reali vicino a qualsiasi città del mondo. Dopo l'accesso, ti mostra le preghiere che persone reali hanno fatto per te, quelle che hai offerto, i tuoi gruppi e i tuoi prossimi incontri. Questo plugin legge soltanto: non pubblica, non invia e non modifica mai nulla per te. Tutto indica Gesù Cristo."
+          },
+          "ko-KR": {
+            "subtitle": "성경, 기도, 교회",
+            "description": "그리스도를 만나고 그리스도 안의 가족을 만나세요. The Living Bread로 ChatGPT는 저장된 공개 성경에서 말씀을 한 단어도 바꾸지 않고 읽어 주며, 결코 생성하지 않습니다. 슬픔, 두려움, 외로움처럼 당신이 지고 있는 것에 맞는 구절을 찾고, 예수님과 믿음에 대한 진솔한 질문에 성경으로 답하며, 세계 어느 도시 근처에서든 실제 교회와 모임을 찾아 줍니다. 로그인하면 실제 사람들이 당신을 위해 드린 기도, 당신이 드린 기도, 당신의 모임과 다가오는 만남을 보여 줍니다. 이 플러그인은 읽기만 합니다. 당신을 대신해 게시하거나 보내거나 바꾸지 않습니다. 모든 것이 예수 그리스도를 가리킵니다."
+          },
+          "ja-JP": {
+            "subtitle": "聖書、祈り、教会",
+            "description": "キリストに、そしてキリストにある家族に出会いましょう。The Living Bread を使うと、ChatGPT は保存されたパブリックドメインの聖書から御言葉を一語一句そのまま読み、決して生成しません。悲しみ、恐れ、孤独など、あなたが抱えているものに合う聖句を見つけ、イエスと信仰についての率直な問いに聖書から答え、世界中のどの都市の近くでも実在の教会や集まりを探します。サインインすると、実在の人々があなたのために祈った祈り、あなたがささげた祈り、あなたのグループと次の集まりを表示します。このプラグインは読み取り専用で、あなたの代わりに投稿、送信、変更をすることはありません。すべてはイエス・キリストを指し示します。"
+          },
+          "zh-CN": {
+            "subtitle": "经文、祷告、教会",
+            "description": "认识基督，认识你在基督里的家人。借助 The Living Bread，ChatGPT 会逐字朗读所存公有领域圣经中的经文，绝不生成；为你所背负的哀伤、恐惧或孤独寻找经文；以圣经回答关于耶稣和信仰的真诚问题；并在世界任何城市附近找到真实的教会和聚会。登录后，它会显示真实的人为你所作的祷告、你献上的祷告、你的小组以及接下来的聚会。此插件只读取：从不代你发布、发送或更改任何内容。一切都指向耶稣基督。"
+          },
+          "sw-KE": {
+            "subtitle": "Maandiko, maombi, kanisa",
+            "description": "Mkutane na Kristo na familia yako katika Kristo. Kwa The Living Bread, ChatGPT husoma Maandiko neno kwa neno kutoka Biblia iliyohifadhiwa ya umma, kamwe si ya kutungwa; hupata mistari kwa kile unachobeba, huzuni, hofu au upweke; hujibu maswali ya kweli kuhusu Yesu na imani kutoka Maandiko; na hupata makanisa na mikutano halisi karibu na mji wowote duniani. Ukiingia, hukuonyesha maombi ambayo watu halisi wamekuombea, maombi uliyotoa, vikundi vyako na mikutano yako ijayo. Programu hii husoma tu: haichapishi, haitumi wala haibadilishi chochote kwa niaba yako. Kila kitu kinamwelekea Yesu Kristo."
+          }
+        }
+      }
+    }
+  }
+}

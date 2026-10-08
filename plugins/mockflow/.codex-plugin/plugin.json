@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "MockFlow",
+    "url": "https://mockflow.com"
+  },
+  "description": "Brainstorm visually on a live MockFlow board from your own machine. Reads local files and code that never leave your computer. Requires Codex \u2014 selected in the desktop app, or the CLI \u2014 plus the mockflow-bridge helper; ChatGPT itself cannot draw, even in the desktop app.",
+  "homepage": "https://mockflow.com",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "brandColor": "#1E88E5",
+    "brandColorDark": "#1E88E5",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Draw a mindmap of how this project is structured",
+      "Wireframe a signup screen for a mobile app",
+      "Map out a customer onboarding process, from signup to first invoice"
+    ],
+    "developerName": "MockFlow",
+    "displayName": "MockFlow",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Think an idea through out loud and watch it take shape on a MockFlow board: mindmaps, flowcharts, roadmaps, wireframes, journeys, charts and maps. It reads the board back too, so you can rearrange things and ask it to carry on from what is now there. Works in Codex Desktop and Codex CLI only.\n\nRequires Codex \u2014 select Codex in the desktop app, or use the Codex CLI \u2014 and the free mockflow-bridge helper running on your computer. The drawing is done by that helper, talking to the board tab open in your browser, which is also why local files never have to be uploaded. ChatGPT itself cannot draw, even in the desktop app: a ChatGPT conversation runs on OpenAI's servers, and only a Codex session runs on your machine where the bridge is. For a quick board without leaving the browser, use Ask Mida on app.mockflow.com.",
+    "privacyPolicyURL": "https://mockflow.com/legal/privacy",
+    "shortDescription": "Brainstorm anything visually",
+    "termsOfServiceURL": "https://mockflow.com/legal/terms",
+    "websiteURL": "https://mockflow.com"
+  },
+  "keywords": [
+    "mockflow",
+    "diagram",
+    "wireframe",
+    "mindmap",
+    "whiteboard",
+    "visualization"
+  ],
+  "license": "MIT",
+  "name": "mockflow",
+  "repository": "https://github.com/mockflow/mockflow-codex-plugin",
+  "skills": "./skills/",
+  "version": "0.3.1"
+}

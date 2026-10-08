@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Signal Yield Advisory / Koichi Matsuda",
+    "url": "https://github.com/signal-yield/tochi-satei-kun"
+  },
+  "description": "Apache-2.0 local-first OSS tool for preliminary Japanese land brokerage valuation support that generates Excel and JSON outputs from user-provided MLIT transaction data and L01 land-price-publication data.",
+  "homepage": "https://github.com/signal-yield/tochi-satei-kun",
+  "interface": {
+    "brandColor": "#0B6E4F",
+    "brandColorDark": "#91F4D5",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "\u571f\u5730\u67fb\u5b9a\u30af\u30f3\u3067\u5a92\u4ecb\u67fb\u5b9a\u306e\u4e00\u6b21\u691c\u8a0e\u7528Excel\u3068JSON\u3092\u4f5c\u6210\u3057\u3066",
+      "MLIT\u53d6\u5f15\u4fa1\u683c\u60c5\u5831CSV\u3068\u5730\u4fa1\u516c\u793aL01\u30c7\u30fc\u30bf\u304b\u3089\u571f\u5730\u67fb\u5b9a\u66f8\u3092\u4f5c\u6210\u3057\u3066",
+      "\u571f\u5730\u67fb\u5b9a\u30af\u30f3\u306e\u6b63\u898fCLI\u3067JSON\u51fa\u529b\u307e\u3067\u5b9f\u884c\u3057\u3066"
+    ],
+    "developerName": "Signal Yield Advisory / Koichi Matsuda",
+    "displayName": "tochi-satei-kun",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "tochi-satei-kun is an Apache-2.0 local-first OSS tool for preliminary Japanese land brokerage valuation support. It runs locally, uses white-box hedonic regression and comparable transaction analysis, and generates Excel and JSON outputs from user-provided property, MLIT transaction, and L01 land-price-publication files. The tool itself does not send input files to external services. Outputs are not real-estate appraisal opinions; users must separately verify site conditions, legal restrictions, rights, and other material facts, and the final decision remains with the user.",
+    "shortDescription": "Japanese Land valuation ",
+    "websiteURL": "https://github.com/signal-yield/tochi-satei-kun"
+  },
+  "keywords": [
+    "real-estate",
+    "land",
+    "brokerage",
+    "excel",
+    "json",
+    "local-first",
+    "japan"
+  ],
+  "license": "Apache-2.0",
+  "name": "tochi-satei-kun",
+  "repository": "https://github.com/signal-yield/tochi-satei-kun",
+  "skills": "./skills/",
+  "version": "1.5.0"
+}

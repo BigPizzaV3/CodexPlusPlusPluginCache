@@ -1,0 +1,9 @@
+interface:
+  display_name: "Document Release"
+  short_description: "Update release-facing documentation to match shipped behavior."
+  default_prompt: "Use Document Release for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

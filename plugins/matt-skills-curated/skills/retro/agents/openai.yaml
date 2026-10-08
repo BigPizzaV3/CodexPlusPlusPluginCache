@@ -1,0 +1,3 @@
+interface:
+  display_name: "Retro"
+  short_description: "Conduct a retrospective on a coding session to improve agent environment"

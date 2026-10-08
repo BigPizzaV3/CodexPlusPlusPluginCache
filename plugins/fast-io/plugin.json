@@ -1,0 +1,112 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "fast-io",
+  "version": "2.91.0",
+  "description": "Fastio workspaces for agents and the people they work with: files, shares, comments, metadata and AI search through the Fastio MCP server, plus the agent guide as a skill.",
+  "author": {
+    "name": "Fastio",
+    "url": "https://fast.io"
+  },
+  "homepage": "https://fast.io",
+  "license": "MIT",
+  "keywords": [
+    "fastio",
+    "files",
+    "storage",
+    "workspaces",
+    "sharing",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Fastio",
+        "shortDescription": "Files, workspaces, AI search",
+        "longDescription": "Fastio is a workspace and file-storage platform for teams. This app connects a signed-in Fastio account to ChatGPT: browse and search workspaces and files, read file text and metadata, organize folders, upload files, manage branded shares, read and add comments, and manage workspace and share members.\n\nSign-in uses OAuth in the browser; the app acts with the permissions of the signed-in account. No tool accepts a password, API key or verification code, and no tool returns one.\n\nEach operation is its own tool (for example `storage_search`, `storage_create_folder`, `share_create`). Read tools only retrieve data. Tools that change data are marked as writes, and tools that delete or overwrite data are marked destructive, so ChatGPT can ask the user before running them.\n\nSearch finds files by keyword or semantic match within one workspace or share and returns ranked results with short excerpts; a separate tool returns a quoted passage from a specific file.\n\nThe app does not display plans, start subscriptions or handle payments.",
+        "developerName": "Fastio",
+        "category": "Productivity",
+        "capabilities": [
+          "Search files in a workspace or share",
+          "Quote passages from documents",
+          "Browse workspaces, folders and files",
+          "Create, move, rename and delete files and folders",
+          "Upload files and import files from a URL",
+          "Create and manage branded shares",
+          "Read and add comments",
+          "List, add and remove workspace and share members",
+          "Get time-limited download and ZIP links",
+          "Read and set file metadata"
+        ],
+        "websiteURL": "https://fast.io",
+        "supportURL": "https://mcp.fast.io/docs#support",
+        "privacyPolicyURL": "https://fast.io/privacy/",
+        "termsOfServiceURL": "https://fast.io/terms/",
+        "defaultPrompt": [
+          "Search my Finance workspace for the Q3 budget report.",
+          "What does the Acme MSA say about the termination notice period?",
+          "Who are the members of my Legal workspace?"
+        ],
+        "brandColor": "#0061FF",
+        "brandColorDark": "#4D8DFF",
+        "logo": "./assets/logo.svg"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Search a workspace",
+              "prompt": "Search my Finance workspace for the Q3 budget report.",
+              "tools_triggered": "workspace_list, find_search",
+              "expected_behavior": "Returns ranked results from the Finance workspace with short excerpts, including Q3 2026 Budget.csv. find_search is annotated read-only and changes nothing."
+            },
+            {
+              "description": "Quote a passage from a contract",
+              "prompt": "What does the Acme MSA say about the termination notice period?",
+              "tools_triggered": "find_search, storage_content",
+              "expected_behavior": "Quotes section 4.1 of Acme MSA.docx: either party may terminate for convenience on sixty (60) days' prior written notice. Read-only tools; nothing is changed."
+            },
+            {
+              "description": "List workspace members",
+              "prompt": "Who are the members of my Legal workspace?",
+              "tools_triggered": "workspace_list, workspace_members",
+              "expected_behavior": "Lists the account owner (Review User) and the invited member with a pending invitation. Read-only; nothing is changed."
+            },
+            {
+              "description": "Create a folder",
+              "prompt": "Create a folder called 'Contracts 2026' in my Legal workspace.",
+              "tools_triggered": "workspace_list, storage_create_folder",
+              "expected_behavior": "storage_create_folder is annotated as a write, so ChatGPT can ask for confirmation first; once approved, the 'Contracts 2026' folder is created in the Legal workspace."
+            },
+            {
+              "description": "Move a folder to the trash",
+              "prompt": "Move 'Old Drafts' in my Legal workspace to the trash.",
+              "tools_triggered": "storage_list, storage_delete",
+              "expected_behavior": "storage_delete is annotated destructive, so ChatGPT can show a confirmation first. If declined, nothing changes; if approved, the folder moves to the trash and can be restored with storage_restore."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Plan or billing change",
+              "prompt": "Upgrade my Fastio plan to Business."
+            },
+            {
+              "description": "Password in chat",
+              "prompt": "Sign me in to Fastio, my password is hunter2."
+            },
+            {
+              "description": "Operation not offered (e-signature)",
+              "prompt": "Send the Acme MSA to bob@example.com for e-signature."
+            }
+          ]
+        },
+        "demo_recording_url": "https://youtu.be/qVKGKSJ4MVU",
+        "commerce": false,
+        "commerce_description": "This app does not sell products, display plans or process payments."
+      },
+      "publication": {
+        "release_notes": "Initial release: search and read files, quote passages, browse and organize workspaces and folders, upload files, manage shares, comments and members, and get time-limited download links, through the Fastio MCP server at https://mcp.fast.io/mcp/operations."
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

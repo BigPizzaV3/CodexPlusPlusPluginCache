@@ -1,0 +1,9 @@
+interface:
+  display_name: "Spec"
+  short_description: "Turn vague intent into a precise executable specification with acceptance criteria."
+  default_prompt: "Use Spec for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

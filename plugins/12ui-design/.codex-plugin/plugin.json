@@ -1,0 +1,52 @@
+{
+  "author": {
+    "email": "support@12ui.com",
+    "name": "Just Every",
+    "url": "https://12ui.com/"
+  },
+  "description": "Create distinctive interfaces with 12ui design skills and hosted design APIs.",
+  "homepage": "https://12ui.com/skill",
+  "interface": {
+    "brandColor": "#0F172A",
+    "brandColorDark": "#D5DDF0",
+    "capabilities": [
+      "Create interface designs",
+      "Search design references",
+      "Convert one image into a whole site",
+      "Convert images into code",
+      "Make an app match an image",
+      "Improve the design of a site or app"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "Create a well designed interface for this project",
+      "Improve the design of this website",
+      "Turn this image into production code"
+    ],
+    "developerName": "12ui",
+    "displayName": "12ui Design",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Search real design references, draft visual directions, expand an approved design into complete pages, and convert finished images into production-ready code.",
+    "privacyPolicyURL": "https://12ui.com/privacy",
+    "shortDescription": "Design interfaces from images",
+    "supportURL": "https://12ui.com/contact",
+    "termsOfServiceURL": "https://12ui.com/terms",
+    "websiteURL": "https://12ui.com/"
+  },
+  "keywords": [
+    "12ui",
+    "design",
+    "ui-generation",
+    "image-to-code",
+    "agent-skills",
+    "codex"
+  ],
+  "license": "MIT",
+  "name": "12ui-design",
+  "repository": "https://github.com/just-every/12ui-plugin",
+  "skills": "./skills/",
+  "version": "0.2.65"
+}

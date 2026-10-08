@@ -1,0 +1,6 @@
+interface:
+  display_name: "Competitive Intelligence"
+  short_description: "Compare competitors and category evidence."
+  default_prompt: "Use Competitive Intelligence to help with this marketing task."
+policy:
+  allow_implicit_invocation: true

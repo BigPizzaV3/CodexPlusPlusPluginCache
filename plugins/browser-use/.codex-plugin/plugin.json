@@ -1,0 +1,37 @@
+{
+  "author": {
+    "name": "Gregor Zunic"
+  },
+  "description": "Browser Use workflows adapted for approved host-managed browser automation, QA, code review, and hosted-browser architecture guidance.",
+  "interface": {
+    "capabilities": [
+      "Host-managed browser guidance",
+      "Website QA",
+      "browser-use code review",
+      "Hosted-browser architecture"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use the available browser to complete this website task",
+      "QA this website and report evidence-based findings",
+      "Review this browser-use Python code"
+    ],
+    "developerName": "RONALD FERRARI SOARES",
+    "displayName": "Browser Use",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Guides browser automation, website QA, browser-use code review, and hosted-browser architecture using approved capabilities already available in the host. It does not bootstrap external runtimes or defeat access controls.",
+    "shortDescription": "Safe browser automation workfl"
+  },
+  "keywords": [
+    "browser",
+    "automation",
+    "testing",
+    "cloud",
+    "web"
+  ],
+  "license": "MIT",
+  "name": "browser-use",
+  "skills": "./skills/",
+  "version": "0.13.10"
+}

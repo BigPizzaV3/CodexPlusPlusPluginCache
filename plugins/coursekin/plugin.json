@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Alexander Gregory Ammann",
+    "url": "https://github.com/agammann"
+  },
+  "description": "Name your class, attach your textbook and syllabus, and ask grounded homework questions.",
+  "homepage": "https://github.com/agammann/coursekin",
+  "keywords": [
+    "education",
+    "textbook",
+    "syllabus",
+    "homework",
+    "tutoring"
+  ],
+  "license": "MIT",
+  "name": "coursekin",
+  "repository": "https://github.com/agammann/coursekin",
+  "version": "0.1.0"
+}

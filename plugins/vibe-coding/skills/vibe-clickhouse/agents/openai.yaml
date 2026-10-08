@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · ClickHouse"
+  short_description: "Data ingestion, table engines and query cost"
+  default_prompt: "Use $vibe-clickhouse to audit the selected clickhouse boundary."

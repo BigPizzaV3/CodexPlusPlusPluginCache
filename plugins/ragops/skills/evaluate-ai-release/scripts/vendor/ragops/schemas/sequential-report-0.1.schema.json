@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/sequential-report-0.1.schema.json",
+  "title": "RAGOps sequential comparison report 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_version", "scenario_id", "passed", "decision", "case_count",
+    "available_repeats", "stopped_at_repeat", "maximum_repeats", "method",
+    "resamples", "seed", "failed_gates", "looks", "provenance"
+  ],
+  "properties": {
+    "report_version": {"const": "0.1"},
+    "scenario_id": {"type": "string", "minLength": 1},
+    "passed": {"type": "boolean"},
+    "decision": {"enum": ["pass", "block", "continue"]},
+    "case_count": {"type": "integer", "minimum": 1},
+    "available_repeats": {"type": "integer", "minimum": 1},
+    "stopped_at_repeat": {"type": ["integer", "null"], "minimum": 1},
+    "maximum_repeats": {"type": "integer", "minimum": 1},
+    "method": {"const": "predeclared_group_sequential_bonferroni_bootstrap"},
+    "resamples": {"type": "integer", "minimum": 100},
+    "seed": {"type": "integer"},
+    "failed_gates": {"type": "array", "items": {"type": "string"}},
+    "looks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "repeat_count", "boundary_confidence", "decision", "failed_gates", "metrics"
+        ],
+        "properties": {
+          "repeat_count": {"type": "integer", "minimum": 1},
+          "boundary_confidence": {"type": "number", "exclusiveMinimum": 0.5, "exclusiveMaximum": 1},
+          "decision": {"enum": ["pass", "block", "continue"]},
+          "failed_gates": {"type": "array", "items": {"type": "string"}},
+          "metrics": {
+            "type": "object",
+            "additionalProperties": {"$ref": "#/$defs/metric"}
+          }
+        }
+      }
+    },
+    "provenance": {"type": "object"}
+  },
+  "$defs": {
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "direction", "baseline_mean", "candidate_mean", "delta", "candidate_lower",
+        "candidate_upper", "regression_lower", "regression_upper", "absolute_threshold",
+        "max_regression", "decision", "reasons"
+      ],
+      "properties": {
+        "direction": {"enum": ["higher", "lower"]},
+        "baseline_mean": {"type": "number"},
+        "candidate_mean": {"type": "number"},
+        "delta": {"type": "number"},
+        "candidate_lower": {"type": "number"},
+        "candidate_upper": {"type": "number"},
+        "regression_lower": {"type": "number"},
+        "regression_upper": {"type": "number"},
+        "absolute_threshold": {"type": "number"},
+        "max_regression": {"type": "number", "minimum": 0},
+        "decision": {"enum": ["pass", "block", "continue"]},
+        "reasons": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

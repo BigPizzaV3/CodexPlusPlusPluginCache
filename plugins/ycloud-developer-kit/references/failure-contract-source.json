@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "failure-contract-v1",
+  "retrievedAt": "2026-08-29",
+  "sources": {
+    "errors": {
+      "url": "https://docs.ycloud.com/reference/errors",
+      "authority": "confirmed_provider_contract"
+    },
+    "rate-limits": {
+      "url": "https://docs.ycloud.com/reference/rate-limits",
+      "authority": "confirmed_provider_contract"
+    },
+    "request-ids": {
+      "url": "https://docs.ycloud.com/reference/request-ids",
+      "authority": "confirmed_provider_contract"
+    },
+    "whatsapp-errors": {
+      "url": "https://docs.ycloud.com/reference/whatsapp-errors",
+      "authority": "confirmed_provider_contract"
+    },
+    "meta-errors": {
+      "url": "https://developers.facebook.com/docs/whatsapp/cloud-api/support/error-codes/",
+      "authority": "upstream_reference_unavailable_during_retrieval"
+    },
+    "integration-boundaries": {
+      "path": "references/integration-boundaries.md",
+      "authority": "developer_kit_policy"
+    }
+  },
+  "authorityLayers": [
+    {
+      "id": "confirmed_provider_contract",
+      "description": "Fields, headers, codes, and channels directly confirmed by YCloud public documentation or the pinned OpenAPI snapshot."
+    },
+    {
+      "id": "developer_kit_policy",
+      "description": "Conservative classification and replay guidance. It is not a YCloud response guarantee."
+    },
+    {
+      "id": "project_decision",
+      "description": "Retry budgets, deadlines, persistence, outbox/idempotency keys, queues, and deployment choices supplied by the integrating project."
+    }
+  ],
+  "errorEnvelope": {
+    "wrapper": "error",
+    "required": ["status", "code"],
+    "properties": [
+      "status",
+      "code",
+      "message",
+      "target",
+      "docUrl",
+      "requestId",
+      "whatsappApiError"
+    ],
+    "controlFlowFields": ["httpStatus", "error.status", "error.code"],
+    "diagnosticOnlyFields": ["error.message"],
+    "derivedFields": ["failureClass", "transience", "decision", "automaticRetry"],
+    "authority": "confirmed_provider_contract"
+  },
+  "responseHeaders": [
+    {
+      "name": "YCloud-Request-ID",
+      "valueType": "opaque_string",
+      "behavior": "preserve_for_correlation_and_support",
+      "authority": "confirmed_provider_contract"
+    },
+    {
+      "name": "Retry-After",
+      "valueType": "delay_seconds",
+      "behavior": "delay_related_traffic_without_granting_replay_safety",
+      "authority": "confirmed_provider_contract"
+    },
+    {
+      "name": "RateLimit-Limit",
+      "valueType": "beta_structured_header",
+      "behavior": "parse_defensively",
+      "authority": "confirmed_provider_contract"
+    },
+    {
+      "name": "RateLimit-Policy",
+      "valueType": "beta_structured_header",
+      "behavior": "informational_parse_defensively",
+      "authority": "confirmed_provider_contract"
+    },
+    {
+      "name": "RateLimit-Remaining",
+      "valueType": "beta_non_negative_integer",
+      "behavior": "parse_defensively",
+      "authority": "confirmed_provider_contract"
+    },
+    {
+      "name": "RateLimit-Reset",
+      "valueType": "beta_delay_seconds",
+      "behavior": "parse_defensively",
+      "authority": "confirmed_provider_contract"
+    }
+  ],
+  "idempotency": {
+    "providerContract": {
+      "generalIdempotencyKey": "not_documented",
+      "mutationReplayGuarantee": "not_documented",
+      "authority": "confirmed_provider_contract_gap"
+    },
+    "externalId": {
+      "role": "application_correlation",
+      "grantsReplaySafety": false,
+      "authority": "confirmed_provider_contract"
+    },
+    "projectDecisionRequirements": [
+      "stable_operation_and_tenant_scope",
+      "durable_command_identity",
+      "request_digest_and_mismatch_conflict",
+      "retention_or_ttl",
+      "duplicate_in_progress_result",
+      "duplicate_completed_result",
+      "ambiguous_provider_outcome_reconciliation"
+    ]
+  },
+  "decisionVocabulary": [
+    "correct_request",
+    "reauthenticate",
+    "reauthorize",
+    "reconcile",
+    "wait",
+    "retry_if_replay_safe",
+    "await_async_status",
+    "do_not_retry",
+    "escalate",
+    "unknown"
+  ],
+  "ambiguousOutcomePolicy": {
+    "state": "ambiguous_outcome",
+    "signals": ["timeout", "connection_loss", "response_lost"],
+    "automaticRetry": false,
+    "requiredAction": "reconcile",
+    "authority": "developer_kit_policy"
+  },
+  "decisionRules": [
+    {
+      "signal": "HTTP_400",
+      "safeReadDecision": "correct_request",
+      "mutationDecision": "correct_request",
+      "authority": "developer_kit_policy"
+    },
+    {
+      "signal": "HTTP_401",
+      "safeReadDecision": "reauthenticate",
+      "mutationDecision": "reauthenticate_then_reconcile_before_new_attempt",
+      "authority": "developer_kit_policy"
+    },
+    {
+      "signal": "HTTP_403",
+      "safeReadDecision": "reauthorize_or_fix_precondition",
+      "mutationDecision": "reauthorize_or_fix_precondition",
+      "authority": "developer_kit_policy"
+    },
+    {
+      "signal": "HTTP_404",
+      "safeReadDecision": "return_not_found",
+      "mutationDecision": "reconcile_if_previous_outcome_was_ambiguous",
+      "authority": "developer_kit_policy"
+    },
+    {
+      "signal": "HTTP_409",
+      "safeReadDecision": "reconcile",
+      "mutationDecision": "reconcile_without_blind_replay",
+      "authority": "developer_kit_policy"
+    },
+    {
+      "signal": "HTTP_429",
+      "safeReadDecision": "honor_retry_after_then_bounded_retry",
+      "mutationDecision": "honor_retry_after_for_new_traffic_do_not_replay",
+      "authority": "developer_kit_policy"
+    },
+    {
+      "signal": "HTTP_5XX_OR_503",
+      "safeReadDecision": "bounded_retry_if_budget_allows",
+      "mutationDecision": "reconcile_ambiguous_outcome",
+      "authority": "developer_kit_policy"
+    },
+    {
+      "signal": "TIMEOUT_CONNECTION_LOSS_NO_RESPONSE",
+      "safeReadDecision": "bounded_retry_if_budget_allows",
+      "mutationDecision": "ambiguous_outcome_reconcile_before_new_attempt",
+      "authority": "developer_kit_policy"
+    },
+    {
+      "signal": "QUEUED_ACCEPTED",
+      "safeReadDecision": "not_applicable",
+      "mutationDecision": "await_retrieve_or_verified_message_updated_event",
+      "authority": "confirmed_provider_contract"
+    },
+    {
+      "signal": "UNKNOWN_CODE_OR_STATUS",
+      "safeReadDecision": "preserve_and_fail_closed",
+      "mutationDecision": "preserve_and_fail_closed_no_replay",
+      "authority": "developer_kit_policy"
+    }
+  ],
+  "unknownPolicy": {
+    "decision": "unknown",
+    "automaticRetry": false,
+    "preserveOriginalCode": true,
+    "preserveUnknownFields": true,
+    "messageTextControlsFlow": false,
+    "authority": "developer_kit_policy"
+  },
+  "ycloudErrorCodes": [
+    {"code": "ACCOUNT_LIMITED", "httpStatus": 403, "failureClass": "authorization", "transience": "conditional", "action": "reauthorize", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "ACCOUNT_RATE_LIMITED", "httpStatus": 429, "failureClass": "rate_limit", "transience": "transient", "action": "wait", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "ACCOUNT_UNAVAILABLE", "httpStatus": 403, "failureClass": "availability", "transience": "conditional", "action": "escalate", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "ALREADY_EXISTS", "httpStatus": 409, "failureClass": "conflict", "transience": "non_transient", "action": "reconcile", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "BAD_REQUEST", "httpStatus": 400, "failureClass": "validation", "transience": "non_transient", "action": "correct_request", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "BALANCE_INSUFFICIENT", "httpStatus": 403, "failureClass": "precondition", "transience": "conditional", "action": "do_not_retry", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "CONTENT_PROHIBITED", "httpStatus": 403, "failureClass": "policy", "transience": "non_transient", "action": "do_not_retry", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "CONTENT_TOO_LARGE", "httpStatus": 413, "failureClass": "validation", "transience": "non_transient", "action": "correct_request", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "EMAIL_DOMAIN_UNVERIFIED", "httpStatus": 403, "failureClass": "precondition", "transience": "conditional", "action": "wait", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "FORBIDDEN", "httpStatus": 403, "failureClass": "authorization", "transience": "non_transient", "action": "reauthorize", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "INTERNAL_SERVER_ERROR", "httpStatus": 500, "failureClass": "server", "transience": "transient", "action": "retry_if_replay_safe", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "MESSAGING_REGION_UNSUPPORTED", "httpStatus": 400, "failureClass": "validation", "transience": "non_transient", "action": "correct_request", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "NOT_FOUND", "httpStatus": 404, "failureClass": "not_found", "transience": "non_transient", "action": "reconcile", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "PARAM_INVALID", "httpStatus": 400, "failureClass": "validation", "transience": "non_transient", "action": "correct_request", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "PARAM_INVALID_LENGTH", "httpStatus": 400, "failureClass": "validation", "transience": "non_transient", "action": "correct_request", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "PARAM_MISSING", "httpStatus": 400, "failureClass": "validation", "transience": "non_transient", "action": "correct_request", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "PARAM_NOT_MATCH", "httpStatus": 400, "failureClass": "validation", "transience": "non_transient", "action": "correct_request", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "RECIPIENT_IN_BLOCK_LIST", "httpStatus": 403, "failureClass": "recipient_policy", "transience": "non_transient", "action": "do_not_retry", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "RECIPIENT_UNSUBSCRIBED", "httpStatus": 403, "failureClass": "recipient_policy", "transience": "non_transient", "action": "do_not_retry", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "SENDER_ID_UNAVAILABLE", "httpStatus": 403, "failureClass": "precondition", "transience": "conditional", "action": "do_not_retry", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "SENDER_RATE_LIMITED", "httpStatus": 429, "failureClass": "rate_limit", "transience": "transient", "action": "wait", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "SERVICE_UNAVAILABLE", "httpStatus": 503, "failureClass": "server", "transience": "transient", "action": "retry_if_replay_safe", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "SMS_SIGNATURE_UNAVAILABLE", "httpStatus": 403, "failureClass": "precondition", "transience": "conditional", "action": "do_not_retry", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "TOO_MANY_REQUESTS", "httpStatus": 429, "failureClass": "rate_limit", "transience": "transient", "action": "wait", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "UNAUTHORIZED", "httpStatus": 401, "failureClass": "authentication", "transience": "non_transient", "action": "reauthenticate", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "WHATSAPP_BUSINESS_ACCOUNT_UNAVAILABLE", "httpStatus": 403, "failureClass": "authorization", "transience": "conditional", "action": "reauthorize", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "WHATSAPP_DIRECT_SEND_UNSUPPORTED_COMPONENT", "httpStatus": 400, "failureClass": "validation", "transience": "non_transient", "action": "correct_request", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "WHATSAPP_PHONE_NUMBER_UNAVAILABLE", "httpStatus": 403, "failureClass": "precondition", "transience": "conditional", "action": "do_not_retry", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "WHATSAPP_TEMPLATE_UNAVAILABLE", "httpStatus": 403, "failureClass": "precondition", "transience": "conditional", "action": "do_not_retry", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "WHATSAPP_TEMPLATE_UNEDITABLE", "httpStatus": 403, "failureClass": "precondition", "transience": "non_transient", "action": "correct_request", "source": "errors", "authority": "confirmed_provider_contract"},
+    {"code": "WHATSAPP_WABA_UNAVAILABLE", "httpStatus": 403, "failureClass": "authorization", "transience": "conditional", "action": "reauthorize", "source": "errors", "authority": "confirmed_provider_contract"}
+  ],
+  "whatsappErrorCodes": [
+    {"code": "1", "channels": ["synchronous_response"], "observedHttpStatus": 500, "failureClass": "payload_or_upstream", "transience": "unknown", "action": "correct_request", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "3", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "permission", "transience": "non_transient", "action": "reauthorize", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "10", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "permission", "transience": "non_transient", "action": "reauthorize", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "190", "channels": ["synchronous_response"], "observedHttpStatus": 401, "failureClass": "authentication", "transience": "non_transient", "action": "reauthenticate", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "200", "channels": ["synchronous_response"], "observedHttpStatus": 403, "failureClass": "permission", "transience": "non_transient", "action": "reauthorize", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "368", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "policy", "transience": "non_transient", "action": "do_not_retry", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131000", "channels": ["asynchronous_webhook"], "observedHttpStatus": null, "failureClass": "upstream_unknown", "transience": "unknown", "action": "retry_if_replay_safe", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131005", "channels": ["synchronous_response"], "observedHttpStatus": 403, "failureClass": "permission", "transience": "non_transient", "action": "reauthorize", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131009", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "validation", "transience": "non_transient", "action": "correct_request", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131013", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "recipient", "transience": "non_transient", "action": "correct_request", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131026", "channels": ["asynchronous_webhook"], "observedHttpStatus": null, "failureClass": "undeliverable", "transience": "conditional", "action": "do_not_retry", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131031", "channels": ["asynchronous_webhook"], "observedHttpStatus": null, "failureClass": "policy", "transience": "non_transient", "action": "do_not_retry", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131037", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "precondition", "transience": "conditional", "action": "do_not_retry", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131047", "channels": ["asynchronous_webhook"], "observedHttpStatus": null, "failureClass": "service_window", "transience": "non_transient", "action": "correct_request", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131048", "channels": ["asynchronous_webhook"], "observedHttpStatus": null, "failureClass": "quality_rate_limit", "transience": "conditional", "action": "wait", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131049", "channels": ["asynchronous_webhook"], "observedHttpStatus": null, "failureClass": "ecosystem_rate_limit", "transience": "conditional", "action": "wait", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131050", "channels": ["asynchronous_webhook"], "observedHttpStatus": null, "failureClass": "recipient_policy", "transience": "non_transient", "action": "do_not_retry", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131053", "channels": ["synchronous_response", "asynchronous_webhook"], "observedHttpStatus": 400, "failureClass": "media", "transience": "conditional", "action": "correct_request", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131055", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "method", "transience": "non_transient", "action": "correct_request", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131056", "channels": ["synchronous_response", "asynchronous_webhook"], "observedHttpStatus": 429, "failureClass": "pair_rate_limit", "transience": "transient", "action": "wait", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131057", "channels": ["synchronous_response"], "observedHttpStatus": 500, "failureClass": "maintenance", "transience": "transient", "action": "retry_if_replay_safe", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "131062", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "recipient", "transience": "non_transient", "action": "correct_request", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "132005", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "validation", "transience": "non_transient", "action": "correct_request", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "135000", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "validation", "transience": "unknown", "action": "correct_request", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "138000", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "calling_precondition", "transience": "conditional", "action": "do_not_retry", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "138017", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "calling_conflict", "transience": "non_transient", "action": "reconcile", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"},
+    {"code": "139000", "channels": ["synchronous_response"], "observedHttpStatus": 400, "failureClass": "integrity", "transience": "non_transient", "action": "do_not_retry", "source": "whatsapp-errors", "authority": "confirmed_provider_contract"}
+  ]
+}

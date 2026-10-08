@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/responses-0.1.schema.json",
+  "title": "RAGOps recorded responses 0.1",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["case_id", "answer", "latency_ms", "cost_usd"],
+    "properties": {
+      "case_id": {"type": "string", "minLength": 1},
+      "answer": {"type": "string"},
+      "citation_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+      "latency_ms": {"type": "integer", "minimum": 0},
+      "cost_usd": {"type": "number", "minimum": 0},
+      "human_approved": {"type": "boolean"},
+      "retrieved_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+      "metadata": {"type": "object"}
+    }
+  }
+}

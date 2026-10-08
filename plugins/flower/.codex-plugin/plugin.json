@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "Flower JVM",
+    "url": "https://github.com/flowerjvm"
+  },
+  "description": "Build, inspect, and verify Flower workflows and governed business actions for Java.",
+  "interface": {
+    "brandColor": "#EC4899",
+    "brandColorDark": "#EC4899",
+    "capabilities": [
+      "Write",
+      "Review"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Build a Flower order workflow with deterministic tests and flower-check.",
+      "Add a governed order-cancellation action with Flower Action Runtime, approval, audit, and idempotency.",
+      "Review this Flower workflow for blocking ticks, unsafe side effects, and flower-check findings."
+    ],
+    "developerName": "\uc0c1\ube48 \ubc15",
+    "displayName": "Flower",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Java workflows and governed actions that coding agents can build, verify, and maintain. Flower is a lightweight in-JVM workflow runtime for explicit, testable Flow and Step transitions, including persistence, Spring Boot integration, runtime observability, Flower Check, Flower Flow Graph, and local read-only Flower Studio inspection. Flower Action Runtime applies policy, approval, idempotency, durable run state, and audit to business mutations. This plugin helps Codex set up, build, inspect, review, migrate, test, and verify either library or both together. Support and bug reports are handled in the Flower GitHub issue tracker.",
+    "privacyPolicyURL": "https://github.com/flowerjvm/flower/blob/main/docs/flower-plugin-privacy.md",
+    "shortDescription": "Java flows & governed actions",
+    "supportURL": "https://github.com/flowerjvm/flower/issues",
+    "termsOfServiceURL": "https://github.com/flowerjvm/flower/blob/main/docs/flower-plugin-terms.md",
+    "websiteURL": "https://github.com/flowerjvm/flower"
+  },
+  "keywords": [
+    "flower",
+    "java",
+    "workflow",
+    "flow-graph",
+    "action-runtime",
+    "studio",
+    "observability",
+    "testing"
+  ],
+  "license": "Apache-2.0",
+  "name": "flower",
+  "skills": "./skills/",
+  "version": "0.3.3"
+}

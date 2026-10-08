@@ -1,0 +1,29 @@
+{
+  "plugin": "creator-workbench",
+  "version": "0.3.3",
+  "skills": 29,
+  "files": 83,
+  "source_refs": {
+    "social-media-skills": "69d9488e880cceaf418329dfa64b44b9bf022174",
+    "ai-second-brain": "69e9959bbc8cac3a983988f2a62ff3ec48642fb1",
+    "show-me": "69e488e301e8d6f43b8ddc883cb2392b1dd45264",
+    "voiceprint": "b8064ccfb358f0ccd212fc7fb9bb5ebf1709bb9f",
+    "save-progress": "7fa2bd15be724d5a1145d3f8ec1f729e843724df"
+  },
+  "validation": {
+    "source_exit": 0,
+    "fresh_extract_exit": 0
+  },
+  "tests": {
+    "source_exit": 0,
+    "fresh_extract_exit": 0,
+    "unit_tests": 8
+  },
+  "package_upload_ready": true,
+  "public_submission_ready": "portal-dependent",
+  "submission_blockers": [
+    "Confirm the existing verified developer identity and any portal-only support, privacy, and terms fields before resubmission."
+  ],
+  "deterministic_packaging_verified": true,
+  "note": "Final publishable build: existing Marketplace identity creator-workbench retained; public display name Creator Workspace; workspace-recall is bundled, routed, and covered by discovery and smoke tests; Marketplace-compatible skill policy metadata enforced."
+}

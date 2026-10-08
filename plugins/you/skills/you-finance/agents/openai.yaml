@@ -1,0 +1,18 @@
+interface:
+  display_name: You.com Finance
+  short_description: Market, ticker, earnings, and company financial research
+  brand_color: '#6C5CE7'
+  default_prompt: Use You.com finance for market, ticker, earnings, or company financial questions.
+
+dependencies:
+  tools:
+    - type: mcp
+      value: you-finance-fallback
+      description: You.com Finance Research tool for finance-specific questions
+      transport: streamable_http
+      url: https://api.you.com/mcp?tools=you-finance
+    - type: mcp
+      value: you-docs
+      description: You.com documentation search for current API details
+      transport: streamable_http
+      url: https://you.com/docs/_mcp/server

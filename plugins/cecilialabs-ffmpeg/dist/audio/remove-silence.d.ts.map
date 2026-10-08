@@ -1,0 +1,1 @@
+{"version":3,"file":"remove-silence.d.ts","sourceRoot":"","sources":["../../src/audio/remove-silence.ts"],"names":[],"mappings":"AAIA,OAAO,KAAK,EAAE,oBAAoB,EAAE,oBAAoB,EAAE,MAAM,YAAY,CAAC;AAS7E,wBAAgB,wBAAwB,CAAC,OAAO,EAAE,MAAM,EAAE,WAAW,EAAE,MAAM,EAAE,WAAW,EAAE,MAAM,GAAG,MAAM,CAa1G;AAED,wBAAsB,aAAa,CAAC,KAAK,EAAE,MAAM,EAAE,OAAO,GAAE,oBAAyB,GAAG,OAAO,CAAC,oBAAoB,CAAC,CAiCpH"}

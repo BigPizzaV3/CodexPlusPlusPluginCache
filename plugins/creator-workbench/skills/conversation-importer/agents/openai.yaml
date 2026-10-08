@@ -1,0 +1,7 @@
+interface:
+  display_name: Conversation Importer
+  short_description: Import AI conversations into markdown
+  brand_color: '#E45B32'
+  default_prompt: Use $conversation-importer to import these ChatGPT or Claude exports into readable markdown.
+policy:
+  allow_implicit_invocation: true

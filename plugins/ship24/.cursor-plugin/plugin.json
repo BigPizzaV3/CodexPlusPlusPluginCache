@@ -1,0 +1,42 @@
+{
+  "name": "ship24",
+  "version": "1.0.0",
+  "description": "Ship24 shipment tracking for AI coding agents: skills to integrate the Ship24 Tracking API, build webhook receivers, look up courier codes, map tracking statuses and troubleshoot errors, plus the Ship24 Tracking MCP server to track parcels live. Set SHIP24_API_KEY for live calls.",
+  "author": {
+    "name": "Ship24",
+    "url": "https://www.ship24.com"
+  },
+  "homepage": "https://github.com/ship24/ship24-ai-plugin#readme",
+  "repository": "https://github.com/ship24/ship24-ai-plugin",
+  "license": "MIT",
+  "keywords": [
+    "ship24",
+    "tracking",
+    "shipment-tracking",
+    "courier",
+    "logistics",
+    "mcp"
+  ],
+  "logo": "./assets/logo.png",
+  "mcpServers": {
+    "ship24-tracking": {
+      "url": "https://api.ship24.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${SHIP24_API_KEY}"
+      }
+    }
+  },
+  "variables": {
+    "type": "object",
+    "properties": {
+      "SHIP24_API_KEY": {
+        "type": "string",
+        "title": "Ship24 API key",
+        "description": "Bearer token for the Ship24 Tracking MCP server (apik_...). Create one at https://dashboard.ship24.com/integrations/api-keys."
+      }
+    },
+    "required": [
+      "SHIP24_API_KEY"
+    ]
+  }
+}

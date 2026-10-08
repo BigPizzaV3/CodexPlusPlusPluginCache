@@ -1,0 +1,8 @@
+interface:
+  display_name: "Setup Browser Cookies"
+  short_description: "Import browser cookies into native gstack only with explicit user authorization on a compatible l..."
+  default_prompt: "Use Setup Browser Cookies for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

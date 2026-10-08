@@ -1,0 +1,6 @@
+interface:
+  display_name: "Brand Context Builder"
+  short_description: "Build reusable brand and product marketing context."
+  default_prompt: "Use Brand Context Builder to help with this marketing task."
+policy:
+  allow_implicit_invocation: true

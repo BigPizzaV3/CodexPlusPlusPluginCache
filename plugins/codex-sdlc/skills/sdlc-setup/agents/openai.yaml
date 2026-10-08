@@ -1,0 +1,4 @@
+interface:
+  display_name: "codex-sdlc Setup"
+  short_description: "Set up and maintain codex-sdlc"
+  default_prompt: "Use $sdlc-setup to initialize codex-sdlc here, explain the setup choices, and show the dry run before applying changes."

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Ship24 Node SDK"
+  short_description: "Use the official ship24 npm package"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon-large.png"
+  brand_color: "#FCB016"
+  default_prompt: "Use the official Ship24 Node SDK in this project."

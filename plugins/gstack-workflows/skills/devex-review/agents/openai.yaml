@@ -1,0 +1,9 @@
+interface:
+  display_name: "DevEx Review"
+  short_description: "Audit a real developer workflow and measure friction against the actual path."
+  default_prompt: "Use DevEx Review for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

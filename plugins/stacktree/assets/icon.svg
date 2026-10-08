@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Directory/app-tile mark. The favicon's two-layer stack, with the mac dots
+     and skeleton bars removed: they are legible at 64px in a tab strip but turn
+     to mush in a 40px connector card. Same gradient and geometry, so it reads
+     as the same mark beside the favicon. Transparent ground: the violet is
+     mid-tone and holds on both light and dark tiles. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bd9af4" />
+      <stop offset="1" stop-color="#4a32f9" />
+    </linearGradient>
+  </defs>
+  <path d="M32 26 L54 42 L32 58 L10 42 Z" fill="url(#g)" opacity="0.55" />
+  <path d="M32 6 L54 22 L32 38 L10 22 Z" fill="url(#g)" opacity="0.95" />
+</svg>

@@ -1,0 +1,52 @@
+{
+  "author": {
+    "name": "MAMDOUN EZZ ELSAMAN HUSSEIN"
+  },
+  "description": "Portable ChatGPT and Codex adaptation of gstack workflows for planning, review, QA, debugging, design, security, documentation, and release work.",
+  "interface": {
+    "brandColor": "#111111",
+    "brandColorDark": "#EEEEEE",
+    "capabilities": [
+      "Product planning",
+      "Architecture review",
+      "Code review",
+      "Root-cause debugging",
+      "QA",
+      "Design review",
+      "Security review",
+      "Documentation",
+      "Release preparation",
+      "Repository health",
+      "Performance benchmarking",
+      "Context handoff",
+      "Browser workflow routing",
+      "iOS workflow routing",
+      "Safety scoping"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Use gstack to route this software task to the right workflow.",
+      "Run a gstack engineering review of this change.",
+      "Use gstack to turn this idea into an executable spec."
+    ],
+    "developerName": "Mamdouh Aboammar",
+    "displayName": "gstack Workflows",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "A ChatGPT and Codex adaptation of the gstack engineering workflows. It keeps the familiar specialist jobs for product planning, architecture review, debugging, code review, QA, design, security, documentation, release work, browser tasks, and iOS workflows while mapping execution to capabilities actually available on the current host. Native gstack browser, device, pairing, gbrain, and local-runtime behavior remains optional and is used only on compatible Codex hosts.",
+    "shortDescription": "Plan, review, QA, and ship"
+  },
+  "keywords": [
+    "gstack",
+    "software-development",
+    "code-review",
+    "qa",
+    "planning",
+    "developer-tools"
+  ],
+  "license": "MIT",
+  "name": "gstack-workflows",
+  "repository": "https://github.com/garrytan/gstack",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

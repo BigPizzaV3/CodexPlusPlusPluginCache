@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rweisssieker-xp/RW-Forgemind-Codex-Plugin/schemas/agent-trust-v1.schema.json",
+  "title": "ForgeMind agent trust record v1",
+  "type": "object",
+  "required": ["schemaVersion", "protocol", "id", "digest"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "protocol": { "enum": ["forgemind-agent-trust-v1", "forgemind-agent-evidence-v1", "forgemind-trust-attestation-v1"] },
+    "id": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["trusted", "rejected"] },
+    "score": { "type": "number", "minimum": 0, "maximum": 100 },
+    "digest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": { "digest": { "type": "object", "required": ["algorithm", "value"], "properties": { "algorithm": { "const": "sha256" }, "value": { "type": "string", "pattern": "^[a-f0-9]{64}$" } }, "additionalProperties": false } },
+  "additionalProperties": true
+}

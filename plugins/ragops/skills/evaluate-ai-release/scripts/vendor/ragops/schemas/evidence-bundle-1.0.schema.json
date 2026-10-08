@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/evidence-bundle-1.0.schema.json",
+  "title": "RAGOps evidence bundle 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "ragops_version", "created_at", "decision", "limitations", "artifacts", "metadata"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "ragops_version": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "decision": {"enum": ["PASS", "WARN", "BLOCK"]},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["logical_name", "path", "media_type", "bytes", "sha256"],
+        "properties": {
+          "logical_name": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"},
+          "path": {"type": "string", "pattern": "^artifacts/[^/]+$"},
+          "media_type": {"type": "string", "minLength": 1},
+          "bytes": {"type": "integer", "minimum": 0},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "metadata": {"type": "object"}
+  }
+}

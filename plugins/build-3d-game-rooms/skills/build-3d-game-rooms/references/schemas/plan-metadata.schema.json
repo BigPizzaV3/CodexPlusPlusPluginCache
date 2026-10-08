@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "game-room.plan-metadata.v1",
+  "type": "object",
+  "required": ["schema", "roomId", "style", "projectionSource", "layers", "semanticLabelsOutsideImage", "aiInspirationIncluded", "aiInspirationReason", "coverage"],
+  "properties": {
+    "schema": {"const": "game-room.plan-metadata.v1"},
+    "roomId": {"type": "string", "minLength": 1},
+    "style": {"const": "monochrome-engineering"},
+    "projectionSource": {"const": "actual-meshes"},
+    "layers": {"type": "array", "const": ["lower-room", "reflected-ceiling"]},
+    "semanticLabelsOutsideImage": {"const": true},
+    "aiInspirationIncluded": {"type": "boolean"},
+    "aiInspirationReason": {"type": "string"},
+    "coverage": {"type": "array", "items": {"enum": ["room-outline", "cutouts", "openings", "exterior-apron", "main-sign", "ingress-props", "floor-markers", "barriers", "columns", "circulation", "placed-features"]}, "uniqueItems": true}
+  }
+}

@@ -1,0 +1,1311 @@
+{
+  "coverage": {
+    "coverageRows": 90,
+    "coveredCapabilities": 90,
+    "coveredOperations": 88,
+    "crosscuttingCapabilities": 2,
+    "excludedOperations": 7,
+    "exclusions": [
+      "7 OpenAPI operations are excluded by product decision; this is not provider deprecation."
+    ],
+    "firstWaveCapabilities": 19,
+    "firstWaveOperations": 17,
+    "futureOperations": 0,
+    "messageTypes": 11,
+    "operations": 95,
+    "secondWaveOperations": 43,
+    "status": "partial",
+    "templateButtonTypes": 10,
+    "templateComponentTypes": 7,
+    "templateHeaderFormats": 6,
+    "thirdWaveOperations": 28,
+    "webhookEvents": 38,
+    "webhookPayloads": {
+      "shared": 1,
+      "typed": 31,
+      "unmodeled": 6
+    }
+  },
+  "coverageProfile": "full-supported-operations-v1",
+  "crosscuttingCapabilities": [
+    {
+      "capabilityId": "crosscutting:api-authentication",
+      "domain": "authentication",
+      "kind": "authentication",
+      "owner": "ycloud-api-authentication",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "capabilityId": "crosscutting:webhook-receiver",
+      "domain": "webhook-receiver",
+      "kind": "webhook-receiver",
+      "owner": "ycloud-webhook-endpoints",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "wave": "first-wave"
+    }
+  ],
+  "messageTypes": [
+    "template",
+    "text",
+    "image",
+    "audio",
+    "video",
+    "document",
+    "sticker",
+    "location",
+    "interactive",
+    "contacts",
+    "reaction"
+  ],
+  "operations": [
+    {
+      "domainOwner": "ycloud-balance",
+      "method": "GET",
+      "operationId": "balance-retrieve",
+      "path": "/balance",
+      "sideEffect": "read",
+      "tags": [
+        "Balance"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-contacts",
+      "method": "GET",
+      "operationId": "contact-attributes-list",
+      "path": "/contact/contacts/attributes",
+      "sideEffect": "read",
+      "tags": [
+        "Contacts"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-contacts",
+      "method": "POST",
+      "operationId": "contact-create",
+      "path": "/contact/contacts",
+      "sideEffect": "create",
+      "tags": [
+        "Contacts"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-contacts",
+      "method": "DELETE",
+      "operationId": "contact-delete",
+      "path": "/contact/contacts/{id}",
+      "sideEffect": "delete",
+      "tags": [
+        "Contacts"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-contacts",
+      "method": "GET",
+      "operationId": "contact-list",
+      "path": "/contact/contacts",
+      "sideEffect": "read",
+      "tags": [
+        "Contacts"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-contacts",
+      "method": "POST",
+      "operationId": "contact-note-create",
+      "path": "/contact/contacts/{contactIdentifier}/notes",
+      "sideEffect": "create",
+      "tags": [
+        "Contacts"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-contacts",
+      "method": "DELETE",
+      "operationId": "contact-note-delete",
+      "path": "/contact/notes/{noteId}",
+      "sideEffect": "delete",
+      "tags": [
+        "Contacts"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-contacts",
+      "method": "PATCH",
+      "operationId": "contact-note-update",
+      "path": "/contact/notes/{noteId}",
+      "sideEffect": "update",
+      "tags": [
+        "Contacts"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-contacts",
+      "method": "GET",
+      "operationId": "contact-notes-list",
+      "path": "/contact/contacts/{contactIdentifier}/notes",
+      "sideEffect": "read",
+      "tags": [
+        "Contacts"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-contacts",
+      "method": "GET",
+      "operationId": "contact-retrieve",
+      "path": "/contact/contacts/{id}",
+      "sideEffect": "read",
+      "tags": [
+        "Contacts"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-contacts",
+      "method": "PATCH",
+      "operationId": "contact-update",
+      "path": "/contact/contacts/{id}",
+      "sideEffect": "update",
+      "tags": [
+        "Contacts"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-custom-events",
+      "method": "POST",
+      "operationId": "custom_events-create-definition",
+      "path": "/event/definitions",
+      "sideEffect": "create",
+      "tags": [
+        "Custom Events"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-custom-events",
+      "method": "POST",
+      "operationId": "custom_events-create-property-definition",
+      "path": "/event/definitions/{name}/properties",
+      "sideEffect": "create",
+      "tags": [
+        "Custom Events"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-custom-events",
+      "method": "GET",
+      "operationId": "custom_events-retrieve-definition",
+      "path": "/event/definitions/{name}",
+      "sideEffect": "read",
+      "tags": [
+        "Custom Events"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-custom-events",
+      "method": "POST",
+      "operationId": "custom_events-send-event",
+      "path": "/event/events",
+      "sideEffect": "send",
+      "tags": [
+        "Custom Events"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-custom-events",
+      "method": "PATCH",
+      "operationId": "custom_events-update-definition",
+      "path": "/event/definitions/{name}",
+      "sideEffect": "update",
+      "tags": [
+        "Custom Events"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-custom-events",
+      "method": "DELETE",
+      "operationId": "custom_events_delete-property-definition",
+      "path": "/event/definitions/{name}/properties/{propertyName}",
+      "sideEffect": "delete",
+      "tags": [
+        "Custom Events"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-custom-events",
+      "method": "PATCH",
+      "operationId": "custom_events_update-property-definition",
+      "path": "/event/definitions/{name}/properties/{propertyName}",
+      "sideEffect": "update",
+      "tags": [
+        "Custom Events"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-integration-architect",
+      "method": "POST",
+      "operationId": "email-send",
+      "path": "/emails",
+      "sideEffect": "send",
+      "tags": [
+        "Emails"
+      ],
+      "wave": "excluded-by-product-decision"
+    },
+    {
+      "domainOwner": "ycloud-integration-architect",
+      "method": "GET",
+      "operationId": "sms-list",
+      "path": "/sms",
+      "sideEffect": "read",
+      "tags": [
+        "SMS"
+      ],
+      "wave": "excluded-by-product-decision"
+    },
+    {
+      "domainOwner": "ycloud-integration-architect",
+      "method": "POST",
+      "operationId": "sms-send",
+      "path": "/sms",
+      "sideEffect": "send",
+      "tags": [
+        "SMS"
+      ],
+      "wave": "excluded-by-product-decision"
+    },
+    {
+      "domainOwner": "ycloud-unsubscribers",
+      "method": "POST",
+      "operationId": "unsubscriber-create",
+      "path": "/unsubscribers",
+      "sideEffect": "create",
+      "tags": [
+        "Unsubscribers"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-unsubscribers",
+      "method": "DELETE",
+      "operationId": "unsubscriber-delete-by-customer-and-channel",
+      "path": "/unsubscribers/{customer}/{channel}",
+      "sideEffect": "delete",
+      "tags": [
+        "Unsubscribers"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-unsubscribers",
+      "method": "GET",
+      "operationId": "unsubscriber-list",
+      "path": "/unsubscribers",
+      "sideEffect": "read",
+      "tags": [
+        "Unsubscribers"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-unsubscribers",
+      "method": "GET",
+      "operationId": "unsubscriber-list-all-by-customer",
+      "path": "/unsubscribers/{customer}",
+      "sideEffect": "read",
+      "tags": [
+        "Unsubscribers"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-unsubscribers",
+      "method": "GET",
+      "operationId": "unsubscriber-retrieve-by-customer-and-channel",
+      "path": "/unsubscribers/{customer}/{channel}",
+      "sideEffect": "read",
+      "tags": [
+        "Unsubscribers"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-integration-architect",
+      "method": "POST",
+      "operationId": "verification-check",
+      "path": "/verify/verificationChecks",
+      "sideEffect": "create",
+      "tags": [
+        "Verify"
+      ],
+      "wave": "excluded-by-product-decision"
+    },
+    {
+      "domainOwner": "ycloud-integration-architect",
+      "method": "POST",
+      "operationId": "verification-send",
+      "path": "/verify/verifications",
+      "sideEffect": "send",
+      "tags": [
+        "Verify"
+      ],
+      "wave": "excluded-by-product-decision"
+    },
+    {
+      "domainOwner": "ycloud-integration-architect",
+      "method": "GET",
+      "operationId": "voice-list",
+      "path": "/voices",
+      "sideEffect": "read",
+      "tags": [
+        "Voices"
+      ],
+      "wave": "excluded-by-product-decision"
+    },
+    {
+      "domainOwner": "ycloud-integration-architect",
+      "method": "POST",
+      "operationId": "voice-send",
+      "path": "/voices",
+      "sideEffect": "send",
+      "tags": [
+        "Voices"
+      ],
+      "wave": "excluded-by-product-decision"
+    },
+    {
+      "domainOwner": "ycloud-webhook-endpoints",
+      "method": "POST",
+      "operationId": "webhook_endpoint-create",
+      "path": "/webhookEndpoints",
+      "sideEffect": "create",
+      "tags": [
+        "Webhook Endpoints"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-webhook-endpoints",
+      "method": "DELETE",
+      "operationId": "webhook_endpoint-delete",
+      "path": "/webhookEndpoints/{id}",
+      "sideEffect": "delete",
+      "tags": [
+        "Webhook Endpoints"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-webhook-endpoints",
+      "method": "GET",
+      "operationId": "webhook_endpoint-list",
+      "path": "/webhookEndpoints",
+      "sideEffect": "read",
+      "tags": [
+        "Webhook Endpoints"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-webhook-endpoints",
+      "method": "GET",
+      "operationId": "webhook_endpoint-retrieve",
+      "path": "/webhookEndpoints/{id}",
+      "sideEffect": "read",
+      "tags": [
+        "Webhook Endpoints"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-webhook-endpoints",
+      "method": "POST",
+      "operationId": "webhook_endpoint-rotate-secret",
+      "path": "/webhookEndpoints/{id}/rotateSecret",
+      "sideEffect": "rotate",
+      "tags": [
+        "Webhook Endpoints"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-webhook-endpoints",
+      "method": "PATCH",
+      "operationId": "webhook_endpoint-update",
+      "path": "/webhookEndpoints/{id}",
+      "sideEffect": "update",
+      "tags": [
+        "Webhook Endpoints"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-business-accounts",
+      "method": "GET",
+      "operationId": "whatsapp_business_account-list",
+      "path": "/whatsapp/businessAccounts",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Business Accounts"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-business-accounts",
+      "method": "GET",
+      "operationId": "whatsapp_business_account-retrieve",
+      "path": "/whatsapp/businessAccounts/{id}",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Business Accounts"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-calling",
+      "method": "POST",
+      "operationId": "whatsapp_call-accept",
+      "path": "/whatsapp/calls/accept",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Calling"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-calling",
+      "method": "POST",
+      "operationId": "whatsapp_call-connect",
+      "path": "/whatsapp/calls/connect",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Calling"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-calling",
+      "method": "GET",
+      "operationId": "whatsapp_call-download-media",
+      "path": "/whatsapp/calls/media/{mediaAssetId}",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Calling"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-calling",
+      "method": "POST",
+      "operationId": "whatsapp_call-pre-accept",
+      "path": "/whatsapp/calls/preAccept",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Calling"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-calling",
+      "method": "POST",
+      "operationId": "whatsapp_call-reject",
+      "path": "/whatsapp/calls/reject",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Calling"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-calling",
+      "method": "POST",
+      "operationId": "whatsapp_call-terminate",
+      "path": "/whatsapp/calls/terminate",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Calling"
+      ],
+      "wave": "third-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-flows",
+      "method": "POST",
+      "operationId": "whatsapp_flow-create",
+      "path": "/whatsapp/flows",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Flows"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-flows",
+      "method": "DELETE",
+      "operationId": "whatsapp_flow-delete",
+      "path": "/whatsapp/flows/{flowId}",
+      "sideEffect": "delete",
+      "tags": [
+        "WhatsApp Flows"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-flows",
+      "method": "POST",
+      "operationId": "whatsapp_flow-deprecate",
+      "path": "/whatsapp/flows/{flowId}/deprecate",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Flows"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-flows",
+      "method": "GET",
+      "operationId": "whatsapp_flow-list",
+      "path": "/whatsapp/flows",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Flows"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-flows",
+      "method": "GET",
+      "operationId": "whatsapp_flow-preview",
+      "path": "/whatsapp/flows/{flowId}/preview",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Flows"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-flows",
+      "method": "POST",
+      "operationId": "whatsapp_flow-publish",
+      "path": "/whatsapp/flows/{flowId}/publish",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Flows"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-flows",
+      "method": "GET",
+      "operationId": "whatsapp_flow-retrieve",
+      "path": "/whatsapp/flows/{flowId}",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Flows"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-flows",
+      "method": "PATCH",
+      "operationId": "whatsapp_flow-update-metadata",
+      "path": "/whatsapp/flows/{flowId}/metadata",
+      "sideEffect": "update",
+      "tags": [
+        "WhatsApp Flows"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-flows",
+      "method": "PATCH",
+      "operationId": "whatsapp_flow-update-structure",
+      "path": "/whatsapp/flows/{flowId}/assets",
+      "sideEffect": "update",
+      "tags": [
+        "WhatsApp Flows"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "POST",
+      "operationId": "whatsapp_group-approve-join-requests",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/joinRequests/approve",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "POST",
+      "operationId": "whatsapp_group-create",
+      "path": "/whatsapp/{businessPhoneNumber}/groups",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "DELETE",
+      "operationId": "whatsapp_group-delete",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}",
+      "sideEffect": "delete",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "GET",
+      "operationId": "whatsapp_group-list",
+      "path": "/whatsapp/{businessPhoneNumber}/groups",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "GET",
+      "operationId": "whatsapp_group-list-join-requests",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/joinRequests",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "POST",
+      "operationId": "whatsapp_group-reject-join-requests",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/joinRequests/reject",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "POST",
+      "operationId": "whatsapp_group-remove-participants",
+      "path": "/whatsapp/groups/{groupId}/participants/remove",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "POST",
+      "operationId": "whatsapp_group-reset-invite-link",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/inviteLink/reset",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "GET",
+      "operationId": "whatsapp_group-retrieve",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "GET",
+      "operationId": "whatsapp_group-retrieve-invite-link",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/inviteLink",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "POST",
+      "operationId": "whatsapp_group-send-invite-link-message",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/inviteLink/messages",
+      "sideEffect": "send",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-groups",
+      "method": "PATCH",
+      "operationId": "whatsapp_group-update-settings",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/settings",
+      "sideEffect": "update",
+      "tags": [
+        "WhatsApp Groups"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-inbound-messages",
+      "method": "POST",
+      "operationId": "whatsapp_inbound_message-mark-as-read",
+      "path": "/whatsapp/inboundMessages/{id}/markAsRead",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Inbound Messages"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-inbound-messages",
+      "method": "POST",
+      "operationId": "whatsapp_inbound_message-typing",
+      "path": "/whatsapp/inboundMessages/{id}/typing",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Inbound Messages"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-media",
+      "method": "POST",
+      "operationId": "whatsapp_media-upload",
+      "path": "/whatsapp/media/{phoneNumber}/upload",
+      "sideEffect": "upload",
+      "tags": [
+        "WhatsApp Media"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-messages",
+      "method": "GET",
+      "operationId": "whatsapp_message-retrieve",
+      "path": "/whatsapp/messages/{id}",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Messages"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-messages",
+      "method": "POST",
+      "operationId": "whatsapp_message-send",
+      "path": "/whatsapp/messages",
+      "sideEffect": "send",
+      "tags": [
+        "WhatsApp Messages"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-messages",
+      "method": "POST",
+      "operationId": "whatsapp_message-send-directly",
+      "path": "/whatsapp/messages/sendDirectly",
+      "sideEffect": "send",
+      "tags": [
+        "WhatsApp Messages"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "DELETE",
+      "operationId": "whatsapp_phone_number-delete-business-username",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername",
+      "sideEffect": "delete",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "DELETE",
+      "operationId": "whatsapp_phone_number-delete-contact-book-entry",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/contactBook/{bsuid}",
+      "sideEffect": "delete",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-list",
+      "path": "/whatsapp/phoneNumbers",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "POST",
+      "operationId": "whatsapp_phone_number-register",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/register",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve-business-username",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve-business-username-suggestions",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername/suggestions",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve-commerce-settings",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/whatsappCommerceSettings",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve-profile",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/profile",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve-settings",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/settings",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "POST",
+      "operationId": "whatsapp_phone_number-save-settings",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/settings",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "PATCH",
+      "operationId": "whatsapp_phone_number-update-business-username",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername",
+      "sideEffect": "update",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "PATCH",
+      "operationId": "whatsapp_phone_number-update-commerce-settings",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/whatsappCommerceSettings",
+      "sideEffect": "update",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "PATCH",
+      "operationId": "whatsapp_phone_number-update-displayName",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/displayName",
+      "sideEffect": "update",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-phone-numbers",
+      "method": "PATCH",
+      "operationId": "whatsapp_phone_number-update-profile",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/profile",
+      "sideEffect": "update",
+      "tags": [
+        "WhatsApp Phone Numbers"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-templates",
+      "method": "POST",
+      "operationId": "whatsapp_template-analytics",
+      "path": "/whatsapp/templates/analytics",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Templates"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-templates",
+      "method": "POST",
+      "operationId": "whatsapp_template-create",
+      "path": "/whatsapp/templates",
+      "sideEffect": "create",
+      "tags": [
+        "WhatsApp Templates"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-templates",
+      "method": "DELETE",
+      "operationId": "whatsapp_template-delete-by-name",
+      "path": "/whatsapp/templates/{wabaId}/{name}",
+      "sideEffect": "delete",
+      "tags": [
+        "WhatsApp Templates"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-templates",
+      "method": "DELETE",
+      "operationId": "whatsapp_template-delete-by-name-and-language",
+      "path": "/whatsapp/templates/{wabaId}/{name}/{language}",
+      "sideEffect": "delete",
+      "tags": [
+        "WhatsApp Templates"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-templates",
+      "method": "PATCH",
+      "operationId": "whatsapp_template-edit-by-name-and-language",
+      "path": "/whatsapp/templates/{wabaId}/{name}/{language}",
+      "sideEffect": "update",
+      "tags": [
+        "WhatsApp Templates"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-templates",
+      "method": "GET",
+      "operationId": "whatsapp_template-list",
+      "path": "/whatsapp/templates",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Templates"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-templates",
+      "method": "GET",
+      "operationId": "whatsapp_template-retrieve-by-name-and-language",
+      "path": "/whatsapp/templates/{wabaId}/{name}/{language}",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Templates"
+      ],
+      "wave": "first-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-business-accounts",
+      "method": "GET",
+      "operationId": "whatsapp_waba-retrieve-automatic-creative-optimizations",
+      "path": "/whatsapp/businessAccounts/{wabaId}/automatic-creative-optimizations",
+      "sideEffect": "read",
+      "tags": [
+        "WhatsApp Business Accounts"
+      ],
+      "wave": "second-wave"
+    },
+    {
+      "domainOwner": "ycloud-whatsapp-business-accounts",
+      "method": "PATCH",
+      "operationId": "whatsapp_waba-update-automatic-creative-optimizations",
+      "path": "/whatsapp/businessAccounts/{wabaId}/automatic-creative-optimizations",
+      "sideEffect": "update",
+      "tags": [
+        "WhatsApp Business Accounts"
+      ],
+      "wave": "second-wave"
+    }
+  ],
+  "provenance": {
+    "canonicalPath": "apis/ycloud-api-v2.yaml",
+    "canonicalRepository": "https://docs.ycloud.com/reference",
+    "canonicalRevision": "5ba1b652e00d27b1a3c097f012cff2da93df624c",
+    "normalizedOpenapiSha256": "0daecf581a140418780393c8f92ca82a68afc3d31413c5f66276d0aa860fcc74",
+    "pluginVersion": "0.7.9",
+    "publicDocsFactsSha256": "bdb174c105774ae6dc5515c0cd156be7be0d41315b7a3ade015385ddb5643c2f",
+    "publicDocsRetrievedAt": "2026-08-29",
+    "scopeOverlaySha256": "b4cdc3e99c3c2f1a722b68a21a5a82939fc31abfb77316d64ece6bac3f023070",
+    "snapshotSha256": "8592bd4cc37186655a480dd86ce6bac6731543727327a2871d9103a0b8ed9e81"
+  },
+  "schemaVersion": 1,
+  "templateEnums": {
+    "buttonTypes": [
+      "PHONE_NUMBER",
+      "URL",
+      "QUICK_REPLY",
+      "COPY_CODE",
+      "OTP",
+      "CATALOG",
+      "MPM",
+      "FLOW",
+      "ORDER_DETAILS",
+      "VOICE_CALL"
+    ],
+    "componentTypes": [
+      "BODY",
+      "HEADER",
+      "FOOTER",
+      "BUTTONS",
+      "LIMITED_TIME_OFFER",
+      "CAROUSEL",
+      "CALL_PERMISSION_REQUEST"
+    ],
+    "headerFormats": [
+      "TEXT",
+      "IMAGE",
+      "GIF",
+      "VIDEO",
+      "DOCUMENT",
+      "LOCATION"
+    ]
+  },
+  "webhookEvents": [
+    {
+      "eventType": "email.delivery.updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "sms.message.updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "sms.inbound.received",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "voice.message.updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.business_account.deleted",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.business_account.reviewed",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.business_account.updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.inbound_message.received",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.message.updated",
+      "payloadCoverage": "shared"
+    },
+    {
+      "eventType": "whatsapp.group.lifecycle_update",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.group.participants_update",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.group.settings_update",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.group.status_update",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.smb.history",
+      "payloadCoverage": "unmodeled"
+    },
+    {
+      "eventType": "whatsapp.smb.message.echoes",
+      "payloadCoverage": "unmodeled"
+    },
+    {
+      "eventType": "whatsapp.phone_number.deleted",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.phone_number.name_updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.phone_number.quality_updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.phone_number.business_username_updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.template.category_updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.template.quality_updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.template.reviewed",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.call.connect",
+      "payloadCoverage": "unmodeled"
+    },
+    {
+      "eventType": "whatsapp.call.terminate",
+      "payloadCoverage": "unmodeled"
+    },
+    {
+      "eventType": "whatsapp.call.status.updated",
+      "payloadCoverage": "unmodeled"
+    },
+    {
+      "eventType": "whatsapp.call.recording.updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.call.transcription.updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.flow.status_change",
+      "payloadCoverage": "unmodeled"
+    },
+    {
+      "eventType": "whatsapp.payment.updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "contact.attributes_changed",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "contact.created",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "contact.deleted",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "contact.note.created",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "contact.note.updated",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "contact.note.deleted",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "contact.unsubscribe.created",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "contact.unsubscribe.deleted",
+      "payloadCoverage": "typed"
+    },
+    {
+      "eventType": "whatsapp.user.preferences",
+      "payloadCoverage": "typed"
+    }
+  ]
+}

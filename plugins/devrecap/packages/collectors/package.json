@@ -1,0 +1,12 @@
+{
+  "name": "@devrecap/collectors",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "@devrecap/shared": "*",
+    "@devrecap/codex-parser": "*",
+    "@devrecap/git-parser": "*"
+  }
+}

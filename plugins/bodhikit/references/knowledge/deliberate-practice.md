@@ -1,0 +1,31 @@
+<!-- Generated from skills/deliberate-practice/SKILL.md; edit the canonical source. -->
+
+# Deliberate Practice (Ericsson)
+
+**Evidence tier: contested in scope.** That targeted practice with immediate feedback beats naive repetition is solid; Ericsson's stronger claims about how much expertise it explains are contested (Macnamara et al. 2014 meta-analysis). BodhiKit uses only the uncontested core.
+
+## What Makes Practice "Deliberate"
+
+1. **Targeted**: Each session has a specific skill improvement goal
+2. **At the edge of ability**: Slightly beyond comfort zone, not too easy, not too hard
+3. **Immediate feedback**: Know right away if the approach worked
+4. **High repetition with variation**: Same skill, different contexts, adjusting each time
+5. **Focused attention**: Cannot be done on autopilot — mentally taxing
+6. **Expert-guided**: Practice designed by someone who can diagnose weaknesses
+
+## NOT Deliberate Practice
+
+- Following tutorials passively
+- Building the same type of project repeatedly
+- Coding for hours without reviewing or reflecting
+- Solving problems well within comfort zone
+- Grinding problems without understanding underlying patterns
+
+## Application
+
+Design exercises that:
+- Isolate ONE skill at a time
+- Require focused effort (not busy work)
+- Have clear success criteria
+- Provide immediate feedback (tests, output comparison)
+- Include variations that prevent rote memorization

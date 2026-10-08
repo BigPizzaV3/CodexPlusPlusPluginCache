@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Redis & queues"
+  short_description: "Redis Streams, BullMQ, ARQ and job recovery"
+  default_prompt: "Use $vibe-redis to audit the selected redis & queues boundary."

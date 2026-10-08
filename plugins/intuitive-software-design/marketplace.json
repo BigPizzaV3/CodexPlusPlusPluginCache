@@ -1,0 +1,14 @@
+{
+  "name": "arcanedge-plugins",
+  "description": "Open-source product and software design plugins from ArcanEdge AI.",
+  "owner": {
+    "name": "ArcanEdge AI"
+  },
+  "plugins": [
+    {
+      "name": "intuitive-software-design",
+      "source": ".",
+      "description": "Design and evaluate software around users' real tasks, clear decisions, and reliable connected experiences."
+    }
+  ]
+}

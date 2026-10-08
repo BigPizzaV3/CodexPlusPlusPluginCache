@@ -1,0 +1,22 @@
+{
+  "name": "willy-seo",
+  "version": "1.0.0",
+  "description": "Willy SEO — Asesor y Auditor SEO Inteligente (MCP + Apps SDK)",
+  "author": {
+    "name": "Willy SEO"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Willy SEO",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  },
+  "license": "MIT",
+  "keywords": [
+    "seo",
+    "audit",
+    "mcp",
+    "onpage",
+    "chatgpt"
+  ]
+}

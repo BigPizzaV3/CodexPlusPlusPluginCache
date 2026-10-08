@@ -1,0 +1,9 @@
+interface:
+  display_name: "Workspace Operator"
+  short_description: "Use host files safely"
+  default_prompt: "Inspect the available marketing files with the narrowest safe host capability before analysis."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

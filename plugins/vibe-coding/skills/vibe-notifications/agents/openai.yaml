@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Notification delivery"
+  short_description: "Notifications, consent, delivery and deduplication"
+  default_prompt: "Use $vibe-notifications to audit the selected notification delivery boundary."

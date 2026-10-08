@@ -1,0 +1,6 @@
+interface:
+  display_name: "Skarn audit"
+  short_description: "Scan sessions and vet configs"
+policy:
+  products:
+    - CODEX

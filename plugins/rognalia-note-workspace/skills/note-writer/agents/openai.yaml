@@ -1,0 +1,5 @@
+interface:
+  display_name: "note Workspace 記事執筆"
+  short_description: "一次情報から一記事を取材・構成・執筆し、納品一式へ仕上げる"
+policy:
+  allow_implicit_invocation: true

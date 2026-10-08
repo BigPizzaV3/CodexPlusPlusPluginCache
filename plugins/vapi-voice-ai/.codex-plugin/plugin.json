@@ -1,0 +1,43 @@
+{
+  "author": {
+    "email": "support@vapi.ai",
+    "name": "Vapi",
+    "url": "https://vapi.ai"
+  },
+  "description": "Skills for building and testing voice AI agents with Vapi, including assistants, tools, calls, campaigns, squads, phone numbers, webhooks, structured outputs, prompts, and simulations.",
+  "homepage": "https://vapi.ai",
+  "interface": {
+    "brandColor": "#000714",
+    "brandColorDark": "#EBF2FF",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Plan a Vapi outbound campaign without launching it.",
+      "Create a Vapi voice assistant configuration.",
+      "Design a Vapi simulation suite."
+    ],
+    "developerName": "Vapi",
+    "displayName": "Vapi",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Plan, configure, and validate Vapi voice AI workflows with skills for assistants, prompts, tools, calls, campaigns, squads, phone numbers, webhooks, structured outputs, and simulations.",
+    "privacyPolicyURL": "https://vapi.ai/privacy",
+    "shortDescription": "Build voice agents with Vapi.",
+    "termsOfServiceURL": "https://vapi.ai/terms-of-service",
+    "websiteURL": "https://vapi.ai"
+  },
+  "keywords": [
+    "vapi",
+    "voice-ai",
+    "agents",
+    "telephony"
+  ],
+  "license": "MIT",
+  "name": "vapi-voice-ai",
+  "repository": "https://github.com/VapiAI/skills",
+  "skills": "./skills/",
+  "version": "1.2.1"
+}

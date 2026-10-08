@@ -1,0 +1,51 @@
+{
+  "name": "zuora-coding-agent",
+  "displayName": "Zuora Coding Agent",
+  "version": "1.5.4",
+  "description": "Zuora development assistant for API integrations, Workflow, Meter, migrations, CPQ customizations, Quote Studio hooks/events, and best-practice validation. Powered by zuora-mcp.",
+  "author": {
+    "name": "Zuora Engineering",
+    "email": "developer@zuora.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "zuora",
+    "billing",
+    "subscription",
+    "migration",
+    "api",
+    "workflow",
+    "cpq",
+    "salesforce",
+    "apex",
+    "lwc",
+    "quote-studio"
+  ],
+  "logo": "assets/logo.svg",
+  "rules": "rules",
+  "skills": "skills",
+  "mcpServers": ".mcp.json",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "ZUORA_BASE_URL": {
+        "type": "string",
+        "title": "Zuora Base URL",
+        "description": "e.g. https://rest.apisandbox.zuora.com"
+      },
+      "ZUORA_CLIENT_ID": {
+        "type": "string",
+        "title": "OAuth Client ID"
+      },
+      "ZUORA_CLIENT_SECRET": {
+        "type": "string",
+        "title": "OAuth Client Secret"
+      }
+    },
+    "required": [
+      "ZUORA_BASE_URL",
+      "ZUORA_CLIENT_ID",
+      "ZUORA_CLIENT_SECRET"
+    ]
+  }
+}

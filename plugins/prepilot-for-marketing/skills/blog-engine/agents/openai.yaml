@@ -1,0 +1,6 @@
+interface:
+  display_name: "Blog Engine"
+  short_description: "Plan, write, audit, and refresh useful blog content."
+  default_prompt: "Use Blog Engine to help with this marketing task."
+policy:
+  allow_implicit_invocation: true

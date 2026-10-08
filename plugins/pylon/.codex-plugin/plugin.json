@@ -1,0 +1,31 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Pylon Labs Inc.",
+    "url": "https://www.usepylon.com/"
+  },
+  "description": "Access Pylon's customer support platform directly from ChatGPT to search, manage, and resolve\ncustomer issues. Stay on top of your support queue while connecting ChatGPT's insights to real customer conversations.\n\nYou can use the Pylon app to:\n  \u2022 Check your queue: \"What Pylon issues are assigned to me that need a response?\"\n  \u2022 Research customers: \"Summarize recent issues from Acme Corp and flag any escalations.\"\n  \u2022 Update issues: \"Mark the billing issue from Sarah as resolved and add a note that we issued a refund.\"",
+  "homepage": "https://www.usepylon.com/",
+  "interface": {
+    "capabilities": [],
+    "category": "Business & Operations",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Can you summarize my most recent issues"
+    ],
+    "developerName": "Pylon Labs Inc.",
+    "displayName": "Pylon",
+    "logo": "./assets/logo.png",
+    "longDescription": "Access Pylon's customer support platform directly from Codex to search, manage, and resolve\ncustomer issues. Stay on top of your support queue while connecting Codex's insights to real customer conversations.\n\nYou can use the Pylon app to:\n  \u2022 Check your queue: \"What Pylon issues are assigned to me that need a response?\"\n  \u2022 Research customers: \"Summarize recent issues from Acme Corp and flag any escalations.\"\n  \u2022 Update issues: \"Mark the billing issue from Sarah as resolved and add a note that we issued a refund.\"",
+    "privacyPolicyURL": "https://www.usepylon.com/privacy",
+    "screenshots": [],
+    "shortDescription": "Manage Pylon support issues",
+    "termsOfServiceURL": "https://www.usepylon.com/terms",
+    "websiteURL": "https://www.usepylon.com/"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "pylon",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

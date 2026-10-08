@@ -1,0 +1,217 @@
+{
+  "schema_version": 2,
+  "skill": "review-go-distributed-change",
+  "cases": [
+    {
+      "id": "route-distributed-diff",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review a Go PR changing a transaction, broker ack, retry loop, and lease renewal.",
+      "should_activate": true,
+      "reason": "Multiple distributed failure boundaries dominate."
+    },
+    {
+      "id": "avoid-rounding",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review currency rounding and balanced ledger postings.",
+      "should_activate": false,
+      "reason": "Financial integrity belongs to review-go-fintech-change.",
+      "confuses_with": [
+        "review-go-fintech-change"
+      ]
+    },
+    {
+      "id": "quality-crash-window",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review code that commits state, publishes, then records publication in separate steps.",
+      "expected_invariants": [
+        "Identifies both crash gaps",
+        "Recommends atomic outbox or explicit recovery"
+      ],
+      "forbidden_outcomes": [
+        "Calls the sequence exactly once"
+      ],
+      "graders": [
+        {
+          "id": "failure-schedule",
+          "kind": "contains",
+          "required": [
+            "crash",
+            "outbox"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-retry-chain",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review three nested retry loops with two attempts each.",
+      "expected_invariants": [
+        "Quantifies maximum leaf attempts",
+        "Selects exactly one retry owner",
+        "Requires one end-to-end deadline",
+        "Classifies transient failures, permanent failures, and ambiguous outcomes before replay"
+      ],
+      "forbidden_outcomes": [
+        "Adds more backoff at every layer"
+      ],
+      "graders": [
+        {
+          "id": "amplification-count",
+          "kind": "contains",
+          "required": [
+            "8",
+            "owner"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-consumer-dual-write-diff",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review this Go message-processing change for distributed correctness. Publish retries at most three times internally; Handle attempts Apply at most three times per delivery; the broker makes at most five total deliveries when a message is not acknowledged. UpdateAggregate is not idempotent. Report only must-fix findings, each with a reachable failure schedule and the repair invariant; do not implement the change.\n\nfunc (c *Consumer) Handle(ctx context.Context, message Message) error {\n    for attempt := 0; attempt < 3; attempt++ {\n        if err := c.service.Apply(ctx, message); err == nil {\n            return c.broker.Ack(ctx, message)\n        }\n    }\n    return ErrRetry\n}\n\nfunc (s *Service) Apply(ctx context.Context, message Message) error {\n    seen, err := s.inbox.Seen(ctx, message.ID)\n    if err != nil { return err }\n    if seen { return nil }\n\n    tx, err := s.db.BeginTx(ctx, nil)\n    if err != nil { return err }\n    defer tx.Rollback()\n    if err := UpdateAggregate(ctx, tx, message); err != nil { return err }\n    if err := tx.Commit(); err != nil { return err }\n\n    event := Event{ID: uuid.NewString(), MessageID: message.ID}\n    if err := s.bus.Publish(ctx, event); err != nil { return err }\n    return s.inbox.Record(ctx, message.ID)\n}",
+      "expected_invariants": [
+        "Shows that the Seen check and inbox Record outside the domain transaction let concurrent or redelivered handlers apply the non-idempotent aggregate update more than once, and requires an atomic unique inbox claim with the domain write",
+        "Shows the commit-before-publish and publish-before-inbox crash windows, and requires the domain write, inbox record, and durable outbox record to commit atomically with later publication",
+        "Requires one durable stable event identity per logical transition so retry or redelivery cannot create distinct downstream events",
+        "Keeps acknowledgement after the durable transaction and makes an unknown or failed acknowledgement safe through replay, without claiming end-to-end exactly-once delivery",
+        "Quantifies the configured worst case as 45 Publish calls for one broker message and assigns retries to one bounded owner with an end-to-end deadline and transient-error classification"
+      ],
+      "forbidden_outcomes": [
+        "Claims the broker or this handler provides exactly-once processing",
+        "Recommends acknowledging before the durable domain transaction",
+        "Recommends only adding backoff or more retries without removing amplification"
+      ],
+      "graders": [
+        {
+          "id": "dual-write-review",
+          "kind": "contains",
+          "required": [
+            "outbox",
+            "45"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-batch-offset-diff",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review this Go broker-consumer change for distributed correctness. Offsets are ordered within each partition. CommitOffset(partition, n) cumulatively commits every offset at or below n and can return an error after the commit took effect. Each invocation of ApplyRemote makes one initial remote-effect attempt and at most two internal retries, for at most three remote-effect attempts per invocation. A remote-effect attempt may succeed even when its response is lost, and the operation is not idempotent. The loop invokes ApplyRemote at most three times per delivery; the broker makes at most four total deliveries for an uncommitted message. A batch may contain 100,000 messages. Report only must-fix findings, each with a reachable failure schedule and the repair invariant; do not implement the change.\n\nfunc (c *Consumer) HandleBatch(ctx context.Context, batch []Message) error {\n    var workers sync.WaitGroup\n    for _, message := range batch {\n        workers.Add(1)\n        go func(message Message) {\n            defer workers.Done()\n            for attempt := 0; attempt < 3; attempt++ {\n                if err := c.processor.ApplyRemote(ctx, message); err != nil {\n                    continue\n                }\n                _ = c.broker.CommitOffset(ctx, message.Partition, message.Offset)\n                return\n            }\n        }(message)\n    }\n    workers.Wait()\n    return nil\n}",
+      "expected_invariants": [
+        "Identifies the schedule where a higher offset finishes and commits while a lower offset is still failing, causing the lower message to be skipped permanently",
+        "Requires committing only the highest contiguous completed offset per partition or equivalently serializing that partition's effects",
+        "Identifies that a lost ApplyRemote success response followed by retry or redelivery can duplicate the non-idempotent remote effect",
+        "Requires a stable operation identity with remote idempotency or authoritative reconciliation before replay",
+        "Quantifies the configured maximum as 36 remote-effect attempts for one message",
+        "Selects exactly one layer to own retries",
+        "Requires one end-to-end deadline across all attempts and deliveries",
+        "Distinguishes transient failures from permanent failures and ambiguous outcomes",
+        "Bounds concurrency before goroutine creation and applies admission backpressure for the 100,000-message batch",
+        "Handles a failed or unknown CommitOffset result explicitly instead of discarding it"
+      ],
+      "forbidden_outcomes": [
+        "Claims independently committing completed offsets is safe for a cumulative-offset broker",
+        "Claims the remote effect or consumer is end-to-end exactly once",
+        "Adds retry or backoff independently at every layer",
+        "Approves ignoring the CommitOffset result"
+      ],
+      "graders": [
+        {
+          "id": "batch-offset-review",
+          "kind": "contains",
+          "required": [
+            "36",
+            "contiguous"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-lease-fencing-diff",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review this Go shard-worker change for distributed correctness. An acquired lease expires 30 seconds after the most recent renewal that took effect; after expiry, another worker can acquire the shard. Each acquisition returns a strictly increasing fencing token. In the evaluation schedule there are at most two owners: the original owner and one successor, and on takeover the successor receives the same incomplete job. Renew and Release may take effect even when their response is lost and the caller receives an error. Release deletes by shard without comparing the acquired lease identity or fencing token. Each invocation of Remote.Apply makes exactly one remote-effect attempt. Apply is non-idempotent, may take effect even when its response is lost, accepts no fencing token or idempotency key, and provides no status lookup. Store.MarkDone is the authoritative durable completion write and currently accepts no fencing token. The loop invokes Apply at most three times per job for each owner. Report only must-fix findings, each with a reachable failure schedule and the repair invariant; do not implement the change.\n\nfunc (w *Worker) Run(ctx context.Context, shard string, jobs []Job) error {\n\tlease, err := w.leases.Acquire(ctx, shard, 30*time.Second)\n\tif err != nil {\n\t\treturn err\n\t}\n\n\tgo func() {\n\t\tticker := time.NewTicker(10 * time.Second)\n\t\tdefer ticker.Stop()\n\n\t\tfor range ticker.C {\n\t\t\trenewCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)\n\t\t\t_ = lease.Renew(renewCtx, 30*time.Second)\n\t\t\tcancel()\n\t\t}\n\t}()\n\n\tfor _, job := range jobs {\n\t\tfor attempt := 0; attempt < 3; attempt++ {\n\t\t\tif err := w.remote.Apply(ctx, job); err != nil {\n\t\t\t\tcontinue\n\t\t\t}\n\t\t\tbreak\n\t\t}\n\t\t_ = w.store.MarkDone(ctx, job.ID)\n\t}\n\n\treturn lease.Release(ctx)\n}",
+      "expected_invariants": [
+        "Identifies the reachable stale-owner schedule where the original owner pauses through lease expiry, a successor acquires a higher token and performs work, and the original resumes and performs conflicting effects",
+        "Requires Store.MarkDone to atomically compare the fencing token and reject every write from an older owner",
+        "Explains that a lease pre-check cannot protect Remote.Apply and requires a target-enforced fence or a fenceable durable boundary with stable idempotency and reconciliation",
+        "Treats a Renew error as an unknown authority outcome and requires authoritative confirmation or stopping fenced work before further effects",
+        "Cancels and joins the renewal goroutine before Release or return, using the Run lifecycle with a bounded per-renewal timeout instead of an unowned background lifecycle",
+        "Requires Release to compare the acquired lease identity or fencing token so a stale owner cannot delete a successor's lease",
+        "Identifies that an Apply success with a lost response followed by retry can duplicate the non-idempotent remote effect",
+        "Requires one stable operation identity and reconciliation-safe replay for each logical job effect",
+        "Identifies that MarkDone runs after all Apply attempts fail and can falsely record an incomplete job as complete",
+        "Handles a failed MarkDone result instead of discarding the authoritative completion-write error",
+        "Quantifies the configured maximum as six remote-effect attempts for one job across the original owner and one successor",
+        "Uses one end-to-end deadline and distinguishes transient failures from permanent failures and ambiguous outcomes before retry"
+      ],
+      "forbidden_outcomes": [
+        "Claims lease acquisition or renewal alone prevents stale-owner effects without authoritative fencing",
+        "Allows work to continue after renewal becomes uncertain without an authority check or fence",
+        "Retries the non-idempotent Apply operation under a fresh identity",
+        "Approves ignoring Renew, MarkDone, or Release errors"
+      ],
+      "graders": [
+        {
+          "id": "lease-fencing-review",
+          "kind": "contains",
+          "required": [
+            "token",
+            "6"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "route-distributed-systems-review",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review this distributed Go system for transaction boundaries, broker redelivery, retry amplification, lease fencing, and recovery after partial failure.",
+      "should_activate": true,
+      "reason": "Multiple cross-process failure schedules dominate the review."
+    },
+    {
+      "id": "route-ambiguous-outbox-symptom",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "After a crash, some Go service updates exist without events while other events are delivered twice and workers occasionally commit after losing ownership.",
+      "should_activate": false,
+      "reason": "The symptoms imply a dominant stale-ownership and coordination invariant even though messaging and atomicity also contribute.",
+      "confuses_with": [
+        "go-distributed-coordination"
+      ]
+    },
+    {
+      "id": "avoid-payment-state-integrity-review",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review a Go capture and refund workflow where an ambiguous provider timeout can duplicate money movement and reconciliation cannot identify the original attempt.",
+      "should_activate": false,
+      "reason": "Payment identity and financial-integrity consequences require fintech review to lead.",
+      "confuses_with": [
+        "review-go-fintech-change"
+      ]
+    },
+    {
+      "id": "avoid-local-json-api-review",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review a local Go JSON type rename for source and wire compatibility; there are no remote effects, retries, or concurrent owners.",
+      "should_activate": false,
+      "reason": "A narrowly scoped API compatibility decision belongs to go-project-and-api-design rather than a collection-wide review.",
+      "confuses_with": [
+        "go-project-and-api-design"
+      ]
+    }
+  ]
+}

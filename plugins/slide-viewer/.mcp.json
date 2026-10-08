@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "slide-viewer": {
+      "command": "./launch_node",
+      "args": ["./launch.mjs"],
+      "cwd": ".",
+      "env_vars": [
+        "CODEX_BROWSER_USE_NODE_PATH",
+        "CODEX_CLI_PATH",
+        "CODEX_ELECTRON_RESOURCES_PATH",
+        "CODEX_MCP_NODE_PATH",
+        "ROSALIND_SENTRY_DSN",
+        "ROSALIND_SENTRY_ENABLED",
+        "XDG_CACHE_HOME"
+      ]
+    }
+  }
+}

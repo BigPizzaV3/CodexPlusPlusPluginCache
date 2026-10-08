@@ -1,0 +1,27 @@
+{
+  "name": "akinator",
+  "version": "2.0.0",
+  "description": "Ask everything, document everything, skillify everything, rule everything. A behavioral operating system that makes it structurally impossible to change code without growing the knowledge layer around it.",
+  "author": {
+    "name": "Ihab Khaled"
+  },
+  "homepage": "https://github.com/ihabkhaled/akinator-ai",
+  "repository": "https://github.com/ihabkhaled/akinator-ai",
+  "license": "MIT",
+  "keywords": [
+    "documentation",
+    "knowledge-management",
+    "agent-skills",
+    "context-engineering",
+    "onboarding",
+    "business-logic",
+    "runbooks",
+    "adr",
+    "codebase-memory",
+    "ai-agents",
+    "coding-agents",
+    "institutional-memory",
+    "gate-economy",
+    "router-sync"
+  ]
+}

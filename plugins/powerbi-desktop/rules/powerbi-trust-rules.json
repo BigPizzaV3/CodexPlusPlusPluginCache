@@ -1,0 +1,32 @@
+{
+  "schema": "codex.powerbi.trustRules.v1",
+  "releaseGate": {
+    "goThreshold": 80,
+    "warnThreshold": 60,
+    "blockOnP0": true,
+    "blockOnLowTrustKpis": true,
+    "warnOnP1": true,
+    "warnOnPendingSemanticTests": true,
+    "blockOnPendingSemanticTests": false,
+    "warnOnLiveUnavailable": true,
+    "blockOnLiveUnavailable": false,
+    "requireMachineReadableResults": true
+  },
+  "weights": {
+    "daxRisk": 25,
+    "missingOwner": 15,
+    "missingBusinessDefinition": 15,
+    "downstreamDependencyPerMeasure": 5,
+    "maxDownstreamDependencyPenalty": 15,
+    "missingTestCoverage": 10
+  },
+  "bestPractices": {
+    "preferMeasuresOverCalculatedColumns": true,
+    "requireMetricOwner": true,
+    "requireBusinessDefinition": true,
+    "discourageVolatileTimeFunctions": true,
+    "discourageFilterAllOnFactTables": true,
+    "requirePbipForSourceControl": true,
+    "preferGovernedDateTable": true
+  }
+}

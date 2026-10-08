@@ -1,0 +1,46 @@
+{
+  "name": "incident-io",
+  "version": "1.20261007.771",
+  "description": "Makes your agent fluent in incident.io: responding to and investigating incidents, working with on-call schedules and escalations, and authoring the operational content \u2014 runbooks, skills, and plugins \u2014 that incident.io investigations draw on. Bundles the official incident.io MCP server.",
+  "author": {
+    "name": "incident.io",
+    "url": "https://incident.io"
+  },
+  "homepage": "https://incident.io",
+  "repository": "https://github.com/incident-io/skills",
+  "license": "MIT",
+  "keywords": [
+    "incident-response",
+    "on-call",
+    "investigations",
+    "runbooks",
+    "sre",
+    "devops"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "incident.io",
+    "shortDescription": "Use incident.io in your agent",
+    "longDescription": "Makes your agent fluent in incident.io: responding to and investigating incidents, working with on-call schedules and escalations, and authoring the operational content \u2014 runbooks, skills, and plugins \u2014 that incident.io investigations draw on. Bundles the official incident.io MCP server.",
+    "developerName": "incident.io",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://incident.io",
+    "supportURL": "https://docs.incident.io/help/contact",
+    "privacyPolicyURL": "https://incident.io/privacy",
+    "termsOfServiceURL": "https://incident.io/terms",
+    "defaultPrompt": [
+      "Run the extensions skill",
+      "What incidents are open right now?",
+      "Who's on call this week?"
+    ],
+    "brandColor": "#F25533",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png"
+  },
+  "apps": "./.app.json"
+}

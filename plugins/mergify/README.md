@@ -1,0 +1,267 @@
+# Mergify CLI
+
+[![CI](https://github.com/Mergifyio/mergify-cli/actions/workflows/ci.yaml/badge.svg)](https://github.com/Mergifyio/mergify-cli/actions/workflows/ci.yaml)
+[![Latest release](https://img.shields.io/github/v/release/Mergifyio/mergify-cli?logo=github&label=release)](https://github.com/Mergifyio/mergify-cli/releases/latest)
+[![Documentation](https://img.shields.io/badge/docs-mergify.com-7c3aed)](https://docs.mergify.com/cli/)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
+Drive [Mergify](https://mergify.com) from your terminal and CI pipelines:
+stacked pull requests, the merge queue, CI Insights, scheduled freezes, and
+configuration — all from a single self-contained binary that reuses your
+existing GitHub (`gh`) login.
+
+```shell
+mergify stack push          # turn your local commits into stacked PRs
+mergify queue status        # inspect the merge queue
+mergify ci junit-process report.xml   # upload test results to CI Insights
+```
+
+- **One static binary.** No runtime, no dependencies — drop it on a developer
+  laptop or a CI runner and go.
+- **One command to sign in.** `mergify auth login` approves the CLI in your
+  browser and keeps the credential in your OS keychain; `MERGIFY_TOKEN` or
+  `--token` for scripting.
+- **Built for pipelines.** Logs to stderr, structured `--json` output on read
+  commands, and stable [exit codes](#exit-codes) for scripts and runbooks.
+- **Cross-platform.** Linux, macOS (x86_64 + aarch64), and Windows.
+
+## Installation
+
+### Homebrew (recommended for macOS)
+
+```shell
+brew install mergifyio/tap/mergify-cli
+```
+
+The fully-qualified name taps and installs in one step. Upgrade with
+`brew upgrade mergify-cli` — not `mergify self-update`, which overwrites the
+Homebrew-managed binary. See the [tap](https://github.com/Mergifyio/homebrew-tap)
+for tap-trust and short-name details.
+
+### Install script (recommended for Linux; also macOS — x86_64 and aarch64)
+
+```shell
+curl -fsSL https://raw.githubusercontent.com/Mergifyio/mergify-cli/main/install.sh | sh
+```
+
+Installs to `~/.local/bin/mergify`. Override with `MERGIFY_INSTALL_DIR=/usr/local/bin`
+or pin a version with `MERGIFY_VERSION=<version>`. Upgrade with `mergify self-update`.
+
+### Manual download (Windows, or to bypass the script)
+
+Grab the matching archive from the
+[latest release](https://github.com/Mergifyio/mergify-cli/releases/latest):
+
+- **Windows** — download `mergify-<version>-x86_64-pc-windows-msvc.zip`,
+  extract it, and put `mergify.exe` anywhere on your `PATH`.
+- **Linux / macOS** — download `mergify-<version>-<target>.tar.gz` (e.g.
+  `mergify-2026.4.23.1-aarch64-apple-darwin.tar.gz`), extract with `tar -xzf`,
+  and put the resulting `mergify` binary anywhere on your `PATH`.
+
+Verify against `SHA256SUMS` from the same release if you care.
+
+## Authentication
+
+Sign in once:
+
+```shell
+mergify auth login
+```
+
+It opens the approval page in your browser, and prints the URL and the code
+as well: pass `--no-browser`, or run it where there is no browser to open,
+and the printed pair is all you need. Once you approve, the
+credential lands in your OS keychain — or, on a machine with none (a
+container, an unattended agent, a headless box with no D-Bus session), in a
+restricted file under your configuration directory. `mergify auth status` says
+which account you are signed in as, and `mergify auth logout` asks the Mergify
+API to revoke the credential rather than only deleting the local copy.
+
+The commands that talk to the **Mergify API** resolve a credential in this
+order:
+
+| # | Credential | |
+| --- | --- | --- |
+| 1 | `--token` / `-t` | |
+| 2 | `MERGIFY_TOKEN` | |
+| 3 | the credential stored by `mergify auth login` | keyed by API URL |
+| 4 | `GITHUB_TOKEN` | **deprecated** |
+| 5 | `gh auth token` | **deprecated** |
+
+A GitHub token still authenticates against the Mergify API and prints a
+deprecation warning once per run. It will stop working in a future release;
+run `mergify auth login` instead. In CI, set `MERGIFY_TOKEN` — nothing about
+that changes.
+
+`mergify ci` skips step 3. Those endpoints require an organization
+application key, which is what `MERGIFY_TOKEN` holds in a CI job; the
+per-user credential `mergify auth login` mints is refused there by design.
+
+`mergify stack` also calls the **GitHub API** directly, and resolves that
+token separately (`--token`, `MERGIFY_TOKEN`, `GITHUB_TOKEN`, `gh auth
+token`). It is unaffected by the deprecation above: `stack` needs a GitHub
+credential and Mergify never issues one. A Mergify-issued token (`mut_…`) is
+skipped there rather than sent to GitHub, which would only answer `401 Bad
+credentials` — in `MERGIFY_TOKEN`, in `GITHUB_TOKEN`, and in what `gh auth
+token` returns, since it echoes `GITHUB_TOKEN` when that is set. Only an
+explicit `--token` is sent as given.
+
+The repository and API URL resolve as before:
+
+| What | `--flag` | then env | then |
+| --- | --- | --- | --- |
+| **Repository** | `--repository` / `-r` | `GITHUB_REPOSITORY` | `git remote` (`origin`) |
+| **API URL** | `--api-url` / `-u` | `MERGIFY_API_URL` | `https://api.mergify.com` |
+
+Credentials are stored per API URL, so one machine can hold a credential for
+the hosted service and one for an on-premise install.
+
+Mergify application keys come in two classes, and a few commands will not
+accept the narrower one. A `ci` key is scoped to what a CI job does — trace
+upload, `ci scopes-send`, quarantine evaluation and the quarantine list.
+Reading test health (`mergify tests show`) and changing the quarantine
+(`mergify tests quarantines add` / `remove`) need an `admin` key or a user
+credential — the one `mergify auth login` stores, or a GitHub PAT — and
+answer a `ci` key with `403 Forbidden`. Note that `GITHUB_TOKEN` inside
+GitHub Actions is the ephemeral installation token, not a PAT, and does not
+reach the Mergify API.
+
+See the [authentication guide](https://docs.mergify.com/cli/usage) for details.
+
+## Quick start
+
+```shell
+# Stacked pull requests — one PR per commit, kept in sync
+mergify stack setup                # once per repo: install the git hooks the stack needs
+mergify stack push                 # push commits and create/update their PRs
+mergify stack list                 # show the stack and its PR status
+mergify stack sync                 # rebase the stack onto its trunk
+
+# Merge queue
+mergify queue status               # current queue state for the repo
+mergify queue status --json        # same, as machine-readable JSON
+
+# CI Insights — from inside your pipeline
+mergify ci junit-process report.xml --test-language python
+
+# Configuration
+mergify config validate            # check .mergify.yml against the schema
+```
+
+Run `mergify --help` for the full command list and `mergify <command> --help`
+for any command's flags.
+
+## Commands
+
+Every command group maps to a section of the
+[CLI reference](https://docs.mergify.com/cli/).
+
+- **`mergify auth`** — Sign in to Mergify and manage the stored
+  credential (`login`, `logout`, `status`).
+- **`mergify stack`** — Create and maintain stacked pull requests.
+  [Docs](https://docs.mergify.com/stacks/)
+- **`mergify queue`** — Inspect and control the merge queue.
+  [Docs](https://docs.mergify.com/merge-queue/)
+- **`mergify events`** — Browse the events Mergify recorded for the
+  repository or one pull request, as a timeline or JSON.
+- **`mergify ci`** — Send JUnit results and pull request scopes from any CI
+  provider. [Docs](https://docs.mergify.com/ci-insights/)
+- **`mergify tests`** — Look up test health and manage the flaky-test
+  quarantine. [Docs](https://docs.mergify.com/ci-insights/)
+- **`mergify freeze`** — Schedule merge freezes for release windows and
+  maintenance. [Docs](https://docs.mergify.com/merge-protections/freeze/)
+- **`mergify config`** — Validate your configuration and simulate actions
+  before you merge. [Docs](https://docs.mergify.com/configuration/file-format/#validating-with-the-cli)
+- **`mergify self-update`** — Update the CLI to the latest release.
+- **`mergify completions <shell>`** — Print a shell completion script
+  ([see below](#shell-completions)).
+
+Run `mergify <command> --help` for a group's subcommands and flags.
+
+## Shell completions
+
+Generate a completion script for your shell — `bash`, `zsh`, `fish`,
+`elvish`, or `powershell`:
+
+```shell
+# zsh — write to a directory on your $fpath
+mergify completions zsh > ~/.zfunc/_mergify
+
+# bash — load in your current session (add to ~/.bashrc to persist)
+source <(mergify completions bash)
+
+# fish
+mergify completions fish > ~/.config/fish/completions/mergify.fish
+```
+
+## Global options
+
+These are accepted on every command:
+
+| Flag | Description |
+| --- | --- |
+| `-v`, `--verbose` | Increase log verbosity: `-v` info, `-vv` debug, `-vvv` trace. Logs go to stderr so stdout stays pipeable. |
+| `--debug` | Shorthand for at least debug-level logging (like `-vv`). |
+| `--color <auto\|always\|never>` | When to colorize terminal output. |
+
+## Environment variables
+
+| Variable | Effect |
+| --- | --- |
+| `MERGIFY_TOKEN` | API token. Takes precedence over a stored `mergify auth login` credential. |
+| `GITHUB_TOKEN` | **Deprecated** as a Mergify API credential (falls back to `gh auth token`); still the GitHub token `mergify stack` uses. |
+| `GITHUB_REPOSITORY` | Default `owner/repo` when `--repository` is omitted. |
+| `MERGIFY_API_URL` | API base URL (default `https://api.mergify.com`). |
+| `RUST_LOG` | Fine-grained log filtering; overrides `--verbose`. |
+| `NO_COLOR` | Disable colored output. |
+| `MERGIFY_INSTALL_DIR`, `MERGIFY_VERSION` | Install-script target directory / pinned version. |
+
+## Exit codes
+
+Commands return stable exit codes so scripts and runbooks can branch on them:
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Success. |
+| `1` | Unclassified runtime failure (I/O error, bug, or captured panic). |
+| `2` | Argument parsing / usage error. |
+| `3` | Stack, branch, or commit not found. |
+| `4` | Rebase or merge conflict. |
+| `5` | GitHub API request failed. |
+| `6` | Mergify API request failed. |
+| `7` | CLI invariant violated (e.g. run outside a valid context). |
+| `8` | Configuration or credentials missing, unparseable, or failing validation (including "not logged in"). |
+
+## AI Agent Skills
+
+Mergify CLI provides AI skills for managing stacked PRs and Git workflows,
+compatible with [Claude Code](https://docs.anthropic.com/en/docs/claude-code),
+[Cursor](https://cursor.sh), and [many other AI agents](https://skills.sh).
+
+Install via npx (all agents):
+
+```shell
+npx skills add Mergifyio/mergify-cli
+```
+
+Install as a Claude Code plugin:
+
+```shell
+/plugin install mergify@claude-plugins-official
+```
+
+## Documentation
+
+Full reference and guides live at
+**[docs.mergify.com/cli](https://docs.mergify.com/cli/)**.
+
+## Contributing
+
+Contributions are welcome — open an
+[issue](https://github.com/Mergifyio/mergify-cli/issues) or a pull request.
+The workspace is a Rust monorepo; see [AGENTS.md](AGENTS.md) for the crate
+layout, build, and test workflow.
+
+## License
+
+Apache License 2.0 — see [LICENSE](LICENSE).

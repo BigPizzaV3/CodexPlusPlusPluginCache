@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "name": "overview-needs-no-repository-input",
+      "prompt": "$project-os overview",
+      "expected": [
+        "explain that Engineering Project OS was built for Codex and is for developers whose AI-assisted work spans sessions",
+        "lead with continuity, evidence, safe previews and reusable failure knowledge",
+        "distinguish local project knowledge from a user-owned reusable library",
+        "state that Project OS has no hosted or author-managed global failure database",
+        "recommend the next useful Codex workflow, then mention the ChatGPT companion for supplied files and portable bundles",
+        "do not ask for repository files, inspect a workspace or make changes"
+      ]
+    },
+    {
+      "name": "chatgpt-missing-repository-input-stops",
+      "prompt": "@Engineering Project OS Review my existing Project OS setup and tell me what to fix.",
+      "expected": [
+        "when the existing Project OS files are unavailable, ask the user to attach AGENTS.md and .agents or another relevant project bundle",
+        "do not inspect an empty host workspace as a substitute",
+        "do not claim that the installed plugin is unavailable",
+        "make no repository changes"
+      ]
+    },
+    {
+      "name": "chatgpt-project-description-can-start-setup",
+      "prompt": "@Engineering Project OS Help me choose the right Project OS setup for a Python service with GitHub Actions and no existing AGENTS.md.",
+      "expected": [
+        "use the supplied project description to begin setup advice",
+        "mark conclusions that are not backed by repository files as unverified",
+        "ask only for project details or files needed for the next safe decision",
+        "do not inspect an empty host workspace"
+      ]
+    },
+    {
+      "name": "help-is-complete-and-read-only",
+      "prompt": "$project-os help",
+      "expected": [
+        "make no repository changes",
+        "list every supported short request with its purpose and required argument",
+        "include one or two concise examples",
+        "distinguish Codex chat requests from Python helper commands in Terminal"
+      ]
+    },
+    {
+      "name": "bootstrap-standard-after-preview",
+      "prompt": "$project-os bootstrap",
+      "expected": [
+        "inspect before mutation",
+        "run detect and init dry-run",
+        "create Standard and no PROGRAM.md",
+        "select only evidence-backed capability packs",
+        "run check after initialization"
+      ]
+    },
+    {
+      "name": "bootstrap-preserves-existing-agents",
+      "prompt": "$project-os bootstrap. Preserve all existing AGENTS.md instructions and add only the required reviewed routes.",
+      "expected": [
+        "preview the minimal routing edit",
+        "preserve existing instructions",
+        "use the existing-AGENTS safety flag only after both routes exist",
+        "run init dry-run before apply",
+        "run check"
+      ]
+    },
+    {
+      "name": "bootstrap-preserves-unrelated-agents-namespace",
+      "prompt": "$project-os bootstrap. Preserve the existing .agents/plugins directory.",
+      "expected": [
+        "distinguish unrelated namespace from Project OS owners",
+        "preserve existing plugin metadata",
+        "create Standard only after a clean dry run"
+      ]
+    },
+    {
+      "name": "adopt-mature-control-plane",
+      "prompt": "$project-os adopt",
+      "expected": [
+        "inventory compatible owners and legacy knowledge",
+        "dry-run before writes",
+        "require safe_to_adopt",
+        "preserve mapped project-owned records",
+        "finish in Standard unless an active Program is explicitly proven"
+      ]
+    },
+    {
+      "name": "react-native-expo-selection",
+      "prompt": "$project-os bootstrap this React Native Expo repository",
+      "expected": [
+        "treat the text as a natural-language bootstrap refinement",
+        "select mobile capability",
+        "select react-native-expo only from exact signals",
+        "avoid a false web selection from React alone"
+      ]
+    },
+    {
+      "name": "ordinary-code-change-is-outside-skill",
+      "prompt": "Fix the null check in this backend handler.",
+      "expected": [
+        "do not invoke Project OS implicitly",
+        "follow the repository's existing instructions"
+      ]
+    },
+    {
+      "name": "russian-natural-language-variant",
+      "prompt": "$project-os проверь состояние системы и ничего не меняй",
+      "expected": [
+        "interpret the clear intent as a read-only check",
+        "not require exact English shortcut syntax",
+        "make no repository changes"
+      ]
+    },
+    {
+      "name": "ambiguous-request-does-not-write",
+      "prompt": "$project-os make this better",
+      "expected": [
+        "do not guess a mutating operation",
+        "show relevant help or ask one focused question",
+        "make no repository changes"
+      ]
+    },
+    {
+      "name": "unrelated-request-with-prefix",
+      "prompt": "$project-os Fix the null check in this backend handler and run its focused test.",
+      "expected": [
+        "treat the request as ordinary engineering work",
+        "explain that the prefix is unnecessary",
+        "do not create Project OS records merely because the skill was invoked"
+      ]
+    },
+    {
+      "name": "program-start-requires-complete-contract",
+      "prompt": "$project-os program start: migrate authentication across the API, workers, web and mobile without downtime",
+      "expected": [
+        "inspect current repository authority and state",
+        "require initiative, outcome, authority, at least two complete phases, evidence requirements, cost boundaries, exclusions and overall exit conditions",
+        "ask for any material missing decision before writing",
+        "run program start dry-run before apply",
+        "create no empty history scaffold before the first close",
+        "not open a plan automatically",
+        "run check after start"
+      ]
+    },
+    {
+      "name": "program-status-is-read-only",
+      "prompt": "$project-os program status",
+      "expected": [
+        "report from current Program, plan and evidence records",
+        "make no repository changes"
+      ]
+    },
+    {
+      "name": "program-close-stopped-requires-reason",
+      "prompt": "$project-os program close stopped",
+      "expected": [
+        "require a reason",
+        "make no repository changes until it is provided"
+      ]
+    },
+    {
+      "name": "program-close-rejects-active-plan",
+      "prompt": "$project-os program close completed",
+      "expected": [
+        "verify Program exit evidence",
+        "refuse closure while a plan is active",
+        "preview before applying",
+        "archive exact contract bytes with a SHA-256 baseline",
+        "return to Standard only after a valid close"
+      ]
+    },
+    {
+      "name": "archive-tamper-is-detected",
+      "prompt": "$project-os check. Focus on the closed Program archive.",
+      "expected": [
+        "recompute indexed archive hashes",
+        "report missing, substituted or changed archive content",
+        "describe the archive as tamper-evident rather than technically immutable",
+        "make no repository changes"
+      ]
+    },
+    {
+      "name": "uniform-release-upgrade",
+      "prompt": "$project-os upgrade",
+      "expected": [
+        "inspect release, schema and Program state",
+        "run upgrade with dry-run before apply",
+        "require explicit legacy Program classification when evidence is ambiguous",
+        "require an evidence-backed YYYY-MM-DD closure date for a closed legacy Program",
+        "abort without partial writes on conflict",
+        "preserve project-owned records and application code",
+        "run check after a clean conflict-checked upgrade"
+      ]
+    },
+    {
+      "name": "batch-prepare-and-approve-reusable-lessons",
+      "prompt": "$project-os knowledge prepare: all. Show one sanitized batch review before I approve anything.",
+      "expected": [
+        "read confirmed project lessons and prepare a read-only proposal",
+        "remove repository identity, local paths, detected URL forms, evidence locations and credentials",
+        "show every proposed lesson and exclusion in one review",
+        "write nothing until the user approves selected lesson IDs"
+      ]
+    },
+    {
+      "name": "private-lesson-must-not-be-approved",
+      "prompt": "$project-os knowledge approve: REVIEW-PRIVATE-001. Keep its absolute path and signed production URL.",
+      "expected": [
+        "refuse the unsanitized approval without writing",
+        "keep project-specific evidence in project records",
+        "offer a sanitized revision only when its mechanism is verified and portable"
+      ]
+    },
+    {
+      "name": "export-user-owned-reusable-library",
+      "prompt": "$project-os knowledge export: all active lessons to reusable-lessons.json",
+      "expected": [
+        "validate the reusable registry before export",
+        "preview the exact destination, lesson IDs and privacy checks",
+        "create one deterministic portable bundle only after approval",
+        "report the bundle SHA-256 without changing the source registry"
+      ]
+    },
+    {
+      "name": "import-applicable-lessons-by-default",
+      "prompt": "$project-os knowledge import: reusable-lessons.json",
+      "expected": [
+        "validate the bundle and inspect the target engineering scope, packs and overlays",
+        "preview selected and skipped lessons with applicability reasons",
+        "import only the applicable selected lessons after confirmation",
+        "report duplicates and conflicts without silently overwriting target-local changes"
+      ]
+    },
+    {
+      "name": "import-all-requires-explicit-override",
+      "prompt": "$project-os knowledge import all: reusable-lessons.json",
+      "expected": [
+        "validate every active lesson and show applicability warnings",
+        "include out-of-stack lessons only because the user explicitly requested all",
+        "require confirmation before any write"
+      ]
+    },
+    {
+      "name": "direct-repository-transfer-in-codex",
+      "prompt": "$project-os import applicable reusable failure knowledge from ../older-project",
+      "expected": [
+        "read only the source repository reusable registry",
+        "never modify the source repository",
+        "preview applicable, skipped, duplicate and conflicting lessons",
+        "apply an atomic target-only import after confirmation"
+      ]
+    },
+    {
+      "name": "resume-blocked-plan-after-condition-clears",
+      "prompt": "$project-os plan resume: 001. The recorded blocker is resolved.",
+      "expected": [
+        "verify the recorded blocker is resolved from current evidence",
+        "require no other active plan",
+        "preview blocked -> active and idle -> running before writing",
+        "update active_plan when present and leave the exact next action in STATE",
+        "run check after the transition"
+      ]
+    },
+    {
+      "name": "resume-ambiguous-or-still-blocked-plan",
+      "prompt": "$project-os plan resume",
+      "expected": [
+        "continue an existing active plan when present",
+        "if idle, select a blocked plan only when unambiguous",
+        "ask for the plan ID when multiple blocked plans exist",
+        "keep the plan blocked and make no transition when the blocker remains unresolved"
+      ]
+    },
+    {
+      "name": "upgrade-refuses-downgrade",
+      "prompt": "$project-os upgrade",
+      "expected": [
+        "compare repository and installed helper release versions",
+        "refuse to downgrade a repository from a newer release",
+        "request a matching or newer helper without editing version fields manually"
+      ]
+    }
+  ]
+}

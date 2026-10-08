@@ -1,0 +1,6 @@
+interface:
+  display_name: "YCloud Contacts"
+  short_description: "Design or implement contact and note operations"
+  default_prompt: "Use $ycloud-contacts to design or implement contract-aware YCloud contact and note workflows with mock-only mutations."
+policy:
+  allow_implicit_invocation: true

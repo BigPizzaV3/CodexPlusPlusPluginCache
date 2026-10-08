@@ -1,0 +1,9 @@
+interface:
+  display_name: "Land And Deploy"
+  short_description: "Land an approved change, observe CI and deployment, and verify production health when host access..."
+  default_prompt: "Use Land And Deploy for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: false

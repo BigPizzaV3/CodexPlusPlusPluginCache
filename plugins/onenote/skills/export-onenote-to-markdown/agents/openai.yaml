@@ -1,0 +1,4 @@
+interface:
+  display_name: "Export OneNote to Markdown"
+  short_description: "Export OneNote pages as Markdown files"
+  default_prompt: "Use $export-onenote-to-markdown to export selected personal OneNote pages as downloadable Markdown files, without changing the source notes."

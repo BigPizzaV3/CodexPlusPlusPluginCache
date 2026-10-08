@@ -1,0 +1,9 @@
+interface:
+  display_name: Grill Me
+  short_description: Sharpen a plan through explicit interview
+  default_prompt: Use $grill-me for this task
+policy:
+  allow_implicit_invocation: false
+  products:
+  - CHAT
+  - CODEX

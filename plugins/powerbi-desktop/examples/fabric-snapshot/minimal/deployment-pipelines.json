@@ -1,0 +1,3 @@
+[
+  { "id": "pipeline-sales", "name": "Sales Deployment", "stage": "Test", "status": "InSync", "workspaceId": "workspace-minimal" }
+]

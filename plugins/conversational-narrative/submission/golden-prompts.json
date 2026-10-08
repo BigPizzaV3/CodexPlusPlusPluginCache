@@ -1,0 +1,38 @@
+{
+  "positive": [
+    {
+      "prompt": "Turn these notes into a conversational diagnostic deep-dive in my voice.",
+      "expected": "diagnostic-deep-dive-writer"
+    },
+    {
+      "prompt": "Explain saturation like a practitioner, not a textbook.",
+      "expected": "technical-concept-storyteller"
+    },
+    {
+      "prompt": "Continue part 4 from this unresolved question without repeating the earlier posts.",
+      "expected": "series-continuity-writer"
+    },
+    {
+      "prompt": "This post feels AI-written. Preserve my dialect and fix only the residue.",
+      "expected": "voice-fidelity-reviewer"
+    },
+    {
+      "prompt": "Use Conversational Narrative to turn this audit finding into a post.",
+      "expected": "conversational-narrative-router -> diagnostic-deep-dive-writer"
+    }
+  ],
+  "negative": [
+    {
+      "prompt": "Calculate 17% of 4200.",
+      "expected": "do not trigger"
+    },
+    {
+      "prompt": "Translate this paragraph literally into French.",
+      "expected": "do not trigger"
+    },
+    {
+      "prompt": "Write an APA literature review with neutral academic tone.",
+      "expected": "do not trigger unless conversational style is also requested"
+    }
+  ]
+}

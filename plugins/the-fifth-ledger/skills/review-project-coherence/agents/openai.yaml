@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Project Coherence"
+  short_description: "Reconcile the five project truth ledgers"
+  default_prompt: "Use $review-project-coherence to find contradictions across project authority, canon, evidence, surfaces, and lifecycle."
+policy:
+  allow_implicit_invocation: true

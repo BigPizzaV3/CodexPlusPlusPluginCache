@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Video Translation"
+  short_description: "Same video, new language"
+  default_prompt: "Use $pixverse-video-translate to make Spanish and Japanese versions of this video with native speech and re-flowed captions and graphics."
+policy:
+  allow_implicit_invocation: true

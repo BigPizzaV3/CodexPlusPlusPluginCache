@@ -1,0 +1,4 @@
+interface:
+  display_name: "Find Best Cashback"
+  short_description: "Which of my cards should I use at this store?"
+  default_prompt: "Use $find-best-cashback to work out my best card for Shell."

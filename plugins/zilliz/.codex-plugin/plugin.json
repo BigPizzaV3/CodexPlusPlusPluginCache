@@ -1,0 +1,40 @@
+{
+  "author": {
+    "email": "support@zilliz.com",
+    "name": "Zilliz"
+  },
+  "description": "Work with Zilliz Cloud and Milvus vector databases using the zilliz-cli.",
+  "homepage": "https://github.com/zilliztech/zilliz-plugin",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Show me the databases and collections available in my current Zilliz environment.",
+      "Describe a collection and tell me whether it is loaded and indexed.",
+      "Help me create, populate, and search a vector collection."
+    ],
+    "developerName": "Zilliz",
+    "displayName": "Zilliz",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Use natural language to work with Zilliz Cloud and Milvus through the zilliz-cli. The plugin discovers available capabilities from the configured endpoint and credentials, and supports data operations as well as cloud-management workflows when available.",
+    "privacyPolicyURL": "https://zilliz.com/privacy-policy",
+    "shortDescription": "Manage Zilliz vector databases",
+    "websiteURL": "https://zilliz.com/"
+  },
+  "keywords": [
+    "zilliz",
+    "milvus",
+    "vector-database",
+    "semantic-search",
+    "rag"
+  ],
+  "license": "Apache-2.0",
+  "name": "zilliz",
+  "repository": "https://github.com/zilliztech/zilliz-plugin",
+  "skills": "./skills/",
+  "version": "1.4.4"
+}

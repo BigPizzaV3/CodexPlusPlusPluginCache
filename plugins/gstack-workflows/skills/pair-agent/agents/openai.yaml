@@ -1,0 +1,8 @@
+interface:
+  display_name: "Pair Agent"
+  short_description: "Pair an authorized agent with native gstack browser access while preserving scope and revocation ..."
+  default_prompt: "Use Pair Agent for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

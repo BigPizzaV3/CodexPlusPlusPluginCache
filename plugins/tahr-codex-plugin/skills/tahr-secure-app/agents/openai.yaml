@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Secure App"
+  short_description: "Run an evidence-backed application security review"
+  default_prompt: "Use $tahr-secure-app to perform an evidence-backed security review of this application."

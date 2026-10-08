@@ -1,0 +1,9 @@
+interface:
+  display_name: "Unfreeze"
+  short_description: "Remove a previously established edit-scope restriction when the user explicitly requests it."
+  default_prompt: "Use Unfreeze for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: false

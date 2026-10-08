@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn From Work"
+  short_description: "Propose working methods from selected experience"
+  default_prompt: "Use $learn-from-work to examine the work I select and propose useful handbook improvements without writing files."

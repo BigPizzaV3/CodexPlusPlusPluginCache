@@ -1,0 +1,9 @@
+interface:
+  display_name: Code Simplification
+  short_description: Simplifies code for clarity
+  default_prompt: Use $code-simplification for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

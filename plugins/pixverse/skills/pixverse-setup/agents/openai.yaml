@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Setup"
+  short_description: "Set up PixVerse CLI and login"
+  default_prompt: "Use $pixverse-setup to check PixVerse CLI setup and login."
+policy:
+  allow_implicit_invocation: true

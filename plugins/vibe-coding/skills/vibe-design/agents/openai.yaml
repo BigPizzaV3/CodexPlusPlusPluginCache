@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Design & accessibility"
+  short_description: "Design systems, keyboard navigation, focus and accessibility"
+  default_prompt: "Use $vibe-design to audit the selected design & accessibility boundary."

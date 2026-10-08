@@ -1,0 +1,6 @@
+interface:
+  display_name: "YCloud Unsubscribers"
+  short_description: "Manage unsubscribe records and eligibility evidence"
+  default_prompt: "Use $ycloud-unsubscribers to design or implement safe, contract-aware unsubscribe handling with mock-only evidence."
+policy:
+  allow_implicit_invocation: true

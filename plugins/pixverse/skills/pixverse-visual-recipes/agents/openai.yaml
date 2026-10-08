@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Visual Recipes"
+  short_description: "Directed image and video looks"
+  default_prompt: "Use $pixverse-visual-recipes to create a restrained light reveal around this product while preserving its exact shape."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,23 @@
+{
+  "schema": "codex.powerbi.processRulePack.v1",
+  "id": "plan-to-produce",
+  "process": "PlanToProduce",
+  "displayName": "Plan to Produce",
+  "kpiTerms": ["production", "manufacturing", "material", "work order", "yield", "scrap", "capacity"],
+  "objects": [
+    { "name": "ProductionOrder", "aliases": ["productionorder", "workorder", "manufacturingorder"], "fields": [
+      { "name": "productionOrderId", "aliases": ["ProductionOrderId", "WorkOrderId"], "required": true },
+      { "name": "materialId", "aliases": ["MaterialId", "ProductId", "ItemId"], "required": true },
+      { "name": "plannedStartDate", "aliases": ["PlannedStartDate", "StartDate"], "required": true },
+      { "name": "plannedEndDate", "aliases": ["PlannedEndDate", "EndDate"], "required": false },
+      { "name": "quantity", "aliases": ["Quantity", "PlannedQuantity"], "required": false },
+      { "name": "status", "aliases": ["Status", "OrderStatus"], "required": false }
+    ] }
+  ],
+  "rules": [
+    { "id": "p2produce.order.material.required", "type": "requiredField", "severity": "High", "object": "ProductionOrder", "field": "materialId", "description": "Production order is missing material.", "ownerHint": "Manufacturing owner", "recommendedAction": "Correct material assignment before production KPI reporting.", "releaseImpact": "No-Go" },
+    { "id": "p2produce.order.start.required", "type": "requiredField", "severity": "High", "object": "ProductionOrder", "field": "plannedStartDate", "description": "Production order is missing planned start date.", "ownerHint": "Manufacturing owner", "recommendedAction": "Backfill plan date before schedule adherence reporting.", "releaseImpact": "No-Go" },
+    { "id": "p2produce.order.quantity.nonnegative", "type": "nonNegative", "severity": "Medium", "object": "ProductionOrder", "field": "quantity", "description": "Production quantity is negative.", "ownerHint": "Manufacturing owner", "recommendedAction": "Confirm scrap/reversal treatment.", "releaseImpact": "Warn" },
+    { "id": "p2produce.order.end.afterStart", "type": "dateOrder", "severity": "High", "object": "ProductionOrder", "field": "plannedEndDate", "startField": "plannedStartDate", "endField": "plannedEndDate", "description": "Planned end date is before planned start date.", "ownerHint": "Manufacturing owner", "recommendedAction": "Correct production schedule dates.", "releaseImpact": "No-Go" }
+  ]
+}

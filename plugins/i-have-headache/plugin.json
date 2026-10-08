@@ -1,0 +1,22 @@
+{
+  "name": "i-have-headache",
+  "description": "Concise mode, always on: stops AI from being talkative. One skill, one command.",
+  "version": "1.1.0",
+  "author": {
+    "name": "IHAB KHALED FOUAD WAHBA"
+  },
+  "homepage": "https://github.com/ihabkhaled/i-have-headache",
+  "repository": "https://github.com/ihabkhaled/i-have-headache",
+  "license": "MIT",
+  "keywords": [
+    "concise",
+    "brevity",
+    "productivity",
+    "prompt"
+  ],
+  "interface": {
+    "developerName": "IHAB KHALED FOUAD WAHBA",
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/composer-icon.png"
+  }
+}

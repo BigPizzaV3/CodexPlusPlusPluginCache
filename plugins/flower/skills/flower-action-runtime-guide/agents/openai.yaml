@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flower Action Runtime Guide"
+  short_description: "Set up and build governed actions with Flower Action Runtime."
+  default_prompt: "Use $flower-action-runtime-guide to select the minimum runtime modules and design or review a governed business action."

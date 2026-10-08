@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · NoSQL"
+  short_description: "Keys, indexes, consistency and hot partitions"
+  default_prompt: "Use $vibe-nosql to audit the selected nosql boundary."

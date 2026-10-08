@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Mamdouh Aboammar"
+  },
+  "description": "Write and refine conversational diagnostic narratives that move from lived friction to sharper questions, technical concepts, decisions, and open loops without flattening the author voice.",
+  "interface": {
+    "brandColor": "#2347A5",
+    "brandColorDark": "#8FA8FF",
+    "capabilities": [
+      "Draft practitioner deep-dive posts",
+      "Continue multi-part content series",
+      "Explain technical concepts conversationally",
+      "Preserve Egyptian Arabic code-switching",
+      "Audit and repair AI-writing patterns",
+      "Keep claims and uncertainty explicit"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Turn these notes into a conversational diagnostic deep-dive in my voice.",
+      "Continue this series without repeating what the previous post already taught.",
+      "Audit this draft for slop, preserve the voice, and rewrite only what weakens it."
+    ],
+    "developerName": "Mamdouh Aboammar",
+    "displayName": "Conversational Narrative",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Turn technical, analytical, or practitioner ideas into conversational narratives that feel like a real operator thinking with the reader. The plugin routes fresh drafts, technical explanations, series continuations, and voice-preserving rewrites through focused Skills. It prioritizes friction before terminology, concrete examples before abstraction, decision consequences over information dumps, natural Arabic-English code-switching when present in the source voice, controlled humor, useful roughness, and open-loop endings. It also audits drafts for repetitive contrast formulas, generic thought-leadership language, decorative English, fake certainty, over-structured headings, and other patterns that make expert writing feel synthetic.",
+    "shortDescription": "Write narratives"
+  },
+  "keywords": [
+    "writing",
+    "social-posts",
+    "technical-writing",
+    "marketing",
+    "voice",
+    "storytelling",
+    "anti-slop"
+  ],
+  "license": "MIT",
+  "name": "conversational-narrative",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

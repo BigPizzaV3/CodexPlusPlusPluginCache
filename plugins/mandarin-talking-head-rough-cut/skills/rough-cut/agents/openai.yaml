@@ -1,0 +1,8 @@
+interface:
+  display_name: "中文口播智能粗剪"
+  short_description: "口播去废话、逻辑复查、字幕包装、音效与视觉滤镜的一体化流程"
+  brand_color: "#2E7D6E"
+  default_prompt: "使用 $rough-cut 把这条中文口播素材剪成逻辑流畅、带字幕并可直接审阅的成片。"
+
+policy:
+  allow_implicit_invocation: true

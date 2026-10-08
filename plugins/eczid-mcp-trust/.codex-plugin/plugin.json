@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "EcoCitizenz Ltd",
+    "url": "https://developers.ecocitizenz.com"
+  },
+  "description": "See what the MCP servers configured in a workspace expose: which servers are declared, how they launch, which environment key names look credential-shaped, and whether any ECZ-ID public proof reference exists. Inspection only: OBSERVED, never ENFORCED. Free.",
+  "homepage": "https://developers.ecocitizenz.com/mcp-trust/",
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this workspace for MCP trust evidence gaps and report the Review Priority.",
+      "What can the MCP servers in this workspace reach, and what has public proof?",
+      "Check the MCP configuration, launch commands, credential-shaped key names and local policy in this repository."
+    ],
+    "developerName": "EcoCitizenz Ltd",
+    "displayName": "ECZ-ID MCP Trust",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Review the MCP server configuration in a workspace: which servers are declared, how they launch, which environment key names look credential-shaped, local policy or allowlist evidence, and whether an ECZ-ID public proof reference exists. Inspection only. OBSERVED does not mean ENFORCED.",
+    "privacyPolicyURL": "https://developers.ecocitizenz.com/plugins/mcp-trust/privacy/",
+    "shortDescription": "Review MCP servers in a repo",
+    "supportURL": "https://developers.ecocitizenz.com/plugins/mcp-trust/support/",
+    "termsOfServiceURL": "https://developers.ecocitizenz.com/plugins/mcp-trust/terms/",
+    "websiteURL": "https://developers.ecocitizenz.com/mcp-trust/"
+  },
+  "keywords": [
+    "ecz-id",
+    "mcp",
+    "mcp-server",
+    "mcp-config",
+    "model-context-protocol",
+    "review",
+    "credential-shaped"
+  ],
+  "license": "MIT",
+  "name": "eczid-mcp-trust",
+  "repository": "https://github.com/Ecocitizenz/eczid-agent-plugins",
+  "skills": "./skills/",
+  "version": "0.1.1"
+}

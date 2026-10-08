@@ -1,0 +1,40 @@
+{
+  "author": {
+    "name": "David Schmidt / Zero Delta LLC"
+  },
+  "description": "One fresh, read-only consultation for material technical decisions in Codex CLI and Codex desktop.",
+  "interface": {
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Should we split this service into microservices?",
+      "Review this database migration plan.",
+      "Which API design is safer for this integration?"
+    ],
+    "developerName": "David Schmidt / Zero Delta LLC",
+    "displayName": "Codex Advisor",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Codex Advisor automatically adds a fresh, read-only second opinion when Codex identifies a material technical decision.\n\nStandard remains Terra/high for ordinary bounded architecture, interface, data-model, and generic-advisor decisions. Specialist remains GPT-6 Sol/high only when targeted evidence still leaves a cross-system design, compatibility or concurrency boundary, competing diagnosis, security or trust boundary, recovery, irreversible migration, or data-loss decision unresolved. Project importance, security adjacency, or an ordinary architecture question alone stays Standard. A separate advisor-astra role offers explicit-only Astra/high consultation for the most complex uses; it is never selected automatically, uses more Codex allowance, and remains subject to account and runtime availability.\n\nEvery consultation runs in a separate read-only, tool-free process. It cannot change your files, run commands, browse the web, or make decisions for you. You remain in control: Advisor does not implement, deploy, or perform final review.",
+    "privacyPolicyURL": "https://zerodelta.dev/advisor/privacy/",
+    "shortDescription": "Read-only technical advice",
+    "supportURL": "https://zerodelta.dev/advisor/support/",
+    "termsOfServiceURL": "https://zerodelta.dev/advisor/terms/",
+    "websiteURL": "https://zerodelta.dev/advisor/"
+  },
+  "keywords": [
+    "codex",
+    "advisor",
+    "architecture-review",
+    "second-opinion",
+    "decision-support",
+    "read-only"
+  ],
+  "license": "MIT",
+  "name": "advisor",
+  "skills": "./skills/",
+  "version": "1.4.6"
+}

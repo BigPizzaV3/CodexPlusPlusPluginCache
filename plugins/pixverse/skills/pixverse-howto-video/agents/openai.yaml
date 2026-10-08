@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Product Tutorials"
+  short_description: "Demonstrate real product steps"
+  default_prompt: "Use $pixverse-howto-video to make a concise product tutorial with correct actions and readable step labels."
+policy:
+  allow_implicit_invocation: true

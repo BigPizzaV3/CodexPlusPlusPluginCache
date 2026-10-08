@@ -1,0 +1,48 @@
+{
+  "author": {
+    "name": "Jes\u00fas David Angarita",
+    "url": "https://www.linkedin.com/in/ninquiet/"
+  },
+  "description": "Reusable Unity workflows for MCP setup, onboarding, feature work, bug investigation, health checks, and build validation.",
+  "interface": {
+    "brandColor": "#222C37",
+    "brandColorDark": "#C8D2DD",
+    "capabilities": [
+      "Unity",
+      "MCP",
+      "Project onboarding",
+      "Feature implementation",
+      "Bug investigation",
+      "Project health",
+      "Build validation",
+      "Testing",
+      "Editor workflows",
+      "Code review"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Help me inspect this Unity project before making changes.",
+      "Investigate this Unity bug and find the root cause with evidence.",
+      "Validate this Unity project for build readiness."
+    ],
+    "developerName": "Jes\u00fas David Angarita",
+    "displayName": "Unity Essentials",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Unity Essentials packages reusable Unity workflows for Codex. It helps users inspect unfamiliar Unity projects, choose and validate a Unity MCP bridge, implement features, investigate bugs, run health checks, and validate build readiness while respecting project architecture, serialized assets, testing limits, and Unity Editor safety boundaries.",
+    "shortDescription": "Work powerfully in Unity",
+    "websiteURL": "https://www.linkedin.com/in/ninquiet/"
+  },
+  "keywords": [
+    "unity",
+    "gamedev",
+    "mcp",
+    "debugging",
+    "build-validation",
+    "project-audit"
+  ],
+  "license": "MIT",
+  "name": "unity-workbench",
+  "skills": "./skills/",
+  "version": "0.1.3"
+}

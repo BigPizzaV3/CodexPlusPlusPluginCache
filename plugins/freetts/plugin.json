@@ -1,0 +1,52 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "freetts",
+  "version": "1.0.9",
+  "description": "Text to speech in 149 languages with 2,253 voices: MP3 links, voice suggestions, multi-voice dialogue, timed tracks with exact pauses, and speech to text.",
+  "author": {
+    "name": "Outline Technologies LLC",
+    "email": "info@freetts.org",
+    "url": "https://freetts.org"
+  },
+  "homepage": "https://freetts.org/developers/mcp",
+  "repository": "https://github.com/freetts/mcp",
+  "license": "MIT",
+  "keywords": [
+    "text to speech",
+    "tts",
+    "voice",
+    "audio",
+    "speech to text",
+    "dialogue",
+    "voiceover",
+    "accessibility"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "FreeTTS",
+        "shortDescription": "Text to speech, 149 languages",
+        "longDescription": "Turn any text into natural speech and get an MP3 link you can play or download.\n\nChoose from 2,253 voices in 149 languages and regional accents, or ask FreeTTS to suggest three voices for your language and purpose, from audiobooks and lessons to ads and podcasts.\n\nRecord a dialogue with a different voice for each speaker, build timed tracks with exact pauses, beeps and dings for presenters, actors, teachers and video voiceovers, and turn an audio link into text.\n\nSome features, such as HD voices, dialogue, timed tracks and transcription, work once you connect your FreeTTS account.",
+        "developerName": "Outline Technologies LLC",
+        "category": "Creativity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://freetts.org/developers/mcp",
+        "supportURL": "https://freetts.org/contact",
+        "privacyPolicyURL": "https://mcp.freetts.org/privacy",
+        "termsOfServiceURL": "https://freetts.org/terms",
+        "defaultPrompt": [
+          "Read this aloud with a warm British voice: Welcome to our spring newsletter.",
+          "Suggest three Spanish voices for a children's audiobook and play a sample of the best one.",
+          "Turn this into a two-voice dialogue between a teacher and a student about photosynthesis."
+        ],
+        "brandColor": "#10B981",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

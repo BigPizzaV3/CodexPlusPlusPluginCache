@@ -1,0 +1,9 @@
+interface:
+  display_name: Writing for Agents
+  short_description: Write documents agents consume
+  default_prompt: Use $writing-for-agents for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

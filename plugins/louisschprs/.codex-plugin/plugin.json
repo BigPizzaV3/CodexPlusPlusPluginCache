@@ -1,0 +1,31 @@
+{
+  "author": {
+    "name": "Louis Scheepers"
+  },
+  "description": "Personal reusable skills for ChatGPT and Agent Skills compatible agents.",
+  "interface": {
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Please review PR 34 create login screen"
+    ],
+    "developerName": "Fetchupstream",
+    "displayName": "louisschprs",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "A collection of personal reusable skills and workflows for ChatGPT and Agent Skills compatible CLI agents.",
+    "shortDescription": "Reusable workflows and skills",
+    "supportURL": "https://github.com/louisschprs/skills",
+    "websiteURL": "https://github.com/louisschprs/skills"
+  },
+  "keywords": [
+    "skills",
+    "agent-skills",
+    "personal",
+    "workflow"
+  ],
+  "license": "MIT",
+  "name": "louisschprs",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

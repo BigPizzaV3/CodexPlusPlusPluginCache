@@ -1,0 +1,27 @@
+{
+  "schema": "codex.powerbi.processRulePack.v1",
+  "id": "quote-to-order",
+  "process": "QuoteToOrder",
+  "displayName": "Quote to Order",
+  "kpiTerms": ["quote", "quotation", "order", "conversion", "sales"],
+  "objects": [
+    { "name": "Quote", "aliases": ["quote", "quotation"], "fields": [
+      { "name": "quoteId", "aliases": ["QuoteId", "QuotationId"], "required": true },
+      { "name": "customerId", "aliases": ["CustomerId", "AccountId"], "required": true },
+      { "name": "quoteDate", "aliases": ["QuoteDate", "CreatedOn"], "required": true },
+      { "name": "amount", "aliases": ["Amount", "QuoteAmount"], "required": false }
+    ] },
+    { "name": "SalesOrder", "aliases": ["salesorder", "order"], "fields": [
+      { "name": "orderId", "aliases": ["OrderId", "SalesOrderId"], "required": true },
+      { "name": "quoteId", "aliases": ["QuoteId", "QuotationId"], "required": false },
+      { "name": "orderDate", "aliases": ["OrderDate", "CreatedOn"], "required": true },
+      { "name": "amount", "aliases": ["Amount", "OrderAmount"], "required": false }
+    ] }
+  ],
+  "rules": [
+    { "id": "q2o.quote.customer.required", "type": "requiredField", "severity": "High", "object": "Quote", "field": "customerId", "description": "Quote is missing customer.", "ownerHint": "Sales operations owner", "recommendedAction": "Correct customer assignment before conversion reporting.", "releaseImpact": "No-Go" },
+    { "id": "q2o.quote.date.required", "type": "requiredField", "severity": "High", "object": "Quote", "field": "quoteDate", "description": "Quote is missing quote date.", "ownerHint": "Sales operations owner", "recommendedAction": "Backfill quote date.", "releaseImpact": "No-Go" },
+    { "id": "q2o.order.quote.orphan", "type": "orphan", "severity": "Medium", "object": "SalesOrder", "field": "quoteId", "parentObject": "Quote", "parentField": "quoteId", "description": "Sales order references missing quote.", "ownerHint": "Sales operations owner", "recommendedAction": "Confirm direct order or correct quote key.", "releaseImpact": "Warn" },
+    { "id": "q2o.quote.amount.nonnegative", "type": "nonNegative", "severity": "Medium", "object": "Quote", "field": "amount", "description": "Quote amount is negative.", "ownerHint": "Sales operations owner", "recommendedAction": "Confirm discount/credit handling.", "releaseImpact": "Warn" }
+  ]
+}

@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 3,
+  "coverageProfile": "full-supported-operations-v1",
+  "expectedSourceCounts": {
+    "operations": 95,
+    "firstWaveOperations": 17,
+    "secondWaveOperations": 43,
+    "thirdWaveOperations": 28,
+    "coveredOperations": 88,
+    "futureOperations": 0,
+    "excludedOperations": 7,
+    "messageTypes": 11,
+    "templateComponentTypes": 7,
+    "templateHeaderFormats": 6,
+    "templateButtonTypes": 10,
+    "webhookEvents": 38
+  },
+  "domains": {
+    "ycloud-integration-architect": [],
+    "ycloud-api-authentication": [],
+    "ycloud-whatsapp-messages": [
+      "whatsapp_message-send-directly",
+      "whatsapp_message-send",
+      "whatsapp_message-retrieve"
+    ],
+    "ycloud-whatsapp-media": [
+      "whatsapp_media-upload"
+    ],
+    "ycloud-whatsapp-templates": [
+      "whatsapp_template-create",
+      "whatsapp_template-list",
+      "whatsapp_template-retrieve-by-name-and-language",
+      "whatsapp_template-edit-by-name-and-language",
+      "whatsapp_template-delete-by-name",
+      "whatsapp_template-delete-by-name-and-language",
+      "whatsapp_template-analytics"
+    ],
+    "ycloud-webhook-endpoints": [
+      "webhook_endpoint-create",
+      "webhook_endpoint-list",
+      "webhook_endpoint-retrieve",
+      "webhook_endpoint-update",
+      "webhook_endpoint-delete",
+      "webhook_endpoint-rotate-secret"
+    ],
+    "ycloud-whatsapp-business-accounts": [
+      "whatsapp_business_account-list",
+      "whatsapp_business_account-retrieve",
+      "whatsapp_waba-retrieve-automatic-creative-optimizations",
+      "whatsapp_waba-update-automatic-creative-optimizations"
+    ],
+    "ycloud-whatsapp-phone-numbers": [
+      "whatsapp_phone_number-delete-business-username",
+      "whatsapp_phone_number-delete-contact-book-entry",
+      "whatsapp_phone_number-list",
+      "whatsapp_phone_number-register",
+      "whatsapp_phone_number-retrieve",
+      "whatsapp_phone_number-retrieve-business-username",
+      "whatsapp_phone_number-retrieve-business-username-suggestions",
+      "whatsapp_phone_number-retrieve-commerce-settings",
+      "whatsapp_phone_number-retrieve-profile",
+      "whatsapp_phone_number-retrieve-settings",
+      "whatsapp_phone_number-save-settings",
+      "whatsapp_phone_number-update-business-username",
+      "whatsapp_phone_number-update-commerce-settings",
+      "whatsapp_phone_number-update-displayName",
+      "whatsapp_phone_number-update-profile"
+    ],
+    "ycloud-whatsapp-groups": [
+      "whatsapp_group-approve-join-requests",
+      "whatsapp_group-create",
+      "whatsapp_group-delete",
+      "whatsapp_group-list",
+      "whatsapp_group-list-join-requests",
+      "whatsapp_group-reject-join-requests",
+      "whatsapp_group-remove-participants",
+      "whatsapp_group-reset-invite-link",
+      "whatsapp_group-retrieve",
+      "whatsapp_group-retrieve-invite-link",
+      "whatsapp_group-send-invite-link-message",
+      "whatsapp_group-update-settings"
+    ],
+    "ycloud-whatsapp-flows": [
+      "whatsapp_flow-create",
+      "whatsapp_flow-delete",
+      "whatsapp_flow-deprecate",
+      "whatsapp_flow-list",
+      "whatsapp_flow-preview",
+      "whatsapp_flow-publish",
+      "whatsapp_flow-retrieve",
+      "whatsapp_flow-update-metadata",
+      "whatsapp_flow-update-structure"
+    ],
+    "ycloud-whatsapp-inbound-messages": [
+      "whatsapp_inbound_message-mark-as-read",
+      "whatsapp_inbound_message-typing"
+    ],
+    "ycloud-balance": [
+      "balance-retrieve"
+    ],
+    "ycloud-contacts": [
+      "contact-attributes-list",
+      "contact-create",
+      "contact-delete",
+      "contact-list",
+      "contact-note-create",
+      "contact-note-delete",
+      "contact-note-update",
+      "contact-notes-list",
+      "contact-retrieve",
+      "contact-update"
+    ],
+    "ycloud-custom-events": [
+      "custom_events-create-definition",
+      "custom_events-create-property-definition",
+      "custom_events-retrieve-definition",
+      "custom_events-send-event",
+      "custom_events-update-definition",
+      "custom_events_delete-property-definition",
+      "custom_events_update-property-definition"
+    ],
+    "ycloud-unsubscribers": [
+      "unsubscriber-create",
+      "unsubscriber-delete-by-customer-and-channel",
+      "unsubscriber-list",
+      "unsubscriber-list-all-by-customer",
+      "unsubscriber-retrieve-by-customer-and-channel"
+    ],
+    "ycloud-whatsapp-calling": [
+      "whatsapp_call-accept",
+      "whatsapp_call-connect",
+      "whatsapp_call-download-media",
+      "whatsapp_call-pre-accept",
+      "whatsapp_call-reject",
+      "whatsapp_call-terminate"
+    ]
+  },
+  "secondWaveDomains": [
+    "ycloud-whatsapp-business-accounts",
+    "ycloud-whatsapp-phone-numbers",
+    "ycloud-whatsapp-groups",
+    "ycloud-whatsapp-flows",
+    "ycloud-whatsapp-inbound-messages",
+    "ycloud-balance"
+  ],
+  "thirdWaveDomains": [
+    "ycloud-contacts",
+    "ycloud-custom-events",
+    "ycloud-unsubscribers",
+    "ycloud-whatsapp-calling"
+  ],
+  "futureOperations": [],
+  "excludedByProductDecision": [
+    "email-send",
+    "sms-list",
+    "sms-send",
+    "verification-check",
+    "verification-send",
+    "voice-list",
+    "voice-send"
+  ],
+  "messageConditionalRules": [
+    {
+      "id": "message.recipient.at-least-one-with-precedence",
+      "kind": "atLeastOneWithPrecedence",
+      "fields": ["to", "recipient"],
+      "precedence": ["to", "recipient"],
+      "sourcePointer": "#/components/schemas/WhatsappMessageSendRequest/description"
+    },
+    {
+      "id": "message.payload.matches-type",
+      "kind": "discriminatorPayload",
+      "discriminator": "type",
+      "payloadFields": [
+        "template", "text", "image", "audio", "video", "document",
+        "sticker", "location", "interactive", "contacts", "reaction"
+      ],
+      "sourcePointer": "#/components/schemas/WhatsappMessageSendRequest/properties"
+    },
+    {
+      "id": "message.queued-only-filters",
+      "kind": "operationFields",
+      "fields": ["filterBlocked", "filterUnsubscribed"],
+      "allowedOperations": ["whatsapp_message-send"],
+      "sourcePointer": "#/components/schemas/WhatsappMessageSendRequest/properties/filterBlocked/description"
+    },
+    {
+      "id": "message.direct-send-options",
+      "kind": "operationFields",
+      "fields": ["category", "ttlSeconds"],
+      "allowedOperations": ["whatsapp_message-send-directly"],
+      "sourcePointer": "#/components/schemas/WhatsappMessageSendRequest/properties/ttlSeconds/description"
+    }
+  ],
+  "crosscuttingCapabilities": [
+    {
+      "capabilityId": "crosscutting:api-authentication",
+      "kind": "authentication",
+      "owner": "ycloud-api-authentication",
+      "domain": "authentication",
+      "requiredSurfaces": ["backend", "tests"]
+    },
+    {
+      "capabilityId": "crosscutting:webhook-receiver",
+      "kind": "webhook-receiver",
+      "owner": "ycloud-webhook-endpoints",
+      "domain": "webhook-receiver",
+      "requiredSurfaces": ["backend", "tests"]
+    }
+  ],
+  "requestFixtureOverrides": {
+    "whatsapp_template-create": {
+      "wabaId": "<WABA_ID>",
+      "name": "order_confirmation",
+      "language": "en_US",
+      "category": "UTILITY",
+      "components": [
+        {
+          "type": "BODY",
+          "text": "Your order {{1}} for a total of {{2}} is confirmed. The expected delivery is {{3}}.",
+          "example": {
+            "body_text": [
+              [
+                "ORDER-5555",
+                "99 USD",
+                "February 25, 2023"
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "webhookPayloadOverrides": {
+    "whatsapp.message.updated": {
+      "payloadCoverage": "shared",
+      "payloadProperties": ["whatsappMessage", "whatsappGroup"],
+      "reason": "The Event schema permits both individual-message and group-message status payloads."
+    },
+    "whatsapp.smb.history": {
+      "payloadCoverage": "unmodeled",
+      "reason": "EventType declares the event but Event has no matching payload property."
+    },
+    "whatsapp.smb.message.echoes": {
+      "payloadCoverage": "unmodeled",
+      "reason": "EventType declares the event but Event has no matching payload property."
+    },
+    "whatsapp.call.connect": {
+      "payloadCoverage": "unmodeled",
+      "reason": "EventType declares the event but Event has no matching payload property."
+    },
+    "whatsapp.call.terminate": {
+      "payloadCoverage": "unmodeled",
+      "reason": "EventType declares the event but Event has no matching payload property."
+    },
+    "whatsapp.call.status.updated": {
+      "payloadCoverage": "unmodeled",
+      "reason": "EventType declares the event but Event has no matching payload property."
+    },
+    "whatsapp.flow.status_change": {
+      "payloadCoverage": "unmodeled",
+      "reason": "EventType declares the event but Event has no matching payload property."
+    }
+  },
+  "runtimeSemantics": [
+    {
+      "id": "authentication.api-key-header",
+      "authority": "provider-contract",
+      "kind": "authentication",
+      "appliesTo": ["*"] ,
+      "value": "Use X-API-Key on a trusted server.",
+      "sourceRefs": ["authentication"]
+    },
+    {
+      "id": "errors.standard-envelope",
+      "authority": "provider-contract",
+      "kind": "errors",
+      "appliesTo": ["*"] ,
+      "value": "Failures use the reviewed error envelope and may carry error.requestId.",
+      "sourceRefs": ["errors"]
+    },
+    {
+      "id": "responses.request-id",
+      "authority": "provider-contract",
+      "kind": "requestIds",
+      "appliesTo": ["*"] ,
+      "value": "Preserve YCloud-Request-ID for correlation.",
+      "sourceRefs": ["request-ids"]
+    },
+    {
+      "id": "messages.accepted-is-not-final",
+      "authority": "provider-contract",
+      "kind": "messageLifecycle",
+      "appliesTo": ["whatsapp_message-send", "whatsapp_message-send-directly", "whatsapp_message-retrieve"],
+      "value": "Submission acceptance is distinct from asynchronous final delivery state.",
+      "sourceRefs": ["message-status", "message-sending-guide"]
+    },
+    {
+      "id": "webhooks.unknown-event-path",
+      "authority": "developer-kit-policy",
+      "kind": "compatibility",
+      "appliesTo": ["webhook-receiver"],
+      "value": "Acknowledge a valid common envelope and route unfamiliar event types to an observable unsupported-event path.",
+      "sourceRefs": ["versioning", "webhook-guide-v2"]
+    }
+  ]
+}

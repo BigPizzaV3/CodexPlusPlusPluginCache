@@ -1,0 +1,75 @@
+{
+  "schema": "codex.powerbi.rules.v1",
+  "dax": [
+    {
+      "id": "dax.filter-all",
+      "enabled": true,
+      "severity": "High",
+      "category": "DAX Performance",
+      "title": "FILTER over ALL pattern",
+      "pattern": "\\bFILTER\\s*\\(\\s*ALL\\s*\\(",
+      "detail": "This pattern can be expensive on large models. Review whether KEEPFILTERS, REMOVEFILTERS, or a narrower table expression is possible."
+    },
+    {
+      "id": "dax.volatile-time",
+      "enabled": true,
+      "severity": "Medium",
+      "category": "Refresh Determinism",
+      "title": "Volatile date/time function",
+      "pattern": "\\bTODAY\\s*\\(|\\bNOW\\s*\\(",
+      "detail": "TODAY/NOW can make refresh and testing behavior time-dependent. Consider a governed date table or refresh parameter."
+    },
+    {
+      "id": "dax.earlier",
+      "enabled": true,
+      "severity": "Medium",
+      "category": "DAX Maintainability",
+      "title": "EARLIER usage",
+      "pattern": "\\bEARLIER\\s*\\(",
+      "detail": "EARLIER often indicates row-context complexity. Consider variables or a clearer calculation pattern."
+    },
+    {
+      "id": "dax.userelationship",
+      "enabled": true,
+      "severity": "Low",
+      "category": "Model Semantics",
+      "title": "Inactive relationship activation",
+      "pattern": "\\bUSERELATIONSHIP\\s*\\(",
+      "detail": "USERELATIONSHIP is valid, but report consumers may not understand the active date or role-playing dimension behavior."
+    }
+  ],
+  "powerQuery": [
+    {
+      "id": "pq.local-file",
+      "enabled": true,
+      "severity": "Medium",
+      "category": "Data Source Governance",
+      "title": "Local file dependency",
+      "pattern": "File\\.Contents\\s*\\(",
+      "detail": "Local file paths can break refresh in shared workspaces. Consider parameters, gateways, SharePoint, OneLake, or governed storage."
+    },
+    {
+      "id": "pq.table-buffer",
+      "enabled": true,
+      "severity": "Low",
+      "category": "Power Query Performance",
+      "title": "Table.Buffer usage",
+      "pattern": "Table\\.Buffer\\s*\\(",
+      "detail": "Table.Buffer can help in narrow cases but can also increase memory pressure and block folding."
+    }
+  ],
+  "thresholds": {
+    "longMeasureLines": 20,
+    "highRiskScore": 9,
+    "mediumRiskScore": 4
+  },
+  "releaseGate": {
+    "blockOnOpenP0": true,
+    "warnOnOpenP1": true,
+    "warnOnPendingSemanticTests": true,
+    "blockOnPendingSemanticTests": false,
+    "warnOnLiveUnavailable": true,
+    "blockOnLiveUnavailable": false,
+    "machineReadableResultsRequired": true
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "author": {
+    "name": "Shashank SN",
+    "url": "https://github.com/shashank-sn"
+  },
+  "description": "A careful writing-review workflow for protecting voice and removing generic AI patterns.",
+  "homepage": "https://github.com/shashank-sn/holdyourvoice",
+  "interface": {
+    "brandColor": "#1F2937",
+    "brandColorDark": "#C8D2E0",
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this draft for generic AI patterns while preserving its meaning and constraints.",
+      "Rewrite this draft in the style of these examples. Show a short review first, then the revision.",
+      "Check this final draft for visible formatting, unsupported claims, and wording that feels unlike the supplied examples."
+    ],
+    "developerName": "Shashank SN",
+    "displayName": "Hold Your Voice",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Hold Your Voice helps you revise drafts without flattening the way you write. Share a draft and a few examples of your voice; it flags generic phrasing, protects your constraints, and improves only what needs changing.",
+    "privacyPolicyURL": "https://github.com/shashank-sn/holdyourvoice/blob/main/docs/wiki/Privacy-and-Data-Rights.md",
+    "shortDescription": "Make AI writing sound like you",
+    "supportURL": "https://github.com/shashank-sn/holdyourvoice/issues",
+    "termsOfServiceURL": "https://github.com/shashank-sn/holdyourvoice/blob/main/docs/TERMS.md",
+    "websiteURL": "https://github.com/shashank-sn/holdyourvoice"
+  },
+  "keywords": [
+    "writing",
+    "voice",
+    "editing",
+    "privacy"
+  ],
+  "license": "MIT",
+  "name": "hold-your-voice",
+  "repository": "https://github.com/shashank-sn/holdyourvoice",
+  "skills": "./skills/",
+  "version": "4.0.2"
+}

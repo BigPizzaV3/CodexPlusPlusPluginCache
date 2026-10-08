@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Integrations & networking"
+  short_description: "External APIs, webhooks, timeouts and network failures"
+  default_prompt: "Use $vibe-integrations to audit the selected integrations & networking boundary."

@@ -1,0 +1,33 @@
+# `teach` skill — Prerequisite Bloom Gate
+
+Loaded on demand by `teach` skill Phase 1 at a module-start boundary. The verdict is computed by `bodhi-state gate-check`; this file says how to act on it. `--tested-bloom` values written here ratchet and feed the gate (`blooms-taxonomy` KB).
+
+The gate's trigger detection and per-prerequisite verdicts are computed by `"<BODHIKIT_PLUGIN_ROOT>/scripts/bodhi-state" --project <project> gate-check` — the canonical logic (trigger model, recency rule, legacy fallthrough, apply-equivalent fallthrough) is documented in the `state-ops` KB's *Prerequisite gate* section. Do not re-derive it in prose.
+
+Skip the gate only when the learner themselves typed a topic (`teach` skill with request context `<topic>` with no `--invoked-from=`) — an explicit request overrides the gate. A concept passed by a caller via `--invoked-from=` (`continue` skill's next module, a never-taught seed) is orchestration context, not an override: run the check. The script decides whether it fires; a continuation session costs one read.
+
+Otherwise, run:
+
+```
+"<BODHIKIT_PLUGIN_ROOT>/scripts/bodhi-state" --project <project> gate-check --prereqs "<declared list>"
+```
+
+passing `--prereqs` from the prior module's `**Prerequisites for next module:**` line in `plan/phase-{N}.md` when it exists (omit the flag when it does not; the script falls back to the tracked `previousModule`, or declines to gate when neither exists — it never guesses).
+
+Act on the verdict JSON:
+
+- **`fires: false`** — continuation session or first-ever project. Proceed to Phase 2.
+- **`verdict: "clear"`** — proceed to Phase 2, no ceremony.
+- **`staleReconfirm` non-empty** — for each stale concept, ONE quick reconfirm before proceeding, shaped by the row's `reason`:
+  - `single-evidence` / `stale` — one question at the apply rung. Clean answer → `"<BODHIKIT_PLUGIN_ROOT>/scripts/bodhi-state" --project <project> record-review --concept "<c>" --result correct --tested-bloom 3 --source teach` and continue.
+  - `no-applied-evidence` — the learner has explained and recalled this well but has never been seen building with it (or not since the last miss). The reconfirm is a few lines of code they write and run, not a question: "You have explained this well; show me once in code." Runs → the same call **with `--applied`** (`state-ops` KB: the flag is the gate's only evidence for building). Say what the flag is for in one line; never call it a grade.
+  - Missed either way → record it too (`--result incorrect --tested-bloom 3 --source teach` — a demonstrated forgetting event belongs in the schedule, per the `spaced-repetition` KB), then treat as a gap below.
+- **`gaps` non-empty** — surface as an **offer, never an auto-block**. The learner decides:
+
+  > "Before we move into `<new module>`, [one earlier concept / a few earlier concepts] might still need more time to root: `<concept>` — [what they can do with it today, and what the new module will ask of it]... Revisit one first, carry on into `<new module>`, or end here?"
+
+  Name the gap in outcome terms, not as a level. The learner is deciding whether to press on; "you can explain what it does, but the next module asks you to debug it" is a decision they can act on, where "(Bloom 2)" is a grade delivered at a moment of friction.
+
+  If the verdict JSON reports `prerequisiteSource: "prior-module"` (no declared list), add: "I am reading the prior module's concept list because the plan does not declare specific prerequisites — say if any of these do not apply and I will skip them."
+
+  Learner choices: **revisit** (re-enter Phase 2 on that prerequisite first), **carry on** (record `**Prerequisite gate carry-on:** <concepts>` in this session's `progress.md` entry so the next evaluation sees the conscious choice), **skip an irrelevant item** (per-session dismissal — no state change), or **end the session**.

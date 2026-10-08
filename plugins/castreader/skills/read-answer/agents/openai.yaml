@@ -1,0 +1,4 @@
+interface:
+  display_name: "Read a Codex Answer"
+  short_description: "Read formatted answers with synchronized highlighting"
+  default_prompt: "Use $read-answer to write a short English answer about how to stay focused while reading, then read that answer aloud in the right-side page with synchronized word highlighting."

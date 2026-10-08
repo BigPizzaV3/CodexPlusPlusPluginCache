@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Michal Cilek",
+    "url": "https://github.com/michalcilek"
+  },
+  "description": "Automate iOS TestFlight releases from Codex using xcodebuild and the App Store Connect API.",
+  "homepage": "https://github.com/michalcilek/codex-testflight-release",
+  "keywords": [
+    "codex",
+    "ios",
+    "testflight",
+    "xcode",
+    "app-store-connect"
+  ],
+  "license": "MIT",
+  "name": "codex-testflight-release",
+  "repository": "https://github.com/michalcilek/codex-testflight-release",
+  "version": "0.1.1"
+}

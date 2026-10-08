@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/baseline-manifest-0.1.schema.json",
+  "title": "RAGOps accepted baseline manifest 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "scenario_id", "scenario_digest", "policy_kind", "bundle",
+    "policy", "provenance", "acceptance"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "scenario_id": {"type": "string", "minLength": 1},
+    "scenario_digest": {"type": "string", "minLength": 1},
+    "policy_kind": {"enum": ["statistical", "sequential"]},
+    "bundle": {"$ref": "#/$defs/artifact"},
+    "policy": {"$ref": "#/$defs/artifact"},
+    "provenance": {"$ref": "#/$defs/provenance"},
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "accepted_at"],
+      "properties": {
+        "owner": {"type": "string", "minLength": 1},
+        "accepted_at": {"type": "string", "format": "date-time"}
+      }
+    }
+  },
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "bytes"],
+      "properties": {
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataset", "evidence", "evaluator", "application", "model", "model_config", "environment"
+      ],
+      "properties": {
+        "dataset": {"type": "string", "minLength": 1},
+        "evidence": {"type": "string", "minLength": 1},
+        "evaluator": {"type": "string", "minLength": 1},
+        "application": {"type": "string", "minLength": 1},
+        "model": {"type": "string", "minLength": 1},
+        "model_config": {"type": "string", "minLength": 1},
+        "environment": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

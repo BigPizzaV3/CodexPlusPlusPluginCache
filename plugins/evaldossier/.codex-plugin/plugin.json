@@ -1,0 +1,41 @@
+{
+  "author": {
+    "email": "contact@hrevn.com",
+    "name": "Miguel Herrero",
+    "url": "https://hrevn.com"
+  },
+  "description": "Offline verification and fixed synthetic conformance for portable signed EvalDossier dossiers.",
+  "homepage": "https://github.com/miguel-herrero-systems/evaldossier",
+  "interface": {
+    "capabilities": [
+      "Check signed evaluation dossier integrity offline",
+      "Report the declared evidentiary basis of a verified dossier",
+      "Run the fixed synthetic conformance workflow"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Check this incoming signed dossier locally before I rely on it.",
+      "Show me the evidentiary basis recorded for this result before I treat it as established.",
+      "Run an offline dossier check and explain what the result establishes\u2014and what it does not."
+    ],
+    "developerName": "Miguel Herrero",
+    "displayName": "EvalDossier",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "EvalDossier checks incoming signed evaluation dossiers locally before you rely on them. It checks schema conformance, integrity, signatures, and caller-supplied audience and nonce pins, then reports the result\u2019s declared evidentiary basis without turning model judgment into formal proof. It does not determine whether work was done well, establish truth or authority, or authorize payment. It requires no network access, accounts, credentials, external evaluators, or payment or settlement actions.",
+    "shortDescription": "Check signed dossier integrity",
+    "supportURL": "https://github.com/miguel-herrero-systems/evaldossier/issues",
+    "websiteURL": "https://hrevn.com/en/evaldossier/"
+  },
+  "keywords": [
+    "ai-agents",
+    "evaluation",
+    "attestations",
+    "offline-verification"
+  ],
+  "license": "MIT",
+  "name": "evaldossier",
+  "repository": "https://github.com/miguel-herrero-systems/evaldossier",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

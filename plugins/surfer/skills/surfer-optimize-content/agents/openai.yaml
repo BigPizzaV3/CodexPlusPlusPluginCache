@@ -1,0 +1,11 @@
+interface:
+  display_name: "Optimize Surfer Content"
+  short_description: "Raise a page's SEO and AI Search score"
+  default_prompt: "Use $surfer-optimize-content to improve the SEO and AI Search score of [URL or draft]."
+dependencies:
+  tools:
+    - type: mcp
+      value: surfer
+      description: Surfer MCP server for content editors, guidelines, scores, and recommendations
+      transport: streamable_http
+      url: https://mcp.surferseo.com/mcp

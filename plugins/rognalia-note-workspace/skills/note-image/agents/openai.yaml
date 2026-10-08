@@ -1,0 +1,5 @@
+interface:
+  display_name: "note Workspace 画像制作"
+  short_description: "確定記事から見出し画像と希望済みの差し絵を一枚ずつ制作・検査します"
+policy:
+  allow_implicit_invocation: true

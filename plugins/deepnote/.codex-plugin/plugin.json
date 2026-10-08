@@ -1,0 +1,48 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Deepnote, inc.",
+    "url": "https://deepnote.com"
+  },
+  "description": "Bring your Deepnote workspace into Codex. Search your workspace, trigger analytical workflows across 60+ data connectors, and use the output in Codex. No SQL, R, or Python knowledge required with the help of OpenAI models.\n\nWith Deepnote MCP, you can:\n\n- Search across your projects, notebooks, and integrations\n- Run an end-to-end notebook\n- Pull the latest result from the notebook runs\n- See scheduled runs in the workspace\n\nAll this while respecting your Deepnote workspace\u2019s permissions. Note: this MCP requires an active Deepnote account and a Deepnote API token (https://deepnote.com/docs/deepnote-api).",
+  "homepage": "https://deepnote.com",
+  "interface": {
+    "brandColor": "#3793EF",
+    "brandColorDark": "#3793EF",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Data & Analytics",
+    "composerIcon": "./assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Summarize my Deepnote workspace and recent notebook activity",
+      "Explore active data connections to my Deepnote workspace",
+      "Create a notebook exploring S&P 500 vs. Nasdaq gains over the last 5 years"
+    ],
+    "developerName": "Deepnote, inc.",
+    "displayName": "Deepnote",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
+    "longDescription": "Deepnote gives teams a collaborative workspace for notebooks, SQL, apps, and data workflows. This plugin helps OpenAI work with connected Deepnote projects, inspect and run notebooks, and turn workspace context into useful analysis and shareable results.",
+    "privacyPolicyURL": "https://deepnote.com/privacy",
+    "screenshots": [],
+    "shortDescription": "Run data workflows with agents",
+    "termsOfServiceURL": "https://deepnote.com/terms",
+    "websiteURL": "https://deepnote.com/"
+  },
+  "keywords": [
+    "deepnote",
+    "chatgpt-app",
+    "openai",
+    "notebooks",
+    "data",
+    "analytics"
+  ],
+  "license": "Apache-2.0",
+  "name": "deepnote",
+  "repository": "https://github.com/openai/plugins/tree/main/plugins/deepnote",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

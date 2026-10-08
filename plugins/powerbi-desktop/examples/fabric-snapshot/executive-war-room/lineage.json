@@ -1,0 +1,3 @@
+[
+  { "from": "dataset-exec", "to": "report-board", "type": "FeedsReport" }
+]

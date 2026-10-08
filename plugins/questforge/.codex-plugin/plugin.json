@@ -1,0 +1,52 @@
+{
+  "author": {
+    "email": "info@adrianmelic.com",
+    "name": "Adri\u00e1n Melic",
+    "url": "https://github.com/adrianmelic"
+  },
+  "description": "Play an open-ended 5E-compatible fantasy RPG inside Codex with visible dice, portable campaigns, optional cloud saves, and generated scenes.",
+  "homepage": "https://adrianmelic.com/questforge",
+  "interface": {
+    "brandColor": "#DFA64A",
+    "brandColorDark": "#DFA64A",
+    "capabilities": [
+      "Interactive",
+      "Write",
+      "Rules Lookup",
+      "Campaign Memory",
+      "Portable Cloud Saves",
+      "Turn-Based Combat",
+      "Rollback Checkpoints",
+      "Image Generation"
+    ],
+    "category": "Entertainment",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "I want to play. Create a quick hero and begin.",
+      "Guide me through creating a hero, then begin.",
+      "Continue my latest Questforge campaign."
+    ],
+    "developerName": "Adri\u00e1n Melic",
+    "displayName": "Questforge",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Say anything and let the world keep up. Questforge turns a conversation into an original 5E-compatible fantasy campaign with transparent dice, durable character and world state, combat, inventory, advancement, checkpoints, and failure-forward play. Campaigns can use verified local saves, portable ZIP exports, and opt-in synchronization through a user-selected writable storage connector. Static generated scenes can appear in the conversation; writable local Codex workspaces can also add a chronological gallery, interactive 360 POV viewers, and optional ambience.",
+    "privacyPolicyURL": "https://adrianmelic.com/privacy-policy",
+    "shortDescription": "Open-ended fantasy RPG",
+    "termsOfServiceURL": "https://adrianmelic.com/terms-of-service",
+    "websiteURL": "https://adrianmelic.com/questforge"
+  },
+  "keywords": [
+    "5e",
+    "fantasy-rpg",
+    "campaigns",
+    "storytelling",
+    "dice",
+    "image-generation",
+    "cloud-saves"
+  ],
+  "license": "MIT",
+  "name": "questforge",
+  "repository": "https://github.com/adrianmelic/codex-questforge",
+  "skills": "./skills/",
+  "version": "1.3.1"
+}

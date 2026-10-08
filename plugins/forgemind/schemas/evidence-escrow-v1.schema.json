@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rweisssieker-xp/RW-Forgemind-Codex-Plugin/schemas/evidence-escrow-v1.schema.json",
+  "title": "ForgeMind evidence escrow v1",
+  "type": "object",
+  "required": ["schemaVersion", "protocol", "id", "custody", "contractId", "status", "digest"],
+  "properties": { "schemaVersion": { "const": 1 }, "protocol": { "enum": ["forgemind-evidence-escrow-v1", "forgemind-evidence-escrow-evaluation-v1", "forgemind-evidence-escrow-receipt-v1"] }, "id": { "type": "string" }, "custody": { "const": "evidence-only-no-funds" }, "contractId": { "type": "string" }, "status": { "enum": ["held", "releasable", "released"] }, "digest": { "$ref": "#/$defs/digest" } },
+  "$defs": { "digest": { "type": "object", "required": ["algorithm", "value"], "properties": { "algorithm": { "const": "sha256" }, "value": { "type": "string", "pattern": "^[a-f0-9]{64}$" } } } },
+  "additionalProperties": true
+}

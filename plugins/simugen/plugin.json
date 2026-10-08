@@ -1,0 +1,48 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Sam McNab",
+    "url": "https://github.com/smcnab1"
+  },
+  "description": "Create realistic clinical simulation scenarios for healthcare education.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [
+          "Generate clinical simulation scenarios",
+          "Design scenario progression",
+          "Create faculty guidance",
+          "Create debriefing prompts"
+        ],
+        "category": "Education & Research",
+        "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+        "defaultPrompt": [
+          "Create a paramedic simulation scenario",
+          "Create a nursing simulation scenario",
+          "Create a paediatric emergency scenario"
+        ],
+        "developerName": "Sam McNab",
+        "displayName": "SimuGen",
+        "logo": "./.codex-plugin/assets/logo.png",
+        "longDescription": "Create structured healthcare simulation scenarios with realistic clinical presentations, observations, scenario progression, faculty guidance and debriefing prompts.",
+        "privacyPolicyURL": "https://smcnab1.github.io/SimuGen/privacy/",
+        "shortDescription": "Clinical simulation scenarios",
+        "supportURL": "https://github.com/smcnab1/SimuGen/issues",
+        "termsOfServiceURL": "https://smcnab1.github.io/SimuGen/terms/",
+        "websiteURL": "https://smcnab1.github.io/SimuGen/"
+      }
+    }
+  },
+  "homepage": "https://smcnab1.github.io/SimuGen/",
+  "keywords": [
+    "healthcare",
+    "simulation",
+    "clinical-education",
+    "scenario-design",
+    "medical-education"
+  ],
+  "license": "MIT",
+  "name": "simugen",
+  "repository": "https://github.com/smcnab1/SimuGen",
+  "version": "1.0.0"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Verification"
+  short_description: "Independent, evidence-based code verification"
+  default_prompt: "Use $code-verification to independently review and test this code against its requirements and report evidence without fixing it."

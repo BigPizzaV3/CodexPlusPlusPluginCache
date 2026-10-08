@@ -1,0 +1,6 @@
+{
+  "schema": "game-room.opening-schedule.v1",
+  "roomId": "__ROOM_ID__",
+  "primaryArrival": {"openingId": "", "exception": ""},
+  "openings": []
+}

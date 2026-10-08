@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/report-0.2.schema.json",
+  "title": "RAGOps comparison report 0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["report_version", "scenario_id", "passed", "baseline_passed", "candidate_passed", "deltas", "failed_gates", "baseline", "candidate"],
+  "properties": {
+    "report_version": {"const": "0.2"},
+    "scenario_id": {"type": "string"},
+    "passed": {"type": "boolean"},
+    "baseline_passed": {"type": "boolean"},
+    "candidate_passed": {"type": "boolean"},
+    "deltas": {"type": "object", "additionalProperties": {"type": "number"}},
+    "failed_gates": {"type": "array", "items": {"type": "string"}},
+    "baseline": {"type": "object"},
+    "candidate": {"type": "object"}
+  }
+}

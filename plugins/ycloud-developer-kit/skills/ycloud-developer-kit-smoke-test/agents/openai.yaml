@@ -1,0 +1,6 @@
+interface:
+  display_name: "YCloud Developer Kit Smoke Test"
+  short_description: "Verify YCloud Developer Kit installation safely."
+  default_prompt: "Use $ycloud-developer-kit-smoke-test to verify the local Plugin installation."
+policy:
+  allow_implicit_invocation: true

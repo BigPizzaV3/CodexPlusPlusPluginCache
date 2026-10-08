@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 1254 1254">
+  <defs>
+    <clipPath id="tileClip">
+      <rect width="1254" height="1254" rx="260"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#tileClip)">
+    <g transform="matrix(1.2615694165 0 0 1.2258064516 -164.0040241449 -131.1612903226)">
+      <path fill="#a358f1" d="M594 290H663V360C933 378 1124 592 1124 852V1042C1124 1091 1085 1130 1036 1130H218C169 1130 130 1091 130 1042V852C130 592 321 378 594 360V290Z"/>
+      <circle cx="628" cy="201" r="94" fill="#a358f1"/>
+      <path fill="#07060d" d="M248 847C248 656 416 512 628 512C839 512 1006 656 1006 847V891C1006 940 966 980 917 980H337C288 980 248 940 248 891V847Z"/>
+      <rect x="419" y="680" width="112" height="210" rx="56" fill="#fff"/>
+      <rect x="725" y="680" width="112" height="210" rx="56" fill="#fff"/>
+    </g>
+  </g>
+</svg>

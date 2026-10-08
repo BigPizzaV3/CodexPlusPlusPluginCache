@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Vitor Hugo Alves Ferreira",
+    "url": "https://github.com/vitorhugo-dotnet"
+  },
+  "description": "Build, compile, and validate complex legacy iReport and JasperReports 2.x JRXML reports.",
+  "homepage": "https://github.com/vitorhugo-dotnet/jasper-jrxml-claude-skill",
+  "interface": {
+    "brandColor": "#F97316",
+    "brandColorDark": "#F97316",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Create a JasperReports 2.x JRXML form from an official PDF.",
+      "Compile this legacy JRXML with the project's JDK 8 dependencies.",
+      "Diagnose this JRValidationException without modernizing the schema."
+    ],
+    "developerName": "Vitor Hugo Alves Ferreira",
+    "displayName": "Legacy JRXML Toolkit",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Create, inspect, compile, and validate dense legacy iReport and JasperReports 2.x JRXML reports without silently introducing incompatible modern syntax.",
+    "privacyPolicyURL": "https://github.com/vitorhugo-dotnet/jasper-jrxml-claude-skill/blob/main/PRIVACY.md",
+    "shortDescription": "Build legacy JRXML",
+    "websiteURL": "https://github.com/vitorhugo-dotnet/jasper-jrxml-claude-skill"
+  },
+  "keywords": [
+    "jasperreports",
+    "ireport",
+    "jrxml",
+    "legacy-java",
+    "reporting",
+    "pdf-forms"
+  ],
+  "license": "MIT",
+  "name": "legacy-jrxml-toolkit",
+  "repository": "https://github.com/vitorhugo-dotnet/jasper-jrxml-claude-skill",
+  "skills": "./skills/",
+  "version": "1.0.5"
+}

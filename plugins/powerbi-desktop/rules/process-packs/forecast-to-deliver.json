@@ -1,0 +1,28 @@
+{
+  "schema": "codex.powerbi.processRulePack.v1",
+  "id": "forecast-to-deliver",
+  "process": "ForecastToDeliver",
+  "displayName": "Forecast to Deliver",
+  "kpiTerms": ["forecast", "demand", "delivery", "backlog", "commit", "plan"],
+  "objects": [
+    { "name": "Forecast", "aliases": ["forecast", "demandforecast"], "fields": [
+      { "name": "forecastId", "aliases": ["ForecastId", "VersionId"], "required": true },
+      { "name": "customerId", "aliases": ["CustomerId", "AccountId"], "required": false },
+      { "name": "productId", "aliases": ["ProductId", "MaterialId", "ItemId"], "required": true },
+      { "name": "forecastDate", "aliases": ["ForecastDate", "AsOfDate"], "required": true },
+      { "name": "quantity", "aliases": ["Quantity", "ForecastQuantity"], "required": false }
+    ] },
+    { "name": "DeliveryCommit", "aliases": ["deliverycommit", "commit", "delivery"], "fields": [
+      { "name": "commitId", "aliases": ["CommitId", "DeliveryId"], "required": true },
+      { "name": "productId", "aliases": ["ProductId", "MaterialId", "ItemId"], "required": true },
+      { "name": "commitDate", "aliases": ["CommitDate", "DeliveryDate"], "required": true },
+      { "name": "quantity", "aliases": ["Quantity", "CommitQuantity"], "required": false }
+    ] }
+  ],
+  "rules": [
+    { "id": "f2d.forecast.product.required", "type": "requiredField", "severity": "High", "object": "Forecast", "field": "productId", "description": "Forecast row is missing product.", "ownerHint": "Planning owner", "recommendedAction": "Correct product mapping before forecast accuracy reporting.", "releaseImpact": "No-Go" },
+    { "id": "f2d.forecast.date.required", "type": "requiredField", "severity": "High", "object": "Forecast", "field": "forecastDate", "description": "Forecast row is missing forecast date.", "ownerHint": "Planning owner", "recommendedAction": "Backfill forecast date or exclude row from forecast-version analysis.", "releaseImpact": "No-Go" },
+    { "id": "f2d.forecast.quantity.nonnegative", "type": "nonNegative", "severity": "Medium", "object": "Forecast", "field": "quantity", "description": "Forecast quantity is negative.", "ownerHint": "Planning owner", "recommendedAction": "Confirm cancellation or return treatment.", "releaseImpact": "Warn" },
+    { "id": "f2d.commit.product.required", "type": "requiredField", "severity": "High", "object": "DeliveryCommit", "field": "productId", "description": "Delivery commit is missing product.", "ownerHint": "Supply chain owner", "recommendedAction": "Correct product mapping before delivery reliability reporting.", "releaseImpact": "No-Go" }
+  ]
+}

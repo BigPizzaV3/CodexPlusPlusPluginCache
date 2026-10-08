@@ -1,0 +1,123 @@
+{
+  "aihero": {
+    "repository": "https://github.com/mattpocock/skills",
+    "commit": "3cca18b368ae95cdbdebbff572ccafa662551015",
+    "skill_count": 37,
+    "skills": [
+      "ask-matt",
+      "code-review",
+      "codebase-design",
+      "diagnosing-bugs",
+      "domain-modeling",
+      "grill-with-docs",
+      "implement",
+      "improve-codebase-architecture",
+      "prototype",
+      "research",
+      "resolving-merge-conflicts",
+      "setup-matt-pocock-skills",
+      "tdd",
+      "to-spec",
+      "to-tickets",
+      "triage",
+      "wayfinder",
+      "wizard",
+      "claude-handoff",
+      "implement-spec",
+      "loop-me",
+      "retro",
+      "setup-ts-deep-modules",
+      "writing-beats",
+      "writing-fragments",
+      "writing-shape",
+      "git-guardrails-claude-code",
+      "migrate-to-shoehorn",
+      "scaffold-exercises",
+      "setup-pre-commit",
+      "grill-me",
+      "grilling",
+      "handoff",
+      "teach",
+      "to-questionnaire",
+      "wait-what",
+      "writing-for-agents"
+    ]
+  },
+  "ponytail": {
+    "repository": "https://github.com/DietrichGebert/ponytail",
+    "commit": "356918eba965ee1eac64bd3a7f0dd02108350de5",
+    "skill_count": 6,
+    "skills": [
+      "ponytail",
+      "ponytail-audit",
+      "ponytail-debt",
+      "ponytail-gain",
+      "ponytail-help",
+      "ponytail-review"
+    ]
+  },
+  "addy": {
+    "repository": "https://github.com/addyosmani/agent-skills",
+    "commit": "6ca0cd7db39b41b1c37e26d335c507ee92382c6d",
+    "skill_count": 25,
+    "skills": [
+      "api-and-interface-design",
+      "browser-testing-with-devtools",
+      "ci-cd-and-automation",
+      "code-review-and-quality",
+      "code-simplification",
+      "constraint-driven-development",
+      "context-engineering",
+      "debugging-and-error-recovery",
+      "deprecation-and-migration",
+      "documentation-and-adrs",
+      "doubt-driven-development",
+      "frontend-ui-engineering",
+      "git-workflow-and-versioning",
+      "idea-refine",
+      "incremental-implementation",
+      "interview-me",
+      "observability-and-instrumentation",
+      "performance-optimization",
+      "planning-and-task-breakdown",
+      "security-and-hardening",
+      "shipping-and-launch",
+      "source-driven-development",
+      "spec-driven-development",
+      "test-driven-development",
+      "using-agent-skills"
+    ]
+  },
+  "taste": {
+    "repository": "https://github.com/Leonxlnx/taste-skill",
+    "commit": "ccbc15639c97057cbfcf32ecebc38ef716e4bb37",
+    "skill_count": 13,
+    "skills": [
+      "brandkit",
+      "industrial-brutalist-ui",
+      "gpt-taste",
+      "image-to-code",
+      "imagegen-frontend-mobile",
+      "imagegen-frontend-web",
+      "minimalist-ui",
+      "full-output-enforcement",
+      "redesign-existing-projects",
+      "high-end-visual-design",
+      "stitch-design-taste",
+      "design-taste-frontend",
+      "design-taste-frontend-v1"
+    ]
+  },
+  "impeccable": {
+    "repository": "https://github.com/pbakaus/impeccable",
+    "commit": "67d018fe052853c104a96d441ce175dd5ec4c39d",
+    "skill_version": "4.3.1",
+    "vendored_paths": [
+      "skills/impeccable",
+      "agents",
+      "hooks",
+      "LICENSE",
+      "NOTICE.md"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">LS Doctor</title>
+  <desc id="desc">Geometric LS initials crossed by an audio diagnostic trace</desc>
+  <rect width="512" height="512" rx="76" fill="#171717"/>
+  <path d="M98 112h54v238h114v54H98z" fill="#F4F0E8"/>
+  <path d="M405 163c-21-39-84-48-122-21-42 30-30 87 20 104l52 18c30 10 34 37 13 56-25 23-71 17-94-17" fill="none" stroke="#F4F0E8" stroke-width="48" stroke-linecap="square"/>
+  <path d="M58 272h116l22-45 31 91 31-46h196" fill="none" stroke="#B43A24" stroke-width="16" stroke-linejoin="miter"/>
+</svg>

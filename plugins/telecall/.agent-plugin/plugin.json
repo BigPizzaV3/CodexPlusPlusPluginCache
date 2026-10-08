@@ -1,0 +1,23 @@
+{
+  "name": "telecall",
+  "version": "1.0.0",
+  "description": "TeleCall — Asistente Conversacional y Asesor Inteligente de Telecomunicaciones (Demo tecnológica con datos de referencia O2 España)",
+  "author": {
+    "name": "TeleCall"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "TeleCall",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  },
+  "license": "MIT",
+  "keywords": [
+    "telecom",
+    "telecommunications",
+    "fiber",
+    "mobile",
+    "ai-advisor",
+    "chatgpt"
+  ]
+}

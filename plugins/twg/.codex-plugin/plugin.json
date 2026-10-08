@@ -1,0 +1,59 @@
+{
+  "author": {
+    "name": "Atlassian",
+    "url": "https://www.atlassian.com"
+  },
+  "description": "Teamwork Graph CLI is Atlassian's agent-first interface to your entire work context: Jira issues, Confluence pages, Bitbucket PRs, along with your connected third-party data sources. Purpose-built for coding agents like ChatGPT Work & Codex (terminal or desktop), and powered by Atlassian's context graph. Try: \"draft a Jira issue from this PR and link it to the epic.\" Using ChatGPT in the browser? Install the Atlassian Rovo MCP plugin instead. Run /twg-setup after install to connect Atlassian Teamwork Graph CLI to ChatGPT Work or Codex.",
+  "homepage": "https://developer.atlassian.com/cloud/twg-cli/",
+  "interface": {
+    "brandColor": "#0052CC",
+    "brandColorDark": "#3385FF",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Set up TWG CLI",
+      "Use `twg work query` and `twg collaborators` to brief me on last 7 days: top 3 workstreams, key people, blockers, next actions",
+      "I was out for 7 days, catch me up on [topic]: key updates, decisions, blockers, replies needed, and my top 3 next actions"
+    ],
+    "developerName": "Atlassian",
+    "displayName": "Atlassian Teamwork Graph CLI",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Teamwork Graph CLI is Atlassian's agent-first interface to your entire work context: Jira issues, Confluence pages, Bitbucket PRs, along with your connected third-party data sources. Purpose-built for coding agents like ChatGPT Work & Codex (terminal or desktop), and powered by Atlassian's context graph. Try: \"draft a Jira issue from this PR and link it to the epic.\" Using ChatGPT in the browser? Install the Atlassian Rovo MCP plugin instead. Run /twg-setup after install to connect Atlassian Teamwork Graph CLI to ChatGPT Work or Codex.",
+    "privacyPolicyURL": "https://www.atlassian.com/legal/privacy-policy",
+    "shortDescription": "Atlassian Context Graph as CLI",
+    "supportURL": "https://ecosystem.atlassian.net/servicedesk/customer/portal/3664/group/3822/create/19140",
+    "termsOfServiceURL": "https://www.atlassian.com/legal/cloud-terms-of-service",
+    "websiteURL": "https://developer.atlassian.com/cloud/twg-cli/"
+  },
+  "keywords": [
+    "atlassian",
+    "twg",
+    "teamwork graph",
+    "teamwork graph cli",
+    "jira",
+    "confluence",
+    "bitbucket",
+    "jsm",
+    "jira service management",
+    "assets",
+    "teams",
+    "goals",
+    "projects",
+    "loom",
+    "trello",
+    "rovo",
+    "cli",
+    "atlassian context"
+  ],
+  "license": "Apache-2.0",
+  "name": "twg",
+  "repository": "https://github.com/atlassian-labs/twg-plugins",
+  "skills": "./skills/",
+  "version": "1.0.5"
+}

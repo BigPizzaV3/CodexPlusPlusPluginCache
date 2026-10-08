@@ -1,0 +1,55 @@
+{
+  "author": {
+    "name": "Dravara, LLC",
+    "url": "https://github.com/FaxanFM/chronos"
+  },
+  "description": "Set up one local Codex Governor for passive task supervision, actionable Heartbeats, Windows diagnostics, and bounded read-only worker coordination.",
+  "homepage": "https://github.com/FaxanFM/chronos",
+  "interface": {
+    "brandColor": "#D64045",
+    "brandColorDark": "#D64045",
+    "capabilities": [
+      "One-Governor setup",
+      "Passive task discovery",
+      "Actionable Heartbeats",
+      "Verified task intervention",
+      "Windows resource diagnostics",
+      "Token and approval analysis",
+      "SQLite churn detection",
+      "Bounded read-worker coordination"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Set up Chronos: verify source, create one Governor, explain hooks, and prove Heartbeat coverage and zero worker recurrences.",
+      "Run a Chronos health briefing: inspect PC, quota, reviews, rules, SQLite, Heartbeat coverage; separate evidence from unknowns.",
+      "Use Chronos Governor to split this repo review into bounded read tasks, verify each result, and keep edits and decisions here."
+    ],
+    "developerName": "Dravara, LLC",
+    "displayName": "Chronos for Codex",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Run one local Governor that discovers active Codex tasks from one complete host inventory per cycle, evaluates actionable Heartbeats, and contacts only the exact affected task when intervention is justified. Optional silent hooks accelerate lifecycle hints without creating model turns. Chronos also diagnoses Windows degradation, quota and context pressure, approval and review loops, permission-rule problems, rollout duplication, and SQLite churn. No publisher telemetry.",
+    "privacyPolicyURL": "https://github.com/FaxanFM/chronos/blob/main/PRIVACY.md",
+    "shortDescription": "Diagnose and govern Codex",
+    "supportURL": "https://github.com/FaxanFM/chronos/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/FaxanFM/chronos/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/FaxanFM/chronos"
+  },
+  "keywords": [
+    "codex",
+    "openai",
+    "windows",
+    "diagnostics",
+    "powershell",
+    "ai-agents",
+    "sqlite",
+    "approval-workflows",
+    "resource-health",
+    "productivity"
+  ],
+  "license": "MIT",
+  "name": "chronos",
+  "repository": "https://github.com/FaxanFM/chronos",
+  "skills": "./skills/",
+  "version": "0.9.2"
+}

@@ -1,0 +1,58 @@
+{
+  "author": {
+    "email": "support@yaps.ai",
+    "name": "Yaps AI",
+    "url": "https://www.yaps.ai"
+  },
+  "description": "Generate subtitles and SRT captions from video or audio with Yaps.",
+  "homepage": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins",
+  "interface": {
+    "brandColor": "#D4775B",
+    "brandColorDark": "#D4775B",
+    "capabilities": [
+      "Generate video subtitles",
+      "Video to SRT",
+      "SRT subtitles",
+      "Timestamped captions",
+      "Closed captions",
+      "Local transcription",
+      "File export"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Generate subtitles for this video.",
+      "Convert this video to SRT captions.",
+      "Create closed captions for this audio file."
+    ],
+    "developerName": "Yaps AI",
+    "displayName": "Yaps Subtitle Generator",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Generate subtitles, closed captions, or a timestamped SRT file from an existing video or audio file with Yaps desktop. The plugin checks app, sign-in, model, and FFmpeg readiness, preserves existing outputs, and reports the exact caption file Yaps generated. Requires a local-capable ChatGPT Desktop Work or Codex session; ChatGPT web and cloud sessions cannot reach the installed Yaps engine. Users can also run the feature directly in Yaps.",
+    "privacyPolicyURL": "https://www.yaps.ai/privacy",
+    "shortDescription": "Generate subtitles for videos",
+    "termsOfServiceURL": "https://www.yaps.ai/terms",
+    "websiteURL": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins"
+  },
+  "keywords": [
+    "subtitle-generator",
+    "generate-subtitles",
+    "add-subtitles-to-video",
+    "video-to-subtitles",
+    "video-to-srt",
+    "generate-srt",
+    "subtitles",
+    "captions",
+    "caption-generator",
+    "closed-captions",
+    "video-subtitles",
+    "audio-subtitles",
+    "whisper"
+  ],
+  "license": "MIT",
+  "name": "yaps-srt-generator",
+  "repository": "https://github.com/richawo/yaps-codex-plugin",
+  "skills": "./skills/",
+  "version": "0.1.11"
+}

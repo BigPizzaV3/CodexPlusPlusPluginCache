@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+  <title>RAGOps Workbench</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body><main>
+  <header><div><div class="eyebrow">Release confidence for AI systems</div><h1>RAGOps</h1></div><p class="lede">Evaluate a candidate locally, then inspect and review saved team runs from the same evidence contract.</p></header>
+  <div class="grid">
+    <section class="panel"><h2>Evaluation input</h2><label for="api-key">API key <span class="text-note">(kept in this tab only)</span></label><input id="api-key" type="password" autocomplete="off"><label for="scenario">Scenario JSON</label><textarea id="scenario"></textarea><label for="responses">Responses JSON</label><textarea id="responses"></textarea><button id="run">Run evaluation</button></section>
+    <section class="panel"><h2>Release decision</h2><div id="status" class="status" aria-live="polite">Waiting for a run</div><p id="evaluation-error" class="error" role="alert" hidden></p><div id="metrics"></div><h3>Failed gates</h3><ul id="gates"><li>Not evaluated</li></ul></section>
+    <section class="panel wide"><div class="toolbar"><div><div class="eyebrow">Team workflow</div><h2>Experiment history</h2></div><div><label for="limit">Run limit</label><input id="limit" type="number" min="1" max="100" value="20"></div><button id="load" class="secondary">Load runs</button></div><p id="history-message" class="lede">Set <code>RAGOPS_STORE</code> on the API to enable shared local history and review metadata.</p><div class="runs" id="runs"></div></section>
+  </div>
+</main></body>
+</html>

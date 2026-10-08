@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "Amit Sharma",
+    "url": "https://github.com/HopLittleBunny"
+  },
+  "description": "Write, rewrite, or reply in the user's evidence-backed voice while preserving meaning, authorial decisions, and language variety.",
+  "homepage": "https://github.com/HopLittleBunny/write-like-me#readme",
+  "interface": {
+    "brandColor": "#0F3031",
+    "brandColorDark": "#CEEFF0",
+    "capabilities": [
+      "Interactive",
+      "Write",
+      "Detect"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Write this email in my voice and keep it paste-ready.",
+      "Clean the AI texture, or rethink the structure without inventing my views.",
+      "Learn my writing pattern from a few answers."
+    ],
+    "developerName": "Amit Sharma",
+    "displayName": "Write Like Me \u2014 Voice Pattern",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Write Like Me by HopLittleBunny drafts or rewrites personal prose, preserves meaning and language variety, removes generic AI texture, and can run a bounded authorial-structure pass without inventing judgement or gaming AI detectors. It builds a portable English writing pattern, verifies rewrite integrity, and learns only corrections the user confirms.",
+    "privacyPolicyURL": "https://github.com/HopLittleBunny/write-like-me/blob/main/PRIVACY.md",
+    "shortDescription": "Write in your own voice",
+    "termsOfServiceURL": "https://github.com/HopLittleBunny/write-like-me/blob/main/TERMS.md",
+    "websiteURL": "https://hoplittlebunny.github.io/write-like-me/"
+  },
+  "keywords": [
+    "writing",
+    "voice",
+    "editing",
+    "humanize",
+    "linguistics",
+    "semantic-preservation",
+    "ai-slop"
+  ],
+  "license": "MIT",
+  "name": "write-like-me",
+  "repository": "https://github.com/HopLittleBunny/write-like-me",
+  "skills": "./skills/",
+  "version": "1.0.0-rc.7+codex.20260831154635"
+}

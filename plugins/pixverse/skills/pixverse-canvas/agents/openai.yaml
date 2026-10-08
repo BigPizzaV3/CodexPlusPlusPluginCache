@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Canvas"
+  short_description: "Create in PixVerse Canvas"
+  default_prompt: "Use $pixverse-canvas to create a PixVerse Canvas project from my idea and references, generate the media, and preview the results."
+policy:
+  allow_implicit_invocation: true

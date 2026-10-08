@@ -1,0 +1,7 @@
+interface:
+  display_name: Content Matrix
+  short_description: Generate structured social content ideas
+  brand_color: '#E45B32'
+  default_prompt: Use $content-matrix to build a content idea matrix from my pillars and formats.
+policy:
+  allow_implicit_invocation: true

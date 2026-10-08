@@ -1,0 +1,9 @@
+interface:
+  display_name: Agent Reach
+  short_description: Research public sources with structured routing
+  default_prompt: Research this topic across relevant public sources and cite the findings.
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

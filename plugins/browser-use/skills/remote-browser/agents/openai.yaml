@@ -1,0 +1,9 @@
+interface:
+  display_name: Remote Browser
+  short_description: Use an authorized remote browser
+  default_prompt: Use $remote-browser with the remote browser capability already available in this host.
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

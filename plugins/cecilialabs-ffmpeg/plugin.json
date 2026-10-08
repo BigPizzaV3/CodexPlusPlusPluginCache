@@ -1,0 +1,147 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Cecil-IA Labs",
+    "url": "https://github.com/cecil-ia-labs"
+  },
+  "description": "Professional FFmpeg and FFprobe workflows with deterministic CLI, Skills, scripts, hardware acceleration, and declarative media pipelines.",
+  "extensions": {
+    "com.cecilialabs.ffmpeg": {
+      "branding": {
+        "displayName": "Cecil-IA Labs FFmpeg",
+        "icon": "./assets/icon.svg",
+        "iconDark": "./assets/icon-dark.svg",
+        "logo": "./assets/logo.svg",
+        "screenshots": [
+          "./assets/screenshots/cli-overview.svg",
+          "./assets/screenshots/skills-overview.svg"
+        ]
+      },
+      "documentation": {
+        "packaging": "./docs/development/plugin-packaging.md",
+        "readme": "./README.md",
+        "skills": "./docs/skill-catalog.md"
+      },
+      "hardware": {
+        "codecs": {
+          "h264": [
+            "nvenc",
+            "qsv",
+            "vaapi",
+            "videotoolbox"
+          ],
+          "vp9": [
+            "qsv",
+            "vaapi"
+          ]
+        },
+        "fallback": "software",
+        "modes": [
+          "software",
+          "auto",
+          "nvenc",
+          "qsv",
+          "vaapi",
+          "videotoolbox"
+        ],
+        "runtimeProbe": true
+      },
+      "npm": {
+        "binary": "cecilia-ffmpeg",
+        "package": "@cecilialabs/ffmpeg"
+      },
+      "skillCatalog": [
+        {
+          "name": "ffmpeg-environment",
+          "path": "./skills/ffmpeg-environment/SKILL.md"
+        },
+        {
+          "name": "ffmpeg-video-editing",
+          "path": "./skills/ffmpeg-video-editing/SKILL.md"
+        },
+        {
+          "name": "ffmpeg-audio",
+          "path": "./skills/ffmpeg-audio/SKILL.md"
+        },
+        {
+          "name": "ffmpeg-conversion",
+          "path": "./skills/ffmpeg-conversion/SKILL.md"
+        },
+        {
+          "name": "ffmpeg-composition",
+          "path": "./skills/ffmpeg-composition/SKILL.md"
+        },
+        {
+          "name": "ffmpeg-streaming",
+          "path": "./skills/ffmpeg-streaming/SKILL.md"
+        },
+        {
+          "name": "ffmpeg-diagnostics",
+          "path": "./skills/ffmpeg-diagnostics/SKILL.md"
+        },
+        {
+          "name": "ffmpeg-pipelines",
+          "path": "./skills/ffmpeg-pipelines/SKILL.md"
+        },
+        {
+          "name": "ffmpeg-onboarding",
+          "path": "./skills/ffmpeg-onboarding/SKILL.md"
+        },
+        {
+          "name": "ffmpeg-workflow",
+          "path": "./skills/ffmpeg-workflow/SKILL.md"
+        }
+      ]
+    },
+    "com.openai": {
+      "interface": {
+        "brandColor": "#0B1220",
+        "brandColorDark": "#DFE6F4",
+        "capabilities": [
+          "Inspect media with FFprobe",
+          "Edit video and synchronize audio",
+          "Convert video, image, and audio formats",
+          "Compose clips, transitions, and slideshows",
+          "Diagnose and repair media issues",
+          "Plan live capture and streaming workflows",
+          "Author and validate declarative YAML pipelines",
+          "Select supported hardware acceleration"
+        ],
+        "category": "Developer Tools",
+        "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+        "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+        "defaultPrompt": [
+          "Inspect this media file and explain its streams, codecs, timing, and compatibility.",
+          "Trim this video, resize it to 1920x1080, and convert the result to H.264 MP4.",
+          "Create a reusable YAML pipeline that trims, speeds up, normalizes, and converts a video."
+        ],
+        "developerName": "Cecil-IA Labs",
+        "displayName": "Cecil-IA Labs FFmpeg",
+        "logo": "./.codex-plugin/assets/logo.png",
+        "logoDark": "./.codex-plugin/assets/logo-dark.png",
+        "longDescription": "Professional, deterministic FFmpeg and FFprobe workflows for ChatGPT and Codex. Inspect media, edit video and audio, convert formats, compose clips and slideshows, diagnose and repair media, plan streaming workflows, and author reusable YAML pipelines. The included Skills prefer the typed @cecilialabs/ffmpeg toolkit when executable tooling is available, with FFprobe preflight, explicit overwrite protection, transactional outputs, structured errors, and optional hardware acceleration. Executable workflows require Node.js 22+ and FFmpeg/FFprobe 6.1+; environments without command execution can still use the plugin to plan commands and author deterministic pipelines.",
+        "privacyPolicyURL": "https://github.com/cecil-ia-labs/ffmpeg-dev/blob/master/PRIVACY.md",
+        "shortDescription": "FFmpeg Toolkit for Agents",
+        "supportURL": "https://github.com/cecil-ia-labs/ffmpeg-dev/blob/master/SUPPORT.md",
+        "termsOfServiceURL": "https://github.com/cecil-ia-labs/ffmpeg-dev/blob/master/TERMS.md",
+        "websiteURL": "https://github.com/cecil-ia-labs/ffmpeg-dev"
+      }
+    }
+  },
+  "homepage": "https://github.com/cecil-ia-labs/ffmpeg-dev#readme",
+  "keywords": [
+    "ffmpeg",
+    "ffprobe",
+    "media",
+    "video",
+    "audio",
+    "streaming",
+    "agent-skills",
+    "typescript",
+    "cli"
+  ],
+  "license": "MIT",
+  "name": "cecilialabs-ffmpeg",
+  "repository": "https://github.com/cecil-ia-labs/ffmpeg-dev",
+  "version": "2.0.0"
+}

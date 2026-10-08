@@ -1,0 +1,6 @@
+interface:
+  display_name: "ForgeMind Design Fidelity"
+  short_description: "Turn local PNG references into measured UI corrections."
+  default_prompt: "Use $forgemind-design-fidelity to obtain three Product Design proposals, persist one user decision, and implement that selected local design with measured verification."
+policy:
+  allow_implicit_invocation: false

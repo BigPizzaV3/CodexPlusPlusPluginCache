@@ -1,0 +1,36 @@
+{
+  "author": {
+    "email": "contact@citrolabs.ai",
+    "name": "citrolabs"
+  },
+  "description": "Browser automation with the ego-browser Skill",
+  "homepage": "https://github.com/citrolabs/ego-lite",
+  "interface": {
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use ego-browser to inspect https://example.com and report its title."
+    ],
+    "developerName": "citrolabs",
+    "displayName": "ego",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Control ego lite through the packaged ego-browser Skill while keeping agent browsing isolated from the user's own tabs.",
+    "shortDescription": "Automate user's ego browser"
+  },
+  "keywords": [
+    "browser",
+    "automation",
+    "skill",
+    "playwright"
+  ],
+  "license": "MIT",
+  "name": "ego",
+  "repository": "https://github.com/citrolabs/ego-lite",
+  "skills": "./skills",
+  "version": "2.0.1"
+}

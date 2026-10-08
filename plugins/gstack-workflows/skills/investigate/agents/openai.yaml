@@ -1,0 +1,9 @@
+interface:
+  display_name: "Investigate"
+  short_description: "Run systematic root-cause investigation before proposing a fix."
+  default_prompt: "Use Investigate for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

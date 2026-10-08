@@ -1,0 +1,39 @@
+{
+  "name": "meme-marketing",
+  "version": "3.1.1",
+  "description": "Fully Agentic Meme Crafting Engine - Generate highly relatable, zero-cringe memes with funny doodle line-art, cultural nuance across English and Arabic dialects, and 8 quality gates.",
+  "author": {
+    "name": "Mamdouh Aboammar",
+    "url": "https://github.com/imMamdouhaboammar/meme-marketing"
+  },
+  "homepage": "https://github.com/imMamdouhaboammar/meme-marketing",
+  "repository": "https://github.com/imMamdouhaboammar/meme-marketing",
+  "license": "MIT",
+  "keywords": [
+    "meme",
+    "meme-marketing",
+    "codex",
+    "chatgpt",
+    "agent-skill"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Meme Marketing Agent",
+    "shortDescription": "Craft relatable memes & cards",
+    "longDescription": "Fully Agentic Meme Crafting Engine - Generate highly relatable, zero-cringe memes with funny doodle line-art, cultural nuance across English and Arabic dialects, and 8 quality gates.",
+    "developerName": "Mamdouh Aboammar",
+    "category": "Creativity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/imMamdouhaboammar/meme-marketing",
+    "defaultPrompt": [
+      "Craft 3 relatable memes for our developer audience.",
+      "عايز 3 ميمز لجمهور مصري في مجال الماركتنج.",
+      "Render a funny doodle meme using the dilemma template."
+    ],
+    "composerIcon": "./assets/logo.svg",
+    "logo": "./assets/logo.svg"
+  }
+}

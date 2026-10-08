@@ -1,0 +1,7 @@
+interface:
+  display_name: Post Writer
+  short_description: Draft social posts in the user’s voice
+  brand_color: '#E45B32'
+  default_prompt: Use $post-writer to write a social post from this idea in my voice.
+policy:
+  allow_implicit_invocation: true

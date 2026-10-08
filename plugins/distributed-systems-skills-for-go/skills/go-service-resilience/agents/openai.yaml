@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Service Resilience"
+  short_description: "Bound retries, deadlines, and overload"
+  default_prompt: "Use $go-service-resilience to design this Go call path for bounded failure and recovery."
+policy:
+  allow_implicit_invocation: true

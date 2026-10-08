@@ -1,0 +1,7 @@
+interface:
+  display_name: "Ship24 Courier Codes"
+  short_description: "Courier codes, auto-detection and per-courier required fields"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon-large.png"
+  brand_color: "#FCB016"
+  default_prompt: "Which Ship24 courier code should I use for USPS, and does it need a postcode?"

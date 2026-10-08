@@ -1,0 +1,43 @@
+{
+  "author": {
+    "email": "support@saymd.app",
+    "name": "Viktor Kond\u00e1s"
+  },
+  "description": "Voice to structured Markdown prompts \u2014 run local saymd, then @ .ai/prompt.md",
+  "homepage": "https://saymd.app/?utm_source=codex&utm_medium=plugin&utm_campaign=saymd",
+  "interface": {
+    "brandColor": "#2563EB",
+    "brandColorDark": "#2563EB",
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use saymd to record a feature idea into .ai/prompt.md, then implement from that file.",
+      "Turn a voice bug report into .ai/prompt.md with saymd, then fix from the structured spec.",
+      "Run saymd with the plan template and start coding from .ai/prompt.md."
+    ],
+    "developerName": "Viktor Kond\u00e1s",
+    "displayName": "saymd",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "saymd turns speech or audio files into a structured Markdown prompt (Objective, Context, Instructions, Constraints) that Codex can @. Runs your local Free MIT CLI (npx saymd) with Bring Your Own Key for Gemini, OpenAI, Deepgram, or ElevenLabs. Audio never goes to saymd.app.\n\nTypical loop: record with the CLI \u2192 open .ai/prompt.md \u2192 implement from the spec.",
+    "privacyPolicyURL": "https://saymd.app/privacy.html",
+    "shortDescription": "Voice to Markdown prompts",
+    "supportURL": "https://saymd.app/",
+    "termsOfServiceURL": "https://saymd.app/terms.html",
+    "websiteURL": "https://saymd.app/?utm_source=codex&utm_medium=plugin&utm_campaign=saymd"
+  },
+  "keywords": [
+    "voice",
+    "markdown",
+    "prompts",
+    "cli",
+    "byok"
+  ],
+  "license": "MIT",
+  "name": "saymd",
+  "repository": "https://github.com/kondasviktor/saymd",
+  "skills": [
+    "./skills/saymd"
+  ],
+  "version": "0.1.2"
+}

@@ -1,0 +1,23 @@
+<!-- Generated from skills/mentoring-theory/SKILL.md; edit the canonical source. -->
+
+# Mentoring — GROW Model and Kram's Theory
+
+**Evidence tier: practitioner framework.** GROW and Kram's functions come from field and observational research, not controlled trials — used here as conversation structure, not as a claimed learning effect.
+
+## GROW Model (Whitmore, 1988)
+
+A coaching conversation structure:
+- **Goal**: What does the learner want to achieve? Be specific.
+- **Reality**: Where are they now? Honest, non-judgmental assessment.
+- **Options**: What could they do? Brainstorm multiple pathways. The learner generates options, not the mentor.
+- **Will**: What will they commit to? When? How will they measure success?
+
+Aligns with self-determination theory (Deci & Ryan): autonomy, competence, and relatedness drive intrinsic motivation.
+
+## Kram's Mentoring Theory (1983)
+
+Two categories of mentor functions:
+- **Career Functions**: Coaching, challenging assignments, exposure
+- **Psychosocial Functions**: Acceptance, encouragement, counseling, role modeling
+
+An AI tutor can provide coaching, challenging assignments, acceptance, and encouragement. It cannot provide sponsorship, organizational visibility, or networking. Be transparent about these limitations.

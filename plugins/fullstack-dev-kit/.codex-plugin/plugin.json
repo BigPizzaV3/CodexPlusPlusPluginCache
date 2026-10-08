@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "The Agile Monkeys",
+    "url": "https://www.theagilemonkeys.com"
+  },
+  "description": "Issue-to-PR workflow for any tech stack: fetch stories from Jira/Linear/GitHub/Azure and Figma designs, plan-approval gate, adaptive quality + coverage gates, e2e generation, PR creation and review.",
+  "homepage": "https://github.com/theam/claude-dev-kit",
+  "interface": {
+    "brandColor": "#000000",
+    "brandColorDark": "#FFFFFF",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Work ticket PROJ-1234 end to end and open a PR",
+      "Review this diff for correctness, security, and missing tests",
+      "Draft a backlog from this brief and create the tickets"
+    ],
+    "developerName": "The Agile Monkeys",
+    "displayName": "Fullstack Dev Kit",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Takes work from idea to shipped PR. For product owners, plan-backlog turns an idea or brief into a well-formed backlog (epics, user stories with acceptance criteria) in your tracker. For engineers, it takes a ticket (Jira / Linear / GitHub Issues / Azure) from plan-approval through implementation, adaptive tests/coverage, security and accessibility review, to an opened pull request \u2014 then offers to track any leftover follow-ups as linked tickets. Stack-agnostic; the tracker and PR host are configured per repo (connect the matching MCP, e.g. Atlassian for Jira).",
+    "privacyPolicyURL": "https://github.com/theam/claude-dev-kit/blob/main/TELEMETRY.md",
+    "shortDescription": "Tickets to reviewed PRs",
+    "supportURL": "https://github.com/theam/claude-dev-kit/issues",
+    "termsOfServiceURL": "https://github.com/theam/claude-dev-kit/blob/main/LICENSE",
+    "websiteURL": "https://github.com/theam/claude-dev-kit"
+  },
+  "keywords": [
+    "issue-to-pr",
+    "code-review",
+    "coverage",
+    "jira",
+    "linear",
+    "workflow"
+  ],
+  "license": "Apache-2.0",
+  "name": "fullstack-dev-kit",
+  "repository": "https://github.com/theam/claude-dev-kit",
+  "skills": "./skills",
+  "version": "0.19.10"
+}

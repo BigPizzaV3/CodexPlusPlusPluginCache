@@ -1,0 +1,4 @@
+interface:
+  display_name: "Style LinkedIn Text"
+  short_description: "Format LinkedIn copy with Unicode styles"
+  default_prompt: "Use $style-linkedin-text to format this LinkedIn post with restrained, accessible emphasis."

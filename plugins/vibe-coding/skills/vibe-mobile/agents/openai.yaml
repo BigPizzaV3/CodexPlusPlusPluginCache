@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Mobile apps"
+  short_description: "Navigation, offline behavior, permissions and releases"
+  default_prompt: "Use $vibe-mobile to audit the selected mobile apps boundary."

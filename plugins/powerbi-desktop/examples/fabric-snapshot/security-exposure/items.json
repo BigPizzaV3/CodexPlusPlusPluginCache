@@ -1,0 +1,4 @@
+[
+  { "id": "dataset-sec", "name": "Sensitive Dataset", "type": "SemanticModel", "owner": "security.owner@example.com", "endorsement": "None", "sensitivityLabel": "", "workspaceId": "workspace-security", "usageScore": 90, "trustScore": 60, "sharedExternally": true, "rlsEnabled": false },
+  { "id": "report-sec", "name": "Sensitive Report", "type": "Report", "owner": "security.owner@example.com", "sensitivityLabel": "", "workspaceId": "workspace-security", "usageScore": 90, "trustScore": 60, "sharedExternally": true }
+]

@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "getcargo"
+  },
+  "description": "GTM engineering for coding agents \u2014 18 skills over the Cargo CLI: research accounts, enrich and verify B2B contact records from licensed data providers, score and qualify leads, sync to your CRM, monitor buying signals, and manage a whole workspace as code. Consent and suppression gates apply to every step that touches a person; the pack sends no messages itself.",
+  "homepage": "https://getcargo.ai",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Other",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Find 50 VPs of Sales at Series B fintechs and verify their emails.",
+      "Enrich this CSV with company size, funding stage, and tech stack, then tell me what it cost.",
+      "Run the Cargo quickstart \u2014 25 real leads for my persona with a cost receipt."
+    ],
+    "developerName": "getcargo",
+    "displayName": "Cargo CLI",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Agent skills for the Cargo CLI in Codex. Turn Codex into a GTM engineering workstation: build lead lists, find and verify emails, run waterfall enrichment, score leads, sync to CRM, monitor buying signals, and manage the workspace as code with cargo-ai.",
+    "privacyPolicyURL": "https://getcargo.ai/privacy",
+    "shortDescription": "GTM engineering for agents",
+    "termsOfServiceURL": "https://getcargo.ai/terms",
+    "websiteURL": "https://getcargo.ai"
+  },
+  "keywords": [
+    "gtm",
+    "go-to-market",
+    "sales",
+    "prospecting",
+    "lead-enrichment",
+    "b2b-data",
+    "crm",
+    "revops",
+    "data-enrichment",
+    "outbound"
+  ],
+  "license": "MIT",
+  "name": "cargo-skills",
+  "repository": "https://github.com/getcargohq/cargo-skills",
+  "skills": "./skills/",
+  "version": "1.23.0"
+}

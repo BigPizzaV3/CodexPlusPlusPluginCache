@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "Saul Mart\u00ed"
+  },
+  "description": "Create an agent-friendly semantic DESIGN.md for Google Stitch with strong typography, color, layout, motion, and anti-generic UI guidance.",
+  "interface": {
+    "brandColor": "#22C55E",
+    "brandColorDark": "#3ADD76",
+    "capabilities": [
+      "Create DESIGN.md for Stitch"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Create a DESIGN.md for this Google Stitch project",
+      "Turn this visual direction into Stitch design guidance",
+      "Define the semantic design system Stitch should follow"
+    ],
+    "developerName": "Saul Mart\u00ed",
+    "displayName": "StitchDesign",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Create an agent-friendly semantic DESIGN.md for Google Stitch with strong typography, color, layout, motion, and anti-generic UI guidance.",
+    "shortDescription": "Create DESIGN.md for Stitch"
+  },
+  "keywords": [
+    "engineering-suite",
+    "stitch-design",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "engineering-suite-stitch-design",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

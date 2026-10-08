@@ -1,0 +1,33 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Cube",
+    "url": "https://www.cubesoftware.com/"
+  },
+  "description": "With the Cube MCP Server, you can:\n- Query live Cube data from actuals, budgets, forecasts, variances, and more\n- Ask an AI to generate board decks, run variance analysis, or build financial summaries using your real Cube data\n- Drill into transaction-level detail and dimension breakdowns directly from an AI chat\n- Maintain full security: Cube's role-based access control (RBAC) security model enforces your user permissions on every AI request. If you can't see it in Cube, the AI can't see it either",
+  "homepage": "https://www.cubesoftware.com/",
+  "interface": {
+    "capabilities": [],
+    "category": "Finance",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Compare Actuals vs. Forecast for Revenue by entity"
+    ],
+    "developerName": "Cube",
+    "displayName": "Cube",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
+    "longDescription": "With the Cube MCP Server, you can:\n- Query live Cube data from actuals, budgets, forecasts, variances, and more\n- Ask an AI to generate board decks, run variance analysis, or build financial summaries using your real Cube data\n- Drill into transaction-level detail and dimension breakdowns directly from an AI chat\n- Maintain full security: Cube's role-based access control (RBAC) security model enforces your user permissions on every AI request. If you can't see it in Cube, the AI can't see it either",
+    "privacyPolicyURL": "https://www.cubesoftware.com/privacy-policy",
+    "screenshots": [],
+    "shortDescription": "Analyze your financial data",
+    "supportURL": "https://help.cubesoftware.com/",
+    "termsOfServiceURL": "https://www.cubesoftware.com/terms-of-service",
+    "websiteURL": "https://www.cubesoftware.com/"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "cube",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

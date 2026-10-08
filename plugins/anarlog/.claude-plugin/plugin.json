@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "name": "anarlog",
+  "displayName": "Anarlog",
+  "version": "1.3.0",
+  "description": "Search local Anarlog meetings or connect to Cloud with OAuth.",
+  "author": {
+    "name": "Fastrepl",
+    "email": "team@fastrepl.com",
+    "url": "https://anarlog.so"
+  },
+  "homepage": "https://docs.anarlog.so/agents/overview",
+  "repository": "https://github.com/fastrepl/anarlog/tree/main/agent-plugins/anarlog",
+  "license": "MIT",
+  "keywords": ["meetings", "notes", "transcripts", "productivity", "mcp", "oauth"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

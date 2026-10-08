@@ -1,0 +1,7 @@
+interface:
+  display_name: Hook Generator
+  short_description: Generate strong opening hooks and angles
+  brand_color: '#E45B32'
+  default_prompt: Use $hook-generator to generate distinct strong hooks for this idea.
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">FFmpeg Media Toolkit CLI overview</title>
+  <desc id="desc">Documentation preview showing toolkit commands in a terminal-style panel.</desc>
+  <rect width="1280" height="720" fill="#E2E8F0"/>
+  <rect x="90" y="70" width="1100" height="580" rx="24" fill="#0B1220"/>
+  <circle cx="130" cy="110" r="8" fill="#FB7185"/>
+  <circle cx="158" cy="110" r="8" fill="#FBBF24"/>
+  <circle cx="186" cy="110" r="8" fill="#4ADE80"/>
+  <text x="130" y="176" fill="#22D3EE" font-family="monospace" font-size="27">$ cecilia-ffmpeg doctor</text>
+  <text x="130" y="226" fill="#F8FAFC" font-family="monospace" font-size="23">status: ok · ffmpeg + ffprobe resolved</text>
+  <text x="130" y="302" fill="#22D3EE" font-family="monospace" font-size="27">$ cecilia-ffmpeg compose concat a.mp4 b.mp4 --transition fade</text>
+  <text x="130" y="352" fill="#F8FAFC" font-family="monospace" font-size="23">probe → normalize → xfade → validate</text>
+  <text x="130" y="428" fill="#22D3EE" font-family="monospace" font-size="27">$ cecilia-ffmpeg diagnose broken.mp4 --json</text>
+  <text x="130" y="478" fill="#F8FAFC" font-family="monospace" font-size="23">typed diagnostics · observation-driven repair</text>
+  <rect x="130" y="540" width="420" height="54" rx="12" fill="#164E63"/>
+  <text x="154" y="576" fill="#ECFEFF" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">deterministic · typed · agent-friendly</text>
+</svg>

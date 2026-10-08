@@ -1,0 +1,54 @@
+{
+  "schema": "codex.powerbi.processRulePack.v1",
+  "id": "order-to-cash",
+  "process": "OrderToCash",
+  "displayName": "Order to Cash",
+  "kpiTerms": ["order", "sales", "revenue", "delivery", "invoice", "payment", "receivable", "cash", "dso"],
+  "objects": [
+    { "name": "SalesOrder", "aliases": ["salesorder", "order", "sales order"], "fields": [
+      { "name": "orderId", "aliases": ["OrderId", "SalesOrderId", "OrderNumber"], "required": true },
+      { "name": "customerId", "aliases": ["CustomerId", "SoldTo", "AccountId"], "required": true },
+      { "name": "orderDate", "aliases": ["OrderDate", "CreatedOn"], "required": true },
+      { "name": "requestedDeliveryDate", "aliases": ["RequestedDeliveryDate", "ShipDate"], "required": false },
+      { "name": "status", "aliases": ["Status", "OrderStatus"], "required": false },
+      { "name": "amount", "aliases": ["Amount", "NetAmount", "Revenue"], "required": false },
+      { "name": "currency", "aliases": ["Currency", "CurrencyCode"], "required": false },
+      { "name": "paymentTerms", "aliases": ["PaymentTerms", "Terms"], "required": false }
+    ] },
+    { "name": "Delivery", "aliases": ["delivery", "shipment"], "fields": [
+      { "name": "deliveryId", "aliases": ["DeliveryId", "ShipmentId"], "required": true },
+      { "name": "orderId", "aliases": ["OrderId", "SalesOrderId"], "required": true },
+      { "name": "deliveryDate", "aliases": ["DeliveryDate", "ShipDate"], "required": true }
+    ] },
+    { "name": "Invoice", "aliases": ["invoice", "billing"], "fields": [
+      { "name": "invoiceId", "aliases": ["InvoiceId", "BillingDocument"], "required": true },
+      { "name": "orderId", "aliases": ["OrderId", "SalesOrderId"], "required": true },
+      { "name": "deliveryId", "aliases": ["DeliveryId", "ShipmentId"], "required": false },
+      { "name": "invoiceDate", "aliases": ["InvoiceDate", "BillingDate"], "required": true },
+      { "name": "dueDate", "aliases": ["DueDate", "PaymentDueDate"], "required": false },
+      { "name": "status", "aliases": ["Status", "InvoiceStatus"], "required": false },
+      { "name": "amount", "aliases": ["Amount", "InvoiceAmount"], "required": false },
+      { "name": "currency", "aliases": ["Currency", "CurrencyCode"], "required": false }
+    ] },
+    { "name": "Payment", "aliases": ["payment", "cash receipt"], "fields": [
+      { "name": "paymentId", "aliases": ["PaymentId", "ReceiptId"], "required": true },
+      { "name": "invoiceId", "aliases": ["InvoiceId", "BillingDocument"], "required": true },
+      { "name": "paymentDate", "aliases": ["PaymentDate", "ReceiptDate"], "required": true },
+      { "name": "amount", "aliases": ["Amount", "PaymentAmount"], "required": false }
+    ] }
+  ],
+  "rules": [
+    { "id": "o2c.order.customer.required", "type": "requiredField", "severity": "High", "object": "SalesOrder", "field": "customerId", "description": "Sales order is missing customer.", "ownerHint": "Order management owner", "recommendedAction": "Correct customer assignment before using O2C KPIs.", "releaseImpact": "No-Go" },
+    { "id": "o2c.order.date.required", "type": "requiredField", "severity": "High", "object": "SalesOrder", "field": "orderDate", "description": "Sales order is missing order date.", "ownerHint": "Order management owner", "recommendedAction": "Backfill order date or exclude incomplete order from cycle-time KPIs.", "releaseImpact": "No-Go" },
+    { "id": "o2c.order.deliveryDate.required", "type": "requiredField", "severity": "Medium", "object": "SalesOrder", "field": "requestedDeliveryDate", "description": "Sales order is missing requested delivery date.", "ownerHint": "Order management owner", "recommendedAction": "Confirm delivery commitment date for OTIF and backlog aging.", "releaseImpact": "Warn" },
+    { "id": "o2c.delivery.order.orphan", "type": "orphan", "severity": "High", "object": "Delivery", "field": "orderId", "parentObject": "SalesOrder", "parentField": "orderId", "description": "Delivery references missing sales order.", "ownerHint": "Logistics owner", "recommendedAction": "Reconcile delivery-to-order keys.", "releaseImpact": "No-Go" },
+    { "id": "o2c.invoice.order.orphan", "type": "orphan", "severity": "High", "object": "Invoice", "field": "orderId", "parentObject": "SalesOrder", "parentField": "orderId", "description": "Invoice references missing sales order.", "ownerHint": "Billing owner", "recommendedAction": "Reconcile invoice-to-order keys.", "releaseImpact": "No-Go" },
+    { "id": "o2c.invoice.delivery.orphan", "type": "orphan", "severity": "Medium", "object": "Invoice", "field": "deliveryId", "parentObject": "Delivery", "parentField": "deliveryId", "description": "Invoice references missing delivery.", "ownerHint": "Billing owner", "recommendedAction": "Confirm invoice is valid without delivery reference or correct key.", "releaseImpact": "Warn" },
+    { "id": "o2c.payment.invoice.orphan", "type": "orphan", "severity": "High", "object": "Payment", "field": "invoiceId", "parentObject": "Invoice", "parentField": "invoiceId", "description": "Payment references missing invoice.", "ownerHint": "Accounts receivable owner", "recommendedAction": "Reconcile payment-to-invoice keys.", "releaseImpact": "No-Go" },
+    { "id": "o2c.order.amount.nonnegative", "type": "nonNegative", "severity": "Medium", "object": "SalesOrder", "field": "amount", "description": "Sales order amount is negative.", "ownerHint": "Order management owner", "recommendedAction": "Separate credits/returns from gross order intake.", "releaseImpact": "Warn" },
+    { "id": "o2c.invoice.amount.nonnegative", "type": "nonNegative", "severity": "Medium", "object": "Invoice", "field": "amount", "description": "Invoice amount is negative.", "ownerHint": "Billing owner", "recommendedAction": "Confirm credit memo treatment and revenue sign convention.", "releaseImpact": "Warn" },
+    { "id": "o2c.invoice.overdue.open", "type": "overdueOpen", "severity": "High", "object": "Invoice", "field": "dueDate", "statusField": "status", "closedValues": ["Paid", "Closed", "Cleared"], "description": "Invoice is overdue and still open.", "ownerHint": "Accounts receivable owner", "recommendedAction": "Review open AR aging and DSO evidence.", "releaseImpact": "No-Go" },
+    { "id": "o2c.order.paymentTerms.required", "type": "requiredField", "severity": "Medium", "object": "SalesOrder", "field": "paymentTerms", "description": "Sales order is missing payment terms.", "ownerHint": "Order management owner", "recommendedAction": "Confirm payment terms before cash forecast or AR aging use.", "releaseImpact": "Warn" },
+    { "id": "o2c.order.currency.required", "type": "requiredField", "severity": "Medium", "object": "SalesOrder", "field": "currency", "description": "Sales order is missing currency.", "ownerHint": "Finance owner", "recommendedAction": "Confirm currency and conversion basis.", "releaseImpact": "Warn" }
+  ]
+}

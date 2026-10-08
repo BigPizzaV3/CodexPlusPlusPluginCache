@@ -1,0 +1,102 @@
+# Baseline .golangci.yml for production Go projects.
+# Targets golangci-lint v2.x. Adjust local-prefixes for your module path.
+
+version: "2"
+
+run:
+  timeout: 5m
+  tests: true
+  modules-download-mode: readonly
+
+linters:
+  default: none
+  enable:
+    # Correctness — start here
+    - errcheck
+    - govet
+    - staticcheck
+    - ineffassign
+    - unused
+
+    # Style
+    - revive
+    - misspell
+    - unconvert
+
+    # Security & resource leaks
+    - gosec
+    - bodyclose
+    - sqlclosecheck
+    - nilerr
+
+    # Suppression hygiene
+    - nolintlint
+
+    # Tests
+    - thelper
+    - paralleltest
+    - testifylint
+
+  settings:
+    errcheck:
+      check-type-assertions: true
+      check-blank: false
+    govet:
+      enable-all: true
+      disable:
+        - fieldalignment # noisy; opt in per package
+    revive:
+      rules:
+        - name: blank-imports
+        - name: context-as-argument
+        - name: context-keys-type
+        - name: error-naming
+        - name: error-return
+        - name: error-strings
+        - name: errorf
+        - name: exported
+        - name: increment-decrement
+        - name: indent-error-flow
+        - name: range
+        - name: receiver-naming
+        - name: redefines-builtin-id
+        - name: superfluous-else
+        - name: time-naming
+        - name: unexported-return
+        - name: unreachable-code
+        - name: unused-parameter
+        - name: var-declaration
+        - name: var-naming
+    nolintlint:
+      require-explanation: true
+      require-specific: true
+      allow-unused: false
+    gosec:
+      excludes:
+        - G104 # duplicates errcheck
+
+  exclusions:
+    rules:
+      - path: _test\.go
+        linters:
+          - errcheck
+          - gosec
+      - path: examples/
+        linters:
+          - errcheck
+          - gosec
+
+formatters:
+  enable:
+    - gofumpt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/your-org/your-repo
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  # For incremental adoption on legacy code, uncomment:
+  # new-from-rev: origin/main

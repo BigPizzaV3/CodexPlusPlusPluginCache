@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "SEOmatic",
+    "url": "https://seomatic.ai"
+  },
+  "description": "A guided, data-grounded SEO audit workflow for the SEOmatic connector: real Search Console, keyword, backlink and AI-visibility data turned into a prioritized action plan the user can approve.",
+  "homepage": "https://seomatic.ai/developers/mcp",
+  "interface": {
+    "capabilities": [
+      "SEO audit",
+      "Search Console analysis",
+      "Keyword research",
+      "Backlink analysis",
+      "AI search visibility"
+    ],
+    "category": "Data & Analytics",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Run a full SEO audit of my site and rank the fixes by impact.",
+      "Which keywords is my site close to ranking on page 1 for?",
+      " Why did my traffic drop, and what should I fix first?"
+    ],
+    "developerName": "SEOmatic",
+    "displayName": "SEOmatic SEO Audit",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Ask for an SEO audit and get a methodical, data-grounded review of your own website through the SEOmatic connector: top queries and pages, keywords one push from page 1, title/meta mismatches losing clicks, traffic decay and who took it, indexation health, backlink velocity, and AI-answer visibility. The report leads with a verdict and ranks actions by expected impact, each justified by a number from your data. On paid SEOmatic plans the fixes can be staged as tasks that always wait for your approval. Requires the SEOmatic MCP connector (https://app.seomatic.ai/api/mcp).",
+    "privacyPolicyURL": "https://seomatic.ai/privacy",
+    "shortDescription": "SEO audit from your real data",
+    "termsOfServiceURL": "https://seomatic.ai/terms",
+    "websiteURL": "https://seomatic.ai"
+  },
+  "keywords": [
+    "seo",
+    "seo-audit",
+    "search-console",
+    "keywords",
+    "backlinks",
+    "ai-visibility"
+  ],
+  "license": "MIT",
+  "name": "seomatic-seo-audit",
+  "skills": "./skills",
+  "version": "1.3.0"
+}

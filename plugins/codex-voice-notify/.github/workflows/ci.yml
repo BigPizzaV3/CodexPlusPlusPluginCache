@@ -1,0 +1,180 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Package and WAV validation
+        run: python scripts/validate_package.py
+      - name: Deterministic release ZIP validation
+        run: >-
+          python scripts/build_release.py --check-only
+          --sha256-output "${{ runner.temp }}/release-sha256.txt"
+      - name: Upload deterministic release digest
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-digest-${{ matrix.os }}
+          path: ${{ runner.temp }}/release-sha256.txt
+          if-no-files-found: error
+          retention-days: 1
+      - name: macOS first-time setup smoke test
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          set -euo pipefail
+          SKILL_DIR="$PWD/skills/voice-notify-settings"
+          PLUGIN_ROOT="$(cd "$SKILL_DIR/../.." && pwd)"
+          SETTINGS_SCRIPT="$PLUGIN_ROOT/scripts/voice_notify_config.sh"
+          HOOK_SCRIPT="$PLUGIN_ROOT/hooks/play_notify.sh"
+          /bin/sh -n "$SETTINGS_SCRIPT"
+          /bin/sh -n "$HOOK_SCRIPT"
+          FAKE_CODEX="$RUNNER_TEMP/codex"
+          printf '#!/bin/sh\necho "codex-cli 0.145.0"\n' > "$FAKE_CODEX"
+          chmod +x "$FAKE_CODEX"
+
+          REJECTED_CONFIG="$RUNNER_TEMP/rejected-settings.json"
+          export CODEX_VOICE_NOTIFY_CONFIG="$REJECTED_CONFIG"
+          set +e
+          /bin/sh "$SETTINGS_SCRIPT" setup \
+            --voice male \
+            --language en \
+            --codex-command /bin/echo \
+            --skip-audio-test
+          REJECTED_STATUS=$?
+          set -e
+          if [ "$REJECTED_STATUS" -ne 3 ] || [ -e "$REJECTED_CONFIG" ]; then
+            echo "Rejected Codex executables must return 3 without saving settings." >&2
+            exit 1
+          fi
+
+          export CODEX_VOICE_NOTIFY_CONFIG="$RUNNER_TEMP/settings.json"
+          /bin/sh "$SETTINGS_SCRIPT" setup \
+            --voice male \
+            --language ja \
+            --codex-command "$FAKE_CODEX" \
+            --skip-audio-test
+          test "$(/usr/bin/plutil -extract voice raw "$CODEX_VOICE_NOTIFY_CONFIG")" = "male"
+          test "$(/usr/bin/plutil -extract language raw "$CODEX_VOICE_NOTIFY_CONFIG")" = "ja"
+          test "$(/usr/bin/plutil -extract events.PreToolUse raw "$CODEX_VOICE_NOTIFY_CONFIG")" = "false"
+          SHOWN_SETTINGS="$RUNNER_TEMP/shown-settings.json"
+          /bin/sh "$SETTINGS_SCRIPT" show > "$SHOWN_SETTINGS"
+          test "$(/usr/bin/plutil -extract voice raw "$SHOWN_SETTINGS")" = "male"
+          /bin/sh "$SETTINGS_SCRIPT" setup \
+            --voice female \
+            --language ko \
+            --codex-command "$FAKE_CODEX" \
+            --open-hooks \
+            --dry-run
+          export PLUGIN_ROOT
+          export PLUGIN_DATA="$RUNNER_TEMP/codex-voice-notify"
+          export CODEX_VOICE_NOTIFY_NO_PLAY=1
+          for LOCALE in ru zh-CN; do
+            /bin/sh "$SETTINGS_SCRIPT" set --language "$LOCALE"
+            test "$(/usr/bin/plutil -extract language raw "$CODEX_VOICE_NOTIFY_CONFIG")" = "$LOCALE"
+            /bin/sh "$SETTINGS_SCRIPT" test \
+              --event Stop --language "$LOCALE" --dry-run
+            printf '%s' '{"hook_event_name":"Stop","prompt":"PRIVATE_SENTINEL"}' |
+              /bin/sh "$HOOK_SCRIPT"
+          done
+      - name: Windows settings script smoke test
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $SkillDir = Join-Path (Get-Location).Path "skills\voice-notify-settings"
+          $PluginRoot = [IO.Path]::GetFullPath((Join-Path $SkillDir "..\.."))
+          $FakeCodex = Join-Path $env:RUNNER_TEMP "codex.cmd"
+          Set-Content -LiteralPath $FakeCodex -Encoding ASCII -Value '@echo codex-cli 0.145.0'
+          $RejectedConfig = Join-Path $env:RUNNER_TEMP "rejected-settings.json"
+          $env:CODEX_VOICE_NOTIFY_CONFIG = $RejectedConfig
+          powershell.exe -NoProfile -ExecutionPolicy Bypass `
+            -File "$PluginRoot\scripts\voice_notify_config.ps1" `
+            setup -Voice male -Language en -CodexCommand $env:ComSpec -SkipAudioTest
+          if ($LASTEXITCODE -ne 3 -or (Test-Path -LiteralPath $RejectedConfig)) {
+            throw "Rejected Codex executables must return 3 without saving settings."
+          }
+          $env:CODEX_VOICE_NOTIFY_CONFIG = Join-Path $env:RUNNER_TEMP "settings.json"
+          $Settings = & "$PluginRoot\scripts\voice_notify_config.ps1" show | ConvertFrom-Json
+          if ($Settings.events.PreToolUse -ne $false -or
+              $Settings.events.PostToolUse -ne $false) {
+            throw "Tool lifecycle notifications must default to disabled."
+          }
+          powershell.exe -NoProfile -ExecutionPolicy Bypass `
+            -File "$PluginRoot\scripts\voice_notify_config.ps1" `
+            setup -Voice male -Language ja -CodexCommand $FakeCodex -SkipAudioTest
+          powershell.exe -NoProfile -ExecutionPolicy Bypass `
+            -File "$PluginRoot\scripts\voice_notify_config.ps1" `
+            setup -Voice female -Language ko -CodexCommand $FakeCodex -OpenHooks -DryRun
+          $env:PLUGIN_ROOT = (Get-Location).Path
+          $env:PLUGIN_DATA = Join-Path $env:RUNNER_TEMP "codex-voice-notify"
+          $env:CODEX_VOICE_NOTIFY_NO_PLAY = "1"
+          $HookInput = '{"hook_event_name":"Stop","prompt":"PRIVATE_SENTINEL"}'
+          $LocaleCases = @(
+            @{ Input = "ru"; Expected = "ru" },
+            @{ Input = "zh-cn"; Expected = "zh-CN" }
+          )
+          foreach ($LocaleCase in $LocaleCases) {
+            & "$PluginRoot\scripts\voice_notify_config.ps1" set `
+              -Language $LocaleCase.Input
+            if ($LASTEXITCODE -ne 0) {
+              throw "Windows set smoke test failed for $($LocaleCase.Input)."
+            }
+            $SavedSettings = `
+              & "$PluginRoot\scripts\voice_notify_config.ps1" show | ConvertFrom-Json
+            if ($SavedSettings.language -cne $LocaleCase.Expected) {
+              throw "Expected canonical locale $($LocaleCase.Expected), got $($SavedSettings.language)."
+            }
+            & "$PluginRoot\scripts\voice_notify_config.ps1" test `
+              -Event Stop -Language $LocaleCase.Input -DryRun
+            if ($LASTEXITCODE -ne 0) {
+              throw "Windows test smoke test failed for $($LocaleCase.Input)."
+            }
+            $HookInput |
+              powershell.exe -NoLogo -NoProfile -NonInteractive `
+                -ExecutionPolicy Bypass `
+                -File "$PluginRoot\hooks\play_notify.ps1"
+            if ($LASTEXITCODE -ne 0) {
+              throw "Windows hook smoke test failed for $($LocaleCase.Input) with exit code $LASTEXITCODE."
+            }
+          }
+
+  compare-release-digests:
+    name: compare release digests
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: release-digest-*
+          path: release-digests
+      - name: Require identical macOS and Windows ZIP digests
+        shell: bash
+        run: |
+          set -euo pipefail
+          MACOS_DIGEST="$(tr -d '\r\n' < release-digests/release-digest-macos-latest/release-sha256.txt)"
+          WINDOWS_DIGEST="$(tr -d '\r\n' < release-digests/release-digest-windows-latest/release-sha256.txt)"
+          [[ "$MACOS_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$WINDOWS_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          if [[ "$MACOS_DIGEST" != "$WINDOWS_DIGEST" ]]; then
+            echo "macOS ZIP SHA-256: $MACOS_DIGEST" >&2
+            echo "Windows ZIP SHA-256: $WINDOWS_DIGEST" >&2
+            exit 1
+          fi
+          echo "Cross-platform ZIP SHA-256: $MACOS_DIGEST"

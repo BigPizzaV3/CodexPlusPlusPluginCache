@@ -1,0 +1,6 @@
+interface:
+  display_name: "YCloud WhatsApp Flows"
+  short_description: "Design or implement WhatsApp Flow lifecycle"
+  default_prompt: "Use $ycloud-whatsapp-flows to design or implement contract-aware WhatsApp Flow lifecycle management with mock-only mutations."
+policy:
+  allow_implicit_invocation: true

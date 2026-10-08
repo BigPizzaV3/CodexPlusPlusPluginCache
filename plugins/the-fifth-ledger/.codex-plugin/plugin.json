@@ -1,0 +1,40 @@
+{
+  "author": {
+    "name": "Senyo",
+    "url": "https://github.com/senyo888/the-fifth-ledger"
+  },
+  "description": "Structured governance workflows for consequential agentic project work.",
+  "homepage": "https://github.com/senyo888/the-fifth-ledger",
+  "interface": {
+    "brandColor": "#07101F",
+    "brandColorDark": "#E0E9F8",
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Establish the safe authority and evidence boundary for this project task.",
+      "Review this project for truth drift across implementation, documentation, and lifecycle state.",
+      "Assess this release packet and identify the exact evidence or approval still missing."
+    ],
+    "developerName": "Senyo Seckley",
+    "displayName": "The 5th Ledger",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Keep consequential project work truthful, reviewable, and within authority. Establish action boundaries, trace claims to project-owned sources, review truth drift, structure independent challenge, draft durable decisions, and assess release evidence without inventing completion or granting lifecycle authority.",
+    "privacyPolicyURL": "https://github.com/senyo888/the-fifth-ledger/blob/main/PRIVACY.md",
+    "shortDescription": "Govern consequential work",
+    "supportURL": "https://github.com/senyo888/the-fifth-ledger/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/senyo888/the-fifth-ledger/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/senyo888/the-fifth-ledger"
+  },
+  "keywords": [
+    "agentic-workflows",
+    "evidence",
+    "governance",
+    "project-review",
+    "release-readiness"
+  ],
+  "license": "Apache-2.0",
+  "name": "the-fifth-ledger",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

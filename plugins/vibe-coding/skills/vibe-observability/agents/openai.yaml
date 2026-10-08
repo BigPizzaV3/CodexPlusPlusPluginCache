@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Metrics, logs & alerts"
+  short_description: "Metrics, logs, dashboards and actionable alerts"
+  default_prompt: "Use $vibe-observability to audit the selected metrics, logs & alerts boundary."

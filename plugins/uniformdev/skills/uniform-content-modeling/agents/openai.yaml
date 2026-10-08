@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uniform Content Modeling"
+  short_description: "Design and review Uniform content types"
+  default_prompt: "Review my content model with $uniform-content-modeling"

@@ -1,0 +1,35 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Hebbia Inc.",
+    "url": "https://www.hebbia.ai"
+  },
+  "description": "Bring Hebbia's institutional intelligence into ChatGPT and Codex. The Hebbia MCP server lets you tap into your firm's knowledge and premium public to make better decisions on deals and investments and run financial workflows from research to reports, slides, and financial models.",
+  "homepage": "https://www.hebbia.ai",
+  "interface": {
+    "brandColor": "#4657F5",
+    "brandColorDark": "#4657F5",
+    "capabilities": [],
+    "category": "Business & Operations",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Search Hebbia projects for documents about this deal and summarize key findings.",
+      "Analyze this document set in Hebbia and extract risks, obligations, and open questions.",
+      "Find Hebbia answers with citations for this research question and flag evidence gaps."
+    ],
+    "developerName": "Hebbia Inc.",
+    "displayName": "Hebbia",
+    "logo": "./assets/logo.png",
+    "longDescription": "Bring Hebbia's institutional intelligence into ChatGPT and Codex. The Hebbia MCP server lets you tap into your firm's knowledge and premium public to make better decisions on deals and investments and run financial workflows from research to reports, slides, and financial models.",
+    "privacyPolicyURL": "https://www.hebbia.com/privacy/",
+    "screenshots": [],
+    "shortDescription": "AI for financial rigor",
+    "termsOfServiceURL": "https://www.hebbia.com/terms-of-service/",
+    "websiteURL": "https://www.hebbia.ai"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "hebbia",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

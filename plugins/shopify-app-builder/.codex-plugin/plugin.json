@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "Shopify App Builder Contributors",
+    "url": "https://github.com/khadinakbarlabs/shopify-app-builder"
+  },
+  "description": "Open-source Shopify app development skills for Claude Code, Codex, Cursor, OpenCode, Command Code, and compatible AI coding agents.",
+  "homepage": "https://github.com/khadinakbarlabs/shopify-app-builder#readme",
+  "interface": {
+    "brandColor": "#004C3F",
+    "brandColorDark": "#B3FFF2",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Help me build a production-ready Shopify app.",
+      "Audit my Shopify app before App Store submission.",
+      "Debug this Shopify API, auth, billing, or webhook issue."
+    ],
+    "developerName": "Khadin Akbar",
+    "displayName": "Shopify App Builder",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "A comprehensive open-source Shopify app engineering toolkit with 32 focused skills for routing, APIs, authentication, billing, webhooks, extensions, UX, accessibility, performance, App Store listings, and acquisition.",
+    "privacyPolicyURL": "https://github.com/khadinakbarlabs/shopify-app-builder/blob/main/PRIVACY.md",
+    "shortDescription": "Develop Shopify Apps",
+    "termsOfServiceURL": "https://github.com/khadinakbarlabs/shopify-app-builder/blob/main/TERMS.md",
+    "websiteURL": "https://khadinakbar.com"
+  },
+  "keywords": [
+    "shopify",
+    "shopify-app-development",
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "cursor",
+    "opencode"
+  ],
+  "license": "MIT",
+  "name": "shopify-app-builder",
+  "repository": "https://github.com/khadinakbarlabs/shopify-app-builder",
+  "skills": "./skills/",
+  "version": "1.4.1"
+}

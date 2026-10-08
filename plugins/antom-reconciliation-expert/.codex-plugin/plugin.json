@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "Antom",
+    "url": "https://www.antom.com/"
+  },
+  "description": "Local analysis and validation for Antom Settlement Detail reports.",
+  "homepage": "https://docs.antom.com/ac/reconcile/skill",
+  "interface": {
+    "brandColor": "#0A22AA",
+    "brandColorDark": "#556DF5",
+    "capabilities": [
+      "Interactive",
+      "Write",
+      "Research"
+    ],
+    "category": "Finance",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Summarize my Antom Settlement Detail report and explain the net settlement.",
+      "Break down the fees in my Antom Settlement Detail report by payment method.",
+      "Verify the settlement calculations in my report and show where the amounts do not match."
+    ],
+    "developerName": "Antom",
+    "displayName": "Antom Reconciliation Expert",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Review Antom Settlement Detail CSV or XLSX reports to verify settlement calculations, summarize net settlement and fees, break down fees by payment method, and show exactly where amounts do not match. It analyzes only the files you provide and does not access your Antom account or download reports.",
+    "privacyPolicyURL": "https://docs.antom.com/ac/Platform/privacy",
+    "shortDescription": "Reconcile Antom settlements",
+    "supportURL": "https://docs.antom.com/support",
+    "termsOfServiceURL": "https://docs.antom.com/ac/Platform/v92lsfhn",
+    "websiteURL": "https://docs.antom.com/ac/reconcile/skill"
+  },
+  "keywords": [
+    "antom",
+    "reconciliation",
+    "settlement",
+    "fees",
+    "finance"
+  ],
+  "license": "MIT",
+  "name": "antom-reconciliation-expert",
+  "repository": "https://github.com/ant-intl/antom-ai-tools",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

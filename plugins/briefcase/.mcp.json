@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "briefcase": {
+      "type": "http",
+      "url": "https://api.briefcase.so/mcp"
+    }
+  }
+}

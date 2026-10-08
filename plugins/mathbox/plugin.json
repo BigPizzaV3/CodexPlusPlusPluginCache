@@ -1,0 +1,31 @@
+{
+  "name": "mathbox",
+  "description": "Sustained mathematical research with auditable claims, dependencies and reproducible experiments",
+  "version": "3.2.0",
+  "author": {
+    "name": "Najib Idrissi-Kaïtouni",
+    "url": "https://github.com/nidrissi"
+  },
+  "homepage": "https://github.com/nidrissi/mathbox",
+  "repository": "https://github.com/nidrissi/mathbox",
+  "license": "MIT",
+  "keywords": [
+    "mathematics",
+    "research",
+    "proof-audit",
+    "literature",
+    "latex"
+  ],
+  "skills": [
+    "./skills/computation-audit",
+    "./skills/literature-check",
+    "./skills/manuscript-integrate",
+    "./skills/proof-audit",
+    "./skills/proofread-math",
+    "./skills/research-attempt",
+    "./skills/research-init",
+    "./skills/research-program",
+    "./skills/research-retrospective",
+    "./skills/research-state"
+  ]
+}

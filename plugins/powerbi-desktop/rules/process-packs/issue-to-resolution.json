@@ -1,0 +1,23 @@
+{
+  "schema": "codex.powerbi.processRulePack.v1",
+  "id": "issue-to-resolution",
+  "process": "IssueToResolution",
+  "displayName": "Issue to Resolution",
+  "kpiTerms": ["issue", "ticket", "incident", "case", "resolution", "sla"],
+  "objects": [
+    { "name": "Issue", "aliases": ["issue", "ticket", "incident", "case"], "fields": [
+      { "name": "issueId", "aliases": ["IssueId", "TicketId", "IncidentId", "CaseId"], "required": true },
+      { "name": "customerId", "aliases": ["CustomerId", "AccountId"], "required": false },
+      { "name": "openedDate", "aliases": ["OpenedDate", "CreatedOn", "CreateDate"], "required": true },
+      { "name": "resolvedDate", "aliases": ["ResolvedDate", "ClosedDate"], "required": false },
+      { "name": "status", "aliases": ["Status", "State"], "required": true },
+      { "name": "priority", "aliases": ["Priority", "Severity"], "required": false }
+    ] }
+  ],
+  "rules": [
+    { "id": "i2r.issue.id.required", "type": "requiredField", "severity": "High", "object": "Issue", "field": "issueId", "description": "Issue is missing identifier.", "ownerHint": "Service owner", "recommendedAction": "Correct issue key before SLA reporting.", "releaseImpact": "No-Go" },
+    { "id": "i2r.issue.opened.required", "type": "requiredField", "severity": "High", "object": "Issue", "field": "openedDate", "description": "Issue is missing opened date.", "ownerHint": "Service owner", "recommendedAction": "Backfill opened date for cycle-time KPIs.", "releaseImpact": "No-Go" },
+    { "id": "i2r.issue.status.required", "type": "requiredField", "severity": "Medium", "object": "Issue", "field": "status", "description": "Issue is missing status.", "ownerHint": "Service owner", "recommendedAction": "Correct issue status before open/closed reporting.", "releaseImpact": "Warn" },
+    { "id": "i2r.issue.resolved.afterOpened", "type": "dateOrder", "severity": "High", "object": "Issue", "field": "resolvedDate", "startField": "openedDate", "endField": "resolvedDate", "description": "Resolved date is before opened date.", "ownerHint": "Service owner", "recommendedAction": "Correct issue lifecycle dates.", "releaseImpact": "No-Go" }
+  ]
+}

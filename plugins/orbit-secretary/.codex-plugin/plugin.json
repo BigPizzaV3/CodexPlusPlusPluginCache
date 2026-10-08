@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "battle-doll",
+    "url": "https://github.com/battle-doll"
+  },
+  "description": "A secretary for your Codex tasks: concise progress briefings, direction and ROI discussions, and bounded delegation that keeps the manager conversation available.",
+  "interface": {
+    "brandColor": "#101B30",
+    "brandColorDark": "#CFDAEF",
+    "capabilities": [
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Orbit, brief me on changes across my Codex tasks.",
+      "Orbit, help me choose which tasks to coordinate.",
+      "Orbit, coordinate this selected task within the scope I approve."
+    ],
+    "developerName": "\ud0dc\uc131 \uc5ec",
+    "displayName": "Orbit Secretary",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Get the essentials across your Codex tasks in one conversation: progress, meaningful blockers and decisions for you. Discuss priorities and delegate agreed work to authorized tasks or agents. Orbit briefly reports the handoff and returns to you; detailed evidence is available when requested. Task coordination depends on your Codex environment. Unattended recurring management and automatic cancellation of already delivered instructions are not included.",
+    "privacyPolicyURL": "https://github.com/battle-doll/orbit-secretary/blob/codex/release-prep/docs/PRIVACY.md",
+    "shortDescription": "Your Codex task secretary",
+    "supportURL": "https://github.com/battle-doll/orbit-secretary/issues",
+    "termsOfServiceURL": "https://github.com/battle-doll/orbit-secretary/blob/codex/release-prep/docs/TERMS.md",
+    "websiteURL": "https://github.com/battle-doll/orbit-secretary"
+  },
+  "keywords": [
+    "secretary",
+    "orchestration",
+    "long-running",
+    "roi",
+    "codex"
+  ],
+  "license": "MIT",
+  "name": "orbit-secretary",
+  "skills": "./skills/",
+  "version": "0.2.0"
+}

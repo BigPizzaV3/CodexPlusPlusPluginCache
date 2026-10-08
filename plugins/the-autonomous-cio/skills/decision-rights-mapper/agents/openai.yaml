@@ -1,0 +1,5 @@
+interface:
+  display_name: "Decision Rights Mapper"
+  short_description: "Explicit-only."
+policy:
+  allow_implicit_invocation: false

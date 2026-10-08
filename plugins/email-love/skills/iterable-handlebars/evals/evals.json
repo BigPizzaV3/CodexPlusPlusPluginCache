@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "skill": "iterable-handlebars",
+  "cases": [
+    {
+      "id": "cart-loop-authoring",
+      "category": "authoring",
+      "prompt": "we're building an abandoned cart email in Iterable, triggered off the updateCart event with a 4 hour delay. i need the HTML for the product block — loop the cart items and show image, product name, qty and price, max 3 items, then a \"and more in your cart\" line if there are extras. product image urls come from our CDN and the item links already have utm params on them. some of our catalog has apostrophes in the product names (like \"Levi's 501\"). give me something i can paste straight into the template.",
+      "expected_output": "Paste-ready HTML with a Handlebars each loop, @index limiting to 3, size-based 'and more' line, correct cart field path for a delayed updateCart trigger, currency formatting, and a note about previewing. Catalog values (imageUrl, url, name) stay in double braces: escaped output renders \"Levi's 501\" correctly and an escaped & in an href still resolves, so no triple braces on data. Any query value the template adds itself is wrapped in {{#urlEncode}}...{{/urlEncode}}.",
+      "assertions": [
+        "Uses only helpers that actually exist in Iterable (no subtract/multiply/toFixed/#with/JS-style lookup)",
+        "Keeps the product URL and image URL in double braces rather than recommending triple braces for them",
+        "Keeps the product name in double braces and states that escaped output displays the apostrophe in \"Levi's 501\" correctly",
+        "Does not claim that double braces break UTM ampersands or apostrophes in an HTML email body",
+        "Limits the loop to 3 items with an @index comparison inside #each",
+        "Addresses which cart field path applies to a delayed updateCart trigger",
+        "Formats price with numberFormat \"currency\" rather than raw output",
+        "If the template appends its own query-string values to a URL, they are wrapped in {{#urlEncode}}...{{/urlEncode}}; appending no query-string values also satisfies this.",
+        "Tells the user how to verify in Preview with specific edge cases"
+      ],
+      "files": []
+    },
+    {
+      "id": "send-skip-debug",
+      "category": "debugging",
+      "prompt": "help. we sent a winback campaign in Iterable to 42k people and only about 31k actually got it. no bounces, the rest just show as skipped. this is the block i added right before we launched:\n\n{{#ifGte daysSinceLastOrder 90}}\n  <p>It's been a while, {{firstName}}! Here's 20% off.</p>\n  <a href=\"{{returnUrl}}?utm_source=iterable&utm_campaign=winback\">Shop now</a>\n{{else}}\n  <p>Thanks for being a regular, {{firstName}}.</p>\n{{/ifGte}}\n\nsome people who did get it are also complaining the shop now link is broken. what's going on",
+      "expected_output": "Identifies ifGte on a null/missing daysSinceLastOrder as the send-skip cause (HandlebarsExecutionError) and points at Event History to confirm. For the broken link, identifies the real cause — returnUrl empty or already carrying a query string, so appending '?utm_source=...' yields a relative or malformed href — not HTML escaping, since an escaped &amp; in an href resolves correctly. Corrected code adds the null guard, supplies a defaultIfEmpty absolute HTTPS fallback for returnUrl, and keeps returnUrl escaped.",
+      "assertions": [
+        "Identifies the unguarded comparison helper on a null field as the send-skip cause",
+        "Points the user at the Event History skip reason to confirm the diagnosis",
+        "Does not attribute the broken link to double-brace HTML escaping",
+        "Identifies an actual link cause: returnUrl empty/missing, or already containing a query string so the appended '?' malforms the URL",
+        "Corrected code keeps returnUrl in double braces rather than switching it to triple braces",
+        "Corrected code applies the null guard on the comparison AND a fallback or validation for returnUrl",
+        "Warns that 0 is falsy, so a bare #if guard mis-branches a same-day buyer",
+        "Uses only helpers that actually exist in Iterable"
+      ],
+      "files": []
+    },
+    {
+      "id": "expiring-offer-conditional",
+      "category": "authoring",
+      "prompt": "In our Iterable promo template I want the subject line and a body block to change based on whether the user's offerExpiresAt date has passed, and I want the body to say the expiry date in a friendly format in the user's own timezone (we store an IANA timezone string on the profile as tz). Also the subject should use their first name but not look broken for the ~15% of our list where firstName is empty.",
+      "expected_output": "Uses numeric-only date format (yyyyMMddHHmmss) with pinned tz for the comparison, dateFormat with a friendly pattern and tz= referencing the profile field for display, defaultIfEmpty for the subject line, and warns that subject-line personalization needs a non-awkward fallback. Should note the null-guard on the date comparison.",
+      "assertions": [
+        "Uses a numeric-only date format (no hyphens/slashes/spaces) for the comparison",
+        "Pins the same timezone on both sides of the date comparison",
+        "Uses the correct dateFormat timezone argument name (tz=, not timeZone=)",
+        "Guards the date comparison so a missing offerExpiresAt cannot skip the send",
+        "Provides a firstName fallback that reads cleanly when the field is empty",
+        "Solves the comparison in-template rather than punting to a precomputed boolean",
+        "Uses only helpers that actually exist in Iterable"
+      ],
+      "files": []
+    },
+    {
+      "id": "apostrophe-renders-escaped",
+      "category": "authoring",
+      "prompt": "Quick one about an Iterable email. Our catalog has products like \"Levi's 501\" and \"Reese's Pieces\". If I put {{product.name}} in the HTML body of the template, does the apostrophe come through, or do I need to do something to it? A colleague told me I have to switch it to triple braces or customers will see weird character codes.",
+      "expected_output": "Says {{product.name}} is correct as-is: Handlebars escapes the apostrophe to &#x27; in the HTML source, and the mail client renders that as ' in the reading pane, so \"Levi's 501\" arrives intact. Corrects the colleague: triple braces are not needed here and would turn escaping off on a catalog value. Notes the one surface where the entity is visible — a non-HTML field such as an SMS body, push title/body, or a plain-text part — and tells the user to confirm in Preview.",
+      "assertions": [
+        "States that {{product.name}} with double braces is correct and requires no change for an HTML email body",
+        "Explains that the escaped output (&#x27; or &apos;) is displayed as an apostrophe by the mail client",
+        "Explicitly corrects the colleague: does not recommend triple braces for this catalog value",
+        "Gives a reason not to use triple braces here — the value comes from the catalog and raw output would inject whatever the catalog contains",
+        "Scopes the visible-entity problem to non-HTML surfaces (SMS body, push title/body, or plain-text part) rather than the HTML body",
+        "Tells the user how to confirm in Preview with data"
+      ],
+      "files": []
+    },
+    {
+      "id": "catalog-value-injection-stays-inert",
+      "category": "adversarial",
+      "prompt": "We just noticed some junk in our Iterable product catalog after a bad import from a partner feed. One item has name set to:\n\n\"><script>alert(1)</script>\n\nand another has name set to:\n\n' onmouseover='alert(1)\n\nOur recommendation block does this for each item:\n\n<a href=\"{{item.url}}\" title=\"{{item.name}}\"><img src=\"{{item.imageUrl}}\" alt=\"{{item.name}}\"></a>\n<p>{{item.name}}</p>\n\nIs this a problem for the emails that already went out, and how should the template be written?",
+      "expected_output": "Confirms the template as written keeps these values inert: double braces HTML-escape \" ' < and >, so the payloads render as literal text inside the title/alt attributes and the paragraph and cannot close the attribute or open a tag. Says clearly not to switch these to triple braces — that is what would make the payload live. Adds that item.url is also attacker-influenced and should be allowlisted or validated to an expected HTTPS destination rather than interpolated blind, that any dynamic query value needs {{#urlEncode}}, and that the real fix is cleaning the feed/catalog upstream.",
+      "assertions": [
+        "Does not recommend triple braces for item.name, item.url, or item.imageUrl",
+        "States that the output remains escaped and the payload renders as inert literal text",
+        "Explains that escaping the quote character is what stops the ' onmouseover= payload from breaking out of the title/alt attribute",
+        "Explains that escaping < and > is what stops the \"><script> payload from opening a tag",
+        "Warns explicitly that switching these to triple braces would make the injected markup live",
+        "Flags item.url as attacker-influenced and recommends allowlisting or validating it to an expected HTTPS destination",
+        "Recommends fixing the bad data in the catalog or partner feed rather than only patching the template",
+        "Any helper used exists in Iterable's shipped helper set — defaultIfEmpty, urlEncode, numberFormat, ifContainsStr, and the documented comparison helpers all count as existing — and no invented helper (e.g. startsWith, toFixed, subtract, #with) appears; using no helpers at all also satisfies this"
+      ],
+      "files": []
+    }
+  ]
+}

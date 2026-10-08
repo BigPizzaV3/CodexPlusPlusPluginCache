@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Voice and Music"
+  short_description: "Create voiceover and music"
+  default_prompt: "Use $pixverse-audio to create narration or music for my project."
+policy:
+  allow_implicit_invocation: true

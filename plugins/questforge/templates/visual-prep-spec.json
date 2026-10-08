@@ -1,0 +1,35 @@
+{
+  "_instructions": "Complete a campaign-specific copy from the accepted conception and current visual ledger. This file defines structure only and must not be used unchanged.",
+  "title": "",
+  "style": "",
+  "session": 0,
+  "subjects": [
+    {
+      "kind": "character",
+      "label": "",
+      "anchor": "",
+      "purpose": "canon player-character visual anchor",
+      "sheet": "",
+      "action": "",
+      "avoid": ""
+    },
+    {
+      "kind": "location",
+      "label": "",
+      "anchor": "",
+      "purpose": "canon opening-location visual anchor",
+      "sheet": "",
+      "action": "",
+      "avoid": ""
+    },
+    {
+      "kind": "item",
+      "label": "",
+      "anchor": "",
+      "purpose": "canon persistent-object visual anchor",
+      "sheet": "",
+      "action": "",
+      "avoid": ""
+    }
+  ]
+}

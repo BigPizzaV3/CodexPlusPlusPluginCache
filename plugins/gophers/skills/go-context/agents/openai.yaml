@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Context"
+  short_description: "Handle Go context flow and cancellation"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-context to review context propagation, deadlines, and cancellation in this Go code."

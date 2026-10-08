@@ -1,0 +1,5 @@
+interface:
+  display_name: "note Workspace 文体プロフィール"
+  short_description: "本人の文章から書き方だけを抽出し、確認済み設定として履歴保存します"
+policy:
+  allow_implicit_invocation: true

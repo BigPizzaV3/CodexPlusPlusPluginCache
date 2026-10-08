@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Message Processing"
+  short_description: "Make redelivery and ordering safe"
+  default_prompt: "Use $go-message-processing to design this Go producer or consumer for redelivery and recovery."
+policy:
+  allow_implicit_invocation: true

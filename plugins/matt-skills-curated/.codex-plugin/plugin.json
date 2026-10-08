@@ -1,0 +1,49 @@
+{
+  "author": {
+    "name": "Mamdouh Aboammar"
+  },
+  "description": "Curated engineering, AI/ML, and agentic productivity Skills adapted for ChatGPT and Codex.",
+  "interface": {
+    "capabilities": [
+      "Engineering task routing",
+      "Requirements discovery & specs",
+      "Issue decomposition & tickets",
+      "Multi-agent spec implementation",
+      "Test-driven development (TDD)",
+      "Root-cause bug diagnosis",
+      "Pre-commit code review",
+      "Software architecture & deep modules",
+      "Domain-driven modeling & ADRs",
+      "Primary-source technical research",
+      "AI & ML model engineering",
+      "Self-healing data remediation",
+      "ML statistical evaluation & metrics",
+      "Cognitive workspace reasoning (J-space)",
+      "Autonomous goal contracts",
+      "Skill conductor authoring & evals",
+      "Git safety guardrails & pre-commit",
+      "Workflow design & session handoffs",
+      "Course scaffolding & pedagogy",
+      "Long-form writing & beats structure"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Choose the best engineering workflow for this task and execute it",
+      "Turn this idea into a buildable engineering plan",
+      "Diagnose this bug, fix it, and verify the result"
+    ],
+    "developerName": "Mamdouh Aboammar",
+    "displayName": "Matt Skills Curated",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "A curated ChatGPT and Codex distribution of MIT-licensed engineering, AI/ML, and productivity workflows, matured for automatic routing. It includes 42 focused Skills for requirements, specs, tickets, multi-agent spec implementation, TDD, debugging, review, session retrospectives, architecture, research, AI model development, data remediation, statistical ML best practices, J-space cognitive reasoning, autonomous goal contracts, skill conductor authoring, repository safety and setup, TypeScript package boundaries, workflow design, handoffs, teaching, course exercise scaffolding, and long-form writing. Host-specific duplicates and repository-development noise are excluded.",
+    "privacyPolicyURL": "https://github.com/imMamdouhaboammar/matts-skills-into-chatgpt/blob/main/PRIVACY.md",
+    "shortDescription": "Curated AI & Dev Workflows",
+    "supportURL": "https://github.com/imMamdouhaboammar/matts-skills-into-chatgpt/issues",
+    "termsOfServiceURL": "https://github.com/imMamdouhaboammar/matts-skills-into-chatgpt/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/imMamdouhaboammar/matts-skills-into-chatgpt"
+  },
+  "name": "matt-skills-curated",
+  "skills": "./skills/",
+  "version": "1.1.0"
+}

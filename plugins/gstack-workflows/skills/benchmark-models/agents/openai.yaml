@@ -1,0 +1,9 @@
+interface:
+  display_name: "Benchmark Models"
+  short_description: "Compare model performance on the same bounded workflow with explicit scoring criteria."
+  default_prompt: "Use Benchmark Models for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Tailscale",
+    "url": "https://tailscale.com"
+  },
+  "description": "Tailscale guidance for ChatGPT and Codex.",
+  "homepage": "https://tailscale.com",
+  "interface": {
+    "brandColor": "#1F1E1E",
+    "brandColorDark": "#FAF9F8",
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "How do I SSH into a server?",
+      "How can I share my self-hosted app privately?",
+      "How do I track coding-agent costs, usage, and sessions"
+    ],
+    "developerName": "Tailscale",
+    "displayName": "Tailscale",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Guide for installing, configuring, and managing Tailscale, headscale, and the Tailscale product family. Covers core mesh VPN (exit nodes, subnet routers, access controls, SSH, MagicDNS), Docker and Kubernetes integration, CI/CD pipelines, ephemeral nodes, infrastructure access, site-to-site networking, app connectors, Aperture (AI/LLM gateway for governance, cost control, usage visibility), device posture, MDM, SCIM provisioning, SSH and kubectl session recording, tsrecorder, Taildrop, Tailscale Serve, Funnel, and building Go applications that embed Tailscale via the tsnet library. Use when someone asks about Tailscale networking, mesh VPN, VPN replacement, containers, Kubernetes operator, CI/CD runners, device management, session recording, audit logging, LLM API access, AI cost control, file sharing, exposing internal services, or writing a Go program that joins a tailnet as its own device \u2014 even when they describe the scenario without naming the product.",
+    "privacyPolicyURL": "https://tailscale.com/privacy-policy",
+    "shortDescription": "Securely connect your devices",
+    "supportURL": "https://github.com/tailscale/tailscale-skill/issues",
+    "termsOfServiceURL": "https://tailscale.com/terms",
+    "websiteURL": "https://tailscale.com"
+  },
+  "keywords": [
+    "ssh",
+    "remote access",
+    "ai gateway",
+    "tailscale",
+    "networking",
+    "vpn",
+    "wireguard"
+  ],
+  "license": "BSD-3-Clause",
+  "name": "tailscale",
+  "repository": "https://github.com/tailscale/tailscale-skill",
+  "skills": "./skills/",
+  "version": "1.0.0-alpha-1"
+}

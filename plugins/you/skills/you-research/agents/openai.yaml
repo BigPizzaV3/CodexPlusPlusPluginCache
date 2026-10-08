@@ -1,0 +1,18 @@
+interface:
+  display_name: You.com Research
+  short_description: Cited research via agent-led search, Research API scripts, or MCP fallback
+  brand_color: '#6C5CE7'
+  default_prompt: Use You.com to research this question with source comparison.
+
+dependencies:
+  tools:
+    - type: mcp
+      value: you-research-base
+      description: You.com search and contents tools for agent-led deep search
+      transport: streamable_http
+      url: https://api.you.com/mcp?tools=you-search,you-contents
+    - type: mcp
+      value: you-docs
+      description: You.com documentation search for current API details
+      transport: streamable_http
+      url: https://you.com/docs/_mcp/server

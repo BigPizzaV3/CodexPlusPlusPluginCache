@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "Erhan Erden",
+    "url": "https://github.com/erhanrdn"
+  },
+  "description": "Reliable sign-in automation for apps on iOS Simulator and Android Emulator using user-supplied test credentials.",
+  "homepage": "https://github.com/erhanrdn/simulator-login-skill",
+  "interface": {
+    "brandColor": "#146C94",
+    "brandColorDark": "#6BC3EB",
+    "capabilities": [
+      "Authenticate simulator sessions",
+      "Handle native and WebView forms",
+      "Verify signed-in state"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Sign in on the active simulator and verify the authenticated session.",
+      "Log in on the Android emulator with my test credentials.",
+      "Prepare an authenticated simulator session for screenshots."
+    ],
+    "developerName": "Erhan Erden",
+    "displayName": "Simulator Login",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Sign in to apps on iOS Simulator and Android Emulator with supplied test credentials, handle input issues, and verify the authenticated state.",
+    "privacyPolicyURL": "https://github.com/erhanrdn/simulator-login-skill/blob/main/PRIVACY.md",
+    "shortDescription": "Reliable simulator sign-in",
+    "termsOfServiceURL": "https://github.com/erhanrdn/simulator-login-skill/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/erhanrdn/simulator-login-skill"
+  },
+  "keywords": [
+    "simulator",
+    "emulator",
+    "ios",
+    "android",
+    "authentication",
+    "testing"
+  ],
+  "license": "MIT",
+  "name": "simulator-login",
+  "repository": "https://github.com/erhanrdn/simulator-login-skill",
+  "skills": "./skills/",
+  "version": "1.0.1"
+}

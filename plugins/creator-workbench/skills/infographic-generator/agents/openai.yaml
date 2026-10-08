@@ -1,0 +1,7 @@
+interface:
+  display_name: Infographic Generator
+  short_description: Plan clear data-led social infographics
+  brand_color: '#E45B32'
+  default_prompt: Use $infographic-generator to turn this content into a clear social infographic concept.
+policy:
+  allow_implicit_invocation: true

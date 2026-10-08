@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Function Design"
+  short_description: "Design focused and idiomatic Go functions"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-functions to design or review these Go functions."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Project mapping"
+  short_description: "Project structure, connections and contract ownership"
+  default_prompt: "Use $vibe-map to map this repository and explain its main contracts."

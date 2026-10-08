@@ -1,0 +1,3 @@
+interface:
+  display_name: "Maeve Client News Monitor"
+  short_description: "Find recent public developments about a prospect or client."

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "policyId": "full-supported-fastify-v4",
+  "adapterProfile": "typescript-fastify-vanilla-v1",
+  "baselineProfile": "full-supported-operations-v1",
+  "requiredOperationSurfaces": {
+    "backend": "all",
+    "ui": "none",
+    "tests": "all"
+  },
+  "requiredScenarios": "all",
+  "minimumStateByMode": {
+    "manifest": "declared",
+    "static": "linked",
+    "runtime": "execution-claimed"
+  }
+}

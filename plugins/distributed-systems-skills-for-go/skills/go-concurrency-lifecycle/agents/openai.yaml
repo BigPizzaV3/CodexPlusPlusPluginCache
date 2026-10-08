@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Concurrency Lifecycle"
+  short_description: "Own goroutines, capacity, and shutdown"
+  default_prompt: "Use $go-concurrency-lifecycle to review this Go concurrency path for ownership and termination."
+policy:
+  allow_implicit_invocation: true

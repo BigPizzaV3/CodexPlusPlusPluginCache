@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shiro"
+  short_description: "Design critic for vibe-coded UI"
+  default_prompt: "Review this landing page in Shiro quick mode."

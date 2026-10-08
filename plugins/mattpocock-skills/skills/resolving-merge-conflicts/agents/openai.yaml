@@ -1,0 +1,9 @@
+interface:
+  display_name: Resolving Merge Conflicts
+  short_description: Resolve merge and rebase conflicts
+  default_prompt: Use $resolving-merge-conflicts for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

@@ -1,0 +1,33 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Statsig, LLC",
+    "url": "https://statsig.com"
+  },
+  "description": "Bring your Statsig workspace into ChatGPT. Product builders can now explore, manage, and create Statsig experiments, feature gates, dynamic configs, and more directly in ChatGPT conversations.\n\nAsk things like:\n\u201cMove this experiment to 50% rollout.\u201d\n\u201cTurn on this feature gate for all users.\u201d\n\u201cShow me which dynamic configs changed this week.\u201d\n\"Explain how the DAU metric is defined.\u201d\n\nYou can both read and write to Statsig: inspect experiment settings, read metric definitions, update allocations, toggle feature flags, edit targeting rules, and modify dynamic config values directly from ChatGPT.\n\nThe app connects through Statsig\u2019s MCP server and honors your existing Statsig permissions, so you only see and change what you\u2019re authorized to access\u2014across projects, environments, and teams.",
+  "homepage": "https://statsig.com",
+  "interface": {
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Analyze results of Statsig experiment shorter_blog_titles"
+    ],
+    "developerName": "Statsig, LLC",
+    "displayName": "Statsig",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
+    "longDescription": "Bring your Statsig workspace into Codex. Product builders can now explore, manage, and create Statsig experiments, feature gates, dynamic configs, and more directly in Codex conversations.\n\nAsk things like:\n\u201cMove this experiment to 50% rollout.\u201d\n\u201cTurn on this feature gate for all users.\u201d\n\u201cShow me which dynamic configs changed this week.\u201d\n\"Explain how the DAU metric is defined.\u201d\n\nYou can both read and write to Statsig: inspect experiment settings, read metric definitions, update allocations, toggle feature flags, edit targeting rules, and modify dynamic config values directly from Codex.\n\nThe app connects through Statsig\u2019s MCP server and honors your existing Statsig permissions, so you only see and change what you\u2019re authorized to access\u2014across projects, environments, and teams.",
+    "privacyPolicyURL": "https://www.statsig.com/privacy",
+    "screenshots": [],
+    "shortDescription": "Connect to Statsig",
+    "supportURL": "https://statsigcommunity.slack.com/join/shared_invite/zt-3lyt5mtn8-KEM9tqPvLkBJ9ZC2ULqoxw#/shared-invite/email",
+    "termsOfServiceURL": "https://www.statsig.com/enterprise-terms",
+    "websiteURL": "https://statsig.com"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "statsig",
+  "repository": "https://github.com/openai/plugins",
+  "version": "3.0.0"
+}

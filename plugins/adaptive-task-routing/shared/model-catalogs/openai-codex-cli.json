@@ -1,0 +1,100 @@
+{
+  "schema_version": 3,
+  "product": "codex-cli",
+  "surface": "codex-cli",
+  "catalog_kind": "versioned_expiring_fallback",
+  "catalog_complete": true,
+  "visible_model_count": 6,
+  "observed_at": "2026-09-12T02:01:51.531598+00:00",
+  "expires_at": "2026-09-19T02:01:51.531598+00:00",
+  "source": {
+    "type": "codex_app_server_model_list",
+    "host_version": "codex-cli 0.154.0",
+    "scope": "one authenticated local Codex CLI environment"
+  },
+  "capability_source": {
+    "type": "official_documentation",
+    "url": "https://learn.chatgpt.com/docs/models",
+    "checked_at": "2026-09-12T02:04:38+00:00",
+    "scope": "ChatGPT Work and Codex model-selection guidance"
+  },
+  "reference_surfaces": [
+    "chatgpt-desktop",
+    "chatgpt-web",
+    "codex-app",
+    "codex-cli",
+    "codex-ide-extension",
+    "codex-cloud"
+  ],
+  "fallback_use": {
+    "recommendation_scope": "recognized OpenAI surfaces listed by the official capability source",
+    "availability_scope": "the observed Codex CLI environment only",
+    "ask_for_selector_before_recommendation": false
+  },
+  "availability": "unverified_outside_observed_environment",
+  "reasoning_guidance": {
+    "principle": "Use the lowest reasoning effort that reliably meets the task's quality and validation requirements.",
+    "low": "Quick, well-scoped tasks.",
+    "medium": "Tasks needing more planning while balancing speed and depth.",
+    "high": "Difficult work with multiple steps, sources, or tradeoffs.",
+    "xhigh": "Difficult work needing more sustained analysis and checking than high.",
+    "max": "The hardest single-task problems when depth matters more than speed or usage.",
+    "ultra": "Large complex work that can be split into meaningful parallel subtasks using automatic delegation."
+  },
+  "models": [
+    {
+      "model": "gpt-6-astra",
+      "display_name": "GPT-6 Astra",
+      "runtime_description": "Our most capable model for complex, demanding work.",
+      "official_description": "Most capable model for complex work across code, apps, and research, with advanced reasoning, computer use, and stronger judgment.",
+      "selection_guidance": "Use for the hardest end-to-end workflows across multiple steps and tools that require sustained reasoning and judgment.",
+      "default_reasoning_effort": "medium",
+      "supported_reasoning_efforts": ["low", "medium", "high", "xhigh", "max", "ultra"]
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "display_name": "GPT-5.6 Sol",
+      "runtime_description": "Reliable agentic workhorse for everyday tasks.",
+      "official_description": "Most capable GPT-5.6 model for complex coding, computer use, research, and cybersecurity.",
+      "selection_guidance": "Use for complex, open-ended, ambiguous, difficult, or high-value work that needs extra analysis, judgment, or polish.",
+      "default_reasoning_effort": "low",
+      "supported_reasoning_efforts": ["low", "medium", "high", "xhigh", "max", "ultra"]
+    },
+    {
+      "model": "gpt-5.6-terra",
+      "display_name": "GPT-5.6 Terra",
+      "runtime_description": "Balanced agentic coding model for everyday work.",
+      "official_description": "Balanced GPT-5.6 model for everyday work, competitive with GPT-5.5 at a lower cost.",
+      "selection_guidance": "Use for everyday work needing strong reasoning and tool use when Sol's full depth is unnecessary.",
+      "default_reasoning_effort": "medium",
+      "supported_reasoning_efforts": ["low", "medium", "high", "xhigh", "max", "ultra"]
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "display_name": "GPT-5.6 Luna",
+      "runtime_description": "Fast and affordable agentic coding model.",
+      "official_description": "Fast and affordable GPT-5.6 model with strong capability at the lowest cost in the family.",
+      "selection_guidance": "Use for clear, repeatable, specific, or high-volume extraction, classification, transformation, and structured-summary tasks.",
+      "default_reasoning_effort": "medium",
+      "supported_reasoning_efforts": ["low", "medium", "high", "xhigh", "max", "ultra"]
+    },
+    {
+      "model": "gpt-5.5",
+      "display_name": "GPT-5.5",
+      "runtime_description": "Proven previous-generation model for coding and general work.",
+      "official_description": "Previous-generation flagship model for complex coding, computer use, knowledge work, and research workflows.",
+      "selection_guidance": "Use only when it is available and compatibility with previous-generation workflows matters; prefer a current recommended family for new routing decisions.",
+      "default_reasoning_effort": "medium",
+      "supported_reasoning_efforts": ["low", "medium", "high", "xhigh"]
+    },
+    {
+      "model": "gpt-5.3-codex-spark",
+      "display_name": "GPT-5.3 Codex Spark",
+      "runtime_description": "Ultra-fast coding model.",
+      "official_description": "Text-only research preview optimized for near-instant, real-time coding iteration and available to eligible ChatGPT Pro users.",
+      "selection_guidance": "Use for rapid, text-only coding iteration when its preview status and account availability are acceptable.",
+      "default_reasoning_effort": "high",
+      "supported_reasoning_efforts": ["low", "medium", "high", "xhigh"]
+    }
+  ]
+}

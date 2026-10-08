@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Kafka & Redpanda"
+  short_description: "Events, offsets, redelivery and rebalancing"
+  default_prompt: "Use $vibe-kafka to audit the selected kafka & redpanda boundary."

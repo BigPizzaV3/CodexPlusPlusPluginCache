@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modelica Projects"
+  short_description: "Build, edit, and preview visual Modelica projects"
+  default_prompt: "Use $modelica-projects to build, source-preservingly edit, validate, or structurally preview a portable Modelica project."

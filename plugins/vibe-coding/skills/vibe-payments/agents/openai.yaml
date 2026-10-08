@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Payments"
+  short_description: "Payment events, reconciliation and plan entitlements"
+  default_prompt: "Use $vibe-payments to audit the selected payments boundary."

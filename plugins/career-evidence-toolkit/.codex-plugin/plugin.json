@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Hazique Malik",
+    "url": "https://github.com/haziqmalik"
+  },
+  "description": "Maintain verified career evidence and generate truthful, role-specific resumes.",
+  "homepage": "https://github.com/haziqmalik/career-evidence-toolkit",
+  "interface": {
+    "brandColor": "#E44C65",
+    "brandColorDark": "#E44C65",
+    "capabilities": [
+      "Interactive",
+      "Write",
+      "Read"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Set up my private career workspace, import my existing evidence, and initialize my master resume.",
+      "Sync my certificates and update my master resume using only verified or user-confirmed evidence.",
+      "Analyze this vacancy and create ATS and Executive resumes using only relevant, supported career evidence."
+    ],
+    "developerName": "Hazique Malik",
+    "displayName": "Career Evidence Toolkit",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Onboard a private career workspace, maintain a verified master resume and certificate registry, and generate ATS or executive resumes for job titles and specific vacancies.",
+    "privacyPolicyURL": "https://github.com/haziqmalik/career-evidence-toolkit/blob/main/PRIVACY.md",
+    "shortDescription": "Create evidence-backed resumes",
+    "termsOfServiceURL": "https://github.com/haziqmalik/career-evidence-toolkit/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/haziqmalik/career-evidence-toolkit"
+  },
+  "keywords": [
+    "career",
+    "resume",
+    "certificates",
+    "job-application",
+    "evidence"
+  ],
+  "license": "Apache-2.0",
+  "name": "career-evidence-toolkit",
+  "repository": "https://github.com/haziqmalik/career-evidence-toolkit",
+  "skills": "./skills",
+  "version": "0.1.0"
+}

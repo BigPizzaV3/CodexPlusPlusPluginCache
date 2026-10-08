@@ -1,0 +1,8 @@
+Finance[Revenue] =
+SUM(Finance[RevenueAmount])
+
+Finance[Cost] =
+SUM(Finance[CostAmount])
+
+Finance[Gross Margin %] =
+DIVIDE([Revenue] - [Cost], [Revenue])

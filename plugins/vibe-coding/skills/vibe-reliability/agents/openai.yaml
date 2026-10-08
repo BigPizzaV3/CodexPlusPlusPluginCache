@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Reliability & performance"
+  short_description: "Failures, race conditions, consistency and performance"
+  default_prompt: "Use $vibe-reliability to audit the selected reliability & performance boundary."

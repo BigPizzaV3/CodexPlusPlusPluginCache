@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "California Residential Assessment Appeal Case State",
+  "type": "object",
+  "required": ["schema_version", "language", "stage", "property", "sources", "unresolved_facts", "deadlines", "documents", "filing"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "language": {"type": "string", "minLength": 1},
+    "stage": {"type": "integer", "minimum": 0, "maximum": 8},
+    "property": {
+      "type": "object",
+      "required": ["address", "county", "parcel_status"],
+      "properties": {
+        "address": {"type": ["string", "null"]},
+        "county": {"type": ["string", "null"]},
+        "apn": {"type": ["string", "null"]},
+        "parcel_status": {"enum": ["unknown", "single_verified", "ambiguous"]}
+      }
+    },
+    "appeal": {
+      "type": "object",
+      "properties": {
+        "assessment_year": {"type": ["integer", "null"]},
+        "appeal_type": {"enum": [null, "decline_in_value", "base_year_or_supplemental", "escape_assessment", "calamity", "record_error", "outside_board_jurisdiction"]},
+        "valuation_date": {"type": ["string", "null"]},
+        "current_assessed_value": {"type": ["number", "null"], "minimum": 0},
+        "proposed_value": {"type": ["number", "null"], "minimum": 0},
+        "evidence_confidence": {"enum": [null, "strong", "moderate", "weak", "insufficient"]}
+      }
+    },
+    "deadlines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["event", "date", "status", "source_url", "verified_on"],
+        "properties": {
+          "event": {"type": "string"},
+          "date": {"type": ["string", "null"]},
+          "status": {"enum": ["verified", "unverified", "completed"]},
+          "source_url": {"type": ["string", "null"]},
+          "verified_on": {"type": ["string", "null"]},
+          "reminder_offsets_days": {"type": "array", "items": {"type": "integer", "minimum": 0}}
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["fact", "classification", "url", "accessed_on"],
+        "properties": {
+          "fact": {"type": "string"},
+          "classification": {"enum": ["official", "primary_document", "secondary", "unverified_lead", "user_provided"]},
+          "url": {"type": ["string", "null"]},
+          "accessed_on": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "status", "extraction_status"],
+        "properties": {
+          "kind": {"type": "string"},
+          "status": {"enum": ["missing", "provided", "verified", "conflicting"]},
+          "extraction_status": {"enum": ["not_attempted", "partial", "complete", "needs_user_confirmation"]},
+          "sensitive_data_warning_given": {"type": "boolean"}
+        }
+      }
+    },
+    "filing": {
+      "type": "object",
+      "required": ["method", "submission_status", "proof_status"],
+      "properties": {
+        "method": {"enum": [null, "online", "mail", "in_person", "other"]},
+        "submission_status": {"enum": ["not_started", "draft", "submitted_user_reported", "submitted_verified", "rejected", "withdrawn"]},
+        "proof_status": {"enum": ["none", "draft_only", "confirmation_unverified", "confirmation_verified"]},
+        "confirmation_number": {"type": ["string", "null"]},
+        "submitted_at": {"type": ["string", "null"]}
+      }
+    },
+    "unresolved_facts": {"type": "array", "items": {"type": "string"}},
+    "conflicts": {"type": "array", "items": {"type": "string"}}
+  }
+}

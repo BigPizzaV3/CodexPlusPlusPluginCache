@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse UGC Videos"
+  short_description: "Create UGC ads and demo videos"
+  default_prompt: "Use $pixverse-ugc-video to create a vertical creator-led product demo from this reference."
+policy:
+  allow_implicit_invocation: true

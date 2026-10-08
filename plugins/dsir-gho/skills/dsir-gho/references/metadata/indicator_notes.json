@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "reviewed_on": "2026-09-09",
+  "policy": "Small reviewed metadata summaries, not observations. Only applied after live catalogue verification and matching the official name. API observations determine available years, not these pages.",
+  "indicators": {
+    "UHC_INDEX_REPORTED": {
+      "official_name": "UHC Service Coverage Index (SDG 3.8.1)",
+      "unit": "unitless index (0-100)",
+      "type": "index",
+      "definition": "A summary index of essential health service coverage based on tracer indicators across reproductive and child health, infectious diseases, noncommunicable diseases, and service capacity and access.",
+      "source_url": "https://www.who.int/data/gho/indicator-metadata-registry/imr-details/4834",
+      "code_mapping_url": "https://data.who.int/indicators/i/9A706FD"
+    },
+    "WHS3_62": {
+      "official_name": "Measles - number of reported cases",
+      "unit": "reported cases",
+      "type": "count",
+      "definition": "Measles cases reported through surveillance. Reported cases are not necessarily all infections or estimated incidence.",
+      "source_url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/measles---number-of-reported-cases"
+    },
+    "MDG_0000000020": {
+      "official_name": "Incidence of tuberculosis (per 100 000 population per year)",
+      "unit": "per 100 000 population per year",
+      "type": "rate",
+      "definition": "Estimated incidence of tuberculosis, including HIV-positive cases, with uncertainty where supplied by WHO.",
+      "source_url": "https://www.who.int/data/gho/data/indicators/indicator-details/GHO/incidence-of-tuberculosis-%28per-100-000-population-per-year%29"
+    }
+  }
+}

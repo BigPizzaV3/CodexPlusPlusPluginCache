@@ -1,0 +1,32 @@
+# Evidence bundle
+
+- Objective and bounded target:
+- Authority granted:
+- Identity kind and exact identity:
+- Preflight record or private evidence identity:
+  - Observation start and completion time:
+  - Non-Git schema, tree algorithm and digest, metadata algorithm and digest:
+  - Scope, exclusions, matched and unmatched exclusions, file and entry counts:
+  - Represented and known non-exhaustive unrepresented metadata:
+  - Observation assurance and required trusted/quiescent precondition:
+- Postflight record or private evidence identity:
+  - Observation start and completion time:
+  - Actual tree digest, metadata digest, and counts:
+  - Expected preflight tree digest, metadata digest, and file count:
+  - Individual comparison states and scope-aware result:
+- Possible observer side effects, including unrepresented atime updates:
+- Pre/post mutation-parity conclusion and residual differences:
+- Changed files or artifacts:
+- Commands or observations:
+- Tests and results:
+- Candidate version:
+- Published artifact identity and publication evidence:
+- Provider validation identity, time, and result:
+- Human release decision and decision owner:
+- Claims confirmed:
+- Claims contradicted:
+- Incomplete or unavailable evidence:
+- Known limitations:
+- Residual risks:
+- Reviewer checklist:
+- Actions not performed:

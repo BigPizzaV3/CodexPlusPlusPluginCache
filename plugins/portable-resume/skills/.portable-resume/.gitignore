@@ -1,0 +1,3 @@
+# portable-resume: machine-local control state only (#33)
+# Keep runtime/ and resources/ shareable; never commit locks/journals.
+.state/

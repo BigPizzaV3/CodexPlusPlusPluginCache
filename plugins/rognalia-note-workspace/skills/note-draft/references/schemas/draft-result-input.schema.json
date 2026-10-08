@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:draft-result-input:1",
+  "title": "note Workspace draft result input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "request_id", "registration_path", "completed_at",
+    "adapter_label", "draft_url", "url_results", "title_verified",
+    "body_start_verified", "body_end_verified", "headings_verified",
+    "tags_verified", "thumbnail_verified", "inline_images_verified",
+    "editor_closed", "private_draft_confirmed", "publish_screen_opened",
+    "published", "scheduled", "existing_draft_overwritten"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "registration_path": {"type": "string", "pattern": "^articles/note-drafts/article-[a-z0-9][a-z0-9-]{2,63}-registration-r[0-9]{3}\\.json$"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "adapter_label": {"type": "string", "minLength": 1, "maxLength": 200},
+    "draft_url": {
+      "type": "string",
+      "pattern": "^https://(?:www\\.)?note\\.com/notes/[A-Za-z0-9_-]+/edit$",
+      "maxLength": 2000
+    },
+    "url_results": {
+      "type": "array",
+      "maxItems": 70,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "display"],
+        "properties": {
+          "url": {"type": "string", "pattern": "^https?://", "maxLength": 2000},
+          "display": {"enum": ["ogp", "link"]}
+        }
+      }
+    },
+    "title_verified": {"const": true},
+    "body_start_verified": {"const": true},
+    "body_end_verified": {"const": true},
+    "headings_verified": {"const": true},
+    "tags_verified": {"const": true},
+    "thumbnail_verified": {"const": true},
+    "inline_images_verified": {"const": true},
+    "editor_closed": {"const": true},
+    "private_draft_confirmed": {"const": true},
+    "publish_screen_opened": {"const": false},
+    "published": {"const": false},
+    "scheduled": {"const": false},
+    "existing_draft_overwritten": {"const": false}
+  }
+}

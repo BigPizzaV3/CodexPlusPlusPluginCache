@@ -1,0 +1,7 @@
+interface:
+  display_name: Post Scorer
+  short_description: Score drafts against performance evidence
+  brand_color: '#E45B32'
+  default_prompt: Use $post-scorer to score this draft against available historical performance evidence.
+policy:
+  allow_implicit_invocation: true

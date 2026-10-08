@@ -1,0 +1,9 @@
+interface:
+  display_name: "Creative Fatigue"
+  short_description: "Plan refreshes before decay"
+  default_prompt: "Check whether these creatives are fatiguing and build the next controlled refresh tests."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

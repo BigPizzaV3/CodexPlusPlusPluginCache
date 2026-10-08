@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "EcoCitizenz Ltd",
+    "url": "https://developers.ecocitizenz.com"
+  },
+  "description": "Check the public ECZ-ID Resolver posture of an MCP server, agent, API or business from any MCP-capable agent host. Local-first, read-only, deterministic. Never writes truth, never scores, never uploads source.",
+  "homepage": "https://developers.ecocitizenz.com/agent-trust/mcp-verifier/",
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Does this MCP server have public ECZ-ID proof?",
+      "Explain this ECZ-ID ResultState and its ReasonCodes.",
+      "Re-check the ECZ-ID Resolver before I rely on this result."
+    ],
+    "developerName": "EcoCitizenz Ltd",
+    "displayName": "ECZ-ID MCP Verifier",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Check whether an MCP server, agent, API, package, domain or business has public ECZ-ID Resolver proof, and read the ResultState and ReasonCodes without turning them into a score. The three read-only ECZ-ID Verifier tools are used when the host has the Verifier MCP server configured; otherwise the skill explains the result vocabulary, the policy modes and where to look, and routes to the public Resolver.",
+    "privacyPolicyURL": "https://developers.ecocitizenz.com/plugins/mcp-verifier/privacy/",
+    "shortDescription": "ECZ-ID public proof checks",
+    "supportURL": "https://developers.ecocitizenz.com/plugins/mcp-verifier/support/",
+    "termsOfServiceURL": "https://developers.ecocitizenz.com/plugins/mcp-verifier/terms/",
+    "websiteURL": "https://developers.ecocitizenz.com/agent-trust/mcp-verifier/"
+  },
+  "keywords": [
+    "ecz-id",
+    "mcp",
+    "verifier",
+    "resolver",
+    "posture",
+    "agent-trust",
+    "read-only"
+  ],
+  "license": "MIT",
+  "name": "eczid-mcp-verifier",
+  "repository": "https://github.com/Ecocitizenz/eczid-agent-plugins",
+  "skills": "./skills/",
+  "version": "0.1.1"
+}

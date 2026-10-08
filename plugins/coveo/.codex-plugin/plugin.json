@@ -1,0 +1,33 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Coveo",
+    "url": "https://www.coveo.com"
+  },
+  "description": "Search your enterprise content",
+  "homepage": "https://www.coveo.com",
+  "interface": {
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use Coveo to help with this task"
+    ],
+    "developerName": "Coveo",
+    "displayName": "Coveo",
+    "logo": "./assets/logo.jpg",
+    "logoDark": "./assets/logo-dark.jpg",
+    "longDescription": "Search your enterprise content",
+    "privacyPolicyURL": "https://www.coveo.com/en/company/legal/privacy-and-security/privacy-notice",
+    "screenshots": [],
+    "shortDescription": "Search your enterprise content",
+    "supportURL": "https://www.coveo.com/en/contact",
+    "termsOfServiceURL": "https://www.coveo.com/en/company/legal/terms-and-agreements/customer-agreement",
+    "websiteURL": "https://www.coveo.com"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "coveo",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

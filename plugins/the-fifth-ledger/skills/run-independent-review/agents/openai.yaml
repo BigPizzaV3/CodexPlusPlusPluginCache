@@ -1,0 +1,6 @@
+interface:
+  display_name: "Run Independent Review"
+  short_description: "Coordinate honest role-separated findings"
+  default_prompt: "Use $run-independent-review to obtain bounded review findings while preserving challenges and disagreement."
+policy:
+  allow_implicit_invocation: true

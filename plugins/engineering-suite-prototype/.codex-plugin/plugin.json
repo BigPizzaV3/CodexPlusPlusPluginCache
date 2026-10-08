@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "Saul Mart\u00ed"
+  },
+  "description": "Build a deliberately throwaway prototype whose purpose is to answer a design, state, logic, or UI question before committing to the real implementation.",
+  "interface": {
+    "brandColor": "#22C55E",
+    "brandColorDark": "#3ADD76",
+    "capabilities": [
+      "Build throwaway prototypes"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Prototype this state model so I can evaluate it",
+      "Build a throwaway UI to answer this design question",
+      "Test this interaction idea with the smallest useful prototype"
+    ],
+    "developerName": "Saul Mart\u00ed",
+    "displayName": "Prototype",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Build a deliberately throwaway prototype whose purpose is to answer a design, state, logic, or UI question before committing to the real implementation.",
+    "shortDescription": "Build throwaway prototypes"
+  },
+  "keywords": [
+    "engineering-suite",
+    "prototype",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "engineering-suite-prototype",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

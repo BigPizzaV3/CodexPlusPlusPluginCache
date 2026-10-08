@@ -1,0 +1,53 @@
+{
+  "author": {
+    "email": "support@you.com",
+    "name": "You.com",
+    "url": "https://you.com"
+  },
+  "description": "You.com skills for search, contents, research, finance, and integration discovery with MCP, ARD, API-key, OAuth, and MPP/x402 payment guidance.",
+  "homepage": "https://docs.you.com",
+  "interface": {
+    "brandColor": "#6C5CE7",
+    "brandColorDark": "#6C5CE7",
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use You.com to search the web and cite current sources.",
+      "Use You.com to research this question with source comparison.",
+      "Use You.com finance for market, ticker, earnings, or company financial questions."
+    ],
+    "developerName": "You.com",
+    "displayName": "You.com",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Use You.com skills for current web search, URL content extraction, cited research, finance-specific answers, and integration discovery. The skills guide agents through free, API-key, OAuth, and MPP/x402 access paths without bundling a fixed MCP server configuration.",
+    "privacyPolicyURL": "https://you.com/privacy",
+    "shortDescription": "Web search",
+    "supportURL": "https://you.com/support",
+    "termsOfServiceURL": "https://you.com/terms",
+    "websiteURL": "https://you.com"
+  },
+  "keywords": [
+    "you.com",
+    "codex",
+    "chatgpt",
+    "agent-skills",
+    "mcp",
+    "web-search",
+    "content-extraction",
+    "research",
+    "finance",
+    "citations",
+    "ard",
+    "ai-catalog",
+    "x402",
+    "mpp"
+  ],
+  "license": "MIT",
+  "name": "you",
+  "repository": "https://github.com/youdotcom-oss/agent-skills",
+  "skills": "./skills/",
+  "version": "0.2.0"
+}

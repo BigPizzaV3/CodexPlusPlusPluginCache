@@ -1,0 +1,7 @@
+interface:
+  display_name: Niche Research
+  short_description: Research current niche topics with sources
+  brand_color: '#E45B32'
+  default_prompt: Use $niche-research to research current topics in my niche with fresh evidence.
+policy:
+  allow_implicit_invocation: true

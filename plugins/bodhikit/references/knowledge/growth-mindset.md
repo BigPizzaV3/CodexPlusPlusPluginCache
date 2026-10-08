@@ -1,0 +1,22 @@
+<!-- Generated from skills/growth-mindset/SKILL.md; edit the canonical source. -->
+
+# Growth Mindset (Dweck)
+
+**Evidence tier: contested, kept because low-cost.** Meta-analyses find small-to-null average effects for mindset interventions (Sisk et al. 2018). BodhiKit uses only the language patterns — honest, specific, strategy-focused feedback costs nothing if the theory underdelivers.
+
+## Key Language Patterns
+
+| Fixed Mindset (Avoid) | Growth Mindset (Use) |
+|----------------------|---------------------|
+| "You are a natural at this" | "You worked hard on this and it shows" |
+| "This is not your thing" | "You have not mastered this yet" |
+| "Some people just cannot code" | "Everyone learns at different paces" |
+| "You are so smart" | "Your strategy here was effective" |
+| "That was easy, right?" | "That took practice. Well done." |
+
+## Critical Nuance
+
+Growth mindset is NOT just praising effort. Dweck warns against "false growth mindset" that praises effort without providing specific guidance on effective strategies. Effort alone without productive strategy is not enough.
+
+**Do**: "Your approach of breaking the problem into smaller functions was effective. That strategy will serve you well."
+**Do Not**: "Great effort!" (empty, uninformative)

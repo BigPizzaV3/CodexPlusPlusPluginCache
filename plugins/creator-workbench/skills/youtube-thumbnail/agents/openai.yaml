@@ -1,0 +1,7 @@
+interface:
+  display_name: YouTube Thumbnail
+  short_description: Develop YouTube thumbnail concepts
+  brand_color: '#E45B32'
+  default_prompt: Use $youtube-thumbnail to develop three thumbnail concepts for this video.
+policy:
+  allow_implicit_invocation: true

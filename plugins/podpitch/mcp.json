@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "podpitch": {
+      "type": "streamable-http",
+      "url": "https://api.podpitch.com/v1/mcp"
+    }
+  }
+}

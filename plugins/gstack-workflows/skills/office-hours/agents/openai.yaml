@@ -1,0 +1,9 @@
+interface:
+  display_name: "Office Hours"
+  short_description: "Reframe a product idea before implementation begins."
+  default_prompt: "Use Office Hours for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

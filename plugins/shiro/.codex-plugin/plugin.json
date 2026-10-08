@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Abhigyan Shekhar"
+  },
+  "description": "Opinionated design reviews for landing pages, websites, and product interfaces.",
+  "homepage": "https://github.com/Abhigyan-Shekhar/Shiro",
+  "interface": {
+    "brandColor": "#111111",
+    "brandColorDark": "#EEEEEE",
+    "capabilities": [
+      "Design review",
+      "Frontend QA",
+      "Accessibility review"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this landing page in Shiro quick mode.",
+      "Give this product UI a full  review.",
+      "Use Shiro fix mode on this frontend."
+    ],
+    "developerName": "Abhigyan Shekhar",
+    "displayName": "Shiro",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Use this skill to ask your Chatgpt to adhere to strict guidelines whilst it works on your frontend . This skills attempts to reduce vibcoded slop UI by implementing design practices . ",
+    "shortDescription": "Fix your vibecoded UI "
+  },
+  "keywords": [
+    "design-review",
+    "ui",
+    "ux",
+    "accessibility",
+    "landing-page"
+  ],
+  "license": "Apache-2.0",
+  "name": "shiro",
+  "repository": "https://github.com/Abhigyan-Shekhar/Shiro",
+  "skills": "./skills/",
+  "version": "1.0.1"
+}

@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "Saul Mart\u00ed"
+  },
+  "description": "Design or improve module interfaces, seams, depth, locality, and testability; optionally scan a codebase for architectural deepening opportunities.",
+  "interface": {
+    "brandColor": "#22C55E",
+    "brandColorDark": "#3ADD76",
+    "capabilities": [
+      "Design deep module seams"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Design a deeper module boundary for this code",
+      "Audit this codebase for architecture deepening opportunities",
+      "Help me decide where the seam and interface should live"
+    ],
+    "developerName": "Saul Mart\u00ed",
+    "displayName": "CodebaseDesign",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Design or improve module interfaces, seams, depth, locality, and testability; optionally scan a codebase for architectural deepening opportunities.",
+    "shortDescription": "Design deep module seams"
+  },
+  "keywords": [
+    "engineering-suite",
+    "codebase-design",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "engineering-suite-codebase-design",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

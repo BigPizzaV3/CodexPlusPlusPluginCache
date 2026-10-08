@@ -1,0 +1,55 @@
+{
+  "author": {
+    "email": "support@yaps.ai",
+    "name": "Yaps AI",
+    "url": "https://www.yaps.ai"
+  },
+  "description": "Persistent private memory for Codex, stored as local Markdown.",
+  "homepage": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins",
+  "interface": {
+    "brandColor": "#D4775B",
+    "brandColorDark": "#D4775B",
+    "capabilities": [
+      "Local-first",
+      "Search",
+      "Read",
+      "Permission-controlled writes"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Set up Yaps Memory. Check my connection, explain privacy and permissions, then guide me through my first useful action.",
+      "Help me capture a new memory in Yaps. Ask what I want to remember and where it belongs.",
+      "Summarize my five most recently updated Yaps notes and cite each note's title and path."
+    ],
+    "developerName": "Yaps AI",
+    "displayName": "Yaps Memory",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Remember facts across Codex chats, recall prior project context, search and cite private Markdown notes, and safely update a user-owned vault. The plugin, Yaps desktop setup, and trial or Yaps Pro activation can be completed in any order; the private local connection reconciles automatically. Requires a local-capable ChatGPT Desktop Work or Codex session; ChatGPT web and cloud sessions cannot reach the installed Yaps engine. Users can also use the vault directly in Yaps.",
+    "privacyPolicyURL": "https://www.yaps.ai/privacy",
+    "shortDescription": "Private memory across chats",
+    "termsOfServiceURL": "https://www.yaps.ai/terms",
+    "websiteURL": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins"
+  },
+  "keywords": [
+    "persistent-memory",
+    "ai-memory",
+    "codex-memory",
+    "memory",
+    "memory-store",
+    "notes",
+    "markdown",
+    "cross-chat-memory",
+    "personal-knowledge",
+    "remembered-facts",
+    "local-first",
+    "voice",
+    "knowledge"
+  ],
+  "license": "MIT",
+  "name": "yaps-memory",
+  "repository": "https://github.com/richawo/yaps-codex-plugin",
+  "skills": "./skills/",
+  "version": "0.2.14"
+}

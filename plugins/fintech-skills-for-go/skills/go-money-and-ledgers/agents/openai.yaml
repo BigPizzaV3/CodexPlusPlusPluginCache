@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Money and Ledgers"
+  short_description: "Keep monetary and ledger state exact"
+  default_prompt: "Use $go-money-and-ledgers to design this Go monetary or ledger invariant."
+policy:
+  allow_implicit_invocation: true

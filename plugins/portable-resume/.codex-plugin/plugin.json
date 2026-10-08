@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "portable-resume-skills contributors",
+    "url": "https://github.com/ImL1s"
+  },
+  "description": "Offline, inert context migration across supported coding agents",
+  "homepage": "https://github.com/ImL1s/resume-skills",
+  "interface": {
+    "brandColor": "#0EA5E9",
+    "brandColorDark": "#16ADF1",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Resume my last session from this repository as a fresh handoff.",
+      "List my recent local coding-agent sessions for this project and show the latest one.",
+      "Import the context of my previous Claude Code session here without restoring a live process."
+    ],
+    "developerName": "YU-SHANG LUNG",
+    "displayName": "Portable Resume",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Portable Resume migrates bounded context from your previous local coding-agent sessions into a fresh session. One resume skill per supported source (17 sources: Antigravity CLI, Claude Code, Cline, Codex CLI, Crush, Cursor, Gemini CLI, GitHub Copilot CLI, goose, Grok Build, Hermes Agent, Kimi CLI / Kimi Code CLI, OpenClaw, OpenCode, OpenHands, Pi agent, Qwen Code) reads that agent's own on-disk session store, selects the newest session recorded for the current working directory where the source records one (a session without a recorded directory may remain eligible, depending on the adapter, and OpenHands has no directory filter), and prints an inert, best-effort redacted markdown handoff that the destination agent reads as data and summarizes; during a skill invocation the host and its model provider receive that output directly. Everything runs locally with Python's standard library: the bundled reader never contacts the network, never invokes the source agent's CLI, never modifies the source store, and ships no MCP server, credentials, scheduler or background service. Recovered text is marked untrusted and stale, and redaction is best-effort rather than complete data-loss prevention. This is offline context migration, not live session restore.",
+    "privacyPolicyURL": "https://iml1s.github.io/resume-skills/privacy/",
+    "shortDescription": "Resume past agent sessions",
+    "supportURL": "https://iml1s.github.io/resume-skills/support/",
+    "termsOfServiceURL": "https://iml1s.github.io/resume-skills/terms/",
+    "websiteURL": "https://iml1s.github.io/resume-skills/"
+  },
+  "keywords": [
+    "context-migration",
+    "agent-skills",
+    "offline",
+    "portable-resume"
+  ],
+  "license": "Apache-2.0",
+  "name": "portable-resume",
+  "repository": "https://github.com/ImL1s/resume-skills",
+  "skills": "./skills/",
+  "version": "0.4.5"
+}

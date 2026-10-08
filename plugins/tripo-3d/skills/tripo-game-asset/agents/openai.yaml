@@ -1,0 +1,9 @@
+interface:
+  display_name: "Build game assets"
+  short_description: "Props, LODs and rigged characters wired into a game project"
+  default_prompt: "Make a low-poly prop set for my Three.js scene and load them in."
+
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: true

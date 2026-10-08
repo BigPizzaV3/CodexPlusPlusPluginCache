@@ -1,0 +1,41 @@
+{
+  "author": {
+    "email": "hello@callstack.com",
+    "name": "Callstack",
+    "url": "https://www.callstack.com/"
+  },
+  "description": "React Native migration skills for assessing native products and implementing incremental brownfield adoption.",
+  "homepage": "https://github.com/callstackincubator/agent-skills/tree/main/plugins/migrating-to-react-native",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Assess this native mobile product and recommend a React Native migration path.",
+      "Define a representative checkpoint before starting the migration.",
+      "Plan an incremental brownfield migration for this iOS and Android app."
+    ],
+    "developerName": "Callstack",
+    "displayName": "Migrating to React Native",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Assess an existing mobile product, choose a viable React Native migration path, define a representative checkpoint, and plan incremental brownfield adoption across iOS and Android.",
+    "shortDescription": "Move Android and iOS to RN",
+    "supportURL": "https://www.callstack.com/contact",
+    "websiteURL": "https://github.com/callstackincubator/agent-skills/tree/main/plugins/migrating-to-react-native"
+  },
+  "keywords": [
+    "react-native",
+    "migration",
+    "brownfield",
+    "ios",
+    "android"
+  ],
+  "license": "MIT",
+  "name": "migrating-to-react-native",
+  "repository": "https://github.com/callstackincubator/agent-skills",
+  "skills": "./skills/",
+  "version": "0.1.1"
+}

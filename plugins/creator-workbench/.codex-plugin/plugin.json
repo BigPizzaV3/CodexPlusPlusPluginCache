@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "Mamdouh Aboammar",
+    "url": "https://github.com/imMamdouhaboammar"
+  },
+  "description": "A ChatGPT and Codex plugin for creator memory, second-brain workflows, authentic writing, content production, visual handoff, and session learning.",
+  "homepage": "https://github.com/imMamdouhaboammar",
+  "interface": {
+    "brandColor": "#E45B32",
+    "brandColorDark": "#E45B32",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Set up my second brain from these exports and research files.",
+      "Recall what my workspace knows about this topic, then create from it.",
+      "Save the useful corrections and project state from this session."
+    ],
+    "developerName": "Mamdouh Aboammar",
+    "displayName": "Creator Workspace",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Creator Workspace helps creators organize ChatGPT and Claude exports, research, project state, and writing preferences into an inspectable second brain. It can retrieve the right context, build and maintain a living wiki, preserve a user\u2019s writing voice, draft and structure social content, plan visual outputs, analyze LinkedIn exports, and carry explicit corrections or project state into future work. The package is skills-only and uses host-native file, Python, web, and connector capabilities only when those capabilities are actually available.",
+    "shortDescription": "Second brain for creators",
+    "websiteURL": "https://github.com/imMamdouhaboammar/"
+  },
+  "keywords": [
+    "second-brain",
+    "knowledge-base",
+    "voice",
+    "writing",
+    "social-media",
+    "content",
+    "memory",
+    "visualization",
+    "linkedin",
+    "creator"
+  ],
+  "license": "MIT",
+  "name": "creator-workbench",
+  "skills": "./skills/",
+  "version": "0.3.3"
+}

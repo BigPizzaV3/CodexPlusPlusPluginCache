@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "routes": [
+    {
+      "intent": "write_new_deep_dive",
+      "skill": "diagnostic-deep-dive-writer"
+    },
+    {
+      "intent": "explain_technical_concept",
+      "skill": "technical-concept-storyteller"
+    },
+    {
+      "intent": "continue_series",
+      "skill": "series-continuity-writer"
+    },
+    {
+      "intent": "audit_or_rewrite_voice",
+      "skill": "voice-fidelity-reviewer"
+    }
+  ],
+  "shared_references": [
+    "voice-profile.md",
+    "pattern-engine.md",
+    "anti-patterns.md",
+    "quality-rubric.md"
+  ],
+  "negative_routes": [
+    "pure fact lookup without authored-content intent",
+    "formal academic paper requiring a neutral scholarly voice",
+    "short direct-response ad copy where commercial-copy logic should own the structure",
+    "verbatim transcription where wording must remain exact"
+  ]
+}

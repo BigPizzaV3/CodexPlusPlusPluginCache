@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Product & UX"
+  short_description: "Requirements, interfaces and user journeys"
+  default_prompt: "Use $vibe-product to audit the selected product & ux boundary."

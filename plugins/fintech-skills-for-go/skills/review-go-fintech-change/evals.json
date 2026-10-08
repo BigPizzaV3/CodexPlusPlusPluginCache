@@ -1,0 +1,225 @@
+{
+  "schema_version": 2,
+  "skill": "review-go-fintech-change",
+  "cases": [
+    {
+      "id": "route-fintech-diff",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review a Go PR changing amount rounding, ledger posting, provider retries, refunds, and reconciliation.",
+      "should_activate": true,
+      "reason": "Financial-integrity review spans these paths."
+    },
+    {
+      "id": "avoid-generic-api",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review a Go HTTP API rename and middleware cleanup with no money path.",
+      "should_activate": false,
+      "reason": "General review belongs to review-go-engineering-change.",
+      "confuses_with": [
+        "review-go-engineering-change"
+      ]
+    },
+    {
+      "id": "quality-duplicate-charge",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review code that creates a new provider idempotency key after timeout.",
+      "expected_invariants": [
+        "Identifies duplicate-charge schedule",
+        "Requires same identity and reconciliation"
+      ],
+      "forbidden_outcomes": [
+        "Calls timeout a confirmed decline"
+      ],
+      "graders": [
+        {
+          "id": "duplicate-charge",
+          "kind": "contains",
+          "required": [
+            "duplicate",
+            "ambiguous"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-ledger-mutation",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review a migration that updates posted ledger rows to correct balances.",
+      "expected_invariants": [
+        "Flags destruction of immutable audit history",
+        "Requires linked balanced adjustment and reconciliation"
+      ],
+      "forbidden_outcomes": [
+        "Approves in-place mutation"
+      ],
+      "graders": [
+        {
+          "id": "ledger-finding",
+          "kind": "contains",
+          "required": [
+            "immutable",
+            "reconciliation"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-authorization-diff",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review this Go payment change for financial correctness. Report only must-fix findings, each with a reachable failure schedule and the repair invariant; do not implement the change.\n\ntype Request struct { PaymentID string; Amount int64; Currency string }\n\nfunc (s *Service) Authorize(ctx context.Context, req Request) (Authorization, error) {\n    providerKey := fmt.Sprintf(\"%s-%d\", req.PaymentID, time.Now().UnixNano())\n    authorization, err := s.provider.Authorize(ctx, providerKey, req.Amount, req.Currency)\n    if errors.Is(err, context.DeadlineExceeded) {\n        _ = s.db.SaveAttempt(ctx, Attempt{PaymentID: req.PaymentID, ProviderKey: providerKey, Status: \"declined\"})\n        return Authorization{}, ErrDeclined\n    }\n    if err != nil { return Authorization{}, err }\n    if err := s.db.SaveAttempt(ctx, Attempt{PaymentID: req.PaymentID, ProviderKey: providerKey, ProviderID: authorization.ID, Status: \"authorized\"}); err != nil {\n        return Authorization{}, err\n    }\n    return authorization, nil\n}\n\nfunc (s *Service) Retry(ctx context.Context, req Request) (Authorization, error) {\n    return s.Authorize(ctx, req)\n}\n\nfunc (s *Service) ApplyWebhook(ctx context.Context, event Webhook) error {\n    attempt, err := s.db.LatestByPaymentID(ctx, event.PaymentID)\n    if err != nil { return err }\n    return s.db.SetStatus(ctx, attempt.ID, event.Status)\n}",
+      "expected_invariants": [
+        "Explains the provider-success then deadline then fresh-key retry schedule that can duplicate authorization",
+        "Treats a deadline after request transmission as an unknown outcome rather than a confirmed decline",
+        "Requires durable attempt identity before the provider side effect and reuse of the same provider identity on exact retry",
+        "Requires rejection when a reused payment identity has a different canonical payload",
+        "Correlates webhooks to the provider attempt and prevents delayed events from regressing state"
+      ],
+      "forbidden_outcomes": [
+        "Recommends only a longer timeout or additional retries",
+        "Approves recording a transmitted deadline as declined"
+      ],
+      "graders": [
+        {
+          "id": "authorization-review",
+          "kind": "contains",
+          "required": [
+            "ambiguous",
+            "reconciliation"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-settlement-correction-diff",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review this Go settlement-report change for financial correctness. Source report amounts are exact decimal strings before parsing and may use currency-specific scales. Reports can contain captures, refunds, fees, and multiple currencies; one PaymentID can have several lifecycle components. Exact redelivery uses the same report ID and checksum. A corrected report has a new ID, a higher version, and Supersedes pointing to its predecessor; Line.ID identifies the same economic component across corrected versions. Raw reports and posted journals are authoritative audit evidence. Every database call shown commits independently, and the process can crash between any two calls. Report only must-fix findings, each with a reachable failure schedule and the repair invariant; do not implement the change.\n\ntype Report struct {\n\tID         string\n\tChecksum   string\n\tVersion    int\n\tSupersedes string\n\tLines      []Line\n}\n\ntype Line struct {\n\tID        string\n\tPaymentID string\n\tCurrency  string\n\tKind      string\n\tAmount    float64\n}\n\nfunc (s *Service) Ingest(ctx context.Context, report Report) error {\n\tif report.Supersedes != \"\" {\n\t\t_ = s.reports.Delete(ctx, report.Supersedes)\n\t}\n\n\tfor _, line := range report.Lines {\n\t\tlocal, err := s.payments.FindByPaymentID(ctx, line.PaymentID)\n\t\tif err != nil {\n\t\t\tcontinue\n\t\t}\n\t\tif math.Abs(local.Amount-line.Amount) < 0.01 {\n\t\t\t_ = s.matches.MarkMatched(ctx, line.PaymentID)\n\t\t\tcontinue\n\t\t}\n\n\t\tamount := int64(line.Amount * 100)\n\t\t_ = s.ledger.UpdatePostedAmount(ctx, local.JournalID, amount)\n\t\t_ = s.adjustments.Insert(ctx, Adjustment{\n\t\t\tID:       uuid.NewString(),\n\t\t\tLineID:   line.ID,\n\t\t\tAmount:   amount,\n\t\t\tCurrency: line.Currency,\n\t\t})\n\t}\n\n\treturn s.reports.MarkComplete(ctx, report.ID)\n}",
+      "expected_invariants": [
+        "Rejects float64 and unconditional multiplication by 100 for settlement money, requiring exact decimal or minor-unit representation with currency-specific scale and explicit rounding",
+        "Explains that PaymentID plus a float epsilon can match the wrong amount, currency, or lifecycle component and requires exact item-level matching predicates",
+        "Requires every normalized economic component to belong to exactly one match group or one explicit exception without reuse",
+        "Preserves the predecessor report and normalized evidence immutably with explicit supersedes lineage instead of deleting it",
+        "Turns a corrected report into explicit rematch and reversal work for affected prior decisions",
+        "Replaces in-place mutation of a posted journal with a linked immutable balanced adjustment or reversal",
+        "Uses a deterministic adjustment operation identity with durable uniqueness so exact report redelivery cannot post another adjustment",
+        "Identifies that ignored operation errors can still be followed by MarkComplete and requires completion to fail or await retry",
+        "Makes ingestion restartable from durable per-item or transactional checkpoints after a crash without duplicating completed work",
+        "Marks a report complete only after every line is matched or classified as an exception",
+        "Requires independent source completeness or sequence evidence before marking the report complete",
+        "Uses stable report identity and checksum so exact re-ingestion is idempotent",
+        "Persists source version and parser version so normalized evidence and matching decisions remain reproducible",
+        "Requires each match group to satisfy a currency-preserving equation over captures, refunds, fees, and adjustments"
+      ],
+      "forbidden_outcomes": [
+        "Approves binary floating-point tolerance or fixed two-decimal conversion for settlement posting",
+        "Deletes or overwrites the superseded source report",
+        "Mutates posted journal history in place",
+        "Generates a fresh adjustment identity on every retry or report redelivery",
+        "Claims matching aggregate net totals proves item-level reconciliation"
+      ],
+      "graders": [
+        {
+          "id": "settlement-correction-review",
+          "kind": "contains",
+          "required": [
+            "supersed",
+            "currency"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-settlement-manifest-close-diff",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review this Go settlement-close change for financial correctness. The provider publishes an authenticated manifest with an immutable artifact ID, source schema version, expected page count, expected record count, page checksums, and exact decimal control totals by currency. Pages can arrive duplicated or out of order, and a fetch error is not end-of-report evidence. Lines contain captures, refunds, and fees; their sign convention is defined by the rail, and one PaymentID can have several economic components. Parser and normalization rules can change between deployments. Every database call shown commits independently, the process can crash between any two calls, and batches may be retried. Report only must-fix findings, each with a reachable failure schedule and the repair invariant; do not implement the change.\n\ntype Manifest struct {\n\tID string\n\tSchemaVersion string\n\tPageCount int\n\tRecordCount int\n\tPageChecksums map[int]string\n\tControlTotals map[string]string\n}\n\ntype Line struct {\n\tID string\n\tPaymentID string\n\tCurrency string\n\tKind string\n\tAmount string\n}\n\nfunc (s *Service) Close(ctx context.Context, manifest Manifest) error {\n\tobserved := map[string]float64{}\n\tfor page := 1; ; page++ {\n\t\traw, err := s.provider.FetchPage(ctx, manifest.ID, page)\n\t\tif err != nil || len(raw) == 0 {\n\t\t\tbreak\n\t\t}\n\t\tlines, _ := s.parser.Current().Parse(raw)\n\t\tfor _, line := range lines {\n\t\t\tamount, _ := strconv.ParseFloat(line.Amount, 64)\n\t\t\tobserved[line.Currency] += amount\n\t\t\tlocal, _ := s.payments.TotalByPaymentID(ctx, line.PaymentID)\n\t\t\tif math.Abs(local-amount) < 0.01 {\n\t\t\t\t_ = s.matches.MarkMatched(ctx, line.PaymentID)\n\t\t\t\tcontinue\n\t\t\t}\n\t\t\t_ = s.adjustments.Insert(ctx, Adjustment{ID: uuid.NewString(), LineID: line.ID, Currency: line.Currency, Amount: amount})\n\t\t}\n\t}\n\tfor currency, expected := range manifest.ControlTotals {\n\t\twant, _ := strconv.ParseFloat(expected, 64)\n\t\tif math.Abs(observed[currency]-want) >= 0.01 {\n\t\t\treturn ErrControlTotal\n\t\t}\n\t}\n\treturn s.batches.MarkComplete(ctx, manifest.ID)\n}",
+      "expected_invariants": [
+        "Treats fetch error or an empty page before independently verified manifest completion as incomplete source evidence, not end of report",
+        "Authenticates and immutably stores the manifest and raw pages with artifact identity, page identity, checksums, retrieval evidence, and source schema version before deriving decisions",
+        "Persists parser, normalizer, and matching-rule versions with normalized items so the batch can be reproduced after deployments change",
+        "Rejects float64, a universal epsilon, and unsigned accumulation; requires exact currency-scale arithmetic and the rail's explicit sign convention for captures, refunds, and fees",
+        "Matches stable economic component identity, kind, currency, and amount rather than a PaymentID aggregate",
+        "Requires every source and local component to belong to exactly one match group or one explicit exception without reuse",
+        "Requires each group to satisfy an exact currency-preserving equation between signed source components, signed local components, and linked adjustments without cross-currency netting",
+        "Treats per-currency control totals as completeness controls rather than proof of item-level reconciliation",
+        "Uses deterministic adjustment operation identity with durable uniqueness so retry, duplicate page delivery, or crash cannot post another adjustment",
+        "Handles duplicate and out-of-order pages by verified page identity and sequence without double counting or skipping expected pages",
+        "Propagates fetch, parse, lookup, match, adjustment, and checkpoint errors into retryable or exception state instead of continuing to completion",
+        "Marks the batch complete only after independent source completeness is proven and every normalized component has a durable matched or exception disposition with all effects committed"
+      ],
+      "forbidden_outcomes": [
+        "Treats fetch failure or the first empty page as proof that the report is complete",
+        "Claims matching aggregate control totals proves item-level reconciliation",
+        "Uses the current parser without persisting source, parser, and rule versions",
+        "Generates a fresh adjustment identity on every retry or duplicate page",
+        "Uses float tolerance, fixed two-decimal conversion, unsigned netting, or cross-currency netting for settlement controls"
+      ],
+      "graders": [
+        {
+          "id": "settlement-manifest-close-review",
+          "kind": "contains",
+          "required": [
+            "parser",
+            "complete"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "route-fintech-integrity-review",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review this Go payments change for exact money, ledger balance, authorization and capture transitions, replay safety, settlement, and audit evidence.",
+      "should_activate": true,
+      "reason": "The review spans the collection's financial-integrity boundaries."
+    },
+    {
+      "id": "route-duplicate-capture-symptom",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Customers are occasionally charged twice after a Go service times out, and the settlement report cannot link the second capture to its original request.",
+      "should_activate": false,
+      "reason": "The indirect symptom has a dominant stable-identity and replay-safety invariant rather than requiring a collection-wide review.",
+      "confuses_with": [
+        "go-financial-idempotency"
+      ]
+    },
+    {
+      "id": "route-pci-api-review",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review a Go checkout API that copies PAN and CVV into retry queues, traces, support exports, and an AI incident prompt.",
+      "should_activate": true,
+      "reason": "Payment-data scope and sensitive authentication-data retention require fintech review to lead."
+    },
+    {
+      "id": "avoid-generic-broker-review",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review a Go image-processing consumer for broker redelivery, poison messages, partition ordering, and retry amplification; no financial effects exist.",
+      "should_activate": false,
+      "reason": "Generic broker delivery and ordering semantics belong to go-message-processing rather than a collection-wide review.",
+      "confuses_with": [
+        "go-message-processing"
+      ]
+    },
+    {
+      "id": "avoid-investment-advice",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Which technology stock should I buy this week for the highest return?",
+      "should_activate": false,
+      "reason": "Investment advice is outside the plugin's engineering scope."
+    }
+  ]
+}

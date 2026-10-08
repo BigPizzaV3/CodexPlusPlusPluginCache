@@ -1,0 +1,9 @@
+interface:
+  display_name: "Engineering Project OS"
+  short_description: "Resume Codex work and reuse failure knowledge"
+  icon_small: "./assets/icon-small.svg"
+  icon_large: "./assets/icon-large.svg"
+  brand_color: "#789F25"
+  default_prompt: "Use $project-os to explain how it helps Codex resume engineering work across sessions."
+policy:
+  allow_implicit_invocation: true

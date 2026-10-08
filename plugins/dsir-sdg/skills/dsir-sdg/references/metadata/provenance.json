@@ -1,0 +1,10 @@
+{
+  "source": "DSIR/data/who_countries.rda",
+  "reference_version": "0.9.0",
+  "reference_commit": "e2ff6735d174769b55f9a3e55f9f36c75ce9f397",
+  "country_count": 194,
+  "sha256": "73e44ab541711ceafe5fa36c9ea1c044e805819d14a94820f70d757178715d62",
+  "verified_against_reference_source": "2026-09-16",
+  "role": "ISO3/M49/name lookup for DSIR parity; live UN catalogue validates query codes",
+  "not_used_for": "historical membership reconstruction or regional aggregation"
+}

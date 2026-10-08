@@ -1,0 +1,29 @@
+{
+  "name": "compound-writing",
+  "owner": {
+    "name": "Every",
+    "url": "https://github.com/EveryInc"
+  },
+  "metadata": {
+    "description": "A writing toolbox for developing, drafting, and revising work using your voice, style, and optional audience context.",
+    "version": "2.4.1"
+  },
+  "plugins": [
+    {
+      "name": "compound-writing",
+      "description": "A writing toolbox for developing, drafting, and revising work using your voice, style, and optional audience context.",
+      "version": "2.4.1",
+      "author": {
+        "name": "Every",
+        "email": "katie@every.to"
+      },
+      "tags": [
+        "writing",
+        "editing",
+        "agent-native",
+        "ai-native-writing"
+      ],
+      "source": "./"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Ranking Video"
+  short_description: "Tier lists with a live board"
+  default_prompt: "Use $pixverse-ranking-video to make a 20-second tier-list video ranking these five items with a sassy host, a live board and karaoke captions."
+policy:
+  allow_implicit_invocation: true

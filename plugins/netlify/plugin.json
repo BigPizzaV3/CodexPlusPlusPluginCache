@@ -1,0 +1,53 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "netlify",
+  "version": "1.6.0",
+  "description": "Netlify platform skills \u2014 functions, edge functions, blobs, database, identity, image CDN, forms, config, CLI, frameworks, caching, AI gateway, and deployment \u2014 plus the official Netlify MCP server.",
+  "author": {
+    "name": "Netlify",
+    "url": "https://www.netlify.com"
+  },
+  "homepage": "https://docs.netlify.com",
+  "repository": "https://github.com/netlify/context-and-tools",
+  "license": "MIT",
+  "keywords": [
+    "netlify",
+    "deploy",
+    "serverless",
+    "functions",
+    "edge-functions",
+    "blobs",
+    "database",
+    "image-cdn",
+    "forms",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Netlify",
+        "shortDescription": "Build and deploy on Netlify",
+        "longDescription": "Gives the agent factual reference for Netlify platform primitives \u2014 functions, edge functions, blobs, database, identity, image CDN, forms, config, caching, frameworks, AI Gateway, and deployment \u2014 plus the official hosted Netlify MCP server, which lets the agent create and manage Netlify projects, deploys, and environment variables after you sign in to Netlify.",
+        "developerName": "Netlify",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://www.netlify.com",
+        "supportURL": "https://www.netlify.com/support/",
+        "privacyPolicyURL": "https://www.netlify.com/privacy/",
+        "termsOfServiceURL": "https://www.netlify.com/legal/terms-of-use/",
+        "defaultPrompt": [
+          "Deploy this site to Netlify and send me the live URL",
+          "Show me the latest contact form submissions on my Netlify site",
+          "Add my API keys as environment variables on my Netlify project"
+        ],
+        "brandColor": "#05BDBA",
+        "composerIcon": "./assets/logo.svg",
+        "logo": "./assets/logo.svg"
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Ship24 Tracking Statuses"
+  short_description: "Map Ship24 tracking statuses and milestones to your business logic"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon-large.png"
+  brand_color: "#FCB016"
+  default_prompt: "Map Ship24 tracking statuses to my order states."

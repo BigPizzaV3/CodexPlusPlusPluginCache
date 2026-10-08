@@ -1,0 +1,32 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Fyxer",
+    "url": "https://www.fyxer.com"
+  },
+  "description": "Fyxer for ChatGPT lets you write emails that sound like you, right from the chat. Fyxer learns your writing style from past emails and uses context from your calendar and meeting notes to create personalized email drafts. Just describe what you want to say and get a polished email ready to review and send.",
+  "homepage": "https://www.fyxer.com",
+  "interface": {
+    "capabilities": [],
+    "category": "Communication",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Follow up with Sarah about our meeting last week"
+    ],
+    "developerName": "Fyxer",
+    "displayName": "Fyxer",
+    "logo": "./assets/logo.png",
+    "longDescription": "Fyxer for Codex lets you write emails that sound like you, right from the chat. Fyxer learns your writing style from past emails and uses context from your calendar and meeting notes to create personalized email drafts. Just describe what you want to say and get a polished email ready to review and send.",
+    "privacyPolicyURL": "https://app.fyxer.com/privacy-policy",
+    "screenshots": [],
+    "shortDescription": "Write emails in your voice",
+    "supportURL": "https://support.fyxer.com/",
+    "termsOfServiceURL": "https://app.fyxer.com/terms-of-use",
+    "websiteURL": "https://www.fyxer.com"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "fyxer",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

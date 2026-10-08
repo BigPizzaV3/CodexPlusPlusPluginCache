@@ -1,0 +1,10 @@
+interface:
+  display_name: "Legacy JRXML Toolkit"
+  short_description: "Build and validate legacy JasperReports JRXML"
+  icon_small: "./assets/legacy-jrxml-toolkit-composer.svg"
+  icon_large: "./assets/legacy-jrxml-toolkit-logo.svg"
+  brand_color: "#F97316"
+  default_prompt: "Use $jasper-jrxml to create or validate a legacy JasperReports 2.x JRXML report."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Persona Builder"
+  short_description: "Sign up + copy Gabi token"
+  brand_color: "#2563EB"
+  default_prompt: "I signed up on Gabriel Operator and connected my Gabi token. Use $persona-builder to interview me and author a local Gabriel AI Persona draft without publishing or calling remote services."

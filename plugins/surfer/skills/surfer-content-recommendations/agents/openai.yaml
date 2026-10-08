@@ -1,0 +1,11 @@
+interface:
+  display_name: "Act on Surfer Recommendations"
+  short_description: "Turn Surfer recommendations into content work"
+  default_prompt: "Use $surfer-content-recommendations to act on my top recommendation."
+dependencies:
+  tools:
+    - type: mcp
+      value: surfer
+      description: Surfer MCP server for content editors, guidelines, scores, and recommendations
+      transport: streamable_http
+      url: https://mcp.surferseo.com/mcp

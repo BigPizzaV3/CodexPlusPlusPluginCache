@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thangldw.github.io/ragops/schemas/pilot-economics-0.1.schema.json",
+  "title": "RAGOps pilot economics assumptions 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "hourly_cost_usd", "pilot_investment_usd", "assumptions"],
+  "properties": {
+    "schema_version": {"const": "ragops-pilot-economics-0.1"},
+    "hourly_cost_usd": {"type": "number", "exclusiveMinimum": 0},
+    "pilot_investment_usd": {"type": "number", "exclusiveMinimum": 0},
+    "assumptions": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

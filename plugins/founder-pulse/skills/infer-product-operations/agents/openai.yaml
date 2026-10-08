@@ -1,0 +1,7 @@
+interface:
+  display_name: "Founder Pulse"
+  short_description: "统计已关闭与仍开放 Issue、老化程度及交付人员"
+  default_prompt: "Use $infer-product-operations to compare Issues that changed from open to closed during the period with Issues still open at period end, grouped by creation age and labels, then show delivery links and their commit or pull/merge request authors."
+
+policy:
+  allow_implicit_invocation: true

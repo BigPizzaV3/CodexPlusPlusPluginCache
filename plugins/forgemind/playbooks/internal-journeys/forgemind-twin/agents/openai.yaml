@@ -1,0 +1,6 @@
+interface:
+  display_name: "ForgeMind Twin"
+  short_description: "Build a live evidence-labelled model of this application."
+  default_prompt: "Use $forgemind-twin to model this repository before autonomous product work."
+policy:
+  allow_implicit_invocation: false

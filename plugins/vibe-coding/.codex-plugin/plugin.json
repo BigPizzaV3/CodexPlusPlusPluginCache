@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Arty S.",
+    "url": "https://github.com/arty-kk"
+  },
+  "description": "Evidence-based coding workflows: 46 skills, 241 domain recipes, scoped implementation and verification.",
+  "homepage": "https://arty-kk.github.io/vibe-coding",
+  "interface": {
+    "brandColor": "#537E1B",
+    "brandColorDark": "#B9E481",
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Map this repository and explain its main contracts.",
+      "Review this branch and report actionable defects.",
+      "Find and fix one backend bug, then verify the change."
+    ],
+    "developerName": "Arty S.",
+    "displayName": "Vibe Coding",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Vibe Coding provides 46 skills and 241 engineering workflows for Codex and Claude Code: repository mapping, task planning, code review, debugging, implementation and release checks. It covers product, backend, data, infrastructure, AI, MCP, web rendering and serverless runtimes. Each workflow works from current code and verifiable behavior, respects the requested scope, and reports changes, checks and remaining limitations. The catalog and prompts support English, Spanish, Russian and Simplified Chinese; detailed technical instructions are in English.",
+    "privacyPolicyURL": "https://arty-kk.github.io/vibe-coding/privacy.html",
+    "shortDescription": "Map, review and improve code",
+    "termsOfServiceURL": "https://arty-kk.github.io/vibe-coding/terms.html",
+    "websiteURL": "https://arty-kk.github.io/vibe-coding/"
+  },
+  "keywords": [
+    "vibe-coding",
+    "review",
+    "debugging",
+    "architecture",
+    "quality",
+    "mcp",
+    "web",
+    "localization"
+  ],
+  "license": "MIT",
+  "name": "vibe-coding",
+  "repository": "https://github.com/arty-kk/vibe-coding",
+  "skills": "./skills",
+  "version": "1.3.0"
+}

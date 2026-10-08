@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Uniform Systems, Inc.",
+    "url": "https://uniform.dev"
+  },
+  "description": "Agent skills for building with Uniform: Next.js integration, content and experience modeling, navigation, forms, automations, assets, and Mesh integrations.",
+  "homepage": "https://docs.uniform.app",
+  "interface": {
+    "brandColor": "#1A1A2E",
+    "brandColorDark": "#D1D1E5",
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Add Uniform to this Next.js App Router project",
+      "Build a mega menu that editors can author and reorder in Uniform",
+      "Review my Uniform content model for best-practice problems"
+    ],
+    "developerName": "Uniform Systems, Inc.",
+    "displayName": "Uniform",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Eleven task-scoped skills that teach coding agents how to build correctly on Uniform, the composable content and experience platform. Covers integrating Uniform with Next.js App Router and Page Router, modeling content types and component definitions, building header navigation and mega menus, adding forms with a generic submission endpoint, writing Uniform Automations, rendering assets with transformations, adding personalized recommendations, and building Mesh integrations that extend the Uniform UI. Each skill loads only when the task calls for it, so the always-on context cost stays small. Guidance is verified against the shipped Uniform SDK packages and measured with an A/B eval harness in the public repository.",
+    "privacyPolicyURL": "https://www.uniform.dev/privacy-policy",
+    "shortDescription": "Build with Uniform",
+    "termsOfServiceURL": "https://www.uniform.dev/msa",
+    "websiteURL": "https://www.uniform.dev"
+  },
+  "keywords": [
+    "uniform",
+    "cms",
+    "dxp",
+    "personalization",
+    "nextjs",
+    "mesh"
+  ],
+  "license": "MIT",
+  "name": "uniformdev",
+  "repository": "https://github.com/uniformdev/agent-skills",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

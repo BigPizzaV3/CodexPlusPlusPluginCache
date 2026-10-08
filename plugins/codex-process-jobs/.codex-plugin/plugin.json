@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Joel Farthing"
+  },
+  "description": "Launch and manage durable, detached local process jobs from Codex.",
+  "homepage": "https://github.com/joelfarthing/codex-process-jobs#readme",
+  "interface": {
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Run this build as a tracked background job.",
+      "Show my active and recent process jobs.",
+      "Re-run the last job."
+    ],
+    "developerName": "Joel Farthing",
+    "displayName": "Codex Process Jobs",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Launch long-running local commands as tracked detached process groups, inspect bounded output, wait for completion, retrieve results, and cancel safely on macOS or Linux.",
+    "privacyPolicyURL": "https://filamentlabs.io/CPJ/privacy",
+    "shortDescription": "Detached process jobs",
+    "supportURL": "https://filamentlabs.io/support/",
+    "termsOfServiceURL": "https://filamentlabs.io/CPJ/terms",
+    "websiteURL": "https://filamentlabs.io/CPJ/"
+  },
+  "keywords": [
+    "background-jobs",
+    "detached-processes",
+    "builds",
+    "benchmarks",
+    "codex"
+  ],
+  "license": "Apache-2.0",
+  "name": "codex-process-jobs",
+  "repository": "https://github.com/joelfarthing/codex-process-jobs",
+  "skills": "./skills/",
+  "version": "0.5.0"
+}

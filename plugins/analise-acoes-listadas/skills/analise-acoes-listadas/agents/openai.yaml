@@ -1,0 +1,7 @@
+interface:
+  display_name: "Análise de Ações Listadas"
+  short_description: "Pesquisa fundamentalista e valuation"
+  icon_small: "./assets/icon.png"
+  icon_large: "./assets/icon.png"
+  brand_color: "#075985"
+  default_prompt: "Use $analise-acoes-listadas para analisar uma companhia listada com fontes atuais e premissas explícitas."

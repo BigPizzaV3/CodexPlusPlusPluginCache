@@ -1,0 +1,70 @@
+{
+  "name": "GOD MODE",
+  "slug": "god-mode",
+  "version": "1.2.0",
+  "type": "auto-routed-hybrid",
+  "modes": ["cloud", "local", "hybrid"],
+  "source": {
+    "repository": "https://github.com/Ogenicchocolate21debug/Core-Dv1",
+    "chat_spec_date": "2026-08-27",
+    "logo_source": "IMG_0172.jpeg"
+  },
+  "tool_families": [
+    "workspace_*",
+    "read_file/search_text/apply_patch",
+    "git_status/git_diff/git_log",
+    "project_dev/test/lint/typecheck/build",
+    "process_*/shell/codex_run",
+    "dom_cdp/accessibility/input_event",
+    "vision/window",
+    "office/clipboard/file_dialog",
+    "screen_record/audio",
+    "notification/scheduler",
+    "web_fetch",
+    "system_info/health"
+  ],
+  "invocation": ["Use $god-mode ...", "@GOD MODE ..."],
+  "availability_status": [
+    "READY_CLOUD",
+    "READY_LOCAL",
+    "READY_HYBRID",
+    "CONNECTOR_REQUIRED",
+    "LOCAL_BRIDGE_REQUIRED",
+    "EXECUTION_SURFACE_REQUIRED",
+    "CONFIGURATION_REQUIRED"
+  ],
+  "efficiency": {
+    "default_max_final_words": null,
+    "response_style": "concise-essential",
+    "sol_high_max_limit_saver": true,
+    "reuse_unchanged_state": true,
+    "batch_independent_calls": true,
+    "stop_after_verification": true
+  },
+  "persistence": {
+    "exact_target_deletion_enabled": true,
+    "dependency_preview_required": true,
+    "recoverable_copy_when_appropriate": true,
+    "controlled_history_cleanup_enabled": true,
+    "default_branch_protected": true,
+    "default_strategy": "append-or-version"
+  },
+  "network_policy": {
+    "direction": "auto",
+    "managed_inbound_webhook_enabled": true,
+    "required_controls": [
+      "https",
+      "authentication-or-signature",
+      "replay-protection",
+      "rate-limit",
+      "audit-log",
+      "disable-switch"
+    ]
+  },
+  "secret_policy": {
+    "metadata_and_placeholders_in_docs": true,
+    "actual_values_route": "approved-credential-ui-or-secret-manager",
+    "rotation_and_revocation_enabled": true,
+    "archive_live_secret_values": false
+  }
+}

@@ -1,0 +1,85 @@
+---
+name: zuora-api-build
+description: Generate or update Zuora integration code using the selected APIs
+argument-hint: <language> <API or requirement description>
+allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Agent, mcp__zuora-mcp__zuora_codegen, mcp__zuora-mcp__ask_zuora, mcp__zuora-mcp__query_objects]
+---
+
+Codex-only path resolution: When an instruction refers to `${CLAUDE_PLUGIN_ROOT}`, treat it as the root of this installed plugin. In Codex, resolve that root as the ancestor directory containing `skills/`, `references/`, and `.codex-plugin/`.
+
+
+You are generating Zuora integration code. The user has either already run `/zuora-api-design` or is describing what they want to build.
+
+## Input
+
+The user's request: $ARGUMENTS
+
+## Tool routing
+
+This build skill depends on `mcp__zuora-mcp__zuora_codegen` for API specs, model fields, enum values, SDK idioms, and code rules. Do not use generic product knowledge for code generation details. `mcp__zuora-mcp__ask_zuora` is allowed only as a fallback for a specific product-behavior question that remains after codegen and references are checked; include the exact uncertainty and sources already checked.
+
+## Workflow
+
+### Step 1: Determine language and scope
+
+Identify the target language (Java, Python, Node.js, C#, curl). If not specified, ask the user. Understand what APIs and operations are needed.
+
+### Step 2: Follow the mandatory codegen workflow
+
+This sequence is critical — call `mcp__zuora-mcp__zuora_codegen` in this exact order:
+
+1. **`code_guidance`** with the target language — get SDK setup instructions and workflow guidance. This MUST be called first.
+2. **`list_api_classes`** — if the right API class is unclear, list all available classes to find the right one.
+3. **`get_class_apis`** — for the relevant class(es), get all available API methods.
+4. **`get_api_details`** — for each endpoint you will use, get method signature, parameters, request/response models.
+5. **`get_model_details`** — for ALL request and response models you will use. This is mandatory to get actual field names, types, and enum values. Call this for each model class. For complex field types, recursively call `get_model_details(fieldTypeName)`.
+6. **`code_rules`** — get language-specific coding rules. This MUST be called before presenting code to the user.
+
+For simple queries (single API, known models), you may skip step 2 and go directly to step 3.
+
+### Step 2.5: Resolve custom field names (when the request includes custom fields)
+
+If the request involves custom fields (fields ending in `__c`) on any Zuora object:
+
+1. Call `mcp__zuora-mcp__query_objects` with `objectType=<objectName>` and `help=fields` to retrieve the live field schema from the tenant.
+2. Extract the exact field names from the `properties` map in the response — custom field names are **case-sensitive** and must be used verbatim as returned (e.g., `Region__c`, not `region__c`).
+3. **Never invent or lowercase custom field names.** If `query_objects` returns no properties (no tenant context), ask the user to provide the exact names.
+
+### Step 3: Generate code
+
+Following the patterns from `code_guidance` and rules from `code_rules`:
+
+- Include SDK client initialization and authentication setup
+- Use correct model classes and constructors from `get_model_details` response
+- Use actual enum values — never guess enum strings
+- Use exact custom field names from Step 2.5 — never guess or lowercase them
+- Include error handling (try/catch, HTTP status checks, retry logic)
+- Include pagination handling for list/query operations
+- Add comments mapping code to business requirements
+- Follow language-specific conventions:
+  - **Java**: Fluent builder pattern, `.execute()` calls, SDK enum constants
+  - **Python**: Snake_case, keyword arguments, async/await where appropriate
+  - **Node.js**: camelCase, async/await, property assignment
+  - **C#**: PascalCase classes, camelCase methods, `Async` suffix on async methods
+  - **curl**: Environment variables for credentials, proper header formatting
+
+### Step 4: Read reference patterns
+
+Read `${CLAUDE_PLUGIN_ROOT}/references/api-integration-patterns.md` and `${CLAUDE_PLUGIN_ROOT}/references/best-practices.md`. Apply relevant patterns to the generated code.
+
+### Step 5: Write code to files
+
+If the user's project context is clear (they're working in a repo), write code to appropriate files. Otherwise, present the code inline.
+
+### Step 6: Suggest validation
+
+Recommend the user run `/zuora-validate` on the generated code to check for correctness.
+
+## Critical rules
+
+- NEVER generate code before completing steps 2.1 through 2.6. The MCP responses contain actual SDK structure.
+- NEVER guess field names or enum values — always use values from `get_model_details`.
+- NEVER guess or lowercase custom field names (`__c` fields) — always resolve them from the live tenant via `query_objects help=fields` (Step 2.5). Custom field names are case-sensitive.
+- NEVER use setter methods like `setName()` in Java — use fluent builder pattern.
+- For discriminated types in Java/C#: instantiate the specific subtype first, then wrap in the base request class.
+- Always include proper error handling — at minimum, catch and log HTTP errors.

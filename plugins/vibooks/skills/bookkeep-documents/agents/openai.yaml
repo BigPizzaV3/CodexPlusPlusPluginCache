@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bookkeep Documents"
+  short_description: "Turn source documents into reviewable Vibooks entries"
+  default_prompt: "Use $bookkeep-documents to read the documents in the current directory, prepare the bookkeeping in Vibooks, and wait for my confirmation before posting."

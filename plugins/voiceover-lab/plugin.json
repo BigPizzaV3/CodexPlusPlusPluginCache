@@ -1,0 +1,57 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "fasihrizviofficial@gmail.com",
+    "name": "Fasih"
+  },
+  "description": "A complete voiceover production studio: timed scripts, delivery direction, audio tags, casting, voice design, clone prep, pronunciation, timing, sync, localization, sound effects, music, QA, and render-ready output.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "brandColor": "#6D28D9",
+        "brandColorDark": "#6D28D9",
+        "capabilities": [
+          "Write timed voiceover scripts for ads, shorts, explainers, podcasts, audiobooks, and e-learning",
+          "Add delivery direction and inline audio tags so AI voices perform instead of read",
+          "Cast or design the right voice and prepare consented voice clone recordings",
+          "Fix pronunciation of names, acronyms, numbers, and foreign words",
+          "Time scripts to picture, captions, and fixed ad slots",
+          "Localize scripts for dubbing and write sound effect and music prompts",
+          "Export clean render-ready text for AI text-to-speech tools"
+        ],
+        "category": "Creativity",
+        "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+        "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+        "defaultPrompt": [
+          "Write a voiceover script for my project.",
+          "Make my script sound natural and ready for an AI voice.",
+          "Help me plan the voice, pacing, and delivery for my audio."
+        ],
+        "developerName": "Syed Fasih Haider Raza Rizvi",
+        "displayName": "Voiceover Lab",
+        "logo": "./.codex-plugin/assets/logo.png",
+        "logoDark": "./.codex-plugin/assets/logo-dark.png",
+        "longDescription": "Turn ideas, drafts, blog posts, or transcripts into production-ready voiceover scripts with timing, pacing, delivery direction, and audio cues. Create scripts for ads, short videos, explainers, e-learning, podcasts, audiobooks, meditation, games, IVR, and voice agents. Get help with voice casting, consented voice-clone preparation, pronunciation, dubbing, sync, sound and music prompts, quality checks, cost estimates, and clean text for AI voice tools.",
+        "privacyPolicyURL": "https://github.com/Fasih38/plugin-pages/blob/main/privacy.md",
+        "shortDescription": "Write voiceover scripts",
+        "supportURL": "https://github.com/Fasih38/plugin-pages/blob/main/support.md",
+        "termsOfServiceURL": "https://github.com/Fasih38/plugin-pages/blob/main/terms.md",
+        "websiteURL": "https://github.com/Fasih38/plugin-pages/blob/main/README.md"
+      }
+    }
+  },
+  "keywords": [
+    "voiceover",
+    "text-to-speech",
+    "narration",
+    "audio",
+    "scriptwriting",
+    "voice-cloning",
+    "dubbing",
+    "podcast",
+    "audiobook"
+  ],
+  "license": "MIT",
+  "name": "voiceover-lab",
+  "version": "3.6.0"
+}

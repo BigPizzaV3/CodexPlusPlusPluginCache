@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "blader",
+    "url": "https://github.com/blader"
+  },
+  "description": "Rewrite AI-sounding prose so it reads naturally while preserving meaning and supported facts.",
+  "homepage": "https://github.com/blader/humanizer",
+  "interface": {
+    "capabilities": [
+      "Rewrite prose",
+      "Detect AI-writing patterns"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Rewrite this text so it sounds natural without changing the facts",
+      "Make this draft less AI-sounding while preserving my meaning",
+      "Edit this passage for a more human and direct voice"
+    ],
+    "developerName": "RONALD FERRARI SOARES",
+    "displayName": "Humanizer",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Rewrites AI-sounding prose to read more naturally while preserving facts, intent, meaning, and important constraints.",
+    "shortDescription": "Natural prose rewriting"
+  },
+  "keywords": [
+    "writing",
+    "editing",
+    "humanize",
+    "prose",
+    "style"
+  ],
+  "license": "MIT",
+  "name": "humanizer",
+  "repository": "https://github.com/blader/humanizer",
+  "skills": "./skills/",
+  "version": "3.0.0"
+}

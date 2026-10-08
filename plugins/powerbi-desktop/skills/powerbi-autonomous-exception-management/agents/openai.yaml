@@ -1,0 +1,5 @@
+interface:
+  display_name: Autonomous Exception Management
+  short_description: Managed planning exceptions
+policy:
+  allow_implicit_invocation: false

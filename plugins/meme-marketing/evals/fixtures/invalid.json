@@ -1,0 +1,93 @@
+{
+  "skill": "meme-marketing",
+  "memes": [
+    {
+      "audience": {
+        "role": "Egyptian UX designer",
+        "context": "gets a Friday night revision after sign-off",
+        "market": "Egypt",
+        "send_to": "a teammate who handles the same client"
+      },
+      "moment": "a signed-off screen gets another edit request after 11 pm",
+      "emotion": "weary",
+      "humor_mechanism": "understatement",
+      "form": "original_scene",
+      "image_text_relation": "dialogue",
+      "caption": "لما الكلاينت يبعت تعديل على النسخة اللي اعتمدها الساعة 11:47 بالليل:",
+      "on_image_text": "هو الـ final ده بيتجدد كل سنة؟",
+      "visual": {
+        "primary": "Original tired designer holding phone in a dark home office",
+        "fallback": "Original illustration of a hand holding a phone with a late-night message",
+        "source": "original",
+        "description": "Sleepy expression, monitor behind subject, readable phone silhouette",
+        "freshness": {
+          "status": "evergreen",
+          "verified_at": null
+        }
+      },
+      "design": {
+        "ratio": "4:5",
+        "text_position": "bottom safe area, away from face",
+        "palette": "white text with dark stroke",
+        "logo": {
+          "placement": "top left",
+          "variant": "dark"
+        }
+      },
+      "brand_role": "none",
+      "evidence": {
+        "provenance": "illustrative",
+        "receipt": "11:47",
+        "source": null
+      },
+      "alternatives": [
+        "Same caption with an original paper calendar reaction"
+      ],
+      "risk_notes": []
+    },
+    {
+      "audience": {
+        "role": "Egyptian UX designer",
+        "context": "gets a Friday night revision after sign-off",
+        "market": "Egypt",
+        "send_to": "a teammate who handles the same client"
+      },
+      "moment": "a signed-off screen gets another edit request after 11 pm",
+      "emotion": "weary",
+      "humor_mechanism": "understatement",
+      "form": "original_scene",
+      "image_text_relation": "dialogue",
+      "caption": "لما الكلاينت يبعت تعديل على النسخة اللي اعتمدها الساعة 11:47 بالليل:",
+      "on_image_text": "سجل الآن https://example.com #promo",
+      "visual": {
+        "primary": "Original tired designer holding phone in a dark home office",
+        "fallback": "Original tired designer holding phone in a dark home office",
+        "source": "original",
+        "description": "Sleepy expression, monitor behind subject, readable phone silhouette",
+        "freshness": {
+          "status": "verified_recent",
+          "verified_at": "yesterday"
+        }
+      },
+      "design": {
+        "ratio": "4:5",
+        "text_position": "bottom safe area, away from face",
+        "palette": "white text with dark stroke",
+        "logo": {
+          "placement": "top left",
+          "variant": "dark"
+        }
+      },
+      "brand_role": "none",
+      "evidence": {
+        "provenance": "illustrative",
+        "receipt": "11:47",
+        "source": null
+      },
+      "alternatives": [
+        "Same caption with an original paper calendar reaction"
+      ],
+      "risk_notes": []
+    }
+  ]
+}

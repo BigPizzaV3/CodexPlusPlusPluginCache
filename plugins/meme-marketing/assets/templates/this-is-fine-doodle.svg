@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #fffbeb; }
+      .line { stroke: #0f172a; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .thick { stroke: #0f172a; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .fill-white { fill: #ffffff; }
+      .flame-yellow { fill: #facc15; stroke: #0f172a; stroke-width: 4; }
+      .flame-red { fill: #ef4444; stroke: #0f172a; stroke-width: 4; }
+      .speech-bubble { fill: #ffffff; stroke: #0f172a; stroke-width: 5; rx: 12; }
+      .speech-text { font-family: 'Comic Sans MS', cursive, -apple-system, sans-serif; font-weight: 800; font-size: 32px; fill: #0f172a; text-anchor: middle; }
+      .label-box { fill: #ffffff; stroke: #0f172a; stroke-width: 3.5; rx: 6; }
+      .label-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; font-size: 18px; fill: #0f172a; text-anchor: middle; }
+      .caption-bar { fill: #0f172a; }
+      .caption-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; font-size: 26px; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="650" class="bg" />
+
+  <!-- Top Caption Bar -->
+  <rect x="0" y="0" width="1000" height="70" class="caption-bar" />
+  <text x="500" y="45" class="caption-text">{{TOP_CAPTION}}</text>
+
+  <!-- Room Wall & Floor -->
+  <line x1="0" y1="520" x2="1000" y2="520" class="line" stroke-width="8" />
+
+  <!-- Cartoon Flames in the Background Left -->
+  <g transform="translate(60, 240)">
+    <path d="M 0,280 Q 40,160 80,210 Q 120,80 180,180 Q 240,100 280,280 Z" class="flame-red" />
+    <path d="M 30,280 Q 60,200 90,230 Q 120,140 160,210 Q 200,160 250,280 Z" class="flame-yellow" />
+    <!-- Label on the fire -->
+    <rect x="30" y="80" width="220" height="45" class="label-box" fill="#fee2e2" />
+    <text x="140" y="108" class="label-text">{{BURNING_CRISIS_1}}</text>
+  </g>
+
+  <!-- Cartoon Flames Right -->
+  <g transform="translate(660, 220)">
+    <path d="M 0,300 Q 50,140 100,200 Q 150,70 210,180 Q 260,90 300,300 Z" class="flame-red" />
+    <path d="M 30,300 Q 70,180 110,230 Q 150,130 190,200 Q 230,140 270,300 Z" class="flame-yellow" />
+    <!-- Label on the fire -->
+    <rect x="50" y="70" width="220" height="45" class="label-box" fill="#fee2e2" />
+    <text x="160" y="98" class="label-text">{{BURNING_CRISIS_2}}</text>
+  </g>
+
+  <!-- Table with Coffee Mug -->
+  <g transform="translate(420, 360)">
+    <!-- Table Surface & Legs -->
+    <rect x="-100" y="100" width="200" height="15" rx="4" class="fill-white" stroke="#0f172a" stroke-width="5" />
+    <line x1="-80" y1="115" x2="-80" y2="160" class="line" stroke-width="6" />
+    <line x1="80" y1="115" x2="80" y2="160" class="line" stroke-width="6" />
+    <!-- Coffee Mug -->
+    <rect x="-30" y="60" width="40" height="40" rx="4" class="fill-white" stroke="#0f172a" stroke-width="4" />
+    <path d="M 10,70 Q 25,80 10,90" class="line" stroke-width="4" />
+    <!-- Coffee Steam -->
+    <path d="M -15,50 Q -10,35 -15,20" class="line" stroke-width="3" />
+    <path d="M -5,50 Q 0,35 -5,20" class="line" stroke-width="3" />
+    <!-- Coffee Label -->
+    <text x="-10" y="85" font-family="sans-serif" font-weight="900" font-size="12" fill="#0f172a" text-anchor="middle">☕</text>
+  </g>
+
+  <!-- The Calm Doodle Dog / Character Sitting at Table -->
+  <g transform="translate(530, 370)">
+    <!-- Dog Body -->
+    <path d="M -30,50 C -40,80 -30,130 -10,145 L 60,145 C 80,120 70,80 60,50 Z" class="fill-white" stroke="#0f172a" stroke-width="6" />
+
+    <!-- Dog Floppy Ears -->
+    <ellipse cx="-45" cy="-10" rx="16" ry="35" transform="rotate(-15 -45 -10)" class="fill-white" stroke="#0f172a" stroke-width="5" />
+    <ellipse cx="65" cy="-10" rx="16" ry="35" transform="rotate(15 65 -10)" class="fill-white" stroke="#0f172a" stroke-width="5" />
+
+    <!-- Head with Little Hat -->
+    <circle cx="10" cy="-20" r="55" class="fill-white" stroke="#0f172a" stroke-width="6.5" />
+    <!-- Little Fedorita / Bowler Hat -->
+    <path d="M -20,-75 L 40,-75 L 35,-95 L -15,-95 Z" class="fill-white" stroke="#0f172a" stroke-width="4.5" />
+    <ellipse cx="10" cy="-75" rx="38" ry="8" class="fill-white" stroke="#0f172a" stroke-width="4" />
+
+    <!-- Perfectly Calm, Slightly Deranged Peaceful Eyes -->
+    <ellipse cx="-10" cy="-25" rx="14" ry="16" class="fill-white" stroke="#0f172a" stroke-width="4.5" />
+    <circle cx="-10" cy="-25" r="4.5" fill="#0f172a" />
+    <ellipse cx="30" cy="-25" rx="14" ry="16" class="fill-white" stroke="#0f172a" stroke-width="4.5" />
+    <circle cx="30" cy="-25" r="4.5" fill="#0f172a" />
+
+    <!-- Cute Dog Snoot -->
+    <ellipse cx="10" cy="-10" rx="10" ry="7" fill="#0f172a" />
+
+    <!-- Calm Serene Smile -->
+    <path d="M -8,8 Q 10,24 28,8" class="line" stroke-width="5" />
+
+    <!-- Arm resting on table holding coffee -->
+    <path d="M -25,75 Q -90,85 -85,100" class="thick" />
+
+    <!-- Speech Bubble: "This is fine." -->
+    <g transform="translate(180, -110)">
+      <path d="M -130,-40 L 130,-40 Q 150,-40 150,-20 L 150,30 Q 150,50 130,50 L -70,50 L -110,80 L -95,50 L -130,50 Q -150,50 -150,30 L -150,-20 Q -150,-40 -130,-40 Z" class="speech-bubble" />
+      <text x="0" y="15" class="speech-text">{{SPEECH_BUBBLE_TEXT}}</text>
+    </g>
+
+    <!-- Character Label -->
+    <rect x="-90" y="155" width="200" height="40" class="label-box" fill="#fef08a" />
+    <text x="10" y="180" class="label-text">{{THE_CALM_VICTIM}}</text>
+  </g>
+</svg>

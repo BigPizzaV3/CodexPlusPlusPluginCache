@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibooks"
+  short_description: "Bookkeeping from source documents to reconciled books"
+  default_prompt: "Use $vibooks to set up or reuse Vibooks, process source documents, reconcile accounts, and prepare reviewable bookkeeping. Wait for my confirmation before posting."

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Innovate"
+  short_description: "Find disruptive AI SaaS USPs and safe experiments."
+  default_prompt: "Use $forgemind-innovate to find disruptive AI-central SaaS opportunities for this product."
+policy:
+  allow_implicit_invocation: false

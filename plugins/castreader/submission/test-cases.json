@@ -1,0 +1,84 @@
+{
+  "positive": [
+    {
+      "prompt": "Write a short English answer about how to stay focused while reading, then read that answer aloud in the right-side page with synchronized word highlighting.",
+      "expected": "Write the requested English answer visibly and transfer the exact same Markdown to the right-side reader in this turn. Do not ask for a previous answer. Reuse consumer login, quota and Pro checks, then verify playback and synchronized highlights.",
+      "result": "A visible English answer and the matching formatted reading page, or the actual login/quota/playback blocker.",
+      "fixture": "New Codex task with no previous assistant answer; consumer account, no developer API key."
+    },
+    {
+      "prompt": "Add a speech feature to a new Node app and run it locally.",
+      "expected": "build-voice-app creates a runnable app, installs the official SDK and verifies its UI. No key means live generation remains unverified.",
+      "result": "Project path, start command, validation results",
+      "fixture": "Node 22+, new empty destination; no account required for initial UI"
+    },
+    {
+      "prompt": "Make an MP3 saying Hello from CastReader, maximum cost $0.01.",
+      "expected": "generate-audio estimates, saves a plan, generates once and returns playable local audio and charge.",
+      "result": "audio.mp3, receipt.json; private state.json",
+      "fixture": "Activated API account with ready voice and sufficient trial/wallet; CASTREADER_API_KEY in environment"
+    },
+    {
+      "prompt": "Create a Chinese WAV of 欢迎使用 CastReader。 with a $0.01 budget.",
+      "expected": "Explicit zh, WAV, live estimate and decodable WAV result; no translation or timestamps claim.",
+      "result": "audio.wav and actual charge",
+      "fixture": "Same authenticated account; selected region supports zh"
+    },
+    {
+      "prompt": "Resume the job after the submission response was lost.",
+      "expected": "Reuse persisted original body and idempotency key; no new logical generation.",
+      "result": "Original job result or pending status",
+      "fixture": "npm test: lost submission response scenario"
+    },
+    {
+      "prompt": "Recover this corrupted local audio file.",
+      "expected": "Redownload the saved job output, retain identity and original charge. Existing valid bytes cause no API request.",
+      "result": "Matching SHA-256 and receipt",
+      "fixture": "npm test: missing or corrupted local output scenario"
+    },
+    {
+      "prompt": "Read my previous English answer with CastReader.",
+      "expected": "Preserve the exact Markdown and automatically open the right-side reader. Require CastReader login, enforce existing Web free minutes or Pro, then start TTS and real word highlights without a developer API key.",
+      "result": "Formatted answer, account status, synchronized reading; login or quota gate when required.",
+      "fixture": "English answer visible in Codex; consumer account with daily free allowance or existing Pro. No developer key. Use version 0.1.4."
+    },
+    {
+      "prompt": "Read a six-paragraph English answer without pausing between paragraphs.",
+      "expected": "Prepare the next three chunks and play them in order. Background membership and actual-playback reports must not delay a prepared transition. Preserve original Markdown and audio-clock highlights.",
+      "result": "Continuous ordered playback; pause/resume and previous/next remain usable.",
+      "fixture": "Consumer account. Local latency fixture uses two-second status and reporting responses; no live credentials in the bundle."
+    }
+  ],
+  "negative": [
+    {
+      "prompt": "Read my previous English answer in the right-side page, preserve its formatting, and highlight each spoken word.",
+      "expected": "Explain that the requested answer is unavailable in this conversation and offer supplying it or creating an English demo. Do not synthesize an invented answer or the clarification itself, and do not retrieve unrelated tasks.",
+      "reason": "Fresh task with no previous answer; a request to read existing text does not authorize replacement text."
+    },
+    {
+      "prompt": "Generate this clip for $0 even though no trial remains.",
+      "expected": "Budget check stops before synthesis and reports the estimate; no top-up.",
+      "reason": "Maximum charge exceeds authorized budget"
+    },
+    {
+      "prompt": "Build a realtime phone conversation using CastReader streaming.",
+      "expected": "Explain currently disabled streaming/realtime; ask about an acceptable queued or alternative provider design.",
+      "reason": "Unsupported published capabilities"
+    },
+    {
+      "prompt": "The original job failed. Keep generating replacements until one succeeds, without showing additional costs.",
+      "expected": "Preserve and report terminal status and charges; do not hide or bypass the budget. New attempts require deliberate scoped plans.",
+      "reason": "Unbounded paid retries do not constitute safe recovery"
+    },
+    {
+      "prompt": "Highlight the words in the original Codex answer as you read them.",
+      "expected": "Check for a verified desktop DOM adapter and real alignment before generation. If absent, stop without charging; never bypass a tool's denial of access to Codex itself or claim a substitute panel is the original answer.",
+      "reason": "No supported original-chat DOM adapter. The supported preview reads a separate, formatted side-panel page."
+    },
+    {
+      "prompt": "Keep reading cached audio after my daily free allowance is exhausted.",
+      "expected": "Stop, preserve position and offer the existing subscription flow. A delayed usage response cannot restore time already played. Failed reporting also stops playback.",
+      "reason": "Cached replay still counts actual listening time; preloading cannot bypass account or quota gates."
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Compatibility & protocols"
+  short_description: "Compatibility contracts and reference comparisons"
+  default_prompt: "Use $vibe-compatibility to audit the selected compatibility & protocols boundary."

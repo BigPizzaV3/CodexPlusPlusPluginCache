@@ -1,0 +1,205 @@
+{
+  "source": "https://docs.ship24.com/status",
+  "fields": {
+    "statusCode": "The `statusCode` which provides the codified meaning of a specific event. While the `statusCategory` and `statusCode` may be empty on non-significant events, the `statusMilestone` will be provided on each and every event of a shipment.",
+    "statusCategory": "The `statusCategory` which provides the codified category of a specific event.",
+    "statusMilestone": "The `statusMilestone` which provides the overall status of the shipment at the time of the event. The field `statusMilestone` is provided both at event-level (overall status of the shipment during the occurrence of the event) and at shipment-level (overall status of the shipment at the present time)."
+  },
+  "milestones": [
+    {
+      "code": "info_received",
+      "label": "Info. Received",
+      "description": "The shipment has been declared electronically and/or is in preparation by the shipper."
+    },
+    {
+      "code": "in_transit",
+      "label": "In Transit",
+      "description": "The shipment has been accepted or picked up from the shipper and is on the way."
+    },
+    {
+      "code": "out_for_delivery",
+      "label": "Out for Delivery",
+      "description": "The shipment is about to be delivered, usually the same day."
+    },
+    {
+      "code": "failed_attempt",
+      "label": "Failed Attempt",
+      "description": "A delivery attempt was made and failed (Recipient not available, business closed, etc.)"
+    },
+    {
+      "code": "available_for_pickup",
+      "label": "To Pick Up",
+      "description": "The shipment is ready to be picked up by the receiver. (At a pickup point such as a post office, a locker, or a local business)"
+    },
+    {
+      "code": "delivered",
+      "label": "Delivered",
+      "description": "The shipment has been delivered. (Delivered at home, picked up from a pickup point, etc.)"
+    },
+    {
+      "code": "exception",
+      "label": "Exception",
+      "description": "The shipment can’t be delivered due to issues that seem to be final (Returning, returned, lost, destroyed, etc.)"
+    },
+    {
+      "code": "pending",
+      "label": "Pending",
+      "description": "The shipment doesn’t have events available yet or can’t be found."
+    }
+  ],
+  "categories": [
+    {
+      "code": "data",
+      "description": "Events related to data exchange, without physical meaning.",
+      "statusCodes": [
+        {
+          "code": "data_order_created",
+          "description": "Delivery order created. The delivery order is electronically declared in the courier's system."
+        },
+        {
+          "code": "data_order_cancelled",
+          "description": "Delivery order cancelled. The delivery order has been cancelled in the courier's system."
+        },
+        {
+          "code": "data_delivery_proposed",
+          "description": "Final delivery methods and/or time slots have been proposed to the receiver and the courier is waiting for his feedback."
+        },
+        {
+          "code": "data_delivery_decided",
+          "description": "Final delivery methods and/or time slots has been decided (by courier, sender, receiver or unknown)."
+        }
+      ]
+    },
+    {
+      "code": "transit",
+      "description": "Event related to overall transit.",
+      "statusCodes": [
+        {
+          "code": "transit_handover",
+          "description": "Shipment picked-up or received by the carrier."
+        },
+        {
+          "code": "transit_origin_country_departure",
+          "description": "Shipment departed from origin country. (in case of an international shipment)"
+        }
+      ]
+    },
+    {
+      "code": "destination",
+      "description": "Event related to the arrival at the destination country.",
+      "statusCodes": [
+        {
+          "code": "destination_arrival",
+          "description": "Shipment arrived in the destination country."
+        }
+      ]
+    },
+    {
+      "code": "customs",
+      "description": "Event related to the customs clearance.",
+      "statusCodes": [
+        {
+          "code": "customs_received",
+          "description": "Shipment received by/Presented to the customs."
+        },
+        {
+          "code": "customs_exception",
+          "description": "Exception or delay during customs clearance. Additional documents or payment may be required."
+        },
+        {
+          "code": "customs_rejected",
+          "description": "Shipment rejected by customs."
+        },
+        {
+          "code": "customs_cleared",
+          "description": "Shipment cleared by customs."
+        }
+      ]
+    },
+    {
+      "code": "delivery",
+      "description": "Event related to the delivery phase.",
+      "statusCodes": [
+        {
+          "code": "delivery_available_for_pickup",
+          "description": "Shipment available for pickup at a pick-up point or at the Post Office."
+        },
+        {
+          "code": "delivery_out_for_delivery",
+          "description": "Shipment delivery in progress."
+        },
+        {
+          "code": "delivery_attempted",
+          "description": "Delivery attempted and unsuccessful. Usually, the delivery will be tried again the next day, or the shipment will be left at a pick-up point."
+        },
+        {
+          "code": "delivery_exception",
+          "description": "Issue during delivery or preventing delivery, which usually could be solved."
+        },
+        {
+          "code": "delivery_refused",
+          "description": "Shipment refused by the recipient."
+        },
+        {
+          "code": "delivery_delivered",
+          "description": "Shipment has been delivered."
+        }
+      ]
+    },
+    {
+      "code": "exception",
+      "description": "Event related to an exception/issue which is usually final.",
+      "statusCodes": [
+        {
+          "code": "exception_return",
+          "description": "Shipment undeliverable, will be or being returned."
+        },
+        {
+          "code": "exception_lost",
+          "description": "Shipment lost by the carrier."
+        },
+        {
+          "code": "exception_discarded",
+          "description": "Shipment destroyed by the carrier."
+        }
+      ]
+    }
+  ],
+  "sampleTrackingNumbers": {
+    "note": "You can reuse the same sample multiple times by modifying the last three characters of the sample to any three-digit combination (e.g., `SHIP24_SAMPLE_DELIVERED_000`, `SHIP24_SAMPLE_DELIVERED_123`, `SHIP24_SAMPLE_DELIVERED_888`). This will effectively create a new Tracker, with tracking results remaining the same as the version ending with `000`. Alternatively, if you want to recreate a tracker with the exact same tracking number, you can do it by providing a unique `clientTrackerId` for each new Tracker.",
+    "samples": [
+      {
+        "milestone": "pending",
+        "trackingNumber": "SHIP24_SAMPLE_PENDING_000"
+      },
+      {
+        "milestone": "info_received",
+        "trackingNumber": "SHIP24_SAMPLE_INFO_RECEIVED_000"
+      },
+      {
+        "milestone": "in_transit",
+        "trackingNumber": "SHIP24_SAMPLE_IN_TRANSIT_000"
+      },
+      {
+        "milestone": "out_for_delivery",
+        "trackingNumber": "SHIP24_SAMPLE_OUT_FOR_DELIVERY_000"
+      },
+      {
+        "milestone": "failed_attempt",
+        "trackingNumber": "SHIP24_SAMPLE_FAILED_ATTEMPT_000"
+      },
+      {
+        "milestone": "available_for_pickup",
+        "trackingNumber": "SHIP24_SAMPLE_AVAILABLE_FOR_PICKUP_000"
+      },
+      {
+        "milestone": "delivered",
+        "trackingNumber": "SHIP24_SAMPLE_DELIVERED_000"
+      },
+      {
+        "milestone": "exception",
+        "trackingNumber": "SHIP24_SAMPLE_EXCEPTION_000"
+      }
+    ]
+  }
+}

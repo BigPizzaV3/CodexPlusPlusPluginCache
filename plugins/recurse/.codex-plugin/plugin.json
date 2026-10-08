@@ -1,0 +1,39 @@
+{
+  "author": {
+    "name": "Synnada"
+  },
+  "description": "Build reusable agentic workloads. Explore alternatives and check results with serverless execution on Recurse. Expose as MCP or run to completion.",
+  "homepage": "https://recurse.run",
+  "interface": {
+    "brandColor": "#5C3DF5",
+    "brandColorDark": "#5C3DF5",
+    "capabilities": [
+      "python",
+      "mcp",
+      "tools",
+      "jev",
+      "agent development",
+      "agent deployment"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Design a Python tool that tests code changes against a benchmark.",
+      "Plan a Recurse agent that generates puzzle levels and checks solvability.",
+      "Help me expose a tested Recurse agent through MCP."
+    ],
+    "developerName": "Synnada",
+    "displayName": "Recurse",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Your coding agent uses Recurse to define Python tools and checks around a task. An LLM calls those tools to explore alternatives and refine results. Execution is serverless: expose the workload as an MCP server for use in agentic workflows, or run it to completion. Requires the Recurse SDK and a Recurse account.",
+    "privacyPolicyURL": "https://synnada.ai/privacy",
+    "shortDescription": "Build specialist agents.",
+    "supportURL": "https://github.com/synnada-ai/recurse-plugins/issues",
+    "termsOfServiceURL": "https://synnada.ai/terms",
+    "websiteURL": "https://recurse.run"
+  },
+  "license": "Apache-2.0",
+  "name": "recurse",
+  "skills": "./skills",
+  "version": "0.2.4"
+}

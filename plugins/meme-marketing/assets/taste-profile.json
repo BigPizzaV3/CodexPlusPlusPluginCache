@@ -1,0 +1,16 @@
+{
+  "profile_version": "1.0",
+  "scope": {
+    "creator": null,
+    "brand": null,
+    "audience": null,
+    "platform": null,
+    "locale": null
+  },
+  "confirmed": [],
+  "contextual": [],
+  "tentative": [],
+  "rejected": [],
+  "history": [],
+  "updated_at": null
+}

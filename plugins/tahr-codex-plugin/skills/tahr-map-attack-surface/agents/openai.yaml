@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Map Attack Surface"
+  short_description: "Map the real application attack surface"
+  default_prompt: "Use $tahr-map-attack-surface to inventory the reachable security boundaries in this application."

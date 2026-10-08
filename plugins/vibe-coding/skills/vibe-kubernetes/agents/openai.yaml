@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Kubernetes"
+  short_description: "Kubernetes deployments, resources and recovery"
+  default_prompt: "Use $vibe-kubernetes to audit the selected kubernetes boundary."

@@ -1,0 +1,9 @@
+interface:
+  display_name: To Questionnaire
+  short_description: Turn unresolved decisions into a questionnaire
+  default_prompt: Use $to-questionnaire for this task
+policy:
+  allow_implicit_invocation: false
+  products:
+  - CHAT
+  - CODEX

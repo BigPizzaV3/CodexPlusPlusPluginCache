@@ -1,0 +1,11 @@
+Tickets[Open Tickets] =
+COUNTROWS(FILTER(ALL(Tickets), Tickets[Status] <> "Closed"))
+
+Tickets[Overdue Tickets] =
+CALCULATE(COUNTROWS(Tickets), Tickets[DueDate] < TODAY())
+
+Tickets[Escalation Risk] =
+DIVIDE([Overdue Tickets], [Open Tickets])
+
+Tickets[Legacy Rank] =
+SUMX(Tickets, EARLIER(Tickets[Priority]))

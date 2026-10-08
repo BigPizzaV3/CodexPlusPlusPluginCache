@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Documentation"
+  short_description: "Write useful Go docs and examples"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-documentation to write or review documentation for this Go code."

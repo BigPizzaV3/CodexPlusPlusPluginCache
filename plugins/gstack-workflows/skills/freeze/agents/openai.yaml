@@ -1,0 +1,9 @@
+interface:
+  display_name: "Freeze"
+  short_description: "Restrict requested edits to an explicitly named directory or scope."
+  default_prompt: "Use Freeze for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: false

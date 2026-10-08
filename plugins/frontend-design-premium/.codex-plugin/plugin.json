@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "TryHand Co., Ltd",
+    "url": "https://github.com/TryHand-Co-Ltd"
+  },
+  "description": "Production UX contracts and durable design context for frontend implementation.",
+  "homepage": "https://github.com/TryHand-Co-Ltd/frontend-design-premium",
+  "interface": {
+    "brandColor": "#4338CA",
+    "brandColorDark": "#4338CA",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Build this application UI with production UX contracts.",
+      "Review this frontend for UX consistency and resilience.",
+      "Create durable DESIGN.md and UX-CONTRACT.md context."
+    ],
+    "developerName": "TryHand Co., Ltd",
+    "displayName": "Frontend Design Premium",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Adds durable design context, cross-screen behavioral consistency, resilient interaction states, accessibility, localization, and verification to frontend implementation workflows.",
+    "privacyPolicyURL": "https://github.com/TryHand-Co-Ltd/frontend-design-premium/blob/main/PRIVACY.md",
+    "shortDescription": "Build production-ready UX",
+    "termsOfServiceURL": "https://github.com/TryHand-Co-Ltd/frontend-design-premium/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/TryHand-Co-Ltd/frontend-design-premium"
+  },
+  "keywords": [
+    "frontend",
+    "ux",
+    "design-system",
+    "accessibility",
+    "localization"
+  ],
+  "license": "Apache-2.0",
+  "name": "frontend-design-premium",
+  "repository": "https://github.com/TryHand-Co-Ltd/frontend-design-premium",
+  "skills": "./skills/",
+  "version": "1.4.0"
+}

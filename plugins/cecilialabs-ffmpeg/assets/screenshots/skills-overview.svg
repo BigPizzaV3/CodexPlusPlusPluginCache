@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">FFmpeg Media Toolkit skills overview</title>
+  <desc id="desc">Documentation preview of the seven professional plugin skills.</desc>
+  <rect width="1280" height="720" fill="#F8FAFC"/>
+  <text x="96" y="92" fill="#0B1220" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700">Professional media skills</text>
+  <text x="96" y="132" fill="#64748B" font-family="Arial, Helvetica, sans-serif" font-size="22">Probe first. Use the typed toolkit. Validate the result.</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">
+    <rect x="96" y="190" width="320" height="110" rx="20" fill="#0B1220"/><text x="126" y="254" fill="#F8FAFC">Environment</text>
+    <rect x="480" y="190" width="320" height="110" rx="20" fill="#0E7490"/><text x="510" y="254" fill="#ECFEFF">Video Editing</text>
+    <rect x="864" y="190" width="320" height="110" rx="20" fill="#0B1220"/><text x="894" y="254" fill="#F8FAFC">Audio</text>
+    <rect x="96" y="350" width="320" height="110" rx="20" fill="#0E7490"/><text x="126" y="414" fill="#ECFEFF">Conversion</text>
+    <rect x="480" y="350" width="320" height="110" rx="20" fill="#0B1220"/><text x="510" y="414" fill="#F8FAFC">Composition</text>
+    <rect x="864" y="350" width="320" height="110" rx="20" fill="#0E7490"/><text x="894" y="414" fill="#ECFEFF">Streaming</text>
+    <rect x="288" y="510" width="704" height="110" rx="20" fill="#0B1220"/><text x="510" y="574" fill="#22D3EE">Diagnostics &amp; Repair</text>
+  </g>
+</svg>

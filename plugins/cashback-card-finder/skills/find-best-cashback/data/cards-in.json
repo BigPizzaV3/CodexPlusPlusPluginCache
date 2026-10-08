@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "country": "IN",
+  "currency": "INR",
+  "as_of": "2026-05",
+  "provenance": "Model-knowledge snapshot, NOT a live feed. Indian issuers revise reward tables, exclusion lists and monthly caps frequently and often at short notice. Verify any rate that decides the recommendation against the issuer's current MITC or rewards page.",
+  "notes": "point_value_cents is the value of one reward point in 1/100 units of the card currency, so 100 means one point is worth one rupee. Most Indian cards award zero reward points on fuel and instead waive the 1% fuel surcharge within a monthly cap, which is why fuel purchases are modelled through surcharge_waiver rather than an earning rule.",
+  "cards": [
+    {
+      "id": "sbi-cashback",
+      "name": "SBI Cashback Card",
+      "issuer": "SBI Card",
+      "network": "visa",
+      "currency": "INR",
+      "reward_type": "cashback",
+      "annual_fee": 999,
+      "base_rate": 1,
+      "base_label": "1% offline",
+      "foreign_transaction_fee_percent": 3.5,
+      "no_earn_categories": ["fuel_india", "rent", "wallet_load"],
+      "surcharge_waiver": {"categories": ["fuel_india", "gas"], "min_txn": 500, "max_txn": 3000, "cap_per_cycle": 100},
+      "as_of": "2026-05",
+      "source": "https://www.sbicard.com/en/personal/credit-cards/shopping/cashback-sbi-card.page",
+      "rules": [
+        {
+          "id": "online",
+          "label": "5% on online spends",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"categories": ["online_retail", "apparel", "electronics", "grocery", "delivery", "streaming"], "channels": ["online", "delivery", "app"]},
+          "excludes": {"categories": ["rent", "wallet_load", "insurance", "utility", "telecom", "jewellery", "government", "education", "fuel_india"]},
+          "cap": {"basis": "reward_cash", "amount": 5000, "period": "month", "shared_key": "sbi-cb"},
+          "confidence": "medium",
+          "note": "The 5% rate applies to most online merchant spends but the exclusion list is long and changes; rent, wallet loads, utilities, insurance, jewellery and fuel are carved out."
+        }
+      ]
+    },
+    {
+      "id": "icici-amazon-pay",
+      "name": "Amazon Pay ICICI Credit Card",
+      "issuer": "ICICI Bank",
+      "network": "visa",
+      "currency": "INR",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 3.5,
+      "no_earn_categories": ["fuel_india", "rent", "wallet_load"],
+      "surcharge_waiver": {"categories": ["fuel_india", "gas"], "min_txn": 400, "max_txn": 4000, "cap_per_cycle": 100},
+      "as_of": "2026-05",
+      "source": "https://www.icicibank.com/personal-banking/cards/credit-card/amazon-pay-credit-card",
+      "rules": [
+        {
+          "id": "amazon-prime",
+          "label": "5% on Amazon for Prime members",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"merchants": ["amazon"]},
+          "confidence": "high",
+          "note": "5% requires an active Prime membership; non-Prime members earn 3%. Confirm Prime status before scoring."
+        },
+        {
+          "id": "partners",
+          "label": "2% at Amazon Pay partner merchants",
+          "unit": "percent",
+          "rate": 2,
+          "match": {"categories": ["online_retail", "delivery", "travel"]},
+          "confidence": "low",
+          "note": "Only merchants on Amazon Pay's partner list earn 2%; everything else earns 1%."
+        }
+      ],
+      "notes": "Cashback posts as Amazon Pay balance, which is only useful to someone who shops on Amazon."
+    },
+    {
+      "id": "hdfc-millennia",
+      "name": "HDFC Millennia",
+      "issuer": "HDFC Bank",
+      "network": "visa",
+      "currency": "INR",
+      "reward_type": "points",
+      "point_value_cents": 100,
+      "annual_fee": 1000,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 3.5,
+      "no_earn_categories": ["fuel_india", "rent", "wallet_load"],
+      "surcharge_waiver": {"categories": ["fuel_india", "gas"], "min_txn": 400, "max_txn": 5000, "cap_per_cycle": 250},
+      "as_of": "2026-05",
+      "source": "https://www.hdfcbank.com/personal/pay/cards/credit-cards/millennia-cards",
+      "rules": [
+        {
+          "id": "partners",
+          "label": "5% CashPoints at partner merchants",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"merchants": ["amazon", "flipkart", "swiggy", "zomato", "myntra", "uber"]},
+          "cap": {"basis": "reward_cash", "amount": 1000, "period": "month", "shared_key": "hdfc-millennia-5"},
+          "confidence": "medium",
+          "note": "Partner list is fixed (Amazon, Flipkart, Swiggy, Zomato, Myntra, Uber, BookMyShow, Sony LIV, Cult.fit, Tata CLiQ) and capped at 1,000 CashPoints per month."
+        }
+      ],
+      "notes": "CashPoints are worth ₹1 each only when redeemed as statement credit; product redemptions are worth less."
+    },
+    {
+      "id": "axis-ace",
+      "name": "Axis Bank ACE Credit Card",
+      "issuer": "Axis Bank",
+      "network": "visa",
+      "currency": "INR",
+      "reward_type": "cashback",
+      "annual_fee": 499,
+      "base_rate": 2,
+      "base_label": "2% on everything else",
+      "foreign_transaction_fee_percent": 3.5,
+      "no_earn_categories": ["fuel_india", "rent", "wallet_load", "government", "insurance", "jewellery"],
+      "surcharge_waiver": {"categories": ["fuel_india", "gas"], "min_txn": 400, "max_txn": 4000, "cap_per_cycle": 500},
+      "as_of": "2026-05",
+      "source": "https://www.axisbank.com/retail/cards/credit-card/ace-credit-card",
+      "rules": [
+        {
+          "id": "bill-payments",
+          "label": "5% on bill payments and recharges via Google Pay",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"categories": ["utility", "telecom"], "channels": ["app"]},
+          "cap": {"basis": "reward_cash", "amount": 500, "period": "month", "shared_key": "axis-ace-5"},
+          "confidence": "medium",
+          "note": "Only bill payments made through the Google Pay app qualify."
+        },
+        {
+          "id": "food-cabs",
+          "label": "4% on Swiggy, Zomato and Ola",
+          "unit": "percent",
+          "rate": 4,
+          "match": {"merchants": ["swiggy", "zomato", "uber"]},
+          "cap": {"basis": "reward_cash", "amount": 500, "period": "month", "shared_key": "axis-ace-4"},
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "id": "hdfc-infinia",
+      "name": "HDFC Infinia Metal",
+      "issuer": "HDFC Bank",
+      "network": "visa",
+      "currency": "INR",
+      "reward_type": "points",
+      "point_value_cents": 100,
+      "annual_fee": 12500,
+      "base_rate": 5,
+      "base_unit": "points_per_slab",
+      "base_slab": 150,
+      "base_label": "5 Reward Points per ₹150",
+      "foreign_transaction_fee_percent": 2,
+      "no_earn_categories": ["fuel_india", "rent", "wallet_load"],
+      "surcharge_waiver": {"categories": ["fuel_india", "gas"], "min_txn": 400, "cap_per_cycle": 1000},
+      "as_of": "2026-05",
+      "source": "https://www.hdfcbank.com/personal/pay/cards/credit-cards/infinia-credit-card-metal-edition",
+      "rules": [
+        {
+          "id": "capped-categories",
+          "label": "5 RP per ₹150, capped per transaction on utility, telecom and insurance",
+          "unit": "points_per_slab",
+          "rate": 5,
+          "slab": 150,
+          "match": {"categories": ["utility", "telecom", "insurance", "education", "government"]},
+          "cap": {"basis": "points", "amount": 2000, "period": "statement", "shared_key": "infinia-capped"},
+          "confidence": "low",
+          "note": "HDFC caps points on utility, telecom, insurance, education and government spends; the exact per-transaction cap changes, so verify."
+        }
+      ],
+      "notes": "Reward Points are worth about ₹1 each only when redeemed for flights and hotels through SmartBuy; as statement credit they are worth roughly ₹0.30."
+    },
+    {
+      "id": "flipkart-axis",
+      "name": "Flipkart Axis Bank Credit Card",
+      "issuer": "Axis Bank",
+      "network": "mastercard",
+      "currency": "INR",
+      "reward_type": "cashback",
+      "annual_fee": 500,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 3.5,
+      "no_earn_categories": ["fuel_india", "rent", "wallet_load", "jewellery", "insurance", "government"],
+      "surcharge_waiver": {"categories": ["fuel_india", "gas"], "min_txn": 400, "max_txn": 4000, "cap_per_cycle": 400},
+      "as_of": "2026-05",
+      "source": "https://www.axisbank.com/retail/cards/credit-card/flipkart-axis-bank-credit-card",
+      "rules": [
+        {
+          "id": "flipkart",
+          "label": "5% on Flipkart and Cleartrip",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"merchants": ["flipkart"]},
+          "cap": {"basis": "reward_cash", "amount": 4000, "period": "quarter", "shared_key": "flipkart-axis-5"},
+          "confidence": "medium"
+        },
+        {
+          "id": "partners",
+          "label": "4% at preferred partners",
+          "unit": "percent",
+          "rate": 4,
+          "match": {"merchants": ["swiggy", "uber", "myntra"]},
+          "cap": {"basis": "reward_cash", "amount": 4000, "period": "quarter", "shared_key": "flipkart-axis-4"},
+          "confidence": "low",
+          "note": "The preferred-partner list changes; verify before applying."
+        }
+      ]
+    },
+    {
+      "id": "hdfc-swiggy",
+      "name": "Swiggy HDFC Bank Credit Card",
+      "issuer": "HDFC Bank",
+      "network": "mastercard",
+      "currency": "INR",
+      "reward_type": "cashback",
+      "annual_fee": 500,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 3.5,
+      "no_earn_categories": ["fuel_india", "rent", "wallet_load", "jewellery", "insurance", "government", "education"],
+      "surcharge_waiver": {"categories": ["fuel_india", "gas"], "min_txn": 400, "max_txn": 4000, "cap_per_cycle": 250},
+      "as_of": "2026-05",
+      "source": "https://www.hdfcbank.com/personal/pay/cards/credit-cards/swiggy-hdfc-bank-credit-card",
+      "rules": [
+        {
+          "id": "swiggy",
+          "label": "10% cashback on Swiggy",
+          "unit": "percent",
+          "rate": 10,
+          "match": {"merchants": ["swiggy"]},
+          "cap": {"basis": "reward_cash", "amount": 1500, "period": "month", "shared_key": "hdfc-swiggy-10"},
+          "confidence": "medium",
+          "note": "Covers Swiggy food delivery, Instamart, Dineout and Genie."
+        },
+        {
+          "id": "online",
+          "label": "5% on online spends",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"categories": ["online_retail", "apparel", "electronics", "delivery", "travel"], "channels": ["online", "app", "delivery"]},
+          "cap": {"basis": "reward_cash", "amount": 1500, "period": "month", "shared_key": "hdfc-swiggy-5"},
+          "confidence": "low",
+          "note": "5% applies only to merchants on HDFC's eligible online-category list."
+        }
+      ]
+    },
+    {
+      "id": "amex-mrcc",
+      "name": "American Express Membership Rewards Credit Card",
+      "issuer": "American Express",
+      "network": "amex",
+      "currency": "INR",
+      "reward_type": "points",
+      "point_value_cents": 45,
+      "annual_fee": 1500,
+      "base_rate": 1,
+      "base_unit": "points_per_slab",
+      "base_slab": 50,
+      "base_label": "1 MR point per ₹50",
+      "foreign_transaction_fee_percent": 3.5,
+      "no_earn_categories": ["fuel_india", "insurance", "utility", "wallet_load", "rent", "government"],
+      "as_of": "2026-05",
+      "source": "https://www.americanexpress.com/in/credit-cards/membership-rewards-credit-card/",
+      "rules": [],
+      "notes": "Fuel, insurance and utility spends earn no points at all on Amex India. MR points are worth roughly ₹0.45 each on good redemptions and much less on vouchers. Amex acceptance is limited outside large merchants."
+    },
+    {
+      "id": "tata-neu-infinity-hdfc",
+      "name": "Tata Neu Infinity HDFC Bank Credit Card",
+      "issuer": "HDFC Bank",
+      "network": "rupay",
+      "currency": "INR",
+      "reward_type": "points",
+      "point_value_cents": 100,
+      "annual_fee": 1499,
+      "base_rate": 1.5,
+      "base_label": "1.5% NeuCoins",
+      "foreign_transaction_fee_percent": 3.5,
+      "no_earn_categories": ["fuel_india", "rent", "wallet_load"],
+      "surcharge_waiver": {"categories": ["fuel_india", "gas"], "min_txn": 400, "max_txn": 5000, "cap_per_cycle": 500},
+      "as_of": "2026-05",
+      "source": "https://www.hdfcbank.com/personal/pay/cards/credit-cards/tata-neu-infinity-credit-card",
+      "rules": [
+        {
+          "id": "tata-brands",
+          "label": "5% NeuCoins on Tata Neu and partner brands",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"merchants": ["bigbasket"]},
+          "confidence": "low",
+          "note": "5% applies only to Tata ecosystem brands (Tata Neu, BigBasket, Croma, Westside, Air India, Titan). Confirm the merchant is a Tata brand before applying."
+        }
+      ],
+      "notes": "This is a RuPay card, so it can be linked to UPI; UPI spends usually earn a lower rate than card swipes."
+    },
+    {
+      "id": "idfc-first-select",
+      "name": "IDFC FIRST Select Credit Card",
+      "issuer": "IDFC FIRST Bank",
+      "network": "visa",
+      "currency": "INR",
+      "reward_type": "points",
+      "point_value_cents": 25,
+      "annual_fee": 0,
+      "base_rate": 3,
+      "base_unit": "points_per_slab",
+      "base_slab": 150,
+      "base_label": "3x reward points per ₹150 below the monthly threshold",
+      "foreign_transaction_fee_percent": 1.5,
+      "no_earn_categories": ["fuel_india", "insurance", "rent", "wallet_load", "government", "education"],
+      "surcharge_waiver": {"categories": ["fuel_india", "gas"], "min_txn": 200, "max_txn": 5000, "cap_per_cycle": 300},
+      "as_of": "2026-05",
+      "source": "https://www.idfcfirstbank.com/credit-card/select",
+      "rules": [
+        {
+          "id": "online",
+          "label": "10x reward points on online spends above the monthly threshold",
+          "unit": "points_per_slab",
+          "rate": 10,
+          "slab": 150,
+          "match": {"channels": ["online", "app", "delivery"]},
+          "confidence": "low",
+          "note": "The 10x rate only applies once monthly spend passes IDFC's threshold (historically ₹20,000). Below that it is 3x. Ask the user's month-to-date spend before applying this."
+        }
+      ],
+      "notes": "Reward points are worth ₹0.25 each and have a minimum redemption threshold."
+    }
+  ]
+}

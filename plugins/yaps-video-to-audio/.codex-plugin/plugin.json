@@ -1,0 +1,52 @@
+{
+  "author": {
+    "email": "support@yaps.ai",
+    "name": "Yaps AI",
+    "url": "https://www.yaps.ai"
+  },
+  "description": "Convert a video to an MP3, WAV, or M4A audio file with Yaps.",
+  "homepage": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins",
+  "interface": {
+    "brandColor": "#D4775B",
+    "brandColorDark": "#D4775B",
+    "capabilities": [
+      "Video to MP3",
+      "Video to WAV",
+      "Video to M4A",
+      "Audio extraction",
+      "Local media conversion"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Convert this video to an MP3 file.",
+      "Extract the audio from this video as WAV.",
+      "Turn this video into an M4A audio file."
+    ],
+    "developerName": "Yaps AI",
+    "displayName": "Yaps Video to Audio",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Convert a video file to MP3, WAV, or M4A audio with Yaps desktop. Choose the source video, output format, and destination; Yaps extracts the audio track locally and preserves existing files. Requires a local-capable ChatGPT Desktop Work or Codex session; ChatGPT web and cloud sessions cannot reach the installed Yaps engine. Users can also run the feature directly in Yaps.",
+    "privacyPolicyURL": "https://www.yaps.ai/privacy",
+    "shortDescription": "Convert video to MP3 or WAV",
+    "termsOfServiceURL": "https://www.yaps.ai/terms",
+    "websiteURL": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins"
+  },
+  "keywords": [
+    "video-to-audio",
+    "convert-video-to-audio",
+    "convert-video-to-mp3",
+    "extract-audio-from-video",
+    "video-to-mp3",
+    "video-to-wav",
+    "video-to-m4a",
+    "audio-extractor",
+    "media-converter"
+  ],
+  "license": "MIT",
+  "name": "yaps-video-to-audio",
+  "repository": "https://github.com/richawo/yaps-codex-plugin",
+  "skills": "./skills/",
+  "version": "0.1.10"
+}

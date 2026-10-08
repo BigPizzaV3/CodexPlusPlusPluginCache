@@ -1,0 +1,1069 @@
+{
+  "schemaVersion": 1,
+  "portfolio": "Molecular Structure Viewer starter examples",
+  "qualificationStatus": "pending-clean-host-qualification",
+  "qualificationBoundary": "These are source-pinned prompts and expected-result contracts. They have not yet been qualified from every visible starter entry point on a clean installed host.",
+  "sourceSnapshotDate": "2026-07-03",
+  "sharedViewerContract": {
+    "openFromChatCalls": 1,
+    "nativeOpenCalls": 0,
+    "renderBearingResults": 1,
+    "visibleViewerCards": 1,
+    "uniqueViewerSessions": 1,
+    "activeViewerSessions": 1,
+    "allOperationsReuseOpenedSession": true,
+    "comparisonUsesAddStructure": true
+  },
+  "sharedLimits": {
+    "maxInputBytes": 134217728,
+    "maxAnalysisAtomsPerSelection": 20000,
+    "maxPairComparisons": 5000000,
+    "maxImagePixels": 16777216,
+    "maxBufferedArtifactBytes": 67108864
+  },
+  "examples": [
+    {
+      "id": "mdm2-p53-interface",
+      "title": "Quantify the MDM2-p53 binding interface",
+      "prompt": "Open RCSB 1YCR once; analyze 4 Å MDM2–p53 contacts and buried area, label p53 Phe19/Trp23/Leu26, and report methods.",
+      "rationale": "1YCR is a compact, clinically relevant protein-peptide complex whose p53 hot-spot residues make a clear visual and quantitative interface-analysis example without combining unrelated workflows.",
+      "capabilities": [
+        "public acquisition",
+        "single chat viewer",
+        "contact analysis",
+        "buried-area analysis",
+        "selection-scoped styling",
+        "selection labels",
+        "analysis provenance"
+      ],
+      "sources": [
+        {
+          "provider": "RCSB Protein Data Bank",
+          "accession": "1YCR",
+          "url": "https://files.rcsb.org/download/1YCR.pdb",
+          "format": "pdb",
+          "byteLength": 94041,
+          "sha256": "d8f23749da9ec22da2e17bb31c33803e3db6123233cd0404bdc005111196e7a3",
+          "atomCount": 818,
+          "revision": {
+            "major": 1,
+            "minor": 5,
+            "date": "2024-02-14"
+          }
+        }
+      ],
+      "budget": {
+        "inputBytes": 94041,
+        "inputLimitBytes": 134217728,
+        "chainAtomCounts": {
+          "MDM2_A": 705,
+          "p53_B": 113
+        },
+        "maximumCrossSelectionPairs": 79665,
+        "pairComparisonLimit": 5000000,
+        "sasaSamples": 240,
+        "withinAdvertisedLimits": true
+      },
+      "orderedToolSequence": [
+        {
+          "order": 1,
+          "tool": "structure.open_from_chat",
+          "purpose": "Open the verified local 1YCR source once and retain its viewerSessionId.",
+          "request": {
+            "openIntentId": "$OPEN_INTENT_ID",
+            "path": "$WORKSPACE/1YCR.pdb"
+          },
+          "resultBindings": {
+            "structuredContent.viewerSessionId": "$VIEWER_SESSION_ID"
+          }
+        },
+        {
+          "order": 2,
+          "tool": "structure.get_state",
+          "purpose": "Read the initial scene revision, object identity, chain inventory, and capability budgets.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID"
+          },
+          "resultBindings": {
+            "structuredContent.state.sceneRevision": "$INITIAL_SCENE_REVISION"
+          }
+        },
+        {
+          "order": 3,
+          "tool": "structure.analyze",
+          "purpose": "Run contacts between object-scoped chains A and B with contactDistanceAngstrom 4.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID",
+            "expectedRevision": "$INITIAL_SCENE_REVISION",
+            "kind": "contacts",
+            "limit": 500,
+            "options": {
+              "contactDistanceAngstrom": 4
+            },
+            "selections": [
+              {
+                "kind": "chain",
+                "chain": "A",
+                "objectId": "primary"
+              },
+              {
+                "kind": "chain",
+                "chain": "B",
+                "objectId": "primary"
+              }
+            ]
+          },
+          "resultBindings": {
+            "structuredContent.state.appliedRevision": "$CONTACTS_APPLIED_REVISION",
+            "structuredContent.state.analysis.provenance": "$CONTACTS_METHOD_PROVENANCE"
+          }
+        },
+        {
+          "order": 4,
+          "tool": "structure.analyze",
+          "purpose": "Run buried_area on the same atom-disjoint chains with probeRadiusAngstrom 1.4 and sasaSamples 240.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID",
+            "expectedRevision": "$CONTACTS_APPLIED_REVISION",
+            "kind": "buried_area",
+            "limit": 10,
+            "options": {
+              "probeRadiusAngstrom": 1.4,
+              "sasaSamples": 240
+            },
+            "selections": [
+              {
+                "kind": "chain",
+                "chain": "A",
+                "objectId": "primary"
+              },
+              {
+                "kind": "chain",
+                "chain": "B",
+                "objectId": "primary"
+              }
+            ]
+          },
+          "resultBindings": {
+            "structuredContent.state.appliedRevision": "$BURIED_AREA_APPLIED_REVISION",
+            "structuredContent.state.analysis.provenance": "$BURIED_AREA_METHOD_PROVENANCE"
+          }
+        },
+        {
+          "order": 5,
+          "tool": "structure.apply_scene",
+          "purpose": "Show deposited author residues PHE B:19, TRP B:23, and LEU B:26 as labeled sticks, frame the complete complex without excess dead space, and preserve both analyses.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID",
+            "expectedRevision": "$BURIED_AREA_APPLIED_REVISION",
+            "camera": {
+              "orientation": "current",
+              "focus": {
+                "kind": "all",
+                "objectId": "primary"
+              },
+              "zoom": 1.3
+            },
+            "replaceLayers": false,
+            "replaceAnnotations": false,
+            "layers": [
+              {
+                "id": "p53-hotspots",
+                "name": "p53 hotspots",
+                "representation": "sticks",
+                "color": {
+                  "kind": "uniform",
+                  "value": "#D946EF"
+                },
+                "target": {
+                  "kind": "anyOf",
+                  "expressions": [
+                    {
+                      "kind": "residue",
+                      "chain": "B",
+                      "residue": 19,
+                      "objectId": "primary"
+                    },
+                    {
+                      "kind": "residue",
+                      "chain": "B",
+                      "residue": 23,
+                      "objectId": "primary"
+                    },
+                    {
+                      "kind": "residue",
+                      "chain": "B",
+                      "residue": 26,
+                      "objectId": "primary"
+                    }
+                  ]
+                }
+              }
+            ],
+            "annotations": [
+              {
+                "id": "p53-phe19",
+                "kind": "selection",
+                "text": "p53 Phe19",
+                "target": {
+                  "kind": "residue",
+                  "chain": "B",
+                  "residue": 19,
+                  "objectId": "primary"
+                }
+              },
+              {
+                "id": "p53-trp23",
+                "kind": "selection",
+                "text": "p53 Trp23",
+                "target": {
+                  "kind": "residue",
+                  "chain": "B",
+                  "residue": 23,
+                  "objectId": "primary"
+                }
+              },
+              {
+                "id": "p53-leu26",
+                "kind": "selection",
+                "text": "p53 Leu26",
+                "target": {
+                  "kind": "residue",
+                  "chain": "B",
+                  "residue": 26,
+                  "objectId": "primary"
+                }
+              }
+            ]
+          },
+          "resultBindings": {
+            "structuredContent.state.appliedRevision": "$STYLED_SCENE_REVISION"
+          }
+        },
+        {
+          "order": 6,
+          "tool": "structure.get_state",
+          "purpose": "Confirm the final revision, labels, layers, and complete provenance-bearing analyses.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID"
+          }
+        }
+      ],
+      "visibleState": {
+        "primaryObjectCount": 1,
+        "requiredChains": ["A", "B"],
+        "hotspotSelectionIdentity": {
+          "numbering": "author",
+          "chain": "B",
+          "residues": [
+            {
+              "componentId": "PHE",
+              "authorResidue": 19,
+              "literatureLabel": "Phe19"
+            },
+            {
+              "componentId": "TRP",
+              "authorResidue": 23,
+              "literatureLabel": "Trp23"
+            },
+            {
+              "componentId": "LEU",
+              "authorResidue": 26,
+              "literatureLabel": "Leu26"
+            }
+          ]
+        },
+        "styledResidues": ["PHE B:19", "TRP B:23", "LEU B:26"],
+        "representation": "sticks",
+        "labelsRequired": true,
+        "analysisKinds": ["contacts", "buried_area"]
+      },
+      "numericSanityChecks": {
+        "contactAnalysis": {
+          "cutoffAngstrom": 4,
+          "atomContactCount": 105,
+          "countTolerance": 0
+        },
+        "buriedAreaAnalysis": {
+          "buriedAreaAngstromSquared": 735.864963,
+          "interfaceAreaSquareAngstrom": 735.864963,
+          "totalSasaLossSquareAngstrom": 1471.729925,
+          "firstSasaSquareAngstrom": 5287.675647,
+          "secondSasaSquareAngstrom": 1613.478497,
+          "complexSasaSquareAngstrom": 5429.424218,
+          "absoluteTolerance": 0.01,
+          "probeRadiusAngstrom": 1.4,
+          "sasaSamples": 240,
+          "partnerSelections": [
+            {
+              "chain": "A",
+              "kind": "chain",
+              "objectId": "primary"
+            },
+            {
+              "chain": "B",
+              "kind": "chain",
+              "objectId": "primary"
+            }
+          ],
+          "partnerAtomCounts": [705, 113],
+          "partnersMustBeAtomDisjoint": true
+        }
+      },
+      "artifactContract": {
+        "required": false,
+        "analysisMethodProvenanceRequired": true,
+        "partialResultsAllowed": false
+      },
+      "cleanHostPrerequisites": [
+        "One canonical Molecular Structure Viewer installation is enabled.",
+        "The host can download the pinned HTTPS source into an active workspace root.",
+        "The downloaded byte length and SHA-256 match the source contract.",
+        "The installed host provides WebGL and one mounted chat viewer session."
+      ],
+      "expectedFailures": [
+        {
+          "condition": "The source length, digest, or RCSB revision differs.",
+          "outcome": "Stop before opening and report source drift; do not update expected results implicitly."
+        },
+        {
+          "condition": "The two buried-area selections overlap or a chain is absent.",
+          "outcome": "Fail without publishing a buried-area result and retain the prior valid scene."
+        },
+        {
+          "condition": "Analysis is cancelled or exceeds a budget.",
+          "outcome": "Publish no partial analysis and keep the viewer usable."
+        }
+      ],
+      "allowedNondeterminism": {
+        "allowed": [
+          "Natural-language explanation wording",
+          "Tool and rendering timings",
+          "Minor camera auto-fit differences that keep all required residues visible"
+        ],
+        "notAllowed": [
+          "Source identity or digest changes",
+          "Additional viewer cards or sessions",
+          "Different contact count, buried area, probe radius, sampling, residue identities, or method"
+        ]
+      },
+      "qualificationStatus": "pending-clean-host-qualification"
+    },
+    {
+      "id": "adenylate-kinase-open-closed",
+      "title": "Compare open and AP5A-bound adenylate kinase",
+      "prompt": "Open RCSB 4AKE once; add 1AKE to the same viewer, align chain A, color teal/magenta, show AP5, and report RMSD/TM-scores.",
+      "rationale": "4AKE and 1AKE capture a well-known ligand-associated conformational change in the same enzyme, making the value of a single-viewer, two-object structural alignment immediately visible.",
+      "capabilities": [
+        "public acquisition",
+        "single chat viewer",
+        "multiple structure objects",
+        "structural alignment",
+        "independent object styling",
+        "ligand styling",
+        "alignment diagnostics"
+      ],
+      "sources": [
+        {
+          "provider": "RCSB Protein Data Bank",
+          "accession": "4AKE",
+          "url": "https://files.rcsb.org/download/4AKE.pdb",
+          "format": "pdb",
+          "byteLength": 309339,
+          "sha256": "ff798ee8791878eb58bac1c6bed32042f51b455512ac93b50bda8fa0ff0e7f78",
+          "atomCount": 3459,
+          "revision": {
+            "major": 1,
+            "minor": 3,
+            "date": "2024-02-28"
+          }
+        },
+        {
+          "provider": "RCSB Protein Data Bank",
+          "accession": "1AKE",
+          "url": "https://files.rcsb.org/download/1AKE.pdb",
+          "format": "pdb",
+          "byteLength": 357777,
+          "sha256": "651e952f55f1317f50f4e82b7f0e99053397032cd8da5b2896f79d0af9f619a9",
+          "atomCount": 3816,
+          "revision": {
+            "major": 1,
+            "minor": 4,
+            "date": "2024-12-25"
+          }
+        }
+      ],
+      "budget": {
+        "inputBytes": 667116,
+        "inputLimitBytes": 134217728,
+        "totalAtomCount": 7275,
+        "loadedObjectCount": 2,
+        "alignmentPositionCount": 214,
+        "withinAdvertisedLimits": true
+      },
+      "orderedToolSequence": [
+        {
+          "order": 1,
+          "tool": "structure.open_from_chat",
+          "purpose": "Open the verified local 4AKE source once and retain its viewerSessionId.",
+          "request": {
+            "openIntentId": "$OPEN_INTENT_ID",
+            "path": "$WORKSPACE/4AKE.pdb"
+          },
+          "resultBindings": {
+            "structuredContent.viewerSessionId": "$VIEWER_SESSION_ID"
+          }
+        },
+        {
+          "order": 2,
+          "tool": "structure.get_state",
+          "purpose": "Read the primary object ID and initial scene revision.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID"
+          },
+          "resultBindings": {
+            "structuredContent.state.sceneRevision": "$INITIAL_SCENE_REVISION"
+          }
+        },
+        {
+          "order": 3,
+          "tool": "structure.add_structure",
+          "purpose": "Add verified 1AKE as object ap5a_bound inside the original viewer.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID",
+            "path": "$WORKSPACE/1AKE.pdb",
+            "objectId": "ap5a_bound",
+            "representation": "cartoon",
+            "color": "#C026D3"
+          },
+          "resultBindings": {
+            "structuredContent.state.appliedRevision": "$ADD_STRUCTURE_APPLIED_REVISION"
+          }
+        },
+        {
+          "order": 4,
+          "tool": "structure.list_structures",
+          "purpose": "Confirm exactly two objects and no second viewer session.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID"
+          }
+        },
+        {
+          "order": 5,
+          "tool": "structure.align_structures",
+          "purpose": "Align mobile ap5a_bound chain A to primary 4AKE chain A with method structure.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID",
+            "method": "structure",
+            "reference": {
+              "kind": "chain",
+              "objectId": "primary",
+              "chain": "A"
+            },
+            "mobile": {
+              "kind": "chain",
+              "objectId": "ap5a_bound",
+              "chain": "A"
+            }
+          },
+          "resultBindings": {
+            "structuredContent.state.appliedRevision": "$ALIGNMENT_APPLIED_REVISION",
+            "structuredContent.state.alignment.appliedMatrix": "$ALIGNMENT_MATRIX",
+            "structuredContent.state.alignment.method": "$ALIGNMENT_METHOD",
+            "structuredContent.state.alignment.provenance": "$ALIGNMENT_PROVENANCE"
+          }
+        },
+        {
+          "order": 6,
+          "tool": "structure.apply_scene",
+          "purpose": "Color 4AKE teal and 1AKE magenta and show chain-A AP5 in the bound object as sticks.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID",
+            "expectedRevision": "$ALIGNMENT_APPLIED_REVISION",
+            "camera": {
+              "orientation": "left",
+              "focus": {
+                "kind": "expression",
+                "expression": {
+                  "kind": "anyOf",
+                  "expressions": [
+                    {
+                      "kind": "chain",
+                      "chain": "A",
+                      "objectId": "primary"
+                    },
+                    {
+                      "kind": "chain",
+                      "chain": "A",
+                      "objectId": "ap5a_bound"
+                    }
+                  ]
+                }
+              },
+              "zoom": 1.15
+            },
+            "replaceLayers": true,
+            "layers": [
+              {
+                "id": "open-chain-a",
+                "name": "4AKE chain A",
+                "representation": "cartoon",
+                "color": {
+                  "kind": "uniform",
+                  "value": "#0F766E"
+                },
+                "target": {
+                  "kind": "chain",
+                  "chain": "A",
+                  "objectId": "primary"
+                }
+              },
+              {
+                "id": "closed-chain-a",
+                "name": "1AKE chain A",
+                "representation": "cartoon",
+                "color": {
+                  "kind": "uniform",
+                  "value": "#C026D3"
+                },
+                "target": {
+                  "kind": "chain",
+                  "chain": "A",
+                  "objectId": "ap5a_bound"
+                }
+              },
+              {
+                "id": "ap5-ligand",
+                "name": "AP5 transition-state analog",
+                "representation": "sticks",
+                "color": {
+                  "kind": "uniform",
+                  "value": "#F59E0B"
+                },
+                "target": {
+                  "kind": "allOf",
+                  "expressions": [
+                    {
+                      "kind": "object",
+                      "objectId": "ap5a_bound"
+                    },
+                    {
+                      "kind": "chain",
+                      "chain": "A",
+                      "objectId": "ap5a_bound"
+                    },
+                    {
+                      "kind": "property",
+                      "property": "compId",
+                      "operator": "eq",
+                      "value": "AP5"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "resultBindings": {
+            "structuredContent.state.appliedRevision": "$STYLED_SCENE_REVISION"
+          }
+        },
+        {
+          "order": 7,
+          "tool": "structure.get_state",
+          "purpose": "Confirm final object transforms, visibility, layers, ligand styling, and alignment provenance.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID"
+          }
+        }
+      ],
+      "visibleState": {
+        "objectCount": 2,
+        "objects": [
+          {
+            "id": "primary",
+            "accession": "4AKE",
+            "chain": "A",
+            "color": "#0F766E",
+            "visible": true
+          },
+          {
+            "id": "ap5a_bound",
+            "accession": "1AKE",
+            "chain": "A",
+            "color": "#C026D3",
+            "visible": true
+          }
+        ],
+        "ligand": {
+          "componentId": "AP5",
+          "objectId": "ap5a_bound",
+          "representation": "sticks",
+          "visible": true
+        },
+        "bothStructuresShareOneViewer": true
+      },
+      "numericSanityChecks": {
+        "alignmentMethod": "structure",
+        "alignedCount": 214,
+        "alignedCountTolerance": 0,
+        "rmsdAngstrom": 8.043719662,
+        "rmsdAbsoluteTolerance": 0.00001,
+        "tmScoreReference": 0.683847026,
+        "tmScoreMobile": 0.683847026,
+        "tmScoreAbsoluteTolerance": 0.000001,
+        "alignmentProvenance": {
+          "implementation": {
+            "library": "Mol*",
+            "routine": "tmAlign",
+            "version": "5.11.0"
+          },
+          "correspondence": {
+            "kind": "selected-protein-residue-c-alpha",
+            "description": "One C-alpha coordinate per selected atomic protein residue is supplied to Mol* tmAlign; tmAlign determines the aligned correspondence."
+          }
+        }
+      },
+      "artifactContract": {
+        "required": false,
+        "alignmentMatrixAndMethodProvenanceRequired": true
+      },
+      "cleanHostPrerequisites": [
+        "One canonical Molecular Structure Viewer installation is enabled.",
+        "Both pinned HTTPS sources can be downloaded into the same active workspace root.",
+        "Both downloaded files match their declared byte lengths and SHA-256 digests.",
+        "The installed host can keep one mounted viewer active while adding the second object."
+      ],
+      "expectedFailures": [
+        {
+          "condition": "Either source digest or revision differs.",
+          "outcome": "Stop before opening or adding the changed source and report source drift."
+        },
+        {
+          "condition": "A second structure.open_from_chat is attempted for 1AKE.",
+          "outcome": "Fail the starter contract; comparison must use structure.add_structure in the original viewer."
+        },
+        {
+          "condition": "Alignment is rejected, cancelled, or returns stale-object diagnostics.",
+          "outcome": "Do not claim alignment and preserve the last valid two-object scene."
+        }
+      ],
+      "allowedNondeterminism": {
+        "allowed": [
+          "Natural-language explanation wording",
+          "Tool and rendering timings",
+          "Minor camera auto-fit differences that keep both structures visible"
+        ],
+        "notAllowed": [
+          "Additional viewer cards, sessions, or chat-open calls",
+          "Different source identities, object count, chain targets, alignment method, aligned count, RMSD, or TM-scores",
+          "Missing AP5 or swapped object colors"
+        ]
+      },
+      "qualificationStatus": "pending-clean-host-qualification"
+    },
+    {
+      "id": "gfp-publication-image",
+      "title": "Render an annotated GFP chromophore image",
+      "prompt": "Open RCSB 1EMA once; style and label its chromophore; save a versioned 1600×1200 PNG to structure-viewer/gfp.png with sidecar.",
+      "rationale": "GFP provides a recognizable fold and a compact, visually meaningful chromophore environment while exercising exact styling, anchored annotation, bounded rendering, collision-safe publication, and integrity provenance.",
+      "capabilities": [
+        "public acquisition",
+        "single chat viewer",
+        "selection-scoped styling",
+        "molecular annotation",
+        "publication PNG",
+        "workspace destination versioning",
+        "artifact integrity provenance"
+      ],
+      "sources": [
+        {
+          "provider": "RCSB Protein Data Bank",
+          "accession": "1EMA",
+          "bundledPath": "examples/1EMA.pdb",
+          "doi": "https://doi.org/10.2210/pdb_00001ema/pdb",
+          "url": "https://files.rcsb.org/download/1EMA.pdb",
+          "license": "CC0-1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "format": "pdb",
+          "byteLength": 190188,
+          "sha256": "f1b9fdc2b871cc41f21f645a21b4948ce12d79b29197256330b108c9b503b088",
+          "atomCount": 1866,
+          "revision": {
+            "major": 2,
+            "minor": 0,
+            "date": "2026-03-18"
+          }
+        }
+      ],
+      "budget": {
+        "inputBytes": 190188,
+        "inputLimitBytes": 134217728,
+        "atomCount": 1866,
+        "chromophoreHeavyAtomCount": 22,
+        "render": {
+          "width": 1600,
+          "height": 1200,
+          "pixels": 1920000,
+          "pixelLimit": 16777216,
+          "bufferedArtifactLimitBytes": 67108864
+        },
+        "withinAdvertisedLimits": true
+      },
+      "orderedToolSequence": [
+        {
+          "order": 1,
+          "tool": "structure.open_from_chat",
+          "purpose": "Open the verified local 1EMA source once and retain its viewerSessionId.",
+          "request": {
+            "openIntentId": "$OPEN_INTENT_ID",
+            "path": "$WORKSPACE/1EMA.pdb"
+          },
+          "resultBindings": {
+            "structuredContent.viewerSessionId": "$VIEWER_SESSION_ID"
+          }
+        },
+        {
+          "order": 2,
+          "tool": "structure.get_state",
+          "purpose": "Read the primary object, scene revision, source-bound publication capability, and render budgets.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID"
+          },
+          "resultBindings": {
+            "structuredContent.state.sceneRevision": "$INITIAL_SCENE_REVISION"
+          }
+        },
+        {
+          "order": 3,
+          "tool": "structure.apply_scene",
+          "purpose": "Apply the teal cartoon, dark background, CRO and residue sticks, and a chromophore-anchored label.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID",
+            "expectedRevision": "$INITIAL_SCENE_REVISION",
+            "background": "#111827",
+            "camera": {
+              "orientation": "front",
+              "focus": {
+                "kind": "all",
+                "objectId": "primary"
+              },
+              "zoom": 1.15
+            },
+            "lighting": "studio",
+            "replaceLayers": true,
+            "replaceAnnotations": true,
+            "layers": [
+              {
+                "id": "gfp-barrel",
+                "name": "GFP beta barrel",
+                "representation": "cartoon",
+                "color": {
+                  "kind": "uniform",
+                  "value": "#0F766E"
+                },
+                "target": {
+                  "kind": "component",
+                  "component": "protein",
+                  "objectId": "primary"
+                }
+              },
+              {
+                "id": "chromophore-environment",
+                "name": "GFP chromophore environment",
+                "representation": "sticks",
+                "color": {
+                  "kind": "element"
+                },
+                "target": {
+                  "kind": "anyOf",
+                  "expressions": [
+                    {
+                      "kind": "allOf",
+                      "expressions": [
+                        {
+                          "kind": "residue",
+                          "chain": "A",
+                          "residue": 66,
+                          "objectId": "primary"
+                        },
+                        {
+                          "kind": "property",
+                          "property": "compId",
+                          "operator": "eq",
+                          "value": "CRO"
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "residue",
+                      "chain": "A",
+                      "residue": 96,
+                      "objectId": "primary"
+                    },
+                    {
+                      "kind": "residue",
+                      "chain": "A",
+                      "residue": 148,
+                      "objectId": "primary"
+                    },
+                    {
+                      "kind": "residue",
+                      "chain": "A",
+                      "residue": 203,
+                      "objectId": "primary"
+                    },
+                    {
+                      "kind": "residue",
+                      "chain": "A",
+                      "residue": 222,
+                      "objectId": "primary"
+                    }
+                  ]
+                }
+              }
+            ],
+            "annotations": [
+              {
+                "id": "gfp-chromophore",
+                "kind": "selection",
+                "text": "Chromophore CRO66",
+                "target": {
+                  "kind": "allOf",
+                  "expressions": [
+                    {
+                      "kind": "residue",
+                      "chain": "A",
+                      "residue": 66,
+                      "objectId": "primary"
+                    },
+                    {
+                      "kind": "property",
+                      "property": "compId",
+                      "operator": "eq",
+                      "value": "CRO"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "resultBindings": {
+            "structuredContent.state.appliedRevision": "$STYLED_SCENE_REVISION"
+          }
+        },
+        {
+          "order": 4,
+          "tool": "structure.validate_render",
+          "purpose": "Validate the 1600x1200 PNG plan, live targets, scene revision, and pixel workload without saving.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID",
+            "request": {
+              "kind": "image",
+              "width": 1600,
+              "height": 1200,
+              "transparent": false,
+              "overwrite": false,
+              "outputPath": "structure-viewer/gfp.png",
+              "destination": {
+                "kind": "workspace",
+                "base": "opened-source",
+                "relativePath": "structure-viewer/gfp.png",
+                "collisionPolicy": "versioned"
+              }
+            }
+          }
+        },
+        {
+          "order": 5,
+          "tool": "structure.render_image",
+          "purpose": "Render and atomically publish the versioned PNG and provenance sidecar to the requested workspace-relative destination.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID",
+            "width": 1600,
+            "height": 1200,
+            "transparent": false,
+            "overwrite": false,
+            "outputPath": "structure-viewer/gfp.png",
+            "destination": {
+              "kind": "workspace",
+              "base": "opened-source",
+              "relativePath": "structure-viewer/gfp.png",
+              "collisionPolicy": "versioned"
+            }
+          }
+        },
+        {
+          "order": 6,
+          "tool": "structure.get_state",
+          "purpose": "Confirm the final visible scene and completed render metadata on the original session.",
+          "request": {
+            "sessionId": "$VIEWER_SESSION_ID"
+          }
+        }
+      ],
+      "visibleState": {
+        "primaryObjectCount": 1,
+        "protein": {
+          "representation": "cartoon",
+          "color": "#0F766E"
+        },
+        "background": "#111827",
+        "sticks": [
+          "CRO A:66",
+          "ARG A:96",
+          "HIS A:148",
+          "THR A:203",
+          "GLU A:222"
+        ],
+        "annotation": {
+          "kind": "selection",
+          "text": "Chromophore CRO66",
+          "target": "CRO A:66"
+        },
+        "requiredTargetsVisible": true
+      },
+      "numericSanityChecks": {
+        "chromophore": {
+          "componentId": "CRO",
+          "chain": "A",
+          "residue": 66,
+          "heavyAtomCount": 22
+        },
+        "closestHeavyAtomDistancesAngstrom": {
+          "ARG_A_96": 2.730334,
+          "HIS_A_148": 2.849985,
+          "THR_A_203": 2.665839,
+          "GLU_A_222": 2.813101
+        },
+        "distanceAbsoluteTolerance": 0.00001,
+        "renderWidth": 1600,
+        "renderHeight": 1200
+      },
+      "artifactContract": {
+        "required": true,
+        "kind": "png",
+        "mediaType": "image/png",
+        "requestedRelativePath": "structure-viewer/gfp.png",
+        "collisionPolicy": "versioned",
+        "resolvedRelativePathPattern": "^structure-viewer/gfp(?:-(?:[2-9]|[1-9][0-9]+))?\\.png$",
+        "provenanceSuffix": ".render.json",
+        "expectedCleanWorkspacePath": "structure-viewer/gfp.png",
+        "expectedCleanWorkspaceSidecarPath": "structure-viewer/gfp.png.render.json",
+        "fixedArtifactSha256": null,
+        "digestContract": {
+          "reportedSha256MustMatchArtifactBytes": true,
+          "sidecarArtifactSha256MustMatchArtifactBytes": true,
+          "sha256Pattern": "^[0-9a-f]{64}$",
+          "reasonNoFixedDigest": "GPU, driver, and installed renderer details may change PNG bytes without changing the accepted scene or dimensions."
+        },
+        "sidecarMustContain": [
+          "canonical replay specification",
+          "source SHA-256",
+          "artifact SHA-256",
+          "artifact byte length",
+          "renderer and version",
+          "1600x1200 dimensions",
+          "workspace-relative destination"
+        ],
+        "atomicArtifactAndSidecar": true,
+        "overwriteAllowed": false,
+        "absolutePathDisclosureAllowed": false
+      },
+      "cleanHostPrerequisites": [
+        "One canonical Molecular Structure Viewer installation is enabled.",
+        "The active workspace root accepts the pinned 1EMA download and one child output folder named structure-viewer.",
+        "The downloaded file matches its declared byte length and SHA-256 digest.",
+        "The installed host provides WebGL and advertises source-relative workspace publication.",
+        "The destination has sufficient quota and free space for the PNG and sidecar pair."
+      ],
+      "expectedFailures": [
+        {
+          "condition": "The source length, digest, or RCSB revision differs.",
+          "outcome": "Stop before opening and report source drift."
+        },
+        {
+          "condition": "Source-relative publication is unavailable or the requested path escapes the active root.",
+          "outcome": "Fail closed without falling back to an absolute path or disclosing host paths."
+        },
+        {
+          "condition": "The base artifact or sidecar already exists.",
+          "outcome": "Reserve the next deterministic versioned artifact and sidecar pair without overwriting either existing file."
+        },
+        {
+          "condition": "Rendering, upload, validation, or commit is cancelled or fails.",
+          "outcome": "Publish neither artifact nor sidecar and leave the original viewer usable."
+        }
+      ],
+      "allowedNondeterminism": {
+        "allowed": [
+          "Natural-language explanation wording",
+          "Render and publication timings",
+          "PNG byte length and SHA-256 when integrity relations remain valid",
+          "A deterministic -2 or later suffix when prior complete artifact pairs exist",
+          "Minor camera auto-fit differences that keep the barrel, chromophore, and four residues visible"
+        ],
+        "notAllowed": [
+          "Additional viewer cards or sessions",
+          "Different source, residue identities, closest-heavy-atom distances, styling, annotation target, dimensions, or collision policy",
+          "Missing or mismatched provenance",
+          "Overwrite, partial publication, or absolute path disclosure"
+        ]
+      },
+      "qualificationStatus": "pending-clean-host-qualification"
+    }
+  ],
+  "downstreamQualificationRunbook": {
+    "purpose": "Qualify every final shipped starter from the visible installed-plugin entry point on a clean host without changing this expected-results contract merely to obtain a pass.",
+    "requiredEnvironmentRecord": [
+      "plugin version",
+      "runtime app version",
+      "commit SHA",
+      "model and reasoning setting",
+      "project label",
+      "host build and renderer details"
+    ],
+    "stepsPerExample": [
+      "Start from a clean installed-host profile with one canonical plugin installation and no prior viewer session.",
+      "Launch the exact shipped starter from its visible entry point and preserve the exact prompt.",
+      "Acquire every source through its public HTTPS URL, then verify accession, revision, byte length, and SHA-256 before opening.",
+      "Assert exactly one structure.open_from_chat call, one render-bearing result, one visible viewer card, and one active viewerSessionId.",
+      "Record the ordered tool trace and prove every downstream operation used the original viewerSessionId.",
+      "Assert the requested structures, selections, analyses, layers, labels, objects, and render state are visibly present.",
+      "Compare every fixed scientific value against its declared tolerance and preserve method provenance.",
+      "Exercise each declared failure path without weakening the example or leaving partial state.",
+      "Capture current screenshots of the actual viewer result, redacted traces, console and host logs, source hashes, and output hashes.",
+      "For artifact examples, verify workspace-relative paths, collision versioning, no-overwrite behavior, sidecar contents, digest agreement, and atomic publication.",
+      "Check in a qualification report and reproducible harness that distinguish fixed assertions from allowed nondeterminism."
+    ],
+    "requiredNegativeChecks": {
+      "mdm2-p53-interface": [
+        "source digest drift",
+        "overlapping buried-area selections",
+        "analysis cancellation without partial publication"
+      ],
+      "adenylate-kinase-open-closed": [
+        "second chat-open attempt is rejected by the qualification contract",
+        "stale or invalid object target does not claim alignment",
+        "both structures remain in one viewer"
+      ],
+      "gfp-publication-image": [
+        "missing publication capability fails closed",
+        "existing destination versions without overwrite",
+        "cancelled or failed save publishes neither member of the pair",
+        "no absolute host path appears in UI, result, sidecar, or published redacted trace; the raw authorized source-open request may contain its absolute workspace path and must be redacted before evidence publication"
+      ]
+    },
+    "requiredEvidence": [
+      "three visible starter-entry screenshots",
+      "three final viewer-result screenshots",
+      "three redacted ordered tool traces",
+      "source accession, revision, byte-length, and SHA-256 evidence",
+      "viewer-card and active-session counts",
+      "scientific result and tolerance checks",
+      "PNG and provenance paths, hashes, dimensions, and collision evidence",
+      "negative-path evidence",
+      "checked-in qualification report and harness"
+    ],
+    "completionRule": "Change qualificationStatus only after all three exact prompts pass this runbook on the final installed build and all required evidence is current for that commit."
+  }
+}

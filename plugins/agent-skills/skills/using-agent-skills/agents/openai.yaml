@@ -1,0 +1,9 @@
+interface:
+  display_name: Using Agent Skills
+  short_description: Discovers and invokes agent skills
+  default_prompt: Use $using-agent-skills for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

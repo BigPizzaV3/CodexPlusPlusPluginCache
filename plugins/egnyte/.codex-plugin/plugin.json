@@ -1,0 +1,33 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Egnyte Inc",
+    "url": "https://www.egnyte.com"
+  },
+  "description": "Work with documents and files stored in Egnyte directly from ChatGPT. Search across folders, retrieve relevant files, and extract key information to answer questions or generate summaries.\n\nQuickly surface insights from contracts, reports, and internal documents. Combine information from multiple files to create concise summaries, stakeholder updates, or draft written content grounded in your team\u2019s internal materials.",
+  "homepage": "https://www.egnyte.com",
+  "interface": {
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "What IT contracts do we have"
+    ],
+    "developerName": "Egnyte Inc",
+    "displayName": "Egnyte",
+    "logo": "./assets/logo.jpg",
+    "logoDark": "./assets/logo-dark.jpg",
+    "longDescription": "Work with documents and files stored in Egnyte directly from Codex. Search across folders, retrieve relevant files, and extract key information to answer questions or generate summaries.\n\nQuickly surface insights from contracts, reports, and internal documents. Combine information from multiple files to create concise summaries, stakeholder updates, or draft written content grounded in your team\u2019s internal materials.",
+    "privacyPolicyURL": "https://www.egnyte.com/privacy-policy",
+    "screenshots": [],
+    "shortDescription": "Find and analyze your files",
+    "supportURL": "https://www.egnyte.com",
+    "termsOfServiceURL": "https://www.egnyte.com/terms-and-conditions/10-2022",
+    "websiteURL": "https://www.egnyte.com"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "egnyte",
+  "repository": "https://github.com/openai/plugins",
+  "version": "3.0.0"
+}

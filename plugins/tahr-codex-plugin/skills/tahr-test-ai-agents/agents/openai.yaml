@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Test AI Agents"
+  short_description: "Test LLM, RAG, and agent trust boundaries"
+  default_prompt: "Use $tahr-test-ai-agents to review LLM, RAG, tool, and agent security boundaries in this application."

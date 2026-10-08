@@ -5,7 +5,7 @@ import json
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-ALLOW = {'MIT', 'Apache-2.0', 'GPL-3.0-only', 'Apache-2.0 AND CC-BY-4.0'}
+ALLOW = {'MIT', 'Apache-2.0', 'GPL-3.0-only', 'Apache-2.0 AND CC-BY-4.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'CC0-1.0', 'Unlicense'}
 
 def validate():
     catalog = json.loads((ROOT / 'catalog.json').read_text())
@@ -22,10 +22,17 @@ def validate():
         assert snapshot['declaredLicense'] in ALLOW, '许可未进入允许集合: ' + name
         assert entry['source'] == {'source': 'local', 'path': './plugins/' + name}, '来源路径不正确: ' + name
         directory = ROOT / 'plugins' / name
-        manifest = json.loads((directory / '.codex-plugin/plugin.json').read_text())
+        manifest_path = snapshot.get('manifestPath') or ('plugin.json' if (directory / 'plugin.json').is_file() else '.codex-plugin/plugin.json')
+        manifest = json.loads((directory / manifest_path).read_text())
         assert manifest['name'] == name, '插件名称不一致: ' + name
         assert manifest['version'] == snapshot['version'], '版本不一致: ' + name
-        assert manifest['license'] == snapshot['declaredLicense'], '许可声明不一致: ' + name
+        evidence = snapshot.get('licenseEvidence')
+        if evidence:
+            assert manifest.get('license') == snapshot.get('originalLicenseDeclaration'), '原始许可字段不一致: ' + name
+            license_path = directory / evidence['path']
+            assert hashlib.sha256(license_path.read_bytes()).hexdigest() == evidence['sha256'], '许可证据文件不一致: ' + name
+        else:
+            assert manifest['license'] == snapshot['declaredLicense'], '许可声明不一致: ' + name
         actual_paths = set()
         for path in directory.rglob('*'):
             assert not path.is_symlink(), '发现未审查的符号链接: ' + str(path.relative_to(ROOT))
@@ -40,8 +47,12 @@ def validate():
             file_count += 1
             byte_count += len(data)
         assert actual_paths == set(snapshot['fileSha256']), '快照文件缺失: ' + name
+        components = dict(manifest)
+        extensions = (manifest.get('extensions') or {}).get('com.openai')
+        if isinstance(extensions, dict):
+            components.update(extensions)
         for field in ['skills', 'apps', 'mcpServers']:
-            value = manifest.get(field)
+            value = components.get(field)
             if isinstance(value, str) and value.startswith('./'):
                 assert (directory / value).exists(), '组件引用不存在: ' + name + '/' + value
     for name in ['MIT', 'Apache-2.0', 'GPL-3.0-only', 'CC-BY-4.0']:

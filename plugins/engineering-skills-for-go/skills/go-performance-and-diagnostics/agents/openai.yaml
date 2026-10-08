@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Performance and Diagnostics"
+  short_description: "Profile and improve measured Go costs"
+  default_prompt: "Use $go-performance-and-diagnostics to diagnose this measured Go bottleneck."
+policy:
+  allow_implicit_invocation: true

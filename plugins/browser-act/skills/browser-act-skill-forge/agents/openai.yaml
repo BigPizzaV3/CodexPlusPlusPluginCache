@@ -1,0 +1,4 @@
+interface:
+  display_name: "BrowserAct Skill Forge"
+  short_description: "Create reusable BrowserAct skills for websites"
+  default_prompt: "Use $browser-act-skill-forge to create a reusable Skill for a website."

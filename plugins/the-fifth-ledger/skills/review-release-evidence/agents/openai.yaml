@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Release Evidence"
+  short_description: "Assess identity-bound release readiness"
+  default_prompt: "Use $review-release-evidence to assess release readiness from current identity-bound evidence."
+policy:
+  allow_implicit_invocation: true

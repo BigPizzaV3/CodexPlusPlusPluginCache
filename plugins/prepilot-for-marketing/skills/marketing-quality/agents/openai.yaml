@@ -1,0 +1,6 @@
+interface:
+  display_name: "Marketing Quality Gate"
+  short_description: "Review marketing work before it is acted on."
+  default_prompt: "Use Marketing Quality Gate to help with this marketing task."
+policy:
+  allow_implicit_invocation: true

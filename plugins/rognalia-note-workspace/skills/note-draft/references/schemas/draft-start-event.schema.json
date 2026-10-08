@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:draft-start-event:1",
+  "title": "note Workspace draft start event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "event_type", "request_id", "article_id",
+    "article_revision", "registration_revision", "created_at", "status",
+    "registration_path", "registration_sha256", "external_actions"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "event_type": {"const": "note_draft_started"},
+    "request_id": {"type": "string"},
+    "article_id": {"type": "string"},
+    "article_revision": {"type": "integer", "minimum": 1},
+    "registration_revision": {"type": "integer", "minimum": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "status": {"const": "external_write_started"},
+    "registration_path": {"type": "string"},
+    "registration_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "external_actions": {"const": []}
+  }
+}

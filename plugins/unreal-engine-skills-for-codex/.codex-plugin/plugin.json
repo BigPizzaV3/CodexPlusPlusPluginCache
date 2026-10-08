@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Epic Games"
+  },
+  "description": "Inspect and edit a running Unreal Editor through its local Model Context Protocol server.",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "List actors in my current Unreal level.",
+      "Inspect the selected Blueprint and report compilation errors.",
+      "Add a cube beside PlayerStart in my test level."
+    ],
+    "developerName": "Epic Games",
+    "displayName": "Unreal Engine Skills for Codex",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Connect to a running Unreal Editor to inspect levels and assets, edit Blueprints and materials, and create or maintain Unreal Agent Skills as Python classes or UAssets. Requires an engine build with ModelContextProtocol and the relevant toolset plugins. Local desktop or CLI use; no Unreal Engine binaries are included.",
+    "privacyPolicyURL": "https://legal.epicgames.com/epicgames/privacy-policy",
+    "shortDescription": "Create and edit Unreal games",
+    "supportURL": "https://dev.epicgames.com/support",
+    "websiteURL": "https://dev.epicgames.com/"
+  },
+  "keywords": [
+    "unreal-engine",
+    "mcp",
+    "game-development",
+    "blueprints",
+    "editor"
+  ],
+  "license": "MIT",
+  "mcpServers": "./.mcp.json",
+  "name": "unreal-engine-skills-for-codex",
+  "repository": "https://github.ol.epicgames.net/ai-plugins/unreal-engine-skills-for-codex-plugin",
+  "skills": "./skills",
+  "version": "0.1.7"
+}

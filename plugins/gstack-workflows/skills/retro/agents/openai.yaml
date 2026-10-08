@@ -1,0 +1,9 @@
+interface:
+  display_name: "Retro"
+  short_description: "Produce a retrospective from repository evidence, delivery outcomes, and recorded learnings."
+  default_prompt: "Use Retro for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

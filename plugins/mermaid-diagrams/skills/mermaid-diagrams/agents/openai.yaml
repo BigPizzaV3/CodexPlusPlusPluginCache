@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mermaid Diagrams"
+  short_description: "Author, edit, and preview Mermaid documents"
+  default_prompt: "Use $mermaid-diagrams to author, safely edit, validate, or structurally preview a Mermaid document."

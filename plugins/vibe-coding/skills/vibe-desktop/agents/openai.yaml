@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Desktop & extensions"
+  short_description: "Desktop apps, browser extensions and IPC"
+  default_prompt: "Use $vibe-desktop to audit the selected desktop & extensions boundary."

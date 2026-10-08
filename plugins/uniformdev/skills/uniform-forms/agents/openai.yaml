@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uniform Forms"
+  short_description: "Add forms backed by Uniform components"
+  default_prompt: "Add a signup form with $uniform-forms"

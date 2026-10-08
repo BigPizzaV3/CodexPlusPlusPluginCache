@@ -1,0 +1,30 @@
+{
+ "keeps": [
+  {
+   "start": 11.254,
+   "end": 16.276,
+   "seg": "s3"
+  },
+  {
+   "start": 16.496,
+   "end": 20.018,
+   "seg": "s4"
+  },
+  {
+   "start": 20.708,
+   "end": 24.47,
+   "seg": "s5"
+  }
+ ],
+ "warnings": [],
+ "stats": {
+  "lines_kept": 3,
+  "lines_deleted": 0,
+  "editor_dropped": 0,
+  "words_struck": 1,
+  "align_fallback": 0,
+  "fillers_restored_no_breath": 0
+ },
+ "src_duration": 27.4,
+ "kept_duration": 12.3
+}

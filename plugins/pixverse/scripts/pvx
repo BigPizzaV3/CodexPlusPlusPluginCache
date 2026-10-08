@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+
+export PIXVERSE_AGENT_PLUGIN_ROOT="$ROOT"
+export PIXVERSE_AGENT_PVX_EXECUTABLE="$ROOT/scripts/pvx"
+export PIXVERSE_CLI_SOURCE="codex-plugin"
+export PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}"
+
+exec "$PYTHON_BIN" -m pvx.cli "$@"

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Linting"
+  short_description: "Configure practical Go lint checks"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-linting to configure or diagnose linting for this Go project."

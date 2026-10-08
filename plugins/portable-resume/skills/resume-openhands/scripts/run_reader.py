@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+"""Bootstrap the owned portable-resume runtime for source=openhands."""
+
+from __future__ import annotations
+
+import os
+import sys
+
+# This file lives at: <skill-package>/scripts/run_reader.py
+# Skill package root is the parent of scripts/; the installer places the
+# stdlib runtime next to the skill tree under <skill-root>/.portable-resume/runtime.
+_SKILL_PACKAGE = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+_ROOT = os.path.dirname(_SKILL_PACKAGE)
+_RUNTIME = os.path.join(_ROOT, ".portable-resume", "runtime")
+_OWNED_PACKAGE = os.path.join(_RUNTIME, "portable_resume")
+_OWNED_INIT = os.path.join(_OWNED_PACKAGE, "__init__.py")
+
+
+def _runtime_unavailable() -> None:
+    sys.stderr.write(
+        '{"attempts":null,"code":"E_CAPABILITY_UNAVAILABLE","exit_code":5,'
+        '"family":[],"hint":null,'
+        '"message":"The requested source capability is unavailable.",'
+        '"provider":null,"schema_version":"portable-resume/diagnostic-v1","source":null}\n'
+    )
+    raise SystemExit(5)
+
+
+def _is_contained(path: str, root: str) -> bool:
+    try:
+        return os.path.commonpath((root, path)) == root
+    except ValueError:
+        return False
+
+
+def _owned_runtime_package_available() -> bool:
+    root = os.path.realpath(_ROOT)
+    runtime = os.path.realpath(_RUNTIME)
+    package = os.path.realpath(_OWNED_PACKAGE)
+    package_init = os.path.realpath(_OWNED_INIT)
+    if not (
+        _is_contained(runtime, root)
+        and _is_contained(package, runtime)
+        and _is_contained(package_init, package)
+        and os.path.isdir(_OWNED_PACKAGE)
+        and os.path.isfile(_OWNED_INIT)
+    ):
+        return False
+    # Reject critical modules that exist but whose symlink/target escapes the package.
+    # Missing files are left for the import path so broken owned runtimes still surface
+    # as real ModuleNotFoundError / exit 1 rather than "unavailable".
+    for name in ("__init__.py", "reader.py", "model.py"):
+        candidate = os.path.join(_OWNED_PACKAGE, name)
+        if not os.path.lexists(candidate):
+            continue
+        try:
+            resolved = os.path.realpath(candidate)
+        except OSError:
+            return False
+        if not (_is_contained(resolved, package) and os.path.isfile(resolved)):
+            return False
+    return True
+
+
+def _module_origin_is_owned(module: object) -> bool:
+    """True only when an imported module's real file lives under the owned package."""
+
+    path = getattr(module, "__file__", None)
+    if not isinstance(path, str) or not path:
+        return False
+    try:
+        resolved = os.path.realpath(path)
+        package = os.path.realpath(_OWNED_PACKAGE)
+    except OSError:
+        return False
+    return _is_contained(resolved, package) and os.path.isfile(resolved)
+
+
+if not _owned_runtime_package_available():
+    _runtime_unavailable()
+
+for _module_name in tuple(sys.modules):
+    if _module_name == "portable_resume" or _module_name.startswith("portable_resume."):
+        sys.modules.pop(_module_name, None)
+
+sys.path[:] = [_entry for _entry in sys.path if _entry != _RUNTIME]
+sys.path.insert(0, _RUNTIME)
+
+try:
+    from portable_resume.reader import main  # noqa: E402
+    from portable_resume.model import SOURCE_KEYS  # noqa: E402
+    import portable_resume.model as _owned_model  # noqa: E402
+    import portable_resume.reader as _owned_reader  # noqa: E402
+except ModuleNotFoundError as error:
+    # Only the top-level package missing is "unavailable"; missing internals re-raise.
+    if error.name != "portable_resume":
+        raise
+    _runtime_unavailable()
+
+if not (_module_origin_is_owned(_owned_reader) and _module_origin_is_owned(_owned_model)):
+    _runtime_unavailable()
+
+_BOUND_SOURCE = "openhands"
+_KNOWN_SOURCES = frozenset(SOURCE_KEYS)
+
+
+def _strip_expected_source(argv: list[str]) -> list[str]:
+    """Remove every spelling of host-supplied --expected-source (never trust it).
+
+    Only drop a following token when it is a plausible value (not another option).
+    ``--expected-source --request-file …`` must not swallow ``--request-file``.
+    """
+
+    cleaned: list[str] = []
+    skip_next = False
+    for item in argv:
+        if skip_next:
+            skip_next = False
+            # Missing/malformed value: keep the token so later parsing fail-closes.
+            if item.startswith("-"):
+                cleaned.append(item)
+            continue
+        if item == "--expected-source":
+            skip_next = True
+            continue
+        if item.startswith("--expected-source="):
+            continue
+        cleaned.append(item)
+    return cleaned
+
+
+def _force_expected_source(argv: list[str]) -> list[str]:
+    """Rebuild a canonical argv that hard-binds this Skill's source.
+
+    The installed wrapper always loads *this* package's runtime (via realpath of
+    this file). Hostile argv may not retarget the source or smuggle a different
+    ``--expected-source``. Prefer ``--request-file`` for free-text / multi-field
+    selection so shell quoting is not required for arbitrary text.
+    """
+
+    cleaned = _strip_expected_source(list(argv))
+
+    # Help: do not inject source; still force expected-source for consistency.
+    if cleaned and cleaned[0] in {"-h", "--help"}:
+        return [*cleaned, "--expected-source", _BOUND_SOURCE]
+
+    # Request-file lane: options-only or mixed; drop leading wrong source keys.
+    has_request = any(
+        item == "--request-file" or item.startswith("--request-file=") for item in cleaned
+    )
+    if has_request:
+        if cleaned and cleaned[0] in _KNOWN_SOURCES:
+            cleaned = cleaned[1:]
+        # Do not reinterpret option values as source/action.
+        return [*cleaned, "--expected-source", _BOUND_SOURCE]
+
+    # Drop a leading source token (bound or hostile) so we re-bind exactly once.
+    if cleaned and cleaned[0] in _KNOWN_SOURCES:
+        cleaned = cleaned[1:]
+
+    if not cleaned:
+        # A bare invocation is the cheap, bounded discovery step.
+        # Use handoff so probes emit the UNTRUSTED banner (not a plain table).
+        return [_BOUND_SOURCE, "list", "--format", "handoff", "--expected-source", _BOUND_SOURCE]
+
+    if cleaned[0] in {"list", "show"}:
+        return [_BOUND_SOURCE, *cleaned, "--expected-source", _BOUND_SOURCE]
+
+    if cleaned[0].startswith("-"):
+        # Options without action — leave to the reader (invalid unless request-file).
+        return [_BOUND_SOURCE, *cleaned, "--expected-source", _BOUND_SOURCE]
+
+    # Bare ref without action → show <ref> (Grok resume-session style).
+    # Leading "-" refs are options, not refs (handled above).
+    return [_BOUND_SOURCE, "show", *cleaned, "--expected-source", _BOUND_SOURCE]
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(_force_expected_source(sys.argv[1:])))

@@ -1,0 +1,7 @@
+interface:
+  display_name: Profile Optimizer
+  short_description: Improve LinkedIn profile positioning
+  brand_color: '#E45B32'
+  default_prompt: Use $profile-optimizer to improve this LinkedIn profile for clearer positioning.
+policy:
+  allow_implicit_invocation: true

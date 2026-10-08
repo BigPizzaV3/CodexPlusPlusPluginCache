@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Trace Dangerous Inputs"
+  short_description: "Trace untrusted input to dangerous sinks"
+  default_prompt: "Use $tahr-trace-dangerous-inputs to find exploitable source-to-sink paths in this application."

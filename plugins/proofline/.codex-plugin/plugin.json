@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Thang Luu",
+    "url": "https://github.com/thangldw"
+  },
+  "description": "Evidence-first decision memory with deterministic impact and signed attestations.",
+  "homepage": "https://github.com/thangldw/proofline",
+  "interface": {
+    "brandColor": "#102A43",
+    "brandColorDark": "#BCD6EF",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Document this engineering decision with exact evidence.",
+      "Check changed evidence and trace transitive decision impact.",
+      "Verify this evidence package or signed attestation."
+    ],
+    "developerName": "DUC THANG LUU",
+    "displayName": "Proofline",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Review evidence-backed engineering decisions, preserve exact cited spans, trace explicit transitive impact, and verify portable packages or signed attestations without an AI provider.",
+    "privacyPolicyURL": "https://github.com/thangldw/proofline/blob/main/PRIVACY.md",
+    "shortDescription": "Verify evidence decisions",
+    "termsOfServiceURL": "https://github.com/thangldw/proofline/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/thangldw/proofline"
+  },
+  "keywords": [
+    "engineering-decisions",
+    "adr",
+    "evidence",
+    "provenance",
+    "knowledge"
+  ],
+  "license": "MIT",
+  "name": "proofline",
+  "repository": "https://github.com/thangldw/proofline",
+  "skills": "./skills/",
+  "version": "2.0.2"
+}

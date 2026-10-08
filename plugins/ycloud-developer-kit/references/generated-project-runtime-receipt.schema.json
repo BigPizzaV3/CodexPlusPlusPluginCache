@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ycloud.com/schemas/generated-project-runtime-receipt.schema.json",
+  "title": "YCloud source-bound external-runner local-stub evidence receipts",
+  "description": "Caller-supplied execution claims from an allowlisted external runner. This format binds claims to every generated-project file except .git and node_modules but is not an authenticated or cryptographic attestation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "adapterProfile", "producer", "trustBoundary", "baselineSha256", "manifestSha256", "sourceSnapshot", "stub", "target", "receipts"],
+  "properties": {
+    "schemaVersion": {"const": 4},
+    "adapterProfile": {"const": "typescript-fastify-vanilla-v1"},
+    "producer": {"enum": ["ycloud-kit-ci-v1", "ycloud-kit-local-runner-v1"]},
+    "trustBoundary": {"const": "external-caller-allowlisted-not-cryptographic"},
+    "baselineSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "manifestSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "sourceSnapshot": {
+      "description": "SHA-256 over the domain separator `ycloud-project-source-snapshot-v2\\0`, then every generated-project file except .git and node_modules in UTF-8 relative-path byte order: unsigned 8-byte big-endian path length, path bytes, and the raw 32-byte SHA-256 digest of the file bytes. Timestamps, permissions, and absolute paths are excluded.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "fileCount", "sha256"],
+      "properties": {
+        "algorithm": {"const": "sha256-project-files-v2"},
+        "fileCount": {"type": "integer", "minimum": 0},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "stub": {"const": true},
+    "target": {"type": "string", "pattern": "^http://(?:127\\.0\\.0\\.1|localhost|\\[::1\\]):[0-9]{1,5}(?:/.*)?$"},
+    "receipts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidenceId", "status"],
+        "properties": {
+          "evidenceId": {"type": "string", "minLength": 1},
+          "status": {"enum": ["passed", "failed"]}
+        }
+      }
+    }
+  }
+}

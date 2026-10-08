@@ -1,0 +1,6 @@
+interface:
+  display_name: "Harmonize Project Content"
+  short_description: "Align user-facing content without hiding truth"
+  default_prompt: "Use $harmonize-project-content to align user-facing project content while preserving safety and status truth."
+policy:
+  allow_implicit_invocation: true

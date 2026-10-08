@@ -1,0 +1,4 @@
+interface:
+  display_name: "Netwalk Scan"
+  short_description: "Help with Netwalk Scan tasks"
+  default_prompt: "Use $netwalk-scan to handle this request with its specialist workflow."

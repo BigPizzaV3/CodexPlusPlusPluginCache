@@ -1,0 +1,42 @@
+{
+  "author": {
+    "name": "Ampres",
+    "url": "https://github.com/ampres-ai"
+  },
+  "description": "Consent-aware, local-first project memory with cited retrieval and provenance.",
+  "homepage": "https://ampres-ai.github.io/talamus/",
+  "interface": {
+    "brandColor": "#8C7CFF",
+    "brandColorDark": "#8C7CFF",
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Find a project decision in Talamus and cite the notes behind it.",
+      "Show how a decision changed over time in this Talamus brain.",
+      "Check this Talamus brain's health and suggest the safest next step."
+    ],
+    "developerName": "Angio Crapuzzi",
+    "displayName": "Talamus Memory",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Use Talamus through a consent-aware CLI workflow to search and recall local project notes, inspect provenance, history, graph links, and brain health. The plugin installs no package, MCP server, hook, or capture process.",
+    "privacyPolicyURL": "https://ampres-ai.github.io/talamus/privacy/",
+    "shortDescription": "Cited local memory for agents",
+    "supportURL": "https://github.com/ampres-ai/talamus/issues",
+    "termsOfServiceURL": "https://ampres-ai.github.io/talamus/terms/",
+    "websiteURL": "https://ampres-ai.github.io/talamus/"
+  },
+  "keywords": [
+    "agent-memory",
+    "citations",
+    "local-first",
+    "provenance"
+  ],
+  "license": "Apache-2.0",
+  "name": "talamus-memory",
+  "repository": "https://github.com/ampres-ai/talamus",
+  "skills": "./skills/",
+  "version": "1.1.1"
+}

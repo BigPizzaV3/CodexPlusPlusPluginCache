@@ -1,0 +1,9 @@
+interface:
+  display_name: "Plan Design Review"
+  short_description: "Review product and interface design dimensions before implementation."
+  default_prompt: "Use Plan Design Review for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

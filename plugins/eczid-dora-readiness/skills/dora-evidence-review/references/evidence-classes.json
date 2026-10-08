@@ -1,0 +1,134 @@
+{
+  "generatedFrom": {
+    "extension": "ecocitizenz.eczid-dora-readiness",
+    "version": "0.3.0"
+  },
+  "detectors": [
+    {
+      "id": "dora.thirdparty",
+      "label": "ICT third-party register",
+      "patterns": [
+        "third-?party-?register",
+        "ict-?third-?party",
+        "outsourcing-?register",
+        "register-?of-?information",
+        "ict-?register"
+      ]
+    },
+    {
+      "id": "dora.policy",
+      "label": "Operational-resilience / ICT risk policy",
+      "patterns": [
+        "(^|[^a-z])dora([^a-z]|$)",
+        "ict-?risk",
+        "operational-?resilience",
+        "resilience-?policy",
+        "risk-?management-?framework"
+      ]
+    },
+    {
+      "id": "dora.incident",
+      "label": "Incident-response evidence",
+      "patterns": [
+        "incident-?response",
+        "incident-?register",
+        "incident-?report",
+        "incident-?log",
+        "incident-?management",
+        "major-?incident",
+        "major-?ict"
+      ]
+    },
+    {
+      "id": "dora.testing",
+      "label": "Resilience-testing / continuity evidence",
+      "patterns": [
+        "resilience-?test",
+        "tlpt",
+        "threat-?led",
+        "continuity-?test",
+        "business-?continuity",
+        "disaster-?recovery",
+        "bcdr",
+        "dr-?plan",
+        "pentest",
+        "penetration-?test"
+      ]
+    },
+    {
+      "id": "dora.contracts",
+      "label": "ICT contractual arrangements / exit plans",
+      "patterns": [
+        "ict-?contract",
+        "contractual-?arrangement",
+        "outsourcing-?agreement",
+        "exit-?plan",
+        "exit-?strateg",
+        "service-?level-?agreement",
+        "(^|/)sla[._-]"
+      ]
+    }
+  ],
+  "guidance": [
+    {
+      "detectorId": "dora.thirdparty",
+      "whyItMatters": "DORA Article 28(3) requires financial entities to maintain and update a register of information covering all contractual arrangements on the use of ICT services provided by ICT third-party service providers, distinguishing those that support critical or important functions, and to make the full register available to the competent authority on request. It is usually the first artefact a supervisor, auditor or customer asks for.",
+      "reviewWhenObserved": "Open the register and confirm it names each ICT provider and service, distinguishes arrangements supporting critical or important functions, and shows an owner and a last-updated date. Check it matches what the contracts say.",
+      "reviewWhenNotObserved": "Locate the register if it lives outside this workspace, or start one from the contract list. Until it is here, this workspace cannot show ICT third-party evidence.",
+      "weightWhenNotObserved": "high",
+      "capability": {
+        "label": "ECZ-ID Vendor Risk and Counterparty Trust (free VS Code extensions)",
+        "url": "https://open-vsx.org/extension/ecocitizenz/eczid-pack-dora-sbom",
+        "note": "Review the supplier and counterparty evidence behind each register entry, locally and free."
+      }
+    },
+    {
+      "detectorId": "dora.policy",
+      "whyItMatters": "DORA Article 6 requires a sound, comprehensive and well-documented ICT risk management framework, including a digital operational resilience strategy (Article 6(8)). A written policy is how a reviewer sees that the framework exists.",
+      "reviewWhenObserved": "Check the policy is current, signed off by the management body, and states the risk tolerance for ICT risk and the ICT objectives it supports.",
+      "reviewWhenNotObserved": "Add or link the operational-resilience or ICT risk policy. If it lives in a document system, record where, so an auditor can find it from here.",
+      "weightWhenNotObserved": "elevated",
+      "capability": {
+        "label": "Cyber Resilience Passport (TrustOps)",
+        "url": "https://trustops.ecocitizenz.com/start?flow=critical-cyber-resilience",
+        "note": "Turn a reviewed resilience posture into a resolver-verifiable credential a counterparty can check."
+      }
+    },
+    {
+      "detectorId": "dora.incident",
+      "whyItMatters": "DORA Article 17 requires an ICT-related incident management process to detect, manage and notify ICT-related incidents, and Article 19 requires major ICT-related incidents to be reported to the competent authority. Suppliers are asked to show their side of that process.",
+      "reviewWhenObserved": "Confirm the process names who classifies incidents, how major incidents are escalated to the financial entity, and where the incident register is kept.",
+      "reviewWhenNotObserved": "Add the incident-response process or the incident register, or a pointer to where they live. Without it a reviewer cannot see how incidents reach the financial entity.",
+      "weightWhenNotObserved": "elevated",
+      "capability": {
+        "label": "Cyber Resilience Passport (TrustOps)",
+        "url": "https://trustops.ecocitizenz.com/start?flow=critical-cyber-resilience",
+        "note": "Make incident-handling evidence part of a credential others can verify in Resolver."
+      }
+    },
+    {
+      "detectorId": "dora.testing",
+      "whyItMatters": "DORA Article 24 requires a digital operational resilience testing programme, Article 11 an ICT business continuity policy, and Article 26 threat-led testing (TLPT) at least every three years for the entities identified for it. Test and continuity records are what show the programme runs.",
+      "reviewWhenObserved": "Check the most recent test or continuity exercise date, its scope, and whether findings were tracked to closure.",
+      "reviewWhenNotObserved": "Add the latest resilience test report, continuity exercise record or DR plan, or a pointer to it.",
+      "weightWhenNotObserved": "elevated",
+      "capability": {
+        "label": "Cyber Resilience Passport (TrustOps)",
+        "url": "https://trustops.ecocitizenz.com/start?flow=critical-cyber-resilience",
+        "note": "Testing and continuity evidence becomes part of a verifiable resilience posture."
+      }
+    },
+    {
+      "detectorId": "dora.contracts",
+      "whyItMatters": "DORA Article 30 requires the rights and obligations of the financial entity and the ICT provider to be set out in one written contract including the service level agreements, and Article 28(8) requires exit strategies for ICT services supporting critical or important functions. Reviewers ask for both alongside the register.",
+      "reviewWhenObserved": "Confirm the contract evidence covers service levels, data location, audit and access rights, termination and exit, and that exit plans exist for services supporting critical or important functions.",
+      "reviewWhenNotObserved": "Record where contractual arrangements and exit plans are kept. This is supporting evidence; the register comes first.",
+      "weightWhenNotObserved": "normal",
+      "capability": {
+        "label": "DORA vendor credentialing (TrustOps)",
+        "url": "https://trustops.ecocitizenz.com/start?flow=dora-sbom",
+        "note": "Give supervised entities a resolver-verifiable view of your vendor posture instead of exchanging documents."
+      }
+    }
+  ]
+}

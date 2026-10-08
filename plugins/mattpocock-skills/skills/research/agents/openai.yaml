@@ -1,0 +1,9 @@
+interface:
+  display_name: Research
+  short_description: Research technical questions from primary sources
+  default_prompt: Use $research for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

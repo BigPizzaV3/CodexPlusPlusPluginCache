@@ -1,0 +1,14 @@
+{
+  "schema": "game-room.prop-manifest.v1",
+  "roomId": "__ROOM_ID__",
+  "generation": {
+    "provider": "meshy",
+    "apiModel": "meshy-5",
+    "pricingSource": "https://docs.meshy.ai/en/api/pricing",
+    "pricingVerifiedAt": "",
+    "creditsPerTexturedTask": 15,
+    "hardCreditCeiling": 0,
+    "maxChargedAttemptsPerAsset": 2
+  },
+  "assets": []
+}

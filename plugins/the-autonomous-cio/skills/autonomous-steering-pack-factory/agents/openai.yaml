@@ -1,0 +1,5 @@
+interface:
+  display_name: "Autonomous Steering Pack Factory"
+  short_description: "Explicit-only."
+policy:
+  allow_implicit_invocation: false

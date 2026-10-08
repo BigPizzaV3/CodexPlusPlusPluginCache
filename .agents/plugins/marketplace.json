@@ -6,10 +6,694 @@
   },
   "plugins": [
     {
+      "name": "12ui-design",
+      "source": {
+        "source": "local",
+        "path": "./plugins/12ui-design"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "1password",
+      "source": {
+        "source": "local",
+        "path": "./plugins/1password"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "6x6",
+      "source": {
+        "source": "local",
+        "path": "./plugins/6x6"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "actively",
+      "source": {
+        "source": "local",
+        "path": "./plugins/actively"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "adaptive-task-routing",
+      "source": {
+        "source": "local",
+        "path": "./plugins/adaptive-task-routing"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "advisor",
+      "source": {
+        "source": "local",
+        "path": "./plugins/advisor"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "advisory",
+      "source": {
+        "source": "local",
+        "path": "./plugins/advisory"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "agent-parley",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agent-parley"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "agent-reach",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agent-reach"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "agent-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agent-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "agentmarkup",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agentmarkup"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "agentproof",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agentproof"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "ai-devkit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ai-devkit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ai-graphic-design",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ai-graphic-design"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "ai-hooter",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ai-hooter"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "ai-review-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ai-review-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ai-router",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ai-router"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "aiera",
+      "source": {
+        "source": "local",
+        "path": "./plugins/aiera"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "aivana-database-engineer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/aivana-database-engineer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "akinator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/akinator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "alation",
+      "source": {
+        "source": "local",
+        "path": "./plugins/alation"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "amd-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/amd-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "analise-acoes-listadas",
+      "source": {
+        "source": "local",
+        "path": "./plugins/analise-acoes-listadas"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "anarlog",
+      "source": {
+        "source": "local",
+        "path": "./plugins/anarlog"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "andrej-karpathy-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/andrej-karpathy-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "anti-churn",
+      "source": {
+        "source": "local",
+        "path": "./plugins/anti-churn"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "antom-integration",
+      "source": {
+        "source": "local",
+        "path": "./plugins/antom-integration"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "antom-reconciliation-expert",
+      "source": {
+        "source": "local",
+        "path": "./plugins/antom-reconciliation-expert"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "app-69ca90f7924881918d4b8d06316e8f9c",
+      "source": {
+        "source": "local",
+        "path": "./plugins/app-69ca90f7924881918d4b8d06316e8f9c"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "app-6a16bcb9a37081919b0db1d81010fb2f",
+      "source": {
+        "source": "local",
+        "path": "./plugins/app-6a16bcb9a37081919b0db1d81010fb2f"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "app-6a1a374657a88191bc1e22f3e9862dc6",
+      "source": {
+        "source": "local",
+        "path": "./plugins/app-6a1a374657a88191bc1e22f3e9862dc6"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "app-6a906843cab08191875b1054ea7b609a",
+      "source": {
+        "source": "local",
+        "path": "./plugins/app-6a906843cab08191875b1054ea7b609a"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "app-design-research",
+      "source": {
+        "source": "local",
+        "path": "./plugins/app-design-research"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "apprentice",
+      "source": {
+        "source": "local",
+        "path": "./plugins/apprentice"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "arabic-word-production",
+      "source": {
+        "source": "local",
+        "path": "./plugins/arabic-word-production"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "arbitration",
+      "source": {
+        "source": "local",
+        "path": "./plugins/arbitration"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "arkah",
+      "source": {
+        "source": "local",
+        "path": "./plugins/arkah"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "arrowgram",
+      "source": {
+        "source": "local",
+        "path": "./plugins/arrowgram"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "asana",
+      "source": {
+        "source": "local",
+        "path": "./plugins/asana"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "asoscan",
+      "source": {
+        "source": "local",
+        "path": "./plugins/asoscan"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "astral-orchestrator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/astral-orchestrator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "astria",
+      "source": {
+        "source": "local",
+        "path": "./plugins/astria"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "atlas-scout",
+      "source": {
+        "source": "local",
+        "path": "./plugins/atlas-scout"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
       "name": "atlassian-rovo",
       "source": {
         "source": "local",
         "path": "./plugins/atlassian-rovo"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "atready",
+      "source": {
+        "source": "local",
+        "path": "./plugins/atready"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "attio",
+      "source": {
+        "source": "local",
+        "path": "./plugins/attio"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "attri",
+      "source": {
+        "source": "local",
+        "path": "./plugins/attri"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "auth0",
+      "source": {
+        "source": "local",
+        "path": "./plugins/auth0"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "auto-optimize-codex-agents-md",
+      "source": {
+        "source": "local",
+        "path": "./plugins/auto-optimize-codex-agents-md"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "avoid-ai-writing",
+      "source": {
+        "source": "local",
+        "path": "./plugins/avoid-ai-writing"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "awesome-design-md",
+      "source": {
+        "source": "local",
+        "path": "./plugins/awesome-design-md"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "awesome-maintainer-defense",
+      "source": {
+        "source": "local",
+        "path": "./plugins/awesome-maintainer-defense"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Security"
+    },
+    {
+      "name": "azure-cosmosdb",
+      "source": {
+        "source": "local",
+        "path": "./plugins/azure-cosmosdb"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "baton-pass-netheremp",
+      "source": {
+        "source": "local",
+        "path": "./plugins/baton-pass-netheremp"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "bionemo-agent-toolkit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/bionemo-agent-toolkit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Scientific Research"
+    },
+    {
+      "name": "blog-generator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/blog-generator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "bloom",
+      "source": {
+        "source": "local",
+        "path": "./plugins/bloom"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "bodhikit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/bodhikit"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -28,6 +712,90 @@
         "authentication": "ON_USE"
       },
       "category": "Scientific Research"
+    },
+    {
+      "name": "brancha",
+      "source": {
+        "source": "local",
+        "path": "./plugins/brancha"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "brand24",
+      "source": {
+        "source": "local",
+        "path": "./plugins/brand24"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "briefcase",
+      "source": {
+        "source": "local",
+        "path": "./plugins/briefcase"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "brighthire",
+      "source": {
+        "source": "local",
+        "path": "./plugins/brighthire"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "browser-act",
+      "source": {
+        "source": "local",
+        "path": "./plugins/browser-act"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "browser-use",
+      "source": {
+        "source": "local",
+        "path": "./plugins/browser-use"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "build-3d-game-rooms",
+      "source": {
+        "source": "local",
+        "path": "./plugins/build-3d-game-rooms"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
     },
     {
       "name": "build-ios-apps",
@@ -60,6 +828,18 @@
       "category": "Developer Tools"
     },
     {
+      "name": "build-steward",
+      "source": {
+        "source": "local",
+        "path": "./plugins/build-steward"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
       "name": "build-web-apps",
       "source": {
         "source": "local",
@@ -90,6 +870,162 @@
       "category": "Developer Tools"
     },
     {
+      "name": "building-react-native-apps",
+      "source": {
+        "source": "local",
+        "path": "./plugins/building-react-native-apps"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "c4-investigator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/c4-investigator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "california-property-tax-appeal-guide",
+      "source": {
+        "source": "local",
+        "path": "./plugins/california-property-tax-appeal-guide"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "canonical-memory-verifier",
+      "source": {
+        "source": "local",
+        "path": "./plugins/canonical-memory-verifier"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "career-command-center",
+      "source": {
+        "source": "local",
+        "path": "./plugins/career-command-center"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "career-command-centre",
+      "source": {
+        "source": "local",
+        "path": "./plugins/career-command-centre"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "career-evidence-toolkit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/career-evidence-toolkit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "cargo-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cargo-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Other"
+    },
+    {
+      "name": "cashback-card-finder",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cashback-card-finder"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "castreader",
+      "source": {
+        "source": "local",
+        "path": "./plugins/castreader"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "cecilialabs-ffmpeg",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cecilialabs-ffmpeg"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "cerebrium",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cerebrium"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "channel99",
+      "source": {
+        "source": "local",
+        "path": "./plugins/channel99"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
       "name": "chatcut",
       "source": {
         "source": "local",
@@ -100,6 +1036,54 @@
         "authentication": "ON_USE"
       },
       "category": "Creativity"
+    },
+    {
+      "name": "chatcut-desktop",
+      "source": {
+        "source": "local",
+        "path": "./plugins/chatcut-desktop"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "chatgpt-codex-plugin-autopilot",
+      "source": {
+        "source": "local",
+        "path": "./plugins/chatgpt-codex-plugin-autopilot"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "chronograph",
+      "source": {
+        "source": "local",
+        "path": "./plugins/chronograph"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "chronos",
+      "source": {
+        "source": "local",
+        "path": "./plugins/chronos"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
     },
     {
       "name": "circleci",
@@ -138,6 +1122,42 @@
       "category": "Developer Tools"
     },
     {
+      "name": "cloudinary",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cloudinary"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "code",
+      "source": {
+        "source": "local",
+        "path": "./plugins/code"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "code-ontology-companion",
+      "source": {
+        "source": "local",
+        "path": "./plugins/code-ontology-companion"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
       "name": "coderabbit",
       "source": {
         "source": "local",
@@ -149,6 +1169,1266 @@
         "products": [
           "CODEX"
         ]
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "codex-browser-recorder",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-browser-recorder"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "codex-coordinator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-coordinator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "codex-cost",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-cost"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "codex-dev-workflows",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-dev-workflows"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "codex-eli5",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-eli5"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "codex-engineering-guardrails",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-engineering-guardrails"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "codex-process-jobs",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-process-jobs"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "codex-sdlc",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-sdlc"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "codex-smart-router",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-smart-router"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "codex-testflight-release",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-testflight-release"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "codex-usage-and-resets",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-usage-and-resets"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "codex-voice-notify",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-voice-notify"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "comic-sol",
+      "source": {
+        "source": "local",
+        "path": "./plugins/comic-sol"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "completion-receipt",
+      "source": {
+        "source": "local",
+        "path": "./plugins/completion-receipt"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "compound-engineering",
+      "source": {
+        "source": "local",
+        "path": "./plugins/compound-engineering"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "compound-writing",
+      "source": {
+        "source": "local",
+        "path": "./plugins/compound-writing"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "conciliation",
+      "source": {
+        "source": "local",
+        "path": "./plugins/conciliation"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "consultor",
+      "source": {
+        "source": "local",
+        "path": "./plugins/consultor"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "consumer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/consumer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "context-handoff",
+      "source": {
+        "source": "local",
+        "path": "./plugins/context-handoff"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "contracts",
+      "source": {
+        "source": "local",
+        "path": "./plugins/contracts"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "conversational-narrative",
+      "source": {
+        "source": "local",
+        "path": "./plugins/conversational-narrative"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "corporate",
+      "source": {
+        "source": "local",
+        "path": "./plugins/corporate"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "coupler-io",
+      "source": {
+        "source": "local",
+        "path": "./plugins/coupler-io"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "coupon-hive",
+      "source": {
+        "source": "local",
+        "path": "./plugins/coupon-hive"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "coursekin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/coursekin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "coveo",
+      "source": {
+        "source": "local",
+        "path": "./plugins/coveo"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "creatify-ad-agent",
+      "source": {
+        "source": "local",
+        "path": "./plugins/creatify-ad-agent"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "creator-workbench",
+      "source": {
+        "source": "local",
+        "path": "./plugins/creator-workbench"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "criminal",
+      "source": {
+        "source": "local",
+        "path": "./plugins/criminal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "crowdstrike-falcon-foundry",
+      "source": {
+        "source": "local",
+        "path": "./plugins/crowdstrike-falcon-foundry"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "crowdstrike-falcon-fusion",
+      "source": {
+        "source": "local",
+        "path": "./plugins/crowdstrike-falcon-fusion"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "crypto-research-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/crypto-research-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "cube",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cube"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "dataverse",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dataverse"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "deepnote",
+      "source": {
+        "source": "local",
+        "path": "./plugins/deepnote"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "defuddle",
+      "source": {
+        "source": "local",
+        "path": "./plugins/defuddle"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "demand-from-the-file",
+      "source": {
+        "source": "local",
+        "path": "./plugins/demand-from-the-file"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "design-arc",
+      "source": {
+        "source": "local",
+        "path": "./plugins/design-arc"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "design-partner",
+      "source": {
+        "source": "local",
+        "path": "./plugins/design-partner"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "designer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/designer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "devrecap",
+      "source": {
+        "source": "local",
+        "path": "./plugins/devrecap"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "diagram-builder",
+      "source": {
+        "source": "local",
+        "path": "./plugins/diagram-builder"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "distilla",
+      "source": {
+        "source": "local",
+        "path": "./plugins/distilla"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "distributed-systems-skills-for-go",
+      "source": {
+        "source": "local",
+        "path": "./plugins/distributed-systems-skills-for-go"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "docket",
+      "source": {
+        "source": "local",
+        "path": "./plugins/docket"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "domotz-preview",
+      "source": {
+        "source": "local",
+        "path": "./plugins/domotz-preview"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "dotenc",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dotenc"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "dovetail",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dovetail"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "dow-jones-factiva",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dow-jones-factiva"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "dreamer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dreamer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "drum-notation-importer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/drum-notation-importer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "dsir-gho",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dsir-gho"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "dsir-sdg",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dsir-sdg"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "duende-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/duende-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "dyslex-ai",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dyslex-ai"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "eczid-agent-trust",
+      "source": {
+        "source": "local",
+        "path": "./plugins/eczid-agent-trust"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "eczid-api-trust",
+      "source": {
+        "source": "local",
+        "path": "./plugins/eczid-api-trust"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "eczid-dora-readiness",
+      "source": {
+        "source": "local",
+        "path": "./plugins/eczid-dora-readiness"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "eczid-mcp-trust",
+      "source": {
+        "source": "local",
+        "path": "./plugins/eczid-mcp-trust"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "eczid-mcp-verifier",
+      "source": {
+        "source": "local",
+        "path": "./plugins/eczid-mcp-verifier"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "eczid-sbom-cra-readiness",
+      "source": {
+        "source": "local",
+        "path": "./plugins/eczid-sbom-cra-readiness"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "eggshell",
+      "source": {
+        "source": "local",
+        "path": "./plugins/eggshell"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "egnyte",
+      "source": {
+        "source": "local",
+        "path": "./plugins/egnyte"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ego",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ego"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "email-love",
+      "source": {
+        "source": "local",
+        "path": "./plugins/email-love"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "employment",
+      "source": {
+        "source": "local",
+        "path": "./plugins/employment"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "endor-labs-agent-kit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/endor-labs-agent-kit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Security"
+    },
+    {
+      "name": "engineering-project-os",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-project-os"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "engineering-skills-for-go",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-skills-for-go"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-ask-matt",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-ask-matt"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-brand-kit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-brand-kit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-build",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-build"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-codebase-design",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-codebase-design"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-debug",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-debug"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-design-system",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-design-system"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-grill-me",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-grill-me"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-handoff",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-handoff"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-harden-ui",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-harden-ui"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-image-to-code",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-image-to-code"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-mobile-mockup",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-mobile-mockup"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-motion-design",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-motion-design"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-plan",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-plan"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-polish",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-polish"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-ponytail",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-ponytail"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-prototype",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-prototype"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-redesign",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-redesign"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-research",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-research"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "engineering-suite-review",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-review"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-setup-matt",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-setup-matt"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-shape-ui",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-shape-ui"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-ship",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-ship"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-stitch-design",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-stitch-design"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-taste",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-taste"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-teach",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-teach"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "engineering-suite-to-tickets",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-to-tickets"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-triage",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-triage"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-ui-audit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-ui-audit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-ux-critique",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-ux-critique"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "engineering-suite-wayfinder",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-wayfinder"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "engineering-suite-web-mockup",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering-suite-web-mockup"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "esquisse-kun",
+      "source": {
+        "source": "local",
+        "path": "./plugins/esquisse-kun"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "essentio",
+      "source": {
+        "source": "local",
+        "path": "./plugins/essentio"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "evaldossier",
+      "source": {
+        "source": "local",
+        "path": "./plugins/evaldossier"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
       },
       "category": "Developer Tools"
     },
@@ -168,6 +2448,318 @@
       "category": "Developer Tools"
     },
     {
+      "name": "fallow",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fallow"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "family",
+      "source": {
+        "source": "local",
+        "path": "./plugins/family"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "fashion-wardrobe",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fashion-wardrobe"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "fast-io",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fast-io"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "fastapicloud",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fastapicloud"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "finance",
+      "source": {
+        "source": "local",
+        "path": "./plugins/finance"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "finn",
+      "source": {
+        "source": "local",
+        "path": "./plugins/finn"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Travel"
+    },
+    {
+      "name": "fintech-skills-for-go",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fintech-skills-for-go"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "firebase",
+      "source": {
+        "source": "local",
+        "path": "./plugins/firebase"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "fireflies",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fireflies"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "fit-file-forge",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fit-file-forge"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "fitness-ledger",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fitness-ledger"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Healthcare"
+    },
+    {
+      "name": "flower",
+      "source": {
+        "source": "local",
+        "path": "./plugins/flower"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "flowstack-ui",
+      "source": {
+        "source": "local",
+        "path": "./plugins/flowstack-ui"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "football-charts",
+      "source": {
+        "source": "local",
+        "path": "./plugins/football-charts"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "forgemind",
+      "source": {
+        "source": "local",
+        "path": "./plugins/forgemind"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "founder-pulse",
+      "source": {
+        "source": "local",
+        "path": "./plugins/founder-pulse"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "freckle",
+      "source": {
+        "source": "local",
+        "path": "./plugins/freckle"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "freetts",
+      "source": {
+        "source": "local",
+        "path": "./plugins/freetts"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "frontend-design-premium",
+      "source": {
+        "source": "local",
+        "path": "./plugins/frontend-design-premium"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "frontier-infra",
+      "source": {
+        "source": "local",
+        "path": "./plugins/frontier-infra"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "fstack",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fstack"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "fullstack-dev-kit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fullstack-dev-kit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "fyxer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fyxer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Communication"
+    },
+    {
+      "name": "gabriel-operator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gabriel-operator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "game-development-studio",
+      "source": {
+        "source": "local",
+        "path": "./plugins/game-development-studio"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
       "name": "game-studio",
       "source": {
         "source": "local",
@@ -179,6 +2771,42 @@
         "products": [
           "CODEX"
         ]
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "generate-runbook",
+      "source": {
+        "source": "local",
+        "path": "./plugins/generate-runbook"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "geoai-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/geoai-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "gh-review-loop",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gh-review-loop"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
       },
       "category": "Developer Tools"
     },
@@ -207,6 +2835,18 @@
       "category": "Communication"
     },
     {
+      "name": "god-prompt",
+      "source": {
+        "source": "local",
+        "path": "./plugins/god-prompt"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
       "name": "google-calendar",
       "source": {
         "source": "local",
@@ -231,10 +2871,214 @@
       "category": "Productivity"
     },
     {
+      "name": "gophers",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gophers"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "gpt-workflows",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gpt-workflows"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
       "name": "granola",
       "source": {
         "source": "local",
         "path": "./plugins/granola"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "groundwork",
+      "source": {
+        "source": "local",
+        "path": "./plugins/groundwork"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "gstack-workflows",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gstack-workflows"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "happenstance",
+      "source": {
+        "source": "local",
+        "path": "./plugins/happenstance"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "hebbia",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hebbia"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "hen-screenshots",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hen-screenshots"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "heygrc",
+      "source": {
+        "source": "local",
+        "path": "./plugins/heygrc"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "heytraders-codex",
+      "source": {
+        "source": "local",
+        "path": "./plugins/heytraders-codex"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "hg-insights",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hg-insights"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "hgraph-development",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hgraph-development"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "highlevel",
+      "source": {
+        "source": "local",
+        "path": "./plugins/highlevel"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "hinge-profile-optimizer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hinge-profile-optimizer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "hold-your-voice",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hold-your-voice"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "hostinger-connector",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hostinger-connector"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "hugging-face",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hugging-face"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "humanizer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/humanizer"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -258,6 +3102,318 @@
       "category": "Creativity"
     },
     {
+      "name": "i-have-headache",
+      "source": {
+        "source": "local",
+        "path": "./plugins/i-have-headache"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "idea-generator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/idea-generator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "image-generator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/image-generator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "impeccable",
+      "source": {
+        "source": "local",
+        "path": "./plugins/impeccable"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "incident-io",
+      "source": {
+        "source": "local",
+        "path": "./plugins/incident-io"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "insforge",
+      "source": {
+        "source": "local",
+        "path": "./plugins/insforge"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "insolvency",
+      "source": {
+        "source": "local",
+        "path": "./plugins/insolvency"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "intuitive-software-design",
+      "source": {
+        "source": "local",
+        "path": "./plugins/intuitive-software-design"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "investigations",
+      "source": {
+        "source": "local",
+        "path": "./plugins/investigations"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ip",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ip"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "italian-investor",
+      "source": {
+        "source": "local",
+        "path": "./plugins/italian-investor"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "japanese-speaking-coach",
+      "source": {
+        "source": "local",
+        "path": "./plugins/japanese-speaking-coach"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "jinko",
+      "source": {
+        "source": "local",
+        "path": "./plugins/jinko"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Healthcare"
+    },
+    {
+      "name": "json-change-lens",
+      "source": {
+        "source": "local",
+        "path": "./plugins/json-change-lens"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "jucho-kun",
+      "source": {
+        "source": "local",
+        "path": "./plugins/jucho-kun"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "kaeban",
+      "source": {
+        "source": "local",
+        "path": "./plugins/kaeban"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Entertainment"
+    },
+    {
+      "name": "kapa",
+      "source": {
+        "source": "local",
+        "path": "./plugins/kapa"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "kata",
+      "source": {
+        "source": "local",
+        "path": "./plugins/kata"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "keelson",
+      "source": {
+        "source": "local",
+        "path": "./plugins/keelson"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "keystone",
+      "source": {
+        "source": "local",
+        "path": "./plugins/keystone"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "kling-ai-cli",
+      "source": {
+        "source": "local",
+        "path": "./plugins/kling-ai-cli"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "la-review",
+      "source": {
+        "source": "local",
+        "path": "./plugins/la-review"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "legacy-jrxml-toolkit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/legacy-jrxml-toolkit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "legalquants-companion",
+      "source": {
+        "source": "local",
+        "path": "./plugins/legalquants-companion"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "legalquants-transactional",
+      "source": {
+        "source": "local",
+        "path": "./plugins/legalquants-transactional"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "linchpin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/linchpin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
       "name": "linear",
       "source": {
         "source": "local",
@@ -268,6 +3424,354 @@
         "authentication": "ON_USE"
       },
       "category": "Productivity"
+    },
+    {
+      "name": "linkedin-animated-infographics",
+      "source": {
+        "source": "local",
+        "path": "./plugins/linkedin-animated-infographics"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "linkedin-text-styler",
+      "source": {
+        "source": "local",
+        "path": "./plugins/linkedin-text-styler"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "litigation",
+      "source": {
+        "source": "local",
+        "path": "./plugins/litigation"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "local-model-route-planner",
+      "source": {
+        "source": "local",
+        "path": "./plugins/local-model-route-planner"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "logo-generator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/logo-generator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "louisschprs",
+      "source": {
+        "source": "local",
+        "path": "./plugins/louisschprs"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "ls-doctor",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ls-doctor"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "luvus",
+      "source": {
+        "source": "local",
+        "path": "./plugins/luvus"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "maeve-lite",
+      "source": {
+        "source": "local",
+        "path": "./plugins/maeve-lite"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "management-consulting",
+      "source": {
+        "source": "local",
+        "path": "./plugins/management-consulting"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "mandarin-talking-head-rough-cut",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mandarin-talking-head-rough-cut"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "marketing-swarm",
+      "source": {
+        "source": "local",
+        "path": "./plugins/marketing-swarm"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "mathbox",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mathbox"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "matt-skills-curated",
+      "source": {
+        "source": "local",
+        "path": "./plugins/matt-skills-curated"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "mattpocock-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mattpocock-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "maxaeo-geo-toolkit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/maxaeo-geo-toolkit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "mediation",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mediation"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "meme-marketing",
+      "source": {
+        "source": "local",
+        "path": "./plugins/meme-marketing"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "memory-keeper",
+      "source": {
+        "source": "local",
+        "path": "./plugins/memory-keeper"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "mergify",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mergify"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "mermaid-diagrams",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mermaid-diagrams"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "meshy-openai-plugin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/meshy-openai-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "metabase",
+      "source": {
+        "source": "local",
+        "path": "./plugins/metabase"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "microcms",
+      "source": {
+        "source": "local",
+        "path": "./plugins/microcms"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "mightshape",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mightshape"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "migrating-to-react-native",
+      "source": {
+        "source": "local",
+        "path": "./plugins/migrating-to-react-native"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "minimus",
+      "source": {
+        "source": "local",
+        "path": "./plugins/minimus"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Security"
+    },
+    {
+      "name": "mixmatter",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mixmatter"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "mixpanel",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mixpanel"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
     },
     {
       "name": "mixpanel-headless",
@@ -282,6 +3786,174 @@
       "category": "Data & Analytics"
     },
     {
+      "name": "mockflow",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mockflow"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "modal",
+      "source": {
+        "source": "local",
+        "path": "./plugins/modal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "modelica-projects",
+      "source": {
+        "source": "local",
+        "path": "./plugins/modelica-projects"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "modern-web-guidance",
+      "source": {
+        "source": "local",
+        "path": "./plugins/modern-web-guidance"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "molviewer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/molviewer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "moody-s",
+      "source": {
+        "source": "local",
+        "path": "./plugins/moody-s"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "moos-ivp-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/moos-ivp-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "mt-newswires",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mt-newswires"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "muchita-shopping",
+      "source": {
+        "source": "local",
+        "path": "./plugins/muchita-shopping"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Other"
+    },
+    {
+      "name": "musical",
+      "source": {
+        "source": "local",
+        "path": "./plugins/musical"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "nacl",
+      "source": {
+        "source": "local",
+        "path": "./plugins/nacl"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "navigator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/navigator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "neon-postgres",
+      "source": {
+        "source": "local",
+        "path": "./plugins/neon-postgres"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "netlify",
+      "source": {
+        "source": "local",
+        "path": "./plugins/netlify"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
       "name": "ngs-analysis",
       "source": {
         "source": "local",
@@ -292,6 +3964,66 @@
         "authentication": "ON_USE"
       },
       "category": "Education & Research"
+    },
+    {
+      "name": "ngs-analysis-workbench",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ngs-analysis-workbench"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Scientific Research"
+    },
+    {
+      "name": "nightshift",
+      "source": {
+        "source": "local",
+        "path": "./plugins/nightshift"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "nightvision",
+      "source": {
+        "source": "local",
+        "path": "./plugins/nightvision"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Security"
+    },
+    {
+      "name": "no-ai-slop",
+      "source": {
+        "source": "local",
+        "path": "./plugins/no-ai-slop"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "noodle-seed",
+      "source": {
+        "source": "local",
+        "path": "./plugins/noodle-seed"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
     },
     {
       "name": "notion",
@@ -318,6 +4050,90 @@
       "category": "Developer Tools"
     },
     {
+      "name": "ogenic-god-toolkit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ogenic-god-toolkit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "okrdev",
+      "source": {
+        "source": "local",
+        "path": "./plugins/okrdev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "onegate",
+      "source": {
+        "source": "local",
+        "path": "./plugins/onegate"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "onenote",
+      "source": {
+        "source": "local",
+        "path": "./plugins/onenote"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "open-design",
+      "source": {
+        "source": "local",
+        "path": "./plugins/open-design"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "orbit-secretary",
+      "source": {
+        "source": "local",
+        "path": "./plugins/orbit-secretary"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "orchestrator-lite-cloud",
+      "source": {
+        "source": "local",
+        "path": "./plugins/orchestrator-lite-cloud"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
       "name": "outlook-calendar",
       "source": {
         "source": "local",
@@ -342,6 +4158,174 @@
       "category": "Communication"
     },
     {
+      "name": "outreach",
+      "source": {
+        "source": "local",
+        "path": "./plugins/outreach"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "oximy-reality-checks",
+      "source": {
+        "source": "local",
+        "path": "./plugins/oximy-reality-checks"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "paper-close-reading",
+      "source": {
+        "source": "local",
+        "path": "./plugins/paper-close-reading"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "particl-market-research",
+      "source": {
+        "source": "local",
+        "path": "./plugins/particl-market-research"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "paytech",
+      "source": {
+        "source": "local",
+        "path": "./plugins/paytech"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "pdf-make",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pdf-make"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "pdf-parser",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pdf-parser"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "pet-platform-mode",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pet-platform-mode"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Entertainment"
+    },
+    {
+      "name": "pethost",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pethost"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "pitchbook",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pitchbook"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "pixeltable",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pixeltable"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "pixverse",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pixverse"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "plain-english",
+      "source": {
+        "source": "local",
+        "path": "./plugins/plain-english"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "playdrop",
+      "source": {
+        "source": "local",
+        "path": "./plugins/playdrop"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
       "name": "plugin-eval",
       "source": {
         "source": "local",
@@ -357,6 +4341,66 @@
       "category": "Developer Tools"
     },
     {
+      "name": "podpitch",
+      "source": {
+        "source": "local",
+        "path": "./plugins/podpitch"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "poka-yoke",
+      "source": {
+        "source": "local",
+        "path": "./plugins/poka-yoke"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "policynote",
+      "source": {
+        "source": "local",
+        "path": "./plugins/policynote"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "portable-mindmaps",
+      "source": {
+        "source": "local",
+        "path": "./plugins/portable-mindmaps"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "portable-resume",
+      "source": {
+        "source": "local",
+        "path": "./plugins/portable-resume"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
       "name": "posthog",
       "source": {
         "source": "local",
@@ -367,6 +4411,390 @@
         "authentication": "ON_USE"
       },
       "category": "Data & Analytics"
+    },
+    {
+      "name": "powerbi-desktop",
+      "source": {
+        "source": "local",
+        "path": "./plugins/powerbi-desktop"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "pr-completion",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pr-completion"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "practice",
+      "source": {
+        "source": "local",
+        "path": "./plugins/practice"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "premiss",
+      "source": {
+        "source": "local",
+        "path": "./plugins/premiss"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "prepilot-for-marketing",
+      "source": {
+        "source": "local",
+        "path": "./plugins/prepilot-for-marketing"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "presentation-generator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/presentation-generator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "presenton",
+      "source": {
+        "source": "local",
+        "path": "./plugins/presenton"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "privacy",
+      "source": {
+        "source": "local",
+        "path": "./plugins/privacy"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "product-idea-pack",
+      "source": {
+        "source": "local",
+        "path": "./plugins/product-idea-pack"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "product-support-investigator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/product-support-investigator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "progress-percent-plans",
+      "source": {
+        "source": "local",
+        "path": "./plugins/progress-percent-plans"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "project-memory-core",
+      "source": {
+        "source": "local",
+        "path": "./plugins/project-memory-core"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "prompt-optimizer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/prompt-optimizer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "promptfoo",
+      "source": {
+        "source": "local",
+        "path": "./plugins/promptfoo"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "proofline",
+      "source": {
+        "source": "local",
+        "path": "./plugins/proofline"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "proofread",
+      "source": {
+        "source": "local",
+        "path": "./plugins/proofread"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "property",
+      "source": {
+        "source": "local",
+        "path": "./plugins/property"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "pstack-plugin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pstack-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "public",
+      "source": {
+        "source": "local",
+        "path": "./plugins/public"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "pylon",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pylon"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "qamap",
+      "source": {
+        "source": "local",
+        "path": "./plugins/qamap"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "qlynk-agent-builder",
+      "source": {
+        "source": "local",
+        "path": "./plugins/qlynk-agent-builder"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "qodo",
+      "source": {
+        "source": "local",
+        "path": "./plugins/qodo"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "quarryfi-time-tracker",
+      "source": {
+        "source": "local",
+        "path": "./plugins/quarryfi-time-tracker"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "questforge",
+      "source": {
+        "source": "local",
+        "path": "./plugins/questforge"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Entertainment"
+    },
+    {
+      "name": "quicknode",
+      "source": {
+        "source": "local",
+        "path": "./plugins/quicknode"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "ragops",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ragops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ranked-ai",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ranked-ai"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "razorpay",
+      "source": {
+        "source": "local",
+        "path": "./plugins/razorpay"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "recurse",
+      "source": {
+        "source": "local",
+        "path": "./plugins/recurse"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "reef-agent-improvement",
+      "source": {
+        "source": "local",
+        "path": "./plugins/reef-agent-improvement"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "regulatory",
+      "source": {
+        "source": "local",
+        "path": "./plugins/regulatory"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
     },
     {
       "name": "remotion",
@@ -384,6 +4812,102 @@
       "category": "Creativity"
     },
     {
+      "name": "research",
+      "source": {
+        "source": "local",
+        "path": "./plugins/research"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "revenue-kun",
+      "source": {
+        "source": "local",
+        "path": "./plugins/revenue-kun"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "revyl",
+      "source": {
+        "source": "local",
+        "path": "./plugins/revyl"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "rognalia-note-workspace",
+      "source": {
+        "source": "local",
+        "path": "./plugins/rognalia-note-workspace"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "rox",
+      "source": {
+        "source": "local",
+        "path": "./plugins/rox"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ru-text",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ru-text"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "runpod",
+      "source": {
+        "source": "local",
+        "path": "./plugins/runpod"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "saymd",
+      "source": {
+        "source": "local",
+        "path": "./plugins/saymd"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
       "name": "sentry",
       "source": {
         "source": "local",
@@ -394,6 +4918,54 @@
         "authentication": "ON_USE"
       },
       "category": "Developer Tools"
+    },
+    {
+      "name": "seomatic-seo-audit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/seomatic-seo-audit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "seq2music",
+      "source": {
+        "source": "local",
+        "path": "./plugins/seq2music"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Scientific Research"
+    },
+    {
+      "name": "sequence-viewer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/sequence-viewer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Scientific Research"
+    },
+    {
+      "name": "session-exporter",
+      "source": {
+        "source": "local",
+        "path": "./plugins/session-exporter"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
     },
     {
       "name": "sharepoint",
@@ -408,6 +4980,174 @@
       "category": "Productivity"
     },
     {
+      "name": "ship24",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ship24"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "shipframe",
+      "source": {
+        "source": "local",
+        "path": "./plugins/shipframe"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "shiro",
+      "source": {
+        "source": "local",
+        "path": "./plugins/shiro"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "shopify-app-builder",
+      "source": {
+        "source": "local",
+        "path": "./plugins/shopify-app-builder"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "short-circuit-codex",
+      "source": {
+        "source": "local",
+        "path": "./plugins/short-circuit-codex"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "shutterstock",
+      "source": {
+        "source": "local",
+        "path": "./plugins/shutterstock"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "similarweb",
+      "source": {
+        "source": "local",
+        "path": "./plugins/similarweb"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "simugen",
+      "source": {
+        "source": "local",
+        "path": "./plugins/simugen"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "simulator-login",
+      "source": {
+        "source": "local",
+        "path": "./plugins/simulator-login"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "skarn",
+      "source": {
+        "source": "local",
+        "path": "./plugins/skarn"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Security"
+    },
+    {
+      "name": "skill-craft",
+      "source": {
+        "source": "local",
+        "path": "./plugins/skill-craft"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "skill-risk-check",
+      "source": {
+        "source": "local",
+        "path": "./plugins/skill-risk-check"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "skillquiver",
+      "source": {
+        "source": "local",
+        "path": "./plugins/skillquiver"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "skywatch",
+      "source": {
+        "source": "local",
+        "path": "./plugins/skywatch"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
       "name": "slack",
       "source": {
         "source": "local",
@@ -420,6 +5160,126 @@
       "category": "Communication"
     },
     {
+      "name": "slide-viewer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/slide-viewer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Scientific Research"
+    },
+    {
+      "name": "socialclaw",
+      "source": {
+        "source": "local",
+        "path": "./plugins/socialclaw"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "soku",
+      "source": {
+        "source": "local",
+        "path": "./plugins/soku"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "speaker-delivery-profiler",
+      "source": {
+        "source": "local",
+        "path": "./plugins/speaker-delivery-profiler"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ssot-check",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ssot-check"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "stacktree",
+      "source": {
+        "source": "local",
+        "path": "./plugins/stacktree"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "startup",
+      "source": {
+        "source": "local",
+        "path": "./plugins/startup"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "statsig",
+      "source": {
+        "source": "local",
+        "path": "./plugins/statsig"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "streampay",
+      "source": {
+        "source": "local",
+        "path": "./plugins/streampay"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "structure-viewer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/structure-viewer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Scientific Research"
+    },
+    {
       "name": "supabase",
       "source": {
         "source": "local",
@@ -430,6 +5290,18 @@
         "authentication": "ON_USE"
       },
       "category": "Developer Tools"
+    },
+    {
+      "name": "superdesign",
+      "source": {
+        "source": "local",
+        "path": "./plugins/superdesign"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
     },
     {
       "name": "superpowers",
@@ -447,6 +5319,126 @@
       "category": "Developer Tools"
     },
     {
+      "name": "surfer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/surfer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "swift-concurrency",
+      "source": {
+        "source": "local",
+        "path": "./plugins/swift-concurrency"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "swiftui-expert",
+      "source": {
+        "source": "local",
+        "path": "./plugins/swiftui-expert"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "tahr-codex-plugin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tahr-codex-plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Security"
+    },
+    {
+      "name": "tailscale",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tailscale"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "talamus-memory",
+      "source": {
+        "source": "local",
+        "path": "./plugins/talamus-memory"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "task-eta-tracker",
+      "source": {
+        "source": "local",
+        "path": "./plugins/task-eta-tracker"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "taskplane",
+      "source": {
+        "source": "local",
+        "path": "./plugins/taskplane"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "taskplanner",
+      "source": {
+        "source": "local",
+        "path": "./plugins/taskplanner"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "tax",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tax"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
       "name": "teams",
       "source": {
         "source": "local",
@@ -457,6 +5449,18 @@
         "authentication": "ON_USE"
       },
       "category": "Communication"
+    },
+    {
+      "name": "telecall",
+      "source": {
+        "source": "local",
+        "path": "./plugins/telecall"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
     },
     {
       "name": "temporal",
@@ -486,10 +5490,298 @@
       "category": "Developer Tools"
     },
     {
+      "name": "testing-react-native-apps",
+      "source": {
+        "source": "local",
+        "path": "./plugins/testing-react-native-apps"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "text-to-cad",
+      "source": {
+        "source": "local",
+        "path": "./plugins/text-to-cad"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "the-autonomous-cio",
+      "source": {
+        "source": "local",
+        "path": "./plugins/the-autonomous-cio"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "the-fifth-ledger",
+      "source": {
+        "source": "local",
+        "path": "./plugins/the-fifth-ledger"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "the-living-bread",
+      "source": {
+        "source": "local",
+        "path": "./plugins/the-living-bread"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "thoughtfulbits-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/thoughtfulbits-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
+    },
+    {
+      "name": "thoughtspot",
+      "source": {
+        "source": "local",
+        "path": "./plugins/thoughtspot"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "tidyguardian",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tidyguardian"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "tight-studio",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tight-studio"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "tinman-ai",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tinman-ai"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "tochi-satei-kun",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tochi-satei-kun"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "tree-ring-memory",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tree-ring-memory"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "treg",
+      "source": {
+        "source": "local",
+        "path": "./plugins/treg"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Data & Analytics"
+    },
+    {
+      "name": "trellis",
+      "source": {
+        "source": "local",
+        "path": "./plugins/trellis"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "trigger-tree",
+      "source": {
+        "source": "local",
+        "path": "./plugins/trigger-tree"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "trinity-capture",
+      "source": {
+        "source": "local",
+        "path": "./plugins/trinity-capture"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "tripo-3d",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tripo-3d"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "trylle",
+      "source": {
+        "source": "local",
+        "path": "./plugins/trylle"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "twg",
+      "source": {
+        "source": "local",
+        "path": "./plugins/twg"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
       "name": "twilio-developer-kit",
       "source": {
         "source": "local",
         "path": "./plugins/twilio-developer-kit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "uniformdev",
+      "source": {
+        "source": "local",
+        "path": "./plugins/uniformdev"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "unity-workbench",
+      "source": {
+        "source": "local",
+        "path": "./plugins/unity-workbench"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "unreal-engine-skills-for-codex",
+      "source": {
+        "source": "local",
+        "path": "./plugins/unreal-engine-skills-for-codex"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "usage-checker",
+      "source": {
+        "source": "local",
+        "path": "./plugins/usage-checker"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "vapi-voice-ai",
+      "source": {
+        "source": "local",
+        "path": "./plugins/vapi-voice-ai"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -508,6 +5800,438 @@
         "authentication": "ON_USE"
       },
       "category": "Developer Tools"
+    },
+    {
+      "name": "verify",
+      "source": {
+        "source": "local",
+        "path": "./plugins/verify"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "vibe-coding",
+      "source": {
+        "source": "local",
+        "path": "./plugins/vibe-coding"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "vibooks",
+      "source": {
+        "source": "local",
+        "path": "./plugins/vibooks"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Finance"
+    },
+    {
+      "name": "video-lab",
+      "source": {
+        "source": "local",
+        "path": "./plugins/video-lab"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "villagesql",
+      "source": {
+        "source": "local",
+        "path": "./plugins/villagesql"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "visual-truth",
+      "source": {
+        "source": "local",
+        "path": "./plugins/visual-truth"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "voiceover-lab",
+      "source": {
+        "source": "local",
+        "path": "./plugins/voiceover-lab"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "waggle-installer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/waggle-installer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "weatherpromise",
+      "source": {
+        "source": "local",
+        "path": "./plugins/weatherpromise"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Travel"
+    },
+    {
+      "name": "webcmd",
+      "source": {
+        "source": "local",
+        "path": "./plugins/webcmd"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "webmcp",
+      "source": {
+        "source": "local",
+        "path": "./plugins/webmcp"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "webmcp-kit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/webmcp-kit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "websitebuilder",
+      "source": {
+        "source": "local",
+        "path": "./plugins/websitebuilder"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "willy-seo",
+      "source": {
+        "source": "local",
+        "path": "./plugins/willy-seo"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "world-flag-map",
+      "source": {
+        "source": "local",
+        "path": "./plugins/world-flag-map"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Education & Research"
+    },
+    {
+      "name": "worldkeep",
+      "source": {
+        "source": "local",
+        "path": "./plugins/worldkeep"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "write-like-me",
+      "source": {
+        "source": "local",
+        "path": "./plugins/write-like-me"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "writer",
+      "source": {
+        "source": "local",
+        "path": "./plugins/writer"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "xweather",
+      "source": {
+        "source": "local",
+        "path": "./plugins/xweather"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "yaps-audio-cleaner",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-audio-cleaner"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "yaps-auto-captions",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-auto-captions"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "yaps-background-removal",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-background-removal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    },
+    {
+      "name": "yaps-dictation",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-dictation"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "yaps-meeting-transcription",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-meeting-transcription"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "yaps-memory",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-memory"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "yaps-srt-generator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-srt-generator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "yaps-text-to-speech",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-text-to-speech"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "yaps-transcription",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-transcription"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "yaps-translation",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-translation"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "yaps-video-clipping",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-video-clipping"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "yaps-video-to-audio",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yaps-video-to-audio"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ycloud-developer-kit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ycloud-developer-kit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "yepcode",
+      "source": {
+        "source": "local",
+        "path": "./plugins/yepcode"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "you",
+      "source": {
+        "source": "local",
+        "path": "./plugins/you"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "zilliz",
+      "source": {
+        "source": "local",
+        "path": "./plugins/zilliz"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "zoho",
+      "source": {
+        "source": "local",
+        "path": "./plugins/zoho"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Business & Operations"
     },
     {
       "name": "zoom",
@@ -535,6 +6259,30 @@
         ]
       },
       "category": "Education & Research"
+    },
+    {
+      "name": "zuora-coding-agent",
+      "source": {
+        "source": "local",
+        "path": "./plugins/zuora-coding-agent"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "zzzops",
+      "source": {
+        "source": "local",
+        "path": "./plugins/zzzops"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
     }
   ]
 }

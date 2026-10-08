@@ -1,0 +1,9 @@
+interface:
+  display_name: "Design Review"
+  short_description: "Audit an implemented interface against design quality, usability, and consistency criteria."
+  default_prompt: "Use Design Review for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

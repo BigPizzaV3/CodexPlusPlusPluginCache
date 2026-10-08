@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "game-room.layout.v1",
+  "type": "object",
+  "required": ["schema", "roomId", "units", "surfaces", "instances", "productionCamera"],
+  "properties": {
+    "schema": {"const": "game-room.layout.v1"},
+    "roomId": {"type": "string", "minLength": 1},
+    "units": {"const": "meters"},
+    "surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "dimensionsMeters", "location", "rotationDegrees", "material"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["floor", "wall", "ceiling", "platform", "beam"]},
+          "dimensionsMeters": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number", "exclusiveMinimum": 0}},
+          "location": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}},
+          "rotationDegrees": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}},
+          "material": {"type": "object", "required": ["baseColor", "metallic", "roughness"], "properties": {"baseColor": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "number", "minimum": 0, "maximum": 1}}, "metallic": {"type": "number", "minimum": 0, "maximum": 1}, "roughness": {"type": "number", "minimum": 0, "maximum": 1}}}
+        }
+      }
+    },
+    "instances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "assetId", "location", "rotationDegrees", "scale"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "assetId": {"type": "string", "minLength": 1},
+          "location": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}},
+          "rotationDegrees": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}},
+          "scale": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number", "exclusiveMinimum": 0}}
+        }
+      }
+    },
+    "productionCamera": {"type": "object", "required": ["location", "target", "verticalFovDegrees"]}
+  }
+}

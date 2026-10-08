@@ -1,0 +1,24 @@
+Flower
+Copyright 2026 Kevin SB Park and Flower contributors
+
+Licensed under the Apache License, Version 2.0.
+
+This distribution includes:
+
+- Flower App Guide 0.7.0, copied from
+  `flowerjvm/flower-agent-skills` commit
+  `b1b13b024dc7134c46bfe4ff85f1fe4e42db5f7e`. The guide targets Flower
+  0.1.3, Flower Flow Graph 0.1.1, and Flower Studio 0.1.1.
+- Flower Action Runtime Guide 0.6.0, copied from
+  `flowerjvm/flower-action-runtime-guide` commit
+  `23c39b5a33d6d28af0214e418d69876474699f51` for published Flower Action
+  Runtime 0.3.3 and its Flower 0.1.3 backends.
+- Flower plugin logo (`assets/flower-logo.png`), copied without modification
+  from the Flower repository at commit
+  `8a594e72181aa6ddf2d91e06bb76bfadb44ace21`; Git blob
+  `ac7e3fcf63ecfcc21c444806819313e46bea8ea0`; SHA-256
+  `2e85b45eb5ced569b658f2f82eac3ffbbb9fc9de1a5730466adb9322d3b6c0fa`.
+  The pinned source is licensed under Apache License 2.0; copyright 2026
+  Flower contributors.
+
+The source commits and license terms are stated above.

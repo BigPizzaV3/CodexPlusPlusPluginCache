@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Michal Cilek",
+    "url": "https://github.com/michalcilek"
+  },
+  "description": "Automate iOS TestFlight releases from Codex using xcodebuild and the App Store Connect API.",
+  "homepage": "https://github.com/michalcilek/codex-testflight-release",
+  "interface": {
+    "brandColor": "#0A84FF",
+    "brandColorDark": "#0A84FF",
+    "capabilities": [
+      "Build",
+      "Release",
+      "Automation"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create a new TestFlight build.",
+      "Upload my iOS app to TestFlight.",
+      "Set What to Test for this build."
+    ],
+    "developerName": "Astroblaster LTD",
+    "displayName": "Codex TestFlight Release",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Automates the repeatable iOS release path: bump build number, archive, upload to App Store Connect, verify processing state, and update TestFlight notes without opening Xcode.",
+    "shortDescription": "iOS releases to TestFlight",
+    "supportURL": "https://github.com/michalcilek/codex-testflight-release/issues",
+    "websiteURL": "https://github.com/michalcilek/codex-testflight-release"
+  },
+  "keywords": [
+    "codex",
+    "ios",
+    "testflight",
+    "xcode",
+    "app-store-connect"
+  ],
+  "license": "MIT",
+  "name": "codex-testflight-release",
+  "repository": "https://github.com/michalcilek/codex-testflight-release",
+  "skills": "./skills/",
+  "version": "0.1.1"
+}

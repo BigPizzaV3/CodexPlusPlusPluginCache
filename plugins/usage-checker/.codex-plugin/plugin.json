@@ -1,0 +1,42 @@
+{
+  "author": {
+    "name": "Kyle is Based",
+    "url": "https://github.com/kyleisbased"
+  },
+  "description": "Check ChatGPT and Codex usage from a connected Remote desktop host.",
+  "homepage": "https://github.com/kyleisbased/chatgpt-usage-plugin",
+  "interface": {
+    "brandColor": "#10A37F",
+    "brandColorDark": "#5CEFCB",
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Check my usage from this Remote host.",
+      "Show my remaining limits and reset times from this Remote host."
+    ],
+    "developerName": "Kyle is Based",
+    "displayName": "Usage",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "For ChatGPT mobile Remote, reads signed-in ChatGPT and Codex limits once from the connected desktop host and displays verified usage, credits, and reset times inline.",
+    "privacyPolicyURL": "https://github.com/kyleisbased/chatgpt-usage-plugin/blob/main/PRIVACY.md",
+    "shortDescription": "Check usage from Remote host.",
+    "supportURL": "https://github.com/kyleisbased/chatgpt-usage-plugin/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/kyleisbased/chatgpt-usage-plugin/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/kyleisbased/chatgpt-usage-plugin"
+  },
+  "keywords": [
+    "chatgpt",
+    "codex",
+    "usage",
+    "credits",
+    "mobile"
+  ],
+  "license": "MIT",
+  "name": "usage-checker",
+  "repository": "https://github.com/kyleisbased/chatgpt-usage-plugin",
+  "skills": "./skills/",
+  "version": "0.3.2"
+}

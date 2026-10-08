@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "ycloud-webhook-message-lifecycle/v1",
+  "authority": "developer_kit_policy_fixture",
+  "endpointId": "endpoint_mock_lifecycle_0001",
+  "messageId": "msg_mock_lifecycle_0001",
+  "deliveries": [
+    {
+      "caseId": "sent-new-event",
+      "signature": "valid",
+      "event": {"id":"evt_mock_lifecycle_sent_0001","type":"whatsapp.message.updated","apiVersion":"v2","createTime":"2023-11-14T22:14:00.000Z","whatsappMessage":{"id":"msg_mock_lifecycle_0001","wabaId":"waba_mock_0001","from":"+15550001000","status":"sent","updateTime":"2023-11-14T22:14:00.000Z"}},
+      "expected": {"inboxClassification":"new","projectionOutcome":"applied"}
+    },
+    {
+      "caseId": "delivered-new-event",
+      "signature": "valid",
+      "event": {"id":"evt_mock_lifecycle_delivered_0001","type":"whatsapp.message.updated","apiVersion":"v2","createTime":"2023-11-14T22:15:00.000Z","whatsappMessage":{"id":"msg_mock_lifecycle_0001","wabaId":"waba_mock_0001","from":"+15550001000","status":"delivered","updateTime":"2023-11-14T22:15:00.000Z"}},
+      "expected": {"inboxClassification":"new","projectionOutcome":"applied"}
+    },
+    {
+      "caseId": "second-delivered-distinct-event",
+      "signature": "valid",
+      "event": {"id":"evt_mock_lifecycle_delivered_0002","type":"whatsapp.message.updated","apiVersion":"v2","createTime":"2023-11-14T22:15:01.000Z","whatsappMessage":{"id":"msg_mock_lifecycle_0001","wabaId":"waba_mock_0001","from":"+15550001000","status":"delivered","updateTime":"2023-11-14T22:15:01.000Z"}},
+      "expected": {"inboxClassification":"new","projectionOutcome":"no_change"}
+    },
+    {
+      "caseId": "same-event-same-payload-redelivery",
+      "signature": "valid",
+      "event": {"id":"evt_mock_lifecycle_delivered_0002","type":"whatsapp.message.updated","apiVersion":"v2","createTime":"2023-11-14T22:15:01.000Z","whatsappMessage":{"id":"msg_mock_lifecycle_0001","wabaId":"waba_mock_0001","from":"+15550001000","status":"delivered","updateTime":"2023-11-14T22:15:01.000Z"}},
+      "expected": {"inboxClassification":"duplicate","projectionOutcome":"not_run"}
+    },
+    {
+      "caseId": "same-event-different-payload",
+      "signature": "valid",
+      "event": {"id":"evt_mock_lifecycle_delivered_0002","type":"whatsapp.message.updated","apiVersion":"v2","createTime":"2023-11-14T22:15:02.000Z","whatsappMessage":{"id":"msg_mock_lifecycle_0001","wabaId":"waba_mock_0001","from":"+15550001000","status":"failed","updateTime":"2023-11-14T22:15:02.000Z"}},
+      "expected": {"inboxClassification":"conflict","projectionOutcome":"not_run"}
+    },
+    {
+      "caseId": "late-older-status-distinct-event",
+      "signature": "valid",
+      "event": {"id":"evt_mock_lifecycle_sent_0002","type":"whatsapp.message.updated","apiVersion":"v2","createTime":"2023-11-14T22:13:59.000Z","whatsappMessage":{"id":"msg_mock_lifecycle_0001","wabaId":"waba_mock_0001","from":"+15550001000","status":"sent","updateTime":"2023-11-14T22:13:59.000Z"}},
+      "expected": {"inboxClassification":"new","projectionOutcome":"out_of_order"}
+    },
+    {
+      "caseId": "invalid-signature-never-enters-inbox",
+      "signature": "invalid",
+      "event": {"id":"evt_mock_lifecycle_untrusted_0001","type":"whatsapp.message.updated","apiVersion":"v2","createTime":"2023-11-14T22:16:00.000Z","whatsappMessage":{"id":"msg_mock_lifecycle_0001","wabaId":"waba_mock_0001","from":"+15550001000","status":"read","updateTime":"2023-11-14T22:16:00.000Z"}},
+      "expected": {"inboxClassification":null,"projectionOutcome":"not_run"}
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: Voiceprint
+  short_description: Turn spoken wording into authored writing
+  brand_color: '#E45B32'
+  default_prompt: Use $voiceprint to turn this transcript into a finished piece while preserving my actual wording.
+policy:
+  allow_implicit_invocation: true

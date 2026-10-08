@@ -1,0 +1,7 @@
+interface:
+  display_name: Python Executor
+  short_description: Run deterministic workspace checks in Python
+  brand_color: '#E45B32'
+  default_prompt: Use $sandbox-python-executor for the deterministic Python part of this Creator Workspace task.
+policy:
+  allow_implicit_invocation: true

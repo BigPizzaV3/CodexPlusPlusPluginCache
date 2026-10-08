@@ -1,0 +1,44 @@
+{
+  "author": {
+    "email": "contact@xiy.ai",
+    "name": "Xiy",
+    "url": "https://hooter.xiy.ai/"
+  },
+  "description": "Give Codex a voice with private, localhost-only Mac alerts when you explicitly authorize it to summon you.",
+  "homepage": "https://hooter.xiy.ai/",
+  "interface": {
+    "brandColor": "#FF8A1F",
+    "brandColorDark": "#FF8A1F",
+    "capabilities": [
+      "Interactive"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Pair with AI Hooter.",
+      "Hoot me when this task is complete.",
+      "Use AI Hooter whenever you need me in this project."
+    ],
+    "developerName": "Xiy",
+    "displayName": "AI Hooter",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Give Codex a voice. AI Hooter lets Codex deliberately summon you through a local macOS companion when a condition you explicitly requested occurs. One-click private pairing stays entirely on your Mac, works offline, and needs no account, cloud service, or visible secret.",
+    "privacyPolicyURL": "https://hooter.xiy.ai/privacy",
+    "shortDescription": "Codex summons. Hooter hollers.",
+    "supportURL": "https://hooter.xiy.ai/support",
+    "termsOfServiceURL": "https://hooter.xiy.ai/terms",
+    "websiteURL": "https://hooter.xiy.ai/"
+  },
+  "keywords": [
+    "codex",
+    "attention",
+    "voice",
+    "macos"
+  ],
+  "license": "MIT",
+  "name": "ai-hooter",
+  "repository": "https://github.com/Geeky-Casey/Hooter",
+  "skills": "./skills/",
+  "version": "0.3.9"
+}

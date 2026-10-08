@@ -1,0 +1,77 @@
+{
+  "upstream": {
+    "repository": "https://github.com/mattpocock/skills",
+    "commit": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2026 Matt Pocock"
+  },
+  "curation": {
+    "maintainer": "Mamdouh Aboammar",
+    "plugin_version": "1.1.0",
+    "source_buckets": [
+      "engineering",
+      "productivity",
+      "misc",
+      "in-progress",
+      "ai-ml",
+      "cognitive"
+    ],
+    "excluded_buckets": [
+      "deprecated"
+    ],
+    "renamed_skills": {
+      "ask-matt": "engineering-workflow-guide",
+      "setup-matt-pocock-skills": "setup-engineering-workflows",
+      "git-guardrails-claude-code": "git-safety-guardrails",
+      "loop-me": "workflow-designer"
+    },
+    "skill_count": 42,
+    "skills": [
+      "ai-data-remediation",
+      "ai-engineering",
+      "code-review",
+      "codebase-design",
+      "diagnosing-bugs",
+      "domain-modeling",
+      "engineering-workflow-guide",
+      "git-safety-guardrails",
+      "goal",
+      "grill-me",
+      "grill-with-docs",
+      "grilling",
+      "handoff",
+      "implement",
+      "implement-spec",
+      "improve-codebase-architecture",
+      "j-space",
+      "migrate-to-shoehorn",
+      "ml-best-practices",
+      "prototype",
+      "research",
+      "resolving-merge-conflicts",
+      "retro",
+      "scaffold-exercises",
+      "setup-engineering-workflows",
+      "setup-pre-commit",
+      "setup-ts-deep-modules",
+      "skill-conductor",
+      "tdd",
+      "teach",
+      "to-questionnaire",
+      "to-spec",
+      "to-tickets",
+      "triage",
+      "wait-what",
+      "wayfinder",
+      "wizard",
+      "workflow-designer",
+      "writing-beats",
+      "writing-for-agents",
+      "writing-fragments",
+      "writing-shape"
+    ],
+    "excluded_skills": {
+      "claude-handoff": "host-specific duplicate of portable handoff workflow"
+    }
+  }
+}

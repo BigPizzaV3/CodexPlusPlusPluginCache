@@ -1,0 +1,9 @@
+interface:
+  display_name: "Health"
+  short_description: "Assess codebase health using available type checks, linting, tests, dead-code signals, and reposi..."
+  default_prompt: "Use Health for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

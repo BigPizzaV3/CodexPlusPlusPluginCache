@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Testing and Verification"
+  short_description: "Build executable Go correctness evidence"
+  default_prompt: "Use $go-testing-and-verification to design evidence for this Go invariant."
+policy:
+  allow_implicit_invocation: true

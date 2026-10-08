@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Music Videos"
+  short_description: "Create music and dance videos"
+  default_prompt: "Use $pixverse-music-video to create a music-video teaser that follows this track."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "hensell@hensell.dev",
+    "name": "Hensell",
+    "url": "https://hensell.dev"
+  },
+  "description": "Create app-store screenshots, portfolio mockups and Play banners from local images. Export PNGs and editable Hen projects.",
+  "homepage": "https://screenshots.hensell.dev/",
+  "keywords": [
+    "screenshots",
+    "mockups",
+    "app-store",
+    "google-play",
+    "local"
+  ],
+  "license": "MIT",
+  "name": "hen-screenshots",
+  "repository": "https://github.com/Hensell/hen-screenshots",
+  "version": "0.2.4"
+}

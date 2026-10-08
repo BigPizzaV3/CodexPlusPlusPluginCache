@@ -1,0 +1,3 @@
+interface:
+  display_name: "Git Safety Guardrails"
+  short_description: "Protect destructive git operations"

@@ -1,0 +1,21 @@
+{
+  "schema": "codex.powerbi.processRulePack.v1",
+  "id": "hire-to-retire",
+  "process": "HireToRetire",
+  "displayName": "Hire to Retire",
+  "kpiTerms": ["employee", "hire", "retire", "termination", "headcount", "payroll", "hr"],
+  "objects": [
+    { "name": "Employee", "aliases": ["employee", "worker", "resource"], "fields": [
+      { "name": "employeeId", "aliases": ["EmployeeId", "WorkerId", "ResourceId"], "required": true },
+      { "name": "hireDate", "aliases": ["HireDate", "StartDate"], "required": true },
+      { "name": "terminationDate", "aliases": ["TerminationDate", "EndDate"], "required": false },
+      { "name": "status", "aliases": ["Status", "EmployeeStatus"], "required": false },
+      { "name": "departmentId", "aliases": ["DepartmentId", "OrgUnit"], "required": false }
+    ] }
+  ],
+  "rules": [
+    { "id": "h2r.employee.id.required", "type": "requiredField", "severity": "High", "object": "Employee", "field": "employeeId", "description": "Employee record is missing employee id.", "ownerHint": "HR data owner", "recommendedAction": "Correct employee key before headcount reporting.", "releaseImpact": "No-Go" },
+    { "id": "h2r.employee.hireDate.required", "type": "requiredField", "severity": "High", "object": "Employee", "field": "hireDate", "description": "Employee record is missing hire date.", "ownerHint": "HR data owner", "recommendedAction": "Backfill hire date before tenure and attrition reporting.", "releaseImpact": "No-Go" },
+    { "id": "h2r.employee.termination.afterHire", "type": "dateOrder", "severity": "High", "object": "Employee", "field": "terminationDate", "startField": "hireDate", "endField": "terminationDate", "description": "Termination date is before hire date.", "ownerHint": "HR data owner", "recommendedAction": "Correct employment date range.", "releaseImpact": "No-Go" }
+  ]
+}

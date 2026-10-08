@@ -1,0 +1,42 @@
+{
+  "author": {
+    "name": "EcoCitizenz Ltd",
+    "url": "https://developers.ecocitizenz.com"
+  },
+  "description": "DORA has applied since 17 January 2025. Review whether a workspace holds the ICT third-party register, resilience policy, incident, testing and contract evidence a regulator, auditor or customer asks for. Filename and path only. Free.",
+  "homepage": "https://developers.ecocitizenz.com/dora/",
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this workspace for DORA evidence gaps and report the Review Priority.",
+      "Can you produce your ICT third-party evidence today?",
+      "What DORA evidence is not observed, and what should I review next?"
+    ],
+    "developerName": "EcoCitizenz Ltd",
+    "displayName": "ECZ-ID DORA Readiness",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "DORA has applied since 17 January 2025. Review whether a workspace holds the ICT third-party register, operational resilience policy, incident records, resilience testing evidence and contractual exit material that a regulator, auditor or customer typically asks for. A local, filename-and-path-only review that reports EVIDENCE OBSERVED / NOT OBSERVED, a deterministic Review Priority with its reasons, why each class matters and what to review next. It reviews evidence; it does not assess or certify compliance.",
+    "privacyPolicyURL": "https://developers.ecocitizenz.com/plugins/dora-readiness/privacy/",
+    "shortDescription": "Review DORA evidence gaps",
+    "supportURL": "https://developers.ecocitizenz.com/plugins/dora-readiness/support/",
+    "termsOfServiceURL": "https://developers.ecocitizenz.com/plugins/dora-readiness/terms/",
+    "websiteURL": "https://developers.ecocitizenz.com/dora/"
+  },
+  "keywords": [
+    "ecz-id",
+    "dora",
+    "operational-resilience",
+    "ict-third-party",
+    "register-of-information",
+    "evidence"
+  ],
+  "license": "MIT",
+  "name": "eczid-dora-readiness",
+  "repository": "https://github.com/Ecocitizenz/eczid-agent-plugins",
+  "skills": "./skills/",
+  "version": "0.1.1"
+}

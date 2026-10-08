@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "stardist-2d-versatile-he",
+  "release": "0.1",
+  "license": "BSD-3-Clause",
+  "source": "https://github.com/stardist/stardist-models/releases/download/v0.1/python_2D_versatile_he.zip",
+  "archiveSha256": "sha256:f1696ef0631bd7e1c0e5c0d3017e2b4c6a95e284c6aab9c22fc2f08317817b28",
+  "weightsSha256": "sha256:ce23a21f09511132c51e2c7b077054355b6b0c1cbece61066dd280054ee7178f",
+  "configSha256": "sha256:47531372d6436172c94be44882c4c74f8c8edeb4843dba47a89a7782673daccd",
+  "thresholdsSha256": "sha256:05a10c871bb32735e86a1ed2ff5c756e7d207beb1142b6d3c470198b41e93fa6",
+  "probabilityThreshold": 0.6924782541382084,
+  "nmsThreshold": 0.3,
+  "runtime": {
+    "stardist": "0.9.2",
+    "csbdeep": "0.8.2",
+    "tensorflow": "2.20.0",
+    "keras": "3.15.1",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3",
+    "h5py": "3.15.1"
+  },
+  "input": "RGB8-H&E",
+  "output": "predicted-nucleus-instances-not-whole-cells",
+  "trainingData": ["MoNuSeg 2018 training data", "TNBC"]
+}

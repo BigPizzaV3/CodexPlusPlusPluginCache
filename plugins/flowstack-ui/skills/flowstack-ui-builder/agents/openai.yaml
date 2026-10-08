@@ -1,0 +1,4 @@
+interface:
+  display_name: "FLOWSTACK UI Builder"
+  short_description: "Build interfaces with exact FLOWSTACK guidance"
+  default_prompt: "Use $flowstack-ui-builder to implement this interface with matching installed FLOWSTACK guidance."

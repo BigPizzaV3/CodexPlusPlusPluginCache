@@ -1,0 +1,7 @@
+interface:
+  display_name: Pinned Comment
+  short_description: Write useful pinned social comments
+  brand_color: '#E45B32'
+  default_prompt: Use $pinned-comment to write a pinned comment that adds something new to this post.
+policy:
+  allow_implicit_invocation: true

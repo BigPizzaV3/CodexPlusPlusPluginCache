@@ -1,0 +1,3 @@
+settlementBatchId,transactionId,transactionRequestId,transactionType,paymentMethodType,transactionAmountValue,transactionCurrency,settlementAmountValue,settlementCurrency,settlementInitiatedDate,cardBrand,cardCountry,paymentMethodFeeAmountValue
+sample-batch-001,sample-tx-001,sample-request-001,PAYMENT,CARD,100.00,USD,97.00,USD,2026-08-31,VISA,US,-3.00
+sample-batch-001,sample-tx-002,sample-request-002,REFUND,CARD,-20.00,USD,-20.50,USD,2026-08-31,VISA,US,-0.50

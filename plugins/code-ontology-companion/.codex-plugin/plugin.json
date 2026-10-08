@@ -1,0 +1,58 @@
+{
+  "author": {
+    "name": "battle-doll",
+    "url": "https://github.com/battle-doll"
+  },
+  "description": "Explore authorized Java/Spring and Python code, dependency paths, and snapshot changes in an offline 3D workbench with source-linked static evidence.",
+  "homepage": "https://github.com/battle-doll/code-ontology-companion#readme",
+  "interface": {
+    "brandColor": "#0F766E",
+    "brandColorDark": "#89F0E8",
+    "capabilities": [
+      "Offline 3D structure, impact, and changes workbench",
+      "Exact symbol search and pinned snapshot reads",
+      "Directional static dependency paths with source evidence",
+      "Auditable relationship evidence and adapter coverage",
+      "Structural and relationship-evidence comparison",
+      "Selected portable code references and RDF export",
+      "Optional read-only local MCP setup",
+      "Keyboard navigation and accessible 2D fallback",
+      "Optional consent-based local inference sidecars"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Map this authorized Spring project so I can see its structure, bean injection, and static dependencies.",
+      "If I change OrderService, what code may be affected? Show static evidence and runtime limitations.",
+      "Compare my current and previous ontology snapshots and explain what structurally changed."
+    ],
+    "developerName": "battle-doll",
+    "displayName": "Code Ontology Companion",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Find symbols, follow static dependency paths, and compare immutable snapshots in an offline 3D workbench. Search, selection, and source evidence stay connected; keyboard navigation, reduced motion, and a 2D fallback remain available. Pin related reads to one snapshot, inspect rule-attributed relationship evidence, adapter coverage, and source spans, and export selected code references or RDF. The skill includes setup guidance for optional read-only local MCP from the complete GitHub package. Deterministic analysis does not execute target code or make network requests. Static relationships do not establish runtime behavior or current authorization. Optional separately authorized local Ollama inference stays outside observed evidence.",
+    "privacyPolicyURL": "https://github.com/battle-doll/code-ontology-companion/blob/main/PRIVACY.md",
+    "shortDescription": "Explore code and impact in 3D",
+    "supportURL": "https://github.com/battle-doll/code-ontology-companion/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/battle-doll/code-ontology-companion/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/battle-doll/code-ontology-companion"
+  },
+  "keywords": [
+    "codex-plugin",
+    "static-analysis",
+    "code-knowledge-graph",
+    "software-architecture",
+    "dependency-analysis",
+    "change-impact-analysis",
+    "spring",
+    "dependency-injection",
+    "python",
+    "rdf",
+    "provenance"
+  ],
+  "license": "Apache-2.0",
+  "name": "code-ontology-companion",
+  "repository": "https://github.com/battle-doll/code-ontology-companion",
+  "skills": "./skills/",
+  "version": "0.6.0"
+}

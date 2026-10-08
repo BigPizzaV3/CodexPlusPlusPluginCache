@@ -1,0 +1,9 @@
+interface:
+  display_name: "Setup Deploy"
+  short_description: "Inspect a repository and establish deployment configuration guidance without inventing provider d..."
+  default_prompt: "Use Setup Deploy for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

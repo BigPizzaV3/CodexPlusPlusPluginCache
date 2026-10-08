@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Defensive Programming"
+  short_description: "Harden Go API boundaries and invariants"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-defensive to harden this Go code at its API boundaries."

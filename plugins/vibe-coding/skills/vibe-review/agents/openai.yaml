@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Change review"
+  short_description: "Full patch review and affected contracts"
+  default_prompt: "Use $vibe-review to review the complete branch against its base."

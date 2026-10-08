@@ -1,0 +1,9 @@
+interface:
+  display_name: Deprecation And Migration
+  short_description: Manages deprecation and migration
+  default_prompt: Use $deprecation-and-migration for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

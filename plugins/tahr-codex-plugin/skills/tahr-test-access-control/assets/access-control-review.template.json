@@ -1,0 +1,2655 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "title": "Fictional Multi-Tenant Report Authorization Review",
+    "review_mode": "full",
+    "analysis_basis": "source_only",
+    "review_status": "complete",
+    "assurance_status": "source_observed",
+    "created_at": "2026-07-15T20:00:00-04:00",
+    "updated_at": "2026-07-15T20:00:00-04:00",
+    "next_review_at": "2026-10-15T20:00:00-04:00",
+    "change_triggers": [
+      "Route, middleware, policy, repository, serializer, or worker change",
+      "Role, tenant, sharing, administrator, or ownership semantics change",
+      "Runtime validation becomes authorized",
+      "The owner-transfer remediation is implemented"
+    ],
+    "authors": [
+      "Tahr example reviewer",
+      "Independent challenge pass"
+    ],
+    "repository": {
+      "name": "fictional-report-service",
+      "root": "/path/to/fictional-report-service",
+      "revision": "0123456789abcdef0123456789abcdef01234567",
+      "included_paths": [
+        "src/",
+        "docs/"
+      ],
+      "included_packages": [
+        "report-api"
+      ],
+      "supplied_documents": [
+        "docs/authorization-policy.md"
+      ],
+      "excluded_paths": [
+        ".git"
+      ]
+    },
+    "runtime_authorization": {
+      "status": "requires_authorization",
+      "targets": [],
+      "constraints": [
+        "No runtime action is authorized in this source-only example."
+      ]
+    }
+  },
+  "scope": {
+    "objective": {
+      "claim_id": "CLAIM-SCOPE-OBJECTIVE",
+      "statement": "Review every authorization-relevant operation in the fictional report service at the frozen source revision.",
+      "evidence_class": "intended",
+      "evidence_ids": [
+        "EVD-POLICY"
+      ],
+      "confidence": "high"
+    },
+    "included_interfaces": [
+      "REST report read and update operations"
+    ],
+    "excluded_interfaces": [],
+    "focused_target_ids": [],
+    "runtime_in_scope": false,
+    "limitations": [
+      {
+        "claim_id": "CLAIM-SCOPE-LIMITATION",
+        "statement": "The review observes source behavior only; no request was sent and deployed enforcement remains unverified.",
+        "evidence_class": "unknown",
+        "evidence_ids": [
+          "EVD-RUNTIME-UNKNOWN"
+        ],
+        "confidence": "high"
+      }
+    ]
+  },
+  "executive_summary": {
+    "overall_assessment": {
+      "claim_id": "CLAIM-SUMMARY-ASSESSMENT",
+      "statement": "The report-read path consumes the tenant policy before serialization, while the report-update path permits an ordinary editor to submit owner_id to a generic update sink without the administrator-only property rule.",
+      "evidence_class": "inferred",
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY",
+        "EVD-POLICY"
+      ],
+      "confidence": "high"
+    },
+    "review_status_rationale": {
+      "claim_id": "CLAIM-SUMMARY-STATUS",
+      "statement": "Every admitted source surface, identity, resource, policy, enforcement point, carrier, variant, operation, obligation, matrix requirement, and candidate in the fictional example is dispositioned.",
+      "evidence_class": "inferred",
+      "evidence_ids": [
+        "EVD-MANIFEST",
+        "EVD-INVENTORY",
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ],
+      "confidence": "high"
+    },
+    "highest_priority_finding_ids": [
+      "FINDING-OWNER-TRANSFER"
+    ],
+    "highest_priority_candidate_ids": [
+      "CANDIDATE-OWNER-TRANSFER"
+    ],
+    "assurance_limitations": [
+      {
+        "claim_id": "CLAIM-SUMMARY-ASSURANCE",
+        "statement": "The owner-transfer path is source-confirmed, but runtime exploitability, framework transformations, and deployed compensating controls have not been tested.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-REPOSITORY",
+          "EVD-RUNTIME-UNKNOWN"
+        ],
+        "confidence": "high"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "evidence_id": "EVD-ROUTES",
+      "evidence_class": "observed",
+      "source_type": "source_code",
+      "title": "Report route handlers",
+      "summary": "The frozen fictional routes show the report read and update entrypoints and caller-controlled fields.",
+      "locator": {
+        "repository_path": "src/routes/reports.py",
+        "revision": "0123456789abcdef0123456789abcdef01234567",
+        "location": "get_report and update_report"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional source contains no credentials, personal data, or customer content."
+      }
+    },
+    {
+      "evidence_id": "EVD-POLICIES",
+      "evidence_class": "observed",
+      "source_type": "source_code",
+      "title": "Report authorization policies",
+      "summary": "The read policy checks tenant and sharing, and the owner-transfer policy is limited to tenant administrators.",
+      "locator": {
+        "repository_path": "src/security/report_policy.py",
+        "revision": "0123456789abcdef0123456789abcdef01234567",
+        "location": "can_read_report and can_transfer_report_owner"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional policy contains no sensitive values."
+      }
+    },
+    {
+      "evidence_id": "EVD-REPOSITORY",
+      "evidence_class": "observed",
+      "source_type": "source_code",
+      "title": "Report repository operations",
+      "summary": "The read handler invokes policy before serialization, while the generic update persists supplied owner_id without a property-specific policy call.",
+      "locator": {
+        "repository_path": "src/repositories/reports.py",
+        "revision": "0123456789abcdef0123456789abcdef01234567",
+        "location": "load_report and update_report_fields"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional repository contains no sensitive values."
+      }
+    },
+    {
+      "evidence_id": "EVD-POLICY",
+      "evidence_class": "intended",
+      "source_type": "policy",
+      "title": "Fictional report authorization policy",
+      "summary": "Editors may update report content within their tenant, but only tenant administrators may transfer ownership; report reads must remain tenant scoped.",
+      "locator": {
+        "repository_path": "docs/authorization-policy.md",
+        "revision": "0123456789abcdef0123456789abcdef01234567",
+        "location": "Report read, edit, and ownership rules"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional policy contains no personal or customer data."
+      }
+    },
+    {
+      "evidence_id": "EVD-MANIFEST",
+      "evidence_class": "observed",
+      "source_type": "repository_manifest",
+      "title": "Deterministic source manifest",
+      "summary": "The manifest binds all admitted fictional source and policy files to the modeled revision.",
+      "locator": {
+        "repository_path": "repository-manifest.json",
+        "revision": "0123456789abcdef0123456789abcdef01234567",
+        "location": "sorted admitted paths and content digests",
+        "content_hash": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The manifest contains paths, sizes, and content digests only."
+      }
+    },
+    {
+      "evidence_id": "EVD-INVENTORY",
+      "evidence_class": "observed",
+      "source_type": "source_code",
+      "title": "Authorization operation inventory",
+      "summary": "Route registration and source discovery identify exactly two admitted authorization-relevant REST operations in the fictional example.",
+      "locator": {
+        "repository_path": "src/app.py",
+        "revision": "0123456789abcdef0123456789abcdef01234567",
+        "location": "registered report routes"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The route inventory contains no sensitive values."
+      }
+    },
+    {
+      "evidence_id": "EVD-RUNTIME-UNKNOWN",
+      "evidence_class": "unknown",
+      "source_type": "unknown",
+      "title": "Runtime validation not authorized",
+      "summary": "No authorized local or staging target, runtime identity, or disposable object was supplied for this source-only example.",
+      "locator": {
+        "location": "runtime authorization record"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "No runtime secret or target material was collected."
+      }
+    }
+  ],
+  "surfaces": [
+    {
+      "surface_id": "SURFACE-REPORT-READ",
+      "name": "GET report REST surface",
+      "kind": "rest",
+      "disposition": "operation",
+      "operation_ids": [
+        "OP-REPORT-READ"
+      ],
+      "reason": {
+        "claim_id": "CLAIM-SURFACE-READ",
+        "statement": "The registered GET route returns a report resource and makes an authorization decision.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-INVENTORY"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-INVENTORY"
+      ]
+    },
+    {
+      "surface_id": "SURFACE-REPORT-PATCH",
+      "name": "PATCH report REST surface",
+      "kind": "rest",
+      "disposition": "operation",
+      "operation_ids": [
+        "OP-REPORT-PATCH"
+      ],
+      "reason": {
+        "claim_id": "CLAIM-SURFACE-PATCH",
+        "statement": "The registered PATCH route changes report content and accepts authorization-sensitive owner_id.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-INVENTORY"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-INVENTORY"
+      ]
+    }
+  ],
+  "identities": [
+    {
+      "identity_id": "IDENTITY-UNAUTHENTICATED",
+      "label": "Unauthenticated caller",
+      "kind": "unauthenticated",
+      "role": "none",
+      "tenant": "unknown",
+      "authorization_domain": "public",
+      "verification_status": "source_modeled",
+      "transports": [
+        "source"
+      ],
+      "protected_account": false,
+      "freshness": {
+        "claim_id": "CLAIM-IDENTITY-UNAUTH-FRESH",
+        "statement": "The unauthenticated caller is a source-modeled authorization state, not a runtime session.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-ROUTES"
+      ]
+    },
+    {
+      "identity_id": "IDENTITY-EDITOR-A",
+      "label": "Tenant A editor",
+      "kind": "human",
+      "role": "editor",
+      "tenant": "tenant-a",
+      "authorization_domain": "tenant-a",
+      "verification_status": "source_modeled",
+      "transports": [
+        "source"
+      ],
+      "protected_account": true,
+      "freshness": {
+        "claim_id": "CLAIM-IDENTITY-A-FRESH",
+        "statement": "Tenant A editor is modeled from policy and source; no runtime identity was created or verified.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-POLICIES",
+          "EVD-POLICY"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-POLICIES",
+        "EVD-POLICY"
+      ]
+    },
+    {
+      "identity_id": "IDENTITY-EDITOR-B",
+      "label": "Tenant B editor",
+      "kind": "human",
+      "role": "editor",
+      "tenant": "tenant-b",
+      "authorization_domain": "tenant-b",
+      "verification_status": "source_modeled",
+      "transports": [
+        "source"
+      ],
+      "protected_account": true,
+      "freshness": {
+        "claim_id": "CLAIM-IDENTITY-B-FRESH",
+        "statement": "Tenant B editor is modeled from policy and source; no runtime identity was created or verified.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-POLICIES",
+          "EVD-POLICY"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-POLICIES",
+        "EVD-POLICY"
+      ]
+    },
+    {
+      "identity_id": "IDENTITY-ADMIN-A",
+      "label": "Tenant A administrator",
+      "kind": "administrator",
+      "role": "tenant_admin",
+      "tenant": "tenant-a",
+      "authorization_domain": "tenant-a",
+      "verification_status": "source_modeled",
+      "transports": [
+        "source"
+      ],
+      "protected_account": true,
+      "freshness": {
+        "claim_id": "CLAIM-IDENTITY-ADMIN-FRESH",
+        "statement": "Tenant A administrator is modeled from policy and source; no runtime identity was created or verified.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-POLICIES",
+          "EVD-POLICY"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-POLICIES",
+        "EVD-POLICY"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "resource_id": "RESOURCE-REPORT-A",
+      "type": "report",
+      "label": "Synthetic disposable Tenant A report",
+      "identifier_fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "carrier_ids": [
+        "CARRIER-REPORT-ID"
+      ],
+      "owner_identity_id": "IDENTITY-EDITOR-A",
+      "tenant": "tenant-a",
+      "authorization_domain": "tenant-a",
+      "sensitivity": "confidential",
+      "lifecycle": "created, read, updated, and deleted within one authorized validation fixture",
+      "provenance": "source_attributed",
+      "safety": "disposable",
+      "evidence_ids": [
+        "EVD-REPOSITORY",
+        "EVD-POLICY"
+      ]
+    },
+    {
+      "resource_id": "RESOURCE-REPORT-B",
+      "type": "report",
+      "label": "Tenant B report reference",
+      "identifier_fingerprint": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "carrier_ids": [
+        "CARRIER-REPORT-ID"
+      ],
+      "owner_identity_id": "IDENTITY-EDITOR-B",
+      "tenant": "tenant-b",
+      "authorization_domain": "tenant-b",
+      "sensitivity": "confidential",
+      "lifecycle": "existing read-only source-modeled resource",
+      "provenance": "source_attributed",
+      "safety": "read_only_reference",
+      "evidence_ids": [
+        "EVD-REPOSITORY",
+        "EVD-POLICY"
+      ]
+    },
+    {
+      "resource_id": "RESOURCE-OWNER-PROPERTY",
+      "type": "authorization_property",
+      "label": "Report owner_id property",
+      "identifier_fingerprint": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "carrier_ids": [
+        "CARRIER-OWNER-ID"
+      ],
+      "owner_identity_id": "IDENTITY-ADMIN-A",
+      "tenant": "tenant-a",
+      "authorization_domain": "tenant-a-admin",
+      "sensitivity": "restricted",
+      "lifecycle": "updated only through an administrator-authorized owner transfer",
+      "provenance": "source_attributed",
+      "safety": "disposable",
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-POLICY"
+      ]
+    }
+  ],
+  "policy_rules": [
+    {
+      "policy_id": "POLICY-REPORT-READ",
+      "name": "Tenant and sharing scoped report reads",
+      "subject_identity_ids": [
+        "IDENTITY-EDITOR-A",
+        "IDENTITY-EDITOR-B",
+        "IDENTITY-ADMIN-A"
+      ],
+      "actions": [
+        "read"
+      ],
+      "resource_ids": [
+        "RESOURCE-REPORT-A",
+        "RESOURCE-REPORT-B"
+      ],
+      "relationship": "cross_tenant",
+        "decision": "conditional",
+      "conditions": [
+        {
+          "claim_id": "CLAIM-POLICY-READ-CONDITION",
+          "statement": "A report may be returned only when the caller's tenant matches and the caller owns or is explicitly shared on the report.",
+          "evidence_class": "intended",
+          "evidence_ids": [
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "authority": "documented_requirement",
+      "enforcement_point_ids": [
+        "ENFORCEMENT-READ-POLICY"
+      ],
+      "evidence_ids": [
+        "EVD-POLICIES",
+        "EVD-POLICY"
+      ]
+    },
+    {
+      "policy_id": "POLICY-REPORT-EDIT",
+      "name": "Tenant editor report-content updates",
+      "subject_identity_ids": [
+        "IDENTITY-EDITOR-A",
+        "IDENTITY-EDITOR-B",
+        "IDENTITY-ADMIN-A"
+      ],
+      "actions": [
+        "update"
+      ],
+      "resource_ids": [
+        "RESOURCE-REPORT-A",
+        "RESOURCE-REPORT-B"
+      ],
+      "relationship": "own",
+      "decision": "conditional",
+      "conditions": [
+        {
+          "claim_id": "CLAIM-POLICY-EDIT-CONDITION",
+          "statement": "Editors may update ordinary report content only for reports in their tenant and may not transfer ownership.",
+          "evidence_class": "intended",
+          "evidence_ids": [
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "authority": "documented_requirement",
+      "enforcement_point_ids": [
+        "ENFORCEMENT-PATCH-SCOPE"
+      ],
+      "evidence_ids": [
+        "EVD-POLICIES",
+        "EVD-POLICY"
+      ]
+    },
+    {
+      "policy_id": "POLICY-OWNER-TRANSFER",
+      "name": "Administrator-only report ownership transfer",
+      "subject_identity_ids": [
+        "IDENTITY-EDITOR-A",
+        "IDENTITY-ADMIN-A"
+      ],
+      "actions": [
+        "transfer"
+      ],
+      "resource_ids": [
+        "RESOURCE-REPORT-A",
+        "RESOURCE-OWNER-PROPERTY"
+      ],
+      "relationship": "cross_role",
+      "decision": "deny",
+      "conditions": [
+        {
+          "claim_id": "CLAIM-POLICY-TRANSFER-CONDITION",
+          "statement": "Only a tenant administrator may change report owner_id; an editor must be denied.",
+          "evidence_class": "intended",
+          "evidence_ids": [
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "authority": "documented_requirement",
+      "enforcement_point_ids": [
+        "ENFORCEMENT-OWNER-FILTER"
+      ],
+      "evidence_ids": [
+        "EVD-POLICIES",
+        "EVD-POLICY"
+      ]
+    }
+  ],
+  "enforcement_points": [
+    {
+      "enforcement_point_id": "ENFORCEMENT-READ-POLICY",
+      "policy_rule_ids": [
+        "POLICY-REPORT-READ"
+      ],
+      "name": "Read policy before serialization",
+      "kind": "policy",
+      "status": "observed_enforced",
+      "location": {
+        "claim_id": "CLAIM-ENFORCEMENT-READ",
+        "statement": "get_report calls can_read_report with the loaded report before the serializer returns it.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "operation_ids": [
+        "OP-REPORT-READ"
+      ],
+      "resource_ids": [
+        "RESOURCE-REPORT-A",
+        "RESOURCE-REPORT-B"
+      ],
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ]
+    },
+    {
+      "enforcement_point_id": "ENFORCEMENT-PATCH-SCOPE",
+      "policy_rule_ids": [
+        "POLICY-REPORT-EDIT"
+      ],
+      "name": "Tenant-scoped report update precondition",
+      "kind": "policy",
+      "status": "observed_enforced",
+      "location": {
+        "claim_id": "CLAIM-ENFORCEMENT-PATCH-SCOPE",
+        "statement": "update_report verifies that the report belongs to the editor's tenant before calling the generic update function.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES"
+        ],
+        "confidence": "high"
+      },
+      "operation_ids": [
+        "OP-REPORT-PATCH"
+      ],
+      "resource_ids": [
+        "RESOURCE-REPORT-A"
+      ],
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES"
+      ]
+    },
+    {
+      "enforcement_point_id": "ENFORCEMENT-OWNER-FILTER",
+      "policy_rule_ids": [
+        "POLICY-OWNER-TRANSFER"
+      ],
+      "name": "Owner-property authorization filter",
+      "kind": "serializer",
+      "status": "missing",
+      "location": {
+        "claim_id": "CLAIM-ENFORCEMENT-OWNER-MISSING",
+        "statement": "No path-specific control removes owner_id or invokes can_transfer_report_owner before the generic repository update.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "operation_ids": [
+        "OP-REPORT-PATCH"
+      ],
+      "resource_ids": [
+        "RESOURCE-REPORT-A",
+        "RESOURCE-OWNER-PROPERTY"
+      ],
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ]
+    }
+  ],
+  "carriers": [
+    {
+      "carrier_id": "CARRIER-REPORT-ID",
+      "name": "report_id",
+      "kind": "path",
+      "location": "REST path parameter {report_id}",
+      "authorization_sensitive": true,
+      "evidence_ids": [
+        "EVD-ROUTES"
+      ]
+    },
+    {
+      "carrier_id": "CARRIER-OWNER-ID",
+      "name": "owner_id",
+      "kind": "property",
+      "location": "PATCH JSON body owner_id",
+      "authorization_sensitive": true,
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-REPOSITORY"
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "variant_id": "VARIANT-PATCH-JSON",
+      "name": "JSON PATCH report update",
+      "kind": "content_type",
+      "operation_ids": [
+        "OP-REPORT-PATCH"
+      ],
+      "evidence_ids": [
+        "EVD-ROUTES"
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "OP-REPORT-READ",
+      "name": "Read one report",
+      "kind": "rest",
+      "method_or_kind": "GET /api/reports/{report_id}",
+      "entrypoint": {
+        "claim_id": "CLAIM-OP-READ-ENTRY",
+        "statement": "The shipped GET handler accepts report_id and returns the report only after policy evaluation.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES"
+        ],
+        "confidence": "high"
+      },
+      "state_change": false,
+      "intentionally_public": false,
+      "sensitive_response": true,
+      "surface_ids": [
+        "SURFACE-REPORT-READ"
+      ],
+      "carrier_ids": [
+        "CARRIER-REPORT-ID"
+      ],
+      "variant_ids": [],
+      "obligation_ids": [
+        "OBLIGATION-REPORT-READ"
+      ],
+      "variant_operation_ids": [],
+      "continuation_operation_ids": [],
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ]
+    },
+    {
+      "operation_id": "OP-REPORT-PATCH",
+      "name": "Update report and submitted properties",
+      "kind": "rest",
+      "method_or_kind": "PATCH /api/reports/{report_id}",
+      "entrypoint": {
+        "claim_id": "CLAIM-OP-PATCH-ENTRY",
+        "statement": "The shipped PATCH handler accepts report_id and a JSON object that can include owner_id.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES"
+        ],
+        "confidence": "high"
+      },
+      "state_change": true,
+      "intentionally_public": false,
+      "sensitive_response": true,
+      "surface_ids": [
+        "SURFACE-REPORT-PATCH"
+      ],
+      "carrier_ids": [
+        "CARRIER-REPORT-ID",
+        "CARRIER-OWNER-ID"
+      ],
+      "variant_ids": [
+        "VARIANT-PATCH-JSON"
+      ],
+      "obligation_ids": [
+        "OBLIGATION-REPORT-PATCH",
+        "OBLIGATION-OWNER-TRANSFER"
+      ],
+      "variant_operation_ids": [],
+      "continuation_operation_ids": [],
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ]
+    }
+  ],
+  "obligations": [
+    {
+      "obligation_id": "OBLIGATION-REPORT-READ",
+      "operation_id": "OP-REPORT-READ",
+      "resource_id": "RESOURCE-REPORT-B",
+      "action": "read",
+      "carrier_ids": [
+        "CARRIER-REPORT-ID"
+      ],
+      "property_names": [],
+      "policy_rule_ids": [
+        "POLICY-REPORT-READ"
+      ],
+      "enforcement_point_ids": [
+        "ENFORCEMENT-READ-POLICY"
+      ],
+      "restriction_source": {
+        "claim_id": "CLAIM-OBLIGATION-READ-RESTRICTION",
+        "statement": "The authenticated principal's tenant and sharing relation are passed to can_read_report.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES"
+        ],
+        "confidence": "high"
+      },
+      "final_sink": {
+        "claim_id": "CLAIM-OBLIGATION-READ-SINK",
+        "statement": "The serializer returns confidential report fields only after can_read_report succeeds.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "downstream_control_checked": {
+        "claim_id": "CLAIM-OBLIGATION-READ-DOWNSTREAM",
+        "statement": "Repository loading is global, but the handler consumes can_read_report before the only response serializer.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "status": "enforced",
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ]
+    },
+    {
+      "obligation_id": "OBLIGATION-REPORT-PATCH",
+      "operation_id": "OP-REPORT-PATCH",
+      "resource_id": "RESOURCE-REPORT-A",
+      "action": "update",
+      "carrier_ids": [
+        "CARRIER-REPORT-ID"
+      ],
+      "property_names": [
+        "title",
+        "body"
+      ],
+      "policy_rule_ids": [
+        "POLICY-REPORT-EDIT"
+      ],
+      "enforcement_point_ids": [
+        "ENFORCEMENT-PATCH-SCOPE"
+      ],
+      "restriction_source": {
+        "claim_id": "CLAIM-OBLIGATION-PATCH-RESTRICTION",
+        "statement": "The handler compares the report tenant to the authenticated editor tenant before ordinary content updates.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES"
+        ],
+        "confidence": "high"
+      },
+      "final_sink": {
+        "claim_id": "CLAIM-OBLIGATION-PATCH-SINK",
+        "statement": "The generic repository update persists allowed report content fields.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "downstream_control_checked": {
+        "claim_id": "CLAIM-OBLIGATION-PATCH-DOWNSTREAM",
+        "statement": "No later worker or database policy changes the ordinary content-update decision in the fictional path.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "status": "enforced",
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ]
+    },
+    {
+      "obligation_id": "OBLIGATION-OWNER-TRANSFER",
+      "operation_id": "OP-REPORT-PATCH",
+      "resource_id": "RESOURCE-OWNER-PROPERTY",
+      "action": "transfer",
+      "carrier_ids": [
+        "CARRIER-OWNER-ID"
+      ],
+      "property_names": [
+        "owner_id"
+      ],
+      "policy_rule_ids": [
+        "POLICY-OWNER-TRANSFER"
+      ],
+      "enforcement_point_ids": [
+        "ENFORCEMENT-OWNER-FILTER"
+      ],
+      "restriction_source": {
+        "claim_id": "CLAIM-OBLIGATION-OWNER-RESTRICTION",
+        "statement": "The administrator-only transfer rule exists, but update_report does not invoke it for owner_id.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES"
+        ],
+        "confidence": "high"
+      },
+      "final_sink": {
+        "claim_id": "CLAIM-OBLIGATION-OWNER-SINK",
+        "statement": "The generic update function assigns supplied owner_id to the stored report record.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "downstream_control_checked": {
+        "claim_id": "CLAIM-OBLIGATION-OWNER-DOWNSTREAM",
+        "statement": "The route, policy module, repository, serializer, and registered middleware contain no later owner-transfer authorization check on this path.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY",
+          "EVD-INVENTORY"
+        ],
+        "confidence": "high"
+      },
+      "status": "missing",
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY",
+        "EVD-POLICY"
+      ]
+    }
+  ],
+  "source_traces": [
+    {
+      "source_trace_id": "TRACE-REPORT-READ",
+      "operation_id": "OP-REPORT-READ",
+      "obligation_ids": [
+        "OBLIGATION-REPORT-READ"
+      ],
+      "reachability": "shipped",
+      "hops": [
+        {
+          "hop_id": "HOP-READ-ENTRY",
+          "kind": "entrypoint",
+          "location": {
+            "claim_id": "CLAIM-HOP-READ-ENTRY",
+            "statement": "GET report_id enters the registered get_report handler.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES",
+              "EVD-INVENTORY"
+            ],
+            "confidence": "high"
+          },
+          "restriction_state": "introduced",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-INVENTORY"
+          ]
+        },
+        {
+          "hop_id": "HOP-READ-POLICY",
+          "kind": "policy",
+          "location": {
+            "claim_id": "CLAIM-HOP-READ-POLICY",
+            "statement": "The handler consumes tenant and sharing restrictions through can_read_report.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES",
+              "EVD-POLICIES"
+            ],
+            "confidence": "high"
+          },
+          "restriction_state": "consumed",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICIES"
+          ]
+        },
+        {
+          "hop_id": "HOP-READ-SINK",
+          "kind": "serializer",
+          "location": {
+            "claim_id": "CLAIM-HOP-READ-SINK",
+            "statement": "Only the policy-approved report reaches the response serializer.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES",
+              "EVD-REPOSITORY"
+            ],
+            "confidence": "high"
+          },
+          "restriction_state": "consumed",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-REPOSITORY"
+          ]
+        }
+      ],
+      "control_conclusion": "enforced",
+      "contradiction_search": {
+        "claim_id": "CLAIM-TRACE-READ-CONTRADICTION",
+        "statement": "The global repository lookup is not itself an IDOR because the downstream read policy applies before serialization; no bypassing sibling response path was found.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ]
+    },
+    {
+      "source_trace_id": "TRACE-REPORT-PATCH",
+      "operation_id": "OP-REPORT-PATCH",
+      "obligation_ids": [
+        "OBLIGATION-REPORT-PATCH",
+        "OBLIGATION-OWNER-TRANSFER"
+      ],
+      "reachability": "shipped",
+      "hops": [
+        {
+          "hop_id": "HOP-PATCH-ENTRY",
+          "kind": "entrypoint",
+          "location": {
+            "claim_id": "CLAIM-HOP-PATCH-ENTRY",
+            "statement": "PATCH report_id and JSON fields enter the registered update_report handler.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES",
+              "EVD-INVENTORY"
+            ],
+            "confidence": "high"
+          },
+          "restriction_state": "introduced",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-INVENTORY"
+          ]
+        },
+        {
+          "hop_id": "HOP-PATCH-SCOPE",
+          "kind": "policy",
+          "location": {
+            "claim_id": "CLAIM-HOP-PATCH-SCOPE",
+            "statement": "Tenant scope is consumed for the report, but owner_id property authorization is not evaluated.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES",
+              "EVD-POLICIES"
+            ],
+            "confidence": "high"
+          },
+          "restriction_state": "dropped",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICIES"
+          ]
+        },
+        {
+          "hop_id": "HOP-PATCH-SINK",
+          "kind": "repository",
+          "location": {
+            "claim_id": "CLAIM-HOP-PATCH-SINK",
+            "statement": "The generic repository assignment persists every supplied field, including owner_id.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-REPOSITORY"
+            ],
+            "confidence": "high"
+          },
+          "restriction_state": "dropped",
+          "evidence_ids": [
+            "EVD-REPOSITORY"
+          ]
+        }
+      ],
+      "control_conclusion": "gap",
+      "contradiction_search": {
+        "claim_id": "CLAIM-TRACE-PATCH-CONTRADICTION",
+        "statement": "Authentication and tenant report scope apply, but route registration, policy invocation, serialization, repository logic, and downstream source contain no owner-transfer check for owner_id.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY",
+          "EVD-INVENTORY"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY",
+        "EVD-INVENTORY"
+      ]
+    }
+  ],
+  "matrix_requirements": [
+    {
+      "matrix_requirement_id": "REQUIREMENT-REPORT-READ",
+      "operation_id": "OP-REPORT-READ",
+      "required_identity_ids": [
+        "IDENTITY-EDITOR-A"
+      ],
+      "required_relationships": [
+        "own",
+        "cross_tenant"
+      ],
+      "required_obligation_ids": [
+        "OBLIGATION-REPORT-READ"
+      ],
+      "required_carrier_ids": [
+        "CARRIER-REPORT-ID"
+      ],
+      "required_variant_ids": [],
+      "source_review_required": true,
+      "runtime_test_required": false,
+      "risk_if_unreviewed": "high",
+      "evidence_ids": [
+        "EVD-INVENTORY",
+        "EVD-POLICY"
+      ]
+    },
+    {
+      "matrix_requirement_id": "REQUIREMENT-REPORT-PATCH",
+      "operation_id": "OP-REPORT-PATCH",
+      "required_identity_ids": [
+        "IDENTITY-EDITOR-A",
+        "IDENTITY-ADMIN-A"
+      ],
+      "required_relationships": [
+        "privileged_to_private",
+        "cross_role"
+      ],
+      "required_obligation_ids": [
+        "OBLIGATION-REPORT-PATCH",
+        "OBLIGATION-OWNER-TRANSFER"
+      ],
+      "required_carrier_ids": [
+        "CARRIER-REPORT-ID",
+        "CARRIER-OWNER-ID"
+      ],
+      "required_variant_ids": [
+        "VARIANT-PATCH-JSON"
+      ],
+      "source_review_required": true,
+      "runtime_test_required": false,
+      "risk_if_unreviewed": "high",
+      "evidence_ids": [
+        "EVD-INVENTORY",
+        "EVD-POLICY"
+      ]
+    }
+  ],
+  "matrix": [
+    {
+      "matrix_cell_id": "MATRIX-READ-OWN",
+      "matrix_requirement_id": "REQUIREMENT-REPORT-READ",
+      "operation_id": "OP-REPORT-READ",
+      "caller_identity_id": "IDENTITY-EDITOR-A",
+      "target_resource_ids": [
+        "RESOURCE-REPORT-A"
+      ],
+      "relationship": "own",
+      "expected_decision": "allow",
+      "policy_rule_ids": [
+        "POLICY-REPORT-READ"
+      ],
+      "covered_obligation_ids": [
+        "OBLIGATION-REPORT-READ"
+      ],
+      "covered_carrier_ids": [
+        "CARRIER-REPORT-ID"
+      ],
+      "covered_variant_ids": [],
+      "review_status": "source_reviewed",
+      "observed_decision": "not_observed",
+      "source_trace_ids": [
+        "TRACE-REPORT-READ"
+      ],
+      "validation_test_ids": [],
+      "reason": {
+        "claim_id": "CLAIM-MATRIX-READ-OWN",
+        "statement": "Source policy permits a tenant editor to read an owned tenant report and consumes that relation before serialization.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ]
+    },
+    {
+      "matrix_cell_id": "MATRIX-READ-CROSS-TENANT",
+      "matrix_requirement_id": "REQUIREMENT-REPORT-READ",
+      "operation_id": "OP-REPORT-READ",
+      "caller_identity_id": "IDENTITY-EDITOR-A",
+      "target_resource_ids": [
+        "RESOURCE-REPORT-B"
+      ],
+      "relationship": "cross_tenant",
+      "expected_decision": "deny",
+      "policy_rule_ids": [
+        "POLICY-REPORT-READ"
+      ],
+      "covered_obligation_ids": [
+        "OBLIGATION-REPORT-READ"
+      ],
+      "covered_carrier_ids": [
+        "CARRIER-REPORT-ID"
+      ],
+      "covered_variant_ids": [],
+      "baseline_cell_id": "MATRIX-READ-OWN",
+      "review_status": "source_reviewed",
+      "observed_decision": "not_observed",
+      "source_trace_ids": [
+        "TRACE-REPORT-READ"
+      ],
+      "validation_test_ids": [],
+      "reason": {
+        "claim_id": "CLAIM-MATRIX-READ-CROSS",
+        "statement": "The downstream can_read_report policy rejects a report whose tenant differs from the caller before any response serialization.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ]
+    },
+    {
+      "matrix_cell_id": "MATRIX-PATCH-ADMIN",
+      "matrix_requirement_id": "REQUIREMENT-REPORT-PATCH",
+      "operation_id": "OP-REPORT-PATCH",
+      "caller_identity_id": "IDENTITY-ADMIN-A",
+      "target_resource_ids": [
+        "RESOURCE-REPORT-A",
+        "RESOURCE-OWNER-PROPERTY"
+      ],
+      "relationship": "privileged_to_private",
+      "expected_decision": "allow",
+      "policy_rule_ids": [
+        "POLICY-REPORT-EDIT",
+        "POLICY-OWNER-TRANSFER"
+      ],
+      "covered_obligation_ids": [
+        "OBLIGATION-REPORT-PATCH",
+        "OBLIGATION-OWNER-TRANSFER"
+      ],
+      "covered_carrier_ids": [
+        "CARRIER-REPORT-ID",
+        "CARRIER-OWNER-ID"
+      ],
+      "covered_variant_ids": [
+        "VARIANT-PATCH-JSON"
+      ],
+      "review_status": "source_reviewed",
+      "observed_decision": "not_observed",
+      "source_trace_ids": [
+        "TRACE-REPORT-PATCH"
+      ],
+      "validation_test_ids": [
+        "TEST-OWNER-TRANSFER"
+      ],
+      "reason": {
+        "claim_id": "CLAIM-MATRIX-PATCH-ADMIN",
+        "statement": "The policy permits a tenant administrator to transfer ownership of a tenant report; this is the planned authorized control.",
+        "evidence_class": "intended",
+        "evidence_ids": [
+          "EVD-POLICY",
+          "EVD-POLICIES"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-POLICY",
+        "EVD-POLICIES",
+        "EVD-RUNTIME-UNKNOWN"
+      ]
+    },
+    {
+      "matrix_cell_id": "MATRIX-PATCH-EDITOR-OWNER",
+      "matrix_requirement_id": "REQUIREMENT-REPORT-PATCH",
+      "operation_id": "OP-REPORT-PATCH",
+      "caller_identity_id": "IDENTITY-EDITOR-A",
+      "target_resource_ids": [
+        "RESOURCE-REPORT-A",
+        "RESOURCE-OWNER-PROPERTY"
+      ],
+      "relationship": "cross_role",
+      "expected_decision": "deny",
+      "policy_rule_ids": [
+        "POLICY-REPORT-EDIT",
+        "POLICY-OWNER-TRANSFER"
+      ],
+      "covered_obligation_ids": [
+        "OBLIGATION-REPORT-PATCH",
+        "OBLIGATION-OWNER-TRANSFER"
+      ],
+      "covered_carrier_ids": [
+        "CARRIER-REPORT-ID",
+        "CARRIER-OWNER-ID"
+      ],
+      "covered_variant_ids": [
+        "VARIANT-PATCH-JSON"
+      ],
+      "baseline_cell_id": "MATRIX-PATCH-ADMIN",
+      "review_status": "source_reviewed",
+      "observed_decision": "not_observed",
+      "source_trace_ids": [
+        "TRACE-REPORT-PATCH"
+      ],
+      "validation_test_ids": [
+        "TEST-OWNER-TRANSFER"
+      ],
+      "reason": {
+        "claim_id": "CLAIM-MATRIX-PATCH-EDITOR",
+        "statement": "Source permits ordinary content updates but fails to consume the administrator-only owner-transfer rule before owner_id reaches the generic update sink.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY",
+        "EVD-RUNTIME-UNKNOWN"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "CANDIDATE-READ-GLOBAL-LOOKUP",
+      "title": "Global report lookup appears unscoped before downstream policy",
+      "classification": "BOLA",
+      "operation_id": "OP-REPORT-READ",
+      "caller_identity_id": "IDENTITY-EDITOR-A",
+      "resource_ids": [
+        "RESOURCE-REPORT-B"
+      ],
+      "obligation_ids": [
+        "OBLIGATION-REPORT-READ"
+      ],
+      "matrix_cell_ids": [
+        "MATRIX-READ-CROSS-TENANT"
+      ],
+      "policy_rule_ids": [
+        "POLICY-REPORT-READ"
+      ],
+      "enforcement_point_ids": [
+        "ENFORCEMENT-READ-POLICY"
+      ],
+      "source_trace_ids": [
+        "TRACE-REPORT-READ"
+      ],
+      "disposition": "rejected",
+      "proof_gates": [
+        {
+          "gate": "caller",
+          "status": "proven",
+          "related_ids": [
+            "IDENTITY-EDITOR-A",
+            "OP-REPORT-READ",
+            "MATRIX-READ-CROSS-TENANT"
+          ],
+          "statement": {
+            "claim_id": "CLAIM-CANDIDATE-READ-CALLER",
+            "statement": "A source-modeled tenant editor can reach the report-read handler.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES"
+            ],
+            "confidence": "high"
+          }
+        },
+        {
+          "gate": "target",
+          "status": "proven",
+          "related_ids": [
+            "OP-REPORT-READ",
+            "CARRIER-REPORT-ID",
+            "RESOURCE-REPORT-B",
+            "OBLIGATION-REPORT-READ"
+          ],
+          "statement": {
+            "claim_id": "CLAIM-CANDIDATE-READ-TARGET",
+            "statement": "The handler accepts a report_id and loads the exact report record before policy evaluation.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES",
+              "EVD-REPOSITORY"
+            ],
+            "confidence": "high"
+          }
+        },
+        {
+          "gate": "ownership_or_tenant",
+          "status": "proven",
+          "related_ids": [
+            "IDENTITY-EDITOR-A",
+            "RESOURCE-REPORT-B",
+            "POLICY-REPORT-READ"
+          ],
+          "statement": {
+            "claim_id": "CLAIM-CANDIDATE-READ-OWNER",
+            "statement": "The source model attributes the target report to tenant B while the caller belongs to tenant A.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-REPOSITORY",
+              "EVD-POLICY"
+            ],
+            "confidence": "high"
+          }
+        },
+        {
+          "gate": "expected_denial",
+          "status": "proven",
+          "related_ids": [
+            "POLICY-REPORT-READ",
+            "MATRIX-READ-CROSS-TENANT"
+          ],
+          "statement": {
+            "claim_id": "CLAIM-CANDIDATE-READ-DENIAL",
+            "statement": "The tenant read policy denies cross-tenant report access without a sharing relation.",
+            "evidence_class": "intended",
+            "evidence_ids": [
+              "EVD-POLICY"
+            ],
+            "confidence": "high"
+          }
+        },
+        {
+          "gate": "unauthorized_impact",
+          "status": "contradicted",
+          "related_ids": [
+            "TRACE-REPORT-READ",
+            "ENFORCEMENT-READ-POLICY",
+            "OBLIGATION-REPORT-READ"
+          ],
+          "statement": {
+            "claim_id": "CLAIM-CANDIDATE-READ-IMPACT",
+            "statement": "The candidate is contradicted because can_read_report consumes tenant policy before the only response serialization path.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES",
+              "EVD-POLICIES",
+              "EVD-REPOSITORY"
+            ],
+            "confidence": "high"
+          }
+        }
+      ],
+      "contradiction": {
+        "claim_id": "CLAIM-CANDIDATE-READ-CONTRADICTION",
+        "statement": "The downstream policy is path-specific, receives the loaded report, and prevents the global lookup from reaching the response sink for a cross-tenant caller.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "risk": "high",
+      "confidence": "high",
+      "validation_test_ids": [],
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY",
+        "EVD-POLICY"
+      ]
+    },
+    {
+      "candidate_id": "CANDIDATE-OWNER-TRANSFER",
+      "title": "Editor-controlled owner_id reaches generic report update",
+      "classification": "BOPLA",
+      "operation_id": "OP-REPORT-PATCH",
+      "caller_identity_id": "IDENTITY-EDITOR-A",
+      "resource_ids": [
+        "RESOURCE-REPORT-A",
+        "RESOURCE-OWNER-PROPERTY"
+      ],
+      "obligation_ids": [
+        "OBLIGATION-OWNER-TRANSFER"
+      ],
+      "matrix_cell_ids": [
+        "MATRIX-PATCH-ADMIN",
+        "MATRIX-PATCH-EDITOR-OWNER"
+      ],
+      "policy_rule_ids": [
+        "POLICY-OWNER-TRANSFER"
+      ],
+      "enforcement_point_ids": [
+        "ENFORCEMENT-OWNER-FILTER"
+      ],
+      "source_trace_ids": [
+        "TRACE-REPORT-PATCH"
+      ],
+      "disposition": "source_confirmed",
+      "proof_gates": [
+        {
+          "gate": "caller",
+          "status": "proven",
+          "related_ids": [
+            "IDENTITY-EDITOR-A",
+            "OP-REPORT-PATCH",
+            "MATRIX-PATCH-EDITOR-OWNER"
+          ],
+          "statement": {
+            "claim_id": "CLAIM-CANDIDATE-OWNER-CALLER",
+            "statement": "The shipped PATCH route permits a source-modeled tenant editor to submit update fields.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES"
+            ],
+            "confidence": "high"
+          }
+        },
+        {
+          "gate": "target",
+          "status": "proven",
+          "related_ids": [
+            "CARRIER-OWNER-ID",
+            "RESOURCE-OWNER-PROPERTY",
+            "OBLIGATION-OWNER-TRANSFER"
+          ],
+          "statement": {
+            "claim_id": "CLAIM-CANDIDATE-OWNER-TARGET",
+            "statement": "The owner_id body property is copied to the generic report update and assigned to stored state.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES",
+              "EVD-REPOSITORY"
+            ],
+            "confidence": "high"
+          }
+        },
+        {
+          "gate": "ownership_or_tenant",
+          "status": "proven",
+          "related_ids": [
+            "IDENTITY-EDITOR-A",
+            "IDENTITY-ADMIN-A",
+            "RESOURCE-OWNER-PROPERTY",
+            "POLICY-OWNER-TRANSFER"
+          ],
+          "statement": {
+            "claim_id": "CLAIM-CANDIDATE-OWNER-BOUNDARY",
+            "statement": "The report owner property is controlled by the tenant administrator rule, while the caller is only an editor in the same tenant.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-POLICIES",
+              "EVD-POLICY"
+            ],
+            "confidence": "high"
+          }
+        },
+        {
+          "gate": "expected_denial",
+          "status": "proven",
+          "related_ids": [
+            "POLICY-OWNER-TRANSFER",
+            "MATRIX-PATCH-EDITOR-OWNER"
+          ],
+          "statement": {
+            "claim_id": "CLAIM-CANDIDATE-OWNER-DENIAL",
+            "statement": "The documented and source policy permits only tenant administrators to transfer report ownership and denies editors.",
+            "evidence_class": "intended",
+            "evidence_ids": [
+              "EVD-POLICY",
+              "EVD-POLICIES"
+            ],
+            "confidence": "high"
+          }
+        },
+        {
+          "gate": "unauthorized_impact",
+          "status": "proven",
+          "related_ids": [
+            "TRACE-REPORT-PATCH",
+            "OBLIGATION-OWNER-TRANSFER",
+            "ENFORCEMENT-OWNER-FILTER",
+            "RESOURCE-OWNER-PROPERTY"
+          ],
+          "statement": {
+            "claim_id": "CLAIM-CANDIDATE-OWNER-IMPACT",
+            "statement": "The shipped source path assigns editor-supplied owner_id to persistent report state, enabling an unauthorized ownership transfer if reached with a valid editor request.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-ROUTES",
+              "EVD-REPOSITORY"
+            ],
+            "confidence": "high"
+          }
+        }
+      ],
+      "contradiction": {
+        "claim_id": "CLAIM-CANDIDATE-OWNER-CONTRADICTION",
+        "statement": "Authentication and tenant report scope are present, but neither applies the administrator-only property rule; no serializer, repository, middleware, or downstream check removes owner_id.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY",
+          "EVD-INVENTORY"
+        ],
+        "confidence": "high"
+      },
+      "risk": "high",
+      "confidence": "high",
+      "validation_test_ids": [
+        "TEST-OWNER-TRANSFER"
+      ],
+      "finding_id": "FINDING-OWNER-TRANSFER",
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY",
+        "EVD-POLICY"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "FINDING-OWNER-TRANSFER",
+      "candidate_id": "CANDIDATE-OWNER-TRANSFER",
+      "title": "Editor may transfer report ownership through owner_id",
+      "classification": "BOPLA",
+      "proof_basis": "source",
+      "severity": "high",
+      "confidence": "high",
+      "description": {
+        "claim_id": "CLAIM-FINDING-DESCRIPTION",
+        "statement": "At the frozen source revision, PATCH report accepts owner_id from an editor and persists it without invoking the administrator-only owner-transfer policy.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "confidence": "high"
+      },
+      "impact": {
+        "claim_id": "CLAIM-FINDING-IMPACT",
+        "statement": "A tenant editor could transfer control of a report to another identity and alter later ownership-based access decisions; this is source-observed impact and was not executed.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-REPOSITORY",
+          "EVD-POLICY"
+        ],
+        "confidence": "high"
+      },
+      "preconditions": [
+        {
+          "claim_id": "CLAIM-FINDING-PRECONDITION",
+          "statement": "The caller has a valid editor identity and can update a report in the same tenant.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "remediation": {
+        "claim_id": "CLAIM-FINDING-REMEDIATION",
+        "statement": "Reject owner_id for ordinary editors and enforce can_transfer_report_owner at the authoritative service or repository boundary before any ownership assignment.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-POLICIES",
+          "EVD-REPOSITORY",
+          "EVD-POLICY"
+        ],
+        "confidence": "high"
+      },
+      "regression_test": {
+        "claim_id": "CLAIM-FINDING-REGRESSION",
+        "statement": "Add a repository-native test proving editor owner_id is rejected while an authorized tenant administrator can transfer a disposable report and cleanup succeeds.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-POLICIES",
+          "EVD-POLICY"
+        ],
+        "confidence": "high"
+      },
+      "operation_ids": [
+        "OP-REPORT-PATCH"
+      ],
+      "resource_ids": [
+        "RESOURCE-REPORT-A",
+        "RESOURCE-OWNER-PROPERTY"
+      ],
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY",
+        "EVD-POLICY"
+      ]
+    }
+  ],
+  "validation_tests": [
+    {
+      "validation_test_id": "TEST-OWNER-TRANSFER",
+      "title": "Verify editor cannot transfer report ownership",
+      "operation_id": "OP-REPORT-PATCH",
+      "caller_identity_id": "IDENTITY-EDITOR-A",
+      "target_resource_ids": [
+        "RESOURCE-REPORT-A",
+        "RESOURCE-OWNER-PROPERTY"
+      ],
+      "matrix_cell_ids": [
+        "MATRIX-PATCH-ADMIN",
+        "MATRIX-PATCH-EDITOR-OWNER"
+      ],
+      "target": {
+        "origin": "http://127.0.0.1:8000",
+        "environment": "authorized local disposable fixture only",
+        "transport": "raw_http",
+        "action_class": "state_change"
+      },
+      "baseline": {
+        "caller_identity_id": "IDENTITY-ADMIN-A",
+        "action": {
+          "claim_id": "CLAIM-TEST-BASELINE-ACTION",
+          "statement": "Using a freshly verified tenant administrator, transfer a newly created disposable report to a synthetic target identity and read it back.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-POLICY",
+            "EVD-POLICIES",
+            "EVD-RUNTIME-UNKNOWN"
+          ],
+          "confidence": "medium"
+        },
+        "expected_signal_ids": [
+          "SIGNAL-CALLER-IDENTITY",
+          "SIGNAL-OWNER-ATTRIBUTION",
+          "SIGNAL-AUTHORIZED-BASELINE",
+          "SIGNAL-STATE-READBACK"
+        ]
+      },
+      "attack_case": {
+        "caller_identity_id": "IDENTITY-EDITOR-A",
+        "action": {
+          "claim_id": "CLAIM-TEST-ATTACK-ACTION",
+          "statement": "Using a freshly verified editor, replay the identical PATCH against a fresh disposable report while changing only owner_id, then read back as the authorized owner.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICY",
+            "EVD-RUNTIME-UNKNOWN"
+          ],
+          "confidence": "medium"
+        },
+        "expected_signal_ids": [
+          "SIGNAL-CALLER-IDENTITY",
+          "SIGNAL-OWNER-ATTRIBUTION",
+          "SIGNAL-EXPECTED-DENIAL",
+          "SIGNAL-UNAUTHORIZED-IMPACT",
+          "SIGNAL-CONTROL-SUCCESS",
+          "SIGNAL-CONTROL-FAILURE",
+          "SIGNAL-STATE-READBACK",
+          "SIGNAL-CLEANUP"
+        ]
+      },
+      "signals": [
+        {
+          "signal_id": "SIGNAL-CALLER-IDENTITY",
+          "purpose": "caller_identity",
+          "description": {
+            "claim_id": "CLAIM-SIGNAL-CALLER",
+            "statement": "A same-transport identity check immediately before each request identifies the expected editor or administrator and tenant.",
+            "evidence_class": "unknown",
+            "evidence_ids": [
+              "EVD-RUNTIME-UNKNOWN"
+            ],
+            "confidence": "medium"
+          }
+        },
+        {
+          "signal_id": "SIGNAL-OWNER-ATTRIBUTION",
+          "purpose": "owner_target_attribution",
+          "description": {
+            "claim_id": "CLAIM-SIGNAL-OWNER",
+            "statement": "Creation receipt and owner-authenticated readback bind the disposable report to its initial owner and tenant.",
+            "evidence_class": "unknown",
+            "evidence_ids": [
+              "EVD-RUNTIME-UNKNOWN"
+            ],
+            "confidence": "medium"
+          }
+        },
+        {
+          "signal_id": "SIGNAL-AUTHORIZED-BASELINE",
+          "purpose": "authorized_baseline",
+          "description": {
+            "claim_id": "CLAIM-SIGNAL-BASELINE",
+            "statement": "The authorized administrator transfer succeeds with the same route, parser, body shape, and disposable resource lifecycle.",
+            "evidence_class": "unknown",
+            "evidence_ids": [
+              "EVD-RUNTIME-UNKNOWN"
+            ],
+            "confidence": "medium"
+          }
+        },
+        {
+          "signal_id": "SIGNAL-EXPECTED-DENIAL",
+          "purpose": "expected_denial",
+          "description": {
+            "claim_id": "CLAIM-SIGNAL-DENIAL",
+            "statement": "The editor request is rejected and owner-authenticated readback shows owner_id unchanged.",
+            "evidence_class": "unknown",
+            "evidence_ids": [
+              "EVD-RUNTIME-UNKNOWN"
+            ],
+            "confidence": "medium"
+          }
+        },
+        {
+          "signal_id": "SIGNAL-UNAUTHORIZED-IMPACT",
+          "purpose": "unauthorized_impact",
+          "description": {
+            "claim_id": "CLAIM-SIGNAL-IMPACT",
+            "statement": "Owner-authenticated readback shows the editor-supplied owner_id persisted despite the editor's lower role.",
+            "evidence_class": "unknown",
+            "evidence_ids": [
+              "EVD-RUNTIME-UNKNOWN"
+            ],
+            "confidence": "medium"
+          }
+        },
+        {
+          "signal_id": "SIGNAL-CONTROL-SUCCESS",
+          "purpose": "control_success",
+          "description": {
+            "claim_id": "CLAIM-SIGNAL-CONTROL-SUCCESS",
+            "statement": "The administrator-only owner-transfer policy is invoked or the sensitive property is rejected before persistence for the editor case.",
+            "evidence_class": "unknown",
+            "evidence_ids": [
+              "EVD-RUNTIME-UNKNOWN"
+            ],
+            "confidence": "medium"
+          }
+        },
+        {
+          "signal_id": "SIGNAL-CONTROL-FAILURE",
+          "purpose": "control_failure",
+          "description": {
+            "claim_id": "CLAIM-SIGNAL-CONTROL-FAILURE",
+            "statement": "The editor case bypasses or omits the administrator-only policy and reaches the ownership assignment.",
+            "evidence_class": "unknown",
+            "evidence_ids": [
+              "EVD-RUNTIME-UNKNOWN"
+            ],
+            "confidence": "medium"
+          }
+        },
+        {
+          "signal_id": "SIGNAL-STATE-READBACK",
+          "purpose": "state_readback",
+          "description": {
+            "claim_id": "CLAIM-SIGNAL-READBACK",
+            "statement": "An authoritative owner or administrator read retrieves the stored owner_id before and after each attempt.",
+            "evidence_class": "unknown",
+            "evidence_ids": [
+              "EVD-RUNTIME-UNKNOWN"
+            ],
+            "confidence": "medium"
+          }
+        },
+        {
+          "signal_id": "SIGNAL-CLEANUP",
+          "purpose": "cleanup",
+          "description": {
+            "claim_id": "CLAIM-SIGNAL-CLEANUP",
+            "statement": "The disposable report is restored or deleted by its authorized owner and absence or original state is verified.",
+            "evidence_class": "unknown",
+            "evidence_ids": [
+              "EVD-RUNTIME-UNKNOWN"
+            ],
+            "confidence": "medium"
+          }
+        }
+      ],
+      "safety": {
+        "state_change": true,
+        "disposable_resource_ids": [
+          "RESOURCE-REPORT-A",
+          "RESOURCE-OWNER-PROPERTY"
+        ],
+        "protected_identity_ids": [
+          "IDENTITY-EDITOR-A",
+          "IDENTITY-ADMIN-A"
+        ],
+        "synthetic_data": true,
+        "before_state_steps": [
+          "Create a fresh synthetic report under the authorized owner and record owner_id."
+        ],
+        "readback_steps": [
+          "Read the report through an authoritative owner or administrator path after each attempt."
+        ],
+        "cleanup_steps": [
+          "Restore the original owner if required, delete the disposable report, and verify cleanup."
+        ],
+        "destructive_risk": "low"
+      },
+      "max_attempts": 2,
+      "stop_conditions": [
+        "Stop immediately if either identity resolves to an unexpected caller or tenant.",
+        "Stop if the disposable resource cannot be authoritatively read back or cleaned up.",
+        "Stop after the first unexpected side effect outside the declared owner_id property."
+      ],
+      "limitations": [
+        {
+          "claim_id": "CLAIM-TEST-LIMITATION",
+          "statement": "This planned test is valid only on an explicitly authorized local disposable target with freshly runtime-verified identities.",
+          "evidence_class": "unknown",
+          "evidence_ids": [
+            "EVD-RUNTIME-UNKNOWN"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "execution_status": "planned",
+      "evidence_ids": [
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY",
+        "EVD-POLICY",
+        "EVD-RUNTIME-UNKNOWN"
+      ]
+    }
+  ],
+  "coverage": {
+    "summary": {
+      "claim_id": "CLAIM-COVERAGE-SUMMARY",
+      "statement": "Every frozen model subject and source-only matrix case in the fictional example has an explicit reviewed disposition; runtime remains outside scope.",
+      "evidence_class": "inferred",
+      "evidence_ids": [
+        "EVD-MANIFEST",
+        "EVD-INVENTORY",
+        "EVD-ROUTES",
+        "EVD-POLICIES",
+        "EVD-REPOSITORY"
+      ],
+      "confidence": "high"
+    },
+    "inventory": {
+      "operation_inventory_evidence_id": "EVD-INVENTORY",
+      "source_manifest": {
+        "evidence_id": "EVD-MANIFEST",
+        "revision": "0123456789abcdef0123456789abcdef01234567",
+        "content_hash": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "included_paths": [
+          "src/",
+          "docs/"
+        ],
+        "included_packages": [
+          "report-api"
+        ],
+        "supplied_documents": [
+          "docs/authorization-policy.md"
+        ],
+        "excluded_paths": [
+          ".git"
+        ]
+      },
+      "expected_subject_ids": [
+        "SURFACE-REPORT-READ",
+        "SURFACE-REPORT-PATCH",
+        "IDENTITY-UNAUTHENTICATED",
+        "IDENTITY-EDITOR-A",
+        "IDENTITY-EDITOR-B",
+        "IDENTITY-ADMIN-A",
+        "RESOURCE-REPORT-A",
+        "RESOURCE-REPORT-B",
+        "RESOURCE-OWNER-PROPERTY",
+        "POLICY-REPORT-READ",
+        "POLICY-REPORT-EDIT",
+        "POLICY-OWNER-TRANSFER",
+        "ENFORCEMENT-READ-POLICY",
+        "ENFORCEMENT-PATCH-SCOPE",
+        "ENFORCEMENT-OWNER-FILTER",
+        "CARRIER-REPORT-ID",
+        "CARRIER-OWNER-ID",
+        "VARIANT-PATCH-JSON",
+        "OP-REPORT-READ",
+        "OP-REPORT-PATCH",
+        "OBLIGATION-REPORT-READ",
+        "OBLIGATION-REPORT-PATCH",
+        "OBLIGATION-OWNER-TRANSFER",
+        "TRACE-REPORT-READ",
+        "TRACE-REPORT-PATCH",
+        "REQUIREMENT-REPORT-READ",
+        "REQUIREMENT-REPORT-PATCH",
+        "MATRIX-READ-OWN",
+        "MATRIX-READ-CROSS-TENANT",
+        "MATRIX-PATCH-ADMIN",
+        "MATRIX-PATCH-EDITOR-OWNER",
+        "CANDIDATE-READ-GLOBAL-LOOKUP",
+        "CANDIDATE-OWNER-TRANSFER",
+        "FINDING-OWNER-TRANSFER",
+        "TEST-OWNER-TRANSFER"
+      ]
+    },
+    "items": [
+      {
+        "coverage_id": "COV-SURFACES",
+        "category": "surface",
+        "subject_ids": [
+          "SURFACE-REPORT-READ",
+          "SURFACE-REPORT-PATCH"
+        ],
+        "status": "reviewed",
+        "risk_if_unreviewed": "high",
+        "reason": {
+          "claim_id": "CLAIM-COVERAGE-SURFACES",
+          "statement": "Both registered authorization-relevant REST surfaces were inventoried and linked to operations.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-INVENTORY",
+            "EVD-ROUTES"
+          ],
+          "confidence": "high"
+        },
+        "evidence_ids": [
+          "EVD-INVENTORY",
+          "EVD-ROUTES"
+        ],
+        "owner": "Application security owner",
+        "next_action": {
+          "claim_id": "CLAIM-COVERAGE-SURFACES-NEXT",
+          "statement": "Reopen surface coverage when route registration or interface exposure changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-INVENTORY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-IDENTITIES",
+        "category": "identity",
+        "subject_ids": [
+          "IDENTITY-UNAUTHENTICATED",
+          "IDENTITY-EDITOR-A",
+          "IDENTITY-EDITOR-B",
+          "IDENTITY-ADMIN-A"
+        ],
+        "status": "reviewed",
+        "risk_if_unreviewed": "high",
+        "reason": {
+          "claim_id": "CLAIM-COVERAGE-IDENTITIES",
+          "statement": "All source-modeled caller roles and tenant boundaries used by the admitted policy are represented.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-POLICIES",
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        },
+        "evidence_ids": [
+          "EVD-POLICIES",
+          "EVD-POLICY"
+        ],
+        "owner": "Identity platform owner",
+        "next_action": {
+          "claim_id": "CLAIM-COVERAGE-IDENTITIES-NEXT",
+          "statement": "Reopen identity coverage when roles, tenants, sharing, or runtime sessions change.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-RESOURCES",
+        "category": "resource",
+        "subject_ids": [
+          "RESOURCE-REPORT-A",
+          "RESOURCE-REPORT-B",
+          "RESOURCE-OWNER-PROPERTY"
+        ],
+        "status": "reviewed",
+        "risk_if_unreviewed": "high",
+        "reason": {
+          "claim_id": "CLAIM-COVERAGE-RESOURCES",
+          "statement": "Report ownership, tenant attribution, sensitive owner property, lifecycle, and fixture safety were modeled.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-REPOSITORY",
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        },
+        "evidence_ids": [
+          "EVD-REPOSITORY",
+          "EVD-POLICY"
+        ],
+        "owner": "Report domain owner",
+        "next_action": {
+          "claim_id": "CLAIM-COVERAGE-RESOURCES-NEXT",
+          "statement": "Reopen resource provenance when report ownership or fixture lifecycle changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-POLICIES",
+        "category": "policy",
+        "subject_ids": [
+          "POLICY-REPORT-READ",
+          "POLICY-REPORT-EDIT",
+          "POLICY-OWNER-TRANSFER"
+        ],
+        "status": "reviewed",
+        "risk_if_unreviewed": "critical",
+        "reason": {
+          "claim_id": "CLAIM-COVERAGE-POLICIES",
+          "statement": "Read, ordinary edit, and owner-transfer rules were reconciled across source and intended policy.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-POLICIES",
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        },
+        "evidence_ids": [
+          "EVD-POLICIES",
+          "EVD-POLICY"
+        ],
+        "owner": "Authorization policy owner",
+        "next_action": {
+          "claim_id": "CLAIM-COVERAGE-POLICIES-NEXT",
+          "statement": "Reopen policy coverage when edit, transfer, sharing, or administrator semantics change.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-ENFORCEMENT",
+        "category": "enforcement_point",
+        "subject_ids": [
+          "ENFORCEMENT-READ-POLICY",
+          "ENFORCEMENT-PATCH-SCOPE",
+          "ENFORCEMENT-OWNER-FILTER"
+        ],
+        "status": "reviewed",
+        "risk_if_unreviewed": "critical",
+        "reason": {
+          "claim_id": "CLAIM-COVERAGE-ENFORCEMENT",
+          "statement": "Each applicable policy was traced to its path-specific enforcement point or explicit missing point.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICIES",
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        },
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "owner": "Report API owner",
+        "next_action": {
+          "claim_id": "CLAIM-COVERAGE-ENFORCEMENT-NEXT",
+          "statement": "Implement and verify owner-property authorization at the authoritative update boundary.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-POLICIES",
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-CARRIERS-VARIANTS",
+        "category": "carrier",
+        "subject_ids": [
+          "CARRIER-REPORT-ID",
+          "CARRIER-OWNER-ID",
+          "VARIANT-PATCH-JSON"
+        ],
+        "status": "reviewed",
+        "risk_if_unreviewed": "high",
+        "reason": {
+          "claim_id": "CLAIM-COVERAGE-CARRIERS",
+          "statement": "The path identifier, sensitive owner property, and evidenced JSON update variant were traced to their sinks.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        },
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-REPOSITORY"
+        ],
+        "owner": "Report API owner",
+        "next_action": {
+          "claim_id": "CLAIM-COVERAGE-CARRIERS-NEXT",
+          "statement": "Reopen carrier and variant coverage when request schemas, parsers, or API versions change.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-ROUTES"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-OPERATIONS-OBLIGATIONS",
+        "category": "operation",
+        "subject_ids": [
+          "OP-REPORT-READ",
+          "OP-REPORT-PATCH",
+          "OBLIGATION-REPORT-READ",
+          "OBLIGATION-REPORT-PATCH",
+          "OBLIGATION-OWNER-TRANSFER"
+        ],
+        "status": "reviewed",
+        "risk_if_unreviewed": "critical",
+        "reason": {
+          "claim_id": "CLAIM-COVERAGE-OPERATIONS",
+          "statement": "Both operations and each independent resource/property authorization obligation were reviewed end to end.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICIES",
+            "EVD-REPOSITORY",
+            "EVD-INVENTORY"
+          ],
+          "confidence": "high"
+        },
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY",
+          "EVD-INVENTORY"
+        ],
+        "owner": "Report API owner",
+        "next_action": {
+          "claim_id": "CLAIM-COVERAGE-OPERATIONS-NEXT",
+          "statement": "Reopen affected operation obligations after route, policy, or repository changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-INVENTORY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-TRACES",
+        "category": "source_trace",
+        "subject_ids": [
+          "TRACE-REPORT-READ",
+          "TRACE-REPORT-PATCH"
+        ],
+        "status": "reviewed",
+        "risk_if_unreviewed": "critical",
+        "reason": {
+          "claim_id": "CLAIM-COVERAGE-TRACES",
+          "statement": "Both shipped source paths were traced through policy and final protected sinks with contradiction checks.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICIES",
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        },
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "owner": "Application security owner",
+        "next_action": {
+          "claim_id": "CLAIM-COVERAGE-TRACES-NEXT",
+          "statement": "Retrace affected paths when any hop or deployment condition changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-ROUTES"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-MATRIX",
+        "category": "matrix_cell",
+        "subject_ids": [
+          "REQUIREMENT-REPORT-READ",
+          "REQUIREMENT-REPORT-PATCH",
+          "MATRIX-READ-OWN",
+          "MATRIX-READ-CROSS-TENANT",
+          "MATRIX-PATCH-ADMIN",
+          "MATRIX-PATCH-EDITOR-OWNER"
+        ],
+        "status": "reviewed",
+        "risk_if_unreviewed": "critical",
+        "reason": {
+          "claim_id": "CLAIM-COVERAGE-MATRIX",
+          "statement": "Required own, cross-tenant, administrator, and editor-property source cases are present and dispositioned.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-INVENTORY",
+            "EVD-POLICY",
+            "EVD-ROUTES",
+            "EVD-POLICIES",
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        },
+        "evidence_ids": [
+          "EVD-INVENTORY",
+          "EVD-POLICY",
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY"
+        ],
+        "owner": "Application security owner",
+        "next_action": {
+          "claim_id": "CLAIM-COVERAGE-MATRIX-NEXT",
+          "statement": "Execute the owner-transfer test only after exact local or staging authorization and disposable identities are supplied.",
+          "evidence_class": "unknown",
+          "evidence_ids": [
+            "EVD-RUNTIME-UNKNOWN"
+          ],
+          "confidence": "medium"
+        }
+      },
+      {
+        "coverage_id": "COV-DECISIONS",
+        "category": "candidate",
+        "subject_ids": [
+          "CANDIDATE-READ-GLOBAL-LOOKUP",
+          "CANDIDATE-OWNER-TRANSFER",
+          "FINDING-OWNER-TRANSFER",
+          "TEST-OWNER-TRANSFER"
+        ],
+        "status": "reviewed",
+        "risk_if_unreviewed": "high",
+        "reason": {
+          "claim_id": "CLAIM-COVERAGE-DECISIONS",
+          "statement": "The apparent read issue was rejected with control evidence, the owner-transfer gap passed all source gates, and its safe runtime test remains explicitly planned outside scope.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICIES",
+            "EVD-REPOSITORY",
+            "EVD-POLICY",
+            "EVD-RUNTIME-UNKNOWN"
+          ],
+          "confidence": "high"
+        },
+        "evidence_ids": [
+          "EVD-ROUTES",
+          "EVD-POLICIES",
+          "EVD-REPOSITORY",
+          "EVD-POLICY",
+          "EVD-RUNTIME-UNKNOWN"
+        ],
+        "owner": "Report API owner",
+        "next_action": {
+          "claim_id": "CLAIM-COVERAGE-DECISIONS-NEXT",
+          "statement": "Implement the owner-property control, add regression coverage, and perform authorized validation when a disposable target is available.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-POLICIES",
+            "EVD-POLICY",
+            "EVD-RUNTIME-UNKNOWN"
+          ],
+          "confidence": "high"
+        }
+      }
+    ],
+    "unread_high_risk_count": 0
+  },
+  "questions": [],
+  "quality_review": {
+    "status": "pass",
+    "challenger": "Independent example challenger",
+    "challenged_at": "2026-07-15T20:30:00-04:00",
+    "challenge_findings": [
+      {
+        "finding_id": "QF-GLOBAL-LOOKUP-FALSE-POSITIVE",
+        "severity": "high",
+        "status": "resolved",
+        "title": {
+          "claim_id": "CLAIM-QF-TITLE",
+          "statement": "Confirm whether the global report lookup bypasses tenant policy before serialization.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        },
+        "related_ids": [
+          "CANDIDATE-READ-GLOBAL-LOOKUP",
+          "TRACE-REPORT-READ",
+          "ENFORCEMENT-READ-POLICY"
+        ],
+        "disposition": {
+          "claim_id": "CLAIM-QF-DISPOSITION",
+          "statement": "Resolved after tracing can_read_report from the loaded object to the only response serializer; the candidate remains rejected.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICIES",
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        },
+        "owner": "Independent challenger",
+        "blocker": false
+      }
+    ],
+    "gates": [
+      {
+        "gate_id": "GATE-SCOPE",
+        "gate": "scope_and_evidence",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-SCOPE",
+          "statement": "The deterministic manifest, revision, evidence, and declared source-only scope reconcile.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-MANIFEST",
+            "EVD-INVENTORY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "gate_id": "GATE-IDENTITY",
+        "gate": "identity_integrity",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-IDENTITY",
+          "statement": "All actors are explicitly source-modeled and none is misrepresented as a runtime-verified session.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-POLICIES",
+            "EVD-POLICY",
+            "EVD-RUNTIME-UNKNOWN"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "gate_id": "GATE-RESOURCE",
+        "gate": "resource_provenance",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-RESOURCE",
+          "statement": "Owner, tenant, sensitivity, lifecycle, provenance, and fixture safety are recorded for every resource.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-REPOSITORY",
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "gate_id": "GATE-INVENTORY",
+        "gate": "operation_inventory",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-INVENTORY",
+          "statement": "Both registered authorization-relevant operations and their sensitive carriers and obligations are inventoried.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-INVENTORY",
+            "EVD-ROUTES"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "gate_id": "GATE-POLICY",
+        "gate": "policy_model",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-POLICY",
+          "statement": "Read, edit, and owner-transfer rules cite source and intended authority and include relevant subject relationships.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-POLICIES",
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "gate_id": "GATE-SOURCE-TRACE",
+        "gate": "source_trace",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-TRACE",
+          "statement": "Each shipped operation is traced through enforcement and the final protected sink with contradiction evidence.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICIES",
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "gate_id": "GATE-MATRIX",
+        "gate": "matrix_completeness",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-MATRIX",
+          "statement": "Every frozen source identity, relationship, obligation, carrier, and variant requirement has a dispositioned matrix cell.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-INVENTORY",
+            "EVD-POLICY",
+            "EVD-ROUTES"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "gate_id": "GATE-RUNTIME-SAFETY",
+        "gate": "runtime_safety",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-RUNTIME-SAFETY",
+          "statement": "No runtime action occurred, and the planned state-changing test requires exact authorization, disposable resources, readback, and cleanup.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-RUNTIME-UNKNOWN",
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "gate_id": "GATE-PROOF",
+        "gate": "proof_gates",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-PROOF",
+          "statement": "The accepted source candidate proves all five gates, and the rejected read lead records the contradictory impact gate.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICIES",
+            "EVD-REPOSITORY",
+            "EVD-POLICY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "gate_id": "GATE-FALSE-POSITIVE",
+        "gate": "false_positive_challenge",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-FALSE-POSITIVE",
+          "statement": "The independent challenge rejected the global-lookup lead only after confirming the downstream control applies to the exact path.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-ROUTES",
+            "EVD-POLICIES",
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "gate_id": "GATE-COVERAGE",
+        "gate": "coverage",
+        "status": "passed",
+        "rationale": {
+          "claim_id": "CLAIM-GATE-COVERAGE",
+          "statement": "All expected model subjects are represented in coverage and no high-risk source item remains unread.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-MANIFEST",
+            "EVD-INVENTORY",
+            "EVD-ROUTES",
+            "EVD-POLICIES",
+            "EVD-REPOSITORY"
+          ],
+          "confidence": "high"
+        }
+      }
+    ],
+    "unresolved_high_severity_finding_ids": [],
+    "checks": {
+      "ids_unique": true,
+      "references_valid": true,
+      "source_runtime_separated": true,
+      "secrets_redacted": true,
+      "coverage_reconciled": true,
+      "challenge_complete": true
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "author": {
+    "name": "rainmanjam",
+    "url": "https://github.com/rainmanjam"
+  },
+  "description": "Mistake-proof your code, your pipeline, and your agents. Audits code for mistakes that are possible, designs APIs where misuse cannot be expressed, installs guardrails, and turns incidents into devices that prevent recurrence.",
+  "homepage": "https://github.com/rainmanjam/poka-yoke",
+  "hooks": {},
+  "interface": {
+    "brandColor": "#A67C00",
+    "brandColorDark": "#FFD559",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Audit this module for mistakes that are possible.",
+      "Design this API so the wrong call cannot be written."
+    ],
+    "developerName": "rainmanjam",
+    "displayName": "Poka-Yoke",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Mistake-proof your code, your pipeline, and your agents. Audits code for mistakes that are possible, designs APIs where misuse cannot be expressed, installs guardrails, and turns incidents into devices that prevent recurrence.",
+    "shortDescription": "Devices, not reminders",
+    "websiteURL": "https://github.com/rainmanjam/poka-yoke"
+  },
+  "keywords": [
+    "code-review",
+    "defensive design",
+    "defensive-design",
+    "error proof",
+    "error-prevention",
+    "fail safe",
+    "foolproof",
+    "footgun",
+    "guardrails",
+    "hardening",
+    "idiot proof",
+    "invalid states unrepresentable",
+    "lean",
+    "mistake proof",
+    "mistake-proofing",
+    "poka-yoke",
+    "poke yoke",
+    "poke-yoke",
+    "reliability",
+    "shigeo shingo",
+    "shingo",
+    "toyota production system",
+    "type-safety",
+    "zero defects"
+  ],
+  "license": "MIT",
+  "name": "poka-yoke",
+  "repository": "https://github.com/rainmanjam/poka-yoke",
+  "skills": "./skills/",
+  "version": "0.2.0"
+}

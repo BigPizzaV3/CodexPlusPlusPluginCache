@@ -1,0 +1,8 @@
+interface:
+  display_name: "Short Circuit"
+  short_description: "Engineering orchestration and Python quality"
+  brand_color: "#2563EB"
+  default_prompt: "Use $short-circuit to plan, implement, and verify this coding task with bounded orchestration."
+
+policy:
+  allow_implicit_invocation: true

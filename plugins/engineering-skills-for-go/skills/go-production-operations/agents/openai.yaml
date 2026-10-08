@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Production Operations"
+  short_description: "Own Go process and incident lifecycles"
+  default_prompt: "Use $go-production-operations to engineer this Go service lifecycle."
+policy:
+  allow_implicit_invocation: true

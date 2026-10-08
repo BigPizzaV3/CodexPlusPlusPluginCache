@@ -1,0 +1,55 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Pavel Bochkov Rastopchin",
+    "url": "https://github.com/innrvoice"
+  },
+  "description": "Keep long-running Codex work resumable and reuse verified failure knowledge safely between your own projects. ChatGPT is a companion for supplied files and portable bundles.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "brandColor": "#789F25",
+        "brandColorDark": "#B3DA60",
+        "capabilities": [
+          "Resume Codex work across sessions",
+          "Keep plans, decisions and evidence with the repository",
+          "Capture verified failure knowledge",
+          "Reuse reviewed lessons across your own projects"
+        ],
+        "category": "Productivity",
+        "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+        "defaultPrompt": [
+          "Tell me how Project OS helps Codex resume real engineering work across sessions.",
+          "Help me set up Project OS for this repository and start with a safe preview.",
+          "Help me reuse verified failure knowledge from an earlier project in this one."
+        ],
+        "developerName": "Pavel Bochkov Rastopchin",
+        "displayName": "Engineering Project OS",
+        "logo": "./.codex-plugin/assets/logo.svg",
+        "longDescription": "Use this when Codex work must survive multiple sessions, preserve verified decisions and evidence or carry reviewed failure lessons into another repository you own. Project OS inspects, bootstraps, validates, repairs and upgrades visible repository records with previews before writes. ChatGPT is a companion for explanation, supplied project files and portable knowledge bundles. Do not use it for ordinary one-session coding or as an automatic global knowledge service.",
+        "privacyPolicyURL": "https://github.com/innrvoice/engineering-project-os/blob/main/docs/PRIVACY.md",
+        "shortDescription": "Resume work. Reuse lessons.",
+        "supportURL": "https://github.com/innrvoice/engineering-project-os/issues",
+        "termsOfServiceURL": "https://github.com/innrvoice/engineering-project-os/blob/main/docs/TERMS.md",
+        "websiteURL": "https://github.com/innrvoice/engineering-project-os"
+      }
+    }
+  },
+  "homepage": "https://github.com/innrvoice/engineering-project-os",
+  "keywords": [
+    "codex",
+    "developer-tools",
+    "engineering-workflow",
+    "repository",
+    "project-state",
+    "continuity",
+    "failure-knowledge",
+    "cross-project",
+    "engineering-memory",
+    "chatgpt"
+  ],
+  "license": "MIT",
+  "name": "engineering-project-os",
+  "repository": "https://github.com/innrvoice/engineering-project-os",
+  "version": "2.2.1"
+}

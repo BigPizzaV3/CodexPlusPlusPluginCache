@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:raw-log-record:1",
+  "title": "note Workspace raw log record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "log_id",
+    "request_id",
+    "recorded_at",
+    "input_type",
+    "original_text",
+    "parent_log_id",
+    "follow_up_question",
+    "visibility",
+    "status",
+    "content_sha256",
+    "payload_sha256"
+  ],
+  "properties": {
+    "schema_version": {"enum": [1, 2]},
+    "conversation_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "speaker": {"enum": ["user", "assistant"]},
+    "log_id": {"type": "string", "pattern": "^log-[0-9]{8}-[a-z0-9]{8,24}$"},
+    "request_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "input_type": {
+      "enum": ["text", "voice_transcript", "diary", "bullet_notes", "follow_up_answer", "other"]
+    },
+    "original_text": {"type": "string", "minLength": 1, "maxLength": 100000},
+    "parent_log_id": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "pattern": "^log-[0-9]{8}-[a-z0-9]{8,24}$"}
+      ]
+    },
+    "follow_up_question": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "minLength": 1, "maxLength": 100000}
+      ]
+    },
+    "visibility": {"enum": ["private", "confirm_before_use", "public"]},
+    "status": {"const": "active"},
+    "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "allOf": [{
+    "if": {"properties": {"schema_version": {"const": 2}}, "required": ["schema_version"]},
+    "then": {
+      "required": ["conversation_id", "speaker"],
+      "properties": {"conversation_id": {}, "speaker": {}, "follow_up_question": {"type": "null"}},
+      "allOf": [{
+        "if": {"properties": {"speaker": {"const": "assistant"}}, "required": ["speaker"]},
+        "then": {"properties": {"input_type": {"const": "text"}, "visibility": {"const": "private"}}}
+      }]
+    },
+    "else": {"properties": {"conversation_id": {"type": "null"}, "speaker": {"type": "null"}}}
+  }]
+}

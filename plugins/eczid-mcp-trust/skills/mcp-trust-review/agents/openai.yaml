@@ -1,0 +1,11 @@
+interface:
+  display_name: "ECZ-ID MCP Trust"
+  short_description: "Review MCP servers in a repo"
+  icon_small: "./assets/logo.png"
+  icon_large: "./assets/logo.png"
+  default_prompt: "Use $mcp-trust-review to review this workspace's MCP server configuration and report the Review Priority."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

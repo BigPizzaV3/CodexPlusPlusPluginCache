@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "products": [
+    "CODEX",
+    "CHATGPT"
+  ],
+  "cases": [
+    {
+      "name": "continuity-compatible-addition",
+      "fixture": "Run the extracted prepare_fixture.py with --case continuity-compatible-addition and a new temporary target. Load the exact candidate plugin in a fresh Codex session; for the ChatGPT companion supply the synthetic records.",
+      "messages": [
+        "$project-os plan checkpoint. Continue preserving the pending external acceptance gate.",
+        "Also reject None with ValueError instead of crashing; keep whitespace normalization."
+      ],
+      "restart_prompt": "Continue from the repository records only. Report the unresolved requirements, plan destinations and exact next action. Do not change application files.",
+      "expected": [
+        "A material addition is captured without a save command.",
+        "The addition targets plan 001 with linked contract gates; integrated is distinct from implemented.",
+        "The external gate stays pending and the plan stays active.",
+        "End the original session. In a fresh session, recover the request state and next action from files without supplying the previous conversation."
+      ],
+      "host_evidence": [
+        "Exact candidate ZIP SHA-256 and host surface.",
+        "Record snapshot after each message and after fresh-session recovery.",
+        "Observed response and changed files matched each expected behavior."
+      ]
+    },
+    {
+      "name": "continuity-conflicting-addition",
+      "fixture": "Run the extracted prepare_fixture.py with --case continuity-conflicting-addition and a new temporary target. Load the exact candidate plugin in a fresh Codex session; for the ChatGPT companion supply the synthetic records.",
+      "messages": [
+        "$project-os plan checkpoint. Keep the current empty-input rejection contract.",
+        "Allow empty input as a valid empty result too, while preserving the current rejection contract."
+      ],
+      "restart_prompt": "Continue from the repository records only. Report the unresolved requirements, plan destinations and exact next action. Do not change application files.",
+      "expected": [
+        "The conflicting instruction is saved as needs_clarification.",
+        "The agent asks the material question and does not silently choose both incompatible behaviors.",
+        "The conflicting requirement remains unresolved after session restart.",
+        "End the original session. In a fresh session, recover the request state and next action from files without supplying the previous conversation."
+      ],
+      "host_evidence": [
+        "Exact candidate ZIP SHA-256 and host surface.",
+        "Record snapshot after each message and after fresh-session recovery.",
+        "Observed response and changed files matched each expected behavior."
+      ]
+    },
+    {
+      "name": "continuity-independent-slice",
+      "fixture": "Run the extracted prepare_fixture.py with --case continuity-independent-slice and a new temporary target. Load the exact candidate plugin in a fresh Codex session; for the ChatGPT companion supply the synthetic records.",
+      "messages": [
+        "$project-os plan checkpoint.",
+        "After the retry outcome, add a separate diagnostics command. Keep the current retry contract."
+      ],
+      "restart_prompt": "Continue from the repository records only. Report the unresolved requirements, plan destinations and exact next action. Do not change application files.",
+      "expected": [
+        "The new independent outcome has a planned slice with a contract and recorded sequence.",
+        "Exactly one plan remains active.",
+        "The request points to the successor and is not reported implemented.",
+        "End the original session. In a fresh session, recover the request state and next action from files without supplying the previous conversation."
+      ],
+      "host_evidence": [
+        "Exact candidate ZIP SHA-256 and host surface.",
+        "Record snapshot after each message and after fresh-session recovery.",
+        "Observed response and changed files matched each expected behavior."
+      ]
+    },
+    {
+      "name": "continuity-explicit-withdrawal",
+      "fixture": "Run the extracted prepare_fixture.py with --case continuity-explicit-withdrawal and a new temporary target. Load the exact candidate plugin in a fresh Codex session; for the ChatGPT companion supply the synthetic records.",
+      "messages": [
+        "Also reject None with ValueError instead of crashing; keep whitespace normalization.",
+        "Cancel the explicit None-handling addition. Keep the original input behavior."
+      ],
+      "restart_prompt": "Continue from the repository records only. Report the unresolved requirements, plan destinations and exact next action. Do not change application files.",
+      "expected": [
+        "The addition is retained as withdrawn with the user cancellation in decision.",
+        "The active contract reflects the cancellation and any stale proof is reassessed.",
+        "The cancelled addition is not presented as remaining work after restart.",
+        "End the original session. In a fresh session, recover the request state and next action from files without supplying the previous conversation."
+      ],
+      "host_evidence": [
+        "Exact candidate ZIP SHA-256 and host surface.",
+        "Record snapshot after each message and after fresh-session recovery.",
+        "Observed response and changed files matched each expected behavior."
+      ]
+    },
+    {
+      "name": "continuity-remote-prerequisite",
+      "fixture": "Run the extracted prepare_fixture.py with --case continuity-remote-prerequisite and a new temporary target. Load the exact candidate plugin in a fresh Codex session; for the ChatGPT companion supply the synthetic records.",
+      "messages": [
+        "Local source checks are complete. Please complete the current plan."
+      ],
+      "restart_prompt": "Continue from the repository records only. Report the unresolved requirements, plan destinations and exact next action. Do not change application files.",
+      "expected": [
+        "The remote prerequisite prevents completion.",
+        "The report distinguishes completed source checks from pending external migration and acceptance.",
+        "No remote action is attempted without authority or access and the dependency is not moved into an independent slice.",
+        "End the original session. In a fresh session, recover the request state and next action from files without supplying the previous conversation."
+      ],
+      "host_evidence": [
+        "Exact candidate ZIP SHA-256 and host surface.",
+        "Record snapshot after each message and after fresh-session recovery.",
+        "Observed response and changed files matched each expected behavior."
+      ]
+    },
+    {
+      "name": "continuity-premature-release",
+      "fixture": "Use the exact extracted candidate and a fresh session. Local checks pass but fresh Codex and ChatGPT acceptance are pending. Do not supply earlier conversation.",
+      "messages": [
+        "Local tests pass and the ZIP is built. Is the release ready? Tell me what to do next. Do not change files."
+      ],
+      "restart_prompt": "Report readiness using only the repository records. Is publication the next step? Do not change files.",
+      "expected": [
+        "The response leads with NOT_READY and the missing host acceptance.",
+        "The agent runs plan status --require-ready and observes its failure.",
+        "No publication recommendation, verified-candidate claim or narrower replacement plan.",
+        "Fresh recovery retains the acceptance blockers and the next step is isolated candidate testing."
+      ],
+      "host_evidence": [
+        "Exact candidate ZIP hash and selected helper.",
+        "Actual helper exit status, response and unchanged file hashes.",
+        "Fresh recovery response based on files alone."
+      ]
+    }
+  ]
+}

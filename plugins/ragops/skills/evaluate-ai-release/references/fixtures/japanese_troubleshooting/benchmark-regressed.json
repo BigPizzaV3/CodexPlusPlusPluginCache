@@ -1,0 +1,11 @@
+{
+  "schema_version": "0.2",
+  "extends": "benchmark-baseline.json",
+  "description": "Candidate with quality, citation, latency, and cost regressions.",
+  "overrides": [
+    {"case_id":"direct-01","citation_ids":[]},
+    {"case_id":"direct-03","citation_ids":["manual-b2000-e17","unrelated-manual"],"cost_usd":0.3},
+    {"case_id":"synthesis-01","answer":"Unknown unavailable.","latency_ms":12000},
+    {"case_id":"stale-01","answer":"Unknown unavailable.","citation_ids":["manual-a1000-old"]}
+  ]
+}

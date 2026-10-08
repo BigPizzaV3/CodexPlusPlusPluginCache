@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Financial Idempotency"
+  short_description: "Prevent duplicate financial effects"
+  default_prompt: "Use $go-financial-idempotency to design this Go money-moving operation for safe replay."
+policy:
+  allow_implicit_invocation: true

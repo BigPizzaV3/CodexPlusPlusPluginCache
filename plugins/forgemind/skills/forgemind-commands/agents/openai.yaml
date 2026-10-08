@@ -1,0 +1,6 @@
+interface:
+  display_name: "Commands"
+  short_description: "Browse ForgeMind's advanced product and delivery workflows."
+  default_prompt: "Use $forgemind-commands to select an advanced ForgeMind workflow."
+policy:
+  allow_implicit_invocation: false

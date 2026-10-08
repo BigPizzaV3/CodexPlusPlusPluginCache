@@ -1,0 +1,9 @@
+interface:
+  display_name: Wayfinder
+  short_description: Map large work into decision tickets
+  default_prompt: Use $wayfinder for this task
+policy:
+  allow_implicit_invocation: false
+  products:
+  - CHAT
+  - CODEX

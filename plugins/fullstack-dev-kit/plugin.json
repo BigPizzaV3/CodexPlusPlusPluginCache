@@ -1,0 +1,53 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "The Agile Monkeys",
+    "url": "https://www.theagilemonkeys.com"
+  },
+  "description": "Issue-to-PR workflow for any tech stack: fetch stories from Jira/Linear/GitHub/Azure and Figma designs, plan-approval gate, adaptive quality + coverage gates, e2e generation, PR creation and review.",
+  "extensions": {
+    "com.theagilemonkeys.dev-kit": {
+      "interface": {
+        "brandColor": "#000000",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "category": "Developer Tools",
+        "composerIcon": "./assets/composer-icon.svg",
+        "defaultPrompt": [
+          "Work ticket PROJ-1234 end to end and open a PR",
+          "Review this diff for correctness, security, and missing tests",
+          "Fetch ticket ENG-42 and summarize its acceptance criteria"
+        ],
+        "developerName": "The Agile Monkeys",
+        "displayName": "Fullstack Dev Kit",
+        "logo": "./assets/logo.png",
+        "logoDark": "./assets/logo-dark.png",
+        "longDescription": "Takes a ticket (Jira / Linear / GitHub Issues / Azure) from plan-approval through implementation, adaptive tests/coverage, security and accessibility review, to an opened pull request. Stack-agnostic. The issue tracker and PR host are configured per repo; connect the matching MCP (e.g. Atlassian for Jira, Linear) to let the kit read tickets.",
+        "privacyPolicyURL": "https://github.com/theam/claude-dev-kit/blob/main/TELEMETRY.md",
+        "screenshots": [
+          "./assets/screenshots/screenshot-1-pr.png",
+          "./assets/screenshots/screenshot-2-plan.png",
+          "./assets/screenshots/screenshot-3-ticket.png"
+        ],
+        "shortDescription": "Issue-to-PR workflow with quality gates, for any stack.",
+        "termsOfServiceURL": "https://github.com/theam/claude-dev-kit/blob/main/LICENSE",
+        "websiteURL": "https://github.com/theam/claude-dev-kit"
+      }
+    }
+  },
+  "homepage": "https://github.com/theam/claude-dev-kit",
+  "keywords": [
+    "issue-to-pr",
+    "code-review",
+    "coverage",
+    "jira",
+    "linear",
+    "workflow"
+  ],
+  "license": "Apache-2.0",
+  "name": "fullstack-dev-kit",
+  "repository": "https://github.com/theam/claude-dev-kit",
+  "version": "0.19.10"
+}

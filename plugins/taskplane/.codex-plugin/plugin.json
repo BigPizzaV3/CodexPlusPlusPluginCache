@@ -1,0 +1,48 @@
+{
+  "author": {
+    "email": "vdemkiv@gmail.com",
+    "name": "Volodymyr Demkiv",
+    "url": "https://github.com/vdemkiv"
+  },
+  "description": "Turn software goals into clear plans, working code and reviews backed by evidence with Claude or Codex.",
+  "homepage": "https://github.com/vdemkiv/taskPlane",
+  "interface": {
+    "brandColor": "#2563EB",
+    "brandColorDark": "#2563EB",
+    "capabilities": [
+      "Turn an idea into clear requirements and acceptance criteria",
+      "Design changes with their dependencies and trade-offs in view",
+      "Plan and build features against the agreed outcome",
+      "Review code and track findings through verified repairs",
+      "Follow progress, verification and available usage in one dashboard"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "taskplane design safe order cancellation before we build it",
+      "taskplane build CSV export for the monthly report",
+      "taskplane review this branch against main; do not change code"
+    ],
+    "developerName": "Volodymyr Demkiv",
+    "displayName": "taskplane",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Taskplane coordinates AI-assisted software delivery from the first requirement to the final review. Design a change before building, implement a feature against clear acceptance criteria, or review existing code without changing it. Keep decisions, source dependencies, tasks, tests and findings connected in one dashboard. Review each stage yourself or explicitly authorize automatic continuation with your own conditions and stops.",
+    "privacyPolicyURL": "https://github.com/vdemkiv/taskPlane/blob/main/PRIVACY.md",
+    "shortDescription": "Plan, build and review code",
+    "termsOfServiceURL": "https://github.com/vdemkiv/taskPlane/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/vdemkiv/taskPlane"
+  },
+  "keywords": [
+    "software-delivery",
+    "software-design",
+    "code-review",
+    "dependency-graph",
+    "claude",
+    "codex"
+  ],
+  "license": "Apache-2.0",
+  "name": "taskplane",
+  "repository": "https://github.com/vdemkiv/taskPlane",
+  "skills": "./skills/",
+  "version": "2.31.5"
+}

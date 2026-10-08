@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Employment agreements, policies, discipline, investigations, separation, and India compliance skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#3A5A40",
+    "brandColorDark": "#A5C5AB",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Draft the employment documents required for this role or exit.",
+      "Build a fair disciplinary or investigation record from these materials.",
+      "Check this Indian workplace's labour and POSH compliance."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Employment",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Seven reusable legal workflows covering employment agreements, handbooks, discipline, separation, investigations, India labour compliance, and POSH governance.",
+    "shortDescription": "Employment law workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "employment",
+    "labour",
+    "workplace",
+    "compliance"
+  ],
+  "license": "MIT",
+  "name": "employment",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

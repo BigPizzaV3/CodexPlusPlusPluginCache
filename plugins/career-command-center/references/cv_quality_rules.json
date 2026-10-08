@@ -1,0 +1,61 @@
+{
+  "version": 2,
+  "strategy_version": "2.0",
+  "cv_min_pages": 1,
+  "cv_max_pages": 3,
+  "default_cv_pages": 2,
+  "max_bullet_words": 41,
+  "minimum_selected_evidence_ids": 3,
+  "require_base_master": true,
+  "require_human_review": true,
+  "blocked_section_names": [
+    "Additional Evidence",
+    "Additional Fit Evidence",
+    "Why I Match",
+    "Role Match",
+    "Targeted Evidence",
+    "Best Match Evidence"
+  ],
+  "blocked_phrases": [
+    "public project evidence",
+    "strongest match to this role",
+    "best fit for this role",
+    "positioned for this role",
+    "perfect fit",
+    "uniquely positioned",
+    "I am thrilled to apply",
+    "I am excited to apply",
+    "I am writing to express my interest",
+    "not only",
+    "not just",
+    "not merely",
+    "not simply",
+    "but also",
+    "rather than",
+    "instead of",
+    "moreover",
+    "furthermore",
+    "in addition",
+    "passion for innovation",
+    "proven track record",
+    "fast-paced environment",
+    "cross-functional synergy",
+    "cutting-edge",
+    "world-class",
+    "dynamic team"
+  ],
+  "blocked_claim_fragments": [
+    "clinical validation",
+    "regulatory approval",
+    "production-grade",
+    "commercial-ready release",
+    "expert in",
+    "deep expertise in",
+    "extensive experience in"
+  ],
+  "allowed_review_outcomes": [
+    "pass",
+    "pass with known stretch",
+    "revise before applying"
+  ]
+}

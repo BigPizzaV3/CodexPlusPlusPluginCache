@@ -1,0 +1,29 @@
+{
+  "author": {
+    "name": "TeleCall"
+  },
+  "description": "TeleCall \u2014 Asistente Conversacional y Asesor Inteligente de Telecomunicaciones (Demo tecnol\u00f3gica con datos de referencia O2 Espa\u00f1a)",
+  "interface": {
+    "capabilities": [],
+    "category": "Other",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": null,
+    "developerName": "TeleCall",
+    "displayName": "TeleCall",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "TeleCall \u2014 Asistente Conversacional y Asesor Inteligente de Telecomunicaciones",
+    "shortDescription": "TeleCall - Asistente"
+  },
+  "keywords": [
+    "telecom",
+    "telecommunications",
+    "fiber",
+    "mobile",
+    "ai-advisor",
+    "chatgpt"
+  ],
+  "license": "MIT",
+  "name": "telecall",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

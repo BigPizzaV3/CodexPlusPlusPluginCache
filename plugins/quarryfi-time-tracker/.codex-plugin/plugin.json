@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "Smashed Studios LLC",
+    "url": "https://quarryfi.com"
+  },
+  "description": "Create privacy-minimized Codex activity records in QuarryFi for R&D evidence review",
+  "homepage": "https://quarryfi.com/integrations",
+  "interface": {
+    "brandColor": "#0D9488",
+    "brandColorDark": "#6BF2E6",
+    "capabilities": [
+      "time-tracking",
+      "session-monitoring",
+      "multi-company",
+      "audit-logging"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Check my QuarryFi R&D tracking status",
+      "Update my QuarryFi Codex tracker safely",
+      "Is this Codex project mapped to QuarryFi?"
+    ],
+    "developerName": "Smashed Studios LLC",
+    "displayName": "QuarryFi R&D Tracker",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Records active Codex session time and privacy-minimized project metadata in QuarryFi so businesses can review potential R&D activity alongside other evidence. Supports multiple company profiles, project-to-key routing, and bounded local audit logging. It does not determine tax-credit eligibility and is not tax advice.",
+    "privacyPolicyURL": "https://quarryfi.com/privacy",
+    "shortDescription": "Track Codex R&D activity",
+    "supportURL": "https://quarryfi.com/support",
+    "termsOfServiceURL": "https://quarryfi.com/terms",
+    "websiteURL": "https://quarryfi.com"
+  },
+  "keywords": [
+    "time-tracking",
+    "r&d",
+    "tax-credits",
+    "quarryfi"
+  ],
+  "license": "MIT",
+  "name": "quarryfi-time-tracker",
+  "repository": "https://github.com/quarryFi/codex-plugin",
+  "skills": "./skills/",
+  "version": "0.4.7"
+}

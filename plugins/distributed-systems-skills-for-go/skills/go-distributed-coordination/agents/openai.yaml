@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Distributed Coordination"
+  short_description: "Fence stale distributed owners"
+  default_prompt: "Use $go-distributed-coordination to design this Go lease or saga for stale-owner safety."
+policy:
+  allow_implicit_invocation: true

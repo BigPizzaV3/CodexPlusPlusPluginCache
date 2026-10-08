@@ -1,0 +1,11 @@
+interface:
+  display_name: "Create Surfer Outline"
+  short_description: "Build a SERP-optimized content outline"
+  default_prompt: "Use $surfer-create-outline to create a SERP-optimized outline for [keyword]."
+dependencies:
+  tools:
+    - type: mcp
+      value: surfer
+      description: Surfer MCP server for content editors, guidelines, scores, and recommendations
+      transport: streamable_http
+      url: https://mcp.surferseo.com/mcp

@@ -1,0 +1,66 @@
+{
+  "author": {
+    "name": "KLING AI",
+    "url": "https://kling.ai/"
+  },
+  "description": "Generate Kling AI images and videos, manage reusable Elements, and control motion with the official Kling CLI.",
+  "homepage": "https://kling.ai/",
+  "interface": {
+    "brandColor": "#000000",
+    "brandColorDark": "#FFFFFF",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Draw a red panda in a vintage spacesuit by a space station window, Earth\u2019s blue glow on its face, richly detailed and cinematic.",
+      "Create a 5-second cinematic clip: a mecha warrior crashes from the sky, blasting rocks and dust as the camera rapidly pushes in.",
+      "Create a 15-second sneaker ad: open with a bold street hook, cut to close-ups and on-foot action in 3 sec, end on a detail shot."
+    ],
+    "developerName": "KLING AI",
+    "displayName": "Kling AI",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Turn every idea into a striking image or video. Kling AI is an AI image and video generator for creators. In local Codex tasks, use natural language for text-to-image, image-to-image, text-to-video, image-to-video, reusable character, animal and prop Elements, motion control from a video or saved motion, and single-shot or multi-shot video through the official Kling CLI. Create posters, illustrations, portraits, product photos, e-commerce hero images, product listing images, product detail images, ad creatives, product showcase videos, marketing clips, e-commerce short videos, social media videos, and cinematic content for Taobao, Tmall, JD.com, Pinduoduo, Douyin, Kuaishou, Xiaohongshu, TikTok, Amazon, Shopify, and more. Paste or attach reference images in the conversation; Codex handles the CLI runtime, browser OAuth, local image paths, credit checks, generation submission, progress tracking, task status, and result retrieval. Requires a local Codex environment with Node.js 18+, Kling CLI 0.2.0+, and shell access. Supports explicit asset uploads, account switching, tool discovery, and transparent, user-authorized issue feedback. Looking for alternatives like Hailuo AI, Seedance, Vidu, Jimeng, Runway, Pika, Sora, or Veo? Use Kling AI (KLING / Kling / \u53ef\u7075) to build a high-quality local creative workflow.",
+    "privacyPolicyURL": "https://kling.ai/app/docs/privacy-policy",
+    "shortDescription": "Create images and videos",
+    "termsOfServiceURL": "https://kling.ai/app/docs/user-policy",
+    "websiteURL": "https://kling.ai/"
+  },
+  "keywords": [
+    "kling",
+    "kling-ai",
+    "kling-video",
+    "\u53ef\u7075",
+    "ai-image-generator",
+    "ai-video-generator",
+    "image-generation",
+    "video-generation",
+    "text-to-image",
+    "image-to-image",
+    "text-to-video",
+    "image-to-video",
+    "product-photography",
+    "product-video",
+    "ecommerce-content",
+    "advertising-creative",
+    "marketing-video",
+    "short-video",
+    "social-media-content",
+    "cinematic-video",
+    "creative-workflow",
+    "command-line",
+    "npm-cli",
+    "browser-oauth",
+    "local-agent",
+    "codex",
+    "reusable-elements",
+    "motion-control",
+    "motion-library"
+  ],
+  "license": "MIT",
+  "name": "kling-ai-cli",
+  "skills": "./skills/",
+  "version": "1.0.5"
+}

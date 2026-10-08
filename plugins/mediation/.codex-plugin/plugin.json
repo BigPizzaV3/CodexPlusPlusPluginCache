@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Caucus strategy, mediation brief and opening, outcome documentation, party-interest analysis, and settlement evaluation skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#0E7490",
+    "brandColorDark": "#6FD5F1",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Help us plan what to disclose in this mediation caucus.",
+      "Map both parties' positions and underlying interests.",
+      "Test this settlement offer against our litigation alternative."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Mediation",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Six reusable mediation workflows covering caucus strategy, mediation briefs, opening statements, outcome documentation, party-interest analysis, and settlement evaluation against the litigation alternative.",
+    "shortDescription": "Mediation workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "mediation",
+    "adr",
+    "settlement",
+    "negotiation"
+  ],
+  "license": "MIT",
+  "name": "mediation",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

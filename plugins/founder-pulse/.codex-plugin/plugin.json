@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "Yui Wang",
+    "url": "https://github.com/Hertz-chat"
+  },
+  "description": "Review closed and open Issue flow, backlog age, labels, and delivery links for GitHub or GitLab projects.",
+  "homepage": "https://github.com/Hertz-chat/founder-pulse",
+  "interface": {
+    "brandColor": "#B92F2A",
+    "brandColorDark": "#D54B46",
+    "capabilities": [
+      "GitHub Issue flow analysis",
+      "GitLab Issue flow analysis",
+      "Backlog aging",
+      "Delivery link assessment"
+    ],
+    "category": "Business & Operations",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Analyze Issue progress for this repository over the last 7 days.",
+      "Compare Issues closed this month with the backlog still open.",
+      "Show which closed Issues are linked to commits or pull requests."
+    ],
+    "developerName": "Hertz",
+    "displayName": "Founder Pulse",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Analyze GitHub or GitLab Issue activity for a requested period. Compare Issues that moved from Open to Closed with Issues still Open at period end, group both populations by creation age, summarize labels, and check whether closed Issues are linked to commits or pull/merge requests. Delivery evidence remains distinct from manual closure, and all access is strictly read-only.",
+    "privacyPolicyURL": "https://github.com/Hertz-chat/founder-pulse/blob/main/PRIVACY.md",
+    "shortDescription": "Track Issue flow and delivery",
+    "termsOfServiceURL": "https://github.com/Hertz-chat/founder-pulse/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/Hertz-chat/founder-pulse"
+  },
+  "keywords": [
+    "founder",
+    "product operations",
+    "GitHub",
+    "GitLab",
+    "delivery health",
+    "repository analysis"
+  ],
+  "license": "MIT",
+  "name": "founder-pulse",
+  "repository": "https://github.com/Hertz-chat/founder-pulse",
+  "skills": "./skills/",
+  "version": "0.3.0"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Tahr Findings"
+  short_description: "Review findings from an existing Tahr account"
+  default_prompt: "Use $tahr-review-tahr-findings to summarize the latest Tahr security findings."

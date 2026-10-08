@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "game-room.opening-schedule.v1",
+  "type": "object",
+  "required": ["schema", "roomId", "primaryArrival", "openings"],
+  "properties": {
+    "schema": {"const": "game-room.opening-schedule.v1"},
+    "roomId": {"type": "string", "minLength": 1},
+    "primaryArrival": {"type": "object", "required": ["openingId", "exception"], "properties": {"openingId": {"type": "string"}, "exception": {"type": "string"}}},
+    "openings": {"type": "array", "items": {"type": "object", "required": ["id", "kind", "wall", "widthMeters", "heightMeters", "mask", "cutter", "destination", "approved"], "properties": {
+      "id": {"type": "string", "minLength": 1},
+      "kind": {"enum": ["door", "window", "deep_alcove"]},
+      "wall": {"type": "string", "minLength": 1},
+      "widthMeters": {"type": "number", "exclusiveMinimum": 0},
+      "heightMeters": {"type": "number", "exclusiveMinimum": 0},
+      "sillMeters": {"type": "number", "minimum": 0},
+      "thresholdMeters": {"type": "number", "minimum": 0},
+      "depthMeters": {"type": "number", "minimum": 0},
+      "mask": {"type": "string", "minLength": 1},
+      "cutter": {"type": "string", "minLength": 1},
+      "destination": {"type": "string", "minLength": 1},
+      "approved": {"type": "boolean"}
+    }} }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "version": "0.1.0",
+  "reviewed_on": "2026-09-09",
+  "policy": "These expand search text, never create or validate indicator codes. All candidates must exist in the live WHO catalogue.",
+  "aliases": [
+    {"terms": ["uhc sci", "uhc service coverage", "service coverage index", "uhc index", "universal health coverage service coverage index", "全民健康覆盖服务覆盖指数"], "expansions": ["UHC Service Coverage Index"]},
+    {"terms": ["universal health coverage"], "expansions": ["UHC"], "clarify": "Universal health coverage includes service coverage and financial protection. Identify which concept the user needs."},
+    {"terms": ["tb incidence", "tuberculosis incidence", "结核病发病"], "expansions": ["incidence tuberculosis", "incident tuberculosis"], "clarify": "Incidence rate and incident case count are different measures. Confirm the unit and whether HIV-specific or age-specific estimates are intended."},
+    {"terms": ["tb incidence rate"], "expansions": ["incidence tuberculosis per 100 000"]},
+    {"terms": ["tb incidence number", "tb incident cases"], "expansions": ["number incident tuberculosis cases"]},
+    {"terms": ["catastrophic health expenditure above 10%", "catastrophic health expenditure >10%", "catastrophic health expenditure 10%", "che 10%"], "expansions": ["household spending health greater than 10%"], "clarify": "For retrieval distinguish reported versus estimated data, percentage versus population count, and population strata. Discovery can list these candidates without asking first."},
+    {"terms": ["catastrophic health expenditure", "catastrophic health spending"], "expansions": ["household spending health"], "clarify": "Confirm the budget threshold for data retrieval, as well as reported versus estimated data and percentage versus population count."},
+    {"terms": ["measles reported cases", "麻疹报告病例"], "expansions": ["measles number reported cases"]},
+    {"terms": ["mcv1"], "expansions": ["MCV1 immunization coverage"]}
+  ]
+}

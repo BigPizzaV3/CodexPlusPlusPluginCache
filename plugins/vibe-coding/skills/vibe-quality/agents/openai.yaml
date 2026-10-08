@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Quality & readiness"
+  short_description: "Test coverage and release readiness"
+  default_prompt: "Use $vibe-quality to audit the selected quality & readiness boundary."

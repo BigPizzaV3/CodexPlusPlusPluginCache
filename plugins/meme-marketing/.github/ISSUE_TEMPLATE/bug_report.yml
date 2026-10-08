@@ -1,0 +1,37 @@
+name: 🐛 Bug Report
+description: Report an issue or unexpected behavior in the meme marketing engine
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please provide as much detail as possible to help us reproduce and fix it.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment & Runtime
+      description: What AI agent, CLI, or runtime are you using? (e.g. Bun 1.2, Claude Code, Cursor, Python 3.11)
+      placeholder: "e.g. Bun 1.2.0 on macOS"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce / Prompt Used
+      description: Exactly what command or prompt produced the issue?
+      placeholder: "e.g. bun bin/cli.js render --template distracted ..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Output / Error Log
+      description: Paste any error stack traces or generated output.
+      render: shell

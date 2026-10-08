@@ -1,0 +1,31 @@
+{
+  "name": "arkah",
+  "version": "0.1.1",
+  "description": "Turn chats into visual boards. Compare options and challenge your ideas.",
+  "license": "MIT",
+  "author": { "name": "Arkah", "url": "https://arkah.io" },
+  "homepage": "https://arkah.io/integrations",
+  "repository": "https://github.com/Arkah-io/arkah-plugins",
+  "keywords": ["boards", "research", "visualization"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Arkah",
+    "shortDescription": "Turn chats into visual boards",
+    "longDescription": "Turn a conversation into something you can see, compare, and question. Arkah creates visual boards from the ideas and context you share—turning brainstorms into plans, research into comparisons, and technical discussions into clear trade-offs.\n\nBring assumptions, risks, and unanswered questions into view. Review a brief with your assistant, then build a board with notes, tables, charts, and visual panels. Explore it in Canvas or Reader, then open Arkah to refine it further.\n\nAlready use Arkah? Find and revisit your existing boards without leaving the conversation. An Arkah account is required.",
+    "developerName": "Arkah",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write", "Interactive"],
+    "websiteURL": "https://arkah.io",
+    "supportURL": "https://arkah.io/integrations",
+    "privacyPolicyURL": "https://arkah.io/privacy",
+    "termsOfServiceURL": "https://arkah.io/terms",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png",
+    "defaultPrompt": [
+      "Turn this conversation into a visual board. Let me review the brief first.",
+      "Compare these options in a board, highlighting assumptions, risks, and trade-offs.",
+      "Turn our debugging discussion into a board of hypotheses, evidence, and next steps."
+    ]
+  }
+}

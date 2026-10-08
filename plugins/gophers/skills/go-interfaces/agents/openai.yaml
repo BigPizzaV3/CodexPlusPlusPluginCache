@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Interfaces"
+  short_description: "Design small and useful Go interfaces"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-interfaces to design or review the interfaces in this Go code."

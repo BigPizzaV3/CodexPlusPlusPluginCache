@@ -1,0 +1,7 @@
+interface:
+  display_name: Workspace Recall
+  short_description: Retrieve focused context from the workspace
+  brand_color: '#E45B32'
+  default_prompt: Use $workspace-recall to retrieve only the workspace context relevant to this request.
+policy:
+  allow_implicit_invocation: true

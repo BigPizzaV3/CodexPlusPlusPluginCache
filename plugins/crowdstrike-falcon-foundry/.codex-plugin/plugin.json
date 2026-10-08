@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "CrowdStrike",
+    "url": "https://github.com/CrowdStrike"
+  },
+  "description": "Build Falcon Foundry apps with guided workflows for UI, functions, collections, Falcon Fusion SOAR workflows, and API integrations.",
+  "homepage": "https://github.com/CrowdStrike/foundry-skills",
+  "interface": {
+    "brandColor": "#E01F3D",
+    "brandColorDark": "#E01F3D",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create a Falcon Foundry app",
+      "Add a Falcon Foundry capability",
+      "Troubleshoot a Falcon Foundry app"
+    ],
+    "developerName": "CrowdStrike",
+    "displayName": "CrowdStrike Falcon Foundry",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Create, validate, deploy, and troubleshoot Falcon Foundry apps with specialized guidance for UI, functions, collections, Falcon Fusion SOAR workflows, security, and OpenAPI integrations.",
+    "shortDescription": "Build Falcon Foundry apps",
+    "websiteURL": "https://github.com/CrowdStrike/foundry-skills"
+  },
+  "keywords": [
+    "crowdstrike",
+    "falcon",
+    "foundry",
+    "cybersecurity",
+    "workflows"
+  ],
+  "license": "MIT",
+  "name": "crowdstrike-falcon-foundry",
+  "repository": "https://github.com/CrowdStrike/foundry-skills",
+  "skills": "./skills/",
+  "version": "1.5.0"
+}

@@ -1,0 +1,9 @@
+import { readFile } from 'node:fs/promises';
+import { invalidInput } from './errors.mjs';
+import { artifactStatePath } from './artifact-store.mjs';
+import { writeJsonAtomic } from './io.mjs';
+import { resolveWorkspace } from './paths.mjs';
+export function requiresExternalResearch(goal = '') { return /market|usp|compet|pricing|price|business case|launch|radical/i.test(goal); }
+export async function importEvidence({ workspace, input }) { const root = await resolveWorkspace(workspace); const raw = JSON.parse(await readFile(input, 'utf8')); if (!Array.isArray(raw)) throw invalidInput('FM_EVIDENCE_INVALID', 'Evidence input must be a JSON array.'); const records = raw.map(normalize); const result = { schemaVersion: 1, status: 'recorded', records, errors: [] }; await writeJsonAtomic(artifactStatePath(root, 'evidence', 'claims-latest.json'), result); return result; }
+export async function assessEvidence({ workspace, goal }) { const root = await resolveWorkspace(workspace); let records = []; try { records = JSON.parse(await readFile(artifactStatePath(root, 'evidence', 'claims-latest.json'), 'utf8')).records; } catch {} const contradictions = records.filter((item) => item.contradicts?.length); return { schemaVersion: 1, status: 'passed', goal, researchRequired: requiresExternalResearch(goal), claimCount: records.length, contradictions, evidenceGap: requiresExternalResearch(goal) && !records.length, errors: [] }; }
+function normalize(raw) { if (!/^https?:\/\//.test(raw.url ?? '')) throw invalidInput('FM_EVIDENCE_URL_REQUIRED', 'Evidence requires an http(s) source URL.'); for (const key of ['title', 'claim', 'retrievedAt', 'sourceType', 'classification']) if (!String(raw[key] ?? '').trim()) throw invalidInput('FM_EVIDENCE_FIELD_REQUIRED', `Evidence requires ${key}.`); return { ...raw, confidence: Number(raw.confidence ?? 0.5), limitations: raw.limitations ?? [], contradicts: raw.contradicts ?? [] }; }

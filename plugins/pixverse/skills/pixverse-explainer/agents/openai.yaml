@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Explainer Videos"
+  short_description: "Finish narrated visual stories"
+  default_prompt: "Use $pixverse-explainer to turn this topic into a complete narrated explainer with clear visuals and captions."
+policy:
+  allow_implicit_invocation: true

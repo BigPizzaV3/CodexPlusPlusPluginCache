@@ -1,0 +1,7 @@
+interface:
+  display_name: Graphic Designer
+  short_description: Choose and plan social visual formats
+  brand_color: '#E45B32'
+  default_prompt: Use $graphic-designer to choose and develop the best visual format for this social post.
+policy:
+  allow_implicit_invocation: true

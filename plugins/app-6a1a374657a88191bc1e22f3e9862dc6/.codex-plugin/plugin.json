@@ -1,0 +1,36 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Chronograph",
+    "url": "https://www.chronograph.pe/"
+  },
+  "description": "Chronograph GP provides portfolio monitoring, valuations, and analytics solutions for private capital investors. Through the Chronograph GP App within ChatGPT and Codex, users can query their trusted portfolio data, analyze investments, surface company-level metrics, and access the full depth of their private markets portfolio using natural language.\n\nChronograph provides two separate Apps for different client user types: Chronograph GP for General Partner users and Chronograph LP for Limited Partner users.",
+  "homepage": "https://www.chronograph.pe/",
+  "interface": {
+    "brandColor": "#414B4B",
+    "brandColorDark": "#B4BEBE",
+    "capabilities": [],
+    "category": "Finance",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Summarize fund returns from Chronograph GP.",
+      "Find top and bottom portfolio investments.",
+      "Show overdue reporting tasks in Chronograph GP."
+    ],
+    "developerName": "Chronograph",
+    "displayName": "Chronograph GP",
+    "logo": "./assets/logo.png",
+    "longDescription": "Chronograph GP provides portfolio monitoring, valuations, and analytics for private capital General Partner users. Query trusted portfolio data, analyze investments, surface company-level metrics, and access private markets portfolio data using natural language.",
+    "privacyPolicyURL": "https://www.chronograph.pe/legal/privacy-policy/",
+    "screenshots": [],
+    "shortDescription": "Your trusted portfolio data",
+    "termsOfServiceURL": "https://www.chronograph.pe/legal/website-terms-of-use/",
+    "websiteURL": "https://www.chronograph.pe/"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "app-6a1a374657a88191bc1e22f3e9862dc6",
+  "repository": "https://github.com/openai/plugins",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

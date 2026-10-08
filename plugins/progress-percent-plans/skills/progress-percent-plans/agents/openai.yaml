@@ -1,0 +1,6 @@
+interface:
+  display_name: "Progress Percent Plans"
+  short_description: "Keep every multi-step plan visibly updated by percentage"
+  default_prompt: "Use $progress-percent-plans to keep every plan step prefixed with [NN%], including after rewrites, scope changes, and context compaction."
+policy:
+  allow_implicit_invocation: true

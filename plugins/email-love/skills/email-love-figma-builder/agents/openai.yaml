@@ -1,0 +1,13 @@
+interface:
+  display_name: "Email Love Figma Builder"
+  short_description: "Build export-ready marketing emails in Figma"
+  default_prompt: "Use $email-love-figma-builder to build an export-ready email in my Figma file."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "figma"
+      description: "Read and write the user's Figma file"
+      transport: "streamable_http"
+      url: "https://mcp.figma.com/mcp"
+policy:
+  allow_implicit_invocation: true

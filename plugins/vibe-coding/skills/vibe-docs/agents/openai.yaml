@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Documentation & refactoring"
+  short_description: "READMEs, design documents and refactoring boundaries"
+  default_prompt: "Use $vibe-docs to update the selected documentation from current repository evidence."

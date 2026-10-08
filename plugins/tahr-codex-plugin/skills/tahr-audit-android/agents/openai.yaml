@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Audit Android"
+  short_description: "Audit Android application security boundaries"
+  default_prompt: "Use $tahr-audit-android to perform a source-backed and runtime-aware Android security review."

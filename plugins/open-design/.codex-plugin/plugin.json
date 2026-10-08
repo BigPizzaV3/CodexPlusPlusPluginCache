@@ -1,0 +1,44 @@
+{
+  "author": {
+    "email": "support@open-design.ai",
+    "name": "Open Design",
+    "url": "https://open-design.ai/"
+  },
+  "description": "Create and refine websites, slides, prototypes, and design systems with Open Design from Codex.",
+  "homepage": "https://open-design.ai/",
+  "interface": {
+    "brandColor": "#00A107",
+    "brandColorDark": "#00FF08",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Design a bold landing page for an AI video editor, using cinematic visuals, dark gradients, and a strong call to action.",
+      "Design an eight-slide pitch deck for a creative AI startup, with clear storytelling, strong data, and a polished dark theme.",
+      "Design a \u201c48 Hours in Lisbon\u201d travel page with a two-day itinerary, local tips, and a sunny Mediterranean editorial style."
+    ],
+    "developerName": "Open Design",
+    "displayName": "Open Design",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Generate and edit websites, presentations, prototypes, and design systems with Open Design directly from Codex.",
+    "privacyPolicyURL": "https://open-design.ai/privacy/",
+    "shortDescription": "One brand kit, all designs.",
+    "supportURL": "https://github.com/nexu-io/open-design/issues",
+    "termsOfServiceURL": "https://open-design.ai/terms/",
+    "websiteURL": "https://open-design.ai/"
+  },
+  "keywords": [
+    "design",
+    "codex",
+    "mcp",
+    "open-design"
+  ],
+  "license": "Apache-2.0",
+  "name": "open-design",
+  "repository": "https://github.com/nexu-io/open-design-agent-plugins",
+  "skills": "./skills/",
+  "version": "0.5.2"
+}

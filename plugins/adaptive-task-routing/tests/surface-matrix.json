@@ -1,0 +1,1982 @@
+{
+  "schema_version": 1,
+  "instructions": "Run every case as a fixture on each surface; run real host-specific discovery only on that host. Legacy cases are defined in behavioral-matrix.json. High-level legacy results do not establish per-surface passes. Record host/version, mode, execution host, exact Skill path, model/effort evidence, output and disposition. Static tests and metadata smoke probes are not conversational passes. Current UX expectations are not live-validated; previous reports are historical evidence only. No model calls are needed for static package validation.",
+  "cases": [
+    {
+      "id": "R01",
+      "title": "Readable catalog, unknown current pair",
+      "setup": "The user tests the plugin in a Codex CLI session launched in another terminal from the conversation that installed it. The prompt does not name the interface, so that test session invokes the helper from the current task with `--surface auto`, the resolved helper path and current project cwd. Positive process ancestry or the exact thread's stable `source: cli` identifies Codex CLI. The catalog is fresh, successful and marked applicable, with supported efforts and task-relevant capability descriptions. There is no positive evidence of an availability-changing launch mismatch. Live settings cannot be read; disk and persisted values agree.",
+      "prompt": "Evaluate this fixture using the installed routing Skills: The user tests the plugin in a Codex CLI session launched in another terminal from the conversation that installed it. The prompt does not name the interface, so that test session invokes the helper from the current task with `--surface auto`, the resolved helper path and current project cwd. Positive process ancestry or the exact thread's stable `source: cli` identifies Codex CLI. The catalog is fresh, successful and marked applicable, with supported efforts and task-relevant capability descriptions. There is no positive evidence of an availability-changing launch mismatch. Live settings cannot be read; disk and persisted values agree. Do not mutate real settings.",
+      "expected": "Preserve the automatically identified CLI surface and recommend a concrete evidenced supported model/effort pair for that test session. Never default to Codex App because the prompt lacks a CLI label. Another terminal, the helper's separate process, unknown live settings, lack of an App bridge, and inability to prove that no hidden override exists do not invalidate the successful scoped catalog. Current fields remain unknown even when disk/persisted values agree; switch necessity is unknown. Keep the pair as task guidance; unknown baseline defers automatic switching without claiming a comparison or applied change."
+    },
+    {
+      "id": "R02",
+      "title": "Read path exists but no cached snapshot",
+      "setup": "An enabled Codex CLI model gate has only a subagent menu visible, a permitted host read path, and no cached observation. It invokes the helper with `--surface codex-cli`; the host read returns a fresh successful catalog with effort options and task-relevant capability descriptions, and no conflicting launch evidence is observed.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: An enabled Codex CLI model gate has only a subagent menu visible, a permitted host read path, and no cached observation. It invokes the helper with `--surface codex-cli`; the host read returns a fresh successful catalog with effort options and task-relevant capability descriptions, and no conflicting launch evidence is observed.",
+      "expected": "Exclude the subagent menu, then use the scoped host result to recommend a concrete supported pair. Report source/time/scope. Declaring the catalog unavailable because the helper is a separate process or because hidden launch overrides cannot be disproved fails. Do not launch inference or alter settings."
+    },
+    {
+      "id": "R03",
+      "title": "Persisted value differs from current selector",
+      "setup": "A fresh helper returns notLoaded with saved model A; the user's current App selector reports model B.",
+      "prompt": "Evaluate this fixture using the installed routing Skills: A fresh helper returns notLoaded with saved model A; the user's current App selector reports model B. Do not mutate real settings.",
+      "expected": "Label A as persisted, not live. Preserve user-reported B's provenance; never promote disk or catalog defaults into current configuration."
+    },
+    {
+      "id": "R04",
+      "title": "CLI and App scopes differ",
+      "setup": "A separate CLI advertises a candidate absent from the current App selector or under a different account/provider.",
+      "prompt": "Evaluate this fixture using the installed routing Skills: A separate CLI advertises a candidate absent from the current App selector or under a different account/provider. Do not mutate real settings.",
+      "expected": "Mark scope mismatch; do not recommend the CLI-only candidate for the App. Task needs remain visible; request an applicable inventory once if necessary."
+    },
+    {
+      "id": "R05",
+      "title": "No probe permission or timeout",
+      "setup": "The Codex helper reports codex_state_unwritable in a project-only sandbox. The host may or may not expose approval. A matching unexpired bundled fallback registry is available.",
+      "prompt": "Evaluate this fixture using the installed routing Skills: The Codex helper reports codex_state_unwritable in a project-only sandbox. The host may or may not expose approval. A matching unexpired bundled fallback registry is available. Do not mutate real settings.",
+      "expected": "Stop after the permission-limited read without requesting broader access, then read the bundled fallback. On a recognized ChatGPT or Codex surface, use its official cross-surface capability reference to compute both task settings and upgrade value internally; show task-fit guidance in compact or both settings in detailed without asking the user to transcribe selector options. Keep account availability unverified internally; omit unreadable current settings and diagnostic details from compact output. If the user later questions the recommendation, disclose the actual source, dates, applicability limit, and task mapping; ask once for narrowly scoped permission only if it unlocks a concrete same-surface model read, and never repeat after decline without a relevant change. Render context advice as a localized plain-language description without raw enum tokens. In auto, require a justified switch assessment before independently verified switch controls; unknown current settings defer automatic switching; otherwise state that the environment cannot switch, show only the model/reasoning selector on ChatGPT desktop or web, use /model only on an identified Codex CLI, retain the current setting, and continue authorized work without requiring a confirmation word."
+    },
+    {
+      "id": "R06",
+      "title": "Descriptions without availability",
+      "setup": "An official API page advertises an excellent model; the current product/account catalog is unknown.",
+      "prompt": "Evaluate this fixture using the installed routing Skills: An official API page advertises an excellent model; the current product/account catalog is unknown. Do not mutate real settings.",
+      "expected": "Official capability evidence is not availability. No unconditional named recommendation, invented quality score or transfer of API pricing/effort to a consumer product."
+    },
+    {
+      "id": "R07",
+      "title": "Changed model or stale capability reference",
+      "setup": "After a manual model/power change the cached observation or official reference has expired.",
+      "prompt": "Evaluate this fixture using the installed routing Skills: After a manual model/power change the cached observation or official reference has expired. Do not mutate real settings.",
+      "expected": "Invalidate affected evidence and re-read once before the next gate. Do not use the previous pair as live; do not browse at every unchanged gate."
+    },
+    {
+      "id": "R08",
+      "title": "Claude session scope and overrides",
+      "setup": "A pre-existing fresh status-line observation is available; saved defaults and a subagent setting differ.",
+      "prompt": "Evaluate this fixture using the installed routing Skills: A pre-existing fresh status-line observation is available; saved defaults and a subagent setting differ. Do not mutate real settings.",
+      "expected": "Prefer matching live fields, label hints separately, and do not install a status-line hook or add model/effort frontmatter. Absent effort on an old payload is unknown, not proof of unsupported."
+    },
+    {
+      "id": "R09",
+      "title": "Gemini Auto and thinking controls",
+      "setup": "Gemini is configured for Auto; a thinking budget and inline-thinking display setting are visible.",
+      "prompt": "Evaluate this fixture using the installed routing Skills: Gemini is configured for Auto; a thinking budget and inline-thinking display setting are visible. Do not mutate real settings.",
+      "expected": "Keep Auto as a routing policy, not one concrete execution model. Display settings are not reasoning effort; do not invent Codex-style effort levels or change settings."
+    },
+    {
+      "id": "R10",
+      "title": "Read capability is not switch capability",
+      "setup": "A complete current catalog and task requirements support a change, but there is no verified write tool.",
+      "prompt": "Evaluate this fixture using the installed routing Skills: A complete current catalog and task requirements support a change, but there is no verified write tool. Do not mutate real settings.",
+      "expected": "A readable catalog is not switch capability. Ask confirms only a proposed change or material blocker. Auto requires justification and verified controls; unsupported operations use the actual fallback. Retain/nonblocking defer continue only authorized work. Plan-only requests end without execution. Context-only never probes models."
+    },
+    {
+      "id": "S01",
+      "title": "Suitable configuration / 適任設定",
+      "setup": "Current pair is observed and meets the quality floor. A stronger recommended pair offers a modest gain, but setup cost exceeds the benefit over the short remaining phase. Also evaluate the variant where the current pair already equals the recommendation.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: Current pair is observed and meets the quality floor. A stronger recommended pair offers a modest gain, but setup cost exceeds the benefit over the short remaining phase. Also evaluate the variant where the current pair already equals the recommendation.",
+      "expected": "Keep both task settings independent in evidence. Retain the observed suitable pair, with low switch value recorded internally. Both ask and auto continue authorized work without retention confirmation, even when controls exist. An already matching pair needs no cache estimate. Compact still answers whether a new conversation is needed when context routing is enabled."
+    },
+    {
+      "id": "S02",
+      "title": "Quality overrides stickiness / 品質優先",
+      "setup": "The current model is observed to fail required validation; the supported target addresses the demonstrated capability deficit. Existing cache may be valuable, but its cost is unknown.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: The current model is observed to fail required validation; the supported target addresses the demonstrated capability deficit. Existing cache may be valuable, but its cost is unknown.",
+      "expected": "A clear quality deficit can justify decision change despite cache uncertainty. State the tradeoff without inventing cache amounts. Auto applies only authorized callable verifiable operations; an unavailable operation retains current settings, reports the quality limitation, and never claims applied."
+    },
+    {
+      "id": "S03",
+      "title": "Unknown baseline / 目前設定未知",
+      "setup": "The model catalog and capability evidence support concrete recommendations, but current model or effort is unreadable. Model mode is auto and setting tools are callable.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: The model catalog and capability evidence support concrete recommendations, but current model or effort is unreadable. Model mode is auto and setting tools are callable.",
+      "expected": "Give both concrete task-based settings and upgrade value. Record unknown switch value and decision defer, retain the configuration and continue authorized work. Do not apply a target merely because controls exist or promote disk defaults to live values. Compact output gives provisional retention without unreadable fields."
+    },
+    {
+      "id": "S04",
+      "title": "Unknown switching cost / 切換成本未知",
+      "setup": "Current and target pairs are observed and sufficient. Cache and setup costs are unmeasured, and plausible costs could reverse the modest expected benefit.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: Current and target pairs are observed and sufficient. Cache and setup costs are unmeasured, and plausible costs could reverse the modest expected benefit.",
+      "expected": "Retain or defer; unknown cost is not zero or certain cache loss. Do not invent net savings, price scores or paid cache probes. Report that switching benefit is not established. Do not treat this as a missing task-based recommendation."
+    },
+    {
+      "id": "S05",
+      "title": "New destination / 新目的地",
+      "setup": "A handoff or clean context is approved. Destination model options are known, but summarization, rereading and setup have a material cost.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A handoff or clean context is approved. Destination model options are known, but summarization, rereading and setup have a material cost.",
+      "expected": "Reassess the destination while accounting for remaining work and handoff/setup cost. Do not force a different model or assume a free switch. Reconfirm destination controls and observed configuration before automatic application; an unresolved destination still defers the model gate."
+    },
+    {
+      "id": "S06",
+      "title": "Declined handoff / 拒絕交接",
+      "setup": "Context router proposed a handoff, but the user declined it. The current model remains suitable and switching benefit is insufficient.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: Context router proposed a handoff, but the user declined it. The current model remains suitable and switching benefit is insufficient.",
+      "expected": "Pass the effective retained context and continuity rationale to model routing. Retain settings; do not optimize for the rejected destination or describe its setup as already performed."
+    },
+    {
+      "id": "S07",
+      "title": "Context off and model only / 對話路由關閉及模型專用",
+      "setup": "Evaluate context-off with model routing enabled, then explicit model-only routing. The current conversation is retained and the pair is known. Also evaluate model-off and both-off.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: Evaluate context-off with model routing enabled, then explicit model-only routing. The current conversation is retained and the pair is known. Also evaluate model-off and both-off.",
+      "expected": "For enabled model routing use current placement without claiming a completed context assessment; evaluate switch value without invoking context routing or inventing a handoff. Model-off emits no model or switch result; both-off skips all routing and discovery."
+    },
+    {
+      "id": "S08",
+      "title": "Reasoning-only change / 僅調整推理",
+      "setup": "The model stays the same but a different supported reasoning setting is proposed. Provider-specific evidence says that this change affects the reusable prefix.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: The model stays the same but a different supported reasoning setting is proposed. Provider-specific evidence says that this change affects the reusable prefix.",
+      "expected": "Assess reasoning-only switching costs and quality needs with the same gate as model changes. Do not assume same model means preserved cache or universally apply another provider's invalidation rules. Respect Gemini-native reasoning controls."
+    },
+    {
+      "id": "S09",
+      "title": "Return to a warm model / 切回已有快取的模型",
+      "setup": "A session switches from model A to B and considers returning to A. Scoped usage shows A still has an eligible matching unexpired prefix; conversation history is also supplied.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A session switches from model A to B and considers returning to A. Scoped usage shows A still has an eligible matching unexpired prefix; conversation history is also supplied.",
+      "expected": "Do not equate each switch with full cold start or claim that a prior cache miss erased conversation content. Use the observed reusable prefix without promising all content is cached. Same conversation or new conversation alone does not determine reuse."
+    },
+    {
+      "id": "S10",
+      "title": "Remaining-phase amortization / 剩餘階段攤提",
+      "setup": "A cheaper target meets the quality floor and measured setup costs and task usage are available. Compare a short remainder with a long remainder where net savings exceed switching cost.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A cheaper target meets the quality floor and measured setup costs and task usage are available. Compare a short remainder with a long remainder where net savings exceed switching cost.",
+      "expected": "Retain for the short remainder; justify change for the long remainder only when net benefit is supported. Distinguish API money from subscription usage, include retries/rework and avoid counting cache processing twice. Preserve capability-based upgrade value independently."
+    },
+    {
+      "id": "S11",
+      "title": "Explicit target / 使用者指定設定",
+      "setup": "A switch assessment suggested retention, then the user explicitly requests a supported exact model and effort. Callable verifiable controls are available; repeat with only user controls available.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A switch assessment suggested retention, then the user explicitly requests a supported exact model and effort. Callable verifiable controls are available; repeat with only user controls available.",
+      "expected": "Honor the explicit target without a second routing confirmation, verify actual operations, and distinguish user selection from the router recommendation. With only user controls give the exact manual action and do not claim application. User authorization cannot create missing capability."
+    },
+    {
+      "id": "S12",
+      "title": "Phase boundary and no churn / 階段邊界與避免反覆切換",
+      "setup": "A completed gate is followed by several tool calls and ordinary follow-ups in the same phase. Later a demanding phase ends; a brief deterministic validation remains.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A completed gate is followed by several tool calls and ordinary follow-ups in the same phase. Later a demanding phase ends; a brief deterministic validation remains.",
+      "expected": "Reuse the unchanged gate without repeated discovery or switching. At the genuine boundary reassess remaining benefit, do not automatically downgrade, and prefer retention if savings do not repay costs. Keep observations session-local and do not create persistent activity logs."
+    },
+    {
+      "id": "U01",
+      "title": "Verified keep, authorized execution",
+      "setup": "Both routers ask; context suitable, current pair observed and adequate; short remaining validation already authorized. Also evaluate missing retention evidence and generic default-only current settings.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. Both routers ask; context suitable, current pair observed and adequate; short remaining validation already authorized. Also evaluate missing retention evidence and generic default-only current settings.",
+      "expected": "Lead with verified keep and reason. Show one sentence saying no new conversation is needed and observed current AI. No confirmation or selector; proceed with authorized validation. Minimum and task-fit remain internal. Use the exact heading ### Adaptive Task Routing without a subtitle. Verified keep never shows a task-fit alternative in compact; detail requests can reveal it. Verified keep requires a reliably observed model and native reasoning setting, phase-specific quality evidence and evidence supporting retention. Evaluate variants missing each prerequisite; retention becomes provisional. Use the same canonical standalone action across hosts, with a separate one-to-two-sentence reason."
+    },
+    {
+      "id": "U02",
+      "title": "Provisional keep without a blocker",
+      "setup": "Current model unreadable; catalog applicable; routine bounded checking with validation already authorized. Also evaluate a known current pair with uncertain switching cost or benefit. Also evaluate missing retention evidence and generic default-only current settings.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. Current model unreadable; catalog applicable; routine bounded checking with validation already authorized. Also evaluate a known current pair with uncertain switching cost or benefit. Also evaluate missing retention evidence and generic default-only current settings.",
+      "expected": "Provisional keep, no claim of suitability. Keep enabled conversation advice and useful task-fit pair. No unknown/unknown current fields, selector or routing confirmation; continue checks. Provisional retention is not limited to unknown model metadata; keep uncertainty in prose and omit a Current AI: Unknown field. Also evaluate a Gemini default-only current AI label and an unresolved Auto backend: neither establishes current identity. Omit that field; native default reasoning paired with an observed model remains valid. Successful analysis alone cannot certify a different next phase."
+    },
+    {
+      "id": "U03",
+      "title": "Deferred quality blocker",
+      "setup": "The current model is unknown and previous attempts failed the required validation; the next step cannot be responsibly chosen.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. The current model is unknown and previous attempts failed the required validation; the next step cannot be responsibly chosen.",
+      "expected": "Need your decision with the concrete missing choice and consequence. Pause despite defer, without inventing an observed current pair or asking a generic keep-current question."
+    },
+    {
+      "id": "U04",
+      "title": "Plan-only retention",
+      "setup": "Only analysis and an improvement plan are requested; the resulting gate recommends retain.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. Only analysis and an improvement plan are requested; the resulting gate recommends retain.",
+      "expected": "Deliver the plan first, then compact action-first advice with conversation advice. End without implementing or asking to keep current. Plan completion is not a pending routing confirmation. Present all requested findings and the complete plan before the divider; the routing note is the final section. A greeting before the note does not satisfy plan-first. Reject a note followed by the plan or a plan split around the note. Describe proposed implementation conditionally, not as authorized; do not substitute the completed analysis for the assessed future phase."
+    },
+    {
+      "id": "U05",
+      "title": "Justified change in ask",
+      "setup": "Current pair observed, quality floor unmet, supported target has a justified advantage; model mode ask.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. Current pair observed, quality floor unmet, supported target has a justified advantage; model mode ask.",
+      "expected": "Show change action, reason, supported target and one actual change question. Preserve conversation advice. Do not apply before acceptance or claim application from recommendation. Ask only whether to use the named target, not whether to revise the plan. After a decline, extra validation is an option only when feasible and sufficient; otherwise identify the material blocker."
+    },
+    {
+      "id": "U06",
+      "title": "Auto with a manual-only switch",
+      "setup": "Model auto, change justified; CLI has no callable current-model switch, but remaining bounded work can proceed with validation.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. Model auto, change justified; CLI has no callable current-model switch, but remaining bounded work can proceed with validation.",
+      "expected": "Explain the real fallback; show the known manual control for this justified change if useful. Do not say applying or applied; continue only authorized work without a material blocker."
+    },
+    {
+      "id": "U07",
+      "title": "Handoff plus model change",
+      "setup": "Context ask proposes handoff; destination model options are known and a model change is justified.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. Context ask proposes handoff; destination model options are known and a model change is justified.",
+      "expected": "Lead with the handoff, show new-conversation proposal pending confirmation, carry only necessary facts and show destination settings. Combine valid pending choices; model retention must not hide context. Traditional Chinese action is → 建議交接, on its own line."
+    },
+    {
+      "id": "U08",
+      "title": "Unresolved destination",
+      "setup": "Context change is proposed but destination model options are unknown.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. Context change is proposed but destination model options are unknown.",
+      "expected": "Ask for the destination decision, keep the conversation advice pending and explicitly defer model selection. Do not fabricate current placement suitability or named destination settings."
+    },
+    {
+      "id": "U09",
+      "title": "Context off",
+      "setup": "Context off, Model ask, model decision retain; next-phase execution is authorized.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. Context off, Model ask, model decision retain; next-phase execution is authorized.",
+      "expected": "No conversation suitability block or conversation advice. Show model-only keep with evidence and continue authorized work without claiming both components were assessed."
+    },
+    {
+      "id": "U10",
+      "title": "Model off and both off",
+      "setup": "First run Context ask and Model off; then run both off.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. First run Context ask and Model off; then run both off.",
+      "expected": "Model-off gives only context advice without probing or recommending models. Both-off emits no routing note and performs no discovery. A verified context-only keep does not require AI identity or model evidence when model routing is off."
+    },
+    {
+      "id": "U11",
+      "title": "Clean start",
+      "setup": "Context ask recommends clean because prior task history would interfere and no task-history handoff is required.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. Context ask recommends clean because prior task history would interfere and no task-history handoff is required.",
+      "expected": "Lead with clean-start action and pending new-conversation proposal. Do not attach old decisions, failed hypotheses or task-history handoff. Supply a self-contained new-task request when needed. Traditional Chinese action is ↻ 全新開始, on its own line."
+    },
+    {
+      "id": "U12",
+      "title": "Details on request",
+      "setup": "An unchanged compact gate completed; user requests detailed explanation only.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. An unchanged compact gate completed; user requests detailed explanation only.",
+      "expected": "Reuse the gate without discovery or execution. Show minimum needed, task-fit setting and upgrade rationale. Retain internal recommended_setting field; switch_value appears only for explicit diagnostics."
+    },
+    {
+      "id": "U13",
+      "title": "Explicit target already authorized",
+      "setup": "User explicitly requests a supported setting change; context stays.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. User explicitly requests a supported setting change; context stays.",
+      "expected": "Do not ask another routing confirmation. Apply only if callable and verifiable; otherwise show the exact manual step. Never reinterpret the explicit target as the router recommendation."
+    },
+    {
+      "id": "U14",
+      "title": "Independent mixed modes",
+      "setup": "Context ask proposes handoff, Model auto chooses retain.",
+      "prompt": "Evaluate this hypothetical fixture under the routing UX contract; do not change real settings. Context ask proposes handoff, Model auto chooses retain.",
+      "expected": "Keep the context question and conversation advice visible. Do not continue into the pending destination merely because the model is retained or auto. Continue only after the effective destination is resolved."
+    }
+  ],
+  "surfaces": {
+    "chatgpt-web": {
+      "B01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B14": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B15": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B16": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B17": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U14": {
+        "status": "not_run",
+        "evidence": null
+      }
+    },
+    "chatgpt-desktop": {
+      "B01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B14": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B15": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B16": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B17": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U14": {
+        "status": "not_run",
+        "evidence": null
+      }
+    },
+    "chatgpt-mobile": {
+      "B01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B14": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B15": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B16": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B17": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U14": {
+        "status": "not_run",
+        "evidence": null
+      }
+    },
+    "codex-app": {
+      "B01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B14": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B15": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B16": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B17": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U14": {
+        "status": "not_run",
+        "evidence": null
+      }
+    },
+    "codex-cli": {
+      "B01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B14": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B15": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B16": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B17": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U14": {
+        "status": "not_run",
+        "evidence": null
+      }
+    },
+    "claude-code": {
+      "B01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B14": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B15": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B16": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B17": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U14": {
+        "status": "not_run",
+        "evidence": null
+      }
+    },
+    "gemini-cli": {
+      "B01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B14": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B15": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B16": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "B17": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "P05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "N03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "R10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "S12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U01": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U02": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U03": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U04": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U05": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U06": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U07": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U08": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U09": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U10": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U11": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U12": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U13": {
+        "status": "not_run",
+        "evidence": null
+      },
+      "U14": {
+        "status": "not_run",
+        "evidence": null
+      }
+    }
+  }
+}

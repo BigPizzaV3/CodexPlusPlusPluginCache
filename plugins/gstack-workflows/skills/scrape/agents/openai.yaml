@@ -1,0 +1,9 @@
+interface:
+  display_name: "Scrape"
+  short_description: "Extract structured data from a web page using the safest available browser or web capability."
+  default_prompt: "Use Scrape for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

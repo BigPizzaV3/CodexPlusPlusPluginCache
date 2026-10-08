@@ -1,0 +1,35 @@
+{
+  "author": {
+    "name": "Saul Mart\u00ed"
+  },
+  "description": "Uses the real vendored Impeccable workflow. Specialized for shaping UX and UI decisions and task structure before any interface code is written.",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "brandColor": "#22C55E",
+    "brandColorDark": "#3ADD76",
+    "capabilities": [
+      "Plan UX before coding"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Shape this UI feature before we write code",
+      "Plan the UX and interaction model for this feature",
+      "Work out the interface structure before implementation"
+    ],
+    "developerName": "Saul Mart\u00ed",
+    "displayName": "ShapeUI",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Uses the real vendored Impeccable workflow. Specialized for shaping UX and UI decisions and task structure before any interface code is written.",
+    "shortDescription": "Plan UX before coding"
+  },
+  "keywords": [
+    "engineering-suite",
+    "shape-ui",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "engineering-suite-shape-ui",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

@@ -1,0 +1,2995 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "title": "Fictional Multi-Tenant Export Threat Model",
+    "mode": "full",
+    "model_status": "complete",
+    "assurance_status": "source_observed",
+    "created_at": "2026-07-15T20:00:00-04:00",
+    "updated_at": "2026-07-15T20:00:00-04:00",
+    "next_review_at": "2026-10-15T20:00:00-04:00",
+    "change_triggers": [
+      "Authentication or tenant-policy change",
+      "Export API or queued-job contract change",
+      "Worker, object-store, privacy, or deployment change",
+      "Security incident affecting export isolation"
+    ],
+    "runtime_authorization": {
+      "status": "requires_authorization",
+      "targets": [],
+      "constraints": [
+        "No runtime action is included in this source-observed example."
+      ]
+    },
+    "authors": [
+      "Tahr example reviewer",
+      "Independent challenge pass"
+    ],
+    "repository": {
+      "name": "fictional-multitenant-export",
+      "root": "/path/to/fictional-multitenant-export",
+      "revision": "example-revision-7f3a2c1",
+      "scope": {
+        "coverage_target": "entire_application",
+        "description": "All first-party source, configuration, and supplied documents in the fictional example application.",
+        "included_paths": [
+          "src/",
+          "deploy/",
+          "docs/"
+        ],
+        "included_packages": [
+          "export-api",
+          "export-worker"
+        ],
+        "deployment_environments": [
+          "documented staging topology"
+        ],
+        "excluded_paths": [
+          "third-party package internals"
+        ],
+        "excluded_environments": [
+          "production runtime"
+        ],
+        "supplied_documents": [
+          "docs/security-review-scope.md",
+          "docs/export-data-policy.md"
+        ],
+        "limitations": [
+          {
+            "claim_id": "CLAIM-121",
+            "statement": "Runtime execution and third-party internals are outside this source-observed example scope.",
+            "evidence_class": "intended",
+            "evidence_ids": [
+              "EVD-005"
+            ],
+            "confidence": "high"
+          }
+        ]
+      }
+    }
+  },
+  "executive_summary": {
+    "system_purpose": {
+      "claim_id": "CLAIM-122",
+      "statement": "The fictional application lets authenticated tenants create asynchronous exports of their own records.",
+      "evidence_class": "intended",
+      "evidence_ids": [
+        "EVD-005"
+      ],
+      "confidence": "high"
+    },
+    "overall_assessment": {
+      "claim_id": "CLAIM-123",
+      "statement": "The source path exposes a high-risk tenant-isolation decision that requires mitigation and authorized validation; all declared source scope is dispositioned.",
+      "evidence_class": "inferred",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-002",
+        "EVD-003",
+        "EVD-004",
+        "EVD-005"
+      ],
+      "confidence": "high"
+    },
+    "model_status_rationale": {
+      "claim_id": "CLAIM-124",
+      "statement": "Every admitted component, high-signal flow, boundary, control, privacy lane, decision, and source coverage item in the example is reviewed; runtime execution was not in scope.",
+      "evidence_class": "inferred",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-002",
+        "EVD-003",
+        "EVD-004",
+        "EVD-005",
+        "EVD-006"
+      ],
+      "confidence": "high"
+    },
+    "highest_risk_threat_ids": [
+      "THREAT-001"
+    ],
+    "priority_decision_ids": [
+      "DEC-001"
+    ],
+    "assurance_limitations": [
+      {
+        "claim_id": "CLAIM-125",
+        "statement": "The planned access-control test has not run, so exploitability and deployed enforcement remain unverified.",
+        "evidence_class": "intended",
+        "evidence_ids": [
+          "EVD-005"
+        ],
+        "confidence": "high"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "evidence_id": "EVD-001",
+      "evidence_class": "observed",
+      "source_type": "source_code",
+      "title": "Export API route",
+      "summary": "The fictional route accepts an export request and forwards a tenant identifier into the asynchronous job payload.",
+      "locator": {
+        "repository_path": "src/api/exports.ts",
+        "revision": "example-revision-7f3a2c1",
+        "location": "createExportJob()"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional example contains no credentials or customer data."
+      }
+    },
+    {
+      "evidence_id": "EVD-002",
+      "evidence_class": "observed",
+      "source_type": "source_code",
+      "title": "Export worker query",
+      "summary": "The fictional worker reads the tenant identifier from the queued job and uses it to select export records.",
+      "locator": {
+        "repository_path": "src/workers/export-worker.ts",
+        "revision": "example-revision-7f3a2c1",
+        "location": "runExport()"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional example contains no credentials or customer data."
+      }
+    },
+    {
+      "evidence_id": "EVD-003",
+      "evidence_class": "observed",
+      "source_type": "source_code",
+      "title": "Authentication middleware",
+      "summary": "The fictional export route is reached after middleware establishes an authenticated user principal.",
+      "locator": {
+        "repository_path": "src/middleware/authenticate.ts",
+        "revision": "example-revision-7f3a2c1",
+        "location": "authenticateRequest()"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional example contains no credentials or customer data."
+      }
+    },
+    {
+      "evidence_id": "EVD-004",
+      "evidence_class": "observed",
+      "source_type": "configuration",
+      "title": "Application topology",
+      "summary": "The fictional deployment configuration defines the API, export worker, queue boundary, and export object store.",
+      "locator": {
+        "repository_path": "deploy/application.yaml",
+        "revision": "example-revision-7f3a2c1",
+        "location": "services and storage"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "medium",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional configuration contains no credentials or deployment secrets."
+      }
+    },
+    {
+      "evidence_id": "EVD-005",
+      "evidence_class": "intended",
+      "source_type": "design_document",
+      "title": "Review scope and tenant requirement",
+      "summary": "The fictional review brief covers the entire example application and requires exports to remain tenant scoped; runtime execution is excluded.",
+      "locator": {
+        "repository_path": "docs/security-review-scope.md",
+        "revision": "example-revision-7f3a2c1",
+        "location": "full application scope and tenant isolation"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional document contains no sensitive material."
+      }
+    },
+    {
+      "evidence_id": "EVD-006",
+      "evidence_class": "intended",
+      "source_type": "policy",
+      "title": "Export privacy and retention policy",
+      "summary": "The fictional policy classifies export contents as personal data and requires deletion after seven days.",
+      "locator": {
+        "repository_path": "docs/export-data-policy.md",
+        "revision": "example-revision-7f3a2c1",
+        "location": "classification and retention"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional policy contains no personal or customer data."
+      }
+    },
+    {
+      "evidence_id": "EVD-007",
+      "evidence_class": "observed",
+      "source_type": "repository_manifest",
+      "title": "Deterministic full-scope repository manifest",
+      "summary": "A sorted manifest binds every admitted fictional application path and supplied document to the modeled revision and records the declared exclusions.",
+      "locator": {
+        "repository_path": "inventory/full-review-manifest.json",
+        "revision": "example-revision-7f3a2c1",
+        "location": "sorted admitted paths and content digests",
+        "content_hash": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+      },
+      "collected_at": "2026-07-15T20:00:00-04:00",
+      "reliability": "high",
+      "redaction": {
+        "applied": false,
+        "details": "The fictional manifest contains paths and content digests only."
+      }
+    }
+  ],
+  "entities": [
+    {
+      "entity_id": "ACTOR-001",
+      "type": "actor",
+      "name": "Authenticated tenant user",
+      "description": {
+        "claim_id": "CLAIM-001",
+        "statement": "A tenant user can request an export after authentication.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-003"
+        ],
+        "confidence": "high"
+      },
+      "criticality": "medium",
+      "data_classification": "none",
+      "owner": "Identity team",
+      "external": true,
+      "zone_id": "ZONE-001",
+      "trust_level": "untrusted",
+      "roles": [
+        "tenant_user"
+      ]
+    },
+    {
+      "entity_id": "ASSET-001",
+      "type": "asset",
+      "name": "Tenant export records",
+      "description": {
+        "claim_id": "CLAIM-002",
+        "statement": "Export records contain tenant-owned personal and business data.",
+        "evidence_class": "intended",
+        "evidence_ids": [
+          "EVD-005",
+          "EVD-006"
+        ],
+        "confidence": "high"
+      },
+      "criticality": "high",
+      "data_classification": "restricted",
+      "owner": "Data platform team",
+      "external": false,
+      "zone_id": "ZONE-004",
+      "trust_level": "trusted"
+    },
+    {
+      "entity_id": "ENTRYPOINT-001",
+      "type": "entrypoint",
+      "name": "Create export API",
+      "description": {
+        "claim_id": "CLAIM-003",
+        "statement": "The create-export route accepts a request and enqueues export work.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-001"
+        ],
+        "confidence": "high"
+      },
+      "criticality": "high",
+      "data_classification": "confidential",
+      "owner": "API team",
+      "external": true,
+      "zone_id": "ZONE-002",
+      "trust_level": "partially_trusted",
+      "technologies": [
+        "HTTPS",
+        "JSON"
+      ],
+      "related_entity_ids": [
+        "COMP-001"
+      ]
+    },
+    {
+      "entity_id": "COMP-001",
+      "type": "component",
+      "name": "Export worker",
+      "description": {
+        "claim_id": "CLAIM-004",
+        "statement": "The worker consumes queued export jobs and selects records for the requested tenant.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-002",
+          "EVD-004"
+        ],
+        "confidence": "high"
+      },
+      "criticality": "high",
+      "data_classification": "restricted",
+      "owner": "Data platform team",
+      "external": false,
+      "zone_id": "ZONE-003",
+      "trust_level": "privileged",
+      "technologies": [
+        "background worker",
+        "queue consumer"
+      ],
+      "related_entity_ids": [
+        "STORE-001"
+      ]
+    },
+    {
+      "entity_id": "STORE-001",
+      "type": "data_store",
+      "name": "Export object store",
+      "description": {
+        "claim_id": "CLAIM-005",
+        "statement": "Completed export objects are written to a dedicated object store.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-004"
+        ],
+        "confidence": "high"
+      },
+      "criticality": "high",
+      "data_classification": "restricted",
+      "owner": "Infrastructure team",
+      "external": false,
+      "zone_id": "ZONE-004",
+      "trust_level": "privileged",
+      "technologies": [
+        "object storage"
+      ],
+      "related_entity_ids": [
+        "ASSET-001"
+      ]
+    },
+    {
+      "entity_id": "ZONE-001",
+      "type": "trust_zone",
+      "name": "Tenant client zone",
+      "description": {
+        "claim_id": "CLAIM-006",
+        "statement": "Tenant-controlled clients are outside the application trust boundary.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-004"
+        ],
+        "confidence": "high"
+      },
+      "criticality": "low",
+      "data_classification": "none",
+      "owner": "Application security team",
+      "external": true,
+      "trust_level": "untrusted"
+    },
+    {
+      "entity_id": "ZONE-002",
+      "type": "trust_zone",
+      "name": "API zone",
+      "description": {
+        "claim_id": "CLAIM-007",
+        "statement": "The export API runs in the application service zone.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-004"
+        ],
+        "confidence": "high"
+      },
+      "criticality": "high",
+      "data_classification": "confidential",
+      "owner": "API team",
+      "external": false,
+      "trust_level": "partially_trusted"
+    },
+    {
+      "entity_id": "ZONE-003",
+      "type": "trust_zone",
+      "name": "Worker zone",
+      "description": {
+        "claim_id": "CLAIM-008",
+        "statement": "The export worker runs with background-processing privileges.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-004"
+        ],
+        "confidence": "high"
+      },
+      "criticality": "high",
+      "data_classification": "restricted",
+      "owner": "Data platform team",
+      "external": false,
+      "trust_level": "privileged"
+    },
+    {
+      "entity_id": "ZONE-004",
+      "type": "trust_zone",
+      "name": "Restricted data zone",
+      "description": {
+        "claim_id": "CLAIM-009",
+        "statement": "Tenant export data and completed objects reside in the restricted data zone.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-004"
+        ],
+        "confidence": "high"
+      },
+      "criticality": "high",
+      "data_classification": "restricted",
+      "owner": "Infrastructure team",
+      "external": false,
+      "trust_level": "privileged"
+    }
+  ],
+  "boundaries": [
+    {
+      "boundary_id": "BOUNDARY-001",
+      "name": "Tenant client to export API",
+      "from_zone_id": "ZONE-001",
+      "to_zone_id": "ZONE-002",
+      "direction": "bidirectional",
+      "description": {
+        "claim_id": "CLAIM-010",
+        "statement": "An untrusted tenant client crosses into the API zone when creating an export.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-004"
+        ],
+        "confidence": "high"
+      },
+      "trust_change": {
+        "claim_id": "CLAIM-011",
+        "statement": "Authentication establishes a principal, but request values remain attacker controlled.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-003"
+        ],
+        "confidence": "high"
+      },
+      "asset_ids": [
+        "ASSET-001"
+      ],
+      "control_ids": [
+        "CONTROL-001"
+      ]
+    },
+    {
+      "boundary_id": "BOUNDARY-002",
+      "name": "Export API to worker",
+      "from_zone_id": "ZONE-002",
+      "to_zone_id": "ZONE-003",
+      "direction": "unidirectional",
+      "description": {
+        "claim_id": "CLAIM-012",
+        "statement": "The API passes an export job into the privileged worker zone.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-004"
+        ],
+        "confidence": "high"
+      },
+      "trust_change": {
+        "claim_id": "CLAIM-013",
+        "statement": "The queued tenant value becomes input to a privileged data-selection process.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002"
+        ],
+        "confidence": "high"
+      },
+      "asset_ids": [
+        "ASSET-001"
+      ],
+      "control_ids": [
+        "CONTROL-002"
+      ]
+    },
+    {
+      "boundary_id": "BOUNDARY-003",
+      "name": "Worker to restricted store",
+      "from_zone_id": "ZONE-003",
+      "to_zone_id": "ZONE-004",
+      "direction": "unidirectional",
+      "description": {
+        "claim_id": "CLAIM-014",
+        "statement": "The worker crosses into restricted storage to read records and write the export object.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-002",
+          "EVD-004"
+        ],
+        "confidence": "high"
+      },
+      "trust_change": {
+        "claim_id": "CLAIM-015",
+        "statement": "Worker-supplied tenant scope determines which restricted records can enter the export.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-002"
+        ],
+        "confidence": "high"
+      },
+      "asset_ids": [
+        "ASSET-001"
+      ],
+      "control_ids": [
+        "CONTROL-002"
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "flow_id": "FLOW-001",
+      "name": "Asynchronous tenant export",
+      "description": {
+        "claim_id": "CLAIM-016",
+        "statement": "An authenticated request creates a job that a worker resolves into a stored tenant export.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002",
+          "EVD-004"
+        ],
+        "confidence": "high"
+      },
+      "actor_ids": [
+        "ACTOR-001"
+      ],
+      "asset_ids": [
+        "ASSET-001"
+      ],
+      "entrypoint_entity_ids": [
+        "ENTRYPOINT-001"
+      ],
+      "trigger": {
+        "claim_id": "CLAIM-017",
+        "statement": "A tenant user submits a create-export request.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-001"
+        ],
+        "confidence": "high"
+      },
+      "input": {
+        "claim_id": "CLAIM-018",
+        "statement": "The request contains export parameters including a tenant identifier.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-001"
+        ],
+        "confidence": "high"
+      },
+      "hops": [
+        {
+          "hop_id": "HOP-001",
+          "sequence": 1,
+          "from_entity_id": "ACTOR-001",
+          "to_entity_id": "ENTRYPOINT-001",
+          "boundary_id": "BOUNDARY-001",
+          "channel": "HTTPS JSON",
+          "operation": {
+            "claim_id": "CLAIM-019",
+            "statement": "The client submits an authenticated export request.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-003"
+            ],
+            "confidence": "high"
+          },
+          "data_asset_ids": [
+            "ASSET-001"
+          ],
+          "identity_context": {
+            "principal": {
+              "claim_id": "CLAIM-020",
+              "statement": "Authentication associates the request with a tenant user principal.",
+              "evidence_class": "observed",
+              "evidence_ids": [
+                "EVD-003"
+              ],
+              "confidence": "high"
+            },
+            "tenant": {
+              "claim_id": "CLAIM-021",
+              "statement": "The request also carries a caller-supplied tenant identifier.",
+              "evidence_class": "observed",
+              "evidence_ids": [
+                "EVD-001"
+              ],
+              "confidence": "high"
+            },
+            "roles": {
+              "claim_id": "CLAIM-022",
+              "statement": "The established principal has the tenant_user role.",
+              "evidence_class": "inferred",
+              "evidence_ids": [
+                "EVD-003"
+              ],
+              "confidence": "high"
+            },
+            "trust_basis": {
+              "claim_id": "CLAIM-023",
+              "statement": "The principal comes from authentication middleware; request fields remain untrusted.",
+              "evidence_class": "inferred",
+              "evidence_ids": [
+                "EVD-001",
+                "EVD-003"
+              ],
+              "confidence": "high"
+            }
+          },
+          "security_decisions": [
+            {
+              "decision_type": "authentication",
+              "outcome": {
+                "claim_id": "CLAIM-024",
+                "statement": "The route requires an authenticated principal.",
+                "evidence_class": "observed",
+                "evidence_ids": [
+                  "EVD-003"
+                ],
+                "confidence": "high"
+              }
+            }
+          ],
+          "control_ids": [
+            "CONTROL-001"
+          ]
+        },
+        {
+          "hop_id": "HOP-002",
+          "sequence": 2,
+          "from_entity_id": "ENTRYPOINT-001",
+          "to_entity_id": "COMP-001",
+          "boundary_id": "BOUNDARY-002",
+          "channel": "asynchronous job queue",
+          "operation": {
+            "claim_id": "CLAIM-025",
+            "statement": "The API serializes export parameters into the worker job.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-004"
+            ],
+            "confidence": "high"
+          },
+          "data_asset_ids": [
+            "ASSET-001"
+          ],
+          "identity_context": {
+            "principal": {
+              "claim_id": "CLAIM-026",
+              "statement": "The job is created on behalf of the authenticated tenant user.",
+              "evidence_class": "inferred",
+              "evidence_ids": [
+                "EVD-001",
+                "EVD-003"
+              ],
+              "confidence": "high"
+            },
+            "tenant": {
+              "claim_id": "CLAIM-027",
+              "statement": "The queued tenant identifier is copied from the request rather than shown as server derived.",
+              "evidence_class": "observed",
+              "evidence_ids": [
+                "EVD-001"
+              ],
+              "confidence": "high"
+            },
+            "roles": {
+              "claim_id": "CLAIM-028",
+              "statement": "The worker processes the request under its service privileges.",
+              "evidence_class": "inferred",
+              "evidence_ids": [
+                "EVD-002",
+                "EVD-004"
+              ],
+              "confidence": "high"
+            },
+            "trust_basis": {
+              "claim_id": "CLAIM-029",
+              "statement": "The worker trusts the job producer but must still bind tenant scope to the initiating principal.",
+              "evidence_class": "inferred",
+              "evidence_ids": [
+                "EVD-001",
+                "EVD-002"
+              ],
+              "confidence": "high"
+            }
+          },
+          "security_decisions": [
+            {
+              "decision_type": "tenant_scope",
+              "outcome": {
+                "claim_id": "CLAIM-030",
+                "statement": "Source review did not establish server-derived tenant binding before enqueue.",
+                "evidence_class": "inferred",
+                "evidence_ids": [
+                  "EVD-001",
+                  "EVD-002"
+                ],
+                "confidence": "medium"
+              }
+            }
+          ],
+          "control_ids": [
+            "CONTROL-002"
+          ]
+        },
+        {
+          "hop_id": "HOP-003",
+          "sequence": 3,
+          "from_entity_id": "COMP-001",
+          "to_entity_id": "STORE-001",
+          "boundary_id": "BOUNDARY-003",
+          "channel": "database and object-storage clients",
+          "operation": {
+            "claim_id": "CLAIM-031",
+            "statement": "The worker selects tenant records and writes the completed export object.",
+            "evidence_class": "observed",
+            "evidence_ids": [
+              "EVD-002",
+              "EVD-004"
+            ],
+            "confidence": "high"
+          },
+          "data_asset_ids": [
+            "ASSET-001"
+          ],
+          "identity_context": {
+            "principal": {
+              "claim_id": "CLAIM-032",
+              "statement": "The worker uses a privileged service identity for data access.",
+              "evidence_class": "inferred",
+              "evidence_ids": [
+                "EVD-002",
+                "EVD-004"
+              ],
+              "confidence": "high"
+            },
+            "tenant": {
+              "claim_id": "CLAIM-033",
+              "statement": "The worker query scope comes from the queued tenant identifier.",
+              "evidence_class": "observed",
+              "evidence_ids": [
+                "EVD-002"
+              ],
+              "confidence": "high"
+            },
+            "roles": {
+              "claim_id": "CLAIM-034",
+              "statement": "The worker service can read exportable tenant records and write export objects.",
+              "evidence_class": "inferred",
+              "evidence_ids": [
+                "EVD-002",
+                "EVD-004"
+              ],
+              "confidence": "high"
+            },
+            "trust_basis": {
+              "claim_id": "CLAIM-035",
+              "statement": "Correct isolation depends on the queued tenant value being bound to the initiating principal.",
+              "evidence_class": "inferred",
+              "evidence_ids": [
+                "EVD-001",
+                "EVD-002"
+              ],
+              "confidence": "high"
+            }
+          },
+          "security_decisions": [
+            {
+              "decision_type": "tenant_scope",
+              "outcome": {
+                "claim_id": "CLAIM-036",
+                "statement": "The worker query uses the job tenant value; a separate principal-to-tenant check was not located.",
+                "evidence_class": "inferred",
+                "evidence_ids": [
+                  "EVD-002"
+                ],
+                "confidence": "medium"
+              }
+            }
+          ],
+          "control_ids": [
+            "CONTROL-002"
+          ]
+        }
+      ],
+      "sink_or_final_state": {
+        "claim_id": "CLAIM-037",
+        "statement": "A tenant-scoped export object is expected to be stored for later download.",
+        "evidence_class": "intended",
+        "evidence_ids": [
+          "EVD-005",
+          "EVD-006"
+        ],
+        "confidence": "high"
+      },
+      "side_effects": [
+        {
+          "claim_id": "CLAIM-038",
+          "statement": "The asynchronous job and completed object persist until cleanup or retention processing.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-004",
+            "EVD-006"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "unresolved_question_ids": [
+        "Q-001"
+      ]
+    }
+  ],
+  "invariants": [
+    {
+      "invariant_id": "INV-001",
+      "statement": {
+        "claim_id": "CLAIM-039",
+        "statement": "A tenant user must never cause another tenant's records to be selected or included in an export.",
+        "evidence_class": "intended",
+        "evidence_ids": [
+          "EVD-005"
+        ],
+        "confidence": "high"
+      },
+      "owner": "Data platform team",
+      "status": "partial",
+      "asset_ids": [
+        "ASSET-001"
+      ],
+      "flow_ids": [
+        "FLOW-001"
+      ],
+      "threat_ids": [
+        "THREAT-001"
+      ],
+      "control_ids": [
+        "CONTROL-001",
+        "CONTROL-002"
+      ],
+      "validation_test_ids": [
+        "TEST-001"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "control_id": "CONTROL-001",
+      "name": "Export route authentication",
+      "category": "authentication",
+      "description": {
+        "claim_id": "CLAIM-040",
+        "statement": "Authentication middleware establishes a tenant user before the export route runs.",
+        "evidence_class": "observed",
+        "evidence_ids": [
+          "EVD-003"
+        ],
+        "confidence": "high"
+      },
+      "implementation_status": "observed",
+      "owner": "Identity team",
+      "entity_ids": [
+        "ACTOR-001",
+        "ENTRYPOINT-001"
+      ],
+      "flow_ids": [
+        "FLOW-001"
+      ],
+      "invariant_ids": [
+        "INV-001"
+      ],
+      "threat_ids": [
+        "THREAT-001"
+      ],
+      "validation_test_ids": [
+        "TEST-001"
+      ],
+      "effectiveness": {
+        "level": "high",
+        "rationale": {
+          "claim_id": "CLAIM-041",
+          "statement": "The middleware invocation is visible at the export route, although authentication alone does not bind tenant scope.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        }
+      },
+      "framework_mappings": [
+        "ASVS authentication"
+      ]
+    },
+    {
+      "control_id": "CONTROL-002",
+      "name": "Principal-bound tenant scope",
+      "category": "tenant_isolation",
+      "description": {
+        "claim_id": "CLAIM-042",
+        "statement": "Tenant scope should be derived from the authenticated principal before enqueue and preserved through worker selection.",
+        "evidence_class": "intended",
+        "evidence_ids": [
+          "EVD-005"
+        ],
+        "confidence": "high"
+      },
+      "implementation_status": "partial",
+      "owner": "Data platform team",
+      "entity_ids": [
+        "ENTRYPOINT-001",
+        "COMP-001",
+        "STORE-001"
+      ],
+      "flow_ids": [
+        "FLOW-001"
+      ],
+      "invariant_ids": [
+        "INV-001"
+      ],
+      "threat_ids": [
+        "THREAT-001"
+      ],
+      "validation_test_ids": [
+        "TEST-001"
+      ],
+      "effectiveness": {
+        "level": "medium",
+        "rationale": {
+          "claim_id": "CLAIM-043",
+          "statement": "The source shows tenant values crossing both enforcement points, but authorized runtime evidence is not available.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002"
+          ],
+          "confidence": "medium"
+        }
+      },
+      "framework_mappings": [
+        "OWASP API object-level authorization",
+        "ASVS access control"
+      ]
+    }
+  ],
+  "threats": [
+    {
+      "threat_id": "THREAT-001",
+      "title": "Request-controlled tenant scope reaches export selection",
+      "actor_ids": [
+        "ACTOR-001"
+      ],
+      "goal": {
+        "claim_id": "CLAIM-046",
+        "statement": "An authenticated tenant user attempts to include another tenant's records in an export.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002"
+        ],
+        "confidence": "high"
+      },
+      "asset_ids": [
+        "ASSET-001"
+      ],
+      "flow_ids": [
+        "FLOW-001"
+      ],
+      "boundary_ids": [
+        "BOUNDARY-001",
+        "BOUNDARY-002",
+        "BOUNDARY-003"
+      ],
+      "invariant_ids": [
+        "INV-001"
+      ],
+      "control_ids": [
+        "CONTROL-001",
+        "CONTROL-002"
+      ],
+      "preconditions": [
+        {
+          "claim_id": "CLAIM-047",
+          "statement": "The attacker has a normal authenticated tenant account.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-003"
+          ],
+          "confidence": "high"
+        },
+        {
+          "claim_id": "CLAIM-048",
+          "statement": "The attacker can influence the tenant identifier accepted by the export route.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-001"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "abuse_path": [
+        {
+          "sequence": 1,
+          "action": {
+            "claim_id": "CLAIM-049",
+            "statement": "Submit an export request containing a foreign synthetic tenant identifier.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001"
+            ],
+            "confidence": "high"
+          },
+          "entity_ids": [
+            "ACTOR-001",
+            "ENTRYPOINT-001"
+          ],
+          "flow_id": "FLOW-001",
+          "boundary_id": "BOUNDARY-001"
+        },
+        {
+          "sequence": 2,
+          "action": {
+            "claim_id": "CLAIM-050",
+            "statement": "Cause the API to preserve the foreign tenant identifier in the worker job.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001"
+            ],
+            "confidence": "high"
+          },
+          "entity_ids": [
+            "ENTRYPOINT-001",
+            "COMP-001"
+          ],
+          "flow_id": "FLOW-001",
+          "boundary_id": "BOUNDARY-002"
+        },
+        {
+          "sequence": 3,
+          "action": {
+            "claim_id": "CLAIM-051",
+            "statement": "Cause the privileged worker to select foreign tenant records and write them into the export.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-002",
+              "EVD-004"
+            ],
+            "confidence": "high"
+          },
+          "entity_ids": [
+            "COMP-001",
+            "STORE-001"
+          ],
+          "flow_id": "FLOW-001",
+          "boundary_id": "BOUNDARY-003"
+        }
+      ],
+      "contradiction_checks": [
+        {
+          "claim_id": "CLAIM-052",
+          "statement": "The export route's authentication middleware was located and narrows the actor to an authenticated user.",
+          "evidence_class": "observed",
+          "evidence_ids": [
+            "EVD-003"
+          ],
+          "confidence": "high"
+        },
+        {
+          "claim_id": "CLAIM-053",
+          "statement": "Review of the route and worker call sites did not locate a separate server-derived principal-to-tenant binding.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002"
+          ],
+          "confidence": "medium"
+        },
+        {
+          "claim_id": "CLAIM-054",
+          "statement": "Deployment topology was reviewed for a compensating tenant enforcement point, but none is specified in the supplied configuration.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-004"
+          ],
+          "confidence": "medium"
+        }
+      ],
+      "business_impact": {
+        "claim_id": "CLAIM-055",
+        "statement": "A successful path could disclose restricted personal and business records across tenants.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-005",
+          "EVD-006"
+        ],
+        "confidence": "medium"
+      },
+      "risk": {
+        "likelihood": "possible",
+        "impact": "major",
+        "rating": "high",
+        "factors": {
+          "exposure": "internet",
+          "privilege_required": "authenticated_user",
+          "attacker_complexity": "low",
+          "user_interaction": "none",
+          "asset_sensitivity": "high",
+          "tenant_reach": "cross_tenant"
+        },
+        "rationale": {
+          "claim_id": "CLAIM-044",
+          "statement": "An authenticated user can reach the export flow with low complexity; if request-supplied tenant scope reaches the privileged worker, restricted cross-tenant data could enter an export.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "medium"
+        }
+      },
+      "confidence": {
+        "level": "medium",
+        "rationale": {
+          "claim_id": "CLAIM-056",
+          "statement": "The complete source path is observed, while exploitability remains untested because runtime execution is outside the example scope.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "medium"
+        }
+      },
+      "response": {
+        "strategy": "mitigate",
+        "priority": "p1",
+        "status": "proposed",
+        "owner": "Data platform team",
+        "next_action": {
+          "claim_id": "CLAIM-057",
+          "statement": "Derive tenant scope from the authenticated principal before enqueue and revalidate it in the worker query.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        "rationale": {
+          "claim_id": "CLAIM-058",
+          "statement": "Two independent enforcement points prevent request and job tampering from becoming privileged cross-tenant selection.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        "residual_risk": {
+          "likelihood": "unlikely",
+          "impact": "major",
+          "rating": "medium",
+          "factors": {
+            "exposure": "internet",
+            "privilege_required": "authenticated_user",
+            "attacker_complexity": "low",
+            "user_interaction": "none",
+            "asset_sensitivity": "high",
+            "tenant_reach": "cross_tenant"
+          },
+          "rationale": {
+            "claim_id": "CLAIM-045",
+            "statement": "Server-derived tenant scope at both enqueue and worker query would reduce likelihood, while implementation and regression evidence would still be required.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        },
+        "decision_ids": [
+          "DEC-001"
+        ],
+        "target_date": "2026-08-15"
+      },
+      "status": "validation_required",
+      "validation_test_ids": [
+        "TEST-001"
+      ]
+    }
+  ],
+  "attack_paths": [
+    {
+      "attack_path_id": "PATH-001",
+      "title": "Tenant request to cross-tenant export object",
+      "actor_id": "ACTOR-001",
+      "preconditions": [
+        {
+          "claim_id": "CLAIM-059",
+          "statement": "A disposable tenant user can create exports in an authorized test environment.",
+          "evidence_class": "intended",
+          "evidence_ids": [
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        {
+          "claim_id": "CLAIM-060",
+          "statement": "Two synthetic tenants contain owner-attributed marker records.",
+          "evidence_class": "intended",
+          "evidence_ids": [
+            "EVD-005"
+          ],
+          "confidence": "high"
+        }
+      ],
+      "hops": [
+        {
+          "sequence": 1,
+          "from_entity_id": "ACTOR-001",
+          "to_entity_id": "ENTRYPOINT-001",
+          "flow_id": "FLOW-001",
+          "flow_hop_id": "HOP-001",
+          "boundary_id": "BOUNDARY-001",
+          "threat_ids": [
+            "THREAT-001"
+          ],
+          "control_ids": [
+            "CONTROL-001"
+          ],
+          "condition": {
+            "claim_id": "CLAIM-061",
+            "statement": "The actor authenticates normally and submits an altered tenant identifier.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-003"
+            ],
+            "confidence": "high"
+          },
+          "outcome": {
+            "claim_id": "CLAIM-062",
+            "statement": "The API receives attacker-influenced tenant scope under a valid principal.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-003"
+            ],
+            "confidence": "high"
+          },
+          "intermediate_asset_ids": [
+            "ASSET-001"
+          ]
+        },
+        {
+          "sequence": 2,
+          "from_entity_id": "ENTRYPOINT-001",
+          "to_entity_id": "COMP-001",
+          "flow_id": "FLOW-001",
+          "flow_hop_id": "HOP-002",
+          "boundary_id": "BOUNDARY-002",
+          "threat_ids": [
+            "THREAT-001"
+          ],
+          "control_ids": [
+            "CONTROL-002"
+          ],
+          "condition": {
+            "claim_id": "CLAIM-063",
+            "statement": "The API preserves the altered tenant identifier in the job payload.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001"
+            ],
+            "confidence": "high"
+          },
+          "outcome": {
+            "claim_id": "CLAIM-064",
+            "statement": "The privileged worker receives tenant scope not yet proven to be principal bound.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002"
+            ],
+            "confidence": "high"
+          },
+          "intermediate_asset_ids": [
+            "ASSET-001"
+          ]
+        },
+        {
+          "sequence": 3,
+          "from_entity_id": "COMP-001",
+          "to_entity_id": "STORE-001",
+          "flow_id": "FLOW-001",
+          "flow_hop_id": "HOP-003",
+          "boundary_id": "BOUNDARY-003",
+          "threat_ids": [
+            "THREAT-001"
+          ],
+          "control_ids": [
+            "CONTROL-002"
+          ],
+          "condition": {
+            "claim_id": "CLAIM-065",
+            "statement": "The worker query accepts the altered job tenant scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-002"
+            ],
+            "confidence": "high"
+          },
+          "outcome": {
+            "claim_id": "CLAIM-066",
+            "statement": "Foreign synthetic tenant data could be placed into the completed export object.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-002",
+              "EVD-004"
+            ],
+            "confidence": "high"
+          },
+          "intermediate_asset_ids": [
+            "ASSET-001"
+          ]
+        }
+      ],
+      "final_asset_ids": [
+        "ASSET-001"
+      ],
+      "final_impact": {
+        "claim_id": "CLAIM-067",
+        "statement": "The requesting tenant could receive restricted records belonging to another tenant.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-005",
+          "EVD-006"
+        ],
+        "confidence": "high"
+      },
+      "risk": {
+        "likelihood": "possible",
+        "impact": "major",
+        "rating": "high",
+        "factors": {
+          "exposure": "internet",
+          "privilege_required": "authenticated_user",
+          "attacker_complexity": "low",
+          "user_interaction": "none",
+          "asset_sensitivity": "high",
+          "tenant_reach": "cross_tenant"
+        },
+        "rationale": {
+          "claim_id": "CLAIM-068",
+          "statement": "All attack-path hops are connected in source, but the decisive tenant-binding behavior still requires an authorized test.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002"
+          ],
+          "confidence": "medium"
+        }
+      },
+      "confidence": {
+        "level": "medium",
+        "rationale": {
+          "claim_id": "CLAIM-069",
+          "statement": "Source evidence supports the connected path; runtime success or denial has not been observed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "medium"
+        }
+      },
+      "status": "conditional",
+      "decision_ids": [
+        "DEC-001"
+      ],
+      "validation_test_ids": [
+        "TEST-001"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "decision_id": "DEC-001",
+      "title": "Choose the tenant-scope enforcement design",
+      "question": {
+        "claim_id": "CLAIM-070",
+        "statement": "Where must tenant scope be bound to the authenticated principal for asynchronous exports?",
+        "evidence_class": "intended",
+        "evidence_ids": [
+          "EVD-005"
+        ],
+        "confidence": "high"
+      },
+      "status": "proposed",
+      "owner": "Data platform team",
+      "threat_ids": [
+        "THREAT-001"
+      ],
+      "invariant_ids": [
+        "INV-001"
+      ],
+      "control_ids": [
+        "CONTROL-001",
+        "CONTROL-002"
+      ],
+      "flow_ids": [
+        "FLOW-001"
+      ],
+      "options": [
+        {
+          "option_id": "OPTION-001",
+          "description": {
+            "claim_id": "CLAIM-071",
+            "statement": "Derive tenant scope at the API and carry a signed or integrity-protected principal context to the worker, which revalidates before querying.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-005"
+            ],
+            "confidence": "high"
+          },
+          "security_effect": {
+            "claim_id": "CLAIM-072",
+            "statement": "Both privilege transitions enforce the same principal-to-tenant invariant.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-005"
+            ],
+            "confidence": "high"
+          },
+          "tradeoffs": [
+            {
+              "claim_id": "CLAIM-073",
+              "statement": "Requires a versioned job contract and worker-side policy code.",
+              "evidence_class": "inferred",
+              "evidence_ids": [
+                "EVD-001",
+                "EVD-002"
+              ],
+              "confidence": "high"
+            }
+          ]
+        },
+        {
+          "option_id": "OPTION-002",
+          "description": {
+            "claim_id": "CLAIM-074",
+            "statement": "Continue passing a caller-supplied tenant identifier and rely only on API validation.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002"
+            ],
+            "confidence": "high"
+          },
+          "security_effect": {
+            "claim_id": "CLAIM-075",
+            "statement": "Leaves the worker dependent on upstream correctness and weakens defense across the asynchronous boundary.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002"
+            ],
+            "confidence": "high"
+          },
+          "tradeoffs": [
+            {
+              "claim_id": "CLAIM-076",
+              "statement": "Requires less implementation change but retains a single enforcement point.",
+              "evidence_class": "inferred",
+              "evidence_ids": [
+                "EVD-001",
+                "EVD-002"
+              ],
+              "confidence": "high"
+            }
+          ]
+        }
+      ],
+      "selected_option_id": "OPTION-001",
+      "recommendation": {
+        "claim_id": "CLAIM-077",
+        "statement": "Select the principal-derived, worker-revalidated tenant context design.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002",
+          "EVD-005"
+        ],
+        "confidence": "high"
+      },
+      "rationale": {
+        "claim_id": "CLAIM-078",
+        "statement": "The recommended option enforces tenant isolation before both job creation and privileged data selection.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002",
+          "EVD-005"
+        ],
+        "confidence": "high"
+      },
+      "validation_test_ids": [
+        "TEST-001"
+      ]
+    }
+  ],
+  "validation_tests": [
+    {
+      "test_id": "TEST-001",
+      "title": "Verify principal-bound tenant scope across the export worker",
+      "hypothesis": {
+        "claim_id": "CLAIM-079",
+        "statement": "A tenant A principal cannot cause tenant B synthetic records to be selected or stored by changing request or job tenant identifiers.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002",
+          "EVD-005"
+        ],
+        "confidence": "medium"
+      },
+      "threat_ids": [
+        "THREAT-001"
+      ],
+      "invariant_ids": [
+        "INV-001"
+      ],
+      "actor_id": "ACTOR-001",
+      "asset_ids": [
+        "ASSET-001"
+      ],
+      "boundary_ids": [
+        "BOUNDARY-001",
+        "BOUNDARY-002",
+        "BOUNDARY-003"
+      ],
+      "flow_ids": [
+        "FLOW-001"
+      ],
+      "preconditions": [
+        "Explicit authorization for the isolated local test target",
+        "Disposable tenant A and tenant B accounts",
+        "Synthetic owner-attributed marker records for both tenants",
+        "Queue and object-store inspection access"
+      ],
+      "fixture_setup": [
+        "Create tenant A record TENANT_A_MARKER and tenant B record TENANT_B_MARKER",
+        "Authenticate as the disposable tenant A user",
+        "Clear prior export jobs and objects for both fixtures"
+      ],
+      "baseline": {
+        "description": {
+          "claim_id": "CLAIM-080",
+          "statement": "A normal tenant A export should complete with only tenant A synthetic records.",
+          "evidence_class": "intended",
+          "evidence_ids": [
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        "steps": [
+          "Request an export as tenant A without altering tenant context",
+          "Wait for the bounded job to complete",
+          "Inspect the synthetic export and authoritative worker query trace"
+        ],
+        "expected_signals": [
+          {
+            "signal_id": "SIGNAL-001",
+            "type": "state_inspection",
+            "observation": "Tenant A export contains only the synthetic TENANT_A_MARKER record.",
+            "interpretation": "The normal flow works and preserves tenant A ownership."
+          }
+        ],
+        "evidence_to_collect": [
+          "Redacted request identifier and job identifier",
+          "Worker tenant-scope trace containing only synthetic identifiers",
+          "Hash and owner labels of the completed synthetic export"
+        ]
+      },
+      "attacker_case": {
+        "objective": {
+          "claim_id": "CLAIM-081",
+          "statement": "Attempt to make tenant A's export select tenant B's synthetic records by altering tenant context.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002"
+          ],
+          "confidence": "high"
+        },
+        "steps": [
+          "Submit the same export request while substituting tenant B's synthetic identifier",
+          "If authorized, inspect the queued job without modifying production-like state",
+          "Wait for the bounded job outcome and inspect the synthetic export"
+        ],
+        "attacker_success_signal": {
+          "signal_id": "SIGNAL-002",
+          "type": "state_inspection",
+          "observation": "Tenant A receives the synthetic TENANT_B_MARKER in the completed export.",
+          "interpretation": "The modeled cross-tenant disclosure path succeeded in the authorized fixture."
+        },
+        "expected_denial_signal": {
+          "signal_id": "SIGNAL-003",
+          "type": "authorization_decision",
+          "observation": "The request is rejected or the completed export contains only TENANT_A_MARKER.",
+          "interpretation": "Tenant isolation prevented tenant B data from entering tenant A's export."
+        }
+      },
+      "control_case": {
+        "expected_control_ids": [
+          "CONTROL-001",
+          "CONTROL-002"
+        ],
+        "steps": [
+          "Inspect the API-derived tenant context for the altered request",
+          "Inspect the worker query scope for the resulting job",
+          "Compare both values with the authenticated tenant A principal"
+        ],
+        "control_success_signal": {
+          "signal_id": "SIGNAL-004",
+          "type": "database_trace",
+          "observation": "Worker query parameters contain the server-derived tenant A identifier only.",
+          "interpretation": "The expected principal-bound tenant control held at the privileged query."
+        },
+        "control_failure_signal": {
+          "signal_id": "SIGNAL-005",
+          "type": "database_trace",
+          "observation": "Worker query parameters contain the request-supplied tenant B identifier.",
+          "interpretation": "The expected worker-side tenant control did not hold."
+        }
+      },
+      "evidence_to_collect": [
+        "Redacted request and response metadata",
+        "Redacted queued-job tenant context",
+        "Authoritative worker query parameters with synthetic tenant labels",
+        "Completed export hash and synthetic owner labels",
+        "Cleanup verification events"
+      ],
+      "target_skill": "tahr-test-access-control",
+      "safety": {
+        "authorized_target": "isolated local test environment",
+        "authorization_status": "requires_authorization",
+        "synthetic_data_only": true,
+        "destructive_actions_prohibited": true,
+        "constraints": [
+          "Do not target production, third parties, real tenants, or real accounts",
+          "Run one bounded export at a time",
+          "Use only synthetic markers and redacted evidence"
+        ],
+        "stop_conditions": [
+          "Stop if the target revision differs from the modeled revision",
+          "Stop if any non-synthetic record appears",
+          "Stop if queue or object-store cleanup cannot be verified"
+        ],
+        "evidence_handling": [
+          "Store only redacted identifiers and hashes",
+          "Do not preserve credentials, tokens, export contents, or customer data"
+        ]
+      },
+      "cleanup": {
+        "steps": [
+          "Delete both synthetic export objects",
+          "Remove or expire both bounded test jobs",
+          "Delete the synthetic marker records and disposable tenant accounts"
+        ],
+        "verification_signals": [
+          {
+            "signal_id": "SIGNAL-006",
+            "type": "state_inspection",
+            "observation": "Both synthetic export objects and queued jobs are absent after cleanup.",
+            "interpretation": "The authorized test left no fixture data or pending work."
+          }
+        ],
+        "owner": "Application security test owner"
+      },
+      "execution_status": "planned",
+      "confidence": {
+        "level": "medium",
+        "rationale": {
+          "claim_id": "CLAIM-082",
+          "statement": "The steps have discriminating oracles, but the test remains unexecuted until authorization is granted.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "medium"
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "summary": {
+      "claim_id": "CLAIM-126",
+      "statement": "All declared high-signal source surfaces in the fictional example were reviewed or specifically dispositioned.",
+      "evidence_class": "inferred",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-002",
+        "EVD-003",
+        "EVD-004",
+        "EVD-005",
+        "EVD-006"
+      ],
+      "confidence": "high"
+    },
+    "inventory": {
+      "method": {
+        "claim_id": "CLAIM-147",
+        "statement": "A stable sorted inventory of the admitted source, deployment configuration, supplied documents, modeled high-signal entities, boundaries, flows, controls, and decisions produced this expected coverage set.",
+        "evidence_class": "inferred",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002",
+          "EVD-003",
+          "EVD-004",
+          "EVD-005",
+          "EVD-006",
+          "EVD-007"
+        ],
+        "confidence": "high"
+      },
+      "manifest": {
+        "evidence_id": "EVD-007",
+        "revision": "example-revision-7f3a2c1",
+        "content_hash": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+        "included_paths": [
+          "src/",
+          "deploy/",
+          "docs/"
+        ],
+        "included_packages": [
+          "export-api",
+          "export-worker"
+        ],
+        "deployment_environments": [
+          "documented staging topology"
+        ],
+        "supplied_documents": [
+          "docs/security-review-scope.md",
+          "docs/export-data-policy.md"
+        ],
+        "excluded_paths": [
+          "third-party package internals"
+        ],
+        "excluded_environments": [
+          "production runtime"
+        ]
+      },
+      "expected_subject_ids": [
+        "ENTRYPOINT-001",
+        "CONTROL-001",
+        "FLOW-001",
+        "COMP-001",
+        "STORE-001",
+        "CONTROL-002",
+        "ASSET-001",
+        "ACTOR-001",
+        "ZONE-001",
+        "ZONE-002",
+        "ZONE-003",
+        "ZONE-004",
+        "BOUNDARY-001",
+        "BOUNDARY-002",
+        "BOUNDARY-003",
+        "INV-001",
+        "DEC-001"
+      ]
+    },
+    "items": [
+      {
+        "coverage_id": "COV-001",
+        "category": "entrypoint",
+        "subject_id": "ENTRYPOINT-001",
+        "description": {
+          "claim_id": "CLAIM-083",
+          "statement": "The create-export API and its middleware chain were traced.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-084",
+          "statement": "The declared source and supplied evidence for this scope item were reviewed at the modeled revision.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-003"
+        ],
+        "owner": "API team",
+        "next_action": {
+          "claim_id": "CLAIM-085",
+          "statement": "Reopen this item when the route, middleware, or request contract changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-002",
+        "category": "authentication",
+        "subject_id": "CONTROL-001",
+        "description": {
+          "claim_id": "CLAIM-086",
+          "statement": "Authentication placement for the export flow was reviewed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed_no_issue",
+        "reason": {
+          "claim_id": "CLAIM-087",
+          "statement": "The declared source and supplied evidence for this scope item were reviewed at the modeled revision.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-003"
+        ],
+        "owner": "Identity team",
+        "next_action": {
+          "claim_id": "CLAIM-088",
+          "statement": "Rerun the authentication review when session or route guards change.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-003",
+        "category": "flow",
+        "subject_id": "FLOW-001",
+        "description": {
+          "claim_id": "CLAIM-089",
+          "statement": "The synchronous and asynchronous export path was traced to its final store.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-090",
+          "statement": "The declared source and supplied evidence for this scope item were reviewed at the modeled revision.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002",
+          "EVD-004"
+        ],
+        "owner": "Data platform team",
+        "next_action": {
+          "claim_id": "CLAIM-091",
+          "statement": "Retrace all hops when the job schema or worker pipeline changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-004",
+        "category": "worker",
+        "subject_id": "COMP-001",
+        "description": {
+          "claim_id": "CLAIM-092",
+          "statement": "The export worker's tenant selection and storage continuation were reviewed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-093",
+          "statement": "The declared source and supplied evidence for this scope item were reviewed at the modeled revision.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-002",
+          "EVD-004"
+        ],
+        "owner": "Data platform team",
+        "next_action": {
+          "claim_id": "CLAIM-094",
+          "statement": "Execute TEST-001 in an authorized isolated target.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-005",
+        "category": "data_store",
+        "subject_id": "STORE-001",
+        "description": {
+          "claim_id": "CLAIM-095",
+          "statement": "The export object's restricted storage boundary and retention intent were reviewed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-004",
+            "EVD-006"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-096",
+          "statement": "The declared source and supplied evidence for this scope item were reviewed at the modeled revision.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-004",
+            "EVD-006"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-004",
+          "EVD-006"
+        ],
+        "owner": "Infrastructure team",
+        "next_action": {
+          "claim_id": "CLAIM-097",
+          "statement": "Verify retention configuration when runtime or deployment evidence is authorized.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-004",
+            "EVD-006"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-006",
+        "category": "control",
+        "subject_id": "CONTROL-002",
+        "description": {
+          "claim_id": "CLAIM-098",
+          "statement": "The principal-to-tenant control was reviewed at both enforcement points.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-099",
+          "statement": "The declared source and supplied evidence for this scope item were reviewed at the modeled revision.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002",
+          "EVD-005"
+        ],
+        "owner": "Data platform team",
+        "next_action": {
+          "claim_id": "CLAIM-100",
+          "statement": "Implement DEC-001 and execute TEST-001.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-007",
+        "category": "privacy",
+        "subject_id": "ASSET-001",
+        "description": {
+          "claim_id": "CLAIM-101",
+          "statement": "Export data classification, purpose, recipients, and retention were reviewed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-005",
+            "EVD-006"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-102",
+          "statement": "The declared source and supplied evidence for this scope item were reviewed at the modeled revision.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-005",
+            "EVD-006"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-005",
+          "EVD-006"
+        ],
+        "owner": "Privacy team",
+        "next_action": {
+          "claim_id": "CLAIM-103",
+          "statement": "Reassess when export fields, recipients, or retention change.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-005",
+            "EVD-006"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-008",
+        "category": "deployment_zone",
+        "subject_id": "ZONE-004",
+        "description": {
+          "claim_id": "CLAIM-104",
+          "statement": "The restricted data zone was reconciled with the supplied topology.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed_no_issue",
+        "reason": {
+          "claim_id": "CLAIM-105",
+          "statement": "The declared source and supplied evidence for this scope item were reviewed at the modeled revision.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "medium",
+        "evidence_ids": [
+          "EVD-004"
+        ],
+        "owner": "Infrastructure team",
+        "next_action": {
+          "claim_id": "CLAIM-106",
+          "statement": "Reopen this item when deployment topology changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-004"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-009",
+        "category": "boundary",
+        "subject_id": "BOUNDARY-001",
+        "description": {
+          "claim_id": "CLAIM-133",
+          "statement": "The tenant-client to export-API trust transition was reviewed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-134",
+          "statement": "The initiating identity and untrusted request values were traced across this boundary.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-003",
+          "EVD-004"
+        ],
+        "owner": "API team",
+        "next_action": {
+          "claim_id": "CLAIM-135",
+          "statement": "Reopen this boundary when authentication or the export request contract changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-010",
+        "category": "boundary",
+        "subject_id": "BOUNDARY-002",
+        "description": {
+          "claim_id": "CLAIM-136",
+          "statement": "The API-to-worker asynchronous trust transition was reviewed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-137",
+          "statement": "The queued identity and tenant context were traced into the privileged worker.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002",
+          "EVD-004"
+        ],
+        "owner": "Data platform team",
+        "next_action": {
+          "claim_id": "CLAIM-138",
+          "statement": "Reopen this boundary when the job producer, queue contract, or worker identity changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-011",
+        "category": "boundary",
+        "subject_id": "BOUNDARY-003",
+        "description": {
+          "claim_id": "CLAIM-139",
+          "statement": "The worker-to-restricted-storage trust transition was reviewed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-140",
+          "statement": "The worker query scope and final export-object write were traced across this boundary.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-002",
+          "EVD-004"
+        ],
+        "owner": "Infrastructure team",
+        "next_action": {
+          "claim_id": "CLAIM-141",
+          "statement": "Reopen this boundary when worker privileges, queries, or export storage change.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-012",
+        "category": "security_decision",
+        "subject_id": "DEC-001",
+        "description": {
+          "claim_id": "CLAIM-142",
+          "statement": "The tenant-scope enforcement decision and its implementation options were reviewed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-143",
+          "statement": "The decision has a named owner, preferred option, risk rationale, and linked validation test.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002",
+          "EVD-005"
+        ],
+        "owner": "Data platform team",
+        "next_action": {
+          "claim_id": "CLAIM-144",
+          "statement": "Approve and implement the principal-derived worker-revalidated option before authorized testing.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-013",
+        "category": "authentication",
+        "subject_id": "ACTOR-001",
+        "description": {
+          "claim_id": "CLAIM-148",
+          "statement": "The initiating tenant-user actor, role, trust level, and authentication context were reconciled with the full export flow.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-149",
+          "statement": "The actor appears as the first flow and attack-path hop and is tied to the observed authentication middleware.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-003"
+        ],
+        "owner": "Identity team",
+        "next_action": {
+          "claim_id": "CLAIM-150",
+          "statement": "Reopen actor coverage when authentication, tenant roles, or external-client trust changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-014",
+        "category": "deployment_zone",
+        "subject_id": "ZONE-001",
+        "description": {
+          "claim_id": "CLAIM-151",
+          "statement": "The untrusted tenant-client zone was reviewed as the initiating side of the public boundary.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-152",
+          "statement": "The zone is connected to the API through BOUNDARY-001 and all caller values remain untrusted until explicitly enforced.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "medium",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-004"
+        ],
+        "owner": "Application security team",
+        "next_action": {
+          "claim_id": "CLAIM-153",
+          "statement": "Reopen this zone when client trust assumptions or the public network boundary changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-015",
+        "category": "deployment_zone",
+        "subject_id": "ZONE-002",
+        "description": {
+          "claim_id": "CLAIM-154",
+          "statement": "The API service zone and its transition from tenant-controlled input to queued work were reviewed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-155",
+          "statement": "The API zone participates in both public authentication and the asynchronous worker handoff.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-003",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-003",
+          "EVD-004"
+        ],
+        "owner": "API team",
+        "next_action": {
+          "claim_id": "CLAIM-156",
+          "statement": "Reopen this zone when API deployment, network exposure, or queue publishing changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-016",
+        "category": "deployment_zone",
+        "subject_id": "ZONE-003",
+        "description": {
+          "claim_id": "CLAIM-157",
+          "statement": "The privileged worker zone and its queue-consumer and restricted-data transitions were reviewed.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-158",
+          "statement": "The worker zone is connected through BOUNDARY-002 and BOUNDARY-003 and carries the privileged tenant-selection decision.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-002",
+          "EVD-004"
+        ],
+        "owner": "Data platform team",
+        "next_action": {
+          "claim_id": "CLAIM-159",
+          "statement": "Reopen this zone when worker identity, queue trust, or restricted-data privileges change.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-002",
+            "EVD-004"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "coverage_id": "COV-017",
+        "category": "authorization",
+        "subject_id": "INV-001",
+        "description": {
+          "claim_id": "CLAIM-160",
+          "statement": "The cross-tenant export invariant was reviewed against every hop, control, threat, decision, and validation oracle.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        "status": "reviewed",
+        "reason": {
+          "claim_id": "CLAIM-161",
+          "statement": "The invariant is connected to FLOW-001 and its partial enforcement is dispositioned through THREAT-001, DEC-001, and TEST-001.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        "risk_if_unreviewed": "high",
+        "evidence_ids": [
+          "EVD-001",
+          "EVD-002",
+          "EVD-005"
+        ],
+        "owner": "Data platform team",
+        "next_action": {
+          "claim_id": "CLAIM-162",
+          "statement": "Reopen the invariant when tenant membership, job context, worker queries, or export delivery changes.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-005"
+          ],
+          "confidence": "high"
+        }
+      }
+    ],
+    "unread_high_risk_count": 0
+  },
+  "questions": [
+    {
+      "question_id": "Q-001",
+      "question": {
+        "claim_id": "CLAIM-107",
+        "statement": "Was runtime validation included in this example review?",
+        "evidence_class": "intended",
+        "evidence_ids": [
+          "EVD-005"
+        ],
+        "confidence": "high"
+      },
+      "priority": "p2",
+      "owner": "Application security team",
+      "related_ids": [
+        "TEST-001",
+        "FLOW-001"
+      ],
+      "blocking": false,
+      "status": "answered",
+      "resolution_criteria": {
+        "claim_id": "CLAIM-108",
+        "statement": "The review scope explicitly states whether runtime actions are authorized and included.",
+        "evidence_class": "intended",
+        "evidence_ids": [
+          "EVD-005"
+        ],
+        "confidence": "high"
+      },
+      "answer": {
+        "claim_id": "CLAIM-109",
+        "statement": "Runtime execution is excluded; TEST-001 remains planned and the assurance status remains source_observed.",
+        "evidence_class": "intended",
+        "evidence_ids": [
+          "EVD-005"
+        ],
+        "confidence": "high"
+      }
+    }
+  ],
+  "privacy_analysis": {
+    "applicable": true,
+    "rationale": {
+      "claim_id": "CLAIM-127",
+      "statement": "Exports contain tenant-owned personal data and therefore require privacy analysis.",
+      "evidence_class": "intended",
+      "evidence_ids": [
+        "EVD-006"
+      ],
+      "confidence": "high"
+    },
+    "data_categories": [
+      {
+        "category_id": "DATA-001",
+        "name": "Tenant export personal data",
+        "classification": "personal",
+        "asset_ids": [
+          "ASSET-001"
+        ],
+        "purposes": [
+          "Provide a tenant-requested data export"
+        ],
+        "subjects": [
+          "Tenant users and tenant-managed individuals"
+        ],
+        "recipients": [
+          "Requesting tenant user"
+        ],
+        "retention_requirement": {
+          "claim_id": "CLAIM-128",
+          "statement": "Completed exports should be deleted after seven days.",
+          "evidence_class": "intended",
+          "evidence_ids": [
+            "EVD-006"
+          ],
+          "confidence": "high"
+        },
+        "description": {
+          "claim_id": "CLAIM-129",
+          "statement": "The export can contain identity and business records associated with a tenant.",
+          "evidence_class": "intended",
+          "evidence_ids": [
+            "EVD-005",
+            "EVD-006"
+          ],
+          "confidence": "high"
+        }
+      }
+    ],
+    "findings": [
+      {
+        "analysis_id": "ANALYSIS-PRIVACY-001",
+        "topic": "Cross-tenant disclosure and retention",
+        "status": "risk_identified",
+        "analysis": {
+          "claim_id": "CLAIM-130",
+          "statement": "Incorrect tenant binding could disclose another tenant's personal data; storage retention must also match the seven-day policy.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-001",
+            "EVD-002",
+            "EVD-004",
+            "EVD-006"
+          ],
+          "confidence": "high"
+        },
+        "asset_ids": [
+          "ASSET-001"
+        ],
+        "threat_ids": [
+          "THREAT-001"
+        ],
+        "decision_ids": [
+          "DEC-001"
+        ],
+        "question_ids": [
+          "Q-001"
+        ]
+      }
+    ]
+  },
+  "ai_analysis": {
+    "applicable": false,
+    "rationale": {
+      "claim_id": "CLAIM-131",
+      "statement": "The admitted source, dependency, topology, and document inventory does not contain an LLM, agent, RAG, embedding, MCP, or model-provider component.",
+      "evidence_class": "inferred",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-002",
+        "EVD-004",
+        "EVD-005"
+      ],
+      "confidence": "high"
+    },
+    "system_entity_ids": [],
+    "findings": []
+  },
+  "quality_review": {
+    "overall_status": "pass",
+    "reviewed_at": "2026-07-15T20:30:00-04:00",
+    "reviewer": "Independent example challenger",
+    "challenge_findings": [
+      {
+        "finding_id": "QF-001",
+        "title": "Clarify source completeness versus runtime assurance",
+        "severity": "medium",
+        "status": "resolved",
+        "description": {
+          "claim_id": "CLAIM-145",
+          "statement": "The challenger found that a complete source model with a planned test could be misread as runtime validation.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-005"
+          ],
+          "confidence": "high"
+        },
+        "related_ids": [
+          "THREAT-001",
+          "TEST-001",
+          "Q-001"
+        ],
+        "owner": "Application security team",
+        "disposition": {
+          "claim_id": "CLAIM-146",
+          "statement": "The model now separates complete source coverage, source_observed assurance, required runtime authorization, and planned execution status.",
+          "evidence_class": "inferred",
+          "evidence_ids": [
+            "EVD-005"
+          ],
+          "confidence": "high"
+        }
+      }
+    ],
+    "gates": [
+      {
+        "gate_id": "GATE-001",
+        "gate": "scope_and_evidence",
+        "status": "passed",
+        "findings": [
+          {
+            "claim_id": "CLAIM-110",
+            "statement": "The independent challenge reviewed the scope and evidence gate and found no unresolved publication blocker in the declared example scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-003",
+              "EVD-004",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "gate_id": "GATE-002",
+        "gate": "architecture_inventory",
+        "status": "passed",
+        "findings": [
+          {
+            "claim_id": "CLAIM-111",
+            "statement": "The independent challenge reviewed the architecture inventory gate and found no unresolved publication blocker in the declared example scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-003",
+              "EVD-004",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "gate_id": "GATE-003",
+        "gate": "flow_completeness",
+        "status": "passed",
+        "findings": [
+          {
+            "claim_id": "CLAIM-112",
+            "statement": "The independent challenge reviewed the flow completeness gate and found no unresolved publication blocker in the declared example scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-003",
+              "EVD-004",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "gate_id": "GATE-004",
+        "gate": "contradiction",
+        "status": "passed",
+        "findings": [
+          {
+            "claim_id": "CLAIM-113",
+            "statement": "The independent challenge reviewed the contradiction gate and found no unresolved publication blocker in the declared example scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-003",
+              "EVD-004",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "gate_id": "GATE-005",
+        "gate": "material_threat",
+        "status": "passed",
+        "findings": [
+          {
+            "claim_id": "CLAIM-114",
+            "statement": "The independent challenge reviewed the material threat gate and found no unresolved publication blocker in the declared example scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-003",
+              "EVD-004",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "gate_id": "GATE-006",
+        "gate": "attack_path",
+        "status": "passed",
+        "findings": [
+          {
+            "claim_id": "CLAIM-115",
+            "statement": "The independent challenge reviewed the attack path gate and found no unresolved publication blocker in the declared example scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-003",
+              "EVD-004",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "gate_id": "GATE-007",
+        "gate": "risk_ranking",
+        "status": "passed",
+        "findings": [
+          {
+            "claim_id": "CLAIM-116",
+            "statement": "The independent challenge reviewed the risk ranking gate and found no unresolved publication blocker in the declared example scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-003",
+              "EVD-004",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "gate_id": "GATE-008",
+        "gate": "privacy_applicability",
+        "status": "passed",
+        "findings": [
+          {
+            "claim_id": "CLAIM-117",
+            "statement": "The independent challenge reviewed the privacy applicability gate and found no unresolved publication blocker in the declared example scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-005",
+              "EVD-006"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "gate_id": "GATE-009",
+        "gate": "ai_applicability",
+        "status": "not_applicable",
+        "findings": [
+          {
+            "claim_id": "CLAIM-118",
+            "statement": "The independent challenge found no AI component in the admitted fictional application inventory, so the AI lane is not applicable.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-003",
+              "EVD-004",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "gate_id": "GATE-010",
+        "gate": "validation_safety",
+        "status": "passed",
+        "findings": [
+          {
+            "claim_id": "CLAIM-119",
+            "statement": "The independent challenge reviewed the validation safety gate and found no unresolved publication blocker in the declared example scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-003",
+              "EVD-004",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      },
+      {
+        "gate_id": "GATE-011",
+        "gate": "coverage",
+        "status": "passed",
+        "findings": [
+          {
+            "claim_id": "CLAIM-120",
+            "statement": "The independent challenge reviewed the coverage gate and found no unresolved publication blocker in the declared example scope.",
+            "evidence_class": "inferred",
+            "evidence_ids": [
+              "EVD-001",
+              "EVD-002",
+              "EVD-003",
+              "EVD-004",
+              "EVD-005"
+            ],
+            "confidence": "medium"
+          }
+        ]
+      }
+    ],
+    "consistency_checks": {
+      "all_ids_connected": true,
+      "all_material_claims_have_provenance": true,
+      "all_flows_have_hops": true,
+      "all_threats_connected": true,
+      "all_tests_have_safety": true,
+      "coverage_reconciled": true
+    },
+    "unresolved_high_severity_finding_ids": [],
+    "final_assessment": {
+      "claim_id": "CLAIM-132",
+      "statement": "The example passes publication gates for its declared source scope while preserving the high-risk threat, planned test, and source-only assurance limitation.",
+      "evidence_class": "inferred",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-002",
+        "EVD-003",
+        "EVD-004",
+        "EVD-005",
+        "EVD-006"
+      ],
+      "confidence": "high"
+    }
+  }
+}

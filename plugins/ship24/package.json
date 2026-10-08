@@ -1,0 +1,57 @@
+{
+  "name": "ship24-ai-plugin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ship24 shipment tracking for AI coding agents: skills to integrate the Ship24 Tracking API, build webhook receivers, look up courier codes, map tracking statuses and troubleshoot errors, plus the Ship24 Tracking MCP server to track parcels live. Set SHIP24_API_KEY for live calls.",
+  "author": {
+    "name": "Ship24",
+    "email": "contact@ship24.com",
+    "url": "https://www.ship24.com"
+  },
+  "homepage": "https://github.com/ship24/ship24-ai-plugin#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ship24/ship24-ai-plugin.git"
+  },
+  "bugs": "https://github.com/ship24/ship24-ai-plugin/issues",
+  "license": "MIT",
+  "keywords": [
+    "ship24",
+    "tracking",
+    "shipment-tracking",
+    "package-tracking",
+    "parcel-tracking",
+    "courier",
+    "logistics",
+    "mcp",
+    "agent-skills",
+    "claude-code",
+    "cursor",
+    "codex",
+    "gemini-cli"
+  ],
+  "type": "module",
+  "packageManager": "pnpm@10.34.5",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "generate": "node scripts/generate-references.mjs",
+    "generate:check": "node scripts/generate-references.mjs --check",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "lint:skills": "node scripts/lint-skills.mjs",
+    "validate:skills": "node scripts/validate-skills.mjs",
+    "validate:manifests": "node scripts/validate-manifests.mjs",
+    "validate:claude": "claude plugin validate --strict .claude-plugin/plugin.json && claude plugin validate --strict .claude-plugin/marketplace.json && claude plugin validate --strict skills && claude plugin validate --strict agents",
+    "test": "node --test scripts/lib/*.test.mjs",
+    "bump": "node scripts/bump-version.mjs",
+    "check": "pnpm lint && pnpm generate:check && pnpm test && pnpm lint:skills && pnpm validate:skills && pnpm validate:manifests"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.12",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.8.0"
+  }
+}

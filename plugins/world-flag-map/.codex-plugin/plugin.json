@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Fatih Akturk",
+    "url": "https://github.com/fakturk"
+  },
+  "description": "Explore national flags, compare country facts, and play geography quizzes using World Flag Map.",
+  "homepage": "https://worldflagmap.com/",
+  "interface": {
+    "brandColor": "#174F3B",
+    "brandColorDark": "#B0E8D4",
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Education & Research",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Find countries with green and yellow flags.",
+      "Compare Japan and South Korea.",
+      "Quiz me on African flags."
+    ],
+    "developerName": "Fatih Akturk",
+    "displayName": "World Flag Map",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Browse national flags by country, continent, major color, and population. Compare dated country facts, follow direct links into the World Flag Map atlas, or play a conversational flag quiz.",
+    "privacyPolicyURL": "https://worldflagmap.com/privacy/",
+    "shortDescription": "Explore flags, maps and games",
+    "websiteURL": "https://worldflagmap.com/"
+  },
+  "keywords": [
+    "flags",
+    "countries",
+    "geography",
+    "quiz",
+    "population"
+  ],
+  "license": "MIT",
+  "name": "world-flag-map",
+  "repository": "https://github.com/fakturk/worldFlagMap",
+  "skills": "./skills/",
+  "version": "0.1.2"
+}

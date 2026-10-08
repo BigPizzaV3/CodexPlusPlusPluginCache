@@ -1,0 +1,14 @@
+'Sales'[Total Sales] =
+SUM ( 'Sales'[Sales Amount] )
+
+'Sales'[Sales YoY %] =
+DIVIDE (
+    [Total Sales] - [Total Sales Prior Year],
+    [Total Sales Prior Year]
+)
+
+'Sales'[Total Sales Prior Year] =
+CALCULATE (
+    [Total Sales],
+    SAMEPERIODLASTYEAR ( 'Date'[Date] )
+)

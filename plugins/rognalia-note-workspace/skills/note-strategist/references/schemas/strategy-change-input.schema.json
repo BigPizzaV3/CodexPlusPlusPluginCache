@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:strategy-change-input:1",
+  "title": "note Workspace strategy change input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request_id", "reason", "approved_by_user", "changes"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "reason": {"$ref": "#/$defs/oneLineText"},
+    "approved_by_user": {"const": true},
+    "changes": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "goal": {"$ref": "#/$defs/oneLineText"},
+        "desired_frequency": {"$ref": "#/$defs/oneLineText"},
+        "minimum_frequency": {"$ref": "#/$defs/oneLineText"},
+        "cadence_status": {"enum": ["active", "paused"]}
+      }
+    }
+  },
+  "$defs": {
+    "oneLineText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000,
+      "pattern": "^[^\\r\\n]+$"
+    }
+  }
+}

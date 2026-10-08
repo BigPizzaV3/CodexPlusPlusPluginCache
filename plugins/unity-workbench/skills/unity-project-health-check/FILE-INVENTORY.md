@@ -1,0 +1,37 @@
+# File Inventory
+
+- `README.md`
+- `SKILL.md`
+- `checklists/architecture-and-maintainability.md`
+- `checklists/assemblies-and-dependencies.md`
+- `checklists/builds-platforms-ci.md`
+- `checklists/code-quality.md`
+- `checklists/editor-tooling-and-imports.md`
+- `checklists/input-and-device-support.md`
+- `checklists/lifecycle-and-initialization.md`
+- `checklists/memory-and-assets.md`
+- `checklists/multiplayer.md`
+- `checklists/packages-and-compatibility.md`
+- `checklists/performance.md`
+- `checklists/project-hygiene.md`
+- `checklists/rendering-and-vfx.md`
+- `checklists/save-and-persistence.md`
+- `checklists/scenes-prefabs-serialization.md`
+- `checklists/security-and-secrets.md`
+- `checklists/testing-and-validation.md`
+- `checklists/ui-localization-accessibility.md`
+- `foundations/evidence-and-confidence.md`
+- `foundations/read-only-audit-safety.md`
+- `foundations/reporting-quality.md`
+- `foundations/severity-and-prioritization.md`
+- `frameworks/networking/fishnet.md`
+- `frameworks/networking/fusion.md`
+- `frameworks/networking/mirror.md`
+- `frameworks/networking/netcode-for-gameobjects.md`
+- `frameworks/rendering/hdrp.md`
+- `frameworks/rendering/urp.md`
+- `references/audit-plan-template.md`
+- `references/capability-requirements.md`
+- `references/finding-template.md`
+- `references/health-report-template.md`
+- `references/health-scoring.md`

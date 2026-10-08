@@ -1,0 +1,6 @@
+interface:
+  display_name: "ForgeMind Growth"
+  short_description: "Build evidence-labelled product growth experiments."
+  default_prompt: "Use $forgemind-growth to create activation, retention, pricing, and value-proof experiments."
+policy:
+  allow_implicit_invocation: false

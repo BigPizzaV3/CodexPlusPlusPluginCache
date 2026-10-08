@@ -1,0 +1,5 @@
+interface:
+  display_name: Forecast War Room
+  short_description: Executive forecast control
+policy:
+  allow_implicit_invocation: false

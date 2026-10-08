@@ -1,0 +1,59 @@
+{
+  "positive": [
+    {
+      "name": "Browse by two major colors",
+      "prompt": "Use World Flag Map to show me countries whose flags have green and yellow.",
+      "expectedBehavior": "Activate explore-world-flags, search major flag colors in the bundled catalog, summarize useful matches, and include the complete tracked atlas link.",
+      "expectedResultShape": "A concise country list plus a worldflagmap.com URL with colors=green,yellow and plugin UTM parameters.",
+      "fixtures": "Bundled countries.json; no account or external service required."
+    },
+    {
+      "name": "Indirect continent and dominant-color discovery",
+      "prompt": "Which European countries have mostly blue flags?",
+      "expectedBehavior": "Activate explore-world-flags, filter Europe and dominant blue from the bundled snapshot, explain that color families are generated classifications, and link to the visual atlas.",
+      "expectedResultShape": "A concise list with a tracked continent/color atlas link.",
+      "fixtures": "Bundled countries.json; no account or external service required."
+    },
+    {
+      "name": "Compare two countries",
+      "prompt": "Compare Japan and South Korea by flag colors, capital, language, currency, and population.",
+      "expectedBehavior": "Activate explore-world-flags, resolve both records, include the population year, and link both country pages.",
+      "expectedResultShape": "A compact two-country comparison table and two tracked country-page links.",
+      "fixtures": "Bundled countries.json; no account or external service required."
+    },
+    {
+      "name": "Start a regional flag quiz",
+      "prompt": "Quiz me on African flags.",
+      "expectedBehavior": "Activate explore-world-flags, stay in an ordinary chat message rather than creating a native quiz experience, attach the bundled PNG flag with neutral visible text, provide exactly four unique country-name-only choices with one correct answer, and wait without revealing the country. Do not place flag emoji or images beside answer choices.",
+      "expectedResultShape": "A plain chat response with a score heading, one visible mystery flag or usable flag fallback link, one question, country-name-only choices A through D, and no answer reveal before the user guesses.",
+      "fixtures": "Bundled countries.json and bundled flag PNGs; no account or external service required."
+    },
+    {
+      "name": "Open the country outline game",
+      "prompt": "I want a game where I guess a country from its outline and location.",
+      "expectedBehavior": "Activate explore-world-flags, identify Map Challange as the matching game, briefly describe it, and provide the tracked game link.",
+      "expectedResultShape": "A short recommendation and a tracked worldflagmap.com/games/map-challange/ URL.",
+      "fixtures": "No account or external service required."
+    }
+  ],
+  "negative": [
+    {
+      "name": "Travel booking is out of scope",
+      "prompt": "Book me a flight to Japan next Friday.",
+      "expectedBehavior": "Do not activate World Flag Map or claim to book travel; leave the request to a travel-capable workflow.",
+      "reason": "The plugin provides static flag and country exploration, not travel transactions."
+    },
+    {
+      "name": "Custom flag design is out of scope",
+      "prompt": "Design a new flag and logo for my company.",
+      "expectedBehavior": "Do not activate World Flag Map; use an image or design capability instead if available.",
+      "reason": "The plugin describes existing national flags and does not generate brand artwork."
+    },
+    {
+      "name": "Live demographic prediction is unsupported",
+      "prompt": "Predict India's exact population on this date next year.",
+      "expectedBehavior": "Do not invent or extrapolate an exact future value; explain that World Flag Map only has a dated population snapshot and use a more suitable source if the user requests forecasting.",
+      "reason": "The bundled catalog is historical static data, not a demographic forecast model."
+    }
+  ]
+}

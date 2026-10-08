@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Serverless & edge"
+  short_description: "Invocation lifetime, retries and runtime limits"
+  default_prompt: "Use $vibe-serverless to audit the invocation lifecycle and verify its side effects."

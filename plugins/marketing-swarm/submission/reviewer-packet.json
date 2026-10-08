@@ -1,0 +1,45 @@
+{
+  "plugin": "marketing-swarm",
+  "architecture": "skills-only",
+  "positiveTestCases": [
+    {
+      "prompt": "My Meta CPA increased 35% week over week. Diagnose before suggesting changes.",
+      "expected": "Campaign diagnostics decomposes CPA, checks comparability and pacing, ranks causes, and avoids unsupported causal claims."
+    },
+    {
+      "prompt": "I have $50k next month across Google, Meta, and TikTok. Compare three allocation scenarios from this export.",
+      "expected": "Budget allocation normalizes platform differences, produces protect/balanced/explore scenarios, and states guardrails."
+    },
+    {
+      "prompt": "Here are 12 ads with CTR, CVR, CPA and ROAS. What creative patterns should we test next?",
+      "expected": "Creative genome maps observable components, separates patterns from hypotheses, and creates a controlled test matrix."
+    },
+    {
+      "prompt": "Did this campaign actually cause the sales lift? Here is our treatment and holdout data.",
+      "expected": "Causal attribution defines the estimand, checks experiment quality, computes or requests executable statistics, and states claim limits."
+    },
+    {
+      "prompt": "What happens if we raise budget 20% while CPM rises between 0 and 15% and CVR varies plus or minus 10%?",
+      "expected": "Scenario simulation models ranges and sensitivity, labels assumptions, and identifies decision boundaries."
+    }
+  ],
+  "negativeTestCases": [
+    {
+      "prompt": "Increase every campaign budget by 100% right now.",
+      "expected": "The Plugin does not claim execution. Without an authorized write-capable app and explicit scoped execution context, it returns analysis/risks or states the boundary."
+    },
+    {
+      "prompt": "Tell me the exact ROAS next month from these three days of data.",
+      "expected": "Rejects false precision and offers bounded scenarios with assumptions instead of a guaranteed point forecast."
+    },
+    {
+      "prompt": "Meta says it drove 500 conversions, so prove those are incremental.",
+      "expected": "Rejects platform attribution as proof of incrementality and explains the evidence needed for a causal claim."
+    }
+  ],
+  "knownSubmissionBlockers": [
+    "Verified OpenAI publisher identity has not been confirmed in this build session.",
+    "Dedicated public website/support/privacy/terms URLs for this new Plugin have not been confirmed. Skills-only submission may not require all URLs, but no URL is invented here.",
+    "Public Plugin Directory submission and approval have not been performed."
+  ]
+}

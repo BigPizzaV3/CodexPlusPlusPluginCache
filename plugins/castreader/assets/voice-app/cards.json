@@ -1,0 +1,22 @@
+[
+  { "id": "welcome-en", "language": "en", "text": "Hello! Welcome to our city." },
+  { "id": "welcome-zh", "language": "zh", "text": "你好！欢迎来到我们的城市。" },
+  { "id": "welcome-ja", "language": "ja", "text": "こんにちは。私たちの町へようこそ。" },
+  { "id": "welcome-es", "language": "es", "text": "¡Hola! Bienvenido a nuestra ciudad." },
+  { "id": "station-en", "language": "en", "text": "Excuse me, where is the train station?" },
+  { "id": "station-zh", "language": "zh", "text": "请问，火车站在哪里？" },
+  { "id": "station-ja", "language": "ja", "text": "すみません、駅はどこですか。" },
+  { "id": "station-es", "language": "es", "text": "Disculpe, ¿dónde está la estación de tren?" },
+  { "id": "water-en", "language": "en", "text": "Could I have a glass of water, please?" },
+  { "id": "water-zh", "language": "zh", "text": "请给我一杯水，谢谢。" },
+  { "id": "water-ja", "language": "ja", "text": "お水を一杯いただけますか。" },
+  { "id": "water-es", "language": "es", "text": "¿Me da un vaso de agua, por favor?" },
+  { "id": "thanks-en", "language": "en", "text": "Thank you for your help." },
+  { "id": "thanks-zh", "language": "zh", "text": "谢谢你的帮助。" },
+  { "id": "thanks-ja", "language": "ja", "text": "手伝ってくれてありがとうございます。" },
+  { "id": "thanks-es", "language": "es", "text": "Gracias por su ayuda." },
+  { "id": "tomorrow-en", "language": "en", "text": "See you tomorrow. Have a good evening!" },
+  { "id": "tomorrow-zh", "language": "zh", "text": "明天见，祝你今晚愉快！" },
+  { "id": "tomorrow-ja", "language": "ja", "text": "また明日。よい夜をお過ごしください。" },
+  { "id": "tomorrow-es", "language": "es", "text": "Hasta mañana. ¡Que tenga una buena noche!" }
+]

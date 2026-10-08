@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Fashion Video"
+  short_description: "Real fit and fabric movement"
+  default_prompt: "Use $pixverse-fashion-video to make a vertical try-on video that preserves this garment and the same creator across shots."
+policy:
+  allow_implicit_invocation: true

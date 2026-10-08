@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/replay-bundle-0.1.schema.json",
+  "title": "RAGOps replay bundle 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "scenario_id", "scenario_digest", "provenance", "records"],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "scenario_id": {"type": "string", "minLength": 1},
+    "scenario_digest": {"type": "string", "minLength": 1},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataset", "evidence", "evaluator", "application", "model", "model_config", "environment"
+      ],
+      "properties": {
+        "dataset": {"type": "string", "minLength": 1},
+        "evidence": {"type": "string", "minLength": 1},
+        "evaluator": {"type": "string", "minLength": 1},
+        "application": {"type": "string", "minLength": 1},
+        "model": {"type": "string", "minLength": 1},
+        "model_config": {"type": "string", "minLength": 1},
+        "environment": {"type": "string", "minLength": 1}
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["case_id", "repeat_id", "metrics"],
+        "properties": {
+          "case_id": {"type": "string", "minLength": 1},
+          "repeat_id": {"type": "string", "minLength": 1},
+          "metrics": {
+            "type": "object",
+            "minProperties": 1,
+            "propertyNames": {"minLength": 1},
+            "additionalProperties": {"type": "number"}
+          }
+        }
+      }
+    }
+  }
+}

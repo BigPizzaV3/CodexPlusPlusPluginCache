@@ -1,0 +1,13 @@
+interface:
+  display_name: You.com Free Search
+  short_description: Unauthenticated basic web search, no API key required
+  brand_color: '#6C5CE7'
+  default_prompt: Use You.com free search to find current web sources without authentication.
+
+dependencies:
+  tools:
+    - type: mcp
+      value: you-free
+      description: You.com free search profile, no authentication required
+      transport: streamable_http
+      url: https://api.you.com/mcp?profile=free

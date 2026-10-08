@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Russell Lane Wonsley",
+    "url": "https://github.com/stoicpickle"
+  },
+  "description": "Add declared resources through a preview-first conversation, then contribute resource-fit advice to Codex's plan.",
+  "homepage": "https://github.com/stoicpickle/atready",
+  "interface": {
+    "brandColor": "#0B172A",
+    "brandColorDark": "#D5E1F4",
+    "capabilities": [
+      "Add declared resources with approval",
+      "Match saved resources to project work",
+      "Explain constraints, gaps, and omissions"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "I have a rough project idea. Use AtReady before implementation to suggest where my saved resources fit.",
+      "Review this plan with AtReady and show proposed resource assignments.",
+      "Add CodeRabbit to my AtReady resource roster."
+    ],
+    "developerName": "Russell Lane Wonsley",
+    "displayName": "AtReady",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "AtReady is a small resource-fit companion for supported Codex surfaces. Add one declared tool, service, subscription, person, or agent through a conversational no-write preview and a separate exact save approval. Then bring AtReady a goal, rough plan, or written plan before implementation to match saved tools, services, subscriptions, people, and agents to planner-provided work, expose material constraints and gaps, and explain its advice without contacting or running routed project resources. Codex owns the project plan. This local-first release requires a separately installed compatible project-atready runtime and local file access.",
+    "privacyPolicyURL": "https://github.com/stoicpickle/atready/blob/main/PRIVACY.md",
+    "shortDescription": "Bring resource fit to the plan",
+    "supportURL": "https://github.com/stoicpickle/atready/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/stoicpickle/atready/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/stoicpickle/atready"
+  },
+  "keywords": [
+    "planning",
+    "project-routing",
+    "local-inventory",
+    "codex-skill"
+  ],
+  "license": "Apache-2.0",
+  "name": "atready",
+  "repository": "https://github.com/stoicpickle/atready",
+  "skills": "./skills/",
+  "version": "0.1.14"
+}

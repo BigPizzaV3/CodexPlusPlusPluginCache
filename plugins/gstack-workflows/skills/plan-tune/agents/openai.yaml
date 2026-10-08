@@ -1,0 +1,9 @@
+interface:
+  display_name: "Plan Tune"
+  short_description: "Tune when the workflow should ask questions versus proceed with safe assumptions."
+  default_prompt: "Use Plan Tune for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

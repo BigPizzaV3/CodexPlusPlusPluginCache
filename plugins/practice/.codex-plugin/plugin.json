@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Counsel briefing, matter closure, conflicts, legal budgeting, and time-entry skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#475569",
+    "brandColorDark": "#96A4B8",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Prepare a focused brief to counsel or controlled matter closure report.",
+      "Run a confidentiality-preserving conflict check and document the clearance path.",
+      "Build a transparent legal budget or defensible time-entry narrative."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Practice",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Five reusable practice-management workflows covering briefs to counsel, matter closure, conflict checks, stage-based cost estimates, and defensible time narratives.",
+    "shortDescription": "Legal practice workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "practice-management",
+    "conflicts",
+    "billing",
+    "matter-management"
+  ],
+  "license": "MIT",
+  "name": "practice",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

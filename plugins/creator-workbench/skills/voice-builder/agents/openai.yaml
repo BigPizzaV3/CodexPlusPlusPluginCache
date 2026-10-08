@@ -1,0 +1,7 @@
+interface:
+  display_name: Voice Builder
+  short_description: Build a reusable writing voice profile
+  brand_color: '#E45B32'
+  default_prompt: Use $voice-builder to build a reusable writing voice from my samples and answers.
+policy:
+  allow_implicit_invocation: true

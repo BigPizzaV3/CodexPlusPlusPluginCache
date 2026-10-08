@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:," />
+    <title>Installed Biological Sequence Viewer harness</title>
+    <style>
+      html,
+      body {
+        background: #fff;
+        margin: 0;
+      }
+      #viewer {
+        background: #fff;
+        border: 0;
+        height: 900px;
+        width: 100%;
+      }
+      #starter {
+        background: #f3faf8;
+        border-bottom: 1px solid #b8d8cf;
+        color: #173f36;
+        display: none;
+        font: 14px/1.45 system-ui, sans-serif;
+        padding: 14px 18px;
+      }
+      #starter[data-visible="true"] {
+        display: grid;
+        gap: 8px;
+      }
+      #starter button {
+        background: #176b5a;
+        border: 0;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        justify-self: start;
+        padding: 8px 12px;
+      }
+      #starter p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="starter" aria-label="Marketplace starter evidence">
+      <strong>Biological Sequence &amp; Alignment Viewer starter</strong>
+      <p id="starter-prompt"></p>
+      <p id="starter-provenance"></p>
+      <button id="open-starter" type="button">Open acquired record</button>
+      <span id="starter-status" role="status">Validated record ready to open</span>
+    </section>
+    <iframe id="viewer" title="Installed Biological Sequence Viewer"></iframe>
+    <script type="module" src="./installed-host.js"></script>
+  </body>
+</html>

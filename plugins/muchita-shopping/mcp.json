@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "muchita-shopping": {
+      "type": "streamable-http",
+      "url": "https://shopping-plugin.muchita.ai/mcp"
+    }
+  }
+}

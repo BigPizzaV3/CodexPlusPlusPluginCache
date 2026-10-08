@@ -1,0 +1,45 @@
+{
+  "author": {
+    "email": "timyeou1234@users.noreply.github.com",
+    "name": "Tim Yu",
+    "url": "https://github.com/timyeou1234"
+  },
+  "description": "Estimate and track honest completion-time ranges for long-running Codex tasks.",
+  "homepage": "https://github.com/timyeou1234/task-eta-tracker",
+  "interface": {
+    "brandColor": "#0B2A52",
+    "brandColorDark": "#ADCCF4",
+    "capabilities": [
+      "Milestone tracking",
+      "ETA ranges",
+      "Confidence reporting"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Estimate and track this task with milestone-based ETA ranges.",
+      "Reforecast the remaining work and explain why the ETA changed.",
+      "Tell me why this task is taking so long and what remains."
+    ],
+    "developerName": "Tim Yu",
+    "displayName": "Task ETA Tracker",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Estimate and revise completion-time ranges from milestones, observed elapsed time, required verification, blockers, and confidence without sacrificing acceptance criteria or pretending uncertain work is precisely predictable.",
+    "privacyPolicyURL": "https://github.com/timyeou1234/task-eta-tracker/blob/main/PRIVACY.md",
+    "shortDescription": "Track milestones and task ETA",
+    "termsOfServiceURL": "https://github.com/timyeou1234/task-eta-tracker/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/timyeou1234/task-eta-tracker"
+  },
+  "keywords": [
+    "codex",
+    "eta",
+    "milestones",
+    "forecasting",
+    "productivity"
+  ],
+  "license": "MIT",
+  "name": "task-eta-tracker",
+  "repository": "https://github.com/timyeou1234/task-eta-tracker",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

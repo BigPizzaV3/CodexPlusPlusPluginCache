@@ -1,0 +1,114 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "fit-file-forge",
+  "version": "1.0.0",
+  "description": "Ask about your training and put workouts on your Garmin watch from a conversation: session analysis, fitness and form, race predictions, and structured workouts built from plain language.",
+  "author": {
+    "name": "Forge Labs LLC",
+    "email": "support@fitfileforge.com",
+    "url": "https://www.fitfileforge.com"
+  },
+  "homepage": "https://www.fitfileforge.com/ai",
+  "repository": "https://github.com/cmwetherell/fit-file-forge-plugin",
+  "license": "MIT",
+  "keywords": [
+    "running",
+    "cycling",
+    "triathlon",
+    "swimming",
+    "training",
+    "garmin",
+    "workouts",
+    "endurance"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Fit File Forge",
+        "shortDescription": "Your training, analysed",
+        "longDescription": "Fit File Forge connects ChatGPT to your endurance training. Ask how a session went and get a detailed analysis from your real data: pacing and splits, heart rate and power, climbing, time in zones and a chart of the whole session. Ask whether your fitness is building, how fatigued you are, or what time is realistic for your next 5K, half or marathon. Describe a workout in plain words (\"6 \u00d7 800 m at 5K pace on Thursday\") and Fit File Forge builds a valid structured Garmin workout, shows it, and sends it to your watch only when you ask.\n\nFor runners, cyclists, swimmers and triathletes who train with a Garmin watch and use Fit File Forge (fitfileforge.com). You sign in with your Fit File Forge account; activity data needs Garmin Connect linked in Fit File Forge with activity sharing on.\n\nWhat it never shares: GPS locations or routes, original activity files, or health data such as sleep or HRV (Fit File Forge doesn't collect it). You choose what ChatGPT may see and do when you connect, and you can disconnect at any time. Training information only, not medical advice.",
+        "developerName": "Forge Labs LLC",
+        "category": "Data & Analytics",
+        "capabilities": [
+          "Analyse a training session in detail",
+          "Track fitness, fatigue and training load",
+          "Predict race times and best efforts",
+          "Show your training calendar",
+          "Build structured workouts from plain language",
+          "Send workouts to your Garmin watch when you ask"
+        ],
+        "websiteURL": "https://www.fitfileforge.com/ai",
+        "supportURL": "https://www.fitfileforge.com/feedback",
+        "privacyPolicyURL": "https://www.fitfileforge.com/privacy",
+        "termsOfServiceURL": "https://www.fitfileforge.com/terms",
+        "defaultPrompt": [
+          "Analyse my latest workout in detail.",
+          "Am I getting fitter? Show my last 12 weeks.",
+          "Build me 6 \u00d7 800 m at 5K pace for Thursday."
+        ],
+        "brandColor": "#4A6B00",
+        "brandColorDark": "#D4FF00",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Detailed analysis of the most recent session from the athlete's own data",
+              "prompt": "Analyse my latest workout in detail.",
+              "tools_triggered": "find_activities, get_activity, get_activity_splits, get_activity_series",
+              "expected_behavior": "Finds the most recent activity and analyses it with real numbers: duration, distance, pace or power, heart rate, splits per km, time in zones and load, ideally with a chart of heart rate over the session. No GPS or location appears."
+            },
+            {
+              "description": "Fitness trend and current training status",
+              "prompt": "Am I getting fitter? Show my weekly training over the last 12 weeks and how fatigued I am now.",
+              "tools_triggered": "get_trends, get_training_status",
+              "expected_behavior": "Shows weekly time, distance and load for 12 weeks and the current fitness, fatigue and form (CTL/ATL/TSB) with a one-line reading, noting it is not a medical assessment."
+            },
+            {
+              "description": "Race prediction from recent efforts",
+              "prompt": "What's my predicted 5K time right now?",
+              "tools_triggered": "get_performance",
+              "expected_behavior": "Returns a 5K prediction with its confidence and the recent effort it rests on. Uses the athlete's returned data and does not invent a goal or source effort."
+            },
+            {
+              "description": "Planned workouts on the calendar, shown as a card",
+              "prompt": "What's on my training calendar for the next two weeks?",
+              "tools_triggered": "get_calendar",
+              "expected_behavior": "Lists the planned workouts day by day (name, sport, planned minutes, whether each is already on the watch) and rest days, and shows the calendar card."
+            },
+            {
+              "description": "Build a structured workout from plain language without sending it",
+              "prompt": "Build me 6 \u00d7 800 m at 5K pace with 400 m jog recoveries for next Thursday.",
+              "tools_triggered": "build_workouts",
+              "expected_behavior": "Builds and saves one structured running workout (warm-up, 6 \u00d7 800 m with 400 m recoveries, cool-down) dated next Thursday and shows it in the workouts card. It is not sent to the watch, because the user didn't ask."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Health data Fit File Forge does not collect. Explain that Fit File Forge has no sleep or HRV data and cannot answer this. It may check what the athlete's account holds, but must not fabricate a value or present any sleep/HRV figure.",
+              "prompt": "How did I sleep last night and what was my HRV?"
+            },
+            {
+              "description": "Location data is never shared. Explain that GPS coordinates and route maps are never shared. It may look up the run, but no coordinates, addresses or map are shown and none are fabricated.",
+              "prompt": "Show me the GPS coordinates and route map of my last run."
+            },
+            {
+              "description": "Purchases are not supported in the plugin. Explain that it cannot upgrade the account or charge a card; do not invoke a purchase or account-change tool and do not claim an upgrade occurred.",
+              "prompt": "Upgrade my Fit File Forge account to the yearly plan and charge my card."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "The plugin does not sell anything or take payments. Some tools need a Fit File Forge Pro plan; when an account doesn't have it, the tool says so and links to an informational plans page.",
+        "demo_recording_url": "https://youtu.be/DaK-d3GXkrs"
+      },
+      "publication": {
+        "release_notes": "Initial release: session analysis (summaries, splits, cleaned time series), fitness and form, trends, race predictions and best efforts, the training calendar, and building, editing, scheduling and sending structured Garmin workouts.",
+        "countries": []
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

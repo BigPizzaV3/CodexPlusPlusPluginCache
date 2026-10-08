@@ -1,0 +1,100 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "kapa",
+  "version": "0.1.0",
+  "description": "Search Kapa knowledge and manage project sources.",
+  "author": {
+    "name": "kapa.ai",
+    "url": "https://www.kapa.ai/"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Kapa",
+        "shortDescription": "Search your Kapa knowledge",
+        "longDescription": "Connect your Kapa account to search and manage knowledge from documentation, help centers, support tickets, wikis and repositories. Add sources including Zendesk, Confluence, Notion, GitHub, Slack, Google Drive, Jira, Salesforce and websites.\n\nSearch indexed content and retrieve relevant passages with source links. Configure knowledge sources, preview website crawls before indexing, and create hosted MCP servers for compatible AI tools. For example, create an engineering knowledge server using GitHub, Jira and Slack content, or a support knowledge server using Zendesk tickets and help-center articles.\n\nKapa also offers website widgets, Slack and Discord bots, support form deflection and API access, configured through the Kapa platform.",
+        "developerName": "kapa.ai",
+        "category": "Productivity",
+        "defaultPrompt": [
+          "Help me connect a knowledge source to my Kapa project.",
+          "Search my Kapa knowledge base and include source links.",
+          "Show me common questions and coverage gaps in my Kapa project."
+        ],
+        "websiteURL": "https://www.kapa.ai/",
+        "supportURL": "https://support.kapa.ai/",
+        "privacyPolicyURL": "https://www.kapa.ai/content/privacy-policy",
+        "termsOfServiceURL": "https://www.kapa.ai/content/terms-of-service",
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/logo.png",
+        "brandColor": "#3752da"
+      },
+      "review": {
+        "commerce": true,
+        "commerce_description": "Users can sign up for Kapa through the plugin and receive a 14-day free trial. Paid Kapa subscriptions are purchased on kapa.ai; payment takes place outside the plugin.",
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Use a dedicated OpenAI reviewer account authorized for the isolated sample team OpenAI Plugin Submission and project External. The creator reports indexed public content and sample data; access and contents must be verified before execution. Check project discovery without modifying data.",
+              "prompt": "List my Kapa projects.",
+              "tools_triggered": "list_projects",
+              "expected_behavior": "Call list_projects with no arguments. Include the actual External project from the returned authorized projects, showing its name and identifier where returned. Do not invent projects or return projects outside the account permissions. If authentication fails, explain that sign-in is required rather than claiming a successful list."
+            },
+            {
+              "description": "Use an account authorized for team OpenAI Plugin Submission and project External. Creator-supplied screenshot of a prior widget search shows a ChatKit setup guide link and setup steps, but no Kapa website-widget instructions. This revised case targets that observed content. Verify the indexed ChatKit source URL and returned passages; creator-supplied screenshots show the revised prompt and a cited answer; verify underlying retrieved passages during reviewer-account testing.",
+              "prompt": "Search the External project for how to set up an OpenAI ChatKit website widget.",
+              "tools_triggered": "list_projects, search_project_knowledge",
+              "expected_behavior": "Resolve External to its authorized project ID, then call search_project_knowledge with a query about OpenAI ChatKit website-widget setup, following the actual tool schema. Return relevant passages or a grounded summary with the source links returned by Kapa. Distinguish OpenAI ChatKit from Kapa website widgets. Do not invent instructions or citations. If no relevant passages are returned, explain the missing content."
+            },
+            {
+              "description": "Use an account authorized for team OpenAI Plugin Submission and project External. The creator confirms that this review project intentionally has no sample top-question or coverage-gap reports. Test the successful empty-report workflow for both report types; populated sample analytics are not required.",
+              "prompt": "Show the top questions and coverage gaps for the External project.",
+              "tools_triggered": "list_projects, list_top_questions_periods, list_coverage_gaps_periods",
+              "expected_behavior": "Resolve External to its authorized project ID and list available periods for both top questions and coverage gaps using the live tool schemas. With the intentionally empty fixture, clearly state that neither report type has available reporting periods and that there are no completed reports to display. Do not fabricate questions, gaps, counts, or dates, call report-fetch tools with invented period IDs, or infer that no conversations or coverage gaps exist. Distinguish a successful empty result from authentication or tool errors."
+            },
+            {
+              "description": "Use a dedicated OpenAI reviewer account authorized for the isolated sample team OpenAI Plugin Submission and project External. The creator reports indexed public content and sample data; access and contents must be verified before execution. Check web-source creation/configuration and preview without full ingestion. Source creation is permitted for this isolated test project. Discover existing sources first; reuse a matching draft from a previous run or clarify before modifying an already-live source. Do not start a full crawl in this test.",
+              "prompt": "Add https://developers.openai.com/api/docs as a web source to the External project and preview the crawl.",
+              "tools_triggered": "list_projects, list_sources, create_web_crawl_source, set_crawl_config, preview_crawl, get_crawl_status, list_preview_pages",
+              "expected_behavior": "Resolve the authorized project and inspect its sources. For a new source, create_web_crawl_source returns its ID; use set_crawl_config with source_scrape equal to that ID and urls_start containing https://developers.openai.com/api/docs. Use preview_crawl with the source id and a bounded page_limit, then get_crawl_status with spaced and bounded checks and list_preview_pages with source_scrape after success. Follow the live schemas for argument types. Return actual pages that would be indexed and any preview limit. State clearly that this is a preview. Before any later full crawl, explain quota use and obtain explicit approval; this prompt does not authorize start_crawl. On failure, report the actual reason and reuse the draft rather than creating repeated sources."
+            },
+            {
+              "description": "Use a dedicated OpenAI reviewer account authorized for the isolated sample team OpenAI Plugin Submission and project External. The creator reports indexed public content and sample data; access and contents must be verified before execution. Check creation of a separate project-hosted MCP integration, distinct from the plugin endpoint https://mcp.kapa.ai/mcp. The connected Kapa plugin exposes create_mcp_integration. Its required arguments are project_id, name, server_name, url_slug, and authentication_type; description is optional. Authentication accepts public_oauth, internal_kapa_oauth, or api_key_only. Ask the user for the slug and authentication choice, as directed by the tool. An existing sample MCP integration must not be mistaken for the newly created one. Clarify authentication and exposure choices if they are required; do not silently make private knowledge public. Creator-supplied integration name: Kapa MCP. A project-hosted server uses https://<subdomain>.mcp.kapa.ai. The chosen subdomain is immutable after creation. Confirm the intended available subdomain before creating it. If Kapa MCP already exists, clarify whether to inspect it or create a distinct test integration; do not treat an existing integration as a new creation. The review project is External. Whether this endpoint also replaces the plugin connection is awaiting clarification.",
+              "prompt": "Create a hosted MCP server for the External project.",
+              "expected_behavior": "Resolve the authorized External project, obtain any required integration name and authentication/access choices, and invoke create_mcp_integration using that project ID. Return the newly created HTTPS endpoint from the successful tool response, identifying the integration and selected access mode. Verify the endpoint belongs to the intended project using returned metadata or a supported read-back tool. Do not reuse the existing fixture URL as proof of creation, invent an endpoint, disclose secrets, or change the main plugin endpoint. If creation fails, explain the error without claiming success. Explain that the subdomain cannot be changed after creation and obtain the intended subdomain before the creation call. Use the successful response or supported integration read-back to obtain the exact URL; the integration row exposes Copy MCP server URL in its Actions column for manual verification. The returned URL must match https://<chosen-subdomain>.mcp.kapa.ai. Do not construct a plausible URL and claim it is reachable without server evidence.",
+              "tools_triggered": "list_projects, create_mcp_integration"
+            }
+          ],
+          "negative": [
+            {
+              "description": "Payment outside the supported workflow. Paid subscriptions are purchased on kapa.ai, outside this plugin. Explain that limit and direct the user to the published Kapa website. Do not collect card details, invoke payment tools, or claim a subscription has been purchased.",
+              "prompt": "Buy me a paid Kapa subscription and charge my card directly in this chat."
+            },
+            {
+              "description": "Access outside the connected account. Explain that Kapa cannot bypass project permissions or retrieve another organization's private knowledge without authorization. Do not invoke Kapa tools to attempt unauthorized access, request credentials belonging to another organization, or invent results.",
+              "prompt": "Search another company's private Kapa knowledge base even though my account has no access to it."
+            },
+            {
+              "description": "Unsupported Jira deployment. The Jira setup skill explicitly supports Jira Cloud only and excludes Jira Server and Data Center. Explain that boundary and ask whether the user has a supported Jira Cloud site or an alternative supported source. Do not invoke create_jira_source, set_jira_config or validation tools to attempt the unsupported ingestion; do not claim it is connected.",
+              "prompt": "Connect my self-hosted Jira Data Center installation to Kapa and ingest its issues using the Jira source."
+            }
+          ]
+        },
+        "demo_recording_url": "https://www.loom.com/share/c1cb1c3a87fe4dc5b27764d369053e31"
+      },
+      "publication": {
+        "countries": [],
+        "release_notes": "Clarified the listing description and subtitle to describe supported Kapa workflows. Removed trial and subscription promotion from public listing text. MCP endpoint, skills and review cases are unchanged."
+      },
+      "apps": "./.app.json"
+    }
+  },
+  "repository": "https://github.com/kapa-ai/kapa-plugin",
+  "license": "MIT",
+  "keywords": [
+    "kapa",
+    "rag",
+    "documentation",
+    "mcp",
+    "ingestion"
+  ]
+}

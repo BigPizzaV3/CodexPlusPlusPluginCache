@@ -1,0 +1,2 @@
+settlementBatchId,transactionId,transactionRequestId,transactionType,paymentMethodType,transactionAmountValue,transactionCurrency,settlementAmountValue,settlementCurrency,settlementInitiatedDate,paymentMethodFeeAmountValue
+sample-batch-003,sample-tx-004,sample-request-004,PAYMENT,CARD,100.00,USD,97.00,USD,2026-08-31,not-a-number

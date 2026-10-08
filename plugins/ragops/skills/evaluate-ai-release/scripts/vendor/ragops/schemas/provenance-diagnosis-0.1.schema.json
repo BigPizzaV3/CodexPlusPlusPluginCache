@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/provenance-diagnosis-0.1.schema.json",
+  "title": "RAGOps provenance diagnosis 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "scenario_id", "classification", "comparable", "changed_axes",
+    "causal_axes", "evidence_changed", "message"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "scenario_id": {"type": "string"},
+    "classification": {
+      "enum": [
+        "model_regression", "evaluator_drift", "dataset_drift", "infrastructure_noise",
+        "stochastic_output_variance", "repeated_measurement_variance", "confounded"
+      ]
+    },
+    "comparable": {"type": "boolean"},
+    "changed_axes": {"type": "array", "items": {"type": "string"}},
+    "causal_axes": {"type": "array", "items": {"type": "string"}},
+    "evidence_changed": {"type": "boolean"},
+    "message": {"type": "string"}
+  }
+}

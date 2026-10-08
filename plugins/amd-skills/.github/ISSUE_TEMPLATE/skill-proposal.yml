@@ -1,0 +1,85 @@
+name: Skill proposal
+description: Propose a new skill for the AMD Skills catalog.
+title: "[Skill proposal] <short outcome or skill name>"
+labels:
+  - skill-proposal
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a skill! Skills earn their keep on **repeated, opinionated AMD workflows**.
+        Before filing, please skim `CONTRIBUTING.md` and *"Is this a good fit for a skill?"* in `docs/best-practices.md`, so we can route this proposal quickly.
+
+        Note that we only accept **federated** submissions: the skill is authored in an AMD-owned product repo and vendored into this catalog. We no longer accept skills authored directly under `skills/` here.
+
+        Fill out the short fields below, then describe the skill in detail at the end.
+
+  - type: input
+    id: name
+    attributes:
+      label: Proposed skill name
+      description: Use `lowercase-with-hyphens`, max 64 characters, action- or outcome-oriented (e.g. `porting-cuda-to-hip`, `tuning-mi300x`, `picking-rocm-container`). Avoid generic names like `helper` or `gpu-stuff`.
+      placeholder: e.g. tuning-mi300x-inference
+    validations:
+      required: true
+
+  - type: dropdown
+    id: prior_art
+    attributes:
+      label: Does something like this already exist?
+      description: Help us avoid duplicating effort. If you pick a "Yes" option, link the prior art in the description below.
+      options:
+        - "No — new idea"
+        - "Yes — as documentation, a runbook, or internal guide"
+        - "Yes — as a similar skill in another catalog or repo"
+        - "Not sure — happy to discuss"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: amd_only_credible
+    attributes:
+      label: Is AMD the only credible institution to create this skill?
+      description: |
+        Skills in this catalog must be ones that only AMD is uniquely positioned to author credibly (e.g. they require AMD hardware expertise, internal performance knowledge, or first-party tooling). If another institution could produce this skill just as credibly, the skill proposal will likely not be accepted.
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+
+  - type: input
+    id: home
+    attributes:
+      label: Which AMD repo will own this skill?
+      description: The AMD-owned repo that will hold the skill folder and act as its source of truth. This catalog vendors a pinned copy from it. If you do not know yet, say so and we will work it out in the discussion.
+      placeholder: e.g. AMD-AGI/MyProject
+    validations:
+      required: true
+
+  - type: dropdown
+    id: focus_area
+    attributes:
+      label: Catalog focus area
+      description: Which focus area in the catalog best fits this skill?
+      options:
+        - "Application integration"
+        - "Hardware-native"
+        - "Cross-stack porting"
+        - "Profiling and delivery"
+        - "Other / not sure"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Skill description
+      description: |
+        Describe the skill in as much detail as you can. Useful things to cover:
+          - **User goal**: what is the user trying to achieve when this skill should fire?
+          - **Trigger surface**: words, phrases, file extensions, error messages, product names that should route to this skill.
+          - **Platform Scope**: Is this for client? server? Both?
+          - **Inputs and outputs**: what does the agent receive, and what does it produce?
+    validations:
+      required: true

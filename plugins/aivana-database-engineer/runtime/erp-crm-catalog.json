@@ -1,0 +1,726 @@
+{
+  "version": "1.0.0",
+  "reviewedAt": "2026-09-12",
+  "scope": "Explicit review profiles, not exhaustive vendor certification. Signals are supplied evidence assessments, not automatic platform discovery.",
+  "profiles": [
+    {
+      "id": "sap-s4hana",
+      "name": "SAP S/4HANA",
+      "collect": "ATC findings, SQL Monitor exports, custom-code inventory",
+      "reference": "https://help.sap.com/docs/ABAP_PLATFORM_NEW/a24970c68fcf4770a64bf9a78e3719e2/2b99ce231e7e45e6a365608d63424336.html",
+      "signals": [
+        "nativeSqlMigrationRisk",
+        "unusedCustomCodeExecuted"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "dynamics-dataverse",
+      "name": "Microsoft Dynamics 365 / Dataverse",
+      "collect": "TDS read-only results, plug-in traces, API response telemetry",
+      "reference": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/dataverse-sql-query",
+      "signals": [
+        "tdsWriteAttempt",
+        "synchronousPluginChain"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "dynamics-finance-operations",
+      "name": "Microsoft Dynamics 365 Finance and Operations",
+      "collect": "Data entity execution history, batch history, application traces",
+      "reference": "https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/data-entities/data-entities",
+      "signals": [
+        "dataEntityLogicBypassed",
+        "batchInteractiveContention"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "business-central",
+      "name": "Microsoft Dynamics 365 Business Central",
+      "collect": "Application Insights telemetry, AL traces, extension inventory",
+      "reference": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/telemetry-overview",
+      "signals": [
+        "extensionSlowSql",
+        "flowfieldRepeatedCalculation"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "salesforce",
+      "name": "Salesforce CRM",
+      "collect": "SOQL Query Plan output, debug logs, sharing and object metadata",
+      "reference": "https://developer.salesforce.com/blogs/engineering/2013/07/maximizing-the-performance-of-force-com-soql-reports-and-list-views",
+      "signals": [
+        "nonSelectiveSoql",
+        "softDeleteSelectivityDistortion"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "oracle-fusion",
+      "name": "Oracle Fusion Cloud ERP / CX",
+      "collect": "Integration instance history, application export and REST diagnostics",
+      "reference": "https://docs.oracle.com/en/cloud/paas/application-integration/oracle-integration-oci/integrations-usage.html",
+      "signals": [
+        "integrationCallsInLoop",
+        "unreconciledImportJobs"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "netsuite",
+      "name": "Oracle NetSuite",
+      "collect": "SuiteQL diagnostics, script execution logs, account configuration",
+      "reference": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0824094533.html",
+      "signals": [
+        "suiteqlDialectMix",
+        "suiteqlUnboundedProjection"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "odoo",
+      "name": "Odoo ERP / CRM",
+      "collect": "ORM profiler, company context, record-rule and PostgreSQL evidence",
+      "reference": "https://www.odoo.com/documentation/18.0/developer/howtos/company.html",
+      "signals": [
+        "companyContextMismatch",
+        "ormRulesBypassed"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "infor-ion",
+      "name": "Infor ERP via ION",
+      "collect": "ION API gateway throttling policies and integration logs",
+      "reference": "https://docs.infor.com/ionapi/latest/en-us/ionapiag_cloud/default.html?helpcontent=ngb1507235574706.html",
+      "signals": [
+        "gatewayThrottleMismatch"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "sage-intacct",
+      "name": "Sage Intacct",
+      "collect": "Web Services response status and integration retry logs",
+      "reference": "https://developer.intacct.com/web-services/error-handling/",
+      "signals": [
+        "xmlBusinessFailureIgnored"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "workday",
+      "name": "Workday",
+      "collect": "Versioned SOAP/REST metadata and integration event exports",
+      "reference": "https://community-content.workday.com/en-us/public/products/platform-and-product-extensions/soap-api-reference.html",
+      "signals": [
+        "apiVersionContractDrift"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "hubspot",
+      "name": "HubSpot CRM",
+      "collect": "API response headers, associations and webhook diagnostics",
+      "reference": "https://developers.hubspot.com/docs/developer-tooling/platform/usage-guidelines",
+      "signals": [
+        "associationFanout"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    },
+    {
+      "id": "servicenow",
+      "name": "ServiceNow customer workflows",
+      "collect": "Slow query, transaction and script logs",
+      "reference": "https://www.servicenow.com/docs/r/platform-administration/platform-performance/t_UseASlowQueryLog.html",
+      "signals": [
+        "slowBusinessRuleQuery"
+      ],
+      "coverage": "documented_review_profile",
+      "nativeConnector": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "applicationLatencySloExceeded", "signal": "applicationLatencySloExceeded", "severity": "high",
+      "area": "performance", "title": "Anwendungslaufzeit ueberschreitet das vorgegebene SLO",
+      "nextStep": "Pruefe langsame Aufrufe, Prozessbudget und Zeitfenster; Dauer allein belegt keine Datenbankursache.",
+      "owner": "application_owner", "products": ["*"], "basis": "user_defined_latency_budget"
+    },
+    {
+      "id": "apiThrottlingObserved", "signal": "apiThrottlingObserved", "severity": "high",
+      "area": "integration", "title": "API-Drosselung im Diagnosefenster beobachtet",
+      "nextStep": "Vergleiche Status 429 mit Dienstlimits und Retry-Verhalten; keine universellen Anbieterlimits annehmen.",
+      "owner": "integration_owner", "products": ["*"], "basis": "observed_http_status"
+    },
+    {
+      "id": "tenantScopeLeak",
+      "signal": "tenantScopeLeak",
+      "severity": "critical",
+      "area": "security",
+      "title": "Mandanten- oder Firmenkontext verletzt",
+      "nextStep": "Vergleiche autorisierte Firmen mit den Schluesseln der betroffenen Datensaetze; pruefe Rollen und Anwendungskontext.",
+      "owner": "security_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "directBusinessTableWrite",
+      "signal": "directBusinessTableWrite",
+      "severity": "critical",
+      "area": "supportability",
+      "title": "Direkte Aenderung von Anwendungstabellen",
+      "nextStep": "Pruefe Herstellerfreigabe und umgangene Validierungen; plane Aenderungen ueber unterstuetzte Anwendungswege.",
+      "owner": "application_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "duplicateBusinessPosting",
+      "signal": "duplicateBusinessPosting",
+      "severity": "critical",
+      "area": "integration",
+      "title": "Doppelte fachliche Buchung nach Wiederholung",
+      "nextStep": "Vergleiche Belegschluessel und Wiederholungsversuche; pruefe Idempotenz vor einer erneuten Verarbeitung.",
+      "owner": "integration_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "lostDeltaChanges",
+      "signal": "lostDeltaChanges",
+      "severity": "high",
+      "area": "integration",
+      "title": "Delta-Export verliert Aenderungen",
+      "nextStep": "Pruefe Watermarks, Paging, Loeschereignisse und Wiederanlauf anhand einer vollstaendigen Vergleichsstichprobe.",
+      "owner": "integration_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "retriesIgnoreBackoff",
+      "signal": "retriesIgnoreBackoff",
+      "severity": "high",
+      "area": "integration",
+      "title": "Wiederholungen missachten Drosselung",
+      "nextStep": "Pruefe Antwortheader und Retry-After; teste begrenzte Wiederholungen und Backoff.",
+      "owner": "integration_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "nPlusOneQueries",
+      "signal": "nPlusOneQueries",
+      "severity": "high",
+      "area": "performance",
+      "title": "Einzelabfragen innerhalb einer Verarbeitungsschleife",
+      "nextStep": "Korreliere Aufrufanzahl und Laufzeit mit der Datensatzanzahl; pruefe unterstuetzte Batch-Zugriffe.",
+      "owner": "developer",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "interactiveBatchOverlap",
+      "signal": "interactiveBatchOverlap",
+      "severity": "high",
+      "area": "performance",
+      "title": "Stapelverarbeitung beeintraechtigt interaktive Vorgaenge",
+      "nextStep": "Vergleiche Wartesituationen und Zeitfenster; pruefe Lastverteilung mit realistischem Spitzenvolumen.",
+      "owner": "operations",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "staleReplicaRead",
+      "signal": "staleReplicaRead",
+      "severity": "high",
+      "area": "consistency",
+      "title": "Veraltete Replik gelesen",
+      "nextStep": "Vergleiche Replikationsverzug mit der fachlichen Frischeanforderung des Prozesses.",
+      "owner": "data_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "joinFanoutDoubleCount",
+      "signal": "joinFanoutDoubleCount",
+      "severity": "critical",
+      "area": "reporting",
+      "title": "Join vervielfacht fachliche Summen",
+      "nextStep": "Vergleiche Beleg- und Positionsgranularitaet vor Aggregationen mit freigegebenen Referenzsummen.",
+      "owner": "data_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "currencyUnitMismatch",
+      "signal": "currencyUnitMismatch",
+      "severity": "critical",
+      "area": "reporting",
+      "title": "Waehrung oder Mengeneinheit falsch verrechnet",
+      "nextStep": "Pruefe Quell- und Zielsemantik sowie Gueltigkeitsdatum der Umrechnung mit dem Fachverantwortlichen.",
+      "owner": "finance_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "effectiveDateMismatch",
+      "signal": "effectiveDateMismatch",
+      "severity": "high",
+      "area": "consistency",
+      "title": "Gueltigkeit oder Zeitzone falsch aufgeloest",
+      "nextStep": "Pruefe Stichtag, Zeitzone und historisierte Versionen fuer die betroffenen Belege.",
+      "owner": "data_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "softDeletesIgnored",
+      "signal": "softDeletesIgnored",
+      "severity": "high",
+      "area": "integration",
+      "title": "Loeschungen fehlen im Zielsystem",
+      "nextStep": "Gleiche Loeschmarker und Wiederherstellungsfaelle mit dem Quellsystem ab.",
+      "owner": "integration_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "extensionUpgradeRegression",
+      "signal": "extensionUpgradeRegression",
+      "severity": "high",
+      "area": "customization",
+      "title": "Erweiterung verursacht Upgrade-Regression",
+      "nextStep": "Vergleiche Ausfuehrungsplaene, Erweiterungsversionen und Tests vor und nach dem Upgrade.",
+      "owner": "developer",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "privilegedExportExposure",
+      "signal": "privilegedExportExposure",
+      "severity": "critical",
+      "area": "security",
+      "title": "Export umgeht den erwarteten Berechtigungsumfang",
+      "nextStep": "Vergleiche Exportidentitaet und Rollenmodell; teste mit einem eingeschraenkten Anwendungskonto.",
+      "owner": "security_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "sensitiveTelemetryExposure",
+      "signal": "sensitiveTelemetryExposure",
+      "severity": "high",
+      "area": "privacy",
+      "title": "Personenbezogene Inhalte in Diagnosedaten",
+      "nextStep": "Pruefe Felder und Zugriff auf Diagnoseexporte; liefere minimierte, redigierte Nachweise.",
+      "owner": "security_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "deadlockObserved",
+      "signal": "deadlockObserved",
+      "severity": "high",
+      "area": "performance",
+      "title": "Deadlock im fachlichen Prozess",
+      "nextStep": "Ordne den Deadlock-Graphen den Transaktionen zu und pruefe Sperrreihenfolge und Wiederholungssemantik.",
+      "owner": "database_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "unboundedExtraction",
+      "signal": "unboundedExtraction",
+      "severity": "high",
+      "area": "performance",
+      "title": "Unbegrenzter Vollabzug",
+      "nextStep": "Pruefe Filter, Projektion und Paging gegen die unterstuetzten Schnittstellen.",
+      "owner": "integration_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "missingReconciliation",
+      "signal": "missingReconciliation",
+      "severity": "high",
+      "area": "consistency",
+      "title": "Fachlicher Abgleich nach Import fehlt",
+      "nextStep": "Vergleiche Beleganzahlen und Kontrollsummen je Firma, Status und Zeitraum.",
+      "owner": "data_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "periodCloseContention",
+      "signal": "periodCloseContention",
+      "severity": "high",
+      "area": "performance",
+      "title": "Periodenabschluss konkurriert mit Berichten",
+      "nextStep": "Korreliere Zeitfenster und Sperren; teste Berichte auf freigegebenen Lesepfaden.",
+      "owner": "operations",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "businessKeyCollision",
+      "signal": "businessKeyCollision",
+      "severity": "critical",
+      "area": "consistency",
+      "title": "Fachschluessel kollidieren zwischen Firmen",
+      "nextStep": "Pruefe zusammengesetzte Schluessel mit Firma, Quellsystem und Belegtyp.",
+      "owner": "data_owner",
+      "products": [
+        "*"
+      ],
+      "basis": "general_engineering_check"
+    },
+    {
+      "id": "nativeSqlMigrationRisk",
+      "signal": "nativeSqlMigrationRisk",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "SAP Native-SQL ist im Zielmodell nicht qualifiziert",
+      "nextStep": "Vergleiche ATC-Funde mit SQL-Monitor-Nutzung und dem konkreten Zielrelease.",
+      "owner": "application_owner",
+      "products": [
+        "sap-s4hana"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://help.sap.com/docs/ABAP_PLATFORM_NEW/a24970c68fcf4770a64bf9a78e3719e2/2b99ce231e7e45e6a365608d63424336.html"
+    },
+    {
+      "id": "unusedCustomCodeExecuted",
+      "signal": "unusedCustomCodeExecuted",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Custom-Code-Bewertung widerspricht Laufzeitnutzung",
+      "nextStep": "Vergleiche Codeinventar und SQL-Monitor-Belege, bevor Code entfernt oder priorisiert wird.",
+      "owner": "application_owner",
+      "products": [
+        "sap-s4hana"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://help.sap.com/docs/ABAP_PLATFORM_NEW/a24970c68fcf4770a64bf9a78e3719e2/2b99ce231e7e45e6a365608d63424336.html"
+    },
+    {
+      "id": "tdsWriteAttempt",
+      "signal": "tdsWriteAttempt",
+      "severity": "critical",
+      "area": "vendor_specific",
+      "title": "Dataverse-TDS wird als Schreibschnittstelle verwendet",
+      "nextStep": "TDS ist lesend; pruefe die unterstuetzte Dataverse-Anwendungsschnittstelle.",
+      "owner": "application_owner",
+      "products": [
+        "dynamics-dataverse"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/dataverse-sql-query"
+    },
+    {
+      "id": "synchronousPluginChain",
+      "signal": "synchronousPluginChain",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Synchrone Dataverse-Plug-in-Kette verlaengert Transaktionen",
+      "nextStep": "Korreliere Trace-Dauern, Rekursion und Transaktionsgrenzen; qualifiziere asynchrone Alternativen.",
+      "owner": "application_owner",
+      "products": [
+        "dynamics-dataverse"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://learn.microsoft.com/en-us/power-apps/developer/data-platform/dataverse-sql-query"
+    },
+    {
+      "id": "dataEntityLogicBypassed",
+      "signal": "dataEntityLogicBypassed",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "F&O-Integration umgeht Data-Entity-Geschaeftslogik",
+      "nextStep": "Vergleiche Importpfad und Entity-Validierung mit dem vorgesehenen Fachprozess.",
+      "owner": "application_owner",
+      "products": [
+        "dynamics-finance-operations"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/data-entities/data-entities"
+    },
+    {
+      "id": "batchInteractiveContention",
+      "signal": "batchInteractiveContention",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "F&O-Batch und Benutzertransaktionen konkurrieren",
+      "nextStep": "Korreliere Batch-Historie und interaktive Laufzeiten im selben Zeitfenster.",
+      "owner": "application_owner",
+      "products": [
+        "dynamics-finance-operations"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://learn.microsoft.com/en-us/dynamics365/fin-ops-core/dev-itpro/data-entities/data-entities"
+    },
+    {
+      "id": "extensionSlowSql",
+      "signal": "extensionSlowSql",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Business-Central-Erweiterung verursacht langsames SQL",
+      "nextStep": "Ordne Application-Insights-Ereignisse der AL-Erweiterung und Version zu.",
+      "owner": "application_owner",
+      "products": [
+        "business-central"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/telemetry-overview"
+    },
+    {
+      "id": "flowfieldRepeatedCalculation",
+      "signal": "flowfieldRepeatedCalculation",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Wiederholte FlowField-Berechnung im Verarbeitungspfad",
+      "nextStep": "Belege Berechnungshaeufigkeit und SQL-Kosten aus AL-Telemetrie vor einer Aenderung.",
+      "owner": "application_owner",
+      "products": [
+        "business-central"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/telemetry-overview"
+    },
+    {
+      "id": "nonSelectiveSoql",
+      "signal": "nonSelectiveSoql",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "SOQL-Filter ist laut Query Plan nicht selektiv",
+      "nextStep": "Pruefe Query Plan, Verteilung und Sharing-Kontext; behandle Salesforce nicht als frei administrierbare SQL-Datenbank.",
+      "owner": "application_owner",
+      "products": [
+        "salesforce"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://developer.salesforce.com/blogs/engineering/2013/07/maximizing-the-performance-of-force-com-soql-reports-and-list-views"
+    },
+    {
+      "id": "softDeleteSelectivityDistortion",
+      "signal": "softDeleteSelectivityDistortion",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Geloeschte Salesforce-Daten verzerren Selektivitaet",
+      "nextStep": "Vergleiche Query-Plan-Schaetzung mit aktiven und weich geloeschten Datensaetzen; keine automatische Loeschung.",
+      "owner": "application_owner",
+      "products": [
+        "salesforce"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://developer.salesforce.com/blogs/engineering/2013/07/maximizing-the-performance-of-force-com-soql-reports-and-list-views"
+    },
+    {
+      "id": "integrationCallsInLoop",
+      "signal": "integrationCallsInLoop",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Oracle-Integrationsfluss ruft Dienste in einer Schleife auf",
+      "nextStep": "Pruefe Instanzhistorie und Batch-Moeglichkeiten fuer das konkrete API.",
+      "owner": "application_owner",
+      "products": [
+        "oracle-fusion"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://docs.oracle.com/en/cloud/paas/application-integration/oracle-integration-oci/integrations-usage.html"
+    },
+    {
+      "id": "unreconciledImportJobs",
+      "signal": "unreconciledImportJobs",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Oracle-Importjobs sind fachlich nicht abgeglichen",
+      "nextStep": "Vergleiche Jobergebnisse, Teilfehler und Kontrollsummen mit der Quellanwendung.",
+      "owner": "application_owner",
+      "products": [
+        "oracle-fusion"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://docs.oracle.com/en/cloud/paas/application-integration/oracle-integration-oci/integrations-usage.html"
+    },
+    {
+      "id": "suiteqlDialectMix",
+      "signal": "suiteqlDialectMix",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "SuiteQL vermischt inkompatible SQL-Dialekte",
+      "nextStep": "Pruefe die Abfrage gegen die unterstuetzte SuiteQL-Syntax.",
+      "owner": "application_owner",
+      "products": [
+        "netsuite"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0824094533.html"
+    },
+    {
+      "id": "suiteqlUnboundedProjection",
+      "signal": "suiteqlUnboundedProjection",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "SuiteQL-Abfrage liest unnoetig breite Daten",
+      "nextStep": "Reduziere Projektion und qualifiziere Filter mit den NetSuite-Diagnosedaten.",
+      "owner": "application_owner",
+      "products": [
+        "netsuite"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_0824094533.html"
+    },
+    {
+      "id": "companyContextMismatch",
+      "signal": "companyContextMismatch",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Odoo-Firmenkontext passt nicht zu den Datensaetzen",
+      "nextStep": "Pruefe with_company, erlaubte Firmen und firmenabhaengige Werte.",
+      "owner": "application_owner",
+      "products": [
+        "odoo"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://www.odoo.com/documentation/18.0/developer/howtos/company.html"
+    },
+    {
+      "id": "ormRulesBypassed",
+      "signal": "ormRulesBypassed",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Odoo-Zugriff umgeht ORM- und Record-Rule-Semantik",
+      "nextStep": "Vergleiche ORM-Ergebnis und technischen Datenbankzugriff mit einem eingeschraenkten Benutzer.",
+      "owner": "application_owner",
+      "products": [
+        "odoo"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://www.odoo.com/documentation/18.0/developer/howtos/company.html"
+    },
+    {
+      "id": "gatewayThrottleMismatch",
+      "signal": "gatewayThrottleMismatch",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Infor-Client missachtet Gateway-Drosselung",
+      "nextStep": "Vergleiche Retry-Verhalten mit der konfigurierten ION-Policy.",
+      "owner": "application_owner",
+      "products": [
+        "infor-ion"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://docs.infor.com/ionapi/latest/en-us/ionapiag_cloud/default.html?helpcontent=ngb1507235574706.html"
+    },
+    {
+      "id": "xmlBusinessFailureIgnored",
+      "signal": "xmlBusinessFailureIgnored",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Sage-XML-Antwort enthaelt ignorierte fachliche Fehler",
+      "nextStep": "Werte Control-, Authentication- und Operation-Status getrennt aus; vermeide blinde Wiederholungen.",
+      "owner": "application_owner",
+      "products": [
+        "sage-intacct"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://developer.intacct.com/web-services/error-handling/"
+    },
+    {
+      "id": "apiVersionContractDrift",
+      "signal": "apiVersionContractDrift",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "Workday-API-Version passt nicht zum Vertrag",
+      "nextStep": "Vergleiche WSDL beziehungsweise API-Schema mit dem freigegebenen Integrationsstand.",
+      "owner": "application_owner",
+      "products": [
+        "workday"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://community-content.workday.com/en-us/public/products/platform-and-product-extensions/soap-api-reference.html"
+    },
+    {
+      "id": "associationFanout",
+      "signal": "associationFanout",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "HubSpot-Assoziationen erzeugen zu viele Folgeaufrufe",
+      "nextStep": "Pruefe Aufrufanzahl, Batch-Moeglichkeiten und die Limits des konkreten Endpunkts.",
+      "owner": "application_owner",
+      "products": [
+        "hubspot"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://developers.hubspot.com/docs/developer-tooling/platform/usage-guidelines"
+    },
+    {
+      "id": "slowBusinessRuleQuery",
+      "signal": "slowBusinessRuleQuery",
+      "severity": "high",
+      "area": "vendor_specific",
+      "title": "ServiceNow-Skript verursacht haeufige langsame Abfragen",
+      "nextStep": "Korreliere Slow-Query- und Transaktionsdaten mit der verantwortlichen Business Rule.",
+      "owner": "application_owner",
+      "products": [
+        "servicenow"
+      ],
+      "basis": "vendor_context_review",
+      "reference": "https://www.servicenow.com/docs/r/platform-administration/platform-performance/t_UseASlowQueryLog.html"
+    }
+  ]
+}

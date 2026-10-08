@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Logging"
+  short_description: "Implement structured logging in Go"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-logging to design or review structured logging in this Go code."

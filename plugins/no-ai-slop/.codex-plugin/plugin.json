@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Peter Yang",
+    "url": "https://creatoreconomy.so"
+  },
+  "description": "Removes 20+ patterns of AI slop from any piece of writing.",
+  "homepage": "https://creatoreconomy.so/p/use-my-no-ai-slop-skill-to-remove-20-ai-slop-patterns",
+  "interface": {
+    "brandColor": "#D30800",
+    "brandColorDark": "#FF342C",
+    "capabilities": [
+      "Edit",
+      "Detect",
+      "Preserve voice"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "(text)",
+      "is this slop? (text)"
+    ],
+    "developerName": "Peter Yang",
+    "displayName": "No AI Slop",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "This plugin removes 20+ patterns of AI slop from your writing without flattening your personal voice. Slop patterns that it removes include:\n\nBinary contrasts: \u201cIt\u2019s not X. It\u2019s Y.\u201d\n\nThroat-clearing openers: \u201cHere\u2019s the thing,\u201d \u201cLet me be clear\u201d\n\nFaux-insight setups: \u201cWhat nobody tells you,\u201d \u201cThe part everyone misses\u201d\n\nColon reveals: \u201cThe best part: it learns.\u201d\n\nFake-profound endings: \u201cThe future isn\u2019t coming. It\u2019s already here.\u201d\n\n...and more.\n\nUse it to remove AI slop from your writing or detect named slop patterns in a piece of writing. If you like this plugin, please star it on GitHub: https://github.com/petergyang/no-ai-slop",
+    "privacyPolicyURL": "https://github.com/petergyang/no-ai-slop/blob/main/PRIVACY.md",
+    "shortDescription": "Remove 20+ AI slop patterns",
+    "termsOfServiceURL": "https://github.com/petergyang/no-ai-slop/blob/main/TERMS.md",
+    "websiteURL": "https://creatoreconomy.so/p/use-my-no-ai-slop-skill-to-remove-20-ai-slop-patterns"
+  },
+  "keywords": [
+    "writing",
+    "editing",
+    "voice",
+    "AI slop"
+  ],
+  "license": "MIT",
+  "name": "no-ai-slop",
+  "repository": "https://github.com/petergyang/no-ai-slop",
+  "skills": "./skills/",
+  "version": "1.0.6"
+}

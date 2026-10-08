@@ -1,0 +1,4 @@
+interface:
+  display_name: "Manage Wallet"
+  short_description: "Remember which cards you carry"
+  default_prompt: "Use $manage-wallet to save the cards I have."

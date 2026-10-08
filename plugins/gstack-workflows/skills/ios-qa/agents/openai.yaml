@@ -1,0 +1,8 @@
+interface:
+  display_name: "iOS QA"
+  short_description: "Run QA on a real iOS device only when a compatible local device bridge is available."
+  default_prompt: "Use iOS QA for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: true

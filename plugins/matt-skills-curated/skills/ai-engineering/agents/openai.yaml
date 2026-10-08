@@ -1,0 +1,3 @@
+interface:
+  display_name: "AI Engineering"
+  short_description: "ML model training, fine-tuning, and serving"

@@ -1,0 +1,46 @@
+{
+  "name": "voiceover-lab",
+  "version": "3.6.0",
+  "description": "A complete voiceover production studio: timed scripts, delivery direction, audio tags, casting, voice design, clone prep, pronunciation, timing, sync, localization, sound effects, music, QA, and render-ready output.",
+  "author": {
+    "name": "Fasih",
+    "email": "fasihrizviofficial@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "voiceover",
+    "text-to-speech",
+    "narration",
+    "audio",
+    "scriptwriting",
+    "voice-cloning",
+    "dubbing",
+    "podcast",
+    "audiobook"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Voiceover Lab",
+    "shortDescription": "Write, direct, and prepare pro voiceover scripts for ads, videos, podcasts, audiobooks, games, and voice agents, ready for AI voice tools.",
+    "longDescription": "Voiceover Lab is a complete voiceover production studio inside ChatGPT. Turn any idea, draft, blog post, or transcript into a polished, production-ready script timed to your slot, with natural pacing, delivery direction, and inline audio tags. It covers ads (6 to 60 seconds), short-form video hooks, explainers and e-learning, podcasts, audiobooks, meditation and sleep audio, game and character lines, IVR phone prompts, and conversational voice agents. It also helps you cast or design the right voice, prepare recordings for consented voice cloning, fix pronunciation, sync narration to video and captions, localize for dubbing, write sound effect and music prompts, estimate render costs, diagnose bad takes, and export clean render-ready text for AI text-to-speech tools.",
+    "developerName": "Fasih",
+    "category": "Creativity",
+    "capabilities": [
+      "Write timed voiceover scripts for ads, shorts, explainers, podcasts, audiobooks, and e-learning",
+      "Add delivery direction and inline audio tags so AI voices perform instead of read",
+      "Cast or design the right voice and prepare consented voice clone recordings",
+      "Fix pronunciation of names, acronyms, numbers, and foreign words",
+      "Time scripts to picture, captions, and fixed ad slots",
+      "Localize scripts for dubbing and write sound effect and music prompts",
+      "Export clean render-ready text for AI text-to-speech tools"
+    ],
+    "defaultPrompt": [
+      "Write a voiceover script for my project.",
+      "Make my script sound natural and ready for an AI voice.",
+      "Help me plan the voice, pacing, and delivery for my audio."
+    ],
+    "brandColor": "#6D28D9",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
+}

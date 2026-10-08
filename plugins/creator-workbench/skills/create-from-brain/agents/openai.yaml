@@ -1,0 +1,7 @@
+interface:
+  display_name: Create From Brain
+  short_description: Create content from stored workspace context
+  brand_color: '#E45B32'
+  default_prompt: Use $create-from-brain to create this content from the relevant context in my workspace.
+policy:
+  allow_implicit_invocation: true

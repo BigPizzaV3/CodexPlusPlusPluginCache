@@ -1,0 +1,17 @@
+[
+  {
+    "case_id": "error-e42",
+    "answer": "E-42 indicates cooling fan obstruction. Stop the A1000, inspect the fan guard, remove debris, then restart below 60C.",
+    "citation_ids": ["manual-a1000-e42"],
+    "latency_ms": 1250,
+    "cost_usd": 0.012
+  },
+  {
+    "case_id": "escalation-e42",
+    "answer": "Escalate E-42 when it repeats twice within 24 hours or temperature remains above 60C after inspection.",
+    "citation_ids": ["policy-escalation-e42"],
+    "latency_ms": 1100,
+    "cost_usd": 0.01
+  }
+]
+

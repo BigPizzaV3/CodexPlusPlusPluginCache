@@ -1,0 +1,9 @@
+interface:
+  display_name: Diagnosing Bugs
+  short_description: Diagnose hard bugs and regressions
+  default_prompt: Use $diagnosing-bugs for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

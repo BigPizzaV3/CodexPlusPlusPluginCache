@@ -1,0 +1,9 @@
+# ChatGPT presentation metadata (Agent Skills open standard).
+# Claude ignores this file entirely - the same skill folder works on both platforms.
+# Schema: https://github.com/openai/codex/blob/main/codex-rs/skills/src/assets/samples/skill-creator/references/openai_yaml.md
+interface:
+  display_name: "Zeta ZML"
+  short_description: "Write and debug Zeta Marketing Platform ZML"
+  default_prompt: "Use $zeta-zml to review this Zeta Marketing Platform template for anything that renders blank, errors, or skips the message."
+policy:
+  allow_implicit_invocation: true

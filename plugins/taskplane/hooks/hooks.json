@@ -1,0 +1,95 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\" ]; then python3 \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT}}/taskplane/tp.py\" context; else echo '{\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"}'; exit 2; fi",
+            "commandWindows": "if defined CLAUDE_PLUGIN_ROOT (py -3 \"%CLAUDE_PLUGIN_ROOT%\\taskplane\\tp.py\" context) else if defined PLUGIN_ROOT (py -3 \"%PLUGIN_ROOT%\\taskplane\\tp.py\" context) else (echo {\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"} & exit /b 2)",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\" ]; then python3 \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT}}/taskplane/tp.py\" screen; else echo '{\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"}'; exit 2; fi",
+            "commandWindows": "if defined CLAUDE_PLUGIN_ROOT (py -3 \"%CLAUDE_PLUGIN_ROOT%\\taskplane\\tp.py\" screen) else if defined PLUGIN_ROOT (py -3 \"%PLUGIN_ROOT%\\taskplane\\tp.py\" screen) else (echo {\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"} & exit /b 2)",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\" ]; then python3 \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT}}/taskplane/tp.py\" tool-observe; else echo '{\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"}'; exit 2; fi",
+            "commandWindows": "if defined CLAUDE_PLUGIN_ROOT (py -3 \"%CLAUDE_PLUGIN_ROOT%\\taskplane\\tp.py\" tool-observe) else if defined PLUGIN_ROOT (py -3 \"%PLUGIN_ROOT%\\taskplane\\tp.py\" tool-observe) else (echo {\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"} & exit /b 2)",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\" ]; then python3 \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT}}/taskplane/tp.py\" subagent-start; else echo '{\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"}'; exit 2; fi",
+            "commandWindows": "if defined CLAUDE_PLUGIN_ROOT (py -3 \"%CLAUDE_PLUGIN_ROOT%\\taskplane\\tp.py\" subagent-start) else if defined PLUGIN_ROOT (py -3 \"%PLUGIN_ROOT%\\taskplane\\tp.py\" subagent-start) else (echo {\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"} & exit /b 2)",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\" ]; then python3 \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT}}/taskplane/tp.py\" subagent-stop; else echo '{\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"}'; exit 2; fi",
+            "commandWindows": "if defined CLAUDE_PLUGIN_ROOT (py -3 \"%CLAUDE_PLUGIN_ROOT%\\taskplane\\tp.py\" subagent-stop) else if defined PLUGIN_ROOT (py -3 \"%PLUGIN_ROOT%\\taskplane\\tp.py\" subagent-stop) else (echo {\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"} & exit /b 2)",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\" ]; then python3 \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT}}/taskplane/tp.py\" session-verify; else echo '{\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"}'; exit 2; fi",
+            "commandWindows": "if defined CLAUDE_PLUGIN_ROOT (py -3 \"%CLAUDE_PLUGIN_ROOT%\\taskplane\\tp.py\" session-verify) else if defined PLUGIN_ROOT (py -3 \"%PLUGIN_ROOT%\\taskplane\\tp.py\" session-verify) else (echo {\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"} & exit /b 2)",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT:-}}\" ]; then python3 \"${CLAUDE_PLUGIN_ROOT:-${PLUGIN_ROOT}}/taskplane/tp.py\" human-input; else echo '{\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"}'; exit 2; fi",
+            "commandWindows": "if defined CLAUDE_PLUGIN_ROOT (py -3 \"%CLAUDE_PLUGIN_ROOT%\\taskplane\\tp.py\" human-input) else if defined PLUGIN_ROOT (py -3 \"%PLUGIN_ROOT%\\taskplane\\tp.py\" human-input) else (echo {\"decision\":\"block\",\"reason\":\"Taskplane plugin root unavailable\"} & exit /b 2)",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

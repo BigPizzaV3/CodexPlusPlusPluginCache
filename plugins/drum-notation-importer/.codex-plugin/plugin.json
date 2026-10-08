@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "Viktor Kamolov",
+    "url": "https://github.com/vkamolov"
+  },
+  "description": "Transcribe clean printed drum scores into validated Obsidian Drum Notation.",
+  "homepage": "https://vkamolov.github.io/obsidian-drum-notation/importer/",
+  "interface": {
+    "brandColor": "#6C5CE7",
+    "brandColorDark": "#6C5CE7",
+    "capabilities": [
+      "Printed score transcription",
+      "Local notation validation",
+      "Ambiguity and workaround reporting",
+      "Simple section-repeat preservation"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Transcribe this printed drum score into validated Obsidian Drum Notation and include the import report.",
+      "Convert this drum groove image into an Obsidian-ready drums block and ask about any unclear symbols.",
+      "Read this printed song chart, preserve supported section repeats, and split it only when required."
+    ],
+    "developerName": "Viktor Kamolov",
+    "displayName": "Drum Notation Importer",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Turn clean printed drum-notation images or visible PDF pages into validated Obsidian Drum Notation blocks. The plugin asks before guessing material ambiguities, preserves supported two-pass section repeats, and includes an import report for human review. It does not transcribe audio or handwritten scores, upload files, call external services, or write to an Obsidian vault.",
+    "privacyPolicyURL": "https://vkamolov.github.io/obsidian-drum-notation/importer/privacy.html",
+    "shortDescription": "Transcribe printed drum score",
+    "supportURL": "https://github.com/vkamolov/obsidian-drum-notation/issues/new?template=importer-support.yml",
+    "termsOfServiceURL": "https://vkamolov.github.io/obsidian-drum-notation/importer/terms.html",
+    "websiteURL": "https://vkamolov.github.io/obsidian-drum-notation/importer/"
+  },
+  "keywords": [
+    "drums",
+    "music-notation",
+    "transcription",
+    "obsidian",
+    "practice"
+  ],
+  "license": "MIT",
+  "name": "drum-notation-importer",
+  "repository": "https://github.com/vkamolov/obsidian-drum-notation",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

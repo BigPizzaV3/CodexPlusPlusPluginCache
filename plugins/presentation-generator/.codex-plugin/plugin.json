@@ -1,0 +1,45 @@
+{
+  "author": {
+    "email": "support@b12.io",
+    "name": "B12",
+    "url": "https://www.b12.io"
+  },
+  "description": "Build the deck the room actually needs \u2014 pitch, sales, quarterly review, training, conference talk \u2014 as a .pptx with speaker notes, one idea per slide, and marked placeholders instead of invented numbers, plus an optional B12 website in the same colors.",
+  "homepage": "https://www.b12.io",
+  "interface": {
+    "brandColor": "#4B22E8",
+    "brandColorDark": "#4B22E8",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Create a pitch deck for my startup",
+      "Make a sales deck for my services",
+      "Build a training deck for new hires"
+    ],
+    "developerName": "B12",
+    "displayName": "Presentation Generator",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Describe the deck you need, from pitch decks to quarterly reviews, and it builds the whole thing: the argument first, then slides that back it up, with real detail kept in the speaker notes and no invented numbers.\n\nYou get an editable .pptx or a browser-ready HTML deck, no account needed and nothing uploaded. Ask for a matching website too, and you'll get a free B12 website link in the same colors.",
+    "privacyPolicyURL": "https://www.b12.io/privacy-policy/",
+    "shortDescription": "Slide decks, ready to present",
+    "supportURL": "https://www.b12.io/contact-us",
+    "termsOfServiceURL": "https://www.b12.io/terms-of-service/",
+    "websiteURL": "https://www.b12.io"
+  },
+  "keywords": [
+    "presentation",
+    "slides",
+    "deck",
+    "pitch deck",
+    "powerpoint",
+    "b12"
+  ],
+  "license": "Apache-2.0",
+  "name": "presentation-generator",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

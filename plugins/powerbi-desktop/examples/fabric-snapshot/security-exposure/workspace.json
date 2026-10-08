@@ -1,0 +1,7 @@
+{
+  "id": "workspace-security",
+  "name": "Security Exposure Workspace",
+  "tenantId": "tenant-demo",
+  "capacityId": "capacity-f4",
+  "owners": ["security.owner@example.com"]
+}

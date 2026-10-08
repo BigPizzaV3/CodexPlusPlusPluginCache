@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "product": "gemini-cli",
+  "surface": "gemini-cli",
+  "catalog_kind": "versioned_expiring_fallback",
+  "catalog_complete": true,
+  "visible_model_count": 4,
+  "observed_at": "2026-09-12T04:56:22+00:00",
+  "expires_at": "2026-09-19T04:56:22+00:00",
+  "source": {
+    "type": "installed_gemini_cli_selector",
+    "host_version": "gemini-cli 0.59.0",
+    "scope": "stable model aliases in the installed Gemini CLI selector"
+  },
+  "capability_source": {
+    "type": "official_documentation",
+    "url": "https://geminicli.com/docs/cli/cli-reference/",
+    "checked_at": "2026-09-12T04:56:22+00:00",
+    "scope": "Gemini CLI model aliases and selection guidance"
+  },
+  "fallback_use": {
+    "recommendation_scope": "Gemini CLI only",
+    "availability_scope": "alias resolution and account eligibility remain runtime-dependent",
+    "ask_for_selector_before_recommendation": false
+  },
+  "reasoning_control": {
+    "kind": "model_native",
+    "fallback_display_value": "model-default",
+    "selection_rule": "Use an observed thinkingBudget or thinkingLevel only when the current Gemini CLI exposes that exact configurable value; otherwise retain the selected model's default.",
+    "forbidden_inference": "Do not convert task-demand labels such as low, moderate, or high into Gemini selector values."
+  },
+  "models": [
+    {
+      "model": "auto",
+      "display_name": "Auto",
+      "official_description": "Lets Gemini CLI choose an appropriate available model for the task.",
+      "selection_guidance": "Use when account-specific model resolution is unknown or when CLI-managed routing is preferable."
+    },
+    {
+      "model": "pro",
+      "display_name": "Pro",
+      "official_description": "Gemini CLI alias for complex reasoning tasks; the resolved model depends on availability and preview settings.",
+      "selection_guidance": "Use for difficult, ambiguous, high-consequence, or deeply validated work when the account exposes this tier."
+    },
+    {
+      "model": "flash",
+      "display_name": "Flash",
+      "official_description": "Fast, balanced Gemini CLI alias for most tasks.",
+      "selection_guidance": "Use for ordinary well-scoped implementation, retrieval, transformation, and validation work."
+    },
+    {
+      "model": "flash-lite",
+      "display_name": "Flash Lite",
+      "official_description": "Fastest Gemini CLI alias for simple tasks.",
+      "selection_guidance": "Use for clear, low-risk, repetitive, or lightweight work."
+    }
+  ]
+}

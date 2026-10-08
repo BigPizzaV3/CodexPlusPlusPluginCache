@@ -1,0 +1,7 @@
+interface:
+  display_name: "Test UI/UX"
+  short_description: "Test UI actions, friction, and accessibility"
+  default_prompt: "Use $test-ui-ux to evaluate every important action in this product experience, count the steps, clicks, and fields, recommend the simplest safe path, and return a loop-ready score."
+
+policy:
+  allow_implicit_invocation: true

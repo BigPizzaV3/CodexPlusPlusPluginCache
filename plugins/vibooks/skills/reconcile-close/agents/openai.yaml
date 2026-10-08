@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reconcile and Close"
+  short_description: "Reconcile accounts and prepare books for month end"
+  default_prompt: "Use $reconcile-close to reconcile my bank and credit-card statements, list unresolved differences, and prepare a month-end review."

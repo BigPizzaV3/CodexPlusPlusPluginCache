@@ -1,0 +1,17 @@
+{
+  "adapterProfile": "typescript-fastify-vanilla-v1",
+  "baselineProfile": "full-whatsapp-operations-v1",
+  "minimumStateByMode": {
+    "manifest": "declared",
+    "runtime": "execution-claimed",
+    "static": "linked"
+  },
+  "policyId": "full-whatsapp-operations-fastify-v1",
+  "requiredOperationSurfaces": {
+    "backend": "all",
+    "tests": "all",
+    "ui": "none"
+  },
+  "requiredScenarios": "all",
+  "schemaVersion": 2
+}

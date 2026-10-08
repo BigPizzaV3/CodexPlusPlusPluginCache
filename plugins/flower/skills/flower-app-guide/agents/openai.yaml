@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flower App Guide"
+  short_description: "Set up and build non-blocking Flower application workflows."
+  default_prompt: "Use $flower-app-guide to select the minimum Flower modules and build or review an explicit, testable application workflow."

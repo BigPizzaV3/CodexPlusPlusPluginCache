@@ -1,0 +1,9 @@
+interface:
+  display_name: Idea Refine
+  short_description: Refine and stress-test early ideas
+  default_prompt: Use $idea-refine for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

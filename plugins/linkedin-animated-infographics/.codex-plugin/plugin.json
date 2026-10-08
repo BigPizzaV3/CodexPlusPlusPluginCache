@@ -1,0 +1,50 @@
+{
+  "author": {
+    "name": "Mamdouh Aboammar",
+    "url": "https://github.com/imMamdouhaboammar"
+  },
+  "description": "Create animated LinkedIn visual stories with MasterOne routing, narrative taste, verified identity sourcing, capability-aware execution, stronger design perception checks, disciplined motion, and strict QA.",
+  "homepage": "https://github.com/imMamdouhaboammar/linkedin-animated-infographics",
+  "interface": {
+    "brandColor": "#111111",
+    "brandColorDark": "#EEEEEE",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Use MasterOne and autopilot to turn this idea into an animated LinkedIn infographic.",
+      "Create an Info-story from this material and choose the best story shape before designing it.",
+      "Review this finished LinkedIn infographic and tell me what must be fixed before publishing."
+    ],
+    "developerName": "Mamdouh Aboammar",
+    "displayName": "LinkedIn Animated Infographics",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Build feed-ready LinkedIn infographics through evidence checks, narrative architecture, verified logo and mascot sourcing, concept exploration, perception preflight, macro-layout planning, still-first critique, disciplined motion, targeted visual repair, and final verification. The Skills-only package can use host-native workspace and Python capabilities when those capabilities are actually available, without requiring an external app or MCP server.",
+    "privacyPolicyURL": "https://github.com/imMamdouhaboammar/linkedin-animated-infographics/blob/main/PRIVACY.md",
+    "shortDescription": "Build LinkedIn visual stories",
+    "termsOfServiceURL": "https://github.com/imMamdouhaboammar/linkedin-animated-infographics/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/imMamdouhaboammar/linkedin-animated-infographics"
+  },
+  "keywords": [
+    "linkedin",
+    "infographic",
+    "animation",
+    "visual-storytelling",
+    "narrative-taste",
+    "autopilot",
+    "creative-direction",
+    "visual-qa",
+    "verified-identity",
+    "typography",
+    "arabic",
+    "rtl"
+  ],
+  "license": "MIT",
+  "name": "linkedin-animated-infographics",
+  "repository": "https://github.com/imMamdouhaboammar/linkedin-animated-infographics",
+  "skills": "./skills/",
+  "version": "3.7.0"
+}

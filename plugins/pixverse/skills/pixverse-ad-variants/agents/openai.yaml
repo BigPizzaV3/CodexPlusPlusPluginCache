@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Ad Variants"
+  short_description: "Make controlled ad variations"
+  default_prompt: "Use $pixverse-ad-variants to make two independent versions of this ad with different backgrounds while keeping its timing and voice."
+policy:
+  allow_implicit_invocation: true

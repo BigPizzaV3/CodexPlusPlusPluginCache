@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "game-room.milestone-reviews.v1",
+  "type": "object",
+  "required": ["schema", "roomId", "function", "form", "runtime"],
+  "properties": {
+    "schema": {"const": "game-room.milestone-reviews.v1"},
+    "roomId": {"type": "string", "minLength": 1},
+    "function": {"$ref": "#/$defs/review"},
+    "form": {"$ref": "#/$defs/review"},
+    "runtime": {"$ref": "#/$defs/review"}
+  },
+  "$defs": {"review": {"type": "object", "required": ["status", "approvedBy", "approvedAt", "evidence", "strangestElement"], "properties": {
+    "status": {"enum": ["pending", "approved", "rejected"]},
+    "approvedBy": {"type": "string"},
+    "approvedAt": {"type": "string"},
+    "evidence": {"type": "array", "items": {"type": "string"}},
+    "strangestElement": {"type": "string"},
+    "notes": {"type": "string"}
+  }} }
+}

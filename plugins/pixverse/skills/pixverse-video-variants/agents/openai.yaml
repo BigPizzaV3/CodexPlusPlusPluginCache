@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Video Variants"
+  short_description: "Variants that reuse assets"
+  default_prompt: "Use $pixverse-video-variants to make five hook variants and a Spanish version of this video project, reusing the accepted B-roll, board and music."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,53 @@
+{
+  "author": {
+    "name": "Joan Boluda",
+    "url": "https://boluda.com/"
+  },
+  "description": "A local-first strategy consulting plugin that interrogates business, marketing, positioning, go-to-market, sales, and validation plans, then turns decisions into live working documents.",
+  "homepage": "https://boluda.com/",
+  "interface": {
+    "brandColor": "#111111",
+    "brandColorDark": "#EEEEEE",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Interrogate this business idea and find its weakest assumption.",
+      "Challenge this go-to-market plan one question at a time.",
+      "Turn these strategy notes into risks, decisions, and experiments."
+    ],
+    "developerName": "Joan Boluda",
+    "displayName": "Consultor",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Consultor challenges business ideas, marketing plans, positioning, pricing, go-to-market, sales, and validation. It asks one focused question at a time, exposes assumptions and contradictions, and turns decisions into living documents such as SWOT/DAFO, business model canvas, positioning, experiment plans, and final reports.",
+    "privacyPolicyURL": "https://boluda.com/legal/",
+    "shortDescription": "Challenge business strategy",
+    "supportURL": "https://boluda.com/contactar/",
+    "termsOfServiceURL": "https://boluda.com/legal/",
+    "websiteURL": "https://boluda.com/"
+  },
+  "keywords": [
+    "consulting",
+    "strategy",
+    "marketing",
+    "value proposition",
+    "offer design",
+    "customer research",
+    "positioning",
+    "competitive research",
+    "pricing",
+    "go-to-market",
+    "business model",
+    "sales",
+    "workshop",
+    "experiments"
+  ],
+  "license": "MIT",
+  "name": "consultor",
+  "skills": "./skills",
+  "version": "0.1.2"
+}

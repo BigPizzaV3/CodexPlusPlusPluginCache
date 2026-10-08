@@ -1,0 +1,737 @@
+# Changelog
+
+## 0.5.1 - 2026-09-25
+
+npm and plugin publication are separate steps.
+See the [0.5.1 release record](docs/releases/0.5.1.md).
+
+### Added
+
+- `qamap qa brief` prints one bounded text review brief (24,000 bytes by default): the numbered diff, each changed declaration's tests and callers with the call, derived locals and assertions that use them, what new or removed code calls, the commits and tests behind removed lines, each inferred behavior flow with every critical check to verify, and unknowns. The base is auto-selected; an explicit subdirectory narrows the diff; the full report is still saved locally; execution stays `not-run`.
+- References are found with `git grep` across every tracked file at the compared head, including files too large for the syntax index, and confirmed through import bindings for JavaScript, TypeScript and Python. Same-named symbols from other modules are excluded; export and import aliases are followed.
+- Repeated change shapes that differ only in one number are shown once for a concrete member followed by the exact remaining values; nothing is sampled.
+- `qamap consent grant|revoke [path] [--global]` and `qamap consent status` record, remove and show consent for agents to run QAMap review without asking. Project consent edits only QAMap's `AGENTS.md` section; a project revoke records "ask each time", which overrides user-level consent. `--global` writes a marked section to the Claude Code and Codex user instruction files for hosts whose configuration directory exists, and revoking removes it without touching other content. Asking first remains the default. `qamap qa brief --require-consent` analyzes nothing and prints a notice to ask first unless consent is recorded; the packaged skill, `AGENTS.md` section and user-level consent section use it, so a host cannot skip the question.
+- `scripts/agent-bench/review-host.mjs` and `review-judge.mjs` measure a real coding-agent host reviewing the same frozen cases with and without QAMap, grade redacted answers against frozen oracles, and aggregate per-model host usage.
+
+### Changed
+
+- `init --agent`, `qamap context` and the packaged `qamap-pr-qa` skill now route PR review through `qamap qa brief`: run once, review from it, read source only to settle a specific open item, and report findings, concrete checks (action and expected result, or a reasoned dismissal) and unknowns. Consent, refusal, review-mode preferences and `not-run` boundaries are unchanged. `qa report --handoff` and `qa read` remain available for structured JSON consumers.
+- The post-release smoke default now targets the published 0.5.0 package.
+
+### Measurement
+
+- Claude Code CLI with one fixed model reviewed 19 frozen cases, three runs per arm, with and without QAMap. The sum of per-case median total tokens fell from 9,752,041 to 2,526,116 (-74.1%); all 57 runs used 30,916,750 versus 8,056,261. In every case the most expensive QAMap run cost less than the cheapest standalone run. Runs finding every seeded regression rose from 40/42 to 42/42 and mean QA-plan coverage from 0.73 to 0.89, with no false definite claims in either arm.
+- With the host `Skill` tool disabled for both arms, totals were 7,410,441 versus 2,710,340 (-63.4%). With the unchanged review prompt and only the saved report preference, the host used QAMap in 19 of 19 runs.
+- With no repository setup and the unchanged prompt, user-level consent (`qamap consent grant --global` plus a user-level skill) led the host to use QAMap in 38 of 38 runs; the sum of per-case medians was 2,881,446 versus 9,752,041 standalone (-70.5%), with every seeded regression found in all 28 regression runs and QA-plan coverage of 0.94.
+- Without recorded consent, the host ran the brief without asking in 4 of 19 runs before `--require-consent`; with the gate, 0 of 19 runs analyzed anything and all 19 asked first. On the gated package, the explicit and user-level consent arms used 69.7% and 71.0% fewer tokens than the standalone medians, one run per case.
+- The published 0.5.0 handoff workflow used more tokens than the standalone host on all three real regressions from this repository's history and missed two of them; that baseline is preserved in the validation record.
+- One host, one model and known author-made or repository-history cases; Codex and GPT hosts were not re-measured. Host cost figures are list-price estimates, not billing.
+
+### Fixed
+
+- `qa brief` preserves an explicit subdirectory scope when its path uses a directory symlink, including macOS temporary-directory aliases, instead of expanding the diff to the whole repository.
+
+## 0.5.0 - 2026-09-22
+
+npm and plugin publication are separate steps.
+See the [0.5.0 release record](docs/releases/0.5.0.md).
+
+### Added
+
+- Opt-in `qa report --handoff` returns a bounded summary, hash-checked source/test excerpts and explicit full-report recovery pointers in one response, while preserving receipt-only reporting and static execution state.
+- `init --agent --review-mode report` saves an explicit project preference; `--review-mode ask` restores the offer-first behavior without replacing user-authored instructions.
+- Local `qa report` saves private Markdown and JSON artifacts with receipt-only output unless `--handoff` is requested.
+- Reusable repository evidence blocks for JS/TS declarations, references, tests, package entries, compiler aliases, API contract pointers and validation metadata, with explicit coverage and incremental refresh receipts.
+- Cross-package symbol paths to test references and registration candidates, with stop conditions for ambiguous exports, unsupported resolution and mismatched source snapshots.
+- Quality-gated cold, warm and incremental index benchmarks plus a self-contained exact-version package smoke.
+- Six repository review tasks with exact evidence precision, recall, contract completeness and explicit uncertainty checks.
+
+### Fixed
+
+- Direct test calls with literal local module filenames retain the selected policy's indexed export declarations without resolving unknown runtime choices or executing imports.
+- Graph-preview overflow remains in a checked local archive. A deduplicated text view preserves its code lines and endpoints; report-review callers must read it when the bounded response is insufficient. Real retention and host-context limits remain explicit.
+- `qa read` verifies saved evidence against its receipt and returns bounded, UTF-8-safe pages without repeating analysis. Callers must follow every offset before treating the report as read.
+- Repeated review evidence can use a lossless inline text table within the handoff limit. Every differing row, source location and uncertainty survives reconstruction; irregular or oversized evidence retains checked archive recovery.
+- Complete inline evidence may use up to 32,768 bytes to avoid duplicate preview and archive reads for mixed contracts. Smaller responses keep the 16,384-byte limit, as do ordinary previews and reader pages.
+- Generated onboarding commands pin the running package version for npm, pnpm, Yarn and Bun, so prerelease-only commands do not resolve an incompatible stable binary.
+- Review evidence preserves short declaration bodies, relevant module bindings, deletion boundaries and distant test expectations. Truncated context remains explicit; ordinary previews stay within 16,384 bytes.
+- Foreground completion-wait guidance reduces avoidable model polling without changing execution authority or hiding additional caller usage.
+- Module boundaries retain specifiers and locations, distinguish explicit Node builtins from unresolved dependencies, and remain recoverable when compact output omits them. Handoff excerpts avoid duplicate endpoint pairs and preserve the strongest pair under diagnostic pressure.
+- Local CLI experiment guards accumulate usage across resumed turns, retain observed overruns and reject incomplete or inconsistent receipts instead of reporting successful low-cost runs.
+- Changed test contracts stay within the PR comparison, excluding merged target-branch tests and restored baseline declarations. Recent-file priority uses current head locations instead of stale commit coordinates.
+- Analysis-rule scenarios and risk explanations require direct changed-line evidence; file-level analyzer context no longer turns read instrumentation into a rule change.
+- Computational calls, comments and string contents no longer become product behavior solely through matching vocabulary; real file and network actions remain visible.
+- Compact handoffs prioritize source/test evidence, preserve the selected action and command location, and recover the original bounded analysis instead of another truncated summary.
+- Shadowed bindings, conflicting star exports, unsupported module substitutions and parser failures no longer create unproven impact paths.
+- Provider failures retain confirmed partial usage without counting it as a complete run; request ceilings and timeouts bound benchmark requests.
+- Fixture integrity snapshots preserve file boundaries when checking source changes.
+
+### Measurement
+
+- Six known synthetic pairs met predefined finding and execution-state criteria with 303,747 standalone versus 202,091 report-review tokens. The 33.47% aggregate reduction is sample-specific, not a general quality, cost or savings guarantee. Prior failures and dynamic-policy and large-change gaps remain documented.
+- A separate two-case inline-delivery follow-up retained required findings with 46,301 versus 41,300 total tokens for a concrete runtime policy and 84,518 versus 30,563 for 160 repeated-structure changes. Prior paging failures remain in the measurement record; heterogeneous large changes and monetary savings remain unproven.
+- Two mixed-contract follow-ups retained the six predefined findings in each architecture with 79,571 versus 48,180 and 86,521 versus 62,922 total tokens. The second candidate includes first-use consent. Earlier mixed-delivery failure remains documented; these known synthetic cases do not establish general savings or exhaustive review parity.
+- Offline benchmark success is reported separately from measured agent quality. Missing provider usage cannot produce a token or cost savings claim.
+- Repository runs record repeated direct file reads, post-handoff tool activity and setup-through-cleanup timing; diagnostic comparisons require matched passing quality and complete provider usage.
+
+## 0.4.17 - 2026-09-04
+
+### Added
+
+- OpenAPI and Swagger responses with usable schemas now retain method, status, media type, shape, and `schema-derived` provenance without inventing concrete payload values.
+- Diverged target and proposed branches now surface a critical preservation scenario when non-equivalent changes overlap on the same behavior-bearing file.
+- Flutter projects, Dart tests and assertions, `flutter test`, and compatible workspace wrappers now participate in project detection and repository validation.
+
+### Changed
+
+- The English and Korean READMEs are shorter first-run entry points, with detailed output and reference material routed to focused guides.
+- Commitless mixed diffs and multi-commit changes preserve independent intent and flow boundaries unless exact repository evidence connects them.
+- Changed repository tests remain visible as behavior contracts, retain supported explicit source assertions, and keep the selected contract through compact agent output with an omitted-contract count.
+- Repository validation prefers commands that can start in the current execution boundary. Python Compose commands can fall back to the same available local runner, while explicit execution probes only the selected prerequisite and reports blocked honestly.
+
+### Fixed
+
+- CI cleanup retries only transient removal of temporary fixture repositories, while test commands and assertions remain strict. The README badge now reports `main` push health instead of unrelated pull-request runs.
+- Vocabulary-only scheduling and routing matches no longer create required scenarios, while valid asynchronous lifecycle stages keep exact source evidence.
+- Working-tree changes can recover a low-confidence behavior intent from an exactly related changed test contract without pulling in similarly named neighboring surfaces.
+
+## 0.4.16 - 2026-08-29
+
+### Added
+
+- Added a complete public brand asset inventory with editable masters, app and web icons, social cards, and dedicated light and dark plugin artwork.
+- Added exact diff evidence and measurable QA contracts for changed rendering work, image request priority, deferred modules, initial HTML and hydration, font loading, and delivery cache policy.
+- Connected working-tree-only performance mechanisms to a low-confidence, review-required runtime intent instead of returning no change intent.
+- Added bounded OpenAPI and Swagger response-example parsing as the authoritative source for generated local JSON response scaffolds.
+
+### Changed
+
+- Release-focused changes now prefer a repository-declared non-publishing validation gate and avoid repeating commands already covered by that gate.
+- Network evidence may still route affected behavior and QA, but repository types, schemas, UI copy, and fixture keys no longer authorize invented response values.
+- Refreshed the README, skill, plugin, GitHub preview, and reusable brand assets around one production-ready visual identity.
+
+### Fixed
+
+- Performance-focused changes no longer stop at a generic screen flow when the changed hunk supports a more specific runtime or delivery measurement.
+- Copy and spacing-only UI changes remain outside performance scenario routing.
+- Changed endpoint implementations are observed instead of intercepted, while status codes or schemas without a concrete response example remain an explicit evidence gap.
+- Publishing, tagging, pushing, and deployment scripts are never promoted as automatic release validation.
+- Working-tree-only release changes no longer inherit test contracts from the previous target-branch commit when that commit is outside the active comparison.
+
+## 0.4.15 - 2026-08-26
+
+### Added
+
+- Added `qamap e2e run <scenario-id>`, which executes one compiled scenario through an executor the repository declares in `qamap.config.json`, materializes the fixtures declared for that scenario, and returns a receipt with pass/fail per assertion, timing, and failure-only artifacts. Receipts persist under `.qamap/runs/e2e` and reruns of the same id are compared instead of re-driven.
+- Added `executors`, `fixtures`, and `scenarioFixtures` configuration, and `qamap qa` now marks which drafted scenarios are executable with the declared executor and fixtures.
+- Added account-scoped storage evidence for client storage writes that carry no owner discriminator, with an account-switch QA scenario.
+- Added divergent-copy evidence that pairs a new label with a near-duplicate label on another surface and plans a side-by-side comparison.
+- Added a provider-neutral agent token benchmark (`pnpm bench:agent`) that runs a fixed public task suite once with generic tools and once with QAMap tools, records provider-reported input, output, and cache tokens, tool calls, wall-clock, and deterministic local task success as median plus range over repeated runs with a separate first-authoring column, and is skipped without a provider key.
+
+### Changed
+
+- Benchmark runners now share one fixture materialization helper under `scripts/lib/`.
+- Repository-validation routes now preserve every applicable changed test and benchmark command. `qamap qa run` still executes only one selected command, while additional required commands remain visible and explicitly `not run`.
+- Benchmark command discovery now keeps matching specialized benchmark scripts instead of reducing a multi-contract change to one generic benchmark.
+
+### Fixed
+
+- Independent feature commits no longer collapse into one change intent merely because they edit the same analyzer file; they now require shared behavior vocabulary or an explicit issue reference.
+- Routing analysis now respects identifier boundaries, so names such as `requireDirectory` do not become redirect scenarios or observable navigation outcomes.
+
+## 0.4.14 - 2026-08-20
+
+### Added
+
+- Added delivery-integrity evidence for local-only or missing referenced assets and history-rewriting validation commands. These risks now route through repository validation before optional E2E work.
+- Added runtime-activation evidence that joins supported guards, configuration sources, runtime side effects, and startup, reload, restart, and deployment boundaries.
+- Added a versioned `qamap.context` contract that separates stable repository QA facts from the current pull request delta, with deterministic block identities and a recoverable full report.
+- Added a provider-neutral context reuse benchmark for identical reruns, related pull requests, reviewed manifest corrections, validation changes, behavior changes, volatile run metadata, and unrelated repositories.
+
+### Fixed
+
+- Long pull requests now keep independent behavior-bearing commit groups separate when they share only broad package vocabulary. Exact changed files or an explicit issue reference can still connect commits into one lifecycle, and human output discloses intent counts when a report is shortened.
+- Removed UI is now treated as an absence contract instead of an executable entry point, while formatting-only UI hunks stay contextual and real React or Vue state transitions remain eligible for QA.
+
+### Changed
+
+- Documented the shared Node.js 20+ runtime contract, the actively supported LTS recommendation, and verified npm, pnpm, Yarn, and Bun installation and repeat-use commands in both READMEs.
+- Linked the English and Korean plugin guidance directly to OpenAI's official installation steps instead of the general Plugins overview.
+- Reorganized both READMEs so the local CLI and package installation form the primary setup path, while the ChatGPT and Codex plugin has a separate, explicit installation entry point.
+- Added the context reuse benchmark to CI and the release gate while keeping context reuse separate from QA correctness, provider token accounting, or fixed cost-reduction claims.
+
+## 0.4.13 - 2026-08-11
+
+### Added
+
+- Added separate English and Korean documentation entry points, including Korean quickstart, agent integration, and verification manifest guides.
+- Added a Korean QAMap cover image that preserves the existing public visual identity.
+- Added target-branch-aware Django migration graph analysis that reports newly divergent leaves with exact changed dependency and current base-leaf evidence.
+- Added bounded runtime-prerequisite tracing for changed React and Next.js entry points. QAMap can now join a reused local import chain, an explicit fail-fast context contract, and an app-wrapper provider bypass into one critical first-render scenario.
+- Added a public runtime-provider regression fixture and negative benchmark contracts that can reject insufficient test evidence and inapplicable focused commands.
+
+### Changed
+
+- Agent output now carries an explicit workspace-root or selected-package working-directory contract for repository validation commands, and the packaged skill follows that contract.
+- Migration graph conflicts now route to repository graph or deployment-plan validation instead of product-journey E2E generation; QAMap requires a repository-declared command before offering execution.
+- Agent output now exposes `schema-graph` and the previously supported `transformation-contract` as explicit verification modes.
+- Documentation, localized guides, packaged docs, issue forms, and pull request templates now route to one repository contract with exact diff evidence and the nearest repository-owned validation command.
+- Repository-validation readiness now reports `ready` only when an applicable command exists, instead of inheriting blocked product-automation readiness.
+
+### Fixed
+
+- Target-branch merge commits no longer place imported baseline hunks ahead of the feature branch's own QA evidence; ordinary non-merge review fixes keep their latest-change priority.
+- Component-mocked changed tests no longer count as proof of a detected runtime provider prerequisite, even when the mock declaration predates the changed test line.
+- Tests stored inside synthetic benchmark `base`, `head`, or `regression` revisions no longer become focused repository validation. When benchmark structure changes and the repository declares a benchmark harness, QAMap keeps that harness alongside the analyzer's real focused test.
+- Concise and Markdown output now label a repository command as selected only when the canonical QA route actually selected that command.
+- One analyzer-rule change now keeps its import/export adapters and matching result schema in a single repository-verification intent instead of expanding internal filenames into product-domain QA flows.
+- Diff-only analyzer changes now recover a concrete rule subject from the changed rule path when commit text does not describe behavior.
+- Automatic package commands now remain workspace-root executable, while explicitly selected package validation runs from the selected package instead of the workspace root.
+- Documentation and contributor-workflow changes no longer produce clean-install, app-launch, endpoint, authentication, response-shape, selector, fixture, or product E2E guidance without runtime evidence.
+- Compact agent output now prioritizes changed guides and contributor templates over accompanying release notes and generated documentation assets.
+- Static-analysis source classifiers and regular-expression vocabulary no longer become fabricated user actions; executable product calls remain eligible when the diff supports them.
+- Release notes remain supporting provenance instead of a competing configuration flow when substantive diff evidence already defines the QA intent; release-only and real configuration changes keep their own verification paths.
+
+## 0.4.12 - 2026-08-07
+
+### Changed
+
+- The README first screen now makes the OpenAI plugin installation path explicit, links the published listing and official installation guide, and distinguishes app installation from a one-off local CLI run.
+- Change-intent clustering now uses commit scope and subject rather than body prose, treats distinct issue tags as intent boundaries, and splits transitive keyword chains around a behavior-bearing anchor.
+- Cleanup-only commits remain visible as provenance with zero standalone QA scenarios, while behavior-describing refactors stay eligible for review.
+- Human and agent documentation now explains provenance-only intents and explicit observable-proof gaps.
+
+### Fixed
+
+- Cleanup-only changes no longer re-enter QA through a generic heuristic or app-launch fallback.
+- Primary assertions no longer promote raw result-shaped helper names, side-effect names, or the scenario title as externally observable proof.
+- Unrelated lifecycle stages no longer contaminate the primary intent merely because an intermediate commit shares broad vocabulary.
+
+## 0.4.11 - 2026-08-06
+
+### Added
+
+- Added a skills-only OpenAI plugin submission package with listing copy, three starter prompts, five positive evaluations, three negative controls, and a canonical 512px QAMap logo.
+- Added `plugin:check` to validate version alignment, listing metadata, legal URLs, prompt limits, skill metadata, package pinning, assets, and the public evaluation corpus.
+- Added `plugin:smoke` to pack and install QAMap in an isolated temporary project, verify every plugin artifact ships, and require evidence-backed agent output from the installed binary.
+- Added public privacy, terms, support, and plugin-submission documents that define local data use, network boundaries, side effects, and the maintainer submission sequence.
+- Added domain-neutral benchmark contracts for a calendar-named view mode and a completion-event instrumentation change, bringing the static corpus to 27 unrelated recommendation targets.
+
+### Changed
+
+- The packaged agent skill pins QAMap `0.4.11` instead of following npm `latest`, prefers an installed local binary, and discloses the one-off npm download before network use.
+- Agent guidance now distinguishes QAMap's zero-additional-LLM analysis from the calling host's own model-token use and distinguishes concise text from the full Markdown trace.
+- CI and the release gate now validate both plugin metadata and a fresh packaged install.
+- Instrumentation changes now route explicit timing, payload, and duplicate-emission QA instead of stopping at a generic function-call assertion.
+- Concise terminal output shows a repeated scenario title once while preserving the complete trace count and full report.
+
+### Security
+
+- Compacted agent recovery reports use owner-only file permissions and stale QAMap recovery files are removed after 24 hours without touching unrelated temporary files.
+
+### Fixed
+
+- Calendar icons and calendar-named presentation modes no longer create scheduling, timezone, and duplicate-job QA without real scheduling evidence.
+- Repository configuration under `.github`, including issue templates whose names contain `request`, no longer becomes an API contract flow or displaces an existing repository validation command.
+- Repository-validation changes no longer advertise an optional automation draft as the next action when QAMap has already selected the applicable existing command.
+
+## 0.4.10 - 2026-08-06
+
+### Added
+
+- Added per-run capability receipts for change intent, behavior impact, scenario routing, repository validation, and automation drafting. Human and agent output now disclose whether each stage is deep, structural, generic, limited, unavailable, or not applicable instead of compressing the whole run into one score.
+- Added a machine-readable action contract for every canonical QA route, including risk, approval, project-code execution, repository writes, dependency changes, network access, and preconditions.
+- Added a public red-team benchmark that preserves a real profile-save QA flow while requiring instruction-like text embedded in the repository to disappear from the agent handoff.
+- Added `qamap qa run`, an explicit bounded execution loop that re-analyzes the change, executes only the exact selected existing repository validation command, preserves its exit code, and emits timeout, duration, output-size, and output-hash evidence without embedding raw output.
+- Completed `qa run` receipts now compare HEAD, the checked-out branch, the Git index, and tracked or non-ignored untracked state before and after execution, distinguish command mutations from pre-existing local changes, and disclose a bounded relative-path list without embedding file contents.
+- Added the `qa:run` repeat-use shortcut through `qamap init --scripts`.
+- Added a concise default `qamap qa` view that keeps the change, lifecycle, required proof, exact source evidence, routing status, selected validation, and next action visible without the full Markdown report.
+- Added input-to-output transformation contracts for parser, serializer, mapper, converter, normalizer, codec, and transformer changes. These changes now route to representative input, exact output, boundary input, and backward-compatibility checks instead of generic API or visual QA.
+- Added a dedicated QA-miss issue template so false positives, missed risks, wrong evidence, and unusable drafts can become minimized public regressions.
+
+### Changed
+
+- The portable agent skill now reads capability and action contracts before acting, chooses one next action, and applies the calling environment's stricter execution policy.
+- Agent and JSON consumers can use the same execution receipt without repeating a repository command that QAMap already ran.
+- Reworked the README around a 60-second first run, one readable recording made from current output, a short result example, and an explicit separation between static analysis, repository command execution, and optional E2E drafting.
+- Reworked contribution guidance around behavioral contracts, safe public fixtures, negative controls, focused validation, maintainer-owned labels, and failure-to-regression workflow.
+- `qamap qa --format markdown` remains the complete reasoning artifact while the default text format is optimized for terminal review.
+
+### Fixed
+
+- Repository test commands launched from QAMap's own Node test harness no longer inherit the parent test-runner marker and silently skip every child test as a recursive invocation.
+- Timed-out repository commands now receive a forced process-tree termination when graceful shutdown does not complete.
+- Agent execution-contract generators are classified as analysis rules instead of fabricating product state-transition QA from fields such as `route.nextAction` and `execution.performed`.
+- Transformation modules inside API repositories no longer fabricate endpoint status, authentication, network-failure, or mock-response checks. Style-named transformer files are no longer mistaken for presentation-only changes.
+- Non-conventional commit recovery is limited to behavior-bearing phrasing and exact changed-code evidence, preventing broad `add` or `update` subjects from replacing route, manifest, and workspace flow contracts.
+
+### Security
+
+- Repository-derived strings are treated as untrusted data before human or agent serialization. Strong prompt-like instructions are neutralized and cannot increase action authority, with the neutralized value count disclosed in the QA result.
+- Repository-derived Python test paths are quoted before a focused validation command reaches the shell, preventing special characters in a changed filename from becoming command syntax.
+
+## 0.4.9 - 2026-08-03
+
+### Added
+
+- Added explicit QA knowledge authority (`team-policy`, `repository-contract`, or `qamap-inference`) and harness test classes (`golden`, `regression`, or `edge`) to human reports, agent handoffs, and the additive v1 schema.
+- Added a working-tree-only current delta that isolates uncommitted files and changed test contracts from older branch history.
+- Added an evidence-gated validation-recovery compiler. When a diff-backed form timing change connects to a route, validated input, visible error, submit action, and visible success result, QAMap now compiles both a valid submission path and an invalid-input, correction, and stale-error recovery scenario.
+- Added a third seeded-regression execution contract that requires the byte-identical generated browser artifact to fail when corrected input leaves stale validation feedback and pass when first-touch revalidation is restored.
+- Added native Codex and Claude Code plugin manifests that expose the existing vendor-neutral `qamap-pr-qa` skill without duplicating the local analysis engine.
+- Added Codex skill presentation metadata and a plugin contract test that keeps both host manifests, the npm package, and the shared skill version aligned.
+- Added multi-commit benchmark fixtures: a target can declare ordered `commits` overlays instead of a single `head/` snapshot, and a `mustNamePrimaryIntent` expectation pins which intent must rank first. A new cleanup-tip fixture materializes a feature commit followed by `fix: minor refactor` and requires the feature to stay in the headline, flow title, and draft filename.
+- Added `restored` to the visible success-outcome vocabulary so standard "restored to defaults" confirmations qualify as diff-anchored success signals, matching the existing completed-state words such as `updated` and `archived`.
+
+### Changed
+
+- Newer independent change intents and current local test commands now rank ahead of stale branch history, while the complete branch remains available for wider impact analysis.
+- Latest-commit diff evidence is reserved before the bounded branch-wide scan, preventing a large accumulated PR from hiding the current behavior and its test contracts.
+- Agent payload compaction preserves current-delta evidence and authority metadata on retained flows while remaining below the 4KB contract.
+- Form validation timing detection now reads the changed hunk and uses word-bounded form context, preserving framework-neutral React and Vue cases without treating unrelated format-mode vocabulary as product validation QA.
+- The agent skill now converts `route.nextAction` into exactly one immediate action and reports later command execution separately from QAMap's static `not-run` receipt.
+- `qamap init --agent` now installs the complete skill bundle, including optional host metadata, while continuing to preserve locally modified skill files unless `--force` is explicit.
+- QA handoffs now prefer test contracts changed by the current PR over broader historical filename or keyword matches, while keeping unrelated changed tests out of individual flow evidence.
+- Safely recognized npm, pnpm, and Yarn workspaces now place one behavior-linked changed-test command per affected package before the unchanged package suites. Ambiguous custom pipelines remain suite-wide.
+- Automatically selected package commands now include the package directory, so copied commands execute from the workspace root instead of depending on an unstated working directory.
+- Unrelated feature tests no longer attach to a flow merely because both paths contain generic structural words, and standalone nested packages with their own lockfile can route changed contracts to their package suite.
+- Changed-test contract extraction now ignores test-like source strings embedded inside fixture builders instead of reporting them as executable repository tests.
+- Compact agent handoffs now retain one repository test-evidence path for secondary affected flows instead of dropping that trace during the 4KB payload reduction.
+
+### Fixed
+
+- Symbol-derived lifecycle labels now read behaviorally instead of exposing raw identifiers. Setter-derived state changes phrase the target ("Update the form error state." instead of "Update state through form.setError."), and side effects, outcomes, and other calls that cannot be phrased naturally mark the identifier as code with backticks ("Invoke `fetch`."). Exact symbols remain on each stage and its evidence, and implementation-stage classification now keys on the structural symbol instead of parsing the label text.
+- Issue-tracker tags such as `[ABC-123]` in commit subjects now survive exactly once, in the intent title, instead of repeating through every derived lifecycle label, assertion, and success signal. Subjects that lead with a tag (`[ABC-123] fix: …`) now also parse as conventional commits instead of falling back to raw-subject heuristics.
+- Two-letter all-lowercase directory segments (`ee`, `ui`, `db`) keep their acronym form in derived flow, domain, and test-plan names instead of producing labels like "Ee". Longer segments are untouched because three-letter directories are often plain words.
+- Success signals no longer restate the flow title as their own proof. When no diff-anchored observable outcome exists, the flow says so explicitly ("no diff-anchored observable outcome was extracted from this change — define the expected user-visible result manually"), the review question asks what the outcome should be, fallback draft steps ask to define the signal instead of asserting the gap statement, and the machine-readable brief carries `successSignalUnresolved: true`. Concrete diff-anchored signals are unchanged.
+- Compacted agent payloads no longer emit partial identifier values. Draft paths, changed files, existing evidence, selectors, entry hints, and commands stay whole at every compaction stage; an oversized payload drops whole optional values — disclosed through the existing omitted counts — instead of truncating a path the consuming agent could not open. `base`, `head`, and `manifest` stay whole up to 256 characters. The previously undocumented `floor` and `hardLimit` compaction flags are now part of the documented schema.
+- `qamap qa --format agent` now writes the pre-compaction summary to a temp file and discloses it as `compaction.fullReport` (additive v1 field), so an agent can recover omitted traces, scenarios, and flows without re-running the analysis. The analyzed repository stays untouched; the library export `formatAgentQaFullReport` produces the same document.
+- Fixed change-intent review ranking so a cleanup-shaped tip commit (for example `fix: minor refactor` or `fix: tidy up and add tests`) no longer displaces the branch's substantive intent from the headline, scenario names, and generated draft filenames. Cleanup-only intents are demoted below substantive intents but never dropped, and pure-cleanup branches keep their newest intent first. Observed on real public PR branches, where review-feedback commits routinely close a branch.
+
+## 0.4.8 - 2026-07-27
+
+### Added
+
+- Added optional JS/TS symbol QA annotations through `@qamapFlow`, `@qamapStage`, `@qamapOutcome`, and `@qamapRisk`. QAMap applies them only when the attached named export overlaps the diff, preserves the changed line as routing evidence, and reports malformed or stale annotations instead of silently trusting them.
+- Added an evidence-gated repeated-action compiler. QAMap emits a runnable duplicate-request check only when the selected scenario, user action, request boundary, route, and visible outcome are connected by repository evidence.
+- Added committed execution benchmarks that generate browser specs once, require them to fail against seeded repeated-action and persisted-state regressions for the intended assertions, and require the same byte-identical artifacts to pass against their fixes.
+- Added portable project-skill installation through `qamap init --agent` for `.agents/skills` and explicit compatibility paths, while preserving local edits unless `--force` is requested.
+- Added a domain-neutral two-surface React benchmark and per-flow compilation contracts. A benchmark can now require every affected flow to retain a primary scenario receipt, mapped action, mapped assertion, and fully compiled draft independently.
+- Added deterministic trace evidence dispositions for confirmed causal chains, missing source locations, and failed behavior joins. Human and machine output now count unique sources instead of treating repeated citations as stronger evidence.
+- Added human-approved manifest correction proposals to QA traces. A wrong judgment points to an existing flow anchor or a concrete repo-local flow target even when no automation artifact exists yet.
+
+### Changed
+
+- The README demo now uses a committed runnable application and real generated tests, and the release gate verifies both its green result and its ability to catch the seeded defect.
+- Agent setup uses the packaged vendor-neutral `qamap-pr-qa` skill as its single workflow source. Future editor or plugin wrappers are documented as thin consumers of the same local CLI and versioned agent contract.
+- Repository test planning and changed-file inspection code now stays on the analyzer-verification path when direct product behavior evidence is absent. Supporting utility conditions no longer turn an analyzer-focused change into product automation work.
+- Primary intent scenarios now retain located diff evidence alongside commit and lifecycle context. When a commit phrase and a code signal describe the same behavior, their provenance is merged instead of discarding the source hunk.
+- Multi-flow reasoning traces and compact agent output now aggregate every artifact for the same logical scenario and disclose `flowCoverage`. A compiled draft on one surface can no longer hide a partial or unmapped draft on another.
+- Compact agent output preserves evidence-gap counts and the highest-priority manifest correction target through emergency 4KB compaction.
+
+### Fixed
+
+- Static matcher vocabulary, CI environment variable names, and background-service labels no longer fabricate scheduling, navigation, or conditional UI QA. Actual product scheduling and destination changes remain covered by the existing positive benchmark contracts.
+- Package root or public API exports no longer imply network timeout and retry QA without network behavior evidence.
+- Analyzer-focused changes no longer borrow unrelated mock handlers or fixture endpoints from benchmark and test directories as product E2E guidance.
+- Repository and Git context analyzers no longer surface implementation guards such as numeric finiteness checks as affected product lifecycle stages.
+- Repository-validation routes no longer report missing product E2E compilation as a required scenario gap when automation is explicitly not applicable.
+- Analyzer reasoning traces, including emergency 4KB agent output, now retain the concrete false-negative and false-positive risk instead of falling back to a generic product outcome regression.
+- Surface-scoped primary scenarios no longer fall back to review-only when their flow has direct diff evidence, and abstract commit phrases such as refreshing an affected state no longer become fake user actions in generated E2E code.
+
+## 0.4.7 - 2026-07-22
+
+### Added
+
+- Added provenance-aware base resolution across QA, review, test-plan, and E2E output. QAMap now reads explicit input, PR CI metadata, repo-local Git configuration, and Git history in order, and discloses long-lived refs that point to the same commit.
+- Added a three-layer human QA decision view that preserves the complete risk map, separates executable evidence available now, and emits manual or agent contracts for important scenarios that cannot yet compile.
+- Added package-scoped JavaScript validation discovery and related-test Python commands through default or variant Compose files, primary application services, and container-local `uv` or Poetry runners.
+- Added a canonical `route` decision to QA JSON and compact agent output. It tells consumers whether the change needs an optional automation draft or existing repository validation, exposes an unambiguous status, and names the next action without relying on compatibility readiness scores.
+- Added the first provenance-pinned public PR benchmark, reduced from Cal.com PR #27765 under its MIT license. The contract requires QAMap to recover form-validation timing, exact diff evidence, existing regression tests, and edit/blur/correction/submission state-transition QA.
+- Added a repository-local manifest lifecycle regression that proves one human correction sharpens the current PR and is reused by the next PR without another prompt.
+- Added a Python API regression fixture that requires an exact changed test to outrank broad repository evidence and route directly to its existing `pytest` command.
+- Added positive and negative nested-action regressions. A changed item-level action can reuse same-entity input and creation controls as prerequisites, while unrelated controls remain excluded.
+
+### Changed
+
+- Emergency 4KB agent output now keeps a compact second affected flow with its supporting file, review question, and success signal instead of collapsing every multi-surface PR to one detailed flow.
+- A single change intent that spans distinct feature, route, or screen surfaces now produces surface-scoped QA flows. Each flow keeps its own files, lifecycle, scenarios, and observable outcome while shared import evidence remains traceable.
+- An existing success message can now ground a flow when it is the only success-shaped outcome on that surface and the same file has direct diff evidence; newly added success copy still takes priority.
+- Working-tree analysis now compares the selected merge base directly with the final worktree, so intermediate files removed later in the branch do not survive as stale changed-file or diff evidence.
+- Draft reporting now says `static-runnable` and `not executed` explicitly; generated tests with skipped placeholders or without observable assertions fail self-check instead of appearing runnable.
+- Specific commit-and-diff-backed intent titles now remain the flow language shown to reviewers; internal handler and serializer symbols only refine broad titles such as generic update or release work.
+- Form validation-mode changes now produce framework-neutral timing QA across initial editing, the configured validation trigger, stale-error correction, and final submission when both the previous and new modes are present in a form-shaped diff.
+- Agent payload compaction now preserves the canonical route decision before lower-priority detail, including under lean and emergency 4KB shapes.
+- Playwright drafts can now prepare an entity before exercising a newly added nested action when the same source exposes strongly related input and creation controls.
+- Playwright bootstrap guidance now includes the package-manager-specific Chromium installation command required after adding the test package.
+
+### Fixed
+
+- QA flows created from one broad intent no longer borrow assertions or success signals from neighboring product surfaces, and residual navigation or service changes are relabeled from their own files instead of inheriting a partially consumed UI title.
+- The npm package root now exports the documented programmatic API and TypeScript declarations, so agent tools and local QA orchestrators can import `generateQaDraft` and `formatAgentQaDraft` without relying on an internal `dist` path.
+- Nested page components no longer become fabricated routes, API endpoints no longer become browser navigation targets, API schema parameter names no longer become mobile screens, settlement vocabulary alone no longer creates payment setup, and unchanged success copy from unrelated or weakly evidenced surfaces is no longer borrowed as a changed-flow assertion.
+- Capturing a current server timestamp with `timezone.now()` no longer creates scheduling and calendar-boundary QA; actual schedule, reminder, and timezone preference changes remain eligible.
+- Python Compose discovery no longer prefers a worker or scheduler over the primary web/API service merely because both services share the same Python image.
+- Repository-validation output no longer requires consumers to reconcile a compatibility-only `blocked` automation level with a `ready-to-run` repository command. The additive route status now expresses the applicable decision directly.
+- CLI command changes now use a `command-contract` verification mode, so mixed analyzer and package-surface diffs route to the discovered repository command instead of appearing as blocked product E2E drafts.
+- Python settings modules are no longer treated as product API behavior, while executable service modules remain eligible for contract impact.
+- Changed Python regression tests now retain imported-module ownership, extracted test names, and changed-file priority; generic `index` tests in another package no longer appear as related evidence.
+
+## 0.4.6 - 2026-07-18
+
+### Added
+
+- Added source-role classification for product behavior, commands, analysis rules, configuration, tests, documentation, and generated artifacts before domain vocabulary is interpreted.
+- Added repository-validation readiness for changes that should be checked with existing project commands instead of receiving fabricated product E2E blockers.
+- Added a public CLI and analyzer-rule benchmark with positive, negative, neighboring-rule, compact-agent, and non-product false-positive contracts.
+
+### Changed
+
+- Compact agent output now preserves one located reasoning trace, scenario source, affected file, review question, success signal, evidence gap, and next command even under the emergency 4KB budget.
+- Long-PR intent clustering now requires stronger shared evidence. Broad Conventional Commit scopes and one-word keyword bridges no longer merge unrelated changes into one high-confidence lifecycle.
+- Product QA flows now link directly imported, same-stem, or owner-path-related existing tests and distinguish them from tests changed by the PR itself.
+
+### Fixed
+
+- Analyzer and CLI vocabulary no longer fabricates scheduling, routing, payment, API, selector, fixture, or manifest work without product-behavior evidence.
+- Configuration-only, documentation-only, generated-artifact, and test-only changes no longer appear as blocked product automation when an existing repository validation command is the appropriate next action.
+- Related-test discovery no longer treats similarly named tests in unrelated repository areas as coverage evidence.
+- Safe untracked text changes included through `--include-working-tree` retain head-side file and line provenance instead of disappearing from QA reasoning.
+
+## 0.4.5 - 2026-07-16
+
+### Added
+
+- Added stable QA reasoning traces that connect an exact diff source to the affected lifecycle, risk statement, routed scenario, optional draft artifact, and explicit `not-run` execution state.
+- Added benchmark contracts that fail when routed scenarios are missing reasoning traces or a required scenario cannot link its diff evidence to the affected lifecycle.
+- Added an invocation-level execution receipt to QA results and the additive agent v1 contract. Static `qa` runs now state `not-run` and `static-analysis-and-draft-mapping` instead of leaving product execution ambiguous.
+- Added a domain-neutral workspace regression fixture that keeps behavior source, supporting assets, endpoint evidence, and fixture candidates attached to the owning flow.
+- Added a public React state-transition benchmark that requires a diff-added action selector and observable state copy to reach the same automation draft.
+
+### Changed
+
+- Human, JSON, agent, Playwright, Maestro, and manual draft output now share stable trace IDs, so generated artifacts can be reviewed as consequences of a visible QA decision instead of opaque output.
+- Human reports now describe automation as fully, partially, or not mapped and explicitly say that no product tests were executed. Backward-compatible machine values remain unchanged.
+- Intent flow titles prefer diff-backed actions and outcomes when a broad commit subject does not describe the actual changed behavior.
+- Human QA output now derives scenario counts from reasoning traces and separates QA routing from optional draft-mapping or repository-context gaps.
+- Intent-backed flow summaries prefer a commit-backed user action over implementation-shaped setter triggers and use repository-observed stable state copy as both the success signal and primary reasoning-trace proof.
+
+### Fixed
+
+- Implementation-shaped setter stages no longer compile as a second user interaction after a real action. The public state-transition benchmark now enforces exactly one mapped action before its repository-observed assertion.
+- Event handlers such as `onShare` now produce natural action labels, and machine-style event keys are no longer promoted as visible-text selectors.
+- Static assets no longer create duplicate product flows when they support a behavior-bearing change.
+- Fixture recommendations no longer cross unrelated monorepo application boundaries unless exact endpoint evidence connects them, and frontend API client filenames are no longer fabricated into server URLs.
+- Persisted date validation no longer fabricates calendar QA without scheduling evidence, and structured metadata fields such as `destination` no longer fabricate browser routing.
+- Ordinary local service modules no longer imply an API fixture dependency, and selector provenance no longer treats an unchanged label as diff-added merely because it is a substring of a changed identifier.
+
+## 0.4.4 - 2026-07-15
+
+### Added
+
+- Added conservative diff-only change intent for committed branches whose commit text does not express a usable behavior intent. Connected trigger, state, side-effect, and observable outcome evidence remains review-required instead of being discarded.
+- Added framework-neutral conditional-state extraction for React and Vue changes, including changed actions, conditional outcomes, destination parameters, and Unicode selector terms.
+- Added public React and Vue conditional-state benchmarks plus a presentation-only negative control. Benchmark contracts can now reject QA scenarios that must not be inferred.
+- Added a tested `skills` CLI installation path for the packaged `qamap-pr-qa` project skill.
+- Added `qamap init --scripts` for collision-safe repeat-use shortcuts: `qa` for committed branch changes, `qa:local` for working-tree changes, and `qa:e2e` for a read-only E2E draft preview.
+
+### Changed
+
+- QA routing now analyzes every behavior-bearing file in the full branch diff even when its commit subject is release-shaped or otherwise non-behavioral. Commit subjects label intent; they no longer define the analysis boundary.
+- Runner setup is reported as an optional automation prerequisite instead of an execution blocker for the runner-independent QA judgment and scenario-routing stages.
+- Low-confidence diff intent now composes with repository-derived action scenarios when that produces a more concrete draft, while broad multi-risk changes retain one evidence-rich lifecycle for deterministic compilers.
+- Selector evidence is sampled across changed files and control types so one large component or registry cannot crowd routes, outcomes, and actionable controls out of the draft.
+- Agent output now stays below 4KB and preserves at least the highest-priority intent, routed scenarios, affected flow, source, and omitted counts when compacted.
+- Low-confidence diff-only scenarios remain recommendations until stronger intent evidence promotes them; they no longer become required automation blockers merely because a diff hunk has a location.
+- One-off skill commands use an explicit npm execution environment so they do not invoke Corepack or rewrite a target repository's package-manager metadata.
+- Selector fallback now prefers diff-added, step-related controls and observable copy. Generic exploratory checks remain coverage guidance instead of executable happy-path steps.
+- The README now leads with a real packaged-CLI routing demo and separates scenario priority from automation compilation status before introducing runners or manifests.
+- Quick-start and adoption guidance now separates one-off execution from a shorter checked-in package workflow, while keeping the direct CLI available for non-JavaScript repositories.
+- Human QA output now states whether the run considered committed branch changes only or also included the local working tree, making `qa` and `qa:local` visibly distinct.
+
+### Fixed
+
+- Commit clusters now use each commit's actual changed files, ignore shared Conventional Commit scope as product evidence, and analyze residual behavior files that were previously hidden behind unrelated commit titles.
+- Reverse-import analysis now parses JSONC path aliases without treating strings such as `@/*` and `**/*.ts` as comments, restoring changed-component propagation to real route surfaces.
+- URL-backed UI state now produces restoration, reload, default cleanup, and invalid-value fallback QA when the diff reads and writes the same query key.
+- Share and media lifecycle evidence can compile deterministic Playwright scenarios for native completion, cancellation, clipboard fallback, play, pause, completion, and restart without requiring a pre-existing Playwright setup.
+- Generated drafts no longer pass by asserting only the document body or by reusing the clicked control as proof of success. Missing outcomes produce an explicit review-only `test.fixme` marker.
+- Generic UI copy such as `Request access`, `Open billing`, or an existing `subscription` symbol no longer fabricates network, external-entry, or payment setup without supporting diff evidence.
+- Vue templates, computed labels, React handlers, multiline visible text, and exact token overlap now produce more stable action and outcome selectors.
+- Risk-specific scenarios are ranked ahead of generic conditional-state suggestions, so calendar, routing, and network failure checks are not silently dropped by the scenario cap.
+
+## 0.4.3 - 2026-07-14
+
+### Added
+
+- Added evidence-ranked QA scenario routing. Each intent-backed scenario is now classified as `required`, `recommended`, or `review-only` from its priority, confidence, review requirement, and exact diff sources instead of treating every inferred path as equally actionable.
+- Added scenario-level automation receipts to human, JSON, and agent output. QAMap reports whether each selected scenario was `compiled`, `partial`, `not-compiled`, or `review-only`, including mapped step and assertion counts plus a concrete blocker when automation is incomplete.
+- Added benchmark contracts for selected-to-compiled coverage so public fixtures fail CI when required QA is proposed without a traceable automation handoff.
+
+### Changed
+
+- E2E readiness now includes required scenario compilation gaps. A syntactically valid draft cannot be promoted as runnable evidence when a required QA scenario was omitted or only partially mapped.
+- Playwright failure-path generation now requires an unchanged mockable endpoint boundary, an action selector related to the changed flow, and a repository-observed failure outcome before it emits executable setup, action, and assertion steps.
+- Contributor guidance now requires domain-neutral product rules, positive evidence combinations, negative controls, and unrelated fixture coverage before a specialized inference can enter the shared engine.
+
+### Fixed
+
+- Unrelated controls can no longer be reused merely because they are the first stable selector near a changed endpoint.
+- Maestro automation receipts now reflect commands and assertions that were actually generated instead of assuming coverage from the selected runner alone.
+
+## 0.4.2 - 2026-07-13
+
+### Added
+
+- Added benchmark contracts for draft readiness, runnable candidates, self-check passes, review-only files, TODO markers, and execution blockers. Public fixtures can now fail CI when QAMap finds the right flow but produces an unusable automation draft.
+- Added deterministic Playwright failure-path compilation when repository evidence exposes a mockable endpoint, a stable action control, and an observable failure message. Generated drafts replace the success route with a 4xx/5xx response, repeat the user action, and assert the failure UI instead of falling back to a body-visible smoke check.
+
+### Changed
+
+- Draft execution readiness now measures whether a generated file can be tried locally from runner, entrypoint, selector, fixture, and self-check evidence. Missing pre-existing validation coverage remains required PR guidance, but no longer falsely claims that the new file cannot execute.
+- A partial fixture match can qualify as a runnable candidate when QAMap generated executable mock scaffolding and every other execution check passes. It still remains a review item before the draft becomes trusted regression evidence.
+- Playwright self-checks now report body-only smoke assertions as domain-assertion warnings. Such files remain tryable, but cannot be called runnable candidates until they assert an observable product outcome.
+
+### Fixed
+
+- Draft reports no longer tell users to replace TODO locators when the generated files contain no TODO markers.
+
+## 0.4.1 - 2026-07-13
+
+### Added
+
+- Added head-side diff hunk provenance to change-intent evidence. Scenario sources can now identify renamed paths, exact line ranges, symbols, and hunk headers without uploading source or calling an LLM.
+- Added base-side evidence for removed lines and deleted files. Removed guards and validation now produce a source-linked critical QA scenario instead of disappearing from the change lifecycle.
+- Added `direct`, `supporting`, and `contextual` evidence relations. Context-only scenarios stay low-confidence and cannot be promoted to critical without a located diff source.
+- Capped the complete `qa --format agent` line at 8KB. Large PRs preserve the strongest evidence first and disclose total and omitted intent/flow counts plus compaction metadata.
+- Added scenario-level confidence and review requirements to Markdown, JSON, Behavior Graph evidence, and the additive `qamap.qa` v1 agent contract. Agent output keeps the existing string evidence field and adds compact structured `sources` for intent and scenario review.
+- Added benchmark trace contracts. The web and mobile lifecycle fixtures now fail CI when a critical QA scenario lacks an exact diff file and line source; the benchmark table reports scenario trace coverage.
+- Documented the repository collaboration contract for branch names, Conventional Commits, PR titles, assignment, labels, squash merges, and canonical `vX.Y.Z` release tags.
+
+### Changed
+
+- `qamap qa` now keeps Playwright, Maestro, and manual setup in a final opt-in automation section. The primary report focuses on change intent, behavior lifecycle, scenario rationale, evidence locations, uncertainty, and PR review actions; missing runner setup is no longer presented as required QA evidence.
+- The README, quick start, agent skill, agent schema contract, output examples, and benchmark guide now describe the evidence-first QA loop. Install and first-run guidance starts with `qa` and `qa --format agent`; E2E draft and setup commands follow only after a scenario and adapter are accepted.
+
+### Fixed
+
+- Structured agent evidence no longer discards file, symbol, line, rename, or hunk provenance when compacting change-intent results.
+- Test-light repositories no longer receive runner installation as the default next step from `qamap qa`; repository validation remains prominent and executable draft generation remains available through explicit `qamap e2e` commands.
+- State updates no longer fabricate scheduling QA because `date` matched inside `update`, and `navigation.setOptions` no longer fabricates destination-routing QA. A branch with no diff now returns no affected flow or automation handoff from `qamap qa` instead of inventing an app-launch smoke flow.
+
+## 0.4.0 - 2026-07-12
+
+### Added
+
+- Added the first framework-neutral Behavior Graph contract with stable content-derived node and edge ids, evidence provenance, direct and propagated impact, deterministic graph merging, adapter diagnostics, and an analyzer adapter interface for future language and framework support.
+- Added a compatibility adapter that maps existing inferred flows, entrypoints, steps, assertions, selectors, fixtures, and changed source files into the graph.
+- Added a verification-manifest Behavior Graph adapter. Matched domains, flows, checks, routes, selectors, and source files now retain reviewed manifest provenance and package-scoped impact inside the graph.
+- Added deterministic Change Intent analysis. Behavior-bearing commits are grouped by normalized product evidence, connected to added diff symbols, assigned confidence and review requirements, and converted into ordered trigger, condition, action, state-change, side-effect, and observable-outcome lifecycles.
+- Added runner-independent primary, failure, boundary, and state-transition QA scenarios derived from each lifecycle. Medium- and high-confidence intent now replaces generic `primary journey` and `smoke flow` candidates before Playwright, Maestro, or manual draft compilation.
+- Added the `qamap.change-intent` Behavior Graph adapter with commit provenance, intent contracts, lifecycle nodes, scenario assertions, source links, and direct or propagated impact.
+- Added Change Intent, lifecycle, and QA scenarios to Markdown, JSON, dry-run, and the additive `qamap.qa` agent format contract.
+- Added public Vue and SvelteKit branch fixtures that require changed selectors, success signals, exact routes, draft paths, and Behavior Graph node kinds to remain useful without React-specific assumptions.
+- Added synthetic web preferences and mobile reminder lifecycle benchmarks. The public matrix now rejects generic titles and directly requires intent names, lifecycle stages, QA scenario axes, commit-backed graph nodes, selectors, outcomes, and draft paths.
+- Added a shipped Behavior Graph JSON Schema and exported runtime enum constants so local consumers and future adapters can validate graph version 1 without an LLM or cloud service.
+
+### Changed
+
+- Human reports now present change intent and QA design before runner setup. Playwright, Maestro, and manual output are labeled automation adapters rather than the primary recommendation.
+- Documented the architecture and conservative pre-1.0 version policy: compatible analyzer and adapter improvements remain patch work, while the next minor is reserved for explicit temporary execution and normalized evidence.
+
+### Fixed
+
+- Test and benchmark fixtures no longer make a CLI repository look like a design-token or data-catalog project, and a real `package.json` bin entry takes precedence over incidental artifact files.
+- SvelteKit convention files such as `+page.svelte` now resolve to their containing route (`/settings`) instead of adding a false `/page` segment.
+- Language syntax such as TypeScript `export` and `async` no longer contaminates intent clustering or lifecycle state inference, and ordinary web click handlers no longer fabricate external entry-payload scenarios.
+
+## 0.3.5 - 2026-07-11
+
+### Added
+
+- `manifest init` now creates reusable manual API contract flows for common server route, controller, handler, and framework-backed service modules. Each inferred flow carries API file anchors plus success-contract and invalid-request checks, so a baseline can shape later service changes instead of containing domains only.
+- The public benchmark can generate an external verification manifest from a fixture's base commit and assert manifest matches and manifest-backed QA flows against the head commit. API contract and reverse-import fixtures now protect this feedback loop in CI without executing fixture code.
+
+### Changed
+
+- A changed file that matches a declared manifest domain but no flow anchor now keeps manifest provenance on the best overlapping inferred flow. QAMap does not invent manifest checks or merge unrelated flows; it preserves the code-derived steps, selectors, and entrypoint while explaining the domain-level evidence.
+- Private repository smoke output is treated as local-only diagnostic data. Public regression coverage uses minimized synthetic fixtures and neutral sample vocabulary.
+
+### Fixed
+
+- Replaced legacy real-world-derived example vocabulary with neutral synthetic examples in tests and documentation.
+
+## 0.3.4 - 2026-07-10
+
+### Added
+
+- Added a committed Benchmark Contract v1: eight synthetic `base`/`head` PR fixtures cover testless web, existing Playwright, Expo/Maestro, API service, design tokens, reverse-imported shared components, native configuration-only changes, and Maestro test-only changes. `pnpm bench:ci` materializes each fixture as a temporary Git repository and fails when runner choice, affected-flow reach, product naming, draft paths, selectors, evidence, commands, blank actions, generic titles, or agent payload limits regress. The gate now runs in CI and `release:check`; private pinned repositories remain an optional local smoke layer.
+- Agent-format flows now carry compact `changedFiles`, `reviewQuestion`, `successSignal`, and `evidence` fields. These are additive `qamap.qa` v1 fields, documented in the public contract and JSON Schema, so an agent can see why a flow was selected without re-reading the repository.
+- The `--format agent` output is now a documented, versioned contract. A machine-readable JSON Schema ships at `schema/qamap-agent.schema.json`, the field-by-field spec with a stability policy lives at `docs/agent-format.md` (within `qamap.qa` version 1, fields are only ever added — never removed or retyped; breaking changes bump `schema.version`), and the test suite validates real CLI output against the published schema so the contract cannot drift silently.
+- `qamap manifest init` now reports how many files it scanned and warns explicitly when the scan stopped at the `--max-files` cap (with the exact rerun command), instead of silently producing an empty-looking baseline on large repositories. The JSON result carries a `scan` block (`files`, `maxFiles`, `truncated`), and `manifest validate`'s "No domains" advice now points at `--max-files` instead of circularly suggesting the same `manifest init` run that produced the empty manifest.
+- Manifest validation commands now come from ground truth first: verification-shaped `package.json` scripts (`test`, `lint`, `typecheck`, `check`, `e2e`, `coverage`, `build`, …, invoked via the detected package manager) and a detected pytest setup (`pytest.ini`, `conftest.py`, `[tool.pytest]`) are listed ahead of commands found in instruction docs. Scripts that block, open a UI, or mutate state (`test:watch`, `test:debug`, `e2e:open`, `test:update`, `lint:fix`, npm-init placeholder tests) are excluded, while segment lookalikes such as `test:server`, `e2e:device`, and `check:fixtures` survive.
+- `manifest init` now derives domains from Django-style backend structure: an app directory carrying two or more framework markers (`models`, `views`, `urls`, `serializers`, `forms`, `admin`, `apps`, `tasks`) becomes a product domain. Only Python files count as markers (a Rails `app/models/user.rb` fabricates nothing), apps are recognized at any nesting depth (`backend/orders/models.py`), and a Django-derived domain merges into a same-id domain from the JS pass instead of duplicating it. A Django monolith that previously produced an empty manifest now yields its real app areas.
+- Manifest flow selection is ranked instead of alphabetical: navigable routes score above component matches, product-signal paths (login, signup, payment, checkout, orders, onboarding, …) get a boost, flows are interleaved across domains so one large area cannot fill every slot, and generic UI plumbing (bare structural nouns like `Modal.tsx`, `Error*`-style wrappers, icon sets, `constants/`/`hooks/` files) no longer becomes a flow, while funnel components ending in `Success`/`Confirmation` count as flows the same way `Checkout`/`Complete` ones do. Route inference maps the repo root correctly (`pages/index.*` and `app/page.*` → `/`), rewrites Nuxt-style dynamic segments (`_orderId` → `:orderId`), and excludes HTTP handlers from UI flows: `pages/api/**`, `app/api/**`, and App Router `route.*` files anywhere.
+- Manifest anchors and checks got concrete: component anchors carry the real exported identifier (parsed from the source, omitted when unresolvable) instead of a humanized guess, and the happy-path check picks up a `data-testid` observed in the flow's source as its selector. `.vue`/`.svelte` files are now readable by the project walk, so Vue single-file components get the same treatment.
+- Manifest domains stopped pretending: structural directory names (`components`, `hooks`, `providers`, `navigations`, `layout`, `styles`, …) are no longer domains, the candidate search continues past structural directory segments to the first product-shaped one (but never descends into a file basename unless the file sits directly under the route directory, so colocated `components/`/`hooks/`/`utils/` files cannot mint garbage domains), `pages/api`/`app/api` trees are never domains, child path globs already covered by a parent are dropped, and `criticality` is inferred (revenue/identity areas → `high`, internal design tooling → `low`) instead of a flat `medium`.
+- Manifest runner inference reads dependency keys across every collected `package.json` (workspace members included) instead of raw root text: `react` in a description or an `eslint-plugin-react` entry no longer forces `playwright`, and an `app.json` only counts as mobile evidence when it has a top-level `expo` key.
+
+- Reports are colorized when printed to an interactive terminal: headings, the At a Glance keys, status words and stage labels, priority tags, and inline commands get ANSI styling with zero dependencies. Files written with `--output`, pipes, CI logs, and machine formats (`json`, `agent`, `sarif`) are byte-identical to before; the standard `NO_COLOR` and `FORCE_COLOR` environment variables are honored.
+- Mock/fixture file detection now matches whole name tokens instead of substrings, and a bare `handler` filename no longer counts as mock evidence outside mock-style directories. Files like `useSeedlingCatalog.ts` or `errorHandler.ts` stop being misreported as fixtures, which also stops branches from being marked `ready` on the strength of ordinary source files.
+- Fixture guidance now names the concrete thing to do instead of assigning homework. QAMap statically reads the contents of discovered mock/fixture/seed files (up to 24 per plan) and extracts exports, handled routes (MSW, Mirage, express-style, Playwright `route(...)`), and response keys. Next actions name the reusable fixture and uncovered endpoint; generated Playwright mock bodies reuse observed response keys instead of the `ok: true` placeholder; and fixture action-item titles carry the endpoints so the compact agent format keeps the target. Matched insights are exposed as an optional `mockInsights` array on `fixtureReadiness` in JSON output.
+- `qamap init --agent` gives agent onboarding a single command: it adds a marked `Pre-PR QA (QAMap)` section to `AGENTS.md` (created if missing, appended if present, refreshed in place on re-runs without touching surrounding content), installs the packaged skill to `.claude/skills/qamap-pr-qa/SKILL.md`, and creates a starter `qamap.config.json` when none exists. Every step is idempotent, and a locally modified skill copy is never replaced without `--force`.
+- Korean action labels now qualify for flow and scenario naming: labels like `저장하기` or `신청하기` (36 common action stems, with `~하기/~합니다`-style endings) name the journey the same way English action words do, draft filenames keep Hangul instead of collapsing to an empty slug, and Korean submit-like labels drive `Submit` steps. This closes the known limit noted in 0.3.3.
+
+### Changed
+
+- `qamap qa` now opens with the affected behavior, a concrete reviewer question, repository evidence, proposed draft path, next command, and missing trust requirements. Diff-visible outcome copy such as `Order confirmed` or `Profile saved` is preferred over generic success wording; simple React state output (`setStatus("Orders refreshed")` rendered through `{status}`) is recognized as visible evidence; and stable action selectors are shown ahead of plain input placeholders.
+- Verification-only diffs no longer enter the product-journey bootstrap loop. Configuration, documentation, generated artifacts, and changed tests expose a compact `verificationMode`; configuration changes prefer existing platform build scripts, while changed test files are returned as `existingEvidence` to run directly. The agent payload omits `firstDraftCommand` and treats the backward-compatible `draft` field as a fallback artifact path when generating a new E2E would duplicate or invent coverage.
+- Shared component changes that reach a page through imports are named after the consuming surface and retain both the changed component and reached page as evidence, instead of producing duplicate `primary journey`/`UI smoke flow` drafts named after the component.
+- API-service route modules under `routes/` stay in contract analysis instead of being mistaken for frontend route surfaces.
+- The project file walk skips mobile vendor/derived trees (`Pods`, `.expo`, `.gradle`, `DerivedData`, `Carthage`). On React Native and Expo repositories these directories could exhaust the capped alphabetical scan before it ever reached `src/`, which made `manifest init` produce zero domains and zero flows.
+- Manifest context extraction got precision-first rules: bare command lines in instruction docs only count inside fenced code blocks (prose sentences that start with a tool name are no longer "commands"), commands containing commas, parentheses, or Hangul prose are rejected, redundant `a && b` compounds are dropped when both halves are already listed, and safety rules are only harvested from prose prohibition/obligation lines — code blocks, CI YAML fragments, mermaid edges, and topic words like `커밋`/`token` alone no longer produce fake team rules.
+- Build-output directories (`out/`, `.output/`, `storybook-static/`, `__generated__/`) are excluded from manifest domain/flow inference, so exported build artifacts with hashed filenames no longer surface as product-domain key paths.
+- Human reports now describe draft readiness as a stage on a fixed four-step journey (`Stage: setup needed (1 of 4) — readiness 0/100`) instead of a verdict (`Readiness: blocked (0/100)`), and the blocked-level recommendation says "keep these drafts review-only and start with X" instead of "do not treat these drafts as runnable". A fresh repository reads as being at the start of a path, not as failing. Machine formats are unchanged: `readiness.level` keeps the `blocked`/`needs-work`/`near-runnable`/`ready` values, and the stage-to-level mapping is documented in `docs/commands.md`.
+- Slimmed the README from ~640 lines to ~100: it now carries only the demo, quick start, agent usage, positioning, and a documentation index. The full command reference moved to `docs/commands.md`, the guardrails scanner section to `docs/guardrails.md`, and positioning tables into `docs/adoption.md`.
+
+### Fixed
+
+- Expo native version and build metadata changes are grouped into one `Mobile build configuration verification checklist` instead of filename-derived user journeys such as `Build Gradle primary journey` or `Info Plist primary journey`. Native project files no longer fabricate screen entrypoints or selector requirements.
+- `.maestro/*.yaml` changes are recognized as existing test evidence. QAMap recommends `maestro test .maestro`, names the changed flow files, and no longer asks for duplicate fixtures, selectors, entrypoints, manifest promotion, or a second generated Maestro journey.
+
+## 0.3.3 - 2026-07-05
+
+### Changed
+
+- When a diff changes only logic or styles on a surface (no labeled elements added), the journey is now named after the surface's primary action-bearing control ("Invoices Send" instead of "Invoices primary journey"). Diffs that add labeled elements keep the existing diff-derived naming, so previously named flows are unaffected. A few common action verbs (send, share, export, download, print) were added to the action vocabulary. Known limit: non-English control labels do not yet qualify as action names.
+
+### Fixed
+
+- Vue bound attributes (`:aria-label="t('nav.search')"`, `v-bind` expressions) are no longer mistaken for literal selector values, and dotted i18n-key tokens (`menu.items.search`) are rejected as selector text, so Vue single-file components stop producing locators that can never match rendered UI.
+
+### Changed
+
+- Observed changed-endpoint responses are now asserted, not just collected: every observed response must stay below a status ceiling derived from the handler's added code (below 400 when the diff only shows success statuses, below 500 otherwise), response-shape keys from the changed handler are emitted as promotion hints, and zero observations warn instead of failing.
+
+- Diff-added action names are also read from button and link inner text (`<button>Apply coupon</button>`), not only from attribute labels, so flows changed by copy-level edits get named after the action instead of "primary journey".
+
+- `qamap qa` now opens with an At a Glance section — the affected flows in one line, the single next command to run, and the one or two blocking evidence items — before the detailed report. Execution blockers already covered by a required action are no longer repeated, required items sort before recommended ones, and the missing-evidence list is capped with a summary line.
+
+## 0.3.2 - 2026-07-04
+
+### Added
+
+- Added a reverse import graph: when only shared components, hooks, or library files change, QAMap now follows imports (2 hops, tsconfig paths and workspace package names included) to the pages and screens that consume them, generates the consuming surface's UI flow with the import chain as evidence, and matches verification/flow/domain manifests through the same expansion.
+- Draft steps and assertions now prefer selectors and labels that the diff itself introduced: added `aria-label`/`data-testid`/`testID`/placeholder values rank first when binding actions, gated by step intent so added status copy becomes an assertion target rather than a click target. Selectors carry an `addedInDiff` marker in JSON output.
+- Domain scenarios are named after the action the diff introduced when an added element label makes one clear (for example "Checkout Submit" instead of "Checkout primary journey"), and labels carrying an action word win over plain field labels.
+- Added `scripts/bench.mjs` (`pnpm bench`): a read-only benchmark runner that scores plan/qa output against pinned repositories, with runner-accuracy, must-reach recall, import-propagation, diff-anchoring, blank-action, and generic-title metrics; documented in `docs/benchmarking.md`.
+
+### Changed
+
+- Running `qamap` with no arguments now prints a short "start here" guide (the three core commands and when to use them) instead of the full usage wall; the full reference moved to `qamap help` and stays on `--help`.
+- The README demo is a real, unedited terminal recording of the zero-tests-to-passing-E2E loop against the published package, replacing the earlier staged walkthrough.
+- Fixtures, documentation examples, and CLI usage samples were standardized on a clearly invented demo vocabulary so examples cannot be mistaken for any real product.
+
+### Fixed
+
+- Monorepo roots without framework dependencies of their own (turbo/pnpm/yarn workspaces where apps live under `apps/`, `services/`, or `packages/`) are no longer classified as unknown/manual: project detection aggregates workspace member dependencies, with per-member evidence, so a frontend monorepo gets a web/Playwright recommendation at the root.
+- Django-style Python service files with prefixed names (`views_summary.py`) or inside service module directories (`views/report_export.py`) are now classified as service sources, so backend changes join API contract flows instead of disappearing from the plan.
+- Draft steps no longer emit blank actions for non-Latin UI labels: Korean (and any Unicode) placeholder, aria-label, and button text now survives step naming, with a selector-kind fallback when a label is symbol-only.
+- Domain scenario names no longer duplicate the "primary journey" suffix.
+
+## 0.3.1 - 2026-07-03
+
+### Fixed
+
+- Removed the stale animated README demo that still showed the previous project name and `.codeward/flows.yml` manifest path.
+- Kept the public demo text-first until a fresh recording can show the current `@ivorycanvas/qamap` package, `.qamap/manifest.yaml`, and real CLI output.
+
+## 0.3.0 - 2026-07-03
+
+### Added
+
+- Bound manifest check hints to generated Playwright draft steps, so declared selectors, values, and routes in check text shape executable actions instead of fuzzy keyword matches.
+- Added changed-endpoint observation scaffolds: endpoints implemented by files in the diff are observed with real responses in drafts instead of being auto-mocked with placeholder bodies.
+- Added `qamap qa --format agent`: a compact single-line JSON summary (`schema: qamap.qa` v1) with affected flows, required evidence, bootstrap blockers, PR checklist, and validation commands, sized for coding-agent context windows.
+- Generated agent context (`qamap context`) now includes a Pre-PR QA section that tells agents to run `qamap qa` before opening a pull request.
+
+### Changed
+
+- Renamed the project, npm package, CLI binary, config files, manifest directory, schema files, rule ids, and docs from the previous project name to QAMap (`@ivorycanvas/qamap` on npm, `qamap` as the CLI binary, `qamap.config.json`, `.qamap/`, `QM###` rule ids) to avoid a naming collision with an unrelated existing product.
+- Generated draft files are excluded from test-suite evidence, so readiness scores no longer rise just because the tool wrote its own unexecuted drafts into the repository.
+
+## 0.2.1 - 2026-07-03
+
+### Added
+
+- Added advisory context capture to `qamap manifest init`, including `CONTEXT.md`, ADRs, goal documents, agent instruction files, and QA/test/release runbooks as manifest context sources.
+- Added inferred manifest `context.validationCommands` and `context.safetyRules` so teams can see which repo-local instructions shaped the baseline without treating them as product truth.
+- Added `qamap manifest context` as a read-only preview for repo-local context sources, role summaries, validation commands, safety rules, and context repair diagnostics.
+- Added next-action and repair-hint guidance to manifest recommendations so `verify`, `e2e plan`, `e2e draft`, and `manifest explain` show how to turn a recommendation into reusable repo policy.
+- Added role classification for repo-local harness, skill, instruction, and runbook files so manifest context can distinguish agent skills, harness config, workflow lifecycle, verification rubric, safety policy, release policy, and test runner hints.
+- Added a manifest bootstrap PoC path where repo-local context filenames such as ADRs can sharpen inferred flow names, then matched PR changes can produce concrete Playwright draft actions from detected input and submit selectors.
+- Added `--manifest <file>` support to manifest validation/explanation, `verify`, and E2E plan/draft commands so teams can preview an external generated manifest without writing it into the target repository.
+- Added `qamap qa` as a manifest-free local QA skill entrypoint that turns a PR diff into a PR comment/checklist draft with affected flow, recommended runner, suggested E2E/checklist path, missing evidence, and agent handoff guidance.
+- Added a packaged `skills/qamap-pr-qa/SKILL.md` template so local agent workflows can run QAMap before PR handoff without requiring users to rewrite the workflow prompt.
+
+### Changed
+
+- Refined README, quick start, roadmap, and release validation docs around the sharper product thesis: repo-local QA manifest plus PR-to-E2E draft, rather than generic test generation.
+- Expanded manifest docs and quick-start examples to show the full default-branch manifest baseline, PR explanation, E2E draft, and manifest repair loop.
+- Documented a read-only adoption preview flow using `manifest init --write /tmp/qamap-manifest.yaml` plus `e2e draft --manifest /tmp/qamap-manifest.yaml`.
+- Repositioned README and quick-start docs so first use starts with `qamap qa`, while `.qamap/manifest.yaml` is presented as an optional accuracy upgrade rather than a setup gate.
+- Included `skills` in the npm package file list so the PR QA skill template ships with the CLI package.
+
+## 0.2.0 - 2026-07-01
+
+### Added
+
+- Added `qamap manifest init` to create a baseline `.qamap/manifest.yaml` with inferred domains, flows, anchors, checks, runner hints, source, and confidence.
+- Added `qamap manifest validate` to check manifest presence, schema shape, duplicate ids, stale anchors, route hints, and low-confidence inferred entries.
+- Added `qamap manifest explain` to show which manifest domains, flows, and checks match a branch and which manifest path should be corrected when a recommendation is wrong.
+- Added `schema/qamap-manifest.schema.json` and `$schema` output in generated manifests for editor validation and a documented manifest contract.
+- Added verification manifest matches to `e2e plan`, `e2e draft`, and `verify` output so recommendations explain why they were made and which manifest path to update when they are wrong.
+- Promoted matched verification manifest flows into generated E2E drafts so declared entry routes and checks shape Playwright, Maestro, and manual draft content before heuristic candidates.
+
+### Changed
+
+- Improved Expo direct `app/*.tsx` manifest baselines so screen domains use specific file paths and special files such as `+not-found.tsx` are not promoted as product domains.
+- Updated release, configuration, and E2E output documentation around the 0.2.0 manifest feedback loop.
+
+## 0.1.1 - 2026-07-01
+
+Documentation and launch polish release.
+
+### Changed
+
+- Refreshed the README first screen with `Install & Quick Start`, npm install commands, and clearer local-first/no-LLM-token positioning.
+- Added a 30-second demo GIF and quick start walkthrough showing how a checkout-form PR becomes a domain-aware Playwright draft.
+- Updated npm package metadata keywords and description to match the PR verification and E2E draft generation positioning.
+
+## 0.1.0 - 2026-07-01
+
+Initial public release.
+
+### Added
+
+- Repository guardrail scanning for AI-agent instructions, MCP config, committed local env files, risky scripts, broad workflow permissions, and API contract source-of-truth gaps.
+- Text, JSON, Markdown, and SARIF reporting.
+- PR-oriented `review`, `eval`, and `verify` commands for branch-aware findings, readiness scoring, validation evidence, and suggested domain tests.
+- GitHub Action entrypoint with annotations, step summary, and PR comment output.
+- Validation command discovery for JavaScript/TypeScript, Python, Go, Rust, Gradle, and Maven projects.
+- E2E planning and draft generation for Playwright, Maestro, and manual checklists.
+- CLI package detection that produces command verification checklists for valid arguments, failure paths, stdout/stderr, generated files, and exit codes instead of browser/device journeys.
+- Bootstrap planning for projects with little or no E2E history, including required runner setup, first-draft, fixture, selector, and validation steps.
+- Execution profiles, draft self-checks, readiness summaries, and action items that distinguish `runnable-candidate`, `near-runnable`, and `review-only` drafts.
+- Domain language, domain manifest, and core-flow manifest support through `.qamap/domains.yml` and `.qamap/flows.yml`.
+- Change-aware `domains suggest` and `flows suggest` commands that draft manifest entries from branch context before teams commit durable policy.
+- Manifest suggestion promotion plans that classify candidates as `commit-candidate`, `needs-review`, or `low-signal`.
+- Fixture/mock readiness and validation matrix output for generated E2E plans and drafts.
+- API-dependent Playwright draft scaffolds with endpoint hints and `page.route(...).fulfill(...)` mock slots.
+- Next.js App Router, Next Pages Router, React Router route-object, link, and navigation route inference, including dynamic route parameter placeholders or concrete route hints when available.
+- `qamap e2e draft --dry-run` to preview planned files, readiness, action items, self-checks, and blockers without writing draft files.
+- Design token and data catalog project profiles that produce artifact/catalog validation checklists instead of browser or device journeys.
+- Local E2E run history snapshots protected by generated `.gitignore` entries.
+- `coverage` and `release:check` scripts for the final local release gate.
+- README and adoption guidance for repo-local verification bases, shared domain/flow manifests, and ignored generated run history.
+- More conservative data-catalog and config/content E2E planning heuristics so generic package schemas or release docs do not create catalog journeys or API fixture blockers.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "LS Doctor"
+  short_description: "Troubleshoot TikTok LIVE Studio"
+  default_prompt: "Use $ls-doctor to diagnose and fix my TikTok LIVE Studio issue safely."

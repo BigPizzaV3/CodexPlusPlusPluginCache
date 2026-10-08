@@ -1,0 +1,20 @@
+{
+  "name": "streampay",
+  "displayName": "StreamPay",
+  "version": "1.0.1",
+  "description": "Sprawdzaj wpłaty i bezpiecznie zarządzaj widgetami oraz ustawieniami strony wpłat StreamPay.",
+  "author": {
+    "name": "StreamPay",
+    "email": "kontakt@streampay.pl",
+    "url": "https://streampay.pl"
+  },
+  "homepage": "https://streampay.pl/mcp",
+  "repository": "https://github.com/StreamPay-pl/streampay-claude-plugin",
+  "license": "MIT",
+  "keywords": ["streaming", "wpłaty", "donations", "widgety", "narzędzia-dla-twórców"],
+  "icon": "./assets/logo.png",
+  "documentationUrl": "https://wiki.streampay.pl/pl/poradniki/jak-polaczyc-asystenta-ai-ze-streampay-przez-mcp",
+  "supportUrl": "https://streampay.pl/kontakt",
+  "privacyPolicyUrl": "https://streampay.pl/polityka-prywatnosci",
+  "termsOfServiceUrl": "https://streampay.pl/regulamin-platnosci"
+}

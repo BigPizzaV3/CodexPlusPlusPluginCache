@@ -1,0 +1,39 @@
+{
+  "schema": "codex.powerbi.processRulePack.v1",
+  "id": "procure-to-pay",
+  "process": "ProcureToPay",
+  "displayName": "Procure to Pay",
+  "kpiTerms": ["purchase", "procure", "vendor", "supplier", "receipt", "invoice", "payment", "ap"],
+  "objects": [
+    { "name": "PurchaseOrder", "aliases": ["purchaseorder", "po", "purchase order"], "fields": [
+      { "name": "poId", "aliases": ["POId", "PurchaseOrderId", "PONumber"], "required": true },
+      { "name": "vendorId", "aliases": ["VendorId", "SupplierId"], "required": true },
+      { "name": "poDate", "aliases": ["PODate", "OrderDate"], "required": true },
+      { "name": "amount", "aliases": ["Amount", "NetAmount"], "required": false },
+      { "name": "status", "aliases": ["Status", "POStatus"], "required": false }
+    ] },
+    { "name": "GoodsReceipt", "aliases": ["goodsreceipt", "receipt", "gr"], "fields": [
+      { "name": "receiptId", "aliases": ["ReceiptId", "GRId"], "required": true },
+      { "name": "poId", "aliases": ["POId", "PurchaseOrderId"], "required": true },
+      { "name": "receiptDate", "aliases": ["ReceiptDate", "GRDate"], "required": true },
+      { "name": "quantity", "aliases": ["Quantity", "ReceivedQuantity"], "required": false }
+    ] },
+    { "name": "VendorInvoice", "aliases": ["vendorinvoice", "supplierinvoice", "apinvoice"], "fields": [
+      { "name": "invoiceId", "aliases": ["InvoiceId", "SupplierInvoiceId"], "required": true },
+      { "name": "poId", "aliases": ["POId", "PurchaseOrderId"], "required": true },
+      { "name": "invoiceDate", "aliases": ["InvoiceDate"], "required": true },
+      { "name": "dueDate", "aliases": ["DueDate"], "required": false },
+      { "name": "status", "aliases": ["Status", "InvoiceStatus"], "required": false },
+      { "name": "amount", "aliases": ["Amount", "InvoiceAmount"], "required": false }
+    ] }
+  ],
+  "rules": [
+    { "id": "p2p.po.vendor.required", "type": "requiredField", "severity": "High", "object": "PurchaseOrder", "field": "vendorId", "description": "Purchase order is missing vendor.", "ownerHint": "Procurement owner", "recommendedAction": "Correct supplier assignment before spend analysis.", "releaseImpact": "No-Go" },
+    { "id": "p2p.po.date.required", "type": "requiredField", "severity": "High", "object": "PurchaseOrder", "field": "poDate", "description": "Purchase order is missing PO date.", "ownerHint": "Procurement owner", "recommendedAction": "Backfill PO date or exclude from cycle-time KPIs.", "releaseImpact": "No-Go" },
+    { "id": "p2p.receipt.po.orphan", "type": "orphan", "severity": "High", "object": "GoodsReceipt", "field": "poId", "parentObject": "PurchaseOrder", "parentField": "poId", "description": "Goods receipt references missing purchase order.", "ownerHint": "Procurement owner", "recommendedAction": "Reconcile receipt-to-PO keys.", "releaseImpact": "No-Go" },
+    { "id": "p2p.invoice.po.orphan", "type": "orphan", "severity": "High", "object": "VendorInvoice", "field": "poId", "parentObject": "PurchaseOrder", "parentField": "poId", "description": "Vendor invoice references missing purchase order.", "ownerHint": "Accounts payable owner", "recommendedAction": "Reconcile invoice-to-PO keys.", "releaseImpact": "No-Go" },
+    { "id": "p2p.po.amount.nonnegative", "type": "nonNegative", "severity": "Medium", "object": "PurchaseOrder", "field": "amount", "description": "Purchase order amount is negative.", "ownerHint": "Procurement owner", "recommendedAction": "Confirm credit/return treatment.", "releaseImpact": "Warn" },
+    { "id": "p2p.invoice.amount.nonnegative", "type": "nonNegative", "severity": "Medium", "object": "VendorInvoice", "field": "amount", "description": "Vendor invoice amount is negative.", "ownerHint": "Accounts payable owner", "recommendedAction": "Confirm credit memo treatment.", "releaseImpact": "Warn" },
+    { "id": "p2p.invoice.overdue.open", "type": "overdueOpen", "severity": "Medium", "object": "VendorInvoice", "field": "dueDate", "statusField": "status", "closedValues": ["Paid", "Closed", "Cleared"], "description": "Vendor invoice is overdue and still open.", "ownerHint": "Accounts payable owner", "recommendedAction": "Review AP aging and payment-block evidence.", "releaseImpact": "Warn" }
+  ]
+}

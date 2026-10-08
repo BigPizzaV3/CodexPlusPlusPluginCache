@@ -1,0 +1,4 @@
+name: tidyguardian
+display_name: TidyGuardian
+short_description: Safely organize messy folders, drives, media libraries, and duplicates with review receipts.
+default_prompt: Scan one folder I explicitly select, create a frozen review plan and dry-run receipt, and never change files without my separate live confirmation for each action type.

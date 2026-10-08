@@ -1,0 +1,49 @@
+{
+  "author": {
+    "name": "Patriot Web Solutions",
+    "url": "https://patriotwebsolutions.org/"
+  },
+  "description": "Interview shoppers, research current deals and genuine freebies, and prepare low-noise recurring watches.",
+  "homepage": "https://patriotwebsolutions.org/",
+  "interface": {
+    "brandColor": "#946900",
+    "brandColorDark": "#FFD46B",
+    "capabilities": [
+      "Research",
+      "Planning",
+      "Shopping",
+      "Savings",
+      "Deals",
+      "Coupon",
+      "Discount"
+    ],
+    "category": "Finance",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Interview me and find the best currently verifiable deal for something I want.",
+      "Help me define what free means, then find genuine freebies near me or online.",
+      "Turn my shopping request into a quiet recurring watch that only reports meaningful changes."
+    ],
+    "developerName": "Patriot Web Solutions",
+    "displayName": "Coupon Hive",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Coupon Hive interviews you about what counts as a useful deal, searches broadly, verifies important terms at first-party sources, and prepares recurring watches that alert only when something materially changes.",
+    "privacyPolicyURL": "https://patriotwebsolutions.org/privacy/",
+    "shortDescription": "Find deals and real freebies",
+    "supportURL": "https://patriotwebsolutions.org/support",
+    "termsOfServiceURL": "https://patriotwebsolutions.org/terms/",
+    "websiteURL": "https://patriotwebsolutions.org/"
+  },
+  "keywords": [
+    "coupons",
+    "deals",
+    "freebies",
+    "shopping",
+    "scheduled-tasks"
+  ],
+  "license": "MIT",
+  "name": "coupon-hive",
+  "repository": "https://github.com/kb4beast/coupon-hive",
+  "skills": "./skills/",
+  "version": "0.1.0+codex.20260915180819"
+}

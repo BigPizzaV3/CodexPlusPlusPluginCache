@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Traycer",
+    "url": "https://github.com/anur4ag"
+  },
+  "description": "Validate and commit local changes, create and watch GitHub pull requests, then request an explicitly approved landing for each exact ready head.",
+  "homepage": "https://anur4ag.github.io/pr-completion/",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Validate and commit my changes. Create the PR, watch gates, and ask before landing the ready head.",
+      "Diagnose failed PR checks. Fix branch-caused failures, validate, push, and resume watching.",
+      "Triage unresolved review threads. Fix real findings. Explain false positives with evidence. Restore PR readiness."
+    ],
+    "developerName": "Traycer",
+    "displayName": "PR Completion",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Discover changed repositories, create validated commits and pull requests, run a deterministic state-machine watcher, repair CI and review failures, resolve conflicts, request per-PR confirmation for the exact ready head, and observe an approved protected landing until merged or blocked.",
+    "privacyPolicyURL": "https://anur4ag.github.io/pr-completion/privacy/",
+    "shortDescription": "Prepare and land GitHub PRs",
+    "supportURL": "https://anur4ag.github.io/pr-completion/support/",
+    "termsOfServiceURL": "https://anur4ag.github.io/pr-completion/terms/",
+    "websiteURL": "https://anur4ag.github.io/pr-completion/"
+  },
+  "keywords": [
+    "github",
+    "pull-request",
+    "ci",
+    "code-review",
+    "productivity"
+  ],
+  "license": "MIT",
+  "name": "pr-completion",
+  "repository": "https://github.com/anur4ag/pr-completion",
+  "skills": "./skills/",
+  "version": "0.3.0"
+}

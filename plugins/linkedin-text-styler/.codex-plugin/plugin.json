@@ -1,0 +1,39 @@
+{
+  "author": {
+    "name": "Angela Ferrante"
+  },
+  "description": "Format finished LinkedIn posts without rewriting them.",
+  "interface": {
+    "brandColor": "#5B4BFF",
+    "brandColorDark": "#5B4BFF",
+    "capabilities": [
+      "Write",
+      "Font",
+      "Text",
+      "Formatting"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Format my LinkedIn post:",
+      "Give me all the format styles for this post:",
+      "Format this post to POP in the feed:"
+    ],
+    "developerName": "Angela Ferrante",
+    "displayName": "LinkedIn Text Styler",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Format text in bold, italic, underline, and other styles that work on LinkedIn. Paste your finished post and get the same words back in complete, copy-and-paste-ready versions. Choose a recommended option with selective emphasis, or specify exactly which text to format and how\u2014without Googling \u201cLinkedIn post styler\u201d every time.",
+    "shortDescription": "Format LinkedIn posts"
+  },
+  "keywords": [
+    "linkedin",
+    "posts",
+    "text formatting",
+    "unicode",
+    "social media"
+  ],
+  "license": "MIT",
+  "name": "linkedin-text-styler",
+  "skills": "./skills/",
+  "version": "1.0.1"
+}

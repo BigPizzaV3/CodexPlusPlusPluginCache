@@ -1,0 +1,5 @@
+interface:
+  display_name: "Decision Consequence Ledger"
+  short_description: "Explicit-only."
+policy:
+  allow_implicit_invocation: false

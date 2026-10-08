@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Conversational Narrative mark</title>
+  <desc id="desc">Compact CN conversational narrative monogram.</desc>
+  <rect width="128" height="128" rx="30" fill="#1739B8"/>
+  <path d="M94 39c-8-10-19-16-32-16-24 0-43 19-43 43s19 43 43 43c13 0 24-5 32-15" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/>
+  <path d="M45 91V44l39 47V44" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M35 87c14-3 26-1 37 5 10 6 21 7 34-1" fill="none" stroke="#FFD46A" stroke-width="5" stroke-linecap="round"/>
+</svg>

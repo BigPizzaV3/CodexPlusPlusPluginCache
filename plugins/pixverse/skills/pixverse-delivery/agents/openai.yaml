@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Project Delivery"
+  short_description: "Resume, inspect and export"
+  default_prompt: "Use $pixverse-delivery to recover my project and inspect or export its results."
+policy:
+  allow_implicit_invocation: true

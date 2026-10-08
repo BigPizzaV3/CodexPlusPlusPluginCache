@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Legal conciliation, mediation preparation, pre-institution procedure, and settlement-documentation skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#2A9D8F",
+    "brandColorDark": "#62D5C7",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Draft a settlement proposal for this conciliation.",
+      "Prepare a confidential brief for the conciliator.",
+      "Turn these agreed points into complete settlement terms."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Conciliation",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Four reusable legal workflows covering conciliation proposals, confidential neutral briefs, India pre-institution mediation, and complete settlement terms.",
+    "shortDescription": "Conciliation workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "conciliation",
+    "mediation",
+    "settlement",
+    "disputes"
+  ],
+  "license": "MIT",
+  "name": "conciliation",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

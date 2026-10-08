@@ -1,0 +1,54 @@
+{
+  "author": {
+    "name": "VAST",
+    "url": "https://developers.tripo3d.ai/en"
+  },
+  "description": "Generate engine-ready 3D assets from a text prompt or a reference image and land them directly in your project, with texturing, rigging, retopology and format conversion handled in one pass.",
+  "homepage": "https://developers.tripo3d.ai/en",
+  "interface": {
+    "capabilities": [
+      "3D Model and Asset Generation",
+      "Text-to-3D",
+      "Image-to-3D",
+      "Multi-Image-to-3D",
+      "3D Character Generation",
+      "3D Texture Generation",
+      "3D Model Segmentation",
+      "Character Rigging and Animation",
+      "Game-Ready 3D Assets",
+      "Low-Poly 3D Models",
+      "3D Printing",
+      "GLB, FBX, OBJ, USDZ, STL, and 3MF Export",
+      "3D Assets for Unity, Unreal Engine, Blender, Three.js, and WebGL"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Turn my reference image into a textured 3D model with PBR materials and export it as GLB.",
+      "Build a game-ready 3D character with PBR textures, rig it for animation, and export it as FBX.",
+      "Generate a custom 3D-printable figurine and export it as STL."
+    ],
+    "developerName": "VAST",
+    "displayName": "Tripo 3D",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Generate and edit high-quality 3D models from text or images\u2014including texturing, segmentation, rigging, and animation\u2014for games, apps, and 3D printing using the Tripo API.",
+    "privacyPolicyURL": "https://www.tripo3d.ai/privacy",
+    "shortDescription": "From Text/Image to 3D Models",
+    "supportURL": "https://developers.tripo3d.ai/en/support",
+    "termsOfServiceURL": "https://developers.tripo3d.ai/en/terms",
+    "websiteURL": "https://developers.tripo3d.ai/en"
+  },
+  "keywords": [
+    "3d",
+    "asset-generation",
+    "game-development",
+    "glb",
+    "fbx",
+    "text-to-3d",
+    "image-to-3d"
+  ],
+  "license": "MIT",
+  "name": "tripo-3d",
+  "skills": "./skills/",
+  "version": "0.2.3"
+}

@@ -1,0 +1,17 @@
+{
+  "directories": [
+    ".codex-plugin",
+    "assets",
+    "skills",
+    "bin",
+    "schemas",
+    "playbooks",
+    "src",
+    "templates"
+  ],
+  "files": [
+    "package-allowlist.json",
+    "package.json",
+    "LICENSE"
+  ]
+}

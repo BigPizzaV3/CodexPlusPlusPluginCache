@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/theisegoria/chatgpt-skill-plugins/schemas/mermaid-diagrams/edit-markdown-v1.schema.json",
+  "title": "Mermaid Markdown targeted edit v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "edits"],
+  "properties": {
+    "version": {"const": 1},
+    "edits": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source"],
+        "properties": {
+          "markerId": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_-]*$", "maxLength": 256},
+          "index": {"type": "integer", "minimum": 1},
+          "expectedSourceSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "source": {"type": "string", "minLength": 1, "maxLength": 2097152}
+        },
+        "oneOf": [
+          {"required": ["markerId"], "not": {"anyOf": [{"required": ["index"]}, {"required": ["expectedSourceSha256"]}]}},
+          {"required": ["index", "expectedSourceSha256"], "not": {"required": ["markerId"]}}
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: Newsletter Voice
+  short_description: Define repeatable newsletter voice rules
+  brand_color: '#E45B32'
+  default_prompt: Use $newsletter-voice to build newsletter-specific voice rules from these issues.
+policy:
+  allow_implicit_invocation: true

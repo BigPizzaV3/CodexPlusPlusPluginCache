@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Packages and Imports"
+  short_description: "Structure Go packages and imports clearly"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-packages to design or review this Go package structure."

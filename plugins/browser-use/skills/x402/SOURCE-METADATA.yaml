@@ -1,0 +1,3 @@
+upstream_project: browser-use/browser-use
+upstream_skill: x402
+adaptation: OpenAI-safe reference-only edition; transactional setup and secret-handling steps omitted.

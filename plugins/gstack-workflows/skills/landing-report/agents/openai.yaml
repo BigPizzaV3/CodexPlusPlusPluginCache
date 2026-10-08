@@ -1,0 +1,9 @@
+interface:
+  display_name: "Landing Report"
+  short_description: "Summarize delivery status and release queue state without modifying anything."
+  default_prompt: "Use Landing Report for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

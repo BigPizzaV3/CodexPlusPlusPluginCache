@@ -1,0 +1,7 @@
+interface:
+  display_name: "Product Feature Feedback"
+  short_description: "Score a product or feature using SPARK"
+  default_prompt: "SPARK-score the attached product or feature specification."
+
+policy:
+  allow_implicit_invocation: true

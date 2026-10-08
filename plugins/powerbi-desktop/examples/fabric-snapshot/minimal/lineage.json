@@ -1,0 +1,3 @@
+[
+  { "from": "dataset-sales", "to": "report-exec", "type": "FeedsReport" }
+]

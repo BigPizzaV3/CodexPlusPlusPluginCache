@@ -1,0 +1,3 @@
+interface:
+  display_name: "Maeve Meeting Brief"
+  short_description: "Build a one-page meeting brief from your mailbox."

@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "NEO GLOBAL RESOURCES",
+    "url": "https://onegate.space"
+  },
+  "description": "Control OneGate DApp debug sessions or use its Browser Mock, and prepare public catalog requests.",
+  "homepage": "https://onegate.space",
+  "interface": {
+    "brandColor": "#282B34",
+    "brandColorDark": "#CBCED7",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.svg",
+    "defaultPrompt": [
+      "Open my DApp with the OneGate Browser Mock and inspect its dAPI calls.",
+      "Pair my OneGate app and debug this HTTPS DApp in a real wallet session.",
+      "Review this project, prepare a OneGate DApp listing request, and submit it only after my confirmation."
+    ],
+    "developerName": "NEO GLOBAL RESOURCES",
+    "displayName": "OneGate",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "logoDark": "./.codex-plugin/assets/logo-dark.svg",
+    "longDescription": "Open a DApp at its original URL with a document-start OneGate-compatible NEP-21 Browser Mock, or act as one compatible remote debugger for an installed OneGate app's encrypted remote-debug interface. Inspect page state, console output, screenshots, approval requests, and dAPI traces. OneGate can also gather public project metadata, validate it against the official catalog form, prepare the exact listing request, and submit it to the public OneGateApp issue tracker only after user review and confirmation.",
+    "privacyPolicyURL": "https://github.com/neoorder/OneGateApp/blob/master/OneGate.Codex/PRIVACY.md",
+    "shortDescription": "OneGate Codex Plugin",
+    "termsOfServiceURL": "https://onegate.space/terms.html",
+    "websiteURL": "https://onegate.space"
+  },
+  "keywords": [
+    "onegate",
+    "neo",
+    "dapp",
+    "nep-21",
+    "debugging"
+  ],
+  "license": "MIT",
+  "name": "onegate",
+  "repository": "https://github.com/neoorder/OneGateApp",
+  "skills": "./skills/",
+  "version": "1.1.0"
+}

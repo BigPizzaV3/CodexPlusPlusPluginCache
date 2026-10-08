@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "LegalQuants",
+    "url": "https://legalquants.com"
+  },
+  "description": "Contract and deal workflows for transactional attorneys, with shared daily-practice tools.",
+  "homepage": "https://github.com/LegalQuants/lq-plugin-oss",
+  "hooks": "./hooks/openai.json",
+  "interface": {
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Check the defined terms in this agreement.",
+      "Build the closing checklist from the SPA.",
+      "Build the signing packs for this closing."
+    ],
+    "developerName": "LegalQuants",
+    "displayName": "LegalQuants Transactional",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Deal workflows for transactional attorneys, with shared daily-practice tools.",
+    "privacyPolicyURL": "https://legalquants.com/lqplugins/privacy",
+    "shortDescription": "Contract and deal workflows",
+    "supportURL": "https://legalquants.com/lqplugins/terms#contact",
+    "termsOfServiceURL": "https://legalquants.com/lqplugins/terms",
+    "websiteURL": "https://legalquants.com"
+  },
+  "keywords": [
+    "legal",
+    "skills",
+    "agents"
+  ],
+  "license": "Apache-2.0",
+  "name": "legalquants-transactional",
+  "repository": "https://github.com/LegalQuants/lq-plugin-oss",
+  "skills": "./skills/",
+  "version": "0.1.1"
+}

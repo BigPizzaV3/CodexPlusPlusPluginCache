@@ -1,0 +1,22 @@
+{
+  "release": "v0.1.0",
+  "source_commit": "117ae76e758371cd01323782a1f8e619ef9bd211",
+  "targets": {
+    "linux-aarch64": {
+      "file": "eggshell-runtime-linux-aarch64-ec1c22b40115932b.tar.gz",
+      "sha256": "ec1c22b40115932b5174755615a59588d45e436ef75a8aa25607eb54ff0f63e0"
+    },
+    "linux-x86_64": {
+      "file": "eggshell-runtime-linux-x86_64-a99409a81d930eb4.tar.gz",
+      "sha256": "a99409a81d930eb47964f1099ee4d6054d0d1efb8c2658c08303235d31e56185"
+    },
+    "macos-aarch64": {
+      "file": "eggshell-runtime-macos-aarch64-bf325a8bb7c3ac50.tar.gz",
+      "sha256": "bf325a8bb7c3ac500afd37ddb701ad90cfe805ae508621473babbb74b7bf6a65"
+    },
+    "macos-x86_64": {
+      "file": "eggshell-runtime-macos-x86_64-a1c2d7073c528c6f.tar.gz",
+      "sha256": "a1c2d7073c528c6f46fd141637a55188f3a782fa2d1a95931c4657cd6336345c"
+    }
+  }
+}

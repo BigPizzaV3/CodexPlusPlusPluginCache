@@ -1,0 +1,7 @@
+{
+  "id": "workspace-deploy",
+  "name": "Deployment Drift Workspace",
+  "tenantId": "tenant-demo",
+  "capacityId": "capacity-f4",
+  "owners": ["release.owner@example.com"]
+}

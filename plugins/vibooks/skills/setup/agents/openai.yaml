@@ -1,0 +1,4 @@
+interface:
+  display_name: "Set Up Vibooks"
+  short_description: "Install, connect, and verify Vibooks readiness"
+  default_prompt: "Use $setup to set up or reuse Vibooks and verify that the intended company and book are ready for bookkeeping."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Netwalk Map"
+  short_description: "Help with Netwalk Map tasks"
+  default_prompt: "Use $netwalk-map to handle this request with its specialist workflow."

@@ -1,0 +1,9 @@
+param([string]$OperationsPackPath,[string]$DecisionPackPath,[string]$OutputPath='powerbi-command-center.html',[switch]$Json)
+$ErrorActionPreference='Stop';function Read-Summary([string]$Path){if($Path -and(Test-Path -LiteralPath $Path)){Get-Content -Raw -LiteralPath $Path|ConvertFrom-Json}}
+$operations=Read-Summary $OperationsPackPath;$decision=Read-Summary $DecisionPackPath
+$rows=@();if($operations){$rows+=[pscustomobject]@{area='Operations';status='Ready';detail=("{0} artifacts" -f $operations.artifactCount)}};if($decision){$rows+=[pscustomobject]@{area='Decision intelligence';status='Ready';detail=("{0} artifacts" -f $decision.artifactCount)}};if(-not $rows.Count){$rows+=[pscustomobject]@{area='Command center';status='NeedsInput';detail='Provide summary.json paths from one or both local packs.'}}
+$cards=($rows|ForEach-Object{"<section><h2>$($_.area)</h2><p class='status'>$($_.status)</p><p>$($_.detail)</p></section>"}) -join [Environment]::NewLine
+$html=@"
+<!doctype html><html><head><meta charset='utf-8'><title>Power BI Command Center</title><style>body{font-family:Segoe UI,Arial;background:#101820;color:#f6f7f8;margin:32px}header{display:flex;justify-content:space-between}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}section{background:#1d2b36;border:1px solid #405260;border-radius:10px;padding:18px}.status{color:#f2c811;font-weight:700}</style></head><body><header><div><h1>Power BI Command Center</h1><p>Local evidence only · no publish or send actions</p></div><p>Generated $(Get-Date -Format s)</p></header><main>$cards</main></body></html>
+"@
+Set-Content -LiteralPath $OutputPath -Value $html -Encoding UTF8;$result=[pscustomobject]@{schema='codex.powerbi.commandCenter.v1';status=if($operations -or $decision){'Ready'}else{'NeedsInput'};outputPath=(Resolve-Path -LiteralPath $OutputPath).Path;cardCount=$rows.Count};if($Json){$result|ConvertTo-Json -Depth 6}else{$result}

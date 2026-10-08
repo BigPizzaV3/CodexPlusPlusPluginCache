@@ -1,0 +1,48 @@
+{
+  "author": {
+    "email": "developer@zuora.com",
+    "name": "Zuora Engineering"
+  },
+  "description": "Zuora development assistant for API integrations, Workflow, Meter, migrations, CPQ customizations, Quote Studio hooks/events, and best-practice validation. Powered by zuora-mcp.",
+  "interface": {
+    "brandColor": "#0B8F8A",
+    "brandColorDark": "#70F4EF",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use Zuora Coding Agent to design a Zuora API integration.",
+      "Use Zuora Coding Agent to review Zuora workflow.",
+      "Use Zuora Coding Agent to review Zuora meter."
+    ],
+    "developerName": "Zuora Engineering",
+    "displayName": "Zuora Coding Agent",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Optimized for Codex. Reusable Zuora skills for API integrations, workflow automation, Invoice Settlement and Order API migrations, CPQ Apex/Visualforce customizations, Quote Studio hooks/events, and\n  best-practice validation.",
+    "privacyPolicyURL": "https://www.zuora.com/privacy-statement/",
+    "shortDescription": "Build Zuora Solutions",
+    "supportURL": "https://support.zuora.com/",
+    "termsOfServiceURL": "https://www.zuora.com/terms-conditions/",
+    "websiteURL": "https://developer.zuora.com"
+  },
+  "keywords": [
+    "zuora",
+    "billing",
+    "subscription",
+    "migration",
+    "api",
+    "workflow",
+    "cpq",
+    "salesforce",
+    "apex",
+    "lwc",
+    "quote-studio"
+  ],
+  "license": "MIT",
+  "name": "zuora-coding-agent",
+  "skills": "./skills/",
+  "version": "1.5.4"
+}

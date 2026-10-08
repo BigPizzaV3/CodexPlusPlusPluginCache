@@ -1,0 +1,15 @@
+{
+  "name": "okrdev",
+  "owner": {
+    "name": "Alex Chisholm",
+    "url": "https://github.com/backedbydata-co"
+  },
+  "description": "The okrdev framework: an OKR operating method that lives in your repo, with an AI coach that runs it.",
+  "plugins": [
+    {
+      "name": "okrdev",
+      "source": "./",
+      "description": "OKRs as markdown files in your own repo, with an AI coach that checks new work against your key results, pre-drafts weekly check-ins, and parks distractions."
+    }
+  ]
+}

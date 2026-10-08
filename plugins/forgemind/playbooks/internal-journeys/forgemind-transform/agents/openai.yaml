@@ -1,0 +1,6 @@
+interface:
+  display_name: "ForgeMind Transform"
+  short_description: "Transform this repository through autonomous AI-native MVP experiments."
+  default_prompt: "Use $forgemind-transform to make this application maximally AI-native and disruptive."
+policy:
+  allow_implicit_invocation: false

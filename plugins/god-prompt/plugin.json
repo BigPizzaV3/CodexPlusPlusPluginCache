@@ -1,0 +1,46 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Tomi \u0160eregi"
+  },
+  "description": "A scoped production-engineering workflow for implementing, debugging, reviewing, refactoring, and release-preparing software with explicit scope and verification evidence.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [
+          "Implement with explicit scope and verification",
+          "Debug systematically from evidence",
+          "Review code and agent work before completion"
+        ],
+        "category": "Developer Tools",
+        "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+        "defaultPrompt": [
+          "Implement this change with explicit scope and verification evidence.",
+          "Debug this failure from evidence and fix only the root cause.",
+          "Review this change for regressions, scope creep, and missing verification without editing files."
+        ],
+        "developerName": "Tomi \u0160eregi",
+        "displayName": "GodPrompt",
+        "logo": "./.codex-plugin/assets/logo.png",
+        "longDescription": "A scoped software-engineering workflow for implementation, debugging, review, refactoring, and release preparation with explicit scope and verification evidence.",
+        "privacyPolicyURL": "https://tomiseregi.si/privacy",
+        "shortDescription": "Production engineering",
+        "supportURL": "https://github.com/AKzar1el/god-prompt-mcp/issues",
+        "termsOfServiceURL": "https://github.com/AKzar1el/god-prompt-mcp/blob/main/LICENSE",
+        "websiteURL": "https://tomiseregi.si/projects/god-prompt"
+      }
+    }
+  },
+  "homepage": "https://tomiseregi.si/projects/god-prompt",
+  "keywords": [
+    "software-engineering",
+    "coding-agent",
+    "debugging",
+    "code-review",
+    "verification"
+  ],
+  "license": "MIT",
+  "name": "god-prompt",
+  "repository": "https://github.com/AKzar1el/god-prompt-mcp",
+  "version": "1.0.24"
+}

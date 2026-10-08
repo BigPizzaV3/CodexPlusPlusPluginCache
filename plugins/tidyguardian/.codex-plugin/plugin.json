@@ -1,0 +1,40 @@
+{
+  "author": {
+    "name": "James Au",
+    "url": "https://github.com/dev-james0723"
+  },
+  "description": "Review-first, local-only file organization with explicit safety gates.",
+  "interface": {
+    "brandColor": "#334155",
+    "brandColorDark": "#AAB8CC",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "Help me safely clean up my desktop and free up disk space",
+      "Help me clean up this messy folder and find duplicates",
+      "Help me find large files taking up disk space"
+    ],
+    "developerName": "James Au",
+    "displayName": "TidyGuardian",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "TidyGuardian inventories one explicitly selected local folder, creates frozen plans and offline review receipts, and supports only same-filesystem moves, reversible quarantine or restore after separate live confirmation. Permanent deletion, quarantine purge, directory removal, Windows mutation, cross-filesystem fallback, telemetry, uploads, background services and automatic installers are disabled.",
+    "shortDescription": "Safe local file organization"
+  },
+  "keywords": [
+    "files",
+    "organization",
+    "duplicates",
+    "media",
+    "safety"
+  ],
+  "license": "MIT",
+  "name": "tidyguardian",
+  "repository": "https://github.com/dev-james0723/TidyGuardian-plugins",
+  "skills": "./skills",
+  "version": "2.0.1"
+}

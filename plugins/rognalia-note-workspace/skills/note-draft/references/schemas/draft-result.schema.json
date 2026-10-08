@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:draft-result:1",
+  "title": "note Workspace saved draft result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "request_id", "payload_sha256", "article_id",
+    "article_revision", "registration_revision", "completed_at", "status",
+    "registration_path", "registration_sha256", "adapter_label", "draft_url",
+    "url_results", "title_verified", "body_start_verified",
+    "body_end_verified", "headings_verified", "tags_verified",
+    "thumbnail_verified", "inline_images_verified", "editor_closed",
+    "private_draft_confirmed", "publish_screen_opened", "published",
+    "scheduled", "existing_draft_overwritten", "result_path", "external_actions"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string"},
+    "payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "article_id": {"type": "string"},
+    "article_revision": {"type": "integer", "minimum": 1},
+    "registration_revision": {"type": "integer", "minimum": 1},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "status": {"const": "saved_private_draft"},
+    "registration_path": {"type": "string"},
+    "registration_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "adapter_label": {"type": "string"},
+    "draft_url": {
+      "type": "string",
+      "pattern": "^https://(?:www\\.)?note\\.com/notes/[A-Za-z0-9_-]+/edit$"
+    },
+    "url_results": {"type": "array"},
+    "title_verified": {"const": true},
+    "body_start_verified": {"const": true},
+    "body_end_verified": {"const": true},
+    "headings_verified": {"const": true},
+    "tags_verified": {"const": true},
+    "thumbnail_verified": {"const": true},
+    "inline_images_verified": {"const": true},
+    "editor_closed": {"const": true},
+    "private_draft_confirmed": {"const": true},
+    "publish_screen_opened": {"const": false},
+    "published": {"const": false},
+    "scheduled": {"const": false},
+    "existing_draft_overwritten": {"const": false},
+    "result_path": {"type": "string"},
+    "external_actions": {"const": ["note:new_private_draft_saved"]}
+  }
+}

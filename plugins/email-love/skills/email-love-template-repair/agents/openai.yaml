@@ -1,0 +1,13 @@
+interface:
+  display_name: "Email Love Template Repair"
+  short_description: "Diagnose and repair broken email templates"
+  default_prompt: "Use $email-love-template-repair to diagnose and repair this broken Email Love template."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "figma"
+      description: "Inspect and repair the user's Email Love template in Figma"
+      transport: "streamable_http"
+      url: "https://mcp.figma.com/mcp"
+policy:
+  allow_implicit_invocation: true

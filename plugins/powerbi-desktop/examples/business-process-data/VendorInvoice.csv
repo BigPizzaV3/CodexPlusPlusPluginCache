@@ -1,0 +1,3 @@
+InvoiceId,POId,InvoiceDate,DueDate,Status,Amount
+VI-1,PO-1,2026-01-06,2026-02-06,Paid,700
+VI-2,PO-404,2026-01-07,2026-02-07,Open,-5

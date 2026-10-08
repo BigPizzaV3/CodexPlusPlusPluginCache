@@ -1,0 +1,47 @@
+{
+  "author": {
+    "name": "Charles Benjamin",
+    "url": "https://github.com/cbenjamin23"
+  },
+  "description": "MOOS-IvP skills for apps, IvP behaviors, missions, test harnesses, documentation, and alog analysis.",
+  "homepage": "https://github.com/cbenjamin23/moos-ivp-skills",
+  "interface": {
+    "brandColor": "#0E4E77",
+    "brandColorDark": "#88C8F1",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Execute"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use MOOS-IvP skills to build or repair this MOOS app",
+      "Use MOOS-IvP skills to create a runnable multi-vehicle MOOS-IvP mission",
+      "Use MOOS-IvP skills to create and verify a TIFF background map for this mission"
+    ],
+    "developerName": "Charles Chen-Zhou Benjamin",
+    "displayName": "MOOS-IvP Skills",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Build and validate MOOS-IvP apps, IvP behaviors, missions, test harnesses, and TIFF background maps. Consult framework documentation, analyze .alog mission logs, and more.",
+    "privacyPolicyURL": "https://cbenjamin23.github.io/moos-ivp-skills/plugin-privacy/",
+    "shortDescription": "Agent workflows for MOOS-IvP",
+    "supportURL": "https://github.com/cbenjamin23/moos-ivp-skills/issues",
+    "termsOfServiceURL": "https://cbenjamin23.github.io/moos-ivp-skills/plugin-terms/",
+    "websiteURL": "https://github.com/cbenjamin23/moos-ivp-skills"
+  },
+  "keywords": [
+    "moos",
+    "moos-ivp",
+    "ivp",
+    "marine-autonomy",
+    "marine-robotics",
+    "autonomy",
+    "robotics"
+  ],
+  "license": "GPL-3.0-only",
+  "name": "moos-ivp-skills",
+  "repository": "https://github.com/cbenjamin23/moos-ivp-skills",
+  "skills": "./skills/",
+  "version": "1.4.12"
+}

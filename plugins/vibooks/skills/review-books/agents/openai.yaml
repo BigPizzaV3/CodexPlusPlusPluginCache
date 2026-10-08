@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Vibooks Books"
+  short_description: "Independently review source documents against the books"
+  default_prompt: "Use $review-books to independently review the posted bookkeeping against the original source documents without changing the books."

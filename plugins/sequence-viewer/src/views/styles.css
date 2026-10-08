@@ -1,0 +1,607 @@
+@import "tailwindcss";
+
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme]), :root:not([data-theme]) *) {
+      @slot;
+    }
+  }
+}
+
+@theme {
+  --color-token-border: var(--bio-token-border);
+  --color-token-focus-border: var(--bio-token-focus-border);
+  --color-token-input-background: var(--bio-token-input-background);
+  --color-token-input-placeholder-foreground: var(
+    --bio-token-input-placeholder
+  );
+  --color-token-main-surface-primary: var(--bio-token-surface-primary);
+  --color-token-main-surface-secondary: var(--bio-token-surface-secondary);
+  --color-token-text-primary: var(--bio-token-text-primary);
+  --color-token-text-secondary: var(--bio-token-text-secondary);
+  --color-token-text-tertiary: var(--bio-token-text-tertiary);
+}
+
+:root {
+  color-scheme: light dark;
+  --bio-token-border: var(--color-border-primary, #e6e6e6);
+  --bio-token-focus-border: var(--color-ring-primary, #52786b);
+  --bio-token-input-background: var(--color-background-primary, #ffffff);
+  --bio-token-input-placeholder: var(--color-text-tertiary, #737373);
+  --bio-token-surface-primary: var(--color-background-primary, #ffffff);
+  --bio-token-surface-secondary: var(--color-background-secondary, #f7f7f7);
+  --bio-token-text-primary: var(--color-text-primary, #242424);
+  --bio-token-text-secondary: var(--color-text-secondary, #626262);
+  --bio-token-text-tertiary: var(--color-text-tertiary, #737373);
+  --bio-token-accent: #4c6b61;
+  --bio-token-accent-surface: #f1f4f2;
+  --bio-sequence-a-surface: #f8e9e8;
+  --bio-sequence-a-foreground: #854e4a;
+  --bio-sequence-c-surface: #f4efdc;
+  --bio-sequence-c-foreground: #725f30;
+  --bio-sequence-g-surface: #e8eef6;
+  --bio-sequence-g-foreground: #4b6181;
+  --bio-sequence-t-surface: #e5f0eb;
+  --bio-sequence-t-foreground: #426d59;
+  --bio-sequence-neutral-surface: var(--bio-token-surface-secondary);
+  --bio-sequence-neutral-foreground: var(--bio-token-text-secondary);
+  --bio-sequence-search-marker: #836524;
+  --bio-protein-hydrophobic-surface: var(--bio-sequence-g-surface);
+  --bio-protein-hydrophobic-foreground: var(--bio-sequence-g-foreground);
+  --bio-protein-positive-surface: var(--bio-sequence-a-surface);
+  --bio-protein-positive-foreground: var(--bio-sequence-a-foreground);
+  --bio-protein-polar-surface: var(--bio-sequence-t-surface);
+  --bio-protein-polar-foreground: var(--bio-sequence-t-foreground);
+  --bio-protein-proline-surface: var(--bio-sequence-c-surface);
+  --bio-protein-proline-foreground: var(--bio-sequence-c-foreground);
+  --bio-protein-negative-surface: #f0eaf5;
+  --bio-protein-negative-foreground: #715b86;
+  --bio-protein-cysteine-surface: #f5e7ee;
+  --bio-protein-cysteine-foreground: #835b70;
+  --bio-protein-glycine-surface: #f5ebdf;
+  --bio-protein-glycine-foreground: #7c6042;
+  --bio-protein-aromatic-surface: #e6f1f2;
+  --bio-protein-aromatic-foreground: #3f6b72;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bio-token-border: var(--color-border-primary, #3a3a3a);
+    --bio-token-focus-border: var(--color-ring-primary, #9caea5);
+    --bio-token-input-background: var(--color-background-primary, #1b1b1b);
+    --bio-token-input-placeholder: var(--color-text-tertiary, #a0a0a0);
+    --bio-token-surface-primary: var(--color-background-primary, #1b1b1b);
+    --bio-token-surface-secondary: var(--color-background-secondary, #242424);
+    --bio-token-text-primary: var(--color-text-primary, #ececec);
+    --bio-token-text-secondary: var(--color-text-secondary, #bdbdbd);
+    --bio-token-text-tertiary: var(--color-text-tertiary, #a0a0a0);
+    --bio-token-accent: #a9c7b8;
+    --bio-token-accent-surface: #29352e;
+    --bio-sequence-a-surface: #342828;
+    --bio-sequence-a-foreground: #e8b6b2;
+    --bio-sequence-c-surface: #332f22;
+    --bio-sequence-c-foreground: #d9c68a;
+    --bio-sequence-g-surface: #222d3b;
+    --bio-sequence-g-foreground: #acbed8;
+    --bio-sequence-t-surface: #21332a;
+    --bio-sequence-t-foreground: #a7cdb9;
+    --bio-sequence-search-marker: #c9b079;
+    --bio-protein-negative-surface: #30273a;
+    --bio-protein-negative-foreground: #cfb8e5;
+    --bio-protein-cysteine-surface: #382831;
+    --bio-protein-cysteine-foreground: #d6b2c6;
+    --bio-protein-glycine-surface: #342b23;
+    --bio-protein-glycine-foreground: #d8bc99;
+    --bio-protein-aromatic-surface: #223337;
+    --bio-protein-aromatic-foreground: #afd0d6;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bio-token-border: var(--color-border-primary, #3a3a3a);
+  --bio-token-focus-border: var(--color-ring-primary, #9caea5);
+  --bio-token-input-background: var(--color-background-primary, #1b1b1b);
+  --bio-token-input-placeholder: var(--color-text-tertiary, #a0a0a0);
+  --bio-token-surface-primary: var(--color-background-primary, #1b1b1b);
+  --bio-token-surface-secondary: var(--color-background-secondary, #242424);
+  --bio-token-text-primary: var(--color-text-primary, #ececec);
+  --bio-token-text-secondary: var(--color-text-secondary, #bdbdbd);
+  --bio-token-text-tertiary: var(--color-text-tertiary, #a0a0a0);
+  --bio-token-accent: #a9c7b8;
+  --bio-token-accent-surface: #29352e;
+  --bio-sequence-a-surface: #342828;
+  --bio-sequence-a-foreground: #e8b6b2;
+  --bio-sequence-c-surface: #332f22;
+  --bio-sequence-c-foreground: #d9c68a;
+  --bio-sequence-g-surface: #222d3b;
+  --bio-sequence-g-foreground: #acbed8;
+  --bio-sequence-t-surface: #21332a;
+  --bio-sequence-t-foreground: #a7cdb9;
+  --bio-sequence-search-marker: #c9b079;
+  --bio-protein-negative-surface: #30273a;
+  --bio-protein-negative-foreground: #cfb8e5;
+  --bio-protein-cysteine-surface: #382831;
+  --bio-protein-cysteine-foreground: #d6b2c6;
+  --bio-protein-glycine-surface: #342b23;
+  --bio-protein-glycine-foreground: #d8bc99;
+  --bio-protein-aromatic-surface: #223337;
+  --bio-protein-aromatic-foreground: #afd0d6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bio-token-surface-primary);
+  color: var(--bio-token-text-primary);
+  font-family: var(
+    --font-sans,
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif
+  );
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.sequence-viewer-shell
+  :is(button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--bio-token-focus-border);
+  outline-offset: 2px;
+}
+
+.bio-sequence-scroller,
+.bio-sequence-track-row {
+  font-family: var(
+    --font-mono,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace
+  );
+  font-size: 14px;
+  font-weight: 400;
+  font-variant-ligatures: none;
+  line-height: 20px;
+}
+
+.bio-sequence-scroller {
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+}
+
+.bio-sequence-line {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.bio-sequence-track-row {
+  display: grid;
+  flex-shrink: 0;
+  grid-template-columns: 3.25rem minmax(0, 1fr) 3.25rem;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.bio-sequence-coordinate,
+.bio-sequence-track-label {
+  color: var(--bio-token-text-tertiary);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.bio-sequence-coordinate-start {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--bio-token-surface-primary);
+  padding-right: 4px;
+  text-align: right;
+}
+
+.bio-sequence-residue {
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 3px;
+  padding: 0;
+  font: inherit;
+  cursor: text;
+  box-shadow:
+    var(--bio-sequence-selection-shadow, 0 0 0 transparent),
+    var(--bio-sequence-search-shadow, 0 0 0 transparent);
+}
+
+.bio-sequence-residue:hover {
+  outline: 1px solid var(--bio-token-focus-border);
+  outline-offset: 1px;
+}
+
+.bio-sequence-residue:focus-visible {
+  position: relative;
+  z-index: 2;
+  outline: 2px solid var(--bio-token-focus-border);
+  outline-offset: 2px;
+}
+
+.bio-sequence-residue[aria-selected="true"] {
+  --bio-sequence-selection-shadow: inset 0 0 0 1.5px
+    var(--bio-token-focus-border);
+}
+
+.bio-sequence-residue[data-search-hit="true"] {
+  --bio-sequence-search-shadow: inset 0 -3px 0 var(--bio-sequence-search-marker);
+}
+
+.bio-sequence-scroller :is([data-sequence-group], [data-quality-group]) {
+  flex-shrink: 0;
+}
+
+.bio-sequence-quality-row {
+  align-items: end;
+}
+
+.bio-sequence-quality-bar {
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: 2px 2px 0 0;
+  background: var(--bio-token-accent);
+  opacity: 0.7;
+}
+
+.bio-sequence-feature {
+  background: var(--bio-sequence-t-surface);
+  color: var(--bio-sequence-t-foreground);
+  font: inherit;
+}
+
+.bio-sequence-feature[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 1.5px var(--bio-token-focus-border);
+}
+
+.bio-sequence-translation-residue {
+  position: absolute;
+  border-radius: 3px;
+  color: var(--bio-token-text-secondary);
+  text-align: center;
+}
+
+.bio-viewer-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+.bio-viewer-identity {
+  display: flex;
+  align-items: center;
+  flex: 1 1 180px;
+  gap: 10px;
+  min-width: 0;
+}
+
+.bio-viewer-file-mark {
+  display: grid;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--bio-token-border);
+  border-radius: 7px;
+  background: var(--bio-token-surface-secondary);
+  color: var(--bio-token-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.bio-viewer-file-name {
+  overflow: hidden;
+  color: var(--bio-token-text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bio-viewer-file-kind {
+  color: var(--bio-token-text-secondary);
+  font-size: 12px;
+}
+
+.bio-viewer-mode-switch {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--bio-token-border);
+  border-radius: 7px;
+  background: var(--bio-token-surface-secondary);
+}
+
+.bio-viewer-mode-button,
+.bio-viewer-header-action {
+  min-height: 32px;
+  padding: 5px 11px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--bio-token-text-secondary);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.bio-viewer-mode-button-active {
+  border-color: var(--bio-token-border);
+  color: var(--bio-token-accent);
+  background: var(--bio-token-surface-primary);
+}
+
+.bio-viewer-header-action {
+  border-color: var(--bio-token-border);
+  background: var(--bio-token-surface-primary);
+}
+
+.bio-viewer-header-action:hover,
+.bio-viewer-mode-button:hover {
+  background: var(--bio-token-accent-surface);
+  color: var(--bio-token-accent);
+}
+
+.bio-viewer-header-action:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.bio-workbench-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.bio-workbench-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.bio-workbench-sidebar {
+  order: -1;
+  min-width: 0;
+}
+
+.bio-msa-workbench-layout {
+  flex: 1;
+  min-height: 0;
+  grid-template-rows: auto minmax(240px, 1fr);
+  align-items: stretch;
+}
+
+.bio-msa-workbench-layout > .bio-workbench-main {
+  gap: 0;
+}
+
+.bio-msa-workbench-layout > .bio-workbench-sidebar {
+  position: static;
+  min-height: 0;
+  overflow: auto;
+}
+
+.bio-workbench-tools {
+  min-width: 0;
+  border: 1px solid var(--bio-token-border);
+  border-radius: 7px;
+  background: var(--bio-token-surface-primary);
+  color: var(--bio-token-text-primary);
+}
+
+.bio-workbench-tool-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 2px;
+  padding: 5px;
+}
+
+.bio-workbench-tool-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--bio-token-text-secondary);
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: start;
+  cursor: pointer;
+}
+
+.bio-workbench-tool-trigger:hover {
+  background: var(--bio-token-surface-secondary);
+  color: var(--bio-token-text-primary);
+}
+
+.bio-workbench-tool-trigger[aria-expanded="true"] {
+  background: var(--bio-token-accent-surface);
+  color: var(--bio-token-accent);
+  font-weight: 600;
+}
+
+.bio-workbench-tool-chevron {
+  color: var(--bio-token-text-tertiary);
+  font-size: 15px;
+}
+
+.bio-workbench-tool-panel {
+  max-height: min(68vh, 680px);
+  overflow: auto;
+  padding: 14px;
+  border-top: 1px solid var(--bio-token-border);
+  scrollbar-gutter: stable;
+}
+
+.bio-workbench-tool-panel[hidden] {
+  display: none;
+}
+
+.bio-workbench-tool-panel > :first-child {
+  margin-top: 0;
+}
+
+.bio-workbench-tool-notice {
+  margin: 0;
+  padding: 10px 14px;
+  border-top: 1px solid var(--bio-token-border);
+  color: var(--bio-token-text-secondary);
+  font-size: 13px;
+}
+
+.bio-sequence-toolbar-primary,
+.bio-sequence-viewbar,
+.bio-sequence-recordbar {
+  min-width: 0;
+}
+
+@media (min-width: 1100px) {
+  .bio-workbench-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+    gap: 16px;
+  }
+
+  .bio-workbench-sidebar {
+    position: sticky;
+    top: 12px;
+    order: 0;
+  }
+
+  .bio-workbench-sidebar .bio-workbench-tool-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bio-msa-workbench-layout {
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .bio-viewer-header {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .bio-viewer-identity {
+    flex-basis: 100%;
+  }
+
+  .bio-workbench-tool-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .bio-workbench-tool-trigger {
+    flex-shrink: 0;
+  }
+
+  .bio-workbench-tool-panel {
+    max-height: 45vh;
+    padding: 12px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .bio-workbench-layout:has(
+    .bio-workbench-sidebar [data-active-panel="quality"]
+  ) {
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+  }
+}
+
+.sequence-viewer-shell {
+  position: relative;
+}
+
+.sequence-viewer-shell[data-toolbar-mode="hidden"] .sequence-viewer-topbar {
+  position: absolute;
+  z-index: 30;
+  inset-inline: 0;
+  top: 0;
+}
+
+.sequence-viewer-shell[data-toolbar-mode="hidden"][data-toolbar-revealed="false"]
+  .sequence-viewer-topbar {
+  pointer-events: none;
+  visibility: hidden;
+  transform: translateY(-100%);
+}
+
+.sequence-viewer-shell[data-toolbar-mode="hidden"][data-toolbar-revealed="true"]
+  .sequence-viewer-topbar {
+  position: sticky;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.sequence-toolbar-reveal-zone {
+  position: absolute;
+  z-index: 40;
+  inset-inline: 0;
+  top: 0;
+  width: 100%;
+  height: 0.75rem;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.sequence-toolbar-reveal-zone:focus-visible {
+  background: var(--bio-token-surface-secondary);
+  outline: 2px solid var(--bio-token-focus-border);
+  outline-offset: -2px;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .sequence-toolbar-reveal-zone {
+    height: 1.5rem;
+  }
+}

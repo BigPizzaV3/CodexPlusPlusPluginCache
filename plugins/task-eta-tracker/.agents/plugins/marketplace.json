@@ -1,0 +1,20 @@
+{
+  "name": "task-eta-tracker-local",
+  "interface": {
+    "displayName": "Task ETA Tracker Local"
+  },
+  "plugins": [
+    {
+      "name": "task-eta-tracker",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

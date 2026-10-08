@@ -1,0 +1,44 @@
+{
+  "author": {
+    "email": "support@b12.io",
+    "name": "B12",
+    "url": "https://www.b12.io"
+  },
+  "description": "Write, review, and fix code in any language \u2014 complete, runnable blocks you can paste, with nothing left out. Or skip the code and have a web app or website built on B12.",
+  "homepage": "https://www.b12.io",
+  "interface": {
+    "brandColor": "#4B22E8",
+    "brandColorDark": "#4B22E8",
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Generate a web app",
+      "Create a landing page in HTML, CSS, and JavaScript",
+      "Review this code snippet"
+    ],
+    "developerName": "B12",
+    "displayName": "Code",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Ask for code and get code \u2014 a complete file, a working component, a whole corrected block \u2014 in whatever language or framework you name. It writes the parts most assistants skip. No \"rest of the code goes here,\" every import in place, and a plain note about what the code still needs before it runs, whether that's an install command, a key you have to supply, or the backend a contact form won't work without. Paste a snippet in for review or unit tests and the full block comes back, not a list of line edits. And when you'd rather have the finished thing than the source, it can generate a web app or website on B12.",
+    "privacyPolicyURL": "https://www.b12.io/privacy-policy/",
+    "shortDescription": "Code that's ready to run",
+    "supportURL": "https://www.b12.io/contact-us/",
+    "termsOfServiceURL": "https://www.b12.io/terms-of-service/",
+    "websiteURL": "https://www.b12.io"
+  },
+  "keywords": [
+    "code",
+    "programming",
+    "html",
+    "javascript",
+    "web",
+    "b12"
+  ],
+  "license": "Apache-2.0",
+  "name": "code",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

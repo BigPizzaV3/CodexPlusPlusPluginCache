@@ -1,0 +1,33 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Happenstance, Inc.",
+    "url": "https://happenstance.ai"
+  },
+  "description": "Happenstance searches your professional network using natural language to find the right people. Results surface mutual connections and rank by relationship strength, helping you find the warmest intro path. Deep research anyone to get comprehensive profiles with career history and expertise. Ideal for sales, recruiting, venture capital, and business development.",
+  "homepage": "https://happenstance.ai",
+  "interface": {
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Check whether Happenstance has relevant contact context"
+    ],
+    "developerName": "Happenstance, Inc.",
+    "displayName": "Happenstance",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
+    "longDescription": "Happenstance searches your professional network using natural language to find the right people. Results surface mutual connections and rank by relationship strength, helping you find the warmest intro path. Deep research anyone to get comprehensive profiles with career history and expertise. Ideal for sales, recruiting, venture capital, and business development.",
+    "privacyPolicyURL": "https://happenstance.ai/privacy",
+    "screenshots": [],
+    "shortDescription": "Search your network",
+    "supportURL": "https://happenstance.ai/contact",
+    "termsOfServiceURL": "https://happenstance.ai/terms",
+    "websiteURL": "https://happenstance.ai"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "happenstance",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

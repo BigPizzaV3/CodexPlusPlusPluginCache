@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Video Editing"
+  short_description: "Edit clips, captions and audio"
+  default_prompt: "Use $pixverse-video-editing to edit this footage into a 30-second vertical video, remove empty sections, adjust the pacing and preserve the original audio."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Evaluate AI Release"
+  short_description: "Gate RAG and agent releases with evidence"
+  default_prompt: "Use $evaluate-ai-release to compare this candidate with its accepted baseline."

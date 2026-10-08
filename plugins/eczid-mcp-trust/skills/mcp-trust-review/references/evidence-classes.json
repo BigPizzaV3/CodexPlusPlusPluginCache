@@ -1,0 +1,111 @@
+{
+  "generatedFrom": {
+    "definition": "foundry/plugins.json"
+  },
+  "detectors": [
+    {
+      "id": "mcp.config",
+      "label": "MCP server configuration",
+      "patterns": [
+        "(^|/)\\.vscode/mcp\\.json$",
+        "(^|/)\\.mcp\\.json$",
+        "(^|/)mcp\\.json$",
+        "(^|/)claude_desktop_config\\.json$",
+        "(^|/)\\.cursor/mcp\\.json$",
+        "(^|/)\\.(codex|gemini|kiro|copilot)/mcp\\.json$",
+        "(^|/)mcp\\.config\\.(json|ya?ml|js|ts)$",
+        "(^|/)\\.mcp/[^/]+\\.json$"
+      ]
+    },
+    {
+      "id": "mcp.serverManifest",
+      "label": "MCP server manifest (server.json / registry entry)",
+      "patterns": [
+        "(^|/)server\\.json$",
+        "mcp-?server",
+        "(^|/)\\.well-known/mcp\\.json$"
+      ]
+    },
+    {
+      "id": "mcp.envTemplate",
+      "label": "Environment / secret-handling template",
+      "patterns": [
+        "(^|/)\\.env\\.(example|sample|template)$",
+        "secrets?-?policy",
+        "(^|/)env\\.example$"
+      ]
+    },
+    {
+      "id": "mcp.policy",
+      "label": "Local MCP policy / allowlist",
+      "patterns": [
+        "mcp-?policy",
+        "tool-?allowlist",
+        "mcp-?allowlist",
+        "mediation-?policy",
+        "(^|/)\\.eczid/"
+      ]
+    },
+    {
+      "id": "mcp.resolverRef",
+      "label": "ECZ-ID public proof reference",
+      "patterns": [
+        "(^|/)\\.well-known/ecz-[a-z0-9-]*\\.json$",
+        "(^|/)ecz-mcp[a-z0-9-]*\\.json$",
+        "(^|/)ecz-id[a-z0-9-]*\\.json$"
+      ]
+    }
+  ],
+  "guidance": [
+    {
+      "detectorId": "mcp.config",
+      "whyItMatters": "An MCP configuration decides which servers an agent can launch or connect to, with which command, arguments and environment. It is the single place where reachability is granted.",
+      "reviewWhenObserved": "Open the file and list each server: transport (stdio or remote URL), the command basename, and every environment KEY NAME that looks credential-shaped (never the value). Confirm each server is one you intend to run.",
+      "reviewWhenNotObserved": "If this workspace is meant to expose MCP servers, no host will find them. If it is not, nothing to do.",
+      "weightWhenNotObserved": "high",
+      "capability": {
+        "label": "ECZ-ID MCP Trust for VS Code (Community, free forever)",
+        "url": "https://marketplace.visualstudio.com/items?itemName=ecocitizenz.eczid-mcp-trust",
+        "note": "Full inventory, credential-shaped key-name detection, Trust Delta and Review Priority with reasons."
+      }
+    },
+    {
+      "detectorId": "mcp.serverManifest",
+      "whyItMatters": "A server manifest or registry descriptor states what a server claims to be and where it is published. It is what a reviewer compares the configuration against.",
+      "reviewWhenObserved": "Check the declared name, version and transport match the configuration that launches it.",
+      "reviewWhenNotObserved": "Supporting evidence only. Servers you publish should carry a manifest; servers you consume are described by their publisher.",
+      "weightWhenNotObserved": "normal"
+    },
+    {
+      "detectorId": "mcp.envTemplate",
+      "whyItMatters": "Environment templates show which key names a server expects. Credential-shaped names (KEY, TOKEN, SECRET, PASSWORD) are the ones to protect. Values are never read by this review.",
+      "reviewWhenObserved": "List the credential-shaped key names and confirm each has an owner and a rotation route. Never paste values anywhere.",
+      "reviewWhenNotObserved": "Supporting evidence only. Consider a template so key names are documented without values.",
+      "weightWhenNotObserved": "normal"
+    },
+    {
+      "detectorId": "mcp.policy",
+      "whyItMatters": "A local policy or allowlist is where you say which tools may run and under what conditions. Without one, every declared tool is reachable by default.",
+      "reviewWhenObserved": "Confirm the allowlist matches what the servers actually expose and that denied tools are named, not assumed.",
+      "reviewWhenNotObserved": "Supporting evidence. A deterministic local policy is what turns inspection into control; ECZ-ID MCP Trust Pro provides one in VS Code.",
+      "weightWhenNotObserved": "normal",
+      "capability": {
+        "label": "MCP Trust Pro (VS Code): deterministic local policy and optional Local Trust Gate",
+        "url": "https://developers.ecocitizenz.com/mcp-trust/",
+        "note": "Pro capabilities run in the VS Code extension; this plugin does not claim them."
+      }
+    },
+    {
+      "detectorId": "mcp.resolverRef",
+      "whyItMatters": "An ECZ-ID public proof reference lets anyone check a server's current public posture in Resolver without exchanging documents. Absence is neutral.",
+      "reviewWhenObserved": "Run ecz_check_target on the referenced identifier and read the ResultState and ReasonCodes.",
+      "reviewWhenNotObserved": "If you operate the server, a free ECZ-ID MCP Passport gives it a public, resolver-checkable identity.",
+      "weightWhenNotObserved": "normal",
+      "capability": {
+        "label": "Free ECZ-ID MCP Passport",
+        "url": "https://mcp.ecocitizenz.com/",
+        "note": "Free, fast self-service. Passport issuance is an ECZ-ID platform service, not a function of this plugin."
+      }
+    }
+  ]
+}

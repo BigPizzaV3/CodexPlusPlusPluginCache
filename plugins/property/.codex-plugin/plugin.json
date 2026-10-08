@@ -1,0 +1,42 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Development agreement review, encumbrance analysis, lease review, RERA compliance, sale deed drafting, stamp duty, and title diligence skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#92400E",
+    "brandColorDark": "#F19F6D",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Review this joint development agreement from the landowner's side.",
+      "Trace the chain of title on these property documents and flag gaps.",
+      "Calculate stamp duty on this sale deed using these rates."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Property",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Seven reusable property workflows covering development agreement review, encumbrance certificate analysis, lease review, RERA compliance, sale deed drafting, stamp duty calculation, and title diligence.",
+    "shortDescription": "Property law workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "property",
+    "real-estate",
+    "title",
+    "conveyancing",
+    "rera"
+  ],
+  "license": "MIT",
+  "name": "property",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

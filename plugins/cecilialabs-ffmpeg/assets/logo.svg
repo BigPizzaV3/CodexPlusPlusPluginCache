@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 160" role="img" aria-labelledby="title desc">
+  <title id="title">FFmpeg Media Toolkit</title>
+  <desc id="desc">Cecil-IA Labs FFmpeg Media Toolkit logo.</desc>
+  <g transform="translate(16 16)">
+    <rect width="128" height="128" rx="30" fill="#0B1220"/>
+    <rect x="24" y="27" width="80" height="74" rx="13" fill="none" stroke="#F8FAFC" stroke-width="9"/>
+    <path d="M53 45 84 64 53 83Z" fill="#22D3EE"/>
+  </g>
+  <text x="176" y="73" fill="#0B1220" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700">FFmpeg Media Toolkit</text>
+  <text x="178" y="112" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="500">Cecil-IA Labs · deterministic media workflows</text>
+</svg>

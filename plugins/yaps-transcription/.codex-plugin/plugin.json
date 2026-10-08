@@ -1,0 +1,51 @@
+{
+  "author": {
+    "email": "support@yaps.ai",
+    "name": "Yaps AI",
+    "url": "https://www.yaps.ai"
+  },
+  "description": "Transcribe audio and video files into clean text with Yaps.",
+  "homepage": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins",
+  "interface": {
+    "brandColor": "#D4775B",
+    "brandColorDark": "#D4775B",
+    "capabilities": [
+      "Audio to text",
+      "Video to text",
+      "Local transcription",
+      "File export"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Transcribe this audio file with Yaps.",
+      "Turn this video into a plain-text transcript.",
+      "Set up local file transcription with Yaps."
+    ],
+    "developerName": "Yaps AI",
+    "displayName": "Yaps Transcription",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Turn an existing audio or video file into a plain-text transcript using the local transcription engine supplied by Yaps desktop. The plugin checks app, sign-in, model, and media-tool readiness; runs the file through Yaps; and saves a reviewable text file without pretending the plugin itself contains a speech model. Requires a local-capable ChatGPT Desktop Work or Codex session; ChatGPT web and cloud sessions cannot reach the installed Yaps engine. Users can also run the feature directly in Yaps.",
+    "privacyPolicyURL": "https://www.yaps.ai/privacy",
+    "shortDescription": "Transcribe audio and video",
+    "termsOfServiceURL": "https://www.yaps.ai/terms",
+    "websiteURL": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins"
+  },
+  "keywords": [
+    "transcription",
+    "transcribe-audio",
+    "transcribe-video",
+    "audio-to-text",
+    "video-to-text",
+    "speech-to-text",
+    "whisper",
+    "local-transcription",
+    "media-transcription"
+  ],
+  "license": "MIT",
+  "name": "yaps-transcription",
+  "repository": "https://github.com/richawo/yaps-codex-plugin",
+  "skills": "./skills/",
+  "version": "0.1.11"
+}

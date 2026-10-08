@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Delores",
+    "url": "https://github.com/Delores-Lin"
+  },
+  "description": "Source-grounded close reading of academic papers with traceable page, section, figure, and table references.",
+  "homepage": "https://github.com/Delores-Lin/paper-close-reading",
+  "interface": {
+    "brandColor": "#A84435",
+    "brandColorDark": "#CA6657",
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Education & Research",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Read this paper section by section with cited source locations.",
+      "Explain this paper's methods, figures, and experimental evidence.",
+      "Turn this paper into reusable, source-grounded research notes."
+    ],
+    "developerName": "Delores",
+    "displayName": "Paper Close Reading",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Guide rigorous close reading of academic papers, methods, experiments, figures, tables, and appendices. Explanations stay grounded in source locations and can be turned into reusable research notes.\n\nOpen source on GitHub:\nhttps://github.com/Delores-Lin/paper-close-reading\n\nIf you find it useful, consider leaving a star. For bugs, questions, or feature requests, please open an issue:\nhttps://github.com/Delores-Lin/paper-close-reading/issues",
+    "privacyPolicyURL": "https://github.com/Delores-Lin/paper-close-reading/blob/main/PRIVACY.md",
+    "shortDescription": "AI-guided close paper reading",
+    "supportURL": "https://github.com/Delores-Lin/paper-close-reading",
+    "termsOfServiceURL": "https://github.com/Delores-Lin/paper-close-reading/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/Delores-Lin/paper-close-reading"
+  },
+  "keywords": [
+    "academic-research",
+    "paper-reading",
+    "research-notes",
+    "critical-reading",
+    "literature-review"
+  ],
+  "license": "MIT",
+  "name": "paper-close-reading",
+  "repository": "https://github.com/Delores-Lin/paper-close-reading",
+  "skills": "./skills/",
+  "version": "1.5.0"
+}

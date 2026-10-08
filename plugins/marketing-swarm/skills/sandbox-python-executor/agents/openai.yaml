@@ -1,0 +1,9 @@
+interface:
+  display_name: "Marketing Python"
+  short_description: "Run marketing calculations"
+  default_prompt: "Use host-native Python for the marketing calculation and report the executed assumptions and result."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

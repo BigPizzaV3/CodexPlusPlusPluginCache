@@ -1,0 +1,11 @@
+interface:
+  display_name: "ECZ-ID DORA Readiness"
+  short_description: "Review DORA evidence gaps"
+  icon_small: "./assets/logo.png"
+  icon_large: "./assets/logo.png"
+  default_prompt: "Use $dora-evidence-review to review this workspace for DORA evidence gaps and report the Review Priority."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

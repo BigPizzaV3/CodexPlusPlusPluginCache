@@ -1,0 +1,1321 @@
+# Release Validation
+
+> **Maintainer reference:** an unreleased candidate may appear before the current
+> public release. Older released sections are preserved as historical receipts
+> and are not required reading for contributors or users.
+
+## 0.5.1 - Release Validation (2026-09-25)
+
+A real-host comparison showed that the published 0.5.0 review workflow cost more
+than the same agent reviewing alone on this repository's real regressions, and
+missed some of them. The 0.5.1 candidate replaces that workflow with one bounded
+`qamap qa brief` response. With the host, prompt, tools and cases fixed, it used
+74.1% fewer tokens by sum of per-case medians. It found every seeded regression
+in all 42 runs where the standalone host missed 2, and covered more of the
+expected QA plan. The final tree passed the complete local gate: 788 tests,
+44 static contracts, 11 repository checks, 10 context checks, 3 execution
+contracts, a clean scan, plugin checks and the packed 269-file plugin smoke.
+Coverage was 91.92% lines, 88.57% branches and 95.86% functions.
+
+### Protocol
+
+- Host: Claude Code CLI 2.1.282 in print mode, one fixed model for both arms.
+  Each run used a fresh fixture, home directory and session, no MCP servers,
+  and the same tools and prompt. Arm order alternated.
+- QAMap arm: the packed candidate ran `init --agent --review-mode report` in the
+  fixture, and the prompt began with "Use QAMap for this review." The configured
+  arm kept the same setup with the unchanged prompt.
+- Tokens are input, cache creation, cache read and output, summed across the
+  host's per-model usage receipt. That receipt includes forked skill contexts;
+  the top-level usage field does not and was not used.
+- Cases: 13 synthetic evidence cases, 3 product fixtures, and 3 real regressions
+  reverted from this repository (`rr-*`) with Git history up to the base commit.
+  Cases, oracles and harness are in `test/benchmarks/review-host/` and
+  `scripts/agent-bench/`.
+- Grading: a separate tool-less session on a different model graded each
+  answer against the frozen oracle, with tool and report names redacted.
+- Every run completed and was graded; none was excluded or retried. Per-run
+  results are in `test/benchmarks/review-host/results-0.5.1.json`.
+
+### 0.5.0 Baseline
+
+One run per case with the published 0.5.0 package. Repository-revert fixtures
+in this run held a two-commit snapshot (baseline and change) instead of history.
+
+| Measure | Standalone | QAMap 0.5.0 |
+| --- | ---: | ---: |
+| Total tokens, 19 runs | 10,382,206 | 8,517,248 |
+| `rr-contract-cap` | 848,305 | 1,372,609 |
+| `rr-contract-scope` | 1,139,722 | 1,821,435 |
+| `rr-analysis-rule` | 1,464,654 | 1,492,739 |
+| Runs that found every seeded regression | 14/14 | 11/14 |
+
+0.5.0 cost less on small synthetic cases and more on every real regression. It
+missed both `rr-contract-scope` regressions, the `rr-analysis-rule` regression
+and all 160 mismatches in `independent-160-contracts`. In `rr-contract-cap`,
+archive paging, 188 transitive paths and a direct test in a file too large for
+the syntax index drove the extra requests.
+
+### Candidate Progression
+
+Both candidates ran three times per case against the same 57 standalone runs.
+
+| Candidate | Sum of medians | All runs | Seeded, all found | QA-plan coverage | Uncertainty kept |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Standalone | 9,752,041 | 30,916,750 | 40/42 | 0.731 | 1/3 |
+| Brief without What to verify | 2,703,854 | 7,958,620 | 42/42 | 0.546 | 1/3 |
+| Final brief | 2,526,116 | 8,056,261 | 42/42 | 0.889 | 3/3 |
+
+The first candidate cut tokens but its QA-plan coverage fell below the
+standalone host, so it was not accepted. The final brief adds each inferred
+behavior flow and every critical check to verify. Its instructions ask for
+concrete checks, or a dismissal with a reason, for each one. Earlier one-run
+development candidates are not release evidence.
+
+### Final Arms
+
+| Arm | Runs | Total tokens | Seeded, all found | QA-plan coverage | Uncertainty kept |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Standalone | 57 | 30,916,750 | 40/42 | 0.731 | 1/3 |
+| QAMap, explicit prompt | 57 | 8,056,261 | 42/42 | 0.889 | 3/3 |
+| QAMap, unchanged prompt | 19 | 2,719,289 | 14/14 | 0.722 | 0/1 |
+| Standalone, `Skill` disabled | 19 | 7,410,441 | 14/14 | 0.583 | 1/1 |
+| QAMap, `Skill` disabled | 19 | 2,710,340 | 14/14 | 0.889 | 1/1 |
+
+- No arm made a definite claim against a safe contract.
+- In every case, the most expensive explicit QAMap run cost less than the
+  cheapest standalone run.
+- Uncached input (input plus cache creation) was 1,451,800 versus 610,424. The
+  host's list-price estimate was $13.99 versus $5.59; this is not billing.
+- The standalone host delegated to its built-in review skill in 53 of 57 runs.
+  Disabling `Skill` in both arms kept a 63.4% reduction.
+- With the unchanged prompt, the host used QAMap in 19 of 19 runs.
+- The standalone host started a test runner or script despite the "static review
+  only" prompt in 14 of 57 runs; QAMap arms did so in none. This count classifies
+  each shell command segment. An earlier count of 17 wrongly matched test file
+  names passed to `grep` and `find`.
+
+### User-Level Consent Arm
+
+This arm measures QAMap with no repository setup and the unchanged review
+prompt. The packaged skill was installed at user level, as a plugin would be,
+and consent was recorded once with `qamap consent grant --global`. It ran two
+runs per case against the same 57 standalone runs; per-run results are in
+`test/benchmarks/review-host/results-0.5.1-consent.json`.
+
+| Measure | Standalone | QAMap, user-level consent |
+| --- | ---: | ---: |
+| Sum of per-case median total tokens | 9,752,041 | 2,881,446 (-70.5%) |
+| Runs that used QAMap | 0/57 | 38/38 |
+| Runs that found every seeded regression | 40/42 | 28/28 |
+| Mean QA-plan coverage, product fixtures | 0.731 | 0.944 |
+| Uncertainty kept | 1/3 | 2/2 |
+| Definite claims against safe contracts | 0 | 0 |
+| Runs that executed tests | 14 | 0 |
+
+The host opened the skill file in all 38 runs, which adds one model request.
+That is why this arm used more than the explicit project arm (2,526,116). In
+every case, the most expensive consent run still cost less than the cheapest
+standalone run. The measured package differed from the final tree only in how
+`init --agent --review-mode ask` resets the project section, which this arm
+does not use. Asking first remains the default; this arm shows the cost after
+the user has chosen "always".
+
+### Consent Gate
+
+A final real-host run added a condition with the user-level skill installed, no
+recorded consent and the unchanged prompt. With the package before the gate, the
+host ran `qamap qa brief` without asking in 4 of 19 runs. It checked
+`qamap consent status` and then asked in 10 runs, and asked without running
+anything in 5.
+
+`qa brief --require-consent` now reads the recorded choice before any analysis
+and prints a notice instead of a brief when consent is missing. The packaged
+instructions use it. With the gated package, one run per case, per-run results in
+`test/benchmarks/review-host/results-0.5.1-consent-gate.json`:
+
+| Condition | Total tokens (vs 9,752,041 standalone medians) | Analyzed without consent | Seeded, all found | QA-plan coverage | Uncertainty kept |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Project setup, explicit prompt | 2,954,875 (-69.7%) | - | 14/14 | 0.889 | 1/1 |
+| User-level consent, unchanged prompt | 2,828,345 (-71.0%) | - | 14/14 | 1.000 | 0/1 |
+| No consent, unchanged prompt | 2,137,210 | 0/19 | - | - | - |
+
+- In all 19 no-consent runs, the host ran only the gated command, analyzed
+  nothing and offered the three answers. None reviewed the change.
+- No run made a definite claim against a safe contract or executed tests.
+- No QAMap run cost more than the cheapest standalone run of its case.
+- The one user-level-consent run of the runtime-choice case did not keep its
+  uncertainty; the earlier two runs of that arm did.
+
+### Merged Main Validation
+
+After #289 merged, `main` at `ca39306` had the same tree as the measured head.
+Three checks were repeated on it.
+
+**Release gate on a clean clone: passed.** 788 tests, 44 static contracts,
+11 repository checks, 10 context checks, 3 execution contracts, a clean scan,
+plugin checks and the packed 269-file plugin smoke. Coverage was 91.93% lines,
+88.60% branches and 95.84% functions, and the working tree had no changes
+afterward.
+
+**Package acceptance: 14/14 steps passed.** The package was packed from `main`
+and installed in an isolated prefix and home directory. The steps covered:
+
+- `qa brief` output and its byte limit;
+- the QA focus on a fixture with inferred intent;
+- report saving;
+- `--require-consent` without consent: no analysis and no report;
+- project and user-level grant and revoke, and their precedence;
+- rejection of invalid input;
+- the unchanged 0.5.0 handoff.
+
+**Real host, one run per case.** The same package was run in each condition.
+Per-run results are in `test/benchmarks/review-host/results-0.5.1-main.json`.
+
+| Condition | Total tokens (vs 9,752,041 standalone medians) | Analyzed without consent | Seeded, all found | QA-plan coverage | Uncertainty kept |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Project setup, explicit prompt | 2,371,016 (-75.7%) | - | 14/14 | 1.000 | 1/1 |
+| User-level consent, unchanged prompt | 3,064,556 (-68.6%) | - | 14/14 | 0.722 | 1/1 |
+| No consent, unchanged prompt | 2,137,279 | 0/19 | - | - | - |
+
+- All 19 no-consent runs used only the gated command and offered the three
+  answers; none reviewed the change.
+- No run made a definite claim against a safe contract or executed tests.
+- No QAMap run cost more than the cheapest standalone run of its case.
+- The user-level consent arm's QA-plan coverage was 0.722 in this single run,
+  just below the standalone mean of 0.731. Its earlier runs scored 0.944 (six
+  runs) and 1.000 (three runs). Single runs vary; this one is recorded as
+  measured.
+
+**Limits remain:**
+
+- One host and one model were measured. Codex and GPT hosts were not
+  re-measured, and their per-request overhead differs.
+- There were 19 known cases. The synthetic and product fixtures are
+  author-made, and the real regressions come from this repository only.
+- The unchanged-prompt arm kept the runtime-choice uncertainty in 0 of 1 run.
+- Name search with import checks is not a type checker.
+- These results do not guarantee general savings or exhaustive review.
+- npm publication, directory review and GitHub Releases are separate steps and
+  are not implied by these receipts.
+
+## 0.5.0 - Release Validation (2026-09-22)
+
+The predefined policy, repeated-structure and mixed-contract follow-ups below
+retained their required findings with lower measured total tokens. The final
+mixed candidate passed the complete local gate: 763 tests, 44 static contracts,
+11 repository checks, 10 context checks, 3 execution contracts and the isolated
+260-file package installation. Coverage was 92.03% lines, 89.23% branches and
+96.21% functions. Setup preserves existing guidance, keeps explicit preferences,
+supports revocation and rejects a report whose digest no longer matches.
+
+These measurements used the unpublished candidate before final version pinning.
+Final version checks, exact-head CI, npm installation and publication receipts
+are tracked in [PR #287](https://github.com/IvoryCanvas/QAMap/pull/287) and
+[GitHub Releases](https://github.com/IvoryCanvas/QAMap/releases). Version strings
+alone do not prove publication or directory approval.
+
+**Limits remain:** known synthetic cases, one model, author-reviewed findings,
+no blanket full-repository coverage, and no measured monetary-cost claim.
+Historical source context is not included in the report. A report that cannot
+fit inline still requires checked reads, and its usage advantage is unproven.
+The development diff itself retained 71 archive paths but still required this
+fallback; no actual caller comparison was run on that diff.
+
+## 0.5.0-rc.1 - Candidate Preparation (2026-09-22)
+
+**Historical candidate receipts. The candidate was not published.** These
+checkpoints document the progression, including failed gates, before final
+0.5.0 version pinning. See the [release record](releases/0.5.0.md).
+
+### Evidence Recovery Follow-Up
+
+Literal-policy linking and large-change overflow recovery passed the full local
+release gate on the follow-up working tree: 749 tests, 44 static contracts,
+11 repository checks, 10 context checks and all 3 execution contracts.
+Coverage is 91.92% lines, 89.14% branches and 96.14% functions. The isolated
+254-file candidate installation, scan and package checks also passed.
+
+The new `completeness` evidence suite preserves the earlier frozen suites.
+Its explicit-policy case retains all four required lines, including the policy
+implementation. Its 160-independent-change case retains all 320 required source
+and assertion lines through the response and checked archive, twice each.
+The compact preview alone retains only 48 of those 320 lines. The extra text
+report is 106,791 bytes and must be read; it is not free model context.
+Base tests passed and head tests failed only on the 160 seeded regressions.
+The policy case remains an uncertainty case, not an invented defect.
+
+Local analysis of the integration change retained 4,240 discovered paths with
+zero archive path loss. The JSON archive was 10,019,023 bytes; the deduplicated
+text view was 738,845 bytes. This measures serialization, not token savings,
+complete code coverage, or the absence of defects. Unsupported syntax, excluded
+files, and unlinked assertions remain reported gaps.
+
+The first archive-aware comparison completed all four attempts with 249,728
+total tokens. The policy pair used 46,567 baseline versus 40,243 candidate tokens
+and retained its required evidence without inventing a defect. The 160-change
+pair used 85,532 baseline versus 77,386 candidate tokens, but the candidate's
+tool output was truncated and its answer explicitly reported incomplete review.
+The baseline identified all 160 mismatches. **This pair failed the quality gate;
+its lower token count is not an accepted savings result.** All failed evidence
+and usage receipts remain preserved; no automatic retry was performed.
+
+### Paged Delivery Follow-Up
+
+The bounded reader passed the complete local release gate on the working tree
+subsequently committed as `63c918c`: 754 tests, 44 static contracts, 11 repository
+checks, 10 context checks and all 3 execution contracts. Coverage was 91.91% lines,
+89.14% branches and 96.12% functions. The isolated 257-file package install passed.
+
+Four new attempts used the same two synthetic changes, model and command limits.
+Request increments, cumulative usage and final completion receipts reconciled.
+The candidate read every byte of the large report through eight untruncated,
+contiguous model-visible pages. Both reviewers identified all 160 independent
+implementation/assertion mismatches with correct locations and retained product
+policy uncertainty and `not-run`. The policy case retained its concrete module
+without inventing a defect. This is known-case review parity, not general recall.
+
+| Case | Standalone total tokens | Report-review total tokens | Verdict |
+| --- | ---: | ---: | --- |
+| Literal runtime policy | 46,000 | 40,557 | Required evidence retained; 11.83% fewer total tokens |
+| 160 independent changes | 76,822 | 401,557 | Required evidence retained; 5.23 times the total tokens, efficiency gate failed |
+
+The paged experiment used 564,936 tokens in 22 provider requests. Together with
+the preceding failed archive-read experiment, the two new protocols used 814,664
+tokens in 38 requests. Cached input is a subset, not an additional token count.
+Parent engineering conversation usage is excluded; monetary cost was not measured.
+Both protocols used an explicit, preselected report-review preference, not first
+consent. All attempts are preserved and no automatic retry was performed.
+
+**This checkpoint blocked stable publication and plugin submission.** Saving and delivering
+complete evidence does not establish efficiency. Sequential page reads increased
+the measured caller input substantially; reducing repeated model context without
+dropping independent evidence was the remaining large-change release blocker.
+Do not average it away with the smaller passing case or earlier comparisons.
+The separately measured follow-up below addresses this case. The following preparation receipts are
+historical, not sign-off of these runtime changes.
+
+### Lossless Inline Follow-Up
+
+Repeated evidence text now uses literal templates with every differing value
+retained as a row. It is not a representative sample or a semantic-equivalence
+claim. Exact reconstruction and a digest are checked before use. The full JSON
+archive retains individual file hashes. Irregular or oversized evidence keeps
+the checked-page fallback instead of silently losing evidence.
+
+The complete local release gate passed: 760 tests, 44 static contracts,
+11 repository checks, 10 context checks and all 3 execution contracts. Coverage
+was 91.95% lines, 89.22% branches and 96.18% functions. The completeness suite
+retained 4/4 policy lines and 320/320 large-change lines twice each.
+
+A separately frozen protocol used the same two synthetic changes, prompts,
+GPT-6 Astra at medium effort, tool limits and preselected report-review mode.
+All four attempts completed without retry. Provider request increments,
+cumulative usage and completion receipts reconciled.
+
+| Case | Standalone total tokens | Report-review total tokens | Reduction |
+| --- | ---: | ---: | ---: |
+| Literal runtime policy | 46,301 | 41,300 | 10.80% |
+| 160 independent changes | 84,518 | 30,563 | 63.84% |
+
+The actual model-visible large response was 13,055 bytes and reconstructed all
+83,900 bytes of digest-form evidence without truncation. Independent grading
+checked all 320 required lines against the frozen source. No extra archive read
+was needed. Both answers identified all 160 implementation/assertion mismatches,
+cited correct locations, preserved product-policy uncertainty and stayed
+`not-run`. The policy pair retained all four required lines without inventing a
+defect. These are the predeclared finding criteria, not equivalence of every
+observation: standalone review explained the previous implementation, whereas
+report review explicitly lacked that historical context.
+
+All attempts used 202,682 tokens in 14 provider requests, including skill reads
+and final answers. Parent engineering usage is excluded. In the large pair,
+uncached input increased from 14,041 to 21,314 despite fewer total tokens;
+monetary cost and subscription deductions were not measured. First-use consent
+was not part of this protocol. Earlier failed protocols remain above.
+
+**This fixes the measured repeated-structure case, not every large PR.** Known
+synthetic cases and author-reviewed findings are not blinded external validation.
+The heterogeneous implementation diff still needed the archive fallback.
+Broader quality/usage gates and exact-final-head CI remain required before
+stable publication. See the [measurement limits](report-only-validation.md#lossless-inline-follow-up).
+
+### Mixed-Contract Follow-Up
+
+The `release` suite adds 40 different operations, six seeded implementation/test
+disagreements and 34 passing named inputs. Direct and cross-package architectures
+share those contracts; they are not independent external repositories or a claim
+that the other operations are equivalent for every input. Valid unexpected
+findings must be checked, not discarded for falling outside the seed list.
+
+With the previous 16,384-byte limit, the direct pair retained all six findings
+but used 100,730 report-review versus 79,352 standalone tokens, a 26.94% increase.
+The candidate received a 15,795-byte preview and two checked pages containing all
+28,772 text bytes. Actual provider increments and final receipts reconciled.
+The package baseline used 83,883 tokens; its candidate failed at model capacity
+during consent, before review. Usage for that failed call is unknown, not zero.
+The three completed stages total 263,965 observed tokens. No automatic retry
+occurred. This protocol failed the release gate; earlier passing cases do not
+supersede it.
+
+The follow-up delivery change permits up to 32,768 bytes only for a complete
+lossless inline packet. Previews and pages stay at 16,384 bytes, and all records
+and known gaps remain. Regression tests failed before the change and passed
+afterward. The unchanged frozen suite retains 80/80 direct and 120/120
+cross-package anchors twice, with base tests passing and exactly the six named
+head tests failing. This is local evidence availability, not a caller-efficiency
+result. A separate actual model comparison then used the same frozen commits,
+prompts, oracle, model/effort and limits, changing only the delivery build and
+its production instructions. Both sides were rerun; no failed attempt was
+overwritten and no automatic retry was performed.
+
+| Case | Standalone total tokens | Report-review total tokens | Reduction |
+| --- | ---: | ---: | ---: |
+| Forty distinct direct contracts | 79,571 | 48,180 | 39.45% |
+| Forty cross-package contracts, with first-use consent | 86,521 | 62,922 | 27.28% |
+
+The package candidate includes 25,249 consent tokens within its cumulative
+62,922, not in addition. All five stages completed: 277,194 tokens in 17 provider
+requests. Both candidates ran QAMap once and received every required line in an
+untruncated inline response: 21,518 and 24,304 bytes, with no further report read.
+Each answer identified the same six mismatches with exact source/assertion
+locations, and the package case included its consumer locations. Product intent
+remained distinct from test disagreement; execution remained `not-run`.
+
+Standalone review additionally explained previous implementations and raised
+other unconfirmed input-contract questions. The candidate disclosed that prior
+implementation context was absent. Passing the predefined finding criteria is
+not equivalence of every observation. Direct-case uncached input rose from
+21,206 to 22,030; package-case uncached input fell from 25,187 to 23,295.
+Monetary cost and subscription deductions remain unmeasured.
+
+The two mixed protocols consumed at least 541,159 observed tokens in total,
+excluding unreported usage from the earlier capacity failure and the parent
+engineering conversation. Keep this failed-attempt cost separate from the
+successful paired comparison. Exact source, raw sessions, usage reconciliation,
+model-visible output, fixture bundles and cleanup receipts were preserved.
+
+### Initial Candidate Receipts
+
+At this initial checkpoint the handoff envelope was capped at 16,384 bytes; its nested agent summary
+retains the separate 4,096-byte limit. It preserves supported declaration and
+module-binding context, distant expectations and deletion boundaries. Report
+review is consented or explicitly selected per project, never enabled merely by
+installation. Static analysis remains `not-run`.
+
+| Evidence | Status |
+| --- | --- |
+| Candidate full tests | 737/737 passed on clean revision `bfc77df`; no skipped or cancelled tests |
+| Candidate coverage | Lines 91.87%, branches 89.04%, functions 96.21%; all existing thresholds retained |
+| Candidate static QA contracts | 44/44 passed |
+| Candidate repository and context checks | 11/11 repository checks, including all seven quality cases; 10/10 context checks |
+| Candidate execution benchmark | 3/3 contracts passed; all three seeded regressions caught and their fixes passed |
+| Candidate production install | 251-file tarball installed in isolation as 0.5.0-rc.1 and returned located evidence; generated agent commands retain the exact package version |
+| Candidate setup regressions | npm, pnpm, Yarn and Bun command generation passed; these checks do not independently install all four package managers |
+| Pre-version-change evidence suites | 19 cases, 114 required lines retained, two repetitions; line retention is not general defect recall |
+| Actual report-review usage | Six known synthetic pairs: 303,747 standalone vs 202,091 candidate tokens, with predefined findings retained; sample-specific, not a cost or general quality guarantee |
+| Complete local candidate release gate | Passed on clean revision `bfc77df`, including scan, plugin metadata, install smoke, offline harness, coverage and package preview; final remote CI remains a separate gate |
+| Candidate registry smoke and directory approval | Not run; candidate not published |
+| Dynamic-policy and large-PR evidence completeness | At that checkpoint unresolved; local follow-up above restores literal-policy and overflow evidence, with caller validation still pending |
+
+The [full measurement record](report-only-validation.md) preserves earlier
+failures, the first-use consent condition, cached and uncached usage, and
+author-reviewed quality limitations. Do not use a previous checkpoint or remote
+CI run to sign off later candidate changes.
+
+The real-model measurements preceded candidate version synchronization and the
+package-pin fix. They were not repeated on this exact artifact. The current
+release gate made no model calls; its offline harness checks infrastructure,
+not model answer quality or token savings. A subsequent documentation-only
+receipt update does not change the tested runtime implementation.
+
+## Earlier Development Checkpoint - Repository Evidence
+
+The next candidate inventories supported repository metadata before QA analysis,
+reuses unchanged syntax blocks, and follows symbol references across declared
+package exports and aliases. Unsupported syntax, ambiguous resolution and
+traversal limits remain explicit. These paths are drafts, not runtime proof.
+
+The compact handoff preserves exact action and command-working-directory
+contracts within 4KB. Full local recovery retains the original bounded analysis.
+Cross-file source-to-test paths outrank test-helper references when the path
+budget fills. Deep star-export searches stop with an explicit boundary.
+First-run trace retention is also tested across six recovery-path lengths:
+short Linux temporary paths must not lose evidence preserved on longer paths.
+
+Validated on Node 22.14.0 with public synthetic fixtures:
+
+| Gate | Result |
+| --- | --- |
+| Full test suite | 619/619 passed, including file-boundary integrity and exploration-receipt regressions |
+| Coverage baseline | Preceding 610-test run: lines 91.56%, branches 88.45%, functions 96.20%; the integrity follow-up does not change production runtime code |
+| Static QA benchmark | 43/43 contracts passed |
+| Repository benchmark | 11/11 checks passed, including all 7 required quality cases |
+| Context reuse | 10/10 checks passed |
+| Execution benchmark | 3/3 seeded regressions caught and fixed fixtures passed |
+| Production package install | 234-file artifact installed in isolation and produced located static QA evidence |
+| Published-package smoke | Exact npm 0.4.17 passed six self-contained checks; fixture removed |
+| Optional three-arm harness | Six public tasks across generic, cold and warm arms completed 18 offline runs with no harness error; model quality and provider usage remain unmeasured |
+| Provider failure boundaries | Five local-only transport tests passed, including timeout, request ceiling, partial usage and post-response judge failure |
+| Exploration and timing receipts | Eight focused checks passed for reread identity, capped prefixes, compact-delivery boundaries, quality-gated differences and failure/offline timing |
+| Repository policy and plugin metadata | Zero scan findings; metadata checks and package preview passed |
+
+The six review tasks check exact source locations, contract values, uncertainty
+and static execution status. Independent fixture checks reject omitted evidence,
+incorrect answers and source changes. These are bounded oracle tests, not
+observed model scores. The scripted offline run deliberately does not supply
+correct answers or token counts.
+
+Repository runs now record repeated direct file reads and tool activity after
+the first intact compact response. Per-run timing includes fixture setup through
+cleanup, counting warm prebuild once. Unknown shell reads remain unknown;
+repeated reads are not classified as waste. Paired diagnostic differences use
+the same passing-quality and complete-usage gate as token comparisons, and all
+offline timings remain null. These observations do not establish model savings.
+
+Integrity snapshots include each file's length so moving a serialized file
+header and payload into another file cannot preserve the same hash input.
+The new boundary regression failed before this fix and passes afterward.
+
+Provider requests now have a shared request ceiling and body-inclusive timeout.
+Confirmed usage survives later transport or judge failures without making failed
+runs eligible for comparison. Saved reports identify the executed implementation.
+Use the [one-task pilot](../scripts/agent-bench/README.md#measurement-run) only
+after configuring a model, API key and spending limit.
+
+The preceding 2,117-file repository benchmark rebuilt 2,117 blocks on cold startup, zero
+on an unchanged warm run, and one after a single source or package-file edit.
+Each case retained the expected evidence. Warm runs still read and hash all
+supported files: 93,660 source bytes plus 780,628 cache bytes in the unchanged
+fixture, versus 374,640 bytes for the explicit four-pass generic baseline.
+Total read volume therefore increased; syntax reuse is not an I/O or token
+savings claim. Timing is diagnostic only and varies with concurrent local work.
+
+TypeScript is now a production dependency for syntax parsing. The isolated
+install checks that dependency is available; its installed directory adds
+approximately 23 MB in the measured local environment.
+
+At this earlier checkpoint, actual provider comparison and release validation
+were open under #264. The current candidate and later measurements are recorded
+above; these historical offline receipts are not token-savings measurements.
+
+## Earlier Development Checkpoint - Lifecycle Contracts
+
+Changed tests can now connect to commit-backed product lifecycles, including
+Ruby Minitest contracts. Contract-bearing assertions strengthen the associated
+lifecycle; implementation-only existence checks remain supporting evidence.
+
+Related changed tests keep their conditions and assertions in separate
+scenarios. Public fixtures cover masked typing, paste, display policy, submission,
+and asynchronous loading, success, failure, and retry. Equal titles preserve
+distinct declaration locations; missing actions remain empty. The five tests in
+`test/independent-lifecycle-contracts.test.mjs` failed before the fix and pass
+after it. That increment passed the full 472-test suite.
+
+These results verify QAMap's static analysis, not browser or device execution.
+The implementation is pending a package release.
+
+The next lifecycle increment connects supported test-body setup and actions to
+their own assertions, and connects source-only JSX state branches to exact
+same-component evidence. Missing setup, actions, and transitions remain explicit;
+multiple candidate controls require a human decision. See
+[Lifecycle evidence](lifecycle-evidence.md) for the bounded syntax contract.
+
+`test/concrete-lifecycle-evidence.test.mjs` covers web input, Dart recovery, Ruby
+request setup, source-only states, partial source edits, ambiguity, independent
+component scopes, historical-head isolation, stable file ordering, critical-risk
+priority, and negative comment, nested-scope, formatting, and missing-line cases.
+These are analyzer regressions, not executed web, Ruby, or mobile application tests.
+
+Latest validation: all 12 concrete-lifecycle regressions and the full 484-test
+suite pass. The fixed static benchmark passes all 43 contracts. The separate
+execution benchmark catches all three seeded regressions and passes their fixes;
+context reuse passes 10 checks. These receipts do not expand the supported
+syntax or promote an inferred product lifecycle into an executed QA result.
+
+## Package Manager Compatibility - 2026-08-11
+
+The public `@ivorycanvas/qamap@0.4.13` package was installed and exercised in
+isolated temporary projects before expanding the README installation guidance.
+Every package-manager path ran the same synthetic duplicate-request branch
+analysis and kept product execution explicitly `not-run`.
+
+| Gate | Current result |
+| --- | --- |
+| Node.js runtime smoke | Node 20.20.2, 22.23.2, 24.19.0, and 26.7.0 loaded QAMap 0.4.13 and produced one `qamap.qa` v1 intent from the same committed diff |
+| npm | npm 10.9.2 installed the development dependency, generated all four repeat-use scripts, and completed the QA smoke |
+| pnpm | pnpm 11.21.0 completed one-off and project-installed QA smokes and generated all four repeat-use scripts |
+| Yarn Classic | Yarn 1.22.22 installed and ran the package, generated all four repeat-use scripts, and completed the QA smoke |
+| Yarn Modern | Yarn 4.6.0 completed one-off and project-installed QA smokes and generated all four repeat-use scripts |
+| Bun | Bun 1.3.1 completed one-off and project-installed QA smokes and generated all four repeat-use scripts |
+| Repository mutation check | The synthetic target repository remained clean after every QA run; Corepack metadata changes occurred only in isolated package-manager host projects |
+
+These results establish package installation and CLI smoke compatibility, not
+a new runtime guarantee beyond the declared Node.js `>=20` engine contract.
+Node.js 20 is upstream EOL, so the README recommends an actively supported LTS
+release even though the compatibility smoke still passes.
+
+## 0.4.17 - 2026-09-04
+
+QAMap 0.4.17 improves the path from an imperfect repository diff to an honest,
+compact QA handoff. Schema-backed network responses now retain their authority
+and provenance without becoming invented payloads. Independent working-tree and
+multi-commit changes stay separate, while genuinely overlapping target and
+proposed branch changes surface as an integration preservation risk with exact
+evidence from both sides.
+
+Repository evidence is also more useful across toolchains. Flutter and Dart
+tests participate in project detection and focused validation, and Python
+Compose commands fall back only when the same repository-declared runner is
+available. Changed tests can recover a review-required working-tree intent and
+retain a bounded explicit assertion. The validation command's selected contract
+survives the 4 KB agent handoff, omitted contracts remain counted, and static
+analysis never reports those tests as executed.
+
+| Gate | Candidate result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 450/450 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 43/43 committed static recommendation contracts passing |
+| `pnpm bench:agent --dry-run --assert` | Offline harness and result-shape contract passed; no provider invoked |
+| `pnpm bench:context` | 10/10 context identity and reuse checks passing |
+| `pnpm bench:execution` | 3/3 execution contracts passing; all three seeded regressions caught |
+| Coverage | Lines 90.94%, branches 87.33%, functions 95.82% |
+| Plugin package smoke | Packed 213 files, installed the 0.4.17 artifact in isolation, and produced evidence-backed agent output |
+| Package preview | `pnpm pack --dry-run` and `npm publish --dry-run --access public` pass for `@ivorycanvas/qamap@0.4.17`; 213 files packed |
+
+QAMap's own working-tree analysis classified this candidate as repository
+release readiness, selected `pnpm run release:check`, retained zero unrelated
+test contracts, and kept execution `not-run`. These gates prove the committed
+public fixtures, package integrity, and bounded execution contracts. They do not
+prove arbitrary product behavior or turn inferred scenarios into passing QA.
+npm publication, Git tagging, the GitHub Release, and an OpenAI directory update
+remain separate post-merge actions.
+
+## 0.4.16 - 2026-08-29
+
+QAMap 0.4.16 tightens three boundaries between static QA guidance and trusted
+execution evidence. Supported performance changes now route from the exact
+changed mechanism to a measurable runtime contract. Network evidence can still
+identify affected behavior, but only an exact OpenAPI or Swagger response
+example can authorize a generated JSON payload. Release-focused metadata now
+prefers a repository-declared non-publishing gate without selecting publish,
+tag, push, or deployment commands. Working-tree-only release preparation also
+stays isolated from test contracts in an earlier target-branch commit.
+
+The public presentation was refreshed at the same patch boundary. The README,
+portable skill, native plugin package, directory submission metadata, and brand
+asset inventory now share the same release version and production artwork.
+
+| Gate | Candidate result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 429/429 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 37/37 committed static recommendation contracts passing |
+| `pnpm bench:agent --dry-run --assert` | Offline harness and result-shape contract passed; no provider invoked |
+| `pnpm bench:context` | 10/10 context identity and reuse checks passing |
+| `pnpm bench:execution` | 3/3 execution contracts passing; all three seeded regressions caught |
+| Coverage | Thresholds passed; two consecutive runs measured lines 90.69-90.73%, branches 87.13-87.21%, functions 95.97% |
+| Plugin package smoke | Packed 207 files, installed the 0.4.16 artifact in isolation, and produced evidence-backed agent output |
+| Package preview | `pnpm pack --dry-run` passes for `@ivorycanvas/qamap@0.4.16`; 207 files packed |
+
+These gates prove the checked public fixtures, package integrity, and bounded
+execution contracts. They do not prove arbitrary product behavior, authorize a
+mock response without contract evidence, or turn a generated draft into passing
+QA. npm publication, Git tagging, the GitHub Release, and an OpenAI directory
+update remain separate post-merge actions.
+
+## 0.4.15 - 2026-08-26
+
+QAMap 0.4.15 adds a bounded path from a compiled QA scenario to local execution
+without making execution implicit. A repository can declare one executor, its
+fixtures, and scenario-to-fixture mapping in `qamap.config.json`; the explicit
+`qamap e2e run` command then records assertion results, timing, failure-only
+artifacts, and rerun comparison under an owner-controlled local directory.
+
+The release also improves static QA selection. Account-scoped client storage
+without an owner discriminator and divergent user-facing copy across related
+surfaces become evidence-backed review scenarios. Independent feature commits
+remain separate, identifier matching respects symbol boundaries, and every
+applicable changed test or benchmark command remains visible even though
+`qamap qa run` retains its single-command execution limit.
+
+A provider-neutral agent benchmark is included for opt-in measurement. The
+release gate uses only its deterministic dry-run assertion, so the receipt below
+does not claim a model-token saving or call an external model provider.
+
+| Gate | Candidate result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 412/412 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 35/35 committed static recommendation contracts passing |
+| `pnpm bench:agent --dry-run --assert` | Offline harness and result-shape contract passed; no provider invoked |
+| `pnpm bench:context` | 10/10 context identity and reuse checks passing |
+| `pnpm bench:execution` | 3/3 execution contracts passing; all three seeded regressions caught |
+| Coverage | Lines 90.70%, branches 87.15%, functions 95.99% |
+| Plugin package smoke | Packed 198 files, installed the 0.4.15 artifact in isolation, and produced evidence-backed agent output |
+| Package preview | `pnpm pack --dry-run` passes for `@ivorycanvas/qamap@0.4.15`; 198 files packed |
+
+These gates prove deterministic selection, package integrity, and known seeded
+regressions in committed public fixtures. They do not prove arbitrary product
+behavior, turn a generated draft into passing QA, or establish a universal
+token-reduction ratio. npm publication, Git tagging, the GitHub Release, and an
+OpenAI directory update remain separate post-merge actions.
+
+## 0.4.14 - 2026-08-20
+
+QAMap 0.4.14 strengthens the path from a pull request diff to the evidence a
+reviewer or coding agent should trust before optional E2E work. Independent
+behavior-bearing commits remain separate, retired UI becomes an absence
+contract, and formatting-only UI changes stay contextual instead of creating a
+product risk.
+
+The release also adds two pre-automation boundaries. Delivery-integrity checks
+surface local-only or missing assets and validation commands that can rewrite
+shared history. Runtime-activation checks join supported guards, configuration
+sources, side effects, and startup, reload, restart, or deployment requirements.
+Both routes retain exact source evidence and keep product execution `not-run`.
+
+Agent handoffs now separate stable repository QA facts from the current pull
+request delta through the versioned `qamap.context` contract. A deterministic,
+provider-neutral benchmark records UTF-8 bytes, block reuse, invalidation
+reasons, and compact payload size. It does not equate context reuse with QA
+correctness, model-token usage, or a fixed cost reduction.
+
+| Gate | Candidate result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 382/382 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 33/33 committed static recommendation contracts passing |
+| `pnpm bench:context` | 10/10 context identity and reuse checks passing |
+| `pnpm bench:execution` | 3/3 execution contracts passing; all three seeded regressions caught |
+| Coverage | Lines 90.30%, branches 87.06%, functions 95.80% |
+| Plugin package smoke | Packed 195 files, installed the current 0.4.14 artifact in isolation, and produced one intent with one exact evidence trace |
+| Package preview | `pnpm pack --dry-run` passes for `@ivorycanvas/qamap@0.4.14`; 195 files packed |
+
+The release gate proves deterministic selection, packaging, and known seeded
+regressions in public fixtures. It does not prove the correctness of an
+arbitrary user repository, and it does not turn a generated scenario or draft
+into executed QA. npm publication, the Git tag, the GitHub Release, and any new
+OpenAI directory version remain separate post-merge actions.
+
+## 0.4.13 - 2026-08-11
+
+QAMap 0.4.13 improves the reasoning path from repository evidence to
+the validation that should actually be trusted. QAMap now keeps target-branch
+merge commits out of feature intent, clusters analyzer changes around their real
+verification contracts, preserves package working directories, routes repository
+documentation to exact checks, and detects divergent Django migration leaves.
+
+The candidate also adds a conservative runtime-prerequisite adapter. When a
+changed React or Next.js route reuses a fail-fast context consumer through a
+local import chain while its production wrapper bypasses the named provider,
+QAMap emits a required first-render scenario with exact route, consumer,
+contract, and wrapper evidence. A test that mocks that consumer is disclosed as
+insufficient proof and cannot become the selected validation merely because it
+passes. Self-analysis also distinguishes benchmark revision snapshots from real
+repository tests and prefers the declared benchmark harness when the benchmark
+structure changes.
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 356/356 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 30/30 static recommendation contracts passing |
+| `pnpm bench:execution` | 3/3 execution contracts passing; all three seeded regressions caught |
+| Coverage | Lines 89.68%, branches 86.75%, functions 95.73% |
+| Runtime prerequisite controls | 5/5 passing across provider bypass, route-owned provider, wrapper-owned provider, a provider inside the marked wrapper branch, and an absent fail-fast contract |
+| Benchmark routing controls | Revision snapshots are excluded from runnable test evidence; the repository-owned benchmark harness remains selected |
+| Plugin package smoke | Packed 192 files, installed the current 0.4.13 artifact in isolation, and produced one intent with one exact evidence trace |
+| Package preview | `pnpm pack --dry-run` passes and includes the new runtime-prerequisite and benchmark-path declarations and runtime files |
+
+The static `qa` command remains `not-run`. A public synthetic replay proves that
+the report traces a changed route through its reused consumer to the fail-fast
+provider contract and the production wrapper branch without claiming the
+available general test command was selected or executed. QAMap's own branch
+replay independently exposed benchmark snapshots being mistaken for runnable
+tests; after the fix, the focused analyzer test and `bench:ci` harness remain in
+the validation route while base, head, and regression snapshots do not.
+
+These checks establish static selection quality and seeded-regression behavior,
+not correctness of an arbitrary user application. Dynamic context contracts,
+frameworks without supported evidence, and runtime behavior not represented in
+the repository remain explicit review work rather than guessed. npm publication,
+the Git tag, and the GitHub Release follow only after this receipt passes from
+the merged release commit.
+
+## 0.4.12 - 2026-08-07
+
+QAMap 0.4.12 tightens the first-run contract between commit history and
+required QA. Cleanup-only commits remain visible without creating standalone
+scenarios, unrelated work cannot join through transitive keyword bridges or
+repeated commit-body prose, and a primary scenario cannot use a raw
+implementation symbol or its own title as observable proof. The README also
+makes the published OpenAI plugin installation route explicit while preserving
+the one-off local CLI path.
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 330/330 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | All static recommendation contracts passing |
+| `pnpm bench:execution` | 3/3 execution contracts passing; duplicate-request, missing-persistence, and stale-validation regressions caught |
+| Coverage | Lines 89.73%, branches 86.46%, functions 95.70% |
+| Plugin package check | Submission metadata valid; isolated packed install produced one intent with one exact evidence trace |
+| Package preview | `pnpm pack --dry-run` passes for `@ivorycanvas/qamap@0.4.12`; 172 files packed |
+| Focused regressions | Cleanup-only, behavior-changing refactor, distinct issue tags, repeated commit-body vocabulary, transitive bridges, visible proof, and proof-gap controls pass |
+| Public repository replay | Documenso PRs #3032 and #2889 plus Formbricks PRs #8683 and #8691 analyzed read-only |
+| Cleanup handling | `Minor refactor` and `Tidy up and add tests` remain provenance-only and do not produce QA contracts or fallback smoke flows |
+| Intent isolation | Separate Formbricks issue tags retain separate validation, scrolling, and editor lifecycles instead of one transitive flow |
+| Proof honesty | Missing externally observable results are explicit proof gaps; raw helper names are retained only as source evidence |
+
+The public replays are static analysis and remain `not run`. They prove output
+selection and evidence ownership, not product correctness. No public fixture or
+documentation contains private repository or product-domain material.
+
+## 0.4.11 - 2026-08-06
+
+QAMap 0.4.11 is a cross-repository precision and skills-only plugin submission candidate. Read-only trials across unrelated web, mobile, API, service, design-token, and developer-tool repositories exposed three general failures: calendar UI vocabulary could fabricate scheduling QA, instrumentation changes lacked event timing and duplication proof, and issue-template configuration could be misclassified as an API flow. The release fixes those boundaries, keeps repository-validation changes on their existing test route, and packages the same local-first QA skill for official directory review without adding an MCP server or hosted service.
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 315/315 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 27/27 static recommendation contracts passing |
+| `pnpm bench:execution` | 3/3 execution contracts passing; duplicate-request, missing-persistence, and stale-validation regressions caught |
+| Coverage | Lines 89.65%, branches 86.30%, functions 95.66% |
+| Skills-only package check | 5 positive cases, 3 negative cases, 3 starter prompts, a 512x512 logo, and legal/support metadata validated |
+| Isolated install smoke | The packed npm artifact installed as 0.4.11 in a clean temporary project and produced one intent with one exact evidence trace |
+| Public repository execution | Focused tests selected for `GLips/Figma-Context-MCP` passed in 4.641 seconds; QAMap's own selected regression command passed in 63.674 seconds; both runs left Git-observable paths unchanged |
+| Package preview | `pnpm pack --dry-run` passes for `@ivorycanvas/qamap@0.4.11`; 169 files packed |
+
+The new instrumentation contract requires evidence for when an event should fire, which payload boundary matters, and whether retries or rerenders can emit it twice. A `calendar` icon or display mode alone no longer creates timezone or scheduling scenarios. Files under issue-template configuration no longer become API contracts merely because their names contain `request`, so existing repository tests remain the selected verification route.
+
+The official plugin candidate is deliberately skills-only. It invokes the published local CLI and does not add network-backed analysis, an MCP server, or a hosted QAMap service. QAMap itself makes no additional model call, but the calling agent still uses its own model tokens. The compact handoff reduces repeated repository rediscovery; it is not advertised as zero total token usage. The submission package also discloses the one-off npm download, write-capable commands, owner-only temporary recovery reports, privacy terms, support path, and positive and negative activation cases.
+
+The public execution canaries prove only the selected repository commands, not every product scenario. Full product QA remains explicitly `not run` until a user or agent chooses an execution action. Cross-repository trials were read-only, and no private repository names, source, or domain assumptions are included in the release fixtures or documentation.
+
+## 0.4.10 - 2026-08-06
+
+QAMap 0.4.10 makes the first-run experience shorter without hiding the reasoning path. The default `qamap qa` output now leads with changed behavior, required proof, exact evidence, and the selected verification route; the complete Markdown report remains available through `--format markdown`. The README and demo were rebuilt from this actual output, and the contributor workflow now asks for minimized QA misses, false-positive controls, and execution evidence instead of broad feature descriptions.
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 308/308 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 25/25 static recommendation contracts passing |
+| `pnpm bench:execution` | 3/3 execution contracts passing; duplicate-request, missing-persistence, and stale-validation regressions caught |
+| Coverage | Lines 89.64%, branches 86.32%, functions 95.66% |
+| Public repository smoke | A transformer-only change in `GLips/Figma-Context-MCP` routes to an input-to-output contract with exact symbol and line evidence, not an invented API, authentication, or product E2E scenario |
+| Package preview | `pnpm pack --dry-run` passes for `@ivorycanvas/qamap@0.4.10` |
+
+The concise output is intentionally a review receipt, not a claim that product QA ran. It reports selected repository commands as `not run`, keeps unsupported automation out of the required path, and points to the full report when a reviewer needs every scenario and trace. Transformation changes receive representative-input, exact-output, boundary, and compatibility checks even when no browser runner exists. A public-repository smoke exposed the previous false API classification, and a domain-neutral regression fixture now protects that boundary.
+
+The quick-start GIF was recorded from the current CLI against the committed `web-symbol-annotated-renewal` fixture. Every line shown is actual static-analysis output, and the recording deliberately ends with validation and E2E marked `not run`. Executable behavior is proven separately by the seeded-regression benchmark. Removed legacy GIFs are no longer referenced or packaged.
+
+## 0.4.9 - 2026-08-03
+
+QAMap 0.4.9 ships the validation-recovery compiler, the native Codex and Claude Code plugin manifests, and a quality series validated against merged pull requests of unrelated public repositories: substantive intents outrank cleanup tip commits, agent payload identifiers stay whole with a recoverable full report, missing observable outcomes are stated honestly instead of echoing the flow title, ticket tags survive once in the title, and symbol-derived lifecycle labels read behaviorally.
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 282/282 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 24/24 static recommendation contracts passing, including the new multi-commit cleanup-tip fixture |
+| `pnpm bench:execution` | 3/3 execution contracts passing; duplicate-request, missing-persistence, and stale-validation regressions caught |
+| Coverage | Lines 89.41%, branches 85.98%, functions 95.76% |
+| Compact agent handoff | A 43-file public PR branch compacts to 3,387 bytes with zero partially emitted identifier values and a disclosed `fullReport` recovery path |
+| Package preview | `pnpm pack --dry-run` passes for `@ivorycanvas/qamap@0.4.9` |
+
+The cleanup-tip fixture materializes a feature commit followed by `fix: minor refactor` and pins the primary intent title, flow title, and draft filename; with the ranking fix reverted the fixture fails on all three, proving the guard. The validation-recovery fixture proves two generated paths against a committed local application: a valid submission reaches its visible success result, and invalid input stays quiet before first blur, shows feedback after blur, clears that feedback after correction, and then submits successfully. The same byte-identical artifact fails at the stale-error assertion when the fixed first-touch mode is replaced with blur-only behavior.
+
+## 0.4.8 - 2026-07-27
+
+QAMap 0.4.8 adds the first CI-enforced seeded-regression execution contracts. QAMap generates browser artifacts from repeated-action and persisted-state changes, then proves that each artifact fails for its intended assertion when the behavior is broken and passes again when the fixed source is restored:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end with the execution contract included |
+| `pnpm test` | 250/250 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 22/22 static recommendation contracts passing |
+| `pnpm bench:execution` | 2/2 execution contracts passing; duplicate-request and missing-persistence regressions caught; fixed sources report `2 passed` and `1 passed` |
+| Coverage | Lines 89.29%, branches 85.91%, functions 95.76% |
+| Compact agent handoff | Current branch output is 4,082 bytes, retains three detected flows with one disclosed omission, and keeps execution explicitly `not-run` |
+| Package preview | `pnpm pack --dry-run` passes for `@ivorycanvas/qamap@0.4.8` |
+
+The execution result is intentionally scoped to committed public fixtures. It does not claim that QAMap executed or passed QA in a user's repository. Its value is narrower and measurable: evidence-compiled tests can distinguish known broken implementations from their fixes, and an unrelated setup failure cannot be counted as a caught regression. SHA-256 checks also prevent regeneration from silently changing the test between comparisons.
+
+## 0.4.7 - 2026-07-22
+
+Validated as a decision-contract, executable-draft, exact-test-routing, public-regression, compounding-repository-context, and multi-flow agent-handoff release. QAMap now exposes one canonical route after it reads a change: either complete an optional automation draft or run a repository validation command. It also connects item-level actions to repository-backed prerequisites, ranks exact changed Python regression tests, adds a provenance-pinned public PR reduction, proves that one reviewed manifest correction improves both the current PR and the next related PR without another prompt, and preserves a second distinct QA flow when a large result must be compacted below the agent payload limit:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end for the `0.4.7` release source |
+| `pnpm test` | 207/207 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 19/19 targets pass across React, Vue, SvelteKit, Expo, JavaScript and Python API services, shared components, configuration, test-only, CLI/analyzer, and a provenance-pinned public PR reduction |
+| Coverage | Lines 88.89%, branches 85.48%, functions 95.87% |
+| Canonical route | Agent output reports one `route.basis`, unambiguous status, next action, and exact repository command when available; the older readiness score remains compatibility detail |
+| Public PR regression | A behavior-preserving reduction of Cal.com PR #27765 recovers the edit -> validation trigger -> correction -> submit lifecycle, exact diff evidence, and related existing regression test |
+| Executable nested-action draft | In an isolated testless web repository, the generated draft filled the entity input, created the required item, exercised the diff-added item action, asserted the visible outcome, and passed 1/1 in Chromium |
+| Exact Python validation | A changed Python regression test that imports the changed module ranks first and routes to its narrowed `pytest` command; neighboring settings modules remain configuration evidence |
+| Repository QA memory | A generic flow is corrected through `.qamap/manifest.yaml`, the same PR becomes manifest-backed, and a later PR automatically reuses the reviewed flow, route, steps, and selectors |
+| Framework-neutral state inference | React Hook Form timing changes are recognized only when both old and new modes occur in form-shaped evidence; an unrelated non-form `mode` change remains a negative control |
+| CLI command contract | CLI-only and mixed analyzer/package-surface changes route to repository validation such as `pnpm test` instead of a blocked product E2E draft |
+| Compact agent handoff | Every benchmark remains below 4KB while preserving the canonical route. An additional read-only large multi-surface canary found four flows and retained two distinct flows, their changed files, review questions, and success signals in 3,670 bytes instead of collapsing to only the first flow; two omitted flows remain disclosed |
+| Package preview | `pnpm pack --dry-run` and `npm publish --dry-run --access public` pass for `@ivorycanvas/qamap@0.4.7`; 146 files, 903.5 kB packed |
+
+The public fixture records its upstream repository, pull request URL, base and head SHAs, license, and reduction method. It is not described as a verbatim repository snapshot. Its contract fails if QAMap loses the changed validation timing, exact source location, related test evidence, or the four observable state boundaries a reviewer needs to reason about the regression.
+
+The manifest lifecycle is intentionally not a one-shot generation demo. The first heuristic result is preserved, a human supplies team language and stable evidence once, and both the current and subsequent related changes are reevaluated against that committed knowledge. This is the measurable distinction between repository-local QA context and repeatedly prompting an agent with the same explanation.
+
+Compact output prioritizes breadth before secondary detail. The first retained flow keeps its full decision context, while a second distinct flow keeps enough repository evidence to continue review without confusing it with the first. The output still reports total, retained, and omitted counts; it does not claim that every detected flow fits inside the 4KB handoff.
+
+The canonical `route` is the decision agents and integrations should consume first. Product behavior can still lead toward Playwright, Maestro, or manual E2E artifacts. Analyzer rules, CLI command contracts, configuration, documentation, generated output, and existing tests instead point at repository validation. Plain `qa` keeps both paths `not-run`. Explicit `qa run` can execute one exact selected existing repository validation command, but it still does not claim that an optional product draft or every routed QA scenario passed.
+
+The executable smoke is deliberately narrower than the static `qa` contract. QAMap's normal analysis still reports product execution as `not-run`. For release validation only, an isolated copy installed the proposed Playwright setup, including Chromium, and executed the generated file against the local application. The first draft failed because the changed item-level control did not exist in an empty collection. That failure became a generic same-entity prerequisite rule plus positive and negative regressions; the regenerated draft then passed.
+
+## 0.4.6 - 2026-07-18
+
+Validated as a source-role-aware routing, large-PR evidence, and repository-verification release. QAMap now distinguishes product behavior from analyzer, command, configuration, documentation, generated, and test evidence before selecting QA. It retains an inspectable path through compact agent output, avoids merging unrelated long-PR intents, and points product changes at related existing tests without presenting repository validation as a failed product E2E:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end for the release candidate |
+| `pnpm test` | 186/186 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 17/17 synthetic PR targets pass across React, Vue, SvelteKit, Expo, API, shared-component, configuration, test-only, and CLI analyzer changes |
+| Coverage | Lines 88.67%, branches 85.27%, functions 95.77% |
+| Change Intent coverage | Lines 97.85%, branches 90.58%, functions 99.07% |
+| QA trace coverage | Lines 98.27%, branches 92.22%, functions 96.77% |
+| Source-role routing | Analyzer and CLI changes require command-contract and rule-boundary checks while rejecting unrelated product scheduling, routing, payment, API, fixture, selector, and manifest QA |
+| Repository verification | Configuration-only and test-only fixtures report `ready-to-run (repo)` with their existing validation command instead of a blocked product E2E score |
+| Large-PR intent integrity | Broad scopes and one-word keyword bridges cannot transitively collapse unrelated commits; exact commit files remain attached to their own intent |
+| Compact reasoning path | Emergency agent output remains below 4KB while retaining one located trace, scenario source, affected file, review question, success signal, evidence gap, and next command |
+| Related test evidence | Direct imports, matching source/test stems, and owner paths rank relevant tests while unrelated similarly named tests remain excluded |
+| Product execution honesty | Human output says `not run` and `not executed`; agent output carries `execution: { status: "not-run", performed: false, scope: "static-analysis-and-draft-mapping" }` |
+| Package preview | `pnpm pack --dry-run` and `npm publish --dry-run --access public` pass for `@ivorycanvas/qamap@0.4.6`; 143 files, 876.6 kB packed |
+
+Product automation readiness and repository validation readiness are now separate contracts. Product changes can still flow from diff evidence to optional Playwright, Maestro, or manual drafts. Analyzer, configuration, documentation, generated-artifact, and existing-test changes instead identify the repository command and verification mode that match the source role. Neither path claims that QAMap launched the target application or executed the command.
+
+The analyzer benchmark is domain-neutral: it changes a CLI command and a static rule engine, requires positive, negative, and neighboring-rule verification, and rejects product-domain setup inferred from words that happen to occur in analyzer source. Existing web, mobile, API, artifact, and state-transition fixtures remain unchanged and green, guarding against source-role classification suppressing genuine product evidence.
+
+Long-PR tests model independent changes connected only by broad scopes or one shared keyword. Their contracts require separate intents and exact commit-file ownership. Related-test tests similarly place a correctly imported feature test beside an unrelated same-name build test; only the directly relevant evidence may enter the QA checklist and agent handoff.
+
+Machine automation values remain `compiled`, `partial`, `not-compiled`, and `review-only` for the additive v1 contract. The new readiness fields are additive and explain whether those automation values apply or whether the result is repository validation. A `ready-to-run` verification status means QAMap found a suitable command; it never means that command passed.
+
+## 0.4.5 - 2026-07-16
+
+Validated as a traceable-reasoning, cross-domain precision, and repository-evidence ownership release. QAMap now exposes one inspectable path from diff evidence to affected behavior, risk, routed QA scenario, optional artifact, and explicit non-execution. It also keeps QA routing separate from draft-mapping gaps, rejects unrelated package mocks, and maps a diff-added UI action to its observable state result:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end without changing the package version |
+| `pnpm test` | 180/180 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 16/16 synthetic PR targets pass across web, mobile, API, shared-component, configuration, state-transition, and test-only changes; public trace fixtures reject missing scenario paths and untraceable required scenarios |
+| Coverage | Lines 88.64%, branches 85.30%, functions 95.91% |
+| Change Intent coverage | Lines 98.61%, branches 91.41%, functions 99.47% |
+| QA trace coverage | Lines 98.26%, branches 92.13%, functions 96.77% |
+| Reasoning path | Stable IDs connect diff source -> evidence-linked lifecycle -> risk -> routing -> optional draft; partial and review-only paths retain their gaps instead of being promoted |
+| Product execution honesty | Human output says `not run` and `not executed`; agent output carries `execution: { status: "not-run", performed: false, scope: "static-analysis-and-draft-mapping" }` |
+| Judgment precision | Persisted dates do not imply scheduling, structured metadata does not imply browser routing, local services do not imply API fixtures, and report counts come from the emitted reasoning traces |
+| UI state handoff | A diff-added action selector compiles to the interaction step and repository-observed stable state copy becomes the assertion and user-facing success signal |
+| Generated action integrity | Implementation-shaped setter stages cannot compile as a second user interaction; the public record-pinning target requires exactly one mapped action and one observable assertion |
+| Workspace evidence ownership | A domain-neutral multi-app fixture keeps a changed asset and same-workspace endpoint evidence with the owning behavior flow while rejecting an unrelated sibling-app mock and unrelated same-app API client |
+| Package preview | `pnpm pack --dry-run` and `npm publish --dry-run --access public` pass for `@ivorycanvas/qamap@0.4.5`; 140 files, 863.1 kB packed |
+
+Human Markdown, full JSON, compact agent JSON, and generated Playwright, Maestro, or manual drafts now share the same trace ID. This keeps the reasoning layer separate from the artifact while letting a reviewer move from generated code back to the exact change, inferred consequence, and risk that caused it to exist. A `traceable` result means the reasoning provenance is connected; it never means the target product was launched or the scenario passed.
+
+The workspace fixture models a generic multi-application repository rather than a maintainer product. It changes a user action, supporting asset, and endpoint in one application, places a similarly named mock in another application, and changes an unrelated API client in the same application. The regression contract requires natural action language, one behavior flow instead of an asset-only duplicate, usable selector evidence, relevant fixture guidance, no filename-fabricated server URL, and an explicit non-execution receipt.
+
+The state-transition fixture models a framework-level interaction rather than a product domain: a branch adds a stable action control and conditional visible result. The benchmark requires the action selector, exact state copy, route, reasoning traces, and scenario-to-draft receipts to survive together. It also caps the primary draft at one mapped action, preventing an internal state setter from becoming a duplicate click. A unit-level negative set separately proves that date validation, structured `destination` data, ordinary local services, and substring selector matches do not fabricate unrelated QA or fixture requirements.
+
+Machine automation values remain `compiled`, `partial`, `not-compiled`, and `review-only` for the additive v1 contract. They now have unambiguous human labels: fully mapped, partially mapped, not mapped, and review only. These values describe whether a selected scenario could be expressed as a draft; they never mean the target application ran or passed.
+
+## 0.4.4 - 2026-07-15
+
+Validated as a cross-framework evidence, honest-draft, and repeat-use UX patch. QAMap recovers conservative change intent from connected diff behavior even when commit text is not descriptive, maps React and Vue conditional states to changed actions and observable outcomes, keeps unsupported outcomes review-only, and can install short collision-safe package scripts for everyday branch and working-tree QA:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 166/166 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 15/15 synthetic PR targets pass; React and Vue conditional-state positives recover actions/outcomes while a presentation-only negative control rejects behavioral state QA |
+| Coverage | Lines 88.32%, branches 84.69%, functions 95.53% |
+| Change Intent coverage | Lines 97.40%, branches 91.15%, functions 99.30% |
+| Short-command initializer | Lines 100%, branches 97.14%, functions 100%; npm, pnpm, Yarn, Bun, collisions, force replacement, malformed metadata, idempotency, and CLI entry are covered |
+| Agent payload | Global output stays below 4KB; complex web and mobile lifecycle fixtures retain intent/scenario/flow context in 3,172 and 3,133 bytes instead of falling back to an empty emergency summary |
+| One-off repository safety | The documented npm execution command left an isolated repository's `package.json` hash unchanged and created no lockfile or package-manager metadata |
+| Skill compatibility | The public repository was discovered by the `skills` CLI and `qamap-pr-qa` installed as a project skill in an isolated home/project |
+| Package preview | `pnpm pack --dry-run` and `npm pack --dry-run` pass for `@ivorycanvas/qamap@0.4.4`; 137 files, 928.3 kB packed |
+
+The React and Vue fixtures are not product-specific framework rules. They express equivalent conditional user behavior through different syntax, while the negative control proves that a presentation condition alone cannot create lifecycle QA. Benchmarks materialize temporary Git repositories, do not install fixture dependencies, and do not execute fixture applications.
+
+Low-confidence diff-only intent remains review-required and recommended. Located lines alone do not promote it to a required blocker. When a repository exposes a stable action and observable failure outcome, QAMap can still compile a separate Playwright failure scenario; when an outcome is absent, the draft emits `test.fixme` rather than treating the clicked control or document body as proof of success.
+
+Repeat-use setup is explicit and repository-local: `qamap init --scripts` adds `qa`, `qa:local`, `qa:run`, and `qa:e2e` only to JavaScript package metadata, preserves conflicting script names unless `--force` is passed, and reports the package-specific install command when QAMap is not yet a dependency. The `qa` report also states whether working-tree changes were included so the two analysis scopes cannot be confused.
+
+## 0.4.3 - 2026-07-14
+
+Validated as an evidence-routed QA-to-automation patch. Intent-backed scenarios are selected from exact diff evidence before an adapter is chosen, and every selected scenario carries a receipt that states whether its setup, action, and assertion were compiled, partially mapped, left uncompiled, or retained for review only:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 148/148 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 12/12 synthetic PR targets pass; both lifecycle fixtures preserve 4/4 exact diff traces and 4/4 scenario automation receipts |
+| Coverage | Lines 87.64%, branches 84.19%, functions 95.32% |
+| Required QA honesty | Required scenarios that are only partially mapped or not compiled lower readiness and remain explicit blockers instead of being hidden behind a syntactically valid draft |
+| Failure-path safety | A positive fixture compiles repository-backed failure setup, action, and outcome evidence; a negative control proves an unrelated stable selector is not reused |
+| Package preview | `pnpm pack --dry-run` and `npm publish --dry-run --access public` pass for `@ivorycanvas/qamap@0.4.3`; 134 files, 914.2 kB packed |
+
+This patch does not add product-specific payment, order, or upload rules. The shared engine ranks scenarios from runner-independent evidence relations and only compiles a failure path when the repository exposes a compatible endpoint boundary, related action selector, and observable outcome. Review-only and incomplete mappings remain visible to humans and agents rather than being presented as runnable E2E coverage.
+
+## 0.4.2 - 2026-07-13
+
+Validated as an automation-readiness honesty patch. Benchmark contracts now fail when QAMap finds a plausible flow but emits a draft that cannot be tried, and generated Playwright failure paths require a repository-observed endpoint, stable action, and visible failure outcome before QAMap writes executable steps:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 146/146 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 12/12 synthetic PR targets pass; readiness, runnable-candidate, self-check, TODO, review-only, and execution-blocker contracts are enforced |
+| Coverage | Lines 87.53%, branches 84.18%, functions 95.22% |
+| Existing Playwright golden | Improved from `needs-work 67` with one blocker to `near-runnable 97`, one runnable candidate, and zero execution blockers |
+| Honest weak-draft handling | Testless checkout and shared-component fixtures remain `needs-work 48` because missing execution facts and body-only assertions are not promoted to runnable evidence |
+| Package preview | `pnpm pack --dry-run` and `npm publish --dry-run --access public` pass for `@ivorycanvas/qamap@0.4.2`; 129 files, 828.8 kB packed |
+
+This patch does not claim that all generated E2E files are green in their target applications. It makes that gap measurable: repository validation guidance no longer masquerades as a generated-file execution blocker, body-only smoke assertions remain warnings, and only evidence-backed failure flows compile into Playwright actions and assertions.
+
+## 0.4.1 - 2026-07-13
+
+Validated as an evidence-first QA patch. A proposed scenario now exposes the commit or exact base/head diff file, line, symbol, hunk, and direct/supporting/contextual relation that caused it. Removed guards remain visible as base-side critical evidence, contextual-only scenarios cannot become critical, and runner adoption remains an explicit step after review:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm release:check` | Passed end to end |
+| `pnpm test` | 146/146 passing |
+| `pnpm scan` | 0 findings |
+| `pnpm bench:ci` | 12/12 synthetic PR targets pass; web and mobile lifecycle scenarios both retain 4/4 exact diff traces |
+| Coverage | Lines 87.49%, branches 83.99%, functions 95.20% |
+| Agent payload | Evidence-rich lifecycle fixtures are 5,288 and 5,659 bytes; a large real mobile branch compacts from 10,873 to 8,111 bytes while disclosing omitted counts |
+| Package preview | `pnpm pack --dry-run` and `npm publish --dry-run --access public` pass for `@ivorycanvas/qamap@0.4.1`; 129 files, 825.5 kB packed |
+| Read-only repository smoke | A large mobile branch and a web workspace branch were rechecked after base-side evidence and output compaction; both target worktrees remained unchanged |
+
+The large mobile branch retained zero untraced critical scenarios. A removed release guard was tied to its exact base-side line and translated into local/development/QA/production configuration checks rather than an unrelated user-authorization scenario. Its agent payload reports 44 total intents, 2 retained intents, and 42 omitted intents within 8,111 bytes. The release-shaped web branch still had no behavior-bearing commit intent and therefore emitted four broader review-only flows with zero critical scenarios; this remains an explicit precision limit rather than promoted confidence.
+
+## 0.4.0 - 2026-07-12
+
+Validated as the first intent-first QA design release. The release contract starts with behavior-bearing commits and diff evidence, reconstructs an ordered behavior lifecycle, proposes runner-independent QA scenarios, and only then compiles an optional automation draft:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm test` | 139/139 passing |
+| `pnpm bench:ci` | 12/12 synthetic PR targets pass; dedicated web and mobile lifecycle targets require commit intent, ordered lifecycle phases, failure/boundary/state QA, observable success text, and commit-backed Behavior Graph evidence |
+| Coverage | Lines 86.80%, branches 83.37%, functions 94.86% |
+| Change Intent coverage | Lines 94.76%, branches 88.57%, functions 98.04% |
+| `npm publish --dry-run --access public` | Passed for `@ivorycanvas/qamap@0.4.0`; 129 files, 813.8 kB packed |
+| Intent-first output | Markdown, JSON, agent output, Behavior Graph, and generated drafts preserve confidence, commit evidence, lifecycle, and QA scenarios before automation-adapter guidance |
+| Read-only safety | Public regression coverage uses synthetic repositories; optional local smoke validation runs from temporary copies and does not modify target repositories |
+
+## 0.3.5 - 2026-07-11
+
+Validated as a manifest-feedback reliability patch:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm test` | 127/127 passing |
+| `pnpm bench:ci` | Eight public PR fixtures pass; API and reverse-import fixtures also generate an external base manifest and require a manifest-backed head flow |
+| Coverage | Lines 86.09%, branches 83.18%, functions 94.66% |
+| `npm publish --dry-run --access public` | Passed for `@ivorycanvas/qamap@0.3.5`; 115 files, 772.8 kB packed |
+| API manifest baseline | Common server modules produce manual contract flows with API anchors and success/failure checks |
+| Domain fallback | Domain-only matches preserve manifest provenance without claiming unrelated files or inventing manifest checks |
+| Privacy | Public changes use synthetic fixtures; private smoke output remains outside the repository |
+
+## 0.3.4 - 2026-07-10
+
+Validated before publishing `0.3.4` with a committed, CI-enforced recommendation contract instead of relying only on private smoke repositories:
+
+| Gate | Current result |
+| --- | --- |
+| `pnpm test` | 124/124 passing |
+| `pnpm bench:ci` | Eight public PR fixtures pass runner, flow naming, file reach, selector/evidence, command, generic-title, blank-action, and agent payload requirements |
+| Coverage | Lines 86.19%, branches 83.37%, functions 94.87% |
+| Reverse import fixture | Shared component change reaches and names the consuming checkout page |
+| API service fixture | Backend route changes produce an API contract, not a browser UI journey |
+| Agent contract | Real output validates against `schema/qamap-agent.schema.json` and stays below the 4KB fixture limit |
+| Verification-only regressions | Native config changes use existing build commands without fabricated journeys; changed Maestro files are returned as existing evidence without duplicate drafts or selector/fixture noise |
+
+## 0.3.3 - 2026-07-05
+
+Validated before publishing `0.3.3` (at-a-glance qa verdict, diff-anchored action naming incl. button/link text and logic-only fallbacks, observed-response assertions with diff-derived status bounds, Vue bound-attribute/i18n selector fixes):
+
+| Gate | Result |
+| --- | --- |
+| `pnpm test` | 103/103 passing |
+| `pnpm scan` (self-scan) | 0 findings |
+| Coverage thresholds (lines/branches/functions >= 80) | Passing |
+| `pnpm bench` against the four pinned local benchmark targets | Runner choice 4/4, labeled must-reach recall 9/9, blank actions 0, no metric regressions vs the 0.3.2 baseline |
+| README demo repository | Flow names and recorded demo unchanged |
+
+
+## 0.3.2 - 2026-07-04
+
+Validated before publishing `0.3.2` (reverse import graph, diff-anchored steps and names, workspace-member project detection, Python service classification, start-here CLI guide):
+
+| Gate | Result |
+| --- | --- |
+| `pnpm test` | 100/100 passing |
+| `pnpm scan` (self-scan) | 0 findings |
+| Coverage thresholds (lines/branches/functions >= 80) | Passing |
+| `pnpm bench` against four pinned local benchmark repositories covering common stack shapes (monorepo, API server, mobile, legacy web) | Runner choice 4/4, labeled must-reach recall 9/9, blank actions 0, no metric regressions vs the previous baseline |
+| README demo | Real recorded run; the generated starter spec passes against the demo app |
+
+Historical validation notes for earlier releases follow below.
+
+# 0.2.1 Patch Release Validation (historical)
+
+QAMap should not publish a patch or minor version only because the CLI commands work in fixtures. The `0.2.1` release should prove that the manifest-backed QA skill flow is useful across representative repositories without requiring an LLM call.
+
+## Release Bar
+
+QAMap is ready for the next public release when the commands below produce useful, reviewable output for each representative repository type:
+
+- manifest-free `qamap qa` output that works as a PR comment/checklist draft
+- packaged `skills/qamap-pr-qa/SKILL.md` template included in the npm tarball
+- repository baseline generation with `.qamap/manifest.yaml`
+- manifest validation that catches stale or ambiguous team verification policy
+- branch-level manifest explanation with clear update paths
+- manifest-driven E2E drafts that use declared routes and checks before heuristic candidates
+- web app with Playwright-compatible routes and components
+- mobile or Expo/React Native app with Maestro-compatible screens
+- API or backend service repo with contract-oriented checklist output
+- CLI package with command-oriented checklist output
+- monorepo package scanned with `--workspace-root`
+- monorepo root that points reviewers to changed app/package targets
+- test-light project with little or no existing E2E coverage
+- API-dependent UI flow that needs deterministic mock or fixture data
+- evidence-only branches where only tests, docs, or generated output changed
+
+For each target, record:
+
+- command used
+- base/head refs or working-tree mode
+- inferred change intent, confidence, commit evidence, and review requirement
+- lifecycle and runner-independent QA scenario quality
+- selected automation adapter
+- generated flow language brief quality
+- draft readiness summary
+- draft self-check status and blockers
+- required and recommended draft action items
+- previewed or generated file paths
+- manual notes about false positives, missing context, or weak selectors
+
+## Required Commands
+
+Run these from a clean checkout of QAMap before any release candidate:
+
+```sh
+pnpm run release:check
+```
+
+`release:check` expands to the required local suite: `pnpm test`, `pnpm scan`, `pnpm bench:ci`, `pnpm bench:execution`, `git diff --check`, coverage thresholds, and `pnpm pack --dry-run`. The execution benchmark runs only committed public fixtures in temporary repositories. If a release candidate fails, run the individual command directly to inspect the failure.
+
+Run the npm publish preview after the local release gate passes:
+
+```sh
+npm publish --dry-run --access public
+```
+
+Run these against every representative target repository:
+
+```sh
+node dist/cli.js e2e plan <target> --base <base> --head <head> --format markdown
+node dist/cli.js e2e plan <target> --base <base> --head <head> --format json
+node dist/cli.js qa <target> --base <base> --head <head> --format markdown
+node dist/cli.js qa <target> --base <base> --head <head> --format json
+node dist/cli.js e2e draft <target> --base <base> --head <head> --output <tmp-output-dir> --dry-run
+node dist/cli.js qa <target> --manifest <tmp-manifest-file> --base <base> --head <head> --format markdown
+node dist/cli.js e2e draft <target> --manifest <tmp-manifest-file> --base <base> --head <head> --dry-run
+node dist/cli.js e2e draft <target> --base <base> --head <head> --output <tmp-output-dir>
+node dist/cli.js e2e draft <target> --base <base> --head <head> --output <tmp-output-dir> --force --json
+node dist/cli.js manifest init <target> --write <tmp-manifest-file> --force --format json
+node dist/cli.js manifest validate <target> --manifest <tmp-manifest-file> --format markdown
+node dist/cli.js manifest validate <target> --format markdown
+node dist/cli.js manifest context <target> --format markdown
+node dist/cli.js manifest explain <target> --manifest <tmp-manifest-file> --base <base> --head <head> --format markdown
+node dist/cli.js manifest explain <target> --base <base> --head <head> --format markdown
+```
+
+For monorepos, include:
+
+```sh
+node dist/cli.js e2e plan <package> --workspace-root <repo-root> --base <base> --head <head> --format markdown
+node dist/cli.js qa <package> --workspace-root <repo-root> --base <base> --head <head> --format markdown
+node dist/cli.js e2e draft <package> --workspace-root <repo-root> --base <base> --head <head> --output <tmp-output-dir> --dry-run
+node dist/cli.js e2e draft <package> --workspace-root <repo-root> --base <base> --head <head> --output <tmp-output-dir>
+```
+
+## Expected Evidence
+
+The E2E plan should show:
+
+- change intent with commit and diff evidence, confidence, and review requirement
+- ordered behavior lifecycle and concrete primary, failure, boundary, and state-transition QA scenarios
+- automation adapter selection after the runner-independent QA sections
+- execution profile with start command, test command, base URL or app id when discoverable, confidence, and blockers
+- runner setup proposal with install commands, explicit `qamap e2e setup` acceptance command, files to create/update, and next commands when the repo lacks an E2E runner
+- setup output that reports the first generated changed-flow draft file after the accepted runner setup is applied
+- bootstrap steps when the project lacks E2E setup
+- domain language and candidate user scenarios
+- matched `.qamap/domains.yml` or `.qamap/flows.yml` entries when present
+- validation matrix rows for fixture, coverage, setup, and testability gaps
+
+The E2E draft should show:
+
+- intent evidence, lifecycle, and QA scenario comments inside generated artifacts
+- `verification-manifest` as the draft source when a matched manifest flow is strong enough
+- manifest evidence comments inside generated drafts
+- external `--manifest <file>` previews that let teams test generated manifest quality without writing `.qamap/manifest.yaml` into target repos
+- manifest checks converted into draft steps or coverage notes
+- previewed or generated Maestro, Playwright, or manual draft files
+- `dryRun` mode and `preview` file status when `--dry-run` is used
+- `languageBrief` for each draft file
+- `promotionStatus` for each draft file
+- `runnableStatus` and execution blockers for each draft file
+- `selfCheck` status, summary, command, warnings, and blockers for each generated draft file
+- `actionItems` grouped by assertion, fixture, selector, runner, validation, or manifest
+- `actionSummary` with required and recommended action counts
+- `readinessSummary` with score, level, self-check counts, TODO counts, execution blocker counts, and top blockers
+- Playwright `test.step()` names that read like the product journey
+
+The QA draft should show:
+
+- no-write PR comment/checklist output from `qamap qa`
+- no cloud and no LLM token positioning in the output
+- change intent and lifecycle before automation setup
+- primary, failure, boundary, and state-transition QA scenarios when evidence supports them
+- affected flow language with changed files and reviewer question
+- suggested E2E or manual checklist path
+- automation adapter inherited from the E2E planner
+- missing fixture, selector, assertion, runner, validation, or manifest evidence
+- PR checklist items that can be pasted into a pull request
+- optional manifest repair path when a manifest-backed recommendation is wrong
+
+The packaged skill template should show:
+
+- a concise `SKILL.md` with valid frontmatter
+- a default `qamap qa` command for PR finalization
+- monorepo scoped command guidance
+- clear warning that QAMap output is QA planning evidence, not proof that QA passed
+- manifest repair guidance for wrong or broad recommendations
+
+The manifest commands should show:
+
+- generated `$schema` pointing at `schema/qamap-manifest.schema.json`
+- domains with narrow enough path patterns to explain matches
+- flows with anchors and checks that can shape generated drafts
+- `manifest validate` status, issue counts, and concrete recommendations
+- `manifest explain` matches with confidence, entry route, required checks, evidence path, and update path
+
+## Golden Demo Acceptance Bar
+
+The public demo must prove the product shape, not only command execution. Before promoting a release, run or update a small demo where a realistic PR diff produces a concrete E2E starting point:
+
+- The output names the affected product feature and user flow in domain language.
+- The output shows the behavior-bearing commit evidence, confidence, and review requirement behind the inferred intent.
+- The output orders trigger, condition, action, state change, side effect, and observable outcome before selecting a runner.
+- The output proposes concrete primary, failure, boundary, and state-transition QA where evidence supports them.
+- The output names the draft file that would be created or previewed.
+- The draft includes route or screen entry, realistic actions, and at least one meaningful assertion.
+- The report explains why the test was recommended from changed files and manifest evidence.
+- The report names the manifest path to update if the recommendation is wrong.
+- Remaining gaps are specific, such as auth fixture, API mock, stable selector, runner config, or validation command.
+- The demo makes clear when output is `--dry-run`, `review-only`, `near-runnable`, or `runnable-candidate`.
+
+Avoid demos that only say broad phrases such as "fixture needed", "selector missing", or "Listing flow recommended" without showing why those gaps matter for the changed behavior.
+
+## Current Fixture Evidence Matrix
+
+The matrix below is public, fixture-backed evidence from the repository test suite. It is not a substitute for final manual validation against real projects, but it proves the release bar with reproducible scenarios that can run in CI without an LLM call.
+
+| Target | Fixture-backed coverage | Expected output |
+| --- | --- | --- |
+| Commit intent and lifecycle | `change intent clusters related commits into one evidence-backed lifecycle`; `change intent keeps unrelated feature commits separate`; `shared route files do not merge distinct navigation intents through generic vocabulary`; `working-tree analysis keeps unrelated behavior files in separate intents`; `change intent ignores release-only commit metadata`; `E2E planning promotes commit intent before runner-specific draft generation` | Related feature commits become one evidence-backed intent; unrelated files and distinct changes in one shared file remain separate unless specific repository evidence connects them; each literal navigation destination stays with its owning intent; release-only changes do not become product intent; lifecycle and QA scenarios appear before Playwright or Maestro compilation. |
+| Manifest-free QA skill entrypoint | `qa command emits a PR comment draft without requiring a manifest` | `qamap qa` works without `.qamap/manifest.yaml`, emits a local-first PR QA draft, names affected flow, changed files, suggested E2E/checklist path, missing evidence, PR checklist, agent handoff, and says manifest is optional upgrade rather than a first-use gate. |
+| Bounded repository validation | `qa run executes the selected focused repository test and returns a bounded receipt`; `qa run distinguishes command mutations from pre-existing dirty worktree state`; `qa run reports Git-observable paths changed by the selected command`; `qa run detects repository history changes even when the worktree stays clean`; `qa run detects a branch checkout even when HEAD and files stay unchanged`; `qa run bounds a large changed-path receipt without losing the total`; `qa run detects staging-only mutations when file contents do not change`; `qa run reports unknown Git state instead of claiming a clean run when observation disappears`; `qa run neutralizes instruction-like paths discovered after execution`; `qa run does not embed raw command output in agent-facing receipts`; `qa run blocks product automation routes instead of executing an E2E draft`; `qa run terminates timed-out repository commands`; `qa run CLI preserves repository failure status and emits its receipt`; `qa run replaces a missing container wrapper with the same available test runner`; `qa run blocks when a container validation runner cannot be established` | Explicit `qamap qa run` re-analyzes the change and executes only the exact selected existing repository-validation command. Recognized Compose-based Python commands receive a bounded runner prerequisite probe after execution is explicitly requested: the same test runner may replace a missing wrapper, while an unresolvable image is blocked before project tests start. Receipts report passed, failed, blocked, or timed-out status with duration, byte counts, output hashes, and a bounded before/after Git-state comparison; raw stdout, stderr, and changed file contents remain outside JSON and agent receipts. Product automation routes, neutralized instruction text, and unsupported commands are never executed. |
+| Packaged PR QA skill template | `package metadata includes the portable PR QA skill template` | npm package metadata includes `skills`, and `skills/qamap-pr-qa/SKILL.md` contains the local PR QA workflow, `qamap qa` command, and manifest repair guidance. |
+| Verification manifest loop | `manifest init creates a baseline verification manifest`; `manifest init keeps Expo app file domains specific`; `manifest init captures advisory instruction context`; `manifest bootstrap produces concrete PR E2E draft from repo QA memory`; `e2e draft can use an external verification manifest for read-only adoption preview`; `manifest matches explain e2e and verify recommendations`; `manifest validate reports missing and stale manifest policy` | Generated `.qamap/manifest.yaml` includes `$schema`, domains, flows, anchors, checks, runner, source, and confidence; context preview reports repo-local instruction sources, role summaries, validation commands, safety rules, and diagnostics; validator reports missing/stale/duplicate policy; explain output maps branch changes to manifest domains/flows/checks; E2E drafts prefer `verification-manifest` sources with manifest evidence, route entry, detected input/action selectors, required checks, and manifest repair paths; external manifests can be passed with `--manifest` for read-only adoption smoke tests. |
+| Web app with Playwright routes | `generateE2ePlan matches committed core flow definitions`; `generateE2eDraft uses web selectors in Playwright specs`; `generateE2eDraft dry run previews files without writing drafts`; `generateE2eDraft asserts changed HTML success copy in Playwright specs`; `generateE2ePlan captures Playwright execution profile and self-check blockers`; `generateE2ePlan infers Playwright base URLs from dev scripts`; `generateE2eDraft supports Next app router route groups and concrete route hints`; `generateE2ePlan reads React Router object route paths`; `generateE2eDraft fills dynamic route params from concrete route hints`; `generateE2eDraft emits runnable Playwright role and input actions` | `Web` project profile, Playwright output adapter, intent-backed or core-flow names, route-aware drafts, dry-run preview status without filesystem writes, stable selector hints, changed HTML success copy assertions, execution profile, dev-script base URL hints, opt-in setup proposal, route groups, object paths, dynamic params, draft self-check status, action items, and validation gaps. |
+| Expo / React Native mobile app | `generateE2ePlan recommends mobile flows for Expo changes`; `generateE2ePlan detects Maestro app ids from app config files`; `generateE2eDraft scopes entrypoint hints to each domain scenario`; `generateE2eDraft names changed component actions before generic primary journeys` | `Expo / React Native` project profile, Maestro output adapter, app id and launch command hints from `app.json` or `app.config.*`, YAML drafts, `testID`/`accessibilityLabel` selector hints, and mobile setup actions after runner-independent QA intent. |
+| API or backend service | `generateE2ePlan detects API service projects and suggests contract checklists`; `generateE2ePlan detects Django service apps from a workspace root`; `generateE2ePlan names versioned API service paths with domain language`; `generateE2ePlan uses matched core flow names for API service contracts` | `API / service` project profile, manual contract checklist, Django/FastAPI-style service signals when present, domain-aware titles such as `Listing API contract`, API consumer actor, endpoint/handler/service-path trigger, service start/test command hints, and contract failure coverage. |
+| CLI package | `generateE2ePlan detects CLI packages and suggests command verification checklists` | `CLI` project profile from `package.json` bin entries, manual command verification checklist, CLI user or maintainer actor language, command invocation trigger, stdout/stderr/generated-file/exit-code success signal, valid and invalid argument coverage, and no required API fixture action unless the changed command path explicitly exposes network or fixture evidence. |
+| Design tokens and data catalogs | `generateE2ePlan detects design token packages and suggests artifact validation`; `generateE2ePlan detects data catalog repositories and suggests catalog verification` | `Design tokens` and `Data catalog` project profiles, manual artifact/catalog checklist, token or catalog actor language, schema/generated output/consumer fixture coverage, fixture readiness marked not needed for API mocks, and validation matrix rows that do not require browser/device selectors. |
+| Monorepo root and package targeting | `generateE2ePlan surfaces package-scoped targets for monorepo root changes`; `generateE2ePlan matches workspace core flows for package scans`; `generateTestPlan scopes monorepo changes to the requested package` | Root plans list changed app/package targets with package names, project type, runner, and scoped commands; package scans keep package-local changed files, workspace-level `.qamap/flows.yml` matches, package-local generated drafts, and no leaked workspace path prefixes in package drafts. |
+| Release and package metadata | `generateE2ePlan avoids turning release metadata into domain journeys`; `generateE2ePlan keeps package release metadata out of product workflows`; `generateE2ePlan treats agent and repo metadata as configuration, not product journeys` | Changelog, changeset, release manifest, package version, and repo metadata changes produce maintainer/release-operator configuration verification flows instead of product journeys or user-facing E2E drafts. |
+| Test-light project | `generateE2ePlan builds a bootstrap plan for projects without tests`; `generateE2ePlan infers Playwright base URLs from dev scripts`; `generateE2eDraft creates a fallback smoke draft without changed files` | Required bootstrap steps for runner setup, opt-in `qamap e2e setup`, generated setup output that includes the first changed-flow draft file, fixture/mock data, testability, and validation evidence before generated drafts are treated as regression coverage. |
+| API-dependent UI flow | `generateE2ePlan flags missing mock fixtures for API-dependent UI flows` | Playwright-compatible UI flow plus fixture/mock readiness actions, inferred endpoint hints, and route-fulfillment scaffold slots for success, empty, unauthorized, timeout, and server-error responses. |
+| Existing test evidence | `generateE2ePlan evaluates existing test suite coverage evidence`; `generateE2ePlan keeps generic test filenames from overmatching unrelated services` | Coverage evidence rows that distinguish covered, partial, and missing targets without matching unrelated generic test filenames. |
+| Changed test contracts | `collectChangedTestContracts preserves non-Latin pytest contracts from diff evidence`; `collectChangedTestContracts keeps only explicit single-line assertions`; `commit-backed intents promote changed test timing and assertions as repository contracts`; `Rails-style Minitest contracts connect to their changed source owner`; `collectChangedTestContracts bounds assertion evidence across zero-context hunks`; `generateE2ePlan treats test-only changes as evidence verification, not product journeys` | JavaScript, pytest, Go, Dart, and Minitest declarations preserve bounded source evidence. Exact related contracts connect to working-tree and commit-backed intents; contract-bearing assertions strengthen matching lifecycle stages, while implementation-only existence checks remain supporting evidence. Arbitrary, distant, and incomplete expressions are omitted; the selected route contract ranks first and survives 4 KB compaction with an omitted count; every discovered contract remains `not-run` until separately executed. |
+| Evidence-only changes | `generateE2ePlan treats test-only changes as evidence verification, not product journeys`; `generateE2ePlan treats docs-only changes as documentation verification`; `generateE2ePlan treats generated-only changes as generated artifact verification` | Test-only, docs-only, and generated-output-only branches produce maintainer-oriented evidence checklists instead of product journeys inferred from filenames such as `admin-primary-journey.spec.ts` or generated API clients. |
+
+See [E2E output examples](e2e-output-examples.md) for the kind of plan and draft snippets users should see from the current release.
+
+## Private Smoke Protocol
+
+Private repositories may be used as local, read-only diagnostics, but their raw output is never release documentation or fixture input. Write manifests and drafts only to an operating-system temp directory, compare target `git status` before and after, and retain no repository names, paths, flow titles, source excerpts, or domain vocabulary in commits or pull requests. Reduce every confirmed defect to a minimal synthetic fixture before it enters the public suite.
+
+## Ongoing Validation Notes
+
+The release candidate must pass the fixture-backed suite, package dry-run, and read-only smoke protocol. Record only public synthetic evidence in this document or in release notes:
+
+- whether the generated flow names match the team's domain language
+- whether commit evidence supports the inferred intent and lifecycle
+- whether the automation adapter is plausible without being mistaken for the product value
+- whether generated drafts identify the right actor, trigger, success signal, and edge cases
+- whether action items are concrete enough for a developer to convert into runnable tests
+- whether false positives are caused by missing manifests, weak selectors, or unsupported project structure
+- whether test-only, docs-only, or generated-output-only changes are clearly demoted instead of being presented as product journeys
+
+## Stop Conditions
+
+Do not publish the current candidate if any representative target shows one of these problems:
+
+- generated flow names are dominated by generic folder names instead of product language
+- test-only or docs-only changes are presented as confident product journeys without low-signal wording
+- execution profiles hide missing start commands, base URLs, app ids, or runner config needed to run generated drafts
+- draft self-checks fail to report unresolved placeholder locators, route params, missing runner structure, or TODO-heavy generated files
+- monorepo package scans report workspace-root paths in generated package-local drafts
+- Playwright drafts cannot express dynamic route parameters with fixture placeholders
+- API-dependent flows fail to produce fixture or mock readiness actions or concrete endpoint-based mock scaffold slots
+- manifest baselines are dominated by broad catch-all paths such as `app/**` when file-specific screen paths are available
+- manifest recommendations do not show why they happened or which manifest path to update
+- draft Markdown or JSON omits required action items for selector, fixture, setup, or validation gaps
+- generated files overwrite existing files without `--force`
+- `pnpm pack --dry-run` excludes required runtime files
+
+## Release Notes Checklist
+
+For every publish candidate, update or confirm:
+
+- `README.md` install section
+- README and adoption docs for the working-base / verification-base positioning
+- `CHANGELOG.md`
+- [release runbook](releasing.md)
+- GitHub Action release tag notes, if the action is versioned with the package
+- package provenance or npm publishing notes

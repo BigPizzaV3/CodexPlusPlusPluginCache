@@ -1,0 +1,9 @@
+interface:
+  display_name: "Design HTML"
+  short_description: "Create production-oriented HTML and CSS from an approved design direction."
+  default_prompt: "Use Design HTML for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

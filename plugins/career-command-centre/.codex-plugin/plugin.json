@@ -1,0 +1,47 @@
+{
+  "author": {
+    "name": "Amit Sharma",
+    "url": "https://github.com/HopLittleBunny"
+  },
+  "description": "A free, evidence-safe career partner for selective job search, CV review, Word application packs and application follow-through using the user's own ChatGPT plan.",
+  "homepage": "https://hoplittlebunny.github.io/career-centre/",
+  "interface": {
+    "brandColor": "#17324D",
+    "brandColorDark": "#B2CDE8",
+    "capabilities": [
+      "Research",
+      "Document Creation",
+      "Application Tracking",
+      "Scheduled Work"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Help me find my next role. ",
+      "Check whether this job is worth applying for.",
+      "Create my CV to apply for this role."
+    ],
+    "developerName": "Amit Sharma",
+    "displayName": "Career Centre",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Career Centre has no separate subscription: it uses the user's ChatGPT plan and sends nothing to a publisher-operated CV backend. Upload one or several CVs for a candid first review, selective role recommendations with exact links and salary context, and polished Word application packs. It automatically prepares a portable Career Passport, keeps submission manual, adapts to the candidate's market, and proactively offers to create a daily or weekday Scheduled search from the same Work task after the first manual run. A reference Word format is supported only when the user explicitly asks for it.",
+    "privacyPolicyURL": "https://hoplittlebunny.github.io/career-centre/privacy.html",
+    "shortDescription": "Find roles. Build better CVs.",
+    "supportURL": "https://hoplittlebunny.github.io/career-centre/support.html",
+    "termsOfServiceURL": "https://hoplittlebunny.github.io/career-centre/terms.html",
+    "websiteURL": "https://hoplittlebunny.github.io/career-centre/"
+  },
+  "keywords": [
+    "career",
+    "job-search",
+    "resume",
+    "cv",
+    "cover-letter",
+    "applications"
+  ],
+  "license": "Apache-2.0",
+  "name": "career-command-centre",
+  "repository": "https://github.com/HopLittleBunny/career-centre",
+  "skills": "./skills/",
+  "version": "4.0.0-beta.4"
+}

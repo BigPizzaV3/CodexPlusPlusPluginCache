@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Thang Luu",
+    "url": "https://github.com/thangldw"
+  },
+  "description": "Read-only repository governance and GitHub Actions risk audits with reviewable patches.",
+  "homepage": "https://github.com/thangldw/awesome-maintainer-defense",
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Security",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Audit this repository's GitHub Actions trust boundaries.",
+      "Explain the highest-risk workflow findings.",
+      "Generate a reviewable patch without editing the repository."
+    ],
+    "developerName": "DUC THANG LUU",
+    "displayName": "Awesome Maintainer Defense",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Inspect repository policy, GitHub Actions trust boundaries, and moderation automation without network access or repository mutation; generate reviewable remediation patches on request.",
+    "privacyPolicyURL": "https://github.com/thangldw/awesome-maintainer-defense/blob/main/PRIVACY.md",
+    "shortDescription": "Audit repository trust safely",
+    "supportURL": "https://github.com/thangldw/awesome-maintainer-defense/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/thangldw/awesome-maintainer-defense/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/thangldw/awesome-maintainer-defense"
+  },
+  "keywords": [
+    "github-actions",
+    "repository-security",
+    "governance",
+    "maintainers",
+    "audit"
+  ],
+  "license": "MIT",
+  "name": "awesome-maintainer-defense",
+  "repository": "https://github.com/thangldw/awesome-maintainer-defense",
+  "skills": "./skills/",
+  "version": "1.1.1"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "product-support-investigator",
+  "version": "0.1.0",
+  "description": "Evidence-first investigation of technical customer and product issues.",
+  "author": {
+    "name": "Support Investigator contributors"
+  }
+}

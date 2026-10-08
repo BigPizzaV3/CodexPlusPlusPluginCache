@@ -1,0 +1,35 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Zoho",
+    "url": "https://www.zoho.com"
+  },
+  "description": "Zoho CRM is an AI-powered sales software that helps businesses of all sizes manage their sales better. With SFA features, advanced automation, easy-to-use UI, advanced analytics, and deep customization capabilities, Zoho CRM truly understands your business. \n\nWith Codex, you can extend the functionalities of Zoho CRM by simply prompting. Your business, your Zoho CRM\u2014powered by Codex.",
+  "homepage": "https://www.zoho.com",
+  "interface": {
+    "brandColor": "#0068B8",
+    "brandColorDark": "#47AFFF",
+    "capabilities": [],
+    "category": "Business & Operations",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Search Zoho CRM for open deals closing this quarter and summarize the highest-risk opportunities.",
+      "Find Zoho CRM contacts at an account and summarize recent activities.",
+      "Pull Zoho CRM organization settings and users needed to audit access."
+    ],
+    "developerName": "Zoho",
+    "displayName": "Zoho CRM",
+    "logo": "./assets/logo.png",
+    "longDescription": "Zoho CRM is an AI-powered sales software that helps businesses of all sizes manage their sales better. With SFA features, advanced automation, easy-to-use UI, advanced analytics, and deep customization capabilities, Zoho CRM truly understands your business. \n\nWith Codex, you can extend the functionalities of Zoho CRM by simply prompting. Your business, your Zoho CRM\u2014powered by Codex.",
+    "privacyPolicyURL": "https://www.zoho.com/en-in/terms.html",
+    "screenshots": [],
+    "shortDescription": "Automate Sales Operations",
+    "termsOfServiceURL": "https://www.zoho.com/privacy.html",
+    "websiteURL": "https://www.zoho.com/en-in/crm/"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "zoho",
+  "repository": "https://github.com/openai/plugins",
+  "version": "2.0.0"
+}

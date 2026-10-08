@@ -1,0 +1,30 @@
+{
+  "author": {
+    "name": "Minimus",
+    "url": "https://www.minimus.io"
+  },
+  "description": "Minimus hardened-image skills (Dockerfile & Kubernetes)",
+  "interface": {
+    "capabilities": [],
+    "category": "Security",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Reduce the CVEs in this Python Dockerfile",
+      "Create a Dockerfile to serve a static site with nginx",
+      "Move these Kubernetes manifests to hardened images"
+    ],
+    "developerName": "Minimus",
+    "displayName": "Minimus",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Minimus plugin that teaches AI coding tools to build Dockerfiles and Kubernetes manifests with hardened near-zero-CVE images",
+    "privacyPolicyURL": "https://www.minimus.io/privacy-policy",
+    "shortDescription": "Dockerfiles on hardened images",
+    "supportURL": "https://support.minimus.io/support/home",
+    "termsOfServiceURL": "https://cdn.minimus.io/minimus-terms-of-service.html",
+    "websiteURL": "https://www.minimus.io/"
+  },
+  "license": "MIT",
+  "name": "minimus",
+  "skills": "./skills/",
+  "version": "1.0.4"
+}

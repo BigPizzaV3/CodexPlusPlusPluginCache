@@ -1,0 +1,25 @@
+{
+  "dataset": "who_countries",
+  "source_package": "DSIR",
+  "source_version": "0.9.0",
+  "source_commit": "e2ff6735d174769b55f9a3e55f9f36c75ce9f397",
+  "source_repository": "https://github.com/shanlong-who/DSIR",
+  "source_file": "data/who_countries.rda",
+  "source_builder": "data-raw/who_countries.R",
+  "source_sha256": "6509eb42b1cf5d56a1f73103a808f7a6360e4f38ce7fa20a77cd4a2e35568f36",
+  "export_sha256": "73e44ab541711ceafe5fa36c9ea1c044e805819d14a94820f70d757178715d62",
+  "exported_on": "2026-09-09",
+  "export_method": "Read the source RDA in R 4.6.1 and export with jsonlite, without rebuilding or changing DSIR.",
+  "row_count": 194,
+  "scope": "WHO Member States in the DSIR 0.9.0 snapshot; not all GHO reporting areas.",
+  "region_counts": {"AFR": 47, "AMR": 35, "SEAR": 10, "EUR": 53, "EMR": 21, "WPR": 28},
+  "regional_vintage_as_documented_by_dsir": "May 2025; Indonesia is assigned to WPR.",
+  "income_vintage_as_documented_by_dsir": "World Bank FY2027, based on 2025 GNI per capita.",
+  "notes": [
+    "This is a versioned DSIR snapshot, not an independent statement of current WHO or World Bank classification.",
+    "GHO regional requests use official API aggregate codes, not a country expansion from this snapshot.",
+    "Non-Member reporting areas and regional variants are resolved using live GHO dimensions.",
+    "M49 codes retain leading zeros. Namibia's ISO2 code is the literal string NA.",
+    "Cook Islands and Niue have null World Bank income groups."
+  ]
+}

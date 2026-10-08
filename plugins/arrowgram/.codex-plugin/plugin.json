@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "GetPaidX.com",
+    "url": "https://getpaidx.com"
+  },
+  "description": "Codex workflows for file-backed Arrowgram diagrams and papers.",
+  "homepage": "https://github.com/hotdocx/arrowgram",
+  "interface": {
+    "brandColor": "#2563EB",
+    "brandColorDark": "#2563EB",
+    "capabilities": [
+      "Write",
+      "Interactive"
+    ],
+    "category": "Education & Research",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Create an Arrowgram paper workspace here.",
+      "Validate and build this Arrowgram project.",
+      "Improve the diagram in diagram.json."
+    ],
+    "developerName": "GetPaidX.com",
+    "displayName": "Arrowgram",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Arrowgram helps Codex initialize, edit, validate, preview, snapshot, and build file-backed Arrowgram workspaces using @hotdocx/arrowgram-agent.",
+    "privacyPolicyURL": "https://getpaidx.com/marketing/terms",
+    "shortDescription": "Edit diagrams and papers",
+    "termsOfServiceURL": "https://getpaidx.com/marketing/terms",
+    "websiteURL": "https://github.com/hotdocx/arrowgram"
+  },
+  "keywords": [
+    "arrowgram",
+    "diagrams",
+    "papers",
+    "codex",
+    "agent"
+  ],
+  "license": "MIT",
+  "name": "arrowgram",
+  "repository": "https://github.com/hotdocx/arrowgram",
+  "skills": "./skills/",
+  "version": "0.1.0+codex.20260806033509"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "prompt-optimizer",
+  "description": "Use when a request has more than three relevant sentences or explicitly needs optimization; return a clear brief without losing requirements or approval limits.",
+  "version": "0.1.9",
+  "author": {
+    "name": "Orbral"
+  },
+  "homepage": "https://github.com/SpannDaMan/prompt-optimizer",
+  "repository": "https://github.com/SpannDaMan/prompt-optimizer",
+  "license": "MIT",
+  "keywords": [
+    "long-prompts",
+    "prompt-optimization",
+    "prompt-engineering",
+    "requirements",
+    "scope-drift",
+    "agent-briefs",
+    "claude-code"
+  ]
+}

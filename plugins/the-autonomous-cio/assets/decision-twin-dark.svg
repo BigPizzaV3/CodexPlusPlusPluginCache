@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Aivana CIO Decision Twin</title>
+  <rect width="512" height="512" rx="56" fill="#152321"/>
+  <path d="M256 366V282L154 180M256 282L358 180" fill="none" stroke="#F7FAF9" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M112 218V138H192M112 138L166 192" fill="none" stroke="#53C9B7" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M320 138H400V218M400 138L346 192" fill="none" stroke="#F29167" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="222" y="334" width="68" height="68" rx="16" fill="#53C9B7"/>
+</svg>

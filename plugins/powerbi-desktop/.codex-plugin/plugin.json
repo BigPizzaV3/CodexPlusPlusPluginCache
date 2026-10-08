@@ -1,0 +1,50 @@
+{
+  "author": {
+    "name": "Reiner Weisssieker"
+  },
+  "description": "Guided Power BI workflows from data sources to trusted decisions, safe PBIP changes, release, and Fabric operations.",
+  "homepage": "https://github.com/rweisssieker-xp/CodexPluginPowerBI",
+  "interface": {
+    "brandColor": "#8A6A00",
+    "brandColorDark": "#FFDF75",
+    "capabilities": [
+      "Local model review",
+      "KPI trust and executive briefs",
+      "DAX and Power Query analysis",
+      "PBIP/TMDL safe drafts",
+      "Semantic tests and impact analysis",
+      "Release gates and rollback guidance",
+      "Live Desktop read-only review",
+      "Decision intelligence and Fabric operations"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "What can you do with this Power BI plugin?",
+      "Build a Power BI model from these data sources.",
+      "Can I trust this report for a decision?"
+    ],
+    "developerName": "Reiner Weisssieker",
+    "displayName": "Power BI Desktop",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Start with one outcome: build a model from data sources, trust KPIs, change PBIP safely, release with confidence, operate Fabric, or govern decisions. The plugin routes to a focused workflow and keeps PBIX binaries untouched. Live and Fabric access are read-only by default.",
+    "privacyPolicyURL": "https://github.com/rweisssieker-xp/CodexPluginPowerBI/blob/main/docs/privacy.md",
+    "shortDescription": "Build trusted Power BI models",
+    "supportURL": "https://github.com/rweisssieker-xp/CodexPluginPowerBI/issues",
+    "termsOfServiceURL": "https://github.com/rweisssieker-xp/CodexPluginPowerBI#license",
+    "websiteURL": "https://aivana-gmbh.ai/"
+  },
+  "keywords": [
+    "power-bi",
+    "pbip",
+    "dax",
+    "power-query",
+    "semantic-model",
+    "fabric"
+  ],
+  "license": "MIT",
+  "name": "powerbi-desktop",
+  "repository": "https://github.com/rweisssieker-xp/CodexPluginPowerBI",
+  "skills": "./skills/",
+  "version": "3.0.0+codex.20260829143201"
+}

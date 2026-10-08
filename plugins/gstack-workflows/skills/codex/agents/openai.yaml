@@ -1,0 +1,9 @@
+interface:
+  display_name: "Codex"
+  short_description: "Provide a second-opinion code or plan review using available Codex reasoning and workspace evidence."
+  default_prompt: "Use Codex for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

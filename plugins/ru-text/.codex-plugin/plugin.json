@@ -1,0 +1,47 @@
+{
+  "author": {
+    "email": "nafigator@gmail.com",
+    "name": "Arseniy Kamyshev",
+    "url": "https://t.me/nafigator"
+  },
+  "description": "Russian text quality for AI agents \u2014 neuroslop cleanup, typography, information style, editorial standards, UX writing, business correspondence. 2,000+ linguistic atoms, loaded on demand.",
+  "homepage": "https://ru-text.org",
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "\u0412\u044b\u0447\u0438\u0442\u0430\u0439 \u044d\u0442\u043e\u0442 \u0442\u0435\u043a\u0441\u0442",
+      "\u0423\u0431\u0435\u0440\u0438 \u0438\u0437 \u0442\u0435\u043a\u0441\u0442\u0430 \u043d\u0435\u0439\u0440\u043e\u0441\u043b\u043e\u043f",
+      "\u041e\u0446\u0435\u043d\u0438 \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u043e \u0442\u0435\u043a\u0441\u0442\u0430 \u043f\u043e \u0434\u0435\u0441\u044f\u0442\u0438\u0431\u0430\u043b\u043b\u044c\u043d\u043e\u0439 \u0448\u043a\u0430\u043b\u0435"
+    ],
+    "developerName": "Arseniy Kamyshev",
+    "displayName": "ru-text",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Russian text quality for AI agents \u2014 neuroslop cleanup, typography, information style, editorial standards, UX writing, business correspondence. 2,000+ linguistic atoms, loaded on demand.",
+    "privacyPolicyURL": "https://github.com/talkstream/ru-text/blob/main/PRIVACY_POLICY.md",
+    "shortDescription": "Proofread Russian text",
+    "supportURL": "https://github.com/talkstream/ru-text/issues",
+    "termsOfServiceURL": "https://github.com/talkstream/ru-text/blob/main/TERMS.md",
+    "websiteURL": "https://ru-text.org"
+  },
+  "keywords": [
+    "russian",
+    "neuroslop",
+    "ai-text-detection",
+    "typography",
+    "proofreading",
+    "editorial",
+    "info-style",
+    "ux-writing",
+    "text-quality",
+    "text-scoring"
+  ],
+  "license": "MIT",
+  "name": "ru-text",
+  "repository": "https://github.com/talkstream/ru-text",
+  "skills": "./skills/",
+  "version": "2.3.0"
+}

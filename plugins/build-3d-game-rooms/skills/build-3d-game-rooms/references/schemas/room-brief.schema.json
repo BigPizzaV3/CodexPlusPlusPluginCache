@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "game-room.room-brief.v1",
+  "type": "object",
+  "required": ["schema", "roomId", "family", "purpose", "runtimeSurface", "boundsMeters", "hero", "symmetry", "circulation", "productionCamera", "performanceBudget", "creditBudget", "environment", "artifacts"],
+  "properties": {
+    "schema": {"const": "game-room.room-brief.v1"},
+    "roomId": {"type": "string", "minLength": 1},
+    "family": {"enum": ["display-gallery", "gameplay-room", "social-hub", "custom"]},
+    "purpose": {"type": "string", "minLength": 1},
+    "runtimeSurface": {"type": "string", "minLength": 1},
+    "boundsMeters": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number", "exclusiveMinimum": 0}},
+    "hero": {"type": "object", "required": ["id", "role", "reservedBoundsMeters"], "properties": {"id": {"type": "string", "minLength": 1}, "role": {"type": "string", "minLength": 1}, "reservedBoundsMeters": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number", "exclusiveMinimum": 0}}}},
+    "symmetry": {"type": "object", "required": ["mode", "order", "appliesTo", "exceptions"], "properties": {"mode": {"enum": ["none", "bilateral", "radial"]}, "order": {"type": "integer", "minimum": 1}, "appliesTo": {"type": "array", "items": {"enum": ["architecture", "barriers", "circulation", "repeatedProps"]}, "uniqueItems": true}, "exceptions": {"type": "array", "items": {"type": "string", "minLength": 1}}}},
+    "circulation": {"type": "object", "required": ["description", "minimumClearanceMeters"]},
+    "productionCamera": {"type": "object", "required": ["viewport", "location", "target", "verticalFovDegrees"]},
+    "performanceBudget": {"type": "object", "required": ["maxSceneTriangles", "maxVLowBytes", "maxHighTextureBytes"]},
+    "creditBudget": {"type": "object", "required": ["maximumCredits", "approvalRequired"]},
+    "environment": {"type": "object", "required": ["type", "identity", "source", "assignmentKey"], "properties": {"type": {"enum": ["none", "equirectangular"]}, "identity": {"type": "string"}, "source": {"type": "string"}, "assignmentKey": {"type": "string"}}},
+    "artifacts": {"type": "object", "required": ["floorPlan", "reflectedCeilingPlan", "planMetadata", "wallElevations", "visualTarget", "openingContactSheet"]}
+  }
+}

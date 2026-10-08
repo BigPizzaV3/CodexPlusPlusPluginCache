@@ -1,0 +1,53 @@
+{
+  "author": {
+    "name": "InsForge",
+    "url": "https://insforge.dev"
+  },
+  "description": "InsForge skills for building AI-native apps with Postgres, auth, storage, compute, hosting, AI gateway, realtime, payments, integrations, and diagnostics.",
+  "homepage": "https://docs.insforge.dev",
+  "interface": {
+    "brandColor": "#17B26A",
+    "brandColorDark": "#4DE8A0",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "create a todo app using insforge and publish it",
+      "Use InsForge CLI to create tables, RLS policies, and deploy functions.",
+      "Use insforge to build me an internal dashboard of my given app with google login"
+    ],
+    "developerName": "InsForge",
+    "displayName": "InsForge",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Model gateway, compute, deployment, database, auth, and more. Every service built for AI coding agents to operate end to end through CLI and skills",
+    "privacyPolicyURL": "https://insforge.dev/privacy",
+    "shortDescription": "Agent-Native Cloud Platform",
+    "termsOfServiceURL": "https://insforge.dev/terms",
+    "websiteURL": "https://insforge.dev"
+  },
+  "keywords": [
+    "insforge",
+    "ai-native",
+    "coding-agents",
+    "backend-as-a-service",
+    "baas",
+    "postgres",
+    "auth",
+    "storage",
+    "compute",
+    "hosting",
+    "ai-gateway",
+    "edge-functions",
+    "stripe",
+    "razorpay",
+    "rls"
+  ],
+  "license": "Apache-2.0",
+  "name": "insforge",
+  "repository": "https://github.com/InsForge/insforge-skills",
+  "skills": "./skills/",
+  "version": "1.2.0"
+}

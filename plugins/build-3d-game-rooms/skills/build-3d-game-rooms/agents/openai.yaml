@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build 3D Game Rooms"
+  short_description: "Create props, meshes, layouts, and Blender rooms"
+  default_prompt: "Use $build-3d-game-rooms to conceive the room and props, generate approved reference images and Meshy meshes, compose the Blender room, and validate it for runtime."

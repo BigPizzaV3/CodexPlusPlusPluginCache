@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
+  <title id="title">Proofread</title>
+  <desc id="description">A paper page with a check mark</desc>
+  <rect width="512" height="512" rx="112" fill="#315C8C"/>
+  <path d="M146 88h174l72 72v264H146z" fill="#fff"/>
+  <path d="M320 88v72h72" fill="#D9E8F5"/>
+  <path d="M205 281l42 42 78-94" fill="none" stroke="#315C8C" stroke-linecap="round" stroke-linejoin="round" stroke-width="30"/>
+</svg>

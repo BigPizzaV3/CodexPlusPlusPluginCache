@@ -1,0 +1,9 @@
+interface:
+  display_name: "Review"
+  short_description: "Review a change before landing and find defects that can pass CI but fail in production."
+  default_prompt: "Use Review for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

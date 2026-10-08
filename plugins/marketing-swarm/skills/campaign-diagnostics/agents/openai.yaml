@@ -1,0 +1,9 @@
+interface:
+  display_name: "Campaign Diagnostics"
+  short_description: "Find what changed and why"
+  default_prompt: "Diagnose this campaign performance change before recommending actions."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

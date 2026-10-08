@@ -1,0 +1,4 @@
+interface:
+  display_name: "Visual Truth"
+  short_description: "Edit live web layouts visually in Codex"
+  default_prompt: "Use $visual-truth to add or operate the visual editor in this web project."

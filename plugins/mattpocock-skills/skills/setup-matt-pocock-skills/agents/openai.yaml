@@ -1,0 +1,9 @@
+interface:
+  display_name: Setup Matt Pocock Skills
+  short_description: Configure a repo for Matt Pocock skills
+  default_prompt: Use $setup-matt-pocock-skills for this task
+policy:
+  allow_implicit_invocation: false
+  products:
+  - CHAT
+  - CODEX

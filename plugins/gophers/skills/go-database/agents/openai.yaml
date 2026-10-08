@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Database"
+  short_description: "Build safe SQL access in Go"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-database to design or review this Go database code."

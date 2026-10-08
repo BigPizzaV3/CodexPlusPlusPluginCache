@@ -1,0 +1,47 @@
+{
+  "author": {
+    "name": "Benjamin Michael Haire",
+    "url": "https://github.com/theisegoria"
+  },
+  "description": "Local-first game asset production, vendoring, render diagnosis, and bounded performance workflows.",
+  "homepage": "https://github.com/theisegoria/game-development-studio-skills",
+  "interface": {
+    "brandColor": "#10C9D5",
+    "brandColorDark": "#2AE3EF",
+    "capabilities": [
+      "Asset production",
+      "Project vendoring",
+      "Visual debugging",
+      "Performance analysis"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Plan a game-ready asset package from this brief.",
+      "Diagnose this sealed render capture and telemetry.",
+      "Compare these runs without overstating the evidence."
+    ],
+    "developerName": "Benjamin Michael Haire",
+    "displayName": "Game Development Studio",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Route game asset production, canonical package vendoring, sealed render-capture diagnosis, and bounded performance work through a local-first evidence-aware workflow. Execution uses the separately installed game-dev 1.0.2-or-newer CLI. Optional provider requests use only a preconfigured local credential controlled by the user; the plugin never collects keys or proxies provider traffic. Provider spend, every local write, GPU work, and performance measurement remain separately authorized for each invocation.",
+    "privacyPolicyURL": "https://github.com/theisegoria/game-development-studio-skills/blob/main/PRIVACY.md",
+    "shortDescription": "Build assets. Debug renders.",
+    "supportURL": "https://github.com/theisegoria/game-development-studio-skills/issues",
+    "termsOfServiceURL": "https://github.com/theisegoria/game-development-studio-skills/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/theisegoria/game-development-studio-skills"
+  },
+  "keywords": [
+    "game-development",
+    "game-assets",
+    "blender",
+    "render-debugging",
+    "performance",
+    "codex"
+  ],
+  "license": "MIT",
+  "name": "game-development-studio",
+  "repository": "https://github.com/theisegoria/game-development-studio-skills",
+  "skills": "./skills/",
+  "version": "1.0.2"
+}

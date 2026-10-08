@@ -1,0 +1,4 @@
+interface:
+  display_name: "FLOWSTACK UI Review"
+  short_description: "Review FLOWSTACK ownership and implementation"
+  default_prompt: "Use $flowstack-ui-review to audit this interface against exact installed FLOWSTACK guidance."

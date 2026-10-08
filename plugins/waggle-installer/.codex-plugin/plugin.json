@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Abhigyan Shekhar",
+    "url": "https://github.com/Abhigyan-Shekhar"
+  },
+  "description": "Installs the official Waggle plugin locally for Codex from GitHub Releases.",
+  "homepage": "https://github.com/Abhigyan-Shekhar/Waggle-mcp",
+  "interface": {
+    "brandColor": "#CE741F",
+    "brandColorDark": "#63E527",
+    "capabilities": [
+      "Local Codex plugin installation",
+      "Provide Persistent Memory Across Session"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Install Waggle MCP for Codex.",
+      "Set up Waggle MCP from PyPI",
+      "Download Waggle MCP from Github Releases and set it up here as a plugin"
+    ],
+    "developerName": "Abhigyan Shekhar",
+    "displayName": "Waggle Installer",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Waggle gives Codex persistent, local-first project memory\u2014helping it retain decisions, reasoning, and relevant context across sessions.  \nThis skills-only plugin installs the official Waggle Codex plugin on your machine. It downloads the latest stable marketplace bundle from the official Waggle GitHub Release and runs the standard Codex installation commands. Waggle is installed locally in a supported Codex environment; this installer does not provide a hosted service.",
+    "shortDescription": "Local memory for Codex",
+    "supportURL": "https://github.com/Abhigyan-Shekhar/Waggle-mcp ",
+    "websiteURL": "https://wagglemcp.vercel.app"
+  },
+  "keywords": [
+    "waggle",
+    "installer",
+    "codex"
+  ],
+  "license": "Apache-2.0",
+  "name": "waggle-installer",
+  "repository": "https://github.com/Abhigyan-Shekhar/Waggle-mcp",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

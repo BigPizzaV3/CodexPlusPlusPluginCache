@@ -1,0 +1,10 @@
+table Sales
+    column OrderDate
+    column Sales Amount
+    measure Total Sales
+    measure Sales YoY %
+
+table Date
+    column Date
+
+relationship 8f0d3c55-9976-4d16-8db4-9dd01ff9b43f

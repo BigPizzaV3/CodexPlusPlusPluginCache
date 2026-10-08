@@ -1,0 +1,4 @@
+interface:
+  display_name: "Netwalk Fullreport"
+  short_description: "Help with Netwalk Fullreport tasks"
+  default_prompt: "Use $netwalk-fullreport to handle this request with its specialist workflow."

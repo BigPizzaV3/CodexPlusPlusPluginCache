@@ -1,0 +1,3 @@
+[
+  { "id": "gateway-1", "name": "Primary Gateway", "status": "Online", "owner": "gateway.owner@example.com" }
+]

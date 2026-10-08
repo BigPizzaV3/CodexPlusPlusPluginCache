@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thangldw.github.io/ragops/schemas/pilot-observation-0.1.schema.json",
+  "title": "RAGOps pilot observation 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "pilot_id", "task_id", "phase", "user_id", "week",
+    "completed", "successful", "duration_seconds", "critical_incident",
+    "reviewer_disagreed", "cost_usd"
+  ],
+  "properties": {
+    "schema_version": {"const": "ragops-pilot-observation-0.1"},
+    "pilot_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{2,63}$"},
+    "task_id": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"},
+    "phase": {"enum": ["baseline", "pilot"]},
+    "user_id": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,63}$"},
+    "week": {"type": "string", "pattern": "^[0-9]{4}-W[0-9]{2}$"},
+    "completed": {"type": "boolean"},
+    "successful": {"type": "boolean"},
+    "duration_seconds": {"type": "number", "minimum": 0},
+    "critical_incident": {"type": "boolean"},
+    "reviewer_disagreed": {"type": "boolean"},
+    "cost_usd": {"type": "number", "minimum": 0}
+  }
+}

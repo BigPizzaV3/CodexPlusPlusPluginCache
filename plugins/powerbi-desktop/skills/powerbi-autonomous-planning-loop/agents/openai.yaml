@@ -1,0 +1,5 @@
+interface:
+  display_name: Autonomous Planning Loop
+  short_description: Closed-loop planning cycle
+policy:
+  allow_implicit_invocation: false

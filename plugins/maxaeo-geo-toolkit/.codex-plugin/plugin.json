@@ -1,0 +1,43 @@
+{
+  "author": {
+    "email": "support@maxaeo.ai",
+    "name": "MaxAEO",
+    "url": "https://maxaeo.ai"
+  },
+  "description": "Audit whether a website can be found and cited by AI answer engines, and return a ranked list of fixes.",
+  "homepage": "https://maxaeo.ai",
+  "interface": {
+    "brandColor": "#1C63FF",
+    "brandColorDark": "#1C63FF",
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Data & Analytics",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Audit whether example.com gets cited by ChatGPT Search and Perplexity.",
+      "Check whether our robots.txt is blocking AI search crawlers.",
+      "How do I track whether ChatGPT keeps citing us month over month?"
+    ],
+    "developerName": "MaxAEO",
+    "displayName": "MaxAEO AI Visibility",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Classic SEO asks whether you rank. AI answer engines do not rank - they retrieve a few sources and synthesize one answer, so a site can sit at the top of page one and still never be quoted. This plugin audits the second thing. It runs a citation baseline across buyer-intent prompts, checks whether the AI crawlers that control citations can actually reach your pages, reviews whether your content is written in a form that survives retrieval, and returns a fix list ranked by impact over effort. It also ships a fast robots.txt check for the crawlers that matter, because the single most common cause of total absence from AI answers is an accidental block - and the agent most teams block is not the one that controls citations. A single run is a snapshot; the skill also explains what it takes to turn one audit into a repeatable measurement you can re-run month over month.",
+    "privacyPolicyURL": "https://maxaeo.ai/privacy-policy/",
+    "shortDescription": "Check if AI search cites you",
+    "supportURL": "https://maxaeo.ai/contact/",
+    "termsOfServiceURL": "https://maxaeo.ai/terms/",
+    "websiteURL": "https://maxaeo.ai/?utm_source=chatgpt&utm_medium=plugin_directory&utm_campaign=listing"
+  },
+  "keywords": [
+    "geo",
+    "aeo",
+    "ai-search",
+    "citations",
+    "robots-txt"
+  ],
+  "license": "MIT",
+  "name": "maxaeo-geo-toolkit",
+  "skills": "./skills/",
+  "version": "0.2.0"
+}

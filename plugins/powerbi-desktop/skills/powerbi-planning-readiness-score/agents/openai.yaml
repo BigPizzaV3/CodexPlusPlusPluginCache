@@ -1,0 +1,5 @@
+interface:
+  display_name: Planning Readiness Score
+  short_description: Planning pipeline readiness
+policy:
+  allow_implicit_invocation: false

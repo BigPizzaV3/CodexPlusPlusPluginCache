@@ -1,0 +1,8 @@
+﻿{
+    "version":  "1.0",
+    "name":  "Codex Power BI Workbench",
+    "description":  "Runs the Codex Power BI unified local review package for the current report or PBIP project.",
+    "path":  "powershell.exe",
+    "arguments":  "-NoProfile -ExecutionPolicy Bypass -File \"D:\\temp\\CodexPluginPowerBI\\plugins\\powerbi-desktop\\scripts\\Invoke-PowerBIUnifiedReview.ps1\" -Path \"%PBIX%\" -OutputDirectory \"%TEMP%\\CodexPowerBIUnifiedReview\"",
+    "iconData":  ""
+}

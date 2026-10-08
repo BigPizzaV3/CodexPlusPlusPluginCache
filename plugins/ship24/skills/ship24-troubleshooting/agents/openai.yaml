@@ -1,0 +1,7 @@
+interface:
+  display_name: "Ship24 Troubleshooting"
+  short_description: "Diagnose Ship24 API errors, rate limits and missing tracking results"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon-large.png"
+  brand_color: "#FCB016"
+  default_prompt: "Why is my Ship24 tracker returning no results?"

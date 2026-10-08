@@ -1,0 +1,30 @@
+{
+  "name": "telecall",
+  "version": "1.0.0",
+  "description": "TeleCall — Asistente Conversacional y Motor de Recomendación de Telecomunicaciones (Demo con datos de referencia O2 España)",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run --pool=forks",
+    "test:watch": "vitest --pool=forks",
+    "pack": "rm -f telecall.zip && zip -r telecall.zip plugin.json .codex-plugin .agent-plugin .claude-plugin skills assets data src package.json tsconfig.json README.md -x '*.DS_Store*'"
+  },
+  "keywords": [
+    "telecommunications",
+    "ai-advisor",
+    "recommendation-engine",
+    "chatgpt-app",
+    "telecall"
+  ],
+  "author": "TeleCall Demo",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vitest": "^1.6.0"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "author": {
+    "email": "alex@thoughtfulbits.me",
+    "name": "ThoughtfulBits Consulting",
+    "url": "https://thoughtfulbits.ai"
+  },
+  "description": "ThoughtfulBits skills for B2B SaaS leaders: board-deck audits, board feedback, product plan and feature feedback, multi-agent UI/UX testing, and reader-first social post editing.",
+  "homepage": "https://thoughtfulbits.ai/board-deck-review",
+  "interface": {
+    "brandColor": "#2864FF",
+    "brandColorDark": "#2864FF",
+    "capabilities": [
+      "Audit board decks and give concise feedback",
+      "Review product plans and features",
+      "Test and simplify UI action loops with five independent methods",
+      "Edit reader-first social posts"
+    ],
+    "category": "Business & Operations",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Audit the attached board deck before I send it. Identify the few fixes that matter most.",
+      "Read the attached board deck like a director and give me the concise meeting-room reaction.",
+      "Edit this social post for a cold audience without changing the facts or my voice."
+    ],
+    "developerName": "ThoughtfulBits Consulting",
+    "displayName": "ThoughtfulBits Skills",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Six rigorous review and editing workflows for B2B SaaS leaders: deep board-deck audits, concise board feedback, product-plan reviews, SPARK feature reviews, multi-agent UI/UX testing with a loop-ready 1-10 score, and reader-first social post editing that preserves facts and voice.",
+    "privacyPolicyURL": "https://thoughtfulbits.ai/privacy",
+    "shortDescription": "Review plans, UX, and posts",
+    "supportURL": "https://thoughtfulbits.ai/support",
+    "termsOfServiceURL": "https://thoughtfulbits.ai/terms",
+    "websiteURL": "https://thoughtfulbits.ai/board-deck-review"
+  },
+  "keywords": [
+    "board decks",
+    "product plans",
+    "product feedback",
+    "UI/UX testing",
+    "social media editing",
+    "B2B SaaS"
+  ],
+  "license": "MIT",
+  "name": "thoughtfulbits-skills",
+  "repository": "https://github.com/thoughtfulbits/thoughtfulbits-skills",
+  "skills": "./skills/",
+  "version": "1.4.0"
+}

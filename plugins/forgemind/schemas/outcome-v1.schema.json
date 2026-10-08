@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rweisssieker-xp/RW-Forgemind-Codex-Plugin/schemas/outcome-v1.schema.json",
+  "title": "ForgeMind outcome v1",
+  "type": "object",
+  "required": ["schemaVersion", "id", "recordedAt", "task", "taskCategory", "route", "project", "verificationStatus", "correctionCount", "userAccepted", "residualDefects", "effectiveness"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "effectiveness": { "type": "number", "minimum": -1, "maximum": 1 }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "codex.powerbi.processRulePack.v1",
+  "id": "service-to-cash",
+  "process": "ServiceToCash",
+  "displayName": "Service to Cash",
+  "kpiTerms": ["service", "contract", "billing", "invoice", "cash", "subscription"],
+  "objects": [
+    { "name": "ServiceContract", "aliases": ["servicecontract", "contract", "subscription"], "fields": [
+      { "name": "contractId", "aliases": ["ContractId", "SubscriptionId"], "required": true },
+      { "name": "customerId", "aliases": ["CustomerId", "AccountId"], "required": true },
+      { "name": "startDate", "aliases": ["StartDate", "ContractStart"], "required": true },
+      { "name": "endDate", "aliases": ["EndDate", "ContractEnd"], "required": false },
+      { "name": "amount", "aliases": ["Amount", "ContractValue"], "required": false }
+    ] },
+    { "name": "ServiceInvoice", "aliases": ["serviceinvoice", "invoice"], "fields": [
+      { "name": "invoiceId", "aliases": ["InvoiceId"], "required": true },
+      { "name": "contractId", "aliases": ["ContractId", "SubscriptionId"], "required": true },
+      { "name": "invoiceDate", "aliases": ["InvoiceDate"], "required": true },
+      { "name": "amount", "aliases": ["Amount", "InvoiceAmount"], "required": false }
+    ] }
+  ],
+  "rules": [
+    { "id": "s2c.contract.customer.required", "type": "requiredField", "severity": "High", "object": "ServiceContract", "field": "customerId", "description": "Service contract is missing customer.", "ownerHint": "Service revenue owner", "recommendedAction": "Correct customer assignment before recurring revenue reporting.", "releaseImpact": "No-Go" },
+    { "id": "s2c.contract.start.required", "type": "requiredField", "severity": "High", "object": "ServiceContract", "field": "startDate", "description": "Service contract is missing start date.", "ownerHint": "Service revenue owner", "recommendedAction": "Backfill contract start date.", "releaseImpact": "No-Go" },
+    { "id": "s2c.invoice.contract.orphan", "type": "orphan", "severity": "High", "object": "ServiceInvoice", "field": "contractId", "parentObject": "ServiceContract", "parentField": "contractId", "description": "Service invoice references missing contract.", "ownerHint": "Billing owner", "recommendedAction": "Reconcile invoice-to-contract keys.", "releaseImpact": "No-Go" },
+    { "id": "s2c.contract.amount.nonnegative", "type": "nonNegative", "severity": "Medium", "object": "ServiceContract", "field": "amount", "description": "Service contract amount is negative.", "ownerHint": "Service revenue owner", "recommendedAction": "Confirm credit or cancellation treatment.", "releaseImpact": "Warn" }
+  ]
+}

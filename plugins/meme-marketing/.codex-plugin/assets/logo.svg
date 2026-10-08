@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <style>
+      .doodle-line { stroke: #18181b; stroke-width: 5.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .doodle-thick { stroke: #18181b; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .doodle-fill { fill: #ffffff; }
+      .accent-glow { fill: #fef08a; opacity: 0.85; }
+      .accent-blue { fill: #bae6fd; opacity: 0.65; }
+      .accent-pink { fill: #fbcfe8; opacity: 0.65; }
+      .comic-text { font-family: 'Comic Sans MS', 'Balsamiq Sans', 'Chalkboard SE', cursive, sans-serif; font-weight: 900; fill: #18181b; }
+      .comic-subtext { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; fill: #52525b; letter-spacing: 2px; }
+      .star-fill { fill: #facc15; stroke: #18181b; stroke-width: 3.5; stroke-linejoin: round; }
+    </style>
+    <filter id="hand-drawn" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </defs>
+
+  <g transform="translate(0, 70)">
+    <!-- Background Glow Blob -->
+    <path d="M 280,180 Q 420,120 540,200 T 580,380 Q 520,500 360,480 T 220,340 Z" class="accent-blue" />
+    <circle cx="210" cy="220" r="45" class="accent-glow" />
+    <circle cx="560" cy="420" r="35" class="accent-pink" />
+
+    <g filter="url(#hand-drawn)">
+      <!-- Whimsical Doodles & Sparkles -->
+      <!-- Star Left -->
+      <path d="M 160,190 L 166,206 L 183,207 L 170,218 L 174,235 L 160,224 L 146,235 L 150,218 L 137,207 L 154,206 Z" class="star-fill" />
+      <!-- Star Right -->
+      <path d="M 590,170 L 595,183 L 610,184 L 599,193 L 602,207 L 590,198 L 578,207 L 581,193 L 570,184 L 585,183 Z" class="star-fill" />
+      <!-- Star Bottom Left -->
+      <path d="M 190,440 L 194,452 L 206,453 L 197,461 L 200,473 L 190,465 L 180,473 L 183,461 L 174,453 L 186,452 Z" class="star-fill" />
+
+      <!-- Squiggly Doodles -->
+      <path d="M 130,280 Q 115,260 135,245 T 145,225" class="doodle-line" />
+      <path d="M 620,270 Q 640,290 625,310 T 635,335" class="doodle-line" />
+      <circle cx="630" cy="240" r="4" fill="#18181b" />
+      <circle cx="140" cy="350" r="5" fill="#18181b" />
+      <circle cx="210" cy="510" r="3.5" fill="#18181b" />
+
+      <!-- Comic Sweat Drop / Emotion Marks -->
+      <path d="M 545,210 Q 560,225 545,235 Q 535,225 545,210 Z" fill="#38bdf8" stroke="#18181b" stroke-width="3" />
+      <path d="M 565,225 Q 575,235 565,242 Q 558,235 565,225 Z" fill="#38bdf8" stroke="#18181b" stroke-width="2.5" />
+
+      <!-- The Sign Post & Board -->
+      <!-- Wooden Post -->
+      <path d="M 285,270 L 310,480 L 290,482 L 268,275 Z" fill="#fef3c7" stroke="#18181b" stroke-width="5" stroke-linejoin="round" />
+      <!-- Sign Board -->
+      <rect x="135" y="125" width="225" height="150" rx="10" transform="rotate(-7 247 200)" fill="#ffffff" stroke="#18181b" stroke-width="6.5" stroke-linejoin="round" />
+      <rect x="142" y="132" width="211" height="136" rx="8" transform="rotate(-7 247 200)" fill="none" stroke="#fde047" stroke-width="4" stroke-dasharray="8 6" />
+
+      <!-- Sign Text -->
+      <g transform="rotate(-7 247 200)">
+        <text x="247" y="185" text-anchor="middle" class="comic-text" font-size="40" letter-spacing="2">MEME</text>
+        <text x="247" y="235" text-anchor="middle" class="comic-text" font-size="44" fill="#ef4444" letter-spacing="1">THIS!</text>
+        <!-- Small Doodle arrow on sign -->
+        <path d="M 180,245 Q 247,260 310,245" class="doodle-line" stroke-width="3.5" />
+      </g>
+
+      <!-- Character Body -->
+      <!-- Left Leg -->
+      <path d="M 430,470 L 420,560 Q 405,565 395,570" class="doodle-thick" />
+      <!-- Right Leg -->
+      <path d="M 470,470 L 490,560 Q 510,565 520,570" class="doodle-thick" />
+
+      <!-- Torso -->
+      <path d="M 420,380 C 410,410 405,450 425,470 L 475,470 C 490,445 490,410 480,380 Z" fill="#ffffff" stroke="#18181b" stroke-width="6" stroke-linejoin="round" />
+
+      <!-- Left Arm holding the sign stick -->
+      <path d="M 420,395 Q 350,400 315,365" class="doodle-thick" />
+      <!-- Hand 1 (Top hand on stick) -->
+      <ellipse cx="305" cy="365" rx="12" ry="10" transform="rotate(-20 305 365)" fill="#ffffff" stroke="#18181b" stroke-width="5" />
+      <!-- Hand 2 (Bottom hand on stick) -->
+      <path d="M 425,420 Q 370,450 318,415" class="doodle-thick" />
+      <ellipse cx="312" cy="415" rx="12" ry="10" transform="rotate(-10 312 415)" fill="#ffffff" stroke="#18181b" stroke-width="5" />
+
+      <!-- Right Arm (Akimbo / sassy hand on hip) -->
+      <path d="M 480,395 Q 525,415 520,445 Q 515,465 475,455" class="doodle-thick" />
+
+      <!-- Character Head -->
+      <circle cx="470" cy="300" r="82" fill="#ffffff" stroke="#18181b" stroke-width="6.5" />
+
+      <!-- Quirky Doodle Hair Tufts -->
+      <path d="M 465,218 Q 470,185 490,195 Q 510,205 500,225" class="doodle-thick" fill="#ffffff" />
+      <path d="M 450,222 Q 445,198 460,202" class="doodle-line" stroke-width="4.5" />
+
+      <!-- Eyebrows -->
+      <!-- Left Raised Wondering Eyebrow -->
+      <path d="M 415,260 Q 430,245 450,255" class="doodle-thick" stroke-width="6" />
+      <!-- Right Sassy Slanted Eyebrow -->
+      <path d="M 480,260 Q 505,255 525,270" class="doodle-thick" stroke-width="6" />
+
+      <!-- Big Doodle Eyes -->
+      <!-- Left Eye (Wide open) -->
+      <ellipse cx="435" cy="285" rx="20" ry="24" fill="#ffffff" stroke="#18181b" stroke-width="5.5" />
+      <ellipse cx="442" cy="285" rx="9" ry="12" fill="#18181b" />
+      <circle cx="444" cy="281" r="3.5" fill="#ffffff" />
+
+      <!-- Right Eye (Slight squint / winking mischief) -->
+      <ellipse cx="495" cy="287" rx="22" ry="24" fill="#ffffff" stroke="#18181b" stroke-width="5.5" />
+      <ellipse cx="500" cy="287" rx="10" ry="12" fill="#18181b" />
+      <circle cx="503" cy="283" r="3.5" fill="#ffffff" />
+
+      <!-- Cheek Blush -->
+      <ellipse cx="410" cy="315" rx="12" ry="7" fill="#fca5a5" opacity="0.6" />
+      <ellipse cx="525" cy="318" rx="12" ry="7" fill="#fca5a5" opacity="0.6" />
+
+      <!-- Smug / Smirking Doodle Mouth -->
+      <path d="M 440,328 Q 470,350 510,325 Q 515,318 518,322" class="doodle-thick" stroke-width="6" />
+
+      <!-- Tiny Tongue Stick-Out -->
+      <path d="M 480,340 Q 492,358 502,338 Z" fill="#f43f5e" stroke="#18181b" stroke-width="3" />
+    </g>
+
+    <!-- Title & Branding Text Area -->
+    <g transform="translate(400, 580)">
+      <text x="0" y="0" text-anchor="middle" class="comic-text" font-size="42" letter-spacing="1">
+        MEME-MARKETING <tspan fill="#e11d48">AGENT</tspan>
+      </text>
+      <path d="M -180,12 Q 0,22 180,12" class="doodle-line" stroke="#e11d48" stroke-width="4.5" />
+      <text x="0" y="38" text-anchor="middle" class="comic-subtext" font-size="14">
+        FULLY AGENTIC MEME ENGINE • ZERO CRINGE • 100% RELATABLE
+      </text>
+    </g>
+  </g>
+</svg>

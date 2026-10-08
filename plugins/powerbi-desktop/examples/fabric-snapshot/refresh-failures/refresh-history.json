@@ -1,0 +1,4 @@
+[
+  { "itemId": "dataset-refresh", "status": "Failed", "startTime": "2026-06-01T08:00:00Z", "error": "Credentials expired" },
+  { "itemId": "dataset-refresh", "status": "Failed", "startTime": "2026-06-02T08:00:00Z", "error": "Gateway unavailable" }
+]

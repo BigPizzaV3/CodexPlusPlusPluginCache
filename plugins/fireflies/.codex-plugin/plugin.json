@@ -1,0 +1,30 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Fireflies",
+    "url": "https://fireflies.ai"
+  },
+  "description": "The Fireflies app brings your meetings and knowledge directly into ChatGPT.\n\nAnalyze any conversation\u2014sales, customer success, product, recruiting\u2014for insights, action items, and sentiment. Track feature requests and pain points, update CRMs or systems of record, and instantly retrieve context from your organization's meetings.\n\nWith Fireflies and ChatGPT, centralize your company knowledge and turn every conversation into searchable, actionable insights.",
+  "homepage": "https://fireflies.ai",
+  "interface": {
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Summarize our conversation history with Acme so far"
+    ],
+    "developerName": "Fireflies",
+    "displayName": "Fireflies",
+    "logo": "./assets/logo.png",
+    "longDescription": "The Fireflies app brings your meetings and knowledge directly into Codex.\n\nAnalyze any conversation\u2014sales, customer success, product, recruiting\u2014for insights, action items, and sentiment. Track feature requests and pain points, update CRMs or systems of record, and instantly retrieve context from your organization's meetings.\n\nWith Fireflies and Codex, centralize your company knowledge and turn every conversation into searchable, actionable insights.",
+    "privacyPolicyURL": "https://fireflies.ai/privacy",
+    "screenshots": [],
+    "shortDescription": "Search meeting transcripts",
+    "websiteURL": "https://fireflies.ai"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "fireflies",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

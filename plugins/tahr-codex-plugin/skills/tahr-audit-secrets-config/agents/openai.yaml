@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Audit Secrets and Config"
+  short_description: "Audit secrets, dependencies, and deployment config"
+  default_prompt: "Use $tahr-audit-secrets-config to review secrets, dependencies, infrastructure, and security configuration."

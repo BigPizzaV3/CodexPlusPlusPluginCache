@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/repeated-run-plan-0.1.schema.json",
+  "title": "RAGOps repeated-run plan 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "scenario_id", "scenario_digest", "case_ids", "repeats", "provenance"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "scenario_id": {"type": "string", "minLength": 1},
+    "scenario_digest": {"type": "string", "minLength": 1},
+    "case_ids": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10000,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "repeats": {"type": "integer", "minimum": 1, "maximum": 1000},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataset", "evidence", "evaluator", "application", "model", "model_config", "environment"
+      ],
+      "properties": {
+        "dataset": {"type": "string", "minLength": 1},
+        "evidence": {"type": "string", "minLength": 1},
+        "evaluator": {"type": "string", "minLength": 1},
+        "application": {"type": "string", "minLength": 1},
+        "model": {"type": "string", "minLength": 1},
+        "model_config": {"type": "string", "minLength": 1},
+        "environment": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

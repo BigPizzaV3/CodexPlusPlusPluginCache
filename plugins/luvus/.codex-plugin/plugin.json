@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "Riz",
+    "url": "https://github.com/RizRiyz"
+  },
+  "description": "Control Luvus agents, workspaces, and UHP automation from Codex.",
+  "homepage": "https://luvus.dev/docs/",
+  "interface": {
+    "brandColor": "#C2AA45",
+    "brandColorDark": "#C2AA45",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Delegate a review to the Luvus agent named reviewer.",
+      "Fork a supported live Luvus agent into a named sibling pane.",
+      "Inspect live Luvus UHP capabilities before planning a harness integration."
+    ],
+    "developerName": "Riz",
+    "displayName": "Luvus",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "logoDark": "./.codex-plugin/assets/logo-dark.svg",
+    "longDescription": "Control a local Luvus session from Codex. Delegate work, fork agent sessions, arrange workspaces, review DIFF notes, coordinate tasks, and build capability-driven UHP automation. Requires an installed Luvus client and a running Luvus session.",
+    "privacyPolicyURL": "https://luvus.dev/privacy/",
+    "shortDescription": "Mission control for AI Agent",
+    "supportURL": "https://github.com/RizRiyz/luvus/issues",
+    "termsOfServiceURL": "https://luvus.dev/terms/",
+    "websiteURL": "https://luvus.dev/"
+  },
+  "keywords": [
+    "luvus",
+    "terminal",
+    "agents",
+    "orchestration",
+    "codex"
+  ],
+  "license": "Apache-2.0",
+  "name": "luvus",
+  "repository": "https://github.com/RizRiyz/luvus",
+  "skills": "./skills/",
+  "version": "0.4.2"
+}

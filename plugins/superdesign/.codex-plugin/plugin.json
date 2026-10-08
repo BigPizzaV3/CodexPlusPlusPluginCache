@@ -1,0 +1,58 @@
+{
+  "author": {
+    "email": "support@superdesign.dev",
+    "name": "Superdesign dev, Inc.",
+    "url": "https://superdesign.dev"
+  },
+  "description": "Superdesign adds a design skill to ChatGPT for web UI, presentations, and graphics.",
+  "homepage": "https://superdesign.dev",
+  "interface": {
+    "brandColor": "#000000",
+    "brandColorDark": "#FFFFFF",
+    "capabilities": [
+      "Read",
+      "Write",
+      "UI"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Design an on-brand landing page for this product.",
+      "Reimagine this interface in three distinct visual directions.",
+      "Create a polished launch graphic for this product to share on X (Twitter)."
+    ],
+    "developerName": "Superdesign",
+    "displayName": "01 Superdesign",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "From landing pages and presentations to launch graphics, Superdesign turns your ideas into polished visuals you can explore and refine with ChatGPT. Approve slide outlines, compare design directions on an infinite browser canvas, and keep iterating\u2014all grounded in your brand and existing design system.",
+    "privacyPolicyURL": "https://superdesign.dev/privacy-policy",
+    "shortDescription": "Create the best UI & visuals",
+    "supportURL": "https://superdesign.dev",
+    "termsOfServiceURL": "https://superdesign.dev/terms-of-service",
+    "websiteURL": "https://superdesign.dev"
+  },
+  "keywords": [
+    "design",
+    "ui-design",
+    "web-design",
+    "landing-pages",
+    "dashboards",
+    "wireframes",
+    "mockups",
+    "prototyping",
+    "design-systems",
+    "branding",
+    "graphics",
+    "posters",
+    "presentations",
+    "slide-decks",
+    "image-generation",
+    "infinite-canvas",
+    "design-drafts"
+  ],
+  "license": "MIT",
+  "name": "superdesign",
+  "repository": "https://github.com/superdesigndev/superdesign-skill",
+  "skills": "./skills/",
+  "version": "0.6.0"
+}

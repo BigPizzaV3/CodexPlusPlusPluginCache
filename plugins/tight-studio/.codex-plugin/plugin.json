@@ -1,0 +1,42 @@
+{
+  "author": {
+    "email": "hello@tight.studio",
+    "name": "Tight Software LLC",
+    "url": "https://tight.studio"
+  },
+  "description": "Inspect and edit the open Tight Studio video project on your Mac.",
+  "homepage": "https://tight.studio",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Summarize my open Tight Studio project",
+      "Make my Tight Studio project vertical",
+      "List the zooms in my current Tight Studio project"
+    ],
+    "developerName": "Tight Software LLC",
+    "displayName": "Tight Studio",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Inspect and edit the video project open in Tight Studio on your Mac. Summarize clips, adjust timeline segments and zooms, style captions, and change canvas, camera, annotations, media, and audio settings. Inspect rendered frames and original source images to choose framing, apply an edit, and check the result. Configure exports and start them when requested. Sharing requires an explicit request and can upload content through Tight Studio. Requires macOS 13+, Tight Studio 3.1.5+, Node.js 18+, an open project, and a local Codex session. Frame inspection requires the new Tight Studio 3.1.9 desktop build, which is not yet publicly released; other editing tools work on older supported versions. Tight Studio controls project access and validates edits. Cloud-only sessions, recording controls, and AI media generation are not supported.",
+    "privacyPolicyURL": "https://tight.studio/privacy-policy/",
+    "shortDescription": "Edit videos on your Mac",
+    "supportURL": "https://tight.studio/help/",
+    "termsOfServiceURL": "https://tight.studio/terms-of-service/",
+    "websiteURL": "https://tight.studio"
+  },
+  "keywords": [
+    "video",
+    "editing",
+    "screen-recording",
+    "macos"
+  ],
+  "license": "MIT",
+  "name": "tight-studio",
+  "repository": "https://github.com/ethanjyx/tight-studio-plugins",
+  "skills": "./skills/",
+  "version": "0.2.0"
+}

@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "Saul Mart\u00ed"
+  },
+  "description": "Break a plan, specification, or conversation into tracer-bullet tickets with explicit blocking edges and publish them to the configured issue tracker.",
+  "interface": {
+    "brandColor": "#22C55E",
+    "brandColorDark": "#3ADD76",
+    "capabilities": [
+      "Split specs into tickets"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Break this spec into tracer-bullet tickets",
+      "Turn this plan into agent-ready tickets with blockers",
+      "Split this feature into independently verifiable tickets"
+    ],
+    "developerName": "Saul Mart\u00ed",
+    "displayName": "ToTickets",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Break a plan, specification, or conversation into tracer-bullet tickets with explicit blocking edges and publish them to the configured issue tracker.",
+    "shortDescription": "Split specs into tickets"
+  },
+  "keywords": [
+    "engineering-suite",
+    "to-tickets",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "engineering-suite-to-tickets",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

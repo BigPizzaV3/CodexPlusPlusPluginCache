@@ -1,0 +1,6 @@
+interface:
+  display_name: "YCloud WhatsApp Messages"
+  short_description: "Design or implement WhatsApp send and retrieval"
+  default_prompt: "Use $ycloud-whatsapp-messages to design or implement contract-aware WhatsApp message handling."
+policy:
+  allow_implicit_invocation: true

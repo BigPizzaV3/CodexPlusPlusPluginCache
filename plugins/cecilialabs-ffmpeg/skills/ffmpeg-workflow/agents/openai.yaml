@@ -1,0 +1,4 @@
+interface:
+  display_name: "FFmpeg Workflow"
+  short_description: "Route and validate media workflows"
+  default_prompt: "Use $ffmpeg-workflow to route this media request and define its preflight and validation steps."

@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Ivypath Education",
+    "url": "https://github.com/ky1290-hub"
+  },
+  "description": "Parse text, scanned, table-heavy, and image-rich PDFs into structured Markdown and JSON with a user-owned LlamaCloud key.",
+  "homepage": "https://github.com/ky1290-hub/pdf-parser",
+  "interface": {
+    "brandColor": "#1B6B45",
+    "brandColorDark": "#94E4BE",
+    "capabilities": [
+      "OCR extraction, PDF-to-Markdown/JSON conversion, table and layout extraction, conversion validation"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Parse this authorized scanned PDF with OCR and return page-ordered Markdown and structured JSON.",
+      "Extract tables, headings, figures, and layout from this authorized PDF while preserving page boundaries.",
+      "Validate this PDF conversion against the source and list any text, table, image, or layout discrepancies."
+    ],
+    "developerName": "Ivypath Education",
+    "displayName": "PDF Parser",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Parse authorized text-based, scanned, table-heavy, and image-rich PDFs into structured Markdown and JSON using each user's own LlamaCloud API key. Preserve page order and layout evidence, keep raw results private, and optionally validate structured question-and-answer deliverables.",
+    "privacyPolicyURL": "https://github.com/ky1290-hub/pdf-parser/blob/main/DATA_HANDLING.md",
+    "shortDescription": "Parse PDFs with OCR & layout",
+    "supportURL": "https://github.com/ky1290-hub/pdf-parser/issues",
+    "termsOfServiceURL": "https://github.com/ky1290-hub/pdf-parser/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/ky1290-hub/pdf-parser"
+  },
+  "keywords": [
+    "pdf",
+    "ocr",
+    "llamaparse",
+    "markdown",
+    "document-processing"
+  ],
+  "license": "MIT",
+  "name": "pdf-parser",
+  "repository": "https://github.com/ky1290-hub/pdf-parser",
+  "skills": "./skills",
+  "version": "1.3.2"
+}

@@ -1,0 +1,41 @@
+{
+  "name": "gstack Workflows",
+  "subtitle": "Plan, review, QA, and ship",
+  "description": "A ChatGPT and Codex adaptation of the gstack engineering workflows. It keeps the familiar specialist jobs for product planning, architecture review, debugging, code review, QA, design, security, documentation, release work, browser tasks, and iOS workflows while mapping execution to capabilities actually available on the current host. Native gstack browser, device, pairing, gbrain, and local-runtime behavior remains optional and is used only on compatible Codex hosts.",
+  "category": "Productivity",
+  "developerName": null,
+  "websiteURL": null,
+  "customerSupportURL": null,
+  "privacyPolicyURL": null,
+  "termsOfServiceURL": null,
+  "version": "0.1.0",
+  "packageName": "gstack-workflows",
+  "capabilities": [
+    "Product planning",
+    "Architecture review",
+    "Code review",
+    "Root-cause debugging",
+    "QA",
+    "Design review",
+    "Security review",
+    "Documentation",
+    "Release preparation",
+    "Repository health",
+    "Performance benchmarking",
+    "Context handoff",
+    "Browser workflow routing",
+    "iOS workflow routing",
+    "Safety scoping"
+  ],
+  "starterPrompts": [
+    "Use gstack to route this software task to the right workflow.",
+    "Run a gstack engineering review of this change.",
+    "Use gstack to turn this idea into an executable spec."
+  ],
+  "upstream": {
+    "repository": "https://github.com/garrytan/gstack",
+    "version": "1.68.3",
+    "commit": "85fd9db554ae4aaaa6d356d2daf873121ee85bdd"
+  },
+  "status": "listing_incomplete_for_public_submission"
+}

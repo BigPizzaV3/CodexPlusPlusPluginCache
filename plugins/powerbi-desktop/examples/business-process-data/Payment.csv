@@ -1,0 +1,3 @@
+PaymentId,InvoiceId,PaymentDate,Amount
+PAY-1,INV-1,2026-02-01,1000
+PAY-2,INV-404,2026-02-03,50

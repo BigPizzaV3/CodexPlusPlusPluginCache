@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "Memory Keeper"
+  },
+  "description": "Keep persistent project memory and files canonical with mandatory routing, fingerprinted bounded recovery, and verified completion.",
+  "interface": {
+    "brandColor": "#6D5CE7",
+    "brandColorDark": "#6D5CE7",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Audit and organize this project's persistent files and memory safely.",
+      "Continue this project and keep its canonical memory synchronized after every durable change.",
+      "Recover this interrupted persistent task without looping or weakening verification."
+    ],
+    "developerName": "Memory Keeper",
+    "displayName": "Memory Keeper",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Routes persistent work through specialist skills for memory maintenance, audits, file organization, repair, bounded recovery, and evidence-based completion.",
+    "shortDescription": "Keep project memory canonical"
+  },
+  "keywords": [
+    "project-memory",
+    "canonical-files",
+    "file-organization",
+    "knowledge-management",
+    "verification",
+    "workflow"
+  ],
+  "license": "MIT",
+  "name": "memory-keeper",
+  "skills": "./skills",
+  "version": "0.5.0"
+}

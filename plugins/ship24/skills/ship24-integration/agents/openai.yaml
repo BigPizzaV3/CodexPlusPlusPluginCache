@@ -1,0 +1,7 @@
+interface:
+  display_name: "Ship24 API Integration"
+  short_description: "Integrate the Ship24 Tracking API into your project end to end"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon-large.png"
+  brand_color: "#FCB016"
+  default_prompt: "Add Ship24 shipment tracking to this project."

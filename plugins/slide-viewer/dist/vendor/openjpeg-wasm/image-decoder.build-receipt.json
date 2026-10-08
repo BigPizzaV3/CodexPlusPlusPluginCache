@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "provenance": "Pinned source rebuild and actual linker/source/header closure; not inferred from the original opaque npm WASM.",
+  "sdk": {
+    "version": "4.0.13",
+    "revision": "2659582941bef14008476903f48941909db1b196",
+    "releaseBuildRevision": "32b8ae819674cb42b8ac2191afeb9571e33ad5e2",
+    "host": {
+      "platform": "darwin",
+      "arch": "arm64"
+    },
+    "compilerRebuiltFromSource": false
+  },
+  "pinnedInputs": {
+    "path": "runtime/openjpeg-wasm/pinned-inputs.json",
+    "sha256": "ac38989d004651683dbc28698dc1a50115d198f1ee0a05393622cca6b1d5ac9b"
+  },
+  "rebuildFiles": [
+    {
+      "path": "runtime/openjpeg-wasm/scripts/prepare-sdk.mjs",
+      "sha256": "4879564c3d2cb13116387d8f3b09d151a44e1479423a340790a7114f94ddef77"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/scripts/rebuild-native.mjs",
+      "sha256": "fbdd94afbbd0861cd99b4623fd26a9d2672535fc7b469d687eaffdd27c3de168"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/scripts/create-decoder.mjs",
+      "sha256": "f20455b37a29fd45f7959461333eacf85f8f5b2e53c7d09d86bdfa896875407c"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/scripts/qualify-decoder.mjs",
+      "sha256": "d4fa7ec029af2a1f20a48fbcdfa69244d532d2f3290df315b23ce6d755c81804"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/scripts/package-evidence.mjs",
+      "sha256": "5e032442a75d75519cdd417d019023a41ad2b56aa554fb0862cecec55b4fa4f4"
+    }
+  ],
+  "qualification": {
+    "receipt": {
+      "path": "runtime/openjpeg-wasm/evidence/decoder-qualification.json",
+      "sha256": "31096eb3fcc67a98017172f4b1d1c72799adb9743206eec8343972b3f5fdf14e"
+    },
+    "checksPassed": 27,
+    "pixelComparisons": 12,
+    "genuineAperioComparisons": 2,
+    "actualResourcePathForced": true,
+    "noNativeExecutable": true,
+    "platformValuesAreSimulatedOnCurrentHost": true,
+    "productionHostAcceptance": "not performed"
+  },
+  "reproducibility": {
+    "path": "runtime/openjpeg-wasm/evidence/reproducibility.json",
+    "sha256": "b8f80bfa5445748c2d7f4b20a6a5d72b02a71da2e2ebc3ad6f20097fa4b439df"
+  },
+  "boundary": "Source/license evidence and controlled runtime validation only; no legal opinion, production-host acceptance, customer acceptance, patent clearance or publication authorization.",
+  "outputs": [
+    {
+      "path": "node_modules/.cache/slide-openjpeg-wasm/pdf.image_decoders.mjs",
+      "bytes": 396953,
+      "sha256": "f04ad5675f8d519a97ccf48227e32037225c18c87d9c526e6940dedab7869699"
+    }
+  ],
+  "components": [
+    {
+      "name": "pdfjs-dist",
+      "version": "5.4.296",
+      "license": "Apache-2.0",
+      "sourceUrl": "https://github.com/mozilla/pdf.js/tree/f56dc86014bb00c5a239680df53d2010e9aad0f8/src"
+    },
+    {
+      "name": "core-js",
+      "version": "3.45.1",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/zloirock/core-js/tree/v3.45.1"
+    },
+    {
+      "name": "webpack",
+      "version": "5.101.3",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/webpack/webpack/tree/v5.101.3/lib/runtime"
+    },
+    {
+      "name": "pdfjs-qcms-js-glue",
+      "version": "5.4.296",
+      "license": "BSD-2-Clause",
+      "sourceUrl": "https://github.com/mozilla/pdf.js/blob/f56dc86014bb00c5a239680df53d2010e9aad0f8/external/qcms/qcms.js"
+    },
+    {
+      "name": "pdfjs-ccitt-decoder",
+      "version": "5.4.296",
+      "license": "Apache-2.0",
+      "sourceUrl": "https://github.com/mozilla/pdf.js/blob/f56dc86014bb00c5a239680df53d2010e9aad0f8/src/core/ccitt.js"
+    },
+    {
+      "name": "Mozilla pdf.js.openjpeg JavaScript pixel bridge",
+      "version": "0.0.1",
+      "license": "BSD-2-Clause",
+      "sourceUrl": "https://github.com/mozilla/pdf.js.openjpeg/blob/f73c6ec70ce6368361599458e47cfcb133b7fec2/src/myjs.js"
+    },
+    {
+      "name": "Emscripten JavaScript runtime",
+      "version": "4.0.13",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/emscripten-core/emscripten/tree/2659582941bef14008476903f48941909db1b196/src"
+    },
+    {
+      "name": "wasm-bindgen generated JavaScript helpers",
+      "version": "0.2.100",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/wasm-bindgen/wasm-bindgen/blob/2405ec2b4bcd1cc4e3bd1562c373e9d5f0cbdcb5/crates/cli-support/src/js/mod.rs"
+    }
+  ],
+  "sourceEvidence": [
+    {
+      "path": "runtime/openjpeg-wasm/evidence/pdfjs-source-inventory.json",
+      "sha256": "d9693e8adfe7699ad462724e503d6932c705bc2843f9934f65a2245c07023c5c"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/decoder-transformation.json",
+      "sha256": "31def5d7dde97b2f68b6a2806a77aaa277b451564413efc5ed7a055d7b170ceb"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-component-evidence.json",
+      "sha256": "efebdab3afe5550128dbd22a58414c51eb37fc8ad14d2c67370ec4d455d3ed17"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/emscripten-generated-js-runtime-sources.json",
+      "sha256": "468f09ce4110cd23b7de1ecfc304540b54da41498b5821c2b67dfae59bb6e5a8"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/qcms-generated-glue-audit.json",
+      "sha256": "41e7d77cc6369cae10d41d798eb5f3194bad5a51c727c105b125ac694cd117fc"
+    },
+    {
+      "path": "runtime/openjpeg-wasm/evidence/notice-aggregate-normalization.json",
+      "sha256": "bd83f7008cf89c3c2e8f4833785778728201e63df1ec936efee90113662dc531"
+    }
+  ]
+}

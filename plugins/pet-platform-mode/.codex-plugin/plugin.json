@@ -1,0 +1,40 @@
+{
+  "author": {
+    "email": "cai-lear@hotmail.com",
+    "name": "CAIUTO AI",
+    "url": "https://caiuto-ai.caiuto.chatgpt.site"
+  },
+  "description": "Turn built-in or custom Codex pets into Windows desktop companions with Sandbox, Survival, Dodgeball, Football, Wispfall, and local two-player play.",
+  "homepage": "https://caiuto-ai.caiuto.chatgpt.site",
+  "interface": {
+    "brandColor": "#E77732",
+    "brandColorDark": "#E77732",
+    "capabilities": [
+      "Interactive"
+    ],
+    "category": "Entertainment",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Turn Game Mode on.",
+      "Turn Game Mode off."
+    ],
+    "developerName": "CAIUTO AI",
+    "displayName": "Windowisp",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Launch built-in or custom Codex pets as animated Windows desktop companions with a floating paw Control Centre, five game modes, local two-player controls, click-through freeze mode, toys, gadgets, and buildable Sandbox platforms.",
+    "privacyPolicyURL": "https://caiuto-ai.caiuto.chatgpt.site/privacy",
+    "shortDescription": "use pet on Windows desktop",
+    "termsOfServiceURL": "https://caiuto-ai.caiuto.chatgpt.site/terms",
+    "websiteURL": "https://caiuto-ai.caiuto.chatgpt.site"
+  },
+  "keywords": [
+    "codex",
+    "desktop-pet",
+    "windows",
+    "game-mode"
+  ],
+  "license": "MIT",
+  "name": "pet-platform-mode",
+  "skills": "./skills/",
+  "version": "0.3.5"
+}

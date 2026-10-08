@@ -1,0 +1,116 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "football-charts",
+  "version": "1.0.0",
+  "description": "Football statistics for 93 leagues in 42 countries, including lower divisions and women's leagues: tables, results with half-time scores, fixtures, goal timing, team profiles and season projections.",
+  "author": {
+    "name": "Damir Devetak",
+    "email": "contact@football-charts.com",
+    "url": "https://www.football-charts.com"
+  },
+  "homepage": "https://www.football-charts.com",
+  "repository": "https://github.com/ddevetak/footballcharts-mcp",
+  "license": "MIT",
+  "keywords": [
+    "football",
+    "soccer",
+    "statistics",
+    "league tables",
+    "results",
+    "fixtures",
+    "goal timing",
+    "lower leagues",
+    "women's football"
+  ],
+  "onboardingSkill": "./skills/get-started/SKILL.md",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Football Charts",
+        "shortDescription": "Stats for 93 football leagues",
+        "longDescription": "Football Charts answers questions about football leagues with data: league tables, results with half-time scores, upcoming fixtures, when teams score and concede (goals by 15-minute period), team profiles, and Monte Carlo season projections (title, top-four and relegation chances). It covers 93 leagues in 42 countries, from the Premier League to lower divisions that few sources cover (Spain's Segunda RFEF groups, the Czech third tier, the English National League, Nordic, Baltic and Asian second tiers) plus women's top divisions. Data is updated daily.\n\nRead-only; no account needed. Statistics and a baseline model only: no odds, no betting advice, no player-level data. Limitations: fixtures appear once they are within a few days of kick-off; historical seasons before the previous one need an API key from football-charts.com/developers.",
+        "developerName": "Damir Devetak",
+        "category": "Data & Analytics",
+        "capabilities": [
+          "League tables",
+          "Results with half-time scores",
+          "Upcoming fixtures",
+          "Goal timing by period",
+          "Team profiles",
+          "Season projections",
+          "93 leagues incl. lower divisions",
+          "Women's leagues"
+        ],
+        "websiteURL": "https://www.football-charts.com",
+        "supportURL": "https://www.football-charts.com/developers",
+        "privacyPolicyURL": "https://www.football-charts.com/privacy",
+        "termsOfServiceURL": "https://www.football-charts.com/terms",
+        "defaultPrompt": [
+          "Who leads the Allsvenskan, and who is most likely to be relegated?",
+          "Show me the last results in Spain's Segunda RFEF Group 1.",
+          "When does Liverpool usually score, early or late?"
+        ],
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/composer-icon.png",
+        "brandColor": "#1d4ed8"
+      },
+      "review": {
+        "demo_recording_url": "https://www.football-charts.com/demo/chatgpt-plugin-walkthrough.mp4",
+        "commerce": false,
+        "test_cases": {
+          "positive": [
+            {
+              "description": "League table",
+              "prompt": "What is the current Premier League table?",
+              "tools_triggered": "list_leagues, get_league_table",
+              "expected_behavior": "Calls get_league_table for league 'premier' and returns positions, points and goal difference."
+            },
+            {
+              "description": "Lower-league results with half-time scores",
+              "prompt": "Results of the Czech third division group A last season.",
+              "tools_triggered": "list_leagues, get_results",
+              "expected_behavior": "Resolves the key 'czech3a' via list_leagues, calls get_results with season '2025-2026', lists matches with full-time and half-time scores."
+            },
+            {
+              "description": "Goal timing",
+              "prompt": "In which period of the match does Hammarby score most goals this season?",
+              "tools_triggered": "list_leagues, get_goal_timing",
+              "expected_behavior": "Calls get_goal_timing for 'sweden1' (season '2026') and names the 15-minute period with the most goals."
+            },
+            {
+              "description": "Season projection",
+              "prompt": "What are Arsenal's chances of winning the Premier League?",
+              "tools_triggered": "get_season_projection",
+              "expected_behavior": "Calls get_season_projection for 'premier' and reports Arsenal's title probability from the 10,000-run simulation, stating it is a baseline model."
+            },
+            {
+              "description": "Coverage question",
+              "prompt": "Which leagues from Spain do you cover?",
+              "tools_triggered": "list_leagues",
+              "expected_behavior": "Calls list_leagues and lists LaLiga, LaLiga2, the Primera RFEF groups and the Segunda RFEF groups."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Betting advice",
+              "prompt": "Which bet should I place on tonight's match?"
+            },
+            {
+              "description": "Player data (not held)",
+              "prompt": "How many goals did Lionel Messi score in 2024?"
+            },
+            {
+              "description": "Other sport",
+              "prompt": "Show me the NBA standings."
+            }
+          ]
+        }
+      },
+      "publication": {
+        "countries": [],
+        "release_notes": "First submission. Keyless, read-only MCP server over the Football Charts API (93 football leagues, 42 countries). Daily updates. No authentication, no personal data collected through the plugin."
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

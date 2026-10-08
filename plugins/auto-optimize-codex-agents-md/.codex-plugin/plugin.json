@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Chan Tin Ping",
+    "url": "https://github.com/ChanTinPing"
+  },
+  "description": "Learn durable Codex preferences from session feedback and retain them as scoped, reviewable AGENTS.md improvements.",
+  "homepage": "https://github.com/ChanTinPing/auto-optimize-codex-agents-md",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review my conversation history and suggest AGENTS.md improvements.",
+      "Review new conversation history and suggest AGENTS.md improvements.",
+      "Schedule a daily 10:00 AM task to mine new conversation history and suggest AGENTS.md improvements."
+    ],
+    "developerName": "Chan Tin Ping",
+    "displayName": "Auto Preference Learner",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "When using Codex, we often see it miss things that feel obvious to us: it may run far more tests than necessary or make assumptions about a project that simply do not make sense. Correcting it helps in the current conversation, but that lesson is often forgotten as soon as a new conversation begins. A good harness should keep learning a user's taste, preferences, and working style from these interactions. This Skill does exactly that: it analyzes Codex conversation history, extracts durable preferences, and writes them to project-level or global AGENTS.md files, giving Codex a form of continuous learning. You can think of it as a stripped-down version of Hermes. The project intentionally limits itself to preferences suitable for AGENTS.md rather than trying to generate Skills. We do not want to lock an agent into particular ways of working, since such constraints can become liabilities as models improve. User preferences, by contrast, are not learned simply by upgrading the model and are therefore worth preserving.",
+    "privacyPolicyURL": "https://github.com/ChanTinPing/auto-optimize-codex-agents-md/blob/main/PRIVACY.md",
+    "shortDescription": "Learn and retain preferences",
+    "supportURL": "https://github.com/ChanTinPing/auto-optimize-codex-agents-md/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/ChanTinPing/auto-optimize-codex-agents-md/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/ChanTinPing/auto-optimize-codex-agents-md"
+  },
+  "keywords": [
+    "codex",
+    "agents-md",
+    "preferences",
+    "continuous-learning"
+  ],
+  "license": "MIT",
+  "name": "auto-optimize-codex-agents-md",
+  "repository": "https://github.com/ChanTinPing/auto-optimize-codex-agents-md",
+  "skills": "./skills/",
+  "version": "1.0.2"
+}

@@ -1,0 +1,55 @@
+{
+  "author": {
+    "name": "Mergify",
+    "url": "https://mergify.com"
+  },
+  "description": "Skills for the Mergify CLI: merge queue, stacked pull requests, CI Insights, merge protections, and configuration.",
+  "homepage": "https://mergify.com",
+  "interface": {
+    "brandColor": "#4D59E0",
+    "brandColorDark": "#4D59E0",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "Why did pull request #1234 leave the merge queue?"
+    ],
+    "developerName": "Mergify",
+    "displayName": "Mergify",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Mergify serializes merges through a queue that runs CI on temporary merge commits, so a pull request that only breaks in combination with another one gets caught before it reaches your default branch. These skills drive the Mergify CLI so an agent can work that queue with you.\n\nAsk why a pull request left the queue and get the engine's own dequeue reason, the checks that failed, and a link straight to the job log. Read the activity log for one pull request or for the whole repository. Validate a .mergify.yml against the schema before you commit it, or simulate what your rules would do on a real pull request. Set up merge protections such as dependencies between pull requests or scheduled freezes for a release window. Turn a branch of commits into a stack of one pull request per commit and keep them rebased.\n\nSix skills ship in the bundle: mergify-merge-queue, mergify-events, mergify-config, mergify-merge-protections, mergify-ci, and mergify-stack.\n\nIt runs on the Mergify CLI, a single static binary with no runtime to install, so it needs a local execution environment: Codex, or ChatGPT desktop with local execution. You need a GitHub repository with Mergify enabled. Install the CLI with 'brew install mergifyio/tap/mergify-cli', sign in once with 'mergify auth login' or set MERGIFY_TOKEN, then ask for what you want in plain language.",
+    "privacyPolicyURL": "https://mergify.com/privacy",
+    "shortDescription": "Run and debug your merge queue",
+    "termsOfServiceURL": "https://mergify.com/tos",
+    "websiteURL": "https://mergify.com"
+  },
+  "keywords": [
+    "git",
+    "pr",
+    "stacked-prs",
+    "merge-queue",
+    "ci",
+    "test-insights",
+    "flaky-tests",
+    "quarantine",
+    "freeze",
+    "config",
+    "push",
+    "commit",
+    "branch",
+    "rebase",
+    "checkout",
+    "workflow"
+  ],
+  "license": "Apache-2.0",
+  "name": "mergify",
+  "repository": "https://github.com/Mergifyio/mergify-cli",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

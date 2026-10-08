@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rweisssieker-xp/RW-Forgemind-Codex-Plugin/schemas/future-tournament-v1.schema.json",
+  "title": "ForgeMind parallel future tournament v1",
+  "type": "object",
+  "required": ["schemaVersion", "protocol", "id", "weights", "candidates", "paretoFrontier", "status", "digest"],
+  "properties": { "schemaVersion": { "const": 1 }, "protocol": { "const": "forgemind-future-tournament-v1" }, "id": { "type": "string" }, "weights": { "type": "object" }, "candidates": { "type": "array", "minItems": 1 }, "paretoFrontier": { "type": "array" }, "status": { "type": "string" }, "digest": { "$ref": "#/$defs/digest" } },
+  "$defs": { "digest": { "type": "object", "required": ["algorithm", "value"], "properties": { "algorithm": { "const": "sha256" }, "value": { "type": "string", "pattern": "^[a-f0-9]{64}$" } } } },
+  "additionalProperties": true
+}

@@ -1,0 +1,13 @@
+interface:
+  display_name: "Email Love Figma Quality Gates"
+  short_description: "Audit Email Love libraries before approval"
+  default_prompt: "Use $email-love-figma-quality-gates to audit this migration batch before approval."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "figma"
+      description: "Measure the built modules in Figma for the acceptance audit"
+      transport: "streamable_http"
+      url: "https://mcp.figma.com/mcp"
+policy:
+  allow_implicit_invocation: true

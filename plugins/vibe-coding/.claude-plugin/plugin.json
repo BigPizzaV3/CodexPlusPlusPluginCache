@@ -1,0 +1,22 @@
+{
+  "name": "vibe-coding",
+  "version": "1.3.0",
+  "description": "Evidence-based coding workflows: 46 skills, 241 domain recipes, scoped implementation and verification.",
+  "author": {
+    "name": "Arty S.",
+    "url": "https://github.com/arty-kk"
+  },
+  "homepage": "https://arty-kk.github.io/vibe-coding",
+  "repository": "https://github.com/arty-kk/vibe-coding",
+  "license": "MIT",
+  "keywords": [
+    "vibe-coding",
+    "review",
+    "debugging",
+    "architecture",
+    "quality",
+    "mcp",
+    "web",
+    "localization"
+  ]
+}

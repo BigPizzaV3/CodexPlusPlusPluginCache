@@ -1,0 +1,7 @@
+interface:
+  display_name: Brain Briefs
+  short_description: Create briefs from workspace context
+  brand_color: '#E45B32'
+  default_prompt: Use $brain-briefs to create a useful brief from my current workspace context.
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+{
+  "id": "workspace-refresh",
+  "name": "Refresh Failures Workspace",
+  "tenantId": "tenant-demo",
+  "capacityId": "capacity-f2",
+  "owners": ["ops.owner@example.com"]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "forgemind",
+  "version": "1.47.0",
+  "description": "Vendor-neutral agent trust and evidence-driven delivery workflows for Codex.",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "forgemind": "./bin/forgemind.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "validate": "node bin/forgemind.mjs validate",
+    "eval": "node bin/forgemind.mjs eval",
+    "coverage": "node -e \"require('node:fs').mkdirSync('coverage',{recursive:true})\" && node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info && node scripts/check-coverage.mjs coverage/lcov.info 90",
+    "build": "node bin/forgemind.mjs package",
+    "ci": "npm test && npm run validate && npm run eval && npm run build && node bin/forgemind.mjs validate --plugin dist/plugin --strict-release",
+    "forgemind": "node bin/forgemind.mjs"
+  }
+}

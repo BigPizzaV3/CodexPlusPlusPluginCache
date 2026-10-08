@@ -1,0 +1,7 @@
+interface:
+  display_name: Creator Workspace Router
+  short_description: Route Creator Workspace workflows
+  brand_color: '#E45B32'
+  default_prompt: Use $creator-router to route this Creator Workspace request through the smallest useful set of skills.
+policy:
+  allow_implicit_invocation: true

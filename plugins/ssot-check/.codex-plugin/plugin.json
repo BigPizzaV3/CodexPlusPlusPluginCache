@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "Conor Bronsdon",
+    "url": "https://github.com/conorbronsdon"
+  },
+  "description": "Find duplicated facts and report documentation drift.",
+  "homepage": "https://github.com/conorbronsdon/ssot-check",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Check this repository for documentation drift.",
+      "Find repeated facts outside our SSOT manifest.",
+      "Trace missing pointers to maintained setup guides."
+    ],
+    "developerName": "Conor Bronsdon",
+    "displayName": "SSOT Check",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Check documentation for copied facts that have gone stale. SSOT Check compares values against a curated source-of-truth manifest, reports exact file locations, and helps discover copies the manifest does not yet track. It also traces missing documentation pointers and unclear ownership across repositories. Audits propose fixes; requests to repair documentation authorize scoped edits. The bundled Python CLI requires Python 3.9 or later and has no third-party dependencies.",
+    "privacyPolicyURL": "https://github.com/conorbronsdon/ssot-check/blob/1cebef0369dc2cdd0214a83566a31e61cc5412ec/docs/privacy.md",
+    "shortDescription": "Check documentation drift",
+    "supportURL": "https://github.com/conorbronsdon/ssot-check/issues",
+    "websiteURL": "https://github.com/conorbronsdon/ssot-check"
+  },
+  "keywords": [
+    "ssot-check",
+    "documentation"
+  ],
+  "license": "MIT",
+  "name": "ssot-check",
+  "repository": "https://github.com/conorbronsdon/ssot-check",
+  "skills": "./skills/",
+  "version": "0.1.4"
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Fintech Security and Compliance"
+  short_description: "Constrain financial trust and data scope"
+  default_prompt: "Use $go-fintech-security-compliance to engineer this Go fintech trust boundary."
+policy:
+  allow_implicit_invocation: true

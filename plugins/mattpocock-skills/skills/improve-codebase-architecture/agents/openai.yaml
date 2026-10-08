@@ -1,0 +1,9 @@
+interface:
+  display_name: Improve Codebase Architecture
+  short_description: Find and examine architecture improvements
+  default_prompt: Use $improve-codebase-architecture for this task
+policy:
+  allow_implicit_invocation: false
+  products:
+  - CHAT
+  - CODEX

@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "pluginVersion": "0.1.43",
+  "downstreamQualification": {
+    "issue": "LSC-109",
+    "url": "https://linear.app/openai/issue/LSC-109/sequence-and-alignment-viewer-qualify-every-refreshed-starter-example",
+    "lastQualifiedPluginVersion": "0.1.26",
+    "qualificationComplete": false,
+    "status": "pending",
+    "qualificationReport": "LSC_109_QUALIFICATION.md",
+    "qualificationRecord": "lsc-109-qualification.json"
+  },
+  "examples": [
+    {
+      "id": "ena-drr037765-first-500",
+      "prompt": "Fetch ENA DRR037765 first 500 reads to active workspace; open and report live length range, GC, Q30, and subset provenance",
+      "area": "Sequence",
+      "source": {
+        "database": "ENA",
+        "stableIdentifiers": [
+          "DRR037765",
+          "DRR037765.fastq.gz@md5:81735432a6f578b332aae58cdbd95231"
+        ],
+        "officialEndpoints": [
+          "https://www.ebi.ac.uk/ena/portal/api/filereport",
+          "https://ftp.sra.ebi.ac.uk/vol1/fastq/DRR037/DRR037765/DRR037765.fastq.gz"
+        ],
+        "optionalSkill": "Life Science Research may retrieve or confirm ENA/SRA metadata; Codex verifies and saves only the official endpoint responses with its authorized workspace tools"
+      },
+      "bounds": {
+        "metadataBytes": 262144,
+        "compressedBytes": 16777216,
+        "decodedBytes": 67108864,
+        "sourceRecords": 967,
+        "selectedRecords": 500,
+        "selectionRule": "first 500 complete parsed FASTQ records in source order, canonical four-line FASTQ",
+        "liveTimeoutSeconds": 60
+      },
+      "viewer": {
+        "viewerCount": 1,
+        "sessionCount": 1,
+        "mode": "sequence",
+        "visibleState": [
+          "FASTQ overview",
+          "500 reads",
+          "read length, GC, and Q30 values from live viewer context"
+        ]
+      },
+      "workflow": {
+        "acquisitionOwner": "codex",
+        "acquisitionMethod": "host-authorized-research-and-workspace-tools",
+        "openTool": "sequence.open_from_chat",
+        "operations": ["read the mounted FASTQ summary from live viewer state"],
+        "scientificQuestion": "Are the bounded real amplicon reads length-uniform and high quality?"
+      },
+      "expectedResults": {
+        "readCount": 500,
+        "totalBases": 235490,
+        "readLengthMin": 469,
+        "readLengthMax": 471,
+        "gcPercent": 28.8462355,
+        "q30Percent": 95.3976814,
+        "displayGcPercent": "28.8%",
+        "displayQ30Percent": "95.4%",
+        "artifactByteLength": 480372,
+        "artifactSha256": "46bd72991d9c9c2bf64751e88e52548d852d5fa021da4815ee6f6517a51b18b9"
+      },
+      "artifacts": {
+        "source": "codex-viewer-examples/DRR037765-first-500.fastq",
+        "sourceProvenance": "codex-viewer-examples/DRR037765-first-500.fastq.provenance.json",
+        "sourceProvenanceOwner": "codex",
+        "derived": null
+      },
+      "failureBehavior": [
+        "Codex host network, rate-limit, metadata-shape, filename, byte-count, MD5, gzip, parser, subset, quota, cancellation, or authorized-workspace failures open no viewer",
+        "never use a bundled or synthetic fallback",
+        "a changed authoritative MD5 is source drift requiring review"
+      ],
+      "acceptableVariability": [
+        "retrieval timestamp and HTTP cache metadata",
+        "collision-safe source filename suffix on a non-clean workspace"
+      ],
+      "tests": [
+        "src/public-example-acquisition.test.ts",
+        "src/public-example-acquisition.live.test.ts",
+        "e2e/public-starter-evidence.spec.ts"
+      ]
+    },
+    {
+      "id": "uniprot-human-ras-sv1",
+      "prompt": "Fetch UniProt P01116/P01111/P01112 alignment; map conserved motifs to KRAS, compute distances/tree, publish Newick to workspace",
+      "area": "Alignment",
+      "source": {
+        "database": "UniProtKB",
+        "stableIdentifiers": ["P01116@SV1", "P01111@SV1", "P01112@SV1"],
+        "officialEndpoints": [
+          "https://rest.uniprot.org/uniprotkb/P01116.fasta",
+          "https://rest.uniprot.org/uniprotkb/P01111.fasta",
+          "https://rest.uniprot.org/uniprotkb/P01112.fasta"
+        ],
+        "optionalSkill": "UniProt skill may retrieve or confirm reviewed entry metadata; Codex verifies only the fixed official FASTA responses and builds the pinned fixed-order center-star-compatible alignment with its authorized workspace tools before opening"
+      },
+      "bounds": {
+        "responseBytesPerRecord": 32768,
+        "recordCount": 3,
+        "residuesPerRecord": 189,
+        "alignmentEngine": "builtin-center-star",
+        "alignmentDynamicProgrammingCells": 72200,
+        "alignedColumns": 191,
+        "treeRows": 3,
+        "liveTimeoutSeconds": 60
+      },
+      "viewer": {
+        "viewerCount": 1,
+        "sessionCount": 1,
+        "mode": "alignment",
+        "visibleState": [
+          "three-row, 191-column aligned FASTA",
+          "P01116 KRAS as active reference",
+          "reference-coordinate mapping and conservation",
+          "distance matrix and graphical neighbor-joining tree"
+        ]
+      },
+      "workflow": {
+        "acquisitionOwner": "codex",
+        "acquisitionMethod": "host-authorized-research-and-workspace-tools",
+        "openTool": "sequence.open_from_chat",
+        "operations": [
+          "sequence.control_viewer set_alignment_reference P01116",
+          "map KRAS reference residues 10-17, 30-38, 60-76, and 116-119",
+          "sequence.run_analysis distance-matrix",
+          "sequence.run_analysis build-tree neighbor-joining",
+          "Codex writes verified Newick and an accurately attributed provenance receipt to its authorized workspace; plugin publication requires independently authenticated roots"
+        ],
+        "scientificQuestion": "Which GTPase-core motifs are conserved across human RAS paralogs, and where does the hypervariable tail diverge?"
+      },
+      "expectedResults": {
+        "artifactByteLength": 786,
+        "artifactSha256": "cb32dd89ca7855f7666fbdf3f2ff926f935b1dbc9e7f57573f884dda7e59c68f",
+        "reference": "P01116",
+        "motifs": [
+          "P-loop KRAS 10-17 GAGGVGKS",
+          "switch I KRAS 30-38 DEYDPTIED",
+          "switch II KRAS 60-76 GQEEYSAMRDQYMRTGE",
+          "NKXD region KRAS 116-119 NKCD"
+        ],
+        "caaxTails": {
+          "P01116": "CIIM",
+          "P01111": "CVVM",
+          "P01112": "CVLS"
+        },
+        "pDistances": {
+          "P01116/P01111": 0.1315789474,
+          "P01116/P01112": 0.1368421053,
+          "P01111/P01112": 0.1578947368
+        },
+        "treeLeaves": ["P01116", "P01111", "P01112"],
+        "treeNewick": "('P01116':0.027632,('P01111':0.076316,'P01112':0.081579):0.027632);",
+        "treeInterpretation": "exploratory uncorrected p-distance guide tree; do not interpret the three-leaf topology as a publication phylogeny"
+      },
+      "artifacts": {
+        "source": "codex-viewer-examples/human-RAS-UniProt-SV1.aln-fasta",
+        "sourceProvenance": "codex-viewer-examples/human-RAS-UniProt-SV1.aln-fasta.provenance.json",
+        "sourceProvenanceOwner": "codex",
+        "derived": {
+          "format": "newick",
+          "destination": {
+            "kind": "workspace",
+            "writer": "codex",
+            "base": "opened-source",
+            "relativePath": "RAS-P01116-P01111-P01112-NJ.nwk"
+          },
+          "output": "codex-viewer-examples/RAS-P01116-P01111-P01112-NJ.nwk",
+          "provenance": "codex-viewer-examples/RAS-P01116-P01111-P01112-NJ.nwk.provenance.json",
+          "requiredProvenance": [
+            "sequence-viewer-guide-tree-v1 engine, neighbor-joining algorithm, uncorrected-p-distance model, row identity, and exploratory warning",
+            "accurately attributed Codex-authored receipt and verified live viewer analysis result",
+            "source workspace path and SHA-256",
+            "output SHA-256 and byte length"
+          ]
+        }
+      },
+      "failureBehavior": [
+        "Codex host network, rate-limit, accession/header, sequence-version, digest, length, protein-motif, alignment, parser, cancellation, or authorized-workspace failures open no viewer",
+        "Codex workspace Newick publication is create-new and never overwrites an existing output or accurately attributed receipt; plugin publication fails closed without authenticated roots",
+        "never substitute Rfam, synthetic sequences, or an assumed workspace file"
+      ],
+      "acceptableVariability": [
+        "retrieval timestamp and HTTP cache metadata",
+        "collision-safe acquired-source filename suffix on a non-clean workspace",
+        "equivalent Newick child ordering and display layout with the same leaf set and distances"
+      ],
+      "tests": [
+        "src/public-example-acquisition.test.ts",
+        "src/public-example-acquisition.live.test.ts",
+        "src/msa/analysis.test.ts",
+        "src/msa/guide-tree.test.ts",
+        "src/workspace-export-publisher.test.ts",
+        "e2e/public-starter-evidence.spec.ts"
+      ]
+    },
+    {
+      "id": "ncbi-nc-001416-1",
+      "prompt": "Fetch NCBI NC_001416.1 to active workspace; open it, map cI to OR1–OR3, and translate cI with code 11",
+      "area": "Sequence",
+      "source": {
+        "database": "NCBI Nuccore",
+        "stableIdentifiers": ["NC_001416.1", "NP_040628.1"],
+        "officialEndpoints": [
+          "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+        ],
+        "optionalSkill": "NCBI Entrez skill may retrieve or confirm metadata; Codex verifies and saves only the fixed official EFetch response with its authorized workspace tools"
+      },
+      "bounds": {
+        "responseBytes": 2097152,
+        "recordCount": 1,
+        "residueCount": 48502,
+        "liveTimeoutSeconds": 60
+      },
+      "viewer": {
+        "viewerCount": 1,
+        "sessionCount": 1,
+        "mode": "sequence",
+        "visibleState": [
+          "NC_001416.1 metadata and 48,502-base sequence",
+          "cI CDS pinned on the reverse strand",
+          "OR3, OR2, and OR1 regulatory annotations",
+          "completed code-11 reverse-frame translation job"
+        ]
+      },
+      "workflow": {
+        "acquisitionOwner": "codex",
+        "acquisitionMethod": "host-authorized-research-and-workspace-tools",
+        "openTool": "sequence.open_from_chat",
+        "operations": [
+          "sequence.control_viewer select_sequence_feature cI CDS",
+          "query exact cI and operator annotations",
+          "sequence.run_analysis translate start 37227 end 37940 frame -1 geneticCodeId 11"
+        ],
+        "scientificQuestion": "How is the lambda cI repressor CDS oriented relative to OR1-OR3, and does code-aware translation reproduce its annotated protein?"
+      },
+      "expectedResults": {
+        "sequenceLength": 48502,
+        "ci": {
+          "location": "complement(37227..37940)",
+          "start": 37227,
+          "end": 37940,
+          "strand": "-",
+          "geneticCodeId": 11,
+          "proteinAccession": "NP_040628.1",
+          "aminoAcids": 237,
+          "codingSequenceSha256": "a51dec784e51f85a35d643a84820c89430b526cd9bf54a398b91c70045cc62e8",
+          "proteinSha256": "ec5d954fd10be8c19c920e78badc5d9e9cc281f6801e2c5fde3803c9f133f580"
+        },
+        "operators": {
+          "OR3": "37951..37967",
+          "OR2": "37974..37990",
+          "OR1": "37998..38014"
+        },
+        "artifactBaselineSha256": "3c624302adeeb3c00649f549903ab781b9e75bab16069ae655833d536407367f"
+      },
+      "artifacts": {
+        "source": "codex-viewer-examples/NC_001416.1.gb",
+        "sourceProvenance": "codex-viewer-examples/NC_001416.1.gb.provenance.json",
+        "sourceProvenanceOwner": "codex",
+        "derived": null
+      },
+      "failureBehavior": [
+        "Codex host network, rate-limit, accession.version, record completeness, length, cI/operator annotation, parser, size, cancellation, or authorized-workspace failures open no viewer",
+        "never infer or fabricate a missing feature and never use a bundled fallback"
+      ],
+      "acceptableVariability": [
+        "retrieval timestamp, HTTP cache metadata, and GenBank annotation serialization",
+        "collision-safe source filename suffix on a non-clean workspace"
+      ],
+      "tests": [
+        "src/public-example-acquisition.test.ts",
+        "src/public-example-acquisition.live.test.ts",
+        "src/sequence/feature-location.test.ts",
+        "src/sequence/translation.test.ts",
+        "e2e/public-starter-evidence.spec.ts"
+      ]
+    }
+  ],
+  "capabilityMatrix": [
+    {
+      "area": "Sequence",
+      "capability": "annotated record, exact compound feature, reference-space mapping, and genetic-code-aware translation",
+      "exampleIds": ["ncbi-nc-001416-1"],
+      "expectedState": "NC_001416.1 in Sequence mode with cI and OR1-OR3 visible; code-11 reverse-frame translation completes",
+      "artifactProvenance": "versioned NCBI record and accurately attributed Codex-authored SHA-256 receipt",
+      "failureBehavior": "identity or annotation drift fails before a viewer opens",
+      "tests": [
+        "public acquisition unit/live tests",
+        "sequence translation and feature-location tests",
+        "installed-host starter evidence"
+      ]
+    },
+    {
+      "area": "Sequence",
+      "capability": "real-read FASTQ quality summary with deterministic bounded selection",
+      "exampleIds": ["ena-drr037765-first-500"],
+      "expectedState": "500-read FASTQ overview with live length range, GC, and Q30",
+      "artifactProvenance": "Codex-authored receipt recording ENA filename, byte count, MD5, subset rule, and canonical artifact SHA-256",
+      "failureBehavior": "metadata, checksum, parse, or subset drift fails before a viewer opens",
+      "tests": [
+        "public acquisition unit/live tests",
+        "installed-host starter evidence"
+      ]
+    },
+    {
+      "area": "Alignment",
+      "capability": "multiple real protein records, bounded deterministic alignment, reference mapping, conservation, distance matrix, and graphical NJ tree",
+      "exampleIds": ["uniprot-human-ras-sv1"],
+      "expectedState": "three-row 191-column Alignment mode with P01116 reference and conserved-core/divergent-tail comparison",
+      "artifactProvenance": "Codex-authored receipt recording three UniProt response/sequence digests, the accurately identified host center-star-compatible algorithm and scores, and the pinned aligned artifact SHA-256",
+      "failureBehavior": "source, version, sequence, motif, engine, or alignment drift fails before a viewer opens",
+      "tests": [
+        "public acquisition unit/live tests",
+        "MSA analysis/tree tests",
+        "installed-host starter evidence"
+      ]
+    },
+    {
+      "area": "Shared",
+      "capability": "Codex-host official-endpoint acquisition, accurately attributed workspace provenance, exact absolute-path opening, opaque handle, and exactly one viewer/session",
+      "exampleIds": [
+        "ena-drr037765-first-500",
+        "uniprot-human-ras-sv1",
+        "ncbi-nc-001416-1"
+      ],
+      "expectedState": "authorized Codex-host download, one sequence.open_from_chat call with the exact absolute path, one opaque resource read, one card, and one active session",
+      "artifactProvenance": "Codex-authored workspace artifact and provenance receipt; the embedded app receives only an opaque resource, never a filesystem path",
+      "failureBehavior": "retrieval or source-validation failures open no viewer; plugin-managed acquisition and publication fail closed without independently authenticated roots",
+      "tests": [
+        "host-managed acquisition, rootless absolute-path opening, and authenticated-session/race tests",
+        "public bundle validator",
+        "installed-host starter evidence"
+      ]
+    },
+    {
+      "area": "Output",
+      "capability": "Codex-authored create-new workspace Newick from a verified live analysis; plugin-managed publication only with independently authenticated roots",
+      "exampleIds": ["uniprot-human-ras-sv1"],
+      "expectedState": "valid Newick and accurately attributed Codex-authored provenance receipt saved beside the opened alignment",
+      "artifactProvenance": "verified live tree engine/parameters, source path/hash, output byte length/hash, and Codex receipt authorship",
+      "failureBehavior": "collision, containment, quota, disk, cancellation, or race never overwrites source or prior output; rootless plugin-managed publication fails closed",
+      "tests": [
+        "workspace export publisher and persistence tests",
+        "installed-host RAS starter evidence"
+      ]
+    },
+    {
+      "area": "Not selected",
+      "capability": "edit-copy, annotations mutation, primer design, evidence/index/reference browser, large indexed input, and durable session restoration",
+      "exampleIds": [],
+      "expectedState": "covered by focused regression suites, not overloaded into the three concise starters",
+      "artifactProvenance": "existing feature-specific contracts",
+      "failureBehavior": "unchanged existing safety and integrity behavior",
+      "tests": [
+        "editing, annotation, primer, workspace-track, indexed-input, Save As, and session suites"
+      ]
+    }
+  ],
+  "evaluatedAlternatives": [
+    {
+      "candidate": "Rfam RF00360@15.1:seed",
+      "decision": "retain as a supported catalog acquisition but remove from the default portfolio",
+      "reason": "secure and compact at 9x132, but the snoZ107/R87 family is obscure and its C/D-box conservation requires more nuance than the former prompt conveyed"
+    },
+    {
+      "candidate": "Rfam RF00008@15.1:seed",
+      "decision": "not selected",
+      "reason": "iconic and bounded at 85x85, but the reviewed UniProt RAS trio adds protein breadth and a clearer conserved-core versus divergent-tail question"
+    },
+    {
+      "candidate": "Rfam RF00005 tRNA and RF00177 bacterial SSU",
+      "decision": "not selected",
+      "reason": "their 954-row and 99x1980 seed alignments respectively are too dense for a reliable concise starter tree workflow"
+    }
+  ]
+}

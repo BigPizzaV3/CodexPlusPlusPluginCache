@@ -1,0 +1,48 @@
+{
+  "author": {
+    "name": "battle-doll",
+    "url": "https://github.com/battle-doll"
+  },
+  "description": "Hear private, offline voice alerts when Codex needs attention or finishes work on macOS and Windows.",
+  "homepage": "https://github.com/battle-doll/codex-voice-notify#readme",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "brandColor": "#7257D5",
+    "brandColorDark": "#7257D5",
+    "capabilities": [
+      "Offline audio",
+      "Lifecycle hooks",
+      "Guided first-time setup",
+      "Voice settings",
+      "macOS and Windows"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Set up Voice Notify with the female Korean voice, then open a new Codex CLI terminal so I can review /hooks.",
+      "Tell me aloud when Codex needs permission or finishes, using the male English voice.",
+      "Test the Stop alert, then mute all Voice Notify alerts."
+    ],
+    "developerName": "battle-doll",
+    "displayName": "Voice Notify for Codex",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Hear private, offline voice alerts when Codex needs permission, starts or stops a subagent, compacts context, or finishes work on macOS and Windows. Use guided setup; choose a female or male voice in Korean, Japanese, English, Russian, or Simplified Chinese; select lifecycle events; test playback; or mute alerts. Audio stays local and conversation content is never retained or sent. This plugin is not for general text-to-speech, narration, speech transcription, cloud notifications, arbitrary OS audio automation, screenshot action extraction, or silent installation and hook-trust bypass.",
+    "privacyPolicyURL": "https://github.com/battle-doll/codex-voice-notify/blob/main/PRIVACY.md",
+    "shortDescription": "Private offline Codex alerts",
+    "supportURL": "https://github.com/battle-doll/codex-voice-notify/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/battle-doll/codex-voice-notify/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/battle-doll/codex-voice-notify"
+  },
+  "keywords": [
+    "codex",
+    "notifications",
+    "voice",
+    "offline",
+    "hooks"
+  ],
+  "license": "MIT",
+  "name": "codex-voice-notify",
+  "repository": "https://github.com/battle-doll/codex-voice-notify",
+  "skills": "./skills/",
+  "version": "0.1.7"
+}

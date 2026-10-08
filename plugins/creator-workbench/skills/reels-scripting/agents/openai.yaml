@@ -1,0 +1,7 @@
+interface:
+  display_name: Reels Scripting
+  short_description: Write and reverse-engineer short-form scripts
+  brand_color: '#E45B32'
+  default_prompt: Use $reels-scripting to turn this source into a short-form video script.
+policy:
+  allow_implicit_invocation: true

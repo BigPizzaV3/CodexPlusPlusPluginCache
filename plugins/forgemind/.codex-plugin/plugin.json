@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "Reiner Weisssieker",
+    "url": "https://aivana-gmbh.ai/"
+  },
+  "description": "Evidence-first product discovery and delivery for Codex: market-tested MVPs, safe execution, and release-ready proof.",
+  "homepage": "https://aivana-gmbh.ai/",
+  "interface": {
+    "brandColor": "#2563EB",
+    "brandColorDark": "#2563EB",
+    "capabilities": [
+      "Product Strategy",
+      "Creative Intelligence",
+      "Automation",
+      "Code Review",
+      "Release Readiness"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Turn this outcome into an evidence-backed MVP plan and next safe action."
+    ],
+    "developerName": "Reiner Weisssieker",
+    "displayName": "ForgeMind",
+    "logo": "./.codex-plugin/assets/logo.jpg",
+    "longDescription": "ForgeMind Core turns discovery, creative exploration, existing-app evidence, and product intent into market-tested MVPs and safe, cost-aware delivery with verifiable release proof. Install the optional ForgeMind Trust Fabric add-on for cross-agent contracts, strategy, learning, and advanced evidence workflows.",
+    "privacyPolicyURL": "https://aivana-gmbh.ai/Privacy",
+    "shortDescription": "Verified MVP delivery",
+    "supportURL": "https://github.com/rweisssieker-xp/RW-Forgemind-Codex-Plugin/issues",
+    "termsOfServiceURL": "https://aivana-gmbh.ai/Terms",
+    "websiteURL": "https://aivana-gmbh.ai/"
+  },
+  "keywords": [
+    "codex",
+    "product-strategy",
+    "mvp",
+    "delivery",
+    "verification"
+  ],
+  "license": "MIT",
+  "name": "forgemind",
+  "repository": "https://github.com/rweisssieker-xp/RW-Forgemind-Codex-Plugin",
+  "skills": "./skills/",
+  "version": "1.47.0+codex.20260828063918"
+}

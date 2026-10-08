@@ -1,0 +1,70 @@
+{
+  "description": "Register silent task activity and subagent lifecycle hints for one local Chronos Governor without reading transcripts or adding model context.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -NoProfile -NonInteractive -File \"$PLUGIN_ROOT/skills/chronos/scripts/hook-intake.ps1\"",
+            "commandWindows": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQAnADsAIAAmACAAKABKAG8AaQBuAC0AUABhAHQAaAAgACQAZQBuAHYAOgBQAEwAVQBHAEkATgBfAFIATwBPAFQAIAAnAHMAawBpAGwAbABzAFwAYwBoAHIAbwBuAG8AcwBcAHMAYwByAGkAcAB0AHMAXABoAG8AbwBrAC0AaQBuAHQAYQBrAGUALgBwAHMAMQAnACkA",
+            "async": true,
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -NoProfile -NonInteractive -File \"$PLUGIN_ROOT/skills/chronos/scripts/hook-intake.ps1\"",
+            "commandWindows": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQAnADsAIAAmACAAKABKAG8AaQBuAC0AUABhAHQAaAAgACQAZQBuAHYAOgBQAEwAVQBHAEkATgBfAFIATwBPAFQAIAAnAHMAawBpAGwAbABzAFwAYwBoAHIAbwBuAG8AcwBcAHMAYwByAGkAcAB0AHMAXABoAG8AbwBrAC0AaQBuAHQAYQBrAGUALgBwAHMAMQAnACkA",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -NoProfile -NonInteractive -File \"$PLUGIN_ROOT/skills/chronos/scripts/hook-intake.ps1\"",
+            "commandWindows": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQAnADsAIAAmACAAKABKAG8AaQBuAC0AUABhAHQAaAAgACQAZQBuAHYAOgBQAEwAVQBHAEkATgBfAFIATwBPAFQAIAAnAHMAawBpAGwAbABzAFwAYwBoAHIAbwBuAG8AcwBcAHMAYwByAGkAcAB0AHMAXABoAG8AbwBrAC0AaQBuAHQAYQBrAGUALgBwAHMAMQAnACkA",
+            "async": true,
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -NoProfile -NonInteractive -File \"$PLUGIN_ROOT/skills/chronos/scripts/hook-intake.ps1\"",
+            "commandWindows": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQAnADsAIAAmACAAKABKAG8AaQBuAC0AUABhAHQAaAAgACQAZQBuAHYAOgBQAEwAVQBHAEkATgBfAFIATwBPAFQAIAAnAHMAawBpAGwAbABzAFwAYwBoAHIAbwBuAG8AcwBcAHMAYwByAGkAcAB0AHMAXABoAG8AbwBrAC0AaQBuAHQAYQBrAGUALgBwAHMAMQAnACkA",
+            "async": true,
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pwsh -NoProfile -NonInteractive -File \"$PLUGIN_ROOT/skills/chronos/scripts/hook-intake.ps1\"",
+            "commandWindows": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand JABQAHIAbwBnAHIAZQBzAHMAUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQAnADsAIAAmACAAKABKAG8AaQBuAC0AUABhAHQAaAAgACQAZQBuAHYAOgBQAEwAVQBHAEkATgBfAFIATwBPAFQAIAAnAHMAawBpAGwAbABzAFwAYwBoAHIAbwBuAG8AcwBcAHMAYwByAGkAcAB0AHMAXABoAG8AbwBrAC0AaQBuAHQAYQBrAGUALgBwAHMAMQAnACkA",
+            "async": true,
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

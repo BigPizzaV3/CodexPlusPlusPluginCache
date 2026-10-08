@@ -1,0 +1,6 @@
+interface:
+  display_name: "Usage"
+  short_description: "Check usage through a connected Remote host"
+  default_prompt: "Use $usage to check my current account usage from this connected Remote host."
+policy:
+  allow_implicit_invocation: true

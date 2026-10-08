@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Verify Security Fix"
+  short_description: "Verify fixes with exploit-focused regression tests"
+  default_prompt: "Use $tahr-verify-security-fix to prove this security fix closes the vulnerable path without breaking legitimate behavior."

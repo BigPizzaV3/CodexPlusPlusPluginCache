@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uniform for Next.js App Router"
+  short_description: "Integrate Uniform with Next.js App Router"
+  default_prompt: "Add Uniform with $uniform-nextjs-app-router"

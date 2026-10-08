@@ -1,0 +1,35 @@
+{
+  "author": {
+    "name": "Saul Mart\u00ed"
+  },
+  "description": "Uses the real vendored Impeccable workflow. Specialized for production hardening of error states, overflow, internationalization, unusual content, and interface edge cases.",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "brandColor": "#22C55E",
+    "brandColorDark": "#3ADD76",
+    "capabilities": [
+      "Harden UI edge cases"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Harden this UI for production edge cases",
+      "Check this interface for overflow errors and unusual content",
+      "Make these forms resilient to errors and localization"
+    ],
+    "developerName": "Saul Mart\u00ed",
+    "displayName": "HardenUI",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Uses the real vendored Impeccable workflow. Specialized for production hardening of error states, overflow, internationalization, unusual content, and interface edge cases.",
+    "shortDescription": "Harden UI edge cases"
+  },
+  "keywords": [
+    "engineering-suite",
+    "harden-ui",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "engineering-suite-harden-ui",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

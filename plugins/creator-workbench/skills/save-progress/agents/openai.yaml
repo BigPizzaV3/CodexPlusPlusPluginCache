@@ -1,0 +1,7 @@
+interface:
+  display_name: Save Progress
+  short_description: Save explicit corrections and project state
+  brand_color: '#E45B32'
+  default_prompt: Use $save-progress to save the explicit corrections and project state from this session.
+policy:
+  allow_implicit_invocation: true

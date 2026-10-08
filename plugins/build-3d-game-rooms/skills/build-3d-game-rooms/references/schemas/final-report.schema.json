@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "game-room.room-final-report.v1",
+  "type": "object",
+  "required": ["schema", "roomId", "gates", "formChecks", "reviewRenders", "runtimeChecks", "postmortem", "proposedLessons"],
+  "properties": {
+    "schema": {"const": "game-room.room-final-report.v1"},
+    "roomId": {"type": "string", "minLength": 1},
+    "gates": {"type": "object", "required": ["function", "form", "runtime"]},
+    "formChecks": {"type": "object", "required": ["floorPlanParity", "primaryArrival", "symmetry", "shell", "manifold", "booleans", "collisions", "support", "attachmentOrientation", "ceilingAttachmentOrientation", "seatingOrientation", "focalDistribution", "heroClearance", "colonnades", "screenClearance", "scale", "camera", "ceilingCoverage", "environmentCoverage", "provenance"]},
+    "reviewRenders": {"type": "object", "required": ["corners", "ceiling", "environment"], "properties": {"corners": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "string"}}, "ceiling": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "string"}}, "environment": {"type": "object"}}},
+    "runtimeChecks": {"type": "object", "required": ["vlow", "textureTiers", "lightmap", "lightingManifest", "performance", "browserCapture", "errors"]},
+    "postmortem": {"type": "object", "required": ["observations", "corrections", "remainingRisks"]},
+    "proposedLessons": {"type": "array", "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,87 @@
+schema_version: 3
+
+user_policy:
+  context_mode: ask
+  model_mode: ask
+
+presentation:
+  default: compact
+  detailed_on_request: true
+  # Compatibility key: keep conversation advice visible, without a separate window field.
+  keep_window_answer_visible: true
+
+interaction:
+  ask_before_change: true
+  retain_requires_confirmation: false
+  defer_requires_confirmation: material_blocker_only
+  continuation_requires_task_authorization: true
+
+environment_detection:
+  first_use: load_snapshot_then_detect_missing_or_stale
+  each_routing_gate: lightweight_freshness_check
+  cache_is_authoritative: false
+  persist_to: host_or_user_settings
+  invalidate_on:
+    - surface_change
+    - new_session
+    - host_or_plugin_update
+    - permission_change
+    - available_tools_change
+    - model_catalog_change
+    - previous_automatic_action_failure
+
+model_catalog:
+  source_precedence:
+    - runtime_metadata
+    - user_provided
+    - versioned_expiring_fallback
+  cache_scope: session_or_host_defined_short_ttl
+  current_configuration_is_separate: true
+  static_names_are_authoritative: false
+  bundled_fallback_registries:
+    openai: shared/model-catalogs/openai-codex-cli.json
+    gemini-cli: shared/model-catalogs/gemini-cli.json
+  fallback_can_suggest_but_not_verify_availability: true
+
+recommendation:
+  require_minimum_sufficient_setting: true
+  require_recommended_setting: true
+  upgrade_value_scale:
+    - low
+    - medium
+    - high
+  prefer_lowest_effort_that_meets_requirements: true
+  require_switch_assessment: true
+
+switching:
+  granularity: meaningful_phase_boundary
+  prefer_stickiness_when_suitable: true
+  quality_floor_overrides_stickiness: true
+  unknown_cost_is_zero: false
+  automatic_change_requires: justified_switch
+  observations_scope: session_only
+
+discovery:
+  guide: host-discovery.md
+  probe_timeout_seconds: 15
+  maximum_probe_timeout_seconds: 30
+  current_values_require_matching_scope: true
+  persisted_settings_are_live: false
+  unknown_does_not_skip_task_requirements: true
+  permission_escalation:
+    recommendation_default: fallback_without_prompt
+    ask_after_user_challenge: true
+    requires_matching_surface_read_path: true
+    maximum_requests_per_unchanged_condition: 1
+    after_decline: continue_with_fallback
+
+capability_evidence:
+  official_docs_establish_account_availability: false
+  reference_max_age_days: 7
+  task_evaluations_preferred_when_relevant: true
+
+execution:
+  resolve_each_operation_separately: true
+  unknown_capability: user_only
+  claim_applied_only_after_verification: true
+  combine_pending_questions: true

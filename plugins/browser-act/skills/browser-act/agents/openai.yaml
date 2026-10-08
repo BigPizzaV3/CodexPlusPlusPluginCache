@@ -1,0 +1,4 @@
+interface:
+  display_name: "BrowserAct"
+  short_description: "Browser automation through the BrowserAct CLI"
+  default_prompt: "Use $browser-act to automate a browser task with the BrowserAct CLI."

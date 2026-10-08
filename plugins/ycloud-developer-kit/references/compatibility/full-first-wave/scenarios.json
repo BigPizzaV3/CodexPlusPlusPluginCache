@@ -1,0 +1,131 @@
+{
+  "profile": "full-first-wave-v1",
+  "scenarios": [
+    {
+      "handoffs": [
+        {
+          "consumerOperationId": "whatsapp_message-retrieve",
+          "handoffId": "auth-message",
+          "producerOperationId": "crosscutting:api-authentication"
+        },
+        {
+          "consumerOperationId": "whatsapp_media-upload",
+          "handoffId": "auth-media",
+          "producerOperationId": "crosscutting:api-authentication"
+        },
+        {
+          "consumerOperationId": "whatsapp_template-list",
+          "handoffId": "auth-template",
+          "producerOperationId": "crosscutting:api-authentication"
+        },
+        {
+          "consumerOperationId": "webhook_endpoint-list",
+          "handoffId": "auth-endpoint",
+          "producerOperationId": "crosscutting:api-authentication"
+        }
+      ],
+      "requiredOperations": [
+        "crosscutting:api-authentication",
+        "whatsapp_message-retrieve",
+        "whatsapp_media-upload",
+        "whatsapp_template-list",
+        "webhook_endpoint-list"
+      ],
+      "scenarioId": "authentication-to-api-domains"
+    },
+    {
+      "handoffs": [
+        {
+          "consumerOperationId": "whatsapp_message-send-directly",
+          "handoffId": "media-direct-message",
+          "producerOperationId": "whatsapp_media-upload"
+        },
+        {
+          "consumerOperationId": "whatsapp_message-send",
+          "handoffId": "media-queued-message",
+          "producerOperationId": "whatsapp_media-upload"
+        }
+      ],
+      "requiredOperations": [
+        "whatsapp_media-upload",
+        "whatsapp_message-send-directly",
+        "whatsapp_message-send"
+      ],
+      "scenarioId": "media-upload-to-message-send"
+    },
+    {
+      "handoffs": [
+        {
+          "consumerOperationId": "whatsapp_template-retrieve-by-name-and-language",
+          "handoffId": "template-create-retrieve",
+          "producerOperationId": "whatsapp_template-create"
+        },
+        {
+          "consumerOperationId": "whatsapp_message-send-directly",
+          "handoffId": "template-direct-message",
+          "producerOperationId": "whatsapp_template-retrieve-by-name-and-language"
+        },
+        {
+          "consumerOperationId": "whatsapp_message-send",
+          "handoffId": "template-queued-message",
+          "producerOperationId": "whatsapp_template-retrieve-by-name-and-language"
+        }
+      ],
+      "requiredOperations": [
+        "whatsapp_template-create",
+        "whatsapp_template-retrieve-by-name-and-language",
+        "whatsapp_message-send-directly",
+        "whatsapp_message-send"
+      ],
+      "scenarioId": "template-lifecycle-to-message-send"
+    },
+    {
+      "handoffs": [
+        {
+          "consumerOperationId": "whatsapp_message-retrieve",
+          "handoffId": "direct-status",
+          "producerOperationId": "whatsapp_message-send-directly"
+        },
+        {
+          "consumerOperationId": "whatsapp_message-retrieve",
+          "handoffId": "queued-status",
+          "producerOperationId": "whatsapp_message-send"
+        }
+      ],
+      "requiredOperations": [
+        "whatsapp_message-send-directly",
+        "whatsapp_message-send",
+        "whatsapp_message-retrieve"
+      ],
+      "scenarioId": "message-accepted-to-final-status"
+    },
+    {
+      "handoffs": [
+        {
+          "consumerOperationId": "webhook_endpoint-retrieve",
+          "handoffId": "endpoint-create-retrieve",
+          "producerOperationId": "webhook_endpoint-create"
+        },
+        {
+          "consumerOperationId": "crosscutting:webhook-receiver",
+          "handoffId": "endpoint-update-receiver",
+          "producerOperationId": "webhook_endpoint-update"
+        },
+        {
+          "consumerOperationId": "crosscutting:webhook-receiver",
+          "handoffId": "secret-receiver",
+          "producerOperationId": "webhook_endpoint-rotate-secret"
+        }
+      ],
+      "requiredOperations": [
+        "webhook_endpoint-create",
+        "webhook_endpoint-retrieve",
+        "webhook_endpoint-update",
+        "webhook_endpoint-rotate-secret",
+        "crosscutting:webhook-receiver"
+      ],
+      "scenarioId": "endpoint-management-to-receiver"
+    }
+  ],
+  "schemaVersion": 1
+}

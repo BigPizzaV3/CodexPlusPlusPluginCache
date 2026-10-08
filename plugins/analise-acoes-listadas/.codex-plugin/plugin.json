@@ -1,0 +1,48 @@
+{
+  "author": {
+    "name": "RODOLFO SIQUEIRA ESTEVES",
+    "url": "https://github.com/estevesr"
+  },
+  "description": "Fluxo estruturado de pesquisa fundamentalista, forense e de valuation para companhias listadas, com documentos regulat\u00f3rios, resultados, pares, cen\u00e1rios e fontes rastre\u00e1veis.",
+  "homepage": "https://github.com/estevesr/analise-acoes-listadas",
+  "interface": {
+    "brandColor": "#075985",
+    "brandColorDark": "#7ACCF8",
+    "capabilities": [
+      "An\u00e1lise fundamentalista",
+      "Leitura de ITR e DFP",
+      "Valuation e cen\u00e1rios",
+      "An\u00e1lise forense de riscos",
+      "Compara\u00e7\u00e3o com concorrentes"
+    ],
+    "category": "Finance",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Analise uma a\u00e7\u00e3o listada com fontes recentes e cen\u00e1rios.",
+      "Leia os \u00faltimos ITR e DFP e explique a evolu\u00e7\u00e3o financeira.",
+      "Compare uma companhia com seus pares e modele o valuation."
+    ],
+    "developerName": "RODOLFO SIQUEIRA ESTEVES",
+    "displayName": "An\u00e1lise de A\u00e7\u00f5es Listadas",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Pesquise companhias listadas com um fluxo estruturado de an\u00e1lise fundamentalista, forense e de valuation. O plugin usa documentos regulat\u00f3rios, como ITR e DFP da CVM, demonstra\u00e7\u00f5es financeiras, teleconfer\u00eancias, dados de mercado e pares compar\u00e1veis para examinar modelo de neg\u00f3cios, desempenho, riscos, vantagem competitiva, gest\u00e3o, valuation, DCF, catalisadores e cen\u00e1rios. Se uma base licenciada for material e estiver acess\u00edvel, pergunta no in\u00edcio se h\u00e1 uma sess\u00e3o j\u00e1 autenticada e autorizada; nunca solicita credenciais. Separa fatos, declara\u00e7\u00f5es, consenso, c\u00e1lculos e premissas, registra limita\u00e7\u00f5es e cita fontes e datas. N\u00e3o executa ordens nem fornece recomenda\u00e7\u00e3o personalizada de compra, venda ou manuten\u00e7\u00e3o.",
+    "privacyPolicyURL": "https://github.com/estevesr/analise-acoes-listadas/blob/main/PRIVACY.md",
+    "shortDescription": "Pesquisa de a\u00e7\u00f5es listadas",
+    "supportURL": "https://github.com/estevesr/analise-acoes-listadas/issues",
+    "termsOfServiceURL": "https://github.com/estevesr/analise-acoes-listadas/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/estevesr/analise-acoes-listadas"
+  },
+  "keywords": [
+    "acoes",
+    "analise-fundamentalista",
+    "valuation",
+    "cvm",
+    "itr",
+    "dfp"
+  ],
+  "license": "MIT",
+  "name": "analise-acoes-listadas",
+  "repository": "https://github.com/estevesr/analise-acoes-listadas",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

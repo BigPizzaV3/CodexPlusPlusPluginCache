@@ -1,0 +1,5 @@
+interface:
+  display_name: Autonomous Forecast Agents
+  short_description: Multi-perspective forecasting
+policy:
+  allow_implicit_invocation: false

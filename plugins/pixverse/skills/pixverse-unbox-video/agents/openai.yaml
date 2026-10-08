@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Unboxing Video"
+  short_description: "Build a believable box reveal"
+  default_prompt: "Use $pixverse-unbox-video to create an unboxing video from this package and contents, making the product reveal the main moment."
+policy:
+  allow_implicit_invocation: true

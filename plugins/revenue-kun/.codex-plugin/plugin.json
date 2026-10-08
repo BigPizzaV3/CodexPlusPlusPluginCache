@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "Signal Yield Advisory / Koichi Matsuda",
+    "url": "https://signal-yield.github.io/revenue-kun/"
+  },
+  "description": "An Apache-2.0 local-first OSS tool that converts rent-roll CSV or text-based PDF files into a direct-capitalization Excel workbook.",
+  "homepage": "https://signal-yield.github.io/revenue-kun/",
+  "interface": {
+    "brandColor": "#1F6FEB",
+    "brandColorDark": "#1F6FEB",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "revenue-kun\u3092\u8d77\u52d5\u3057\u3066",
+      "\u30ec\u30f3\u30c8\u30ed\u30fc\u30ebCSV\u304b\u3089\u53ce\u76ca\u8a66\u7b97Excel\u3092\u4f5c\u6210\u3057\u3066",
+      "\u30c6\u30ad\u30b9\u30c8\u62bd\u51fa\u53ef\u80fd\u306a\u30ec\u30f3\u30c8\u30ed\u30fc\u30ebPDF\u304b\u3089\u53ce\u76ca\u8a66\u7b97Excel\u3092\u4f5c\u6210\u3057\u3066"
+    ],
+    "developerName": "Koichi Matsuda / Signal Yield Advisory",
+    "displayName": "revenue-kun",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Convert rent-roll CSV files and text-based PDFs into an inspectable direct-capitalization Excel workbook. revenue-kun previews extracted rent-roll rows and creates OER, detailed-expense, and extracted-rent-roll sheets for review and further analysis. It is an Apache-2.0, local-first OSS tool designed for real-estate practitioners. Files are processed locally and are not uploaded to a hosted service. OCR and scanned PDFs are not supported. Outputs are financial estimates, not appraisal, investment, legal, or tax advice.",
+    "privacyPolicyURL": "https://signal-yield.github.io/revenue-kun/privacy.html",
+    "shortDescription": "Turn rent rolls into Excel",
+    "supportURL": "https://signal-yield.github.io/revenue-kun/support.html",
+    "termsOfServiceURL": "https://signal-yield.github.io/revenue-kun/terms.html",
+    "websiteURL": "https://signal-yield.github.io/revenue-kun/"
+  },
+  "keywords": [
+    "real-estate",
+    "rent-roll",
+    "direct-capitalization",
+    "excel",
+    "local-first",
+    "japan"
+  ],
+  "license": "Apache-2.0",
+  "name": "revenue-kun",
+  "repository": "https://github.com/signal-yield/revenue-kun",
+  "skills": "./skills/",
+  "version": "0.5.2"
+}

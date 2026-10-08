@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Character Sheets"
+  short_description: "Build character reference art"
+  default_prompt: "Use $pixverse-character-sheet to create a reusable character sheet from this reference."
+policy:
+  allow_implicit_invocation: true

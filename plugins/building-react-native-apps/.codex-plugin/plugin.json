@@ -1,0 +1,42 @@
+{
+  "author": {
+    "email": "hello@callstack.com",
+    "name": "Callstack",
+    "url": "https://www.callstack.com/"
+  },
+  "description": "React Native implementation skills covering architecture, navigation, TV, libraries, performance, and upgrades.",
+  "homepage": "https://github.com/callstackincubator/agent-skills/tree/main/plugins/building-react-native-apps",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this React Native screen for architecture and performance issues.",
+      "Implement navigation, TV, or library changes using current React Native patterns.",
+      "Plan the upgrade path for this app to a newer React Native version."
+    ],
+    "developerName": "Callstack",
+    "displayName": "Building React Native Apps",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Build and maintain React Native apps with guidance for architecture, performance, navigation, TV platforms, reusable libraries, and version upgrades.",
+    "shortDescription": "Build and maintain RN apps",
+    "websiteURL": "https://github.com/callstackincubator/agent-skills/tree/main/plugins/building-react-native-apps"
+  },
+  "keywords": [
+    "react-native",
+    "navigation",
+    "performance",
+    "tv",
+    "libraries",
+    "upgrades",
+    "mobile"
+  ],
+  "license": "MIT",
+  "name": "building-react-native-apps",
+  "repository": "https://github.com/callstackincubator/agent-skills",
+  "skills": "./skills/",
+  "version": "0.2.0"
+}

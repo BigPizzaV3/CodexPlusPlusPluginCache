@@ -1,0 +1,48 @@
+{
+  "author": {
+    "email": "support@duendesoftware.com",
+    "name": "Duende Software",
+    "url": "https://duendesoftware.com"
+  },
+  "description": "Duende development skills and agents \u2014 covering OAuth/OIDC protocols, IdentityServer, token management, ASP.NET Core authentication/authorization, BFF patterns, and secure identity architecture",
+  "homepage": "https://github.com/DuendeSoftware/duende-skills",
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "My IdentityServer is deployed behind an nginx reverse proxy. How do I fix the wrong URL schema used?",
+      "Configure the IdentityServerOptions for my project. Also configure data protection for a multi-instance deployment.",
+      "Give me a complete checklist of everything I need to do to upgrade from IdentityServer v7.4 to the latest."
+    ],
+    "developerName": "Duende Software",
+    "displayName": "Duende Skills",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Specialized skills and agents covering Duende IdentityServer configuration, OAuth 2.0 / OpenID Connect protocols, ASP.NET Core authentication and authorization, BFF patterns, token management, SAML, key management, deployment, and security hardening.",
+    "privacyPolicyURL": "https://duendesoftware.com/privacy",
+    "shortDescription": "IdentityServer & OAuth skills",
+    "termsOfServiceURL": "https://duendesoftware.com/terms",
+    "websiteURL": "https://duendesoftware.com"
+  },
+  "keywords": [
+    "identityserver",
+    "oauth",
+    "oidc",
+    "openid-connect",
+    "aspnetcore",
+    "authentication",
+    "authorization",
+    "bff",
+    "token-management",
+    "duende",
+    "dotnet",
+    "security"
+  ],
+  "license": "MIT",
+  "name": "duende-skills",
+  "repository": "https://github.com/DuendeSoftware/duende-skills",
+  "skills": "./skills/",
+  "version": "0.3.0"
+}

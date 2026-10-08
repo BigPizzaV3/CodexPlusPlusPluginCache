@@ -1,0 +1,52 @@
+{
+  "author": {
+    "email": "suraj@presenton.ai",
+    "name": "Presenton",
+    "url": "https://presenton.ai"
+  },
+  "description": "Create professional, editable AI presentations with Presenton.",
+  "homepage": "https://presenton.ai",
+  "interface": {
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create a professional presentation with design from https://presenton.ai.",
+      "Turn this document into a polished presentation.",
+      "Crunch this number and create a report in my brand."
+    ],
+    "developerName": "Presenton",
+    "displayName": "Presenton",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Create professional presentations, pitch decks, business reports, educational decks, product presentations, and other slide-based content with Presenton. Generate structured presentations from prompts or source material, apply suitable visual design and layouts, and produce editable presentation outputs such as PowerPoint files.",
+    "privacyPolicyURL": "https://presenton.ai/privacy-policy",
+    "shortDescription": "Create editable presentations",
+    "supportURL": "https://presenton.ai/support",
+    "termsOfServiceURL": "https://presenton.ai/terms-and-conditions",
+    "websiteURL": "https://presenton.ai"
+  },
+  "keywords": [
+    "presentation",
+    "presentations",
+    "slides",
+    "slide-deck",
+    "powerpoint",
+    "pptx",
+    "pitch-deck",
+    "presentation-generator",
+    "ai-presentation",
+    "business-presentation",
+    "report-presentation",
+    "education-presentation",
+    "presenton"
+  ],
+  "license": "Apache-2.0",
+  "name": "presenton",
+  "repository": "https://github.com/presenton/skills",
+  "skills": "./skills/",
+  "version": "1.0.2"
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:style-profile-input:1",
+  "title": "note Workspace style profile input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "request_id", "approved_at", "approval_obtained",
+    "approval_scope", "status", "reason", "samples", "user_preferences",
+    "profile", "uncertainties"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "approved_at": {"type": "string", "format": "date-time"},
+    "approval_obtained": {"const": true},
+    "approval_scope": {"const": "save_style_profile_revision"},
+    "status": {"enum": ["provisional", "confirmed"]},
+    "reason": {"type": "string", "minLength": 1, "maxLength": 500},
+    "samples": {
+      "type": "array", "minItems": 1, "maxItems": 5,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["sample_id", "source_kind", "content_sha256", "character_count"],
+        "properties": {
+          "sample_id": {"type": "string", "pattern": "^sample-[a-z0-9][a-z0-9-]{2,63}$"},
+          "source_kind": {"enum": ["published_article", "draft", "writing_sample", "conversation_text"]},
+          "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "character_count": {"type": "integer", "minimum": 1, "maximum": 1000000}
+        }
+      }
+    },
+    "user_preferences": {
+      "type": "object", "additionalProperties": false,
+      "required": ["keep", "change", "variable"],
+      "properties": {
+        "keep": {"$ref": "#/$defs/shortList"},
+        "change": {"$ref": "#/$defs/shortList"},
+        "variable": {"$ref": "#/$defs/shortList"}
+      }
+    },
+    "profile": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "basic_voice", "rhythm", "opening", "headings", "specificity",
+        "preferred_expressions", "avoid_expressions", "per_article",
+        "never_invent"
+      ],
+      "properties": {
+        "basic_voice": {"$ref": "#/$defs/profileList"},
+        "rhythm": {"$ref": "#/$defs/profileList"},
+        "opening": {"$ref": "#/$defs/profileList"},
+        "headings": {"$ref": "#/$defs/profileList"},
+        "specificity": {"$ref": "#/$defs/profileList"},
+        "preferred_expressions": {"$ref": "#/$defs/profileList"},
+        "avoid_expressions": {"$ref": "#/$defs/profileList"},
+        "per_article": {"$ref": "#/$defs/profileList"},
+        "never_invent": {"$ref": "#/$defs/profileList"}
+      }
+    },
+    "uncertainties": {"$ref": "#/$defs/shortList"}
+  },
+  "$defs": {
+    "shortList": {
+      "type": "array", "minItems": 0, "maxItems": 12,
+      "items": {"type": "string", "minLength": 1, "maxLength": 240}
+    },
+    "profileList": {
+      "type": "array", "minItems": 1, "maxItems": 8,
+      "items": {"type": "string", "minLength": 1, "maxLength": 240}
+    }
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Go & Rust services"
+  short_description: "Concurrency and shutdown in Go and Rust services"
+  default_prompt: "Use $vibe-go-rust to audit the selected go & rust services boundary."

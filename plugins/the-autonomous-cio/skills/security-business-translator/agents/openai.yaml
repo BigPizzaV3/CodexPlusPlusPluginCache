@@ -1,0 +1,5 @@
+interface:
+  display_name: "Security Business Translator"
+  short_description: "Explicit-only."
+policy:
+  allow_implicit_invocation: false

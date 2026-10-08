@@ -1,0 +1,48 @@
+{
+  "name": "sequence-viewer",
+  "version": "0.1.43",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "bundle": "node ./scripts/bundle.mjs",
+    "check": "tsc --noEmit",
+    "smoke:formats": "node ./scripts/manual-format-smoke.mjs",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:large-workspace": "node ./scripts/run-opt-in-vitest.mjs SEQUENCE_VIEWER_LARGE_WORKSPACE_QUALIFICATION src/large-workspace-saveas.qualification.test.ts",
+    "test:public-examples-live": "node ./scripts/run-opt-in-vitest.mjs SEQUENCE_VIEWER_PUBLIC_EXAMPLES_LIVE src/public-example-acquisition.live.test.ts",
+    "test:starter-qualification": "node ./scripts/run-starter-qualification.mjs"
+  },
+  "dependencies": {
+    "@gmod/bam": "^7.2.4",
+    "@gmod/cram": "^8.2.6",
+    "@modelcontextprotocol/ext-apps": "^1.7.1",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@openai/scientific-viewer-platform": "file:../scientific-viewer-platform",
+    "clsx": "^2.1.1",
+    "generic-filehandle2": "^2.1.10",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-intl": "^7.1.11",
+    "tailwindcss": "^4.2.4",
+    "zod": "4.3.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
+    "@playwright/test": "^1.60.0",
+    "@tailwindcss/vite": "^4.2.4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^22.19.0",
+    "@types/react": "^19.2.6",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "esbuild": "^0.27.2",
+    "jsdom": "^27.4.0",
+    "typescript": "^5.9.3",
+    "vite": "8.0.0",
+    "vitest": "^4.0.18"
+  }
+}

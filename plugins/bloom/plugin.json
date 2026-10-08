@@ -1,0 +1,47 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "bloom",
+  "version": "1.0.0",
+  "description": "Connect your AI client to Bloom's design canvas using OAuth.",
+  "author": {
+    "name": "Bloom Labs",
+    "url": "https://bloom.diy"
+  },
+  "homepage": "https://docs.bloom.diy/connect-bloom-mcp",
+  "repository": "https://github.com/BloomLabsInc/bloom-mcp",
+  "license": "MIT",
+  "keywords": [
+    "bloom",
+    "canvas",
+    "design",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Bloom",
+        "shortDescription": "Design in Bloom",
+        "longDescription": "Connect your Bloom account with browser OAuth, inspect canvas work, make changes, and collaborate through comments. Bloom requires an account with early access.",
+        "developerName": "Bloom Labs",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://docs.bloom.diy/connect-bloom-mcp",
+        "privacyPolicyURL": "https://bloom.diy/privacy",
+        "termsOfServiceURL": "https://bloom.diy/terms",
+        "defaultPrompt": [
+          "Use Bloom's whoami tool to show which account is connected.",
+          "Inspect the Bloom canvas I'm working on and suggest improvements.",
+          "Help me make the requested change to my Bloom canvas."
+        ],
+        "brandColor": "#2EA1F3",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png",
+        "supportURL": "https://bloom.diy/support/chat"
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

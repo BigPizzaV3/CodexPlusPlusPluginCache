@@ -1,0 +1,4 @@
+[
+  { "id": "dataset-orphan", "name": "Orphan Sales Dataset", "type": "SemanticModel", "owner": "", "endorsement": "None", "sensitivityLabel": "", "workspaceId": "workspace-risk", "usageScore": 5, "trustScore": 35 },
+  { "id": "report-unused", "name": "Unused Sales Report", "type": "Report", "owner": "", "sensitivityLabel": "", "workspaceId": "workspace-risk", "usageScore": 0, "trustScore": 40 }
+]

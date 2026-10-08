@@ -1,0 +1,9 @@
+interface:
+  display_name: "Marketing Swarm Router"
+  short_description: "Route complex marketing work"
+  default_prompt: "Diagnose this marketing problem and route it to the right specialist workflows."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

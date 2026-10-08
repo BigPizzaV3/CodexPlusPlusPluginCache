@@ -1,0 +1,23 @@
+[
+  {
+    "id": "dataset-sales",
+    "name": "Sales Semantic Model",
+    "type": "SemanticModel",
+    "owner": "bi.owner@example.com",
+    "endorsement": "Promoted",
+    "sensitivityLabel": "Confidential",
+    "workspaceId": "workspace-minimal",
+    "usageScore": 80,
+    "trustScore": 74
+  },
+  {
+    "id": "report-exec",
+    "name": "Executive Sales Report",
+    "type": "Report",
+    "owner": "bi.owner@example.com",
+    "sensitivityLabel": "Confidential",
+    "workspaceId": "workspace-minimal",
+    "usageScore": 65,
+    "trustScore": 70
+  }
+]

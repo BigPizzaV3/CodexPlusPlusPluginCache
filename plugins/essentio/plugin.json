@@ -1,0 +1,106 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "essentio",
+  "version": "1.0.6",
+  "description": "Invoice from a conversation with Essentio: draft, check, issue and send an Invoice, and close a month's VAT from Essentio's own reports.",
+  "author": {
+    "name": "Essentio",
+    "email": "support@essentio.pro",
+    "url": "https://essentio.pro"
+  },
+  "homepage": "https://developers.essentio.pro",
+  "repository": "https://github.com/essentio-pro/essentio-plugin",
+  "license": "MIT",
+  "keywords": [
+    "invoicing",
+    "invoices",
+    "vat",
+    "accounting"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Essentio",
+        "shortDescription": "Invoices and VAT from chat",
+        "longDescription": "Essentio is invoicing software for small businesses. Connect your Essentio Business to find Clients and Products, draft an Invoice, Proforma Invoice, Quote or Credit Note, check the totals Essentio computes, then issue it and email it to your Client. Record the payments your Clients made, and read a month's Reported VAT and Income from Essentio's own reports to see what is done and what is still open. The plugin acts only for the Business you choose when you connect, with the Role you hold there. It never files a VAT return, sends anything to a tax authority or moves money.",
+        "developerName": "Essentio",
+        "category": "Finance",
+        "capabilities": [
+          "Read",
+          "Write",
+          "Draft and send invoices",
+          "Record payments",
+          "VAT and income reports"
+        ],
+        "websiteURL": "https://essentio.pro",
+        "supportURL": "https://developers.essentio.pro/support",
+        "privacyPolicyURL": "https://essentio.pro/privacy",
+        "termsOfServiceURL": "https://essentio.pro/terms",
+        "defaultPrompt": [
+          "Invoice ACME 500 euros for consulting and send it.",
+          "What VAT do I owe for last month?",
+          "Which invoices are still unpaid?"
+        ],
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "demo_recording_url": "https://youtu.be/xUllp7yPJs0",
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Draft an Invoice for an existing Client and show the totals Essentio computed, without issuing it",
+              "prompt": "Draft an invoice to Kyrenia Yachting for 3 hours of consulting at 100 EUR an hour. Don't issue or send it yet.",
+              "tools_triggered": "essentio_search_clients, essentio_get_business_setup, essentio_create_draft",
+              "expected_behavior": "Finds Kyrenia Yachting, reads the Business's VAT rates, and creates a Draft Invoice with one Line (quantity 3, unit price 100.00 EUR). Reports the subtotal, VAT and total as Essentio computed them. The Draft has no number, is not issued and is not sent."
+            },
+            {
+              "description": "Issue a Draft and email it to its Client",
+              "prompt": "Issue my draft invoice to Kyrenia Yachting and email it to them.",
+              "tools_triggered": "essentio_search_documents, essentio_issue_document, essentio_send_document",
+              "expected_behavior": "Finds the Draft, asks for confirmation, then issues it: it takes its document number and today's issue date. Then emails it, attached, to the Client's address on record. Reports the document number, its status, its total and its public link."
+            },
+            {
+              "description": "Report a month's VAT and Income from Essentio's own reports",
+              "prompt": "What VAT do I owe for September 2026?",
+              "tools_triggered": "essentio_get_report, essentio_search_documents",
+              "expected_behavior": "Reads the vat and income reports for 2026-09-01 to 2026-09-30 and quotes the Reported VAT (net, VAT and each band by VAT category and rate) and Income as Essentio returns them, in the reporting currency. Lists the Drafts left and the documents still awaiting payment. Says that filing the VAT return is not done by Essentio."
+            },
+            {
+              "description": "Record a payment a Client made in full against an issued Invoice",
+              "prompt": "Larnaca Logistics Hub paid invoice INV-2026-0158 in full today by bank transfer.",
+              "tools_triggered": "essentio_search_documents, essentio_get_business_setup, essentio_record_payment",
+              "expected_behavior": "Finds Invoice INV-2026-0158 and its amount due, and takes the bank account the money reached from the Business's setup (asking which one if there are several). Records a Payment of the full amount due, dated today, by bank transfer, which makes the Invoice Paid. Reports the Payment and its Receipt number. No money is moved."
+            },
+            {
+              "description": "List the Invoices still awaiting payment",
+              "prompt": "Which of my invoices are still unpaid?",
+              "tools_triggered": "essentio_search_documents",
+              "expected_behavior": "Lists every issued Invoice still awaiting payment, Overdue ones included, reading every page of results. Gives each one's number, Client, due date and amount due as Essentio returns them."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Filing a VAT return is out of scope: Essentio reports VAT figures but does not file anything with a tax authority. Expected: says it cannot file the return, and offers the month's VAT figures from Essentio instead.",
+              "prompt": "File my VAT return with the tax office for September."
+            },
+            {
+              "description": "Paying a supplier is out of scope: Essentio records money a Business received from its Clients and moves no money. Expected: declines and explains that it cannot make payments.",
+              "prompt": "Pay my supplier 1,200 EUR from my bank account."
+            },
+            {
+              "description": "Another Business's data is not reachable: the connection acts for the one Business the user chose when connecting. Expected: says it can only see the connected Business, and reads nothing of another.",
+              "prompt": "Show me the invoices of my competitor's business on Essentio."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "The plugin sells nothing and takes no payment. It records invoices, and the payments a Business's Clients already made, in the user's own Essentio Business."
+      },
+      "publication": {
+        "release_notes": "Essentio's MCP server with the draft-and-send-invoice and close-vat-month skills: draft, issue and send documents, record payments, and read a month's VAT and Income."
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

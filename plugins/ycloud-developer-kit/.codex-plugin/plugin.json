@@ -1,0 +1,48 @@
+{
+  "author": {
+    "name": "YCloud Developers",
+    "url": "https://github.com/YCloud-Developers"
+  },
+  "description": "Build WhatsApp Business API integrations with YCloud: messaging, templates, media, contacts, Flows, and webhooks, with code and local tests for your app.",
+  "interface": {
+    "brandColor": "#5B5CE2",
+    "brandColorDark": "#5B5CE2",
+    "capabilities": [
+      "Interactive",
+      "Code Generation",
+      "API Integration"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Help me integrate the WhatsApp Business API with YCloud.",
+      "Add WhatsApp inbound-message and status webhooks with local tests.",
+      "Review my WhatsApp Business integration and suggest fixes."
+    ],
+    "developerName": "YCloud Developers",
+    "displayName": "YCloud Developer Kit",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "logoDark": "./.codex-plugin/assets/logo-dark.svg",
+    "longDescription": "Build WhatsApp Business API integrations in your existing app with YCloud. Turn requirements such as order notifications, appointment reminders, customer support, and lead capture into an integration plan, server-side code, and local tests. Get help with template and media messages, incoming messages and delivery-status webhooks, contacts and unsubscribe preferences, WhatsApp Flows, business accounts, phone numbers, groups, and calling. The skills guide your coding agent through authentication, request and response handling, webhook verification, and error handling, using YCloud API contracts and official documentation. Start from a new workflow or review an existing integration, then check its behavior with mocks and local sandbox tests for supported scenarios. Develop and validate locally; your application connects to YCloud at runtime using credentials managed by your team.",
+    "privacyPolicyURL": "https://www.ycloud.com/privacy-policy",
+    "shortDescription": "YCloud & WhatsApp Business API",
+    "termsOfServiceURL": "https://www.ycloud.com/terms-service",
+    "websiteURL": "https://www.ycloud.com/"
+  },
+  "keywords": [
+    "ycloud",
+    "developer-kit",
+    "whatsapp",
+    "whatsapp-business",
+    "whatsapp-business-api",
+    "api-integration",
+    "webhooks",
+    "templates",
+    "contacts",
+    "openapi"
+  ],
+  "license": "Apache-2.0",
+  "name": "ycloud-developer-kit",
+  "skills": "./skills/",
+  "version": "0.7.9"
+}

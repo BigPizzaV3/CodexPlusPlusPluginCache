@@ -1,0 +1,20 @@
+{
+  "name": "attri",
+  "owner": {
+    "name": "Attri",
+    "url": "https://attri.io"
+  },
+  "metadata": {
+    "description": "Attri's plugin marketplace: one plugin, attri.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "attri",
+      "source": "./",
+      "description": "Attri for AI assistants: link attribution, site analytics, Search Console data joined to on-site behaviour, and the posture review (ranked findings on what to fix first). Connects to Attri's MCP server with OAuth; you choose the workspaces and permissions.",
+      "version": "1.0.0",
+      "category": "analytics"
+    }
+  ]
+}

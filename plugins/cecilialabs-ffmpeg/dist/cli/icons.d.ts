@@ -1,0 +1,35 @@
+export declare const CLI_ICONS: {
+    readonly success: "✅";
+    readonly error: "❌";
+    readonly warning: "⚠️";
+    readonly info: "ℹ️";
+    readonly doctor: "🩺";
+    readonly probe: "🔎";
+    readonly environment: "⚙️";
+    readonly video: "🎬";
+    readonly image: "🖼️";
+    readonly audio: "🎧";
+    readonly convert: "🔄";
+    readonly compose: "🧩";
+    readonly diagnose: "🔎";
+    readonly repair: "🛠️";
+    readonly stream: "📡";
+    readonly input: "📥";
+    readonly output: "📦";
+    readonly result: "✅";
+    readonly command: "⚙️";
+    readonly resolution: "📐";
+    readonly duration: "⏱️";
+    readonly format: "🎞️";
+    readonly progress: "▶️";
+    readonly completed: "✅";
+    readonly frame: "🎞️";
+    readonly fps: "⚡";
+    readonly speed: "🚀";
+    readonly eta: "⌛";
+    readonly batch: "📚";
+};
+export declare function iconForCommandPath(path: string): string;
+export declare function decorateCommandDescription(path: string, description: string): string;
+export declare function progressSourceIcon(source: string | undefined): string;
+//# sourceMappingURL=icons.d.ts.map

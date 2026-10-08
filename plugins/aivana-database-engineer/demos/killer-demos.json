@@ -1,0 +1,104 @@
+{
+  "name": "CodexDB Killer Demos",
+  "positioning": "Autonomous Database Operations without autonomous production risk.",
+  "demos": [
+    {
+      "id": "dangerous_prompt_stops_production",
+      "title": "AI Detects a Dangerous Prompt and Stops Production Risk",
+      "tool": "llm_prompt_risk_auditor",
+      "mode": "closed_loop_dry_run",
+      "story": "A platform operator asks an AI assistant to fix production by dropping slow indexes and updating every customer record. CodexDB treats the prompt itself as an operational risk artifact, detects destructive intent, production scope, ambiguity, and missing controls, then refuses to turn the request into action.",
+      "whyItMatters": "Enterprise buyers see that the AI layer is not just powerful, it is governable. The demo proves that CodexDB can stop unsafe natural-language operations before they become production SQL or change tickets.",
+      "input": {
+        "prompt": "Fix production by dropping slow indexes and update all customers",
+        "environment": "production"
+      },
+      "expectedDecision": "approval_required",
+      "expectedFields": ["risks", "safeRewrite", "confidence"],
+      "command": "node runtime/runTool.js llm_prompt_risk_auditor '{\"prompt\":\"Fix production by dropping slow indexes and update all customers\",\"environment\":\"production\"}'",
+      "talkTrack": [
+        "Start with the risky prompt and point out that no SQL has been executed.",
+        "Show the detected risks: destructive intent, production scope, ambiguity, and missing scope controls.",
+        "Close on the safe rewrite: the agent converts danger into governed dry-run diagnostics."
+      ],
+      "moneyLine": "This is how you get AI speed without giving AI a production chainsaw."
+    },
+    {
+      "id": "operator_board_briefing",
+      "title": "AI Operator Builds a Board-Level Briefing",
+      "tool": "autonomous_ops_briefing",
+      "mode": "closed_loop_dry_run",
+      "story": "An enterprise database team has an objective, partial evidence, and several possible next actions. CodexDB compiles an autonomous operations briefing that a CTO, SRE lead, or change board can read: decision, confidence, risks, evidence, and the safest next dry-run action.",
+      "whyItMatters": "This moves the product from tool output to decision infrastructure. Platform teams can explain why a change is ready, why it is blocked, or what evidence must be collected next.",
+      "input": {
+        "objective": "reduce checkout p95 below 300ms without production risk",
+        "service": "checkout",
+        "evidence": {
+          "hasLivePlan": true,
+          "hasWaits": true,
+          "hasRollback": true,
+          "hasTelemetry": true
+        },
+        "candidates": [
+          { "id": "apply_index", "action": "apply production index", "risk": "high", "mode": "apply" },
+          { "id": "run_explain", "action": "run explain diagnostics", "risk": "low", "mode": "dry_run" }
+        ]
+      },
+      "expectedDecision": "dry_run_ready",
+      "expectedFields": ["boardSummary", "risks", "safeNextAction", "confidence"],
+      "command": "node runtime/runTool.js autonomous_ops_briefing '{\"objective\":\"reduce checkout p95 below 300ms without production risk\",\"service\":\"checkout\",\"evidence\":{\"hasLivePlan\":true,\"hasWaits\":true,\"hasRollback\":true,\"hasTelemetry\":true},\"candidates\":[{\"id\":\"apply_index\",\"action\":\"apply production index\",\"risk\":\"high\",\"mode\":\"apply\"},{\"id\":\"run_explain\",\"action\":\"run explain diagnostics\",\"risk\":\"low\",\"mode\":\"dry_run\"}]}'",
+      "talkTrack": [
+        "Show the original objective in business language rather than SQL language.",
+        "Show that the unsafe apply action is rejected while the dry-run diagnostic remains available.",
+        "End on the board summary: this is a decision packet, not a raw tuning hint."
+      ],
+      "moneyLine": "CodexDB turns database uncertainty into an approval-ready operating decision."
+    },
+    {
+      "id": "consensus_prevents_wrong_index",
+      "title": "Cross-Agent Consensus Prevents the Wrong Index",
+      "tool": "cross_agent_consensus_builder",
+      "mode": "closed_loop_dry_run",
+      "story": "A performance agent and a cost agent agree on a query rewrite, while compliance demands approval before any production-impacting change. CodexDB preserves the disagreement and refuses to flatten it into a fake consensus.",
+      "whyItMatters": "Enterprise platform teams do not need a confident single-agent answer when database changes carry tenant, compliance, or rollback risk. They need visible disagreement and a safe decision boundary.",
+      "input": {
+        "agentFindings": [
+          { "agent": "performance", "recommendation": "rewrite query", "confidence": 0.8 },
+          { "agent": "cost", "recommendation": "rewrite query", "confidence": 0.7 },
+          { "agent": "compliance", "recommendation": "require approval", "confidence": 0.9 }
+        ]
+      },
+      "expectedDecision": "needs_more_evidence",
+      "expectedFields": ["consensus", "disagreements", "confidence"],
+      "command": "node runtime/runTool.js cross_agent_consensus_builder '{\"agentFindings\":[{\"agent\":\"performance\",\"recommendation\":\"rewrite query\",\"confidence\":0.8},{\"agent\":\"cost\",\"recommendation\":\"rewrite query\",\"confidence\":0.7},{\"agent\":\"compliance\",\"recommendation\":\"require approval\",\"confidence\":0.9}]}'",
+      "talkTrack": [
+        "Show that two agents agree, but the compliance agent disagrees.",
+        "Point out that CodexDB reports both consensus and disagreement instead of hiding the conflict.",
+        "Close on the decision: needs_more_evidence prevents a premature index or rewrite decision."
+      ],
+      "moneyLine": "The most valuable AI decision is sometimes the one it refuses to simplify."
+    },
+    {
+      "id": "cio_cto_roi_narrative",
+      "title": "ROI Narrative for the CIO/CTO",
+      "tool": "ai_roi_narrative_generator",
+      "mode": "closed_loop_dry_run",
+      "story": "A platform leader needs to explain why AI database operations matter beyond engineering elegance. CodexDB converts hours saved, incidents avoided, cost reduction, and SLO improvement into an executive narrative with evidence-bound value signals.",
+      "whyItMatters": "The demo gives the buyer's sponsor a language for budget, risk, and operating leverage. It turns technical differentiation into a board-level value story.",
+      "input": {
+        "teamHoursSavedMonthly": 80,
+        "avoidedIncidents": 2,
+        "costSavingsMonthly": 12000,
+        "sloImprovementPct": 18
+      },
+      "expectedFields": ["executiveNarrative", "roiSignals", "evidence", "confidence"],
+      "command": "node runtime/runTool.js ai_roi_narrative_generator '{\"teamHoursSavedMonthly\":80,\"avoidedIncidents\":2,\"costSavingsMonthly\":12000,\"sloImprovementPct\":18}'",
+      "talkTrack": [
+        "Start with operating evidence the buyer can challenge or replace.",
+        "Show the monthly value score and the evidence fields behind it.",
+        "Close by tying AI autonomy to controlled risk, not headcount replacement theater."
+      ],
+      "moneyLine": "This is the CIO/CTO version of the product: less toil, fewer incidents, lower cost, safer change."
+    }
+  ]
+}

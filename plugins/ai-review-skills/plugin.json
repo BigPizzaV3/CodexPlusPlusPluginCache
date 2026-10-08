@@ -1,0 +1,49 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "hoku-ya",
+    "url": "https://github.com/hoku-ya"
+  },
+  "description": "Evidence-preserving research, paper explanation, quotation, and HTML review workflows for ChatGPT and Codex.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "brandColor": "#172554",
+        "brandColorDark": "#ABB9E8",
+        "capabilities": [
+          "Research, Write, Files"
+        ],
+        "category": "Productivity",
+        "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+        "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+        "defaultPrompt": [
+          "Create a sourced survey and preserve every citation.",
+          "Explain this paper and continue if figure extraction fails.",
+          "Render this Review Packet as human-review HTML."
+        ],
+        "developerName": "hoku-ya",
+        "displayName": "AI Review Skills",
+        "logo": "./.codex-plugin/assets/logo.png",
+        "logoDark": "./.codex-plugin/assets/logo-dark.png",
+        "longDescription": "Seven reusable workflows for sourced Markdown, surveys, faithful paper explainers, visual HTML explanations, and human review snapshots across ChatGPT and Codex.",
+        "privacyPolicyURL": "https://github.com/hoku-ya/ai-review-skills/blob/main/PRIVACY.md",
+        "shortDescription": "Sourced research & explainers",
+        "supportURL": "https://github.com/hoku-ya/ai-review-skills/issues",
+        "termsOfServiceURL": "https://github.com/hoku-ya/ai-review-skills/blob/main/TERMS.md",
+        "websiteURL": "https://github.com/hoku-ya/ai-review-skills"
+      }
+    }
+  },
+  "homepage": "https://github.com/hoku-ya/ai-review-skills",
+  "keywords": [
+    "research",
+    "citations",
+    "paper",
+    "review",
+    "html"
+  ],
+  "license": "MIT",
+  "name": "ai-review-skills",
+  "repository": "https://github.com/hoku-ya/ai-review-skills",
+  "version": "0.3.2+codex.20260909134907"
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "app-6a906843cab08191875b1054ea7b609a",
+  "version": "1.5.0",
+  "description": "Mollie payment integration — connects Codex to your Mollie account via the Mollie MCP server and activates skills for payments, Mollie Connect, recurring payments, refunds/operations, troubleshooting, SDK upgrades, and building Mollie-powered AI agents.",
+  "author": {
+    "name": "Mollie",
+    "email": "info@mollie.com",
+    "url": "https://mollie.com"
+  },
+  "homepage": "https://docs.mollie.com",
+  "repository": "https://github.com/mollie/ai",
+  "license": "MIT",
+  "keywords": [
+    "mollie",
+    "payments",
+    "mcp",
+    "checkout",
+    "subscriptions"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Mollie",
+        "shortDescription": "Build Mollie payment flows",
+        "longDescription": "Connects Codex to your Mollie account through the Mollie MCP server and adds skills for building Mollie integrations: hosted checkout and Components, Mollie Connect for platforms and marketplaces, recurring payments and subscriptions, refunds, captures, chargebacks and settlements, webhook and credential troubleshooting, SDK upgrades, and AI agents built on the Mollie agent toolkit.",
+        "developerName": "Mollie",
+        "category": "Finance",
+        "capabilities": [
+          "Build Mollie payment integrations",
+          "Set up Mollie Connect for platforms",
+          "Implement recurring payments and subscriptions",
+          "Review payments, refunds and settlements",
+          "Troubleshoot webhooks and authentication",
+          "Upgrade Mollie SDKs and migrate from the Orders API"
+        ],
+        "defaultPrompt": [
+          "Add Mollie hosted checkout to my app",
+          "Why is my Mollie webhook not being received?",
+          "Migrate my integration from the Orders API to the Payments API"
+        ],
+        "brandColor": "#000000",
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/icon.png",
+        "websiteURL": "https://www.mollie.com",
+        "supportURL": "https://help.mollie.com",
+        "privacyPolicyURL": "https://www.mollie.com/legal/privacy",
+        "termsOfServiceURL": "https://www.mollie.com/legal/user-agreement"
+      }
+    }
+  }
+}

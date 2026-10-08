@@ -1,0 +1,81 @@
+name: Label skill issues
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  label:
+    if: contains(github.event.issue.labels.*.name, 'skill-issue')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply kind labels based on issue form answers
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || "";
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.issue.number;
+            const currentLabels = context.payload.issue.labels.map(l => l.name);
+            const templateLabels = currentLabels;
+
+            // Map a single form question to a mutually-exclusive label group.
+            // - section: heading text from the issue form (matched case-insensitively)
+            // - groupLabels: every label managed by this rule (used to clear stale ones)
+            // - pick(answer): returns the label to apply, or null to apply none
+            async function applyGroup({ section, groupLabels, pick }) {
+              const re = new RegExp(`###\\s*${section}\\s*\\n+([^\\n]+)`, "i");
+              const match = body.match(re);
+              if (!match) {
+                core.info(`No "${section}" section found; skipping.`);
+                return;
+              }
+              const answer = match[1].trim();
+              core.info(`[${section}] detected answer: ${answer}`);
+
+              const labelToAdd = pick(answer);
+              if (!labelToAdd) {
+                core.info(`[${section}] answer did not map to a label; none applied.`);
+              }
+
+              const stale = groupLabels.filter(
+                l => l !== labelToAdd && currentLabels.includes(l)
+              );
+              for (const name of stale) {
+                core.info(`[${section}] removing stale label: ${name}`);
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner, repo, issue_number, name,
+                  });
+                } catch (err) {
+                  core.warning(`Could not remove label ${name}: ${err.message}`);
+                }
+              }
+
+              if (labelToAdd && !currentLabels.includes(labelToAdd)) {
+                core.info(`[${section}] adding label: ${labelToAdd}`);
+                try {
+                  await github.rest.issues.addLabels({
+                    owner, repo, issue_number, labels: [labelToAdd],
+                  });
+                } catch (err) {
+                  core.warning(`Could not add label ${labelToAdd}: ${err.message}. Make sure the label exists in the repo.`);
+                }
+              }
+            }
+
+            if (templateLabels.includes("skill-issue")) {
+              await applyGroup({
+                section: "Kind",
+                groupLabels: ["bug", "improvement", "scope"],
+                pick: (answer) => {
+                  if (/^Improvement\b/i.test(answer)) return "improvement";
+                  if (/^Bug\b/i.test(answer)) return "bug";
+                  if (/^Scope\b/i.test(answer)) return "scope";
+                  return null;
+                },
+              });
+            }

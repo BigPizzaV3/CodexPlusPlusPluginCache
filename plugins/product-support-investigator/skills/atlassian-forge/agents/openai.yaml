@@ -1,0 +1,4 @@
+interface:
+  display_name: "Atlassian Forge"
+  short_description: "Investigate and build Jira/Confluence Forge integrations"
+  default_prompt: "Use the Atlassian Forge skill to investigate or implement this Jira/Confluence integration request, using available Rovo context and preserving evidence boundaries."

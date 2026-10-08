@@ -1,0 +1,104 @@
+{
+  "persona_id": "P03",
+  "synthetic": true,
+  "profile": {
+    "name": "Aisha Khan",
+    "headline": "Early-Career Digital Marketing Analyst",
+    "location": "Manchester, United Kingdom",
+    "contact": [
+      {"label": "email", "text": "aisha.khan@example.test", "url": "mailto:aisha.khan@example.test"}
+    ],
+    "work_rights": "UK Graduate visa holder; expiry not supplied"
+  },
+  "preferences": {
+    "target_directions": ["Digital Marketing Coordinator", "Marketing Analyst", "CRM Coordinator"],
+    "locations": ["Manchester", "Remote United Kingdom"],
+    "remote_preference": "flexible",
+    "salary_minimum": 32000,
+    "currency": "GBP",
+    "employment_types": ["permanent", "fixed-term"],
+    "excluded_employers": [],
+    "excluded_role_patterns": ["unpaid internship", "commission only"],
+    "selectivity": "balanced",
+    "source_preferences": {
+      "strategy": "automatic",
+      "preferred": [],
+      "excluded": []
+    },
+    "document_preferences": {
+      "format_mode": "smart_default",
+      "reference_template_name": null,
+      "page_strategy": "adaptive",
+      "section_order": ["Professional Summary", "Role-Match Experience", "Professional Experience", "Projects", "Core Skills", "Education"],
+      "additional_sections": ["Projects"],
+      "omitted_sections": [],
+      "cover_letter_mode": "paired",
+      "style_notes": ["Keep the CV concise and do not overstate internship ownership."]
+    }
+  },
+  "source_cv": {
+    "summary": "Early-career digital marketing graduate with internship experience supporting email and web campaigns and a university marketing-analytics capstone.",
+    "experience": [
+      {
+        "role": "Digital Marketing Intern",
+        "company": "Westbridge Community Arts",
+        "location": "Manchester",
+        "dates": "January–June 2026",
+        "bullets": [
+          "Supported email campaigns, landing-page updates and weekly performance reporting during a six-month internship.",
+          "Prepared campaign assets and coordinated feedback with the marketing coordinator."
+        ]
+      },
+      {
+        "role": "Marketing Analytics Capstone",
+        "company": "Western Shore University",
+        "location": "Manchester",
+        "dates": "2025",
+        "bullets": [
+          "Built a Google Sheets dashboard comparing channel spend, clicks and conversions for a university project."
+        ]
+      }
+    ],
+    "skills": ["Email campaign support", "Google Sheets", "Campaign reporting", "Landing-page updates", "Digital content coordination"],
+    "education": ["Bachelor of Commerce (Marketing), Western Shore University, 2025"]
+  },
+  "evidence": [
+    {
+      "evidence_id": "EV-P03-001",
+      "claim": "Completed a six-month marketing internship supporting email and web campaigns.",
+      "safe_wording": "Completed a six-month marketing internship supporting email and web campaigns.",
+      "source_type": "current_cv",
+      "source_name": "Aisha_Khan_Mock_CV.docx",
+      "source_excerpt": "Six-month Digital Marketing Intern placement supporting email campaigns, landing pages and weekly reporting.",
+      "confidence": "source_only",
+      "restrictions": ["Do not describe internship work as campaign ownership."],
+      "role_relevance": ["digital marketing", "email"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P03-002",
+      "claim": "Built a campaign dashboard in Google Sheets for a university project.",
+      "safe_wording": "Built a campaign-performance dashboard in Google Sheets for a university project.",
+      "source_type": "current_cv",
+      "source_name": "Aisha_Khan_Mock_CV.docx",
+      "source_excerpt": "University capstone: built a Google Sheets dashboard to compare channel spend, clicks and conversions.",
+      "confidence": "source_only",
+      "restrictions": ["Keep this labelled as a university project.", "Do not infer Power BI expertise."],
+      "role_relevance": ["marketing analytics"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P03-003",
+      "claim": "Completed a Bachelor of Commerce in Marketing.",
+      "safe_wording": "Bachelor of Commerce (Marketing).",
+      "source_type": "current_cv",
+      "source_name": "Aisha_Khan_Mock_CV.docx",
+      "source_excerpt": "Bachelor of Commerce (Marketing), Western Shore University, 2025.",
+      "confidence": "source_only",
+      "restrictions": ["Synthetic fixture only."],
+      "role_relevance": ["education"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    }
+  ],
+  "expected_journey": "Ask about visa expiry only when a role makes ongoing work rights material; create a concise one-page CV without inflating internship ownership."
+}

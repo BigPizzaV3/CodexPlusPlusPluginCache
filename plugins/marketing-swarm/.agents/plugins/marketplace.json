@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    {
+      "name": "marketing-swarm",
+      "source": "./",
+      "description": "Paid-media diagnosis, creative analysis, scenario planning, and causal attribution workflows."
+    }
+  ]
+}

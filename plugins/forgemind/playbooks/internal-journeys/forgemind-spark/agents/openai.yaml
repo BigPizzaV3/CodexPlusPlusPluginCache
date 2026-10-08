@@ -1,0 +1,6 @@
+interface:
+  display_name: "Spark"
+  short_description: "Guided creative product discovery and narrative."
+  default_prompt: "Use $forgemind-spark with its Zero-Input Default when no additional outcome is supplied."
+policy:
+  allow_implicit_invocation: false

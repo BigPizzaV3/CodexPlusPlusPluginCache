@@ -1,0 +1,6 @@
+interface:
+  display_name: "Establish Governance Boundary"
+  short_description: "Confirm authority, scope, and safe next action"
+  default_prompt: "Use $establish-governance-boundary to classify this request and identify the safe next action."
+policy:
+  allow_implicit_invocation: true

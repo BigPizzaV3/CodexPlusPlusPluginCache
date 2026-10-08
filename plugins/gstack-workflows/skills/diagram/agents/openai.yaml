@@ -1,0 +1,9 @@
+interface:
+  display_name: "Diagram"
+  short_description: "Create a technical diagram from a textual description and return editable source when the host su..."
+  default_prompt: "Use Diagram for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

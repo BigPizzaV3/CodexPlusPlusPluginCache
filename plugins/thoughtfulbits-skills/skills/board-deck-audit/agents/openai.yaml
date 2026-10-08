@@ -1,0 +1,7 @@
+interface:
+  display_name: "Board Deck Audit"
+  short_description: "Deep pre-send audit of a board deck"
+  default_prompt: "Audit the attached board deck before I send it."
+
+policy:
+  allow_implicit_invocation: true

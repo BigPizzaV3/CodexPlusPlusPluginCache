@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Language Engineering"
+  short_description: "Make Go semantics and ownership explicit"
+  default_prompt: "Use $go-language-engineering to engineer this Go code from its semantic invariants."
+policy:
+  allow_implicit_invocation: true

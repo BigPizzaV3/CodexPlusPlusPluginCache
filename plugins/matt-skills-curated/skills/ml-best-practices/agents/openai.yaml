@@ -1,0 +1,3 @@
+interface:
+  display_name: "ML Best Practices"
+  short_description: "Exploratory analysis, feature engineering, and evaluation"

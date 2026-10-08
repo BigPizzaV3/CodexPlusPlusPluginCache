@@ -1,0 +1,47 @@
+{
+  "schema": "codex.powerbi.goldenBaselines.v1",
+  "baselines": [
+    {
+      "name": "sample-model-core",
+      "path": "examples/sample-model",
+      "metricCount": 5,
+      "dependencyEdgeCount": 5,
+      "insightFindingCount": 4,
+      "minimumInsightRiskScore": 8,
+      "requiredMeasures": [
+        "All Customer Sales",
+        "Refresh Sensitive Sales",
+        "Total Sales",
+        "Sales YoY %",
+        "Total Sales Prior Year"
+      ]
+    },
+    {
+      "name": "clean-model-core",
+      "path": "examples/clean-model",
+      "metricCount": 3,
+      "dependencyEdgeCount": 2,
+      "insightFindingCount": 1,
+      "minimumInsightRiskScore": 1,
+      "requiredMeasures": [
+        "Revenue",
+        "Cost",
+        "Gross Margin %"
+      ]
+    },
+    {
+      "name": "risky-model-core",
+      "path": "examples/risky-model",
+      "metricCount": 4,
+      "dependencyEdgeCount": 2,
+      "insightFindingCount": 4,
+      "minimumInsightRiskScore": 5,
+      "requiredMeasures": [
+        "Open Tickets",
+        "Overdue Tickets",
+        "Escalation Risk",
+        "Legacy Rank"
+      ]
+    }
+  ]
+}

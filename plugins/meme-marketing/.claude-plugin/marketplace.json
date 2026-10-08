@@ -1,0 +1,30 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "meme-marketing",
+  "owner": {
+    "name": "Mamdouh Aboammar",
+    "url": "https://github.com/imMamdouhaboammar"
+  },
+  "metadata": {
+    "description": "Claude Code marketplace for the Meme Marketing agentic meme crafting engine.",
+    "version": "3.1.1"
+  },
+  "plugins": [
+    {
+      "name": "meme-marketing",
+      "source": "./",
+      "description": "Craft, audit, localize, tune and render zero-cringe memes grounded in real audience friction. Ships a skill, 4 specialist subagents, 5 slash commands and BinEval validation hooks.",
+      "version": "3.1.1",
+      "author": {
+        "name": "Mamdouh Aboammar",
+        "url": "https://github.com/imMamdouhaboammar"
+      },
+      "homepage": "https://github.com/imMamdouhaboammar/meme-marketing#readme",
+      "repository": "https://github.com/imMamdouhaboammar/meme-marketing",
+      "license": "MIT",
+      "category": "marketing",
+      "keywords": ["meme", "marketing", "social-media", "arabic", "svg"],
+      "tags": ["content-creation", "copywriting"]
+    }
+  ]
+}

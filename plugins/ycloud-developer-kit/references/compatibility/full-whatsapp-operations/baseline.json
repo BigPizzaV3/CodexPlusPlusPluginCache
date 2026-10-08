@@ -1,0 +1,1646 @@
+{
+  "integrationSource": {
+    "kind": "generated-capability-manifest",
+    "schemaVersion": 3
+  },
+  "operations": [
+    {
+      "contractDigest": "403fb0e8a4158a8dc30cbca3d8df94f75c6bc43cb59ec178da206148270b062a",
+      "domain": "ycloud-balance",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "balance-retrieve",
+      "owner": "ycloud-balance",
+      "path": "/balance",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"amount\":190.0765,\"currency\":\"USD\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "2719e01b766017584fb22aefedbeb7c75296c456479456bf4052de136fbc6960",
+      "domain": "ycloud-webhook-endpoints",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "webhook_endpoint-create",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"id\":\"wh627c8640675de8fc689ab9d9\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"enabledEvents\":[],\"url\":\"https://httpbin.org/anything?tag=api\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "9a17d494da6eb946be2b34696d6be0df9ce03c1215eb74377e303070d6f29a2b",
+      "domain": "ycloud-webhook-endpoints",
+      "kind": "operation",
+      "method": "DELETE",
+      "operationId": "webhook_endpoint-delete",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints/{id}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"id\":\"wh627c8640675de8fc689ab9d9\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "9eb8456b4e7ea28b2083cac1415aab090d352d7df51b52ab01e2e3b9a8092573",
+      "domain": "ycloud-webhook-endpoints",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "webhook_endpoint-list",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"length\":0,\"limit\":1,\"offset\":0}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "321e47f7bb0d15ebe29ea7c6363301d292adc46b03b0844cc1038ad5d16773cf",
+      "domain": "ycloud-webhook-endpoints",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "webhook_endpoint-retrieve",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints/{id}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"id\":\"wh627c8640675de8fc689ab9d9\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "b907b4db5c35ac8fde63b24b45b2f1e9a3e7171561002e4b997e269de80d2f57",
+      "domain": "ycloud-webhook-endpoints",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "webhook_endpoint-rotate-secret",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints/{id}/rotateSecret",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"id\":\"wh627c8640675de8fc689ab9d9\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "3b3c31b392c7c2d8a93f42afb4505129a6a6c023b0b818b0e996fa5c20196d68",
+      "domain": "ycloud-webhook-endpoints",
+      "kind": "operation",
+      "method": "PATCH",
+      "operationId": "webhook_endpoint-update",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints/{id}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"id\":\"wh627c8640675de8fc689ab9d9\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "10640ef1fb4f5571a0ab248a99d64298a550fa800d6185adcea9b438a4625f7d",
+      "domain": "ycloud-whatsapp-business-accounts",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_business_account-list",
+      "owner": "ycloud-whatsapp-business-accounts",
+      "path": "/whatsapp/businessAccounts",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"length\":0,\"limit\":1,\"offset\":0}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "ca32d8be51fad62eab79d955b4fd49315a9ed467f5496f197e7de1f9cba752df",
+      "domain": "ycloud-whatsapp-business-accounts",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_business_account-retrieve",
+      "owner": "ycloud-whatsapp-business-accounts",
+      "path": "/whatsapp/businessAccounts/{id}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "605bb5e1a3fa5dcda7fadb677c9558af4e0cd8588a197b5e356a119ea0e6f3fd",
+      "domain": "ycloud-whatsapp-flows",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_flow-create",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"categories\":[],\"name\":\"My first flow\",\"wabaId\":\"whatsapp-business-account-id\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "f23c8130e35ee8018eab8b5c1825f14ee3121b9188294aed015c479d5df3f6f7",
+      "domain": "ycloud-whatsapp-flows",
+      "kind": "operation",
+      "method": "DELETE",
+      "operationId": "whatsapp_flow-delete",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "4e9b09422de8d6ebb29083a00bcdd521b97ac97f8f2ea25329fbcb2b7ee90929",
+      "domain": "ycloud-whatsapp-flows",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_flow-deprecate",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}/deprecate",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "cbb2cdd40f14668709a0a3c212e7a61a021234e4efdedd76be83f9ec4fae544a",
+      "domain": "ycloud-whatsapp-flows",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_flow-list",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "e7d64d0f89abd8273fefd89c2695f1fcbb939761756e7368ff926160c659d492",
+      "domain": "ycloud-whatsapp-flows",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_flow-preview",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}/preview",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "8ac77712c73f5778c3cd59c20a710e2759e4ef45b1589518dcc4c7e060fff22a",
+      "domain": "ycloud-whatsapp-flows",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_flow-publish",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}/publish",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "92794fb09344b94c5c8cee2e2de77e3ffcc0eaa60bf0d605c0889bb2d8ed0420",
+      "domain": "ycloud-whatsapp-flows",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_flow-retrieve",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "bb1a608bd6127c2669ca0aea43655e2ad80ab1f3eeb4de8e711919eae57aa3e0",
+      "domain": "ycloud-whatsapp-flows",
+      "kind": "operation",
+      "method": "PATCH",
+      "operationId": "whatsapp_flow-update-metadata",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}/metadata",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "5deec5a397eb82f8286d8d813dc99e5c36e10a12d0e66880d9733387627bb4cb",
+      "domain": "ycloud-whatsapp-flows",
+      "kind": "operation",
+      "method": "PATCH",
+      "operationId": "whatsapp_flow-update-structure",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}/assets",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"flowJson\":\"synthetic\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "bf0a0b4c82b6615f11b5653edf33a06eb424e3d987a99220d7fd4440b42d910f",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_group-approve-join-requests",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/joinRequests/approve",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"joinRequests\":[\"join-request-id\"]}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "5504931eb7a408fb869e3c94d1be83f80ceefab7267deff07e046e48ee252e6f",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_group-create",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"subject\":\"New Purchase Inquiry\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "0cd43f74159a86d1a1cc033653449eb0d133e67438dfbe7191daa46437df4f9e",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "DELETE",
+      "operationId": "whatsapp_group-delete",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "49fac44a3327a8e0bfe66cd1a8b085f77d2e78048c30db90d0aeaf0c5d84592b",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_group-list",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "856f0f08424d97686643f7812d56d187f733c5ec7ee862b60a2dec98eb098c85",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_group-list-join-requests",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/joinRequests",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "de263766f96077a77a7668ef62dd0035490a82282f132e84708ea8f6df673192",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_group-reject-join-requests",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/joinRequests/reject",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"joinRequests\":[\"join-request-id\"]}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "f02484ef9f5bb50603ee9c1346881e1cf2d058da0ceace2605ec3df5a258f0ad",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_group-remove-participants",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/groups/{groupId}/participants/remove",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"participants\":[]}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "4ebe7a1c729ab596310f8171970637ce76ec672ca4c13fe207163d6323bf4a4d",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_group-reset-invite-link",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/inviteLink/reset",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "c01ebfe684ff8a0889d34a31142ff12c8f05241f33d89a86442cbe05f0425ca8",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_group-retrieve",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "fd9ed1a67a8e06ee2151220ac06493262ac3115cf441a5ffdf890cf426ed308a",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_group-retrieve-invite-link",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/inviteLink",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "00770229b7457e84ddffa6afe631add0c79b176ea98ebddf2ec954f89c6d0a9d",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_group-send-invite-link-message",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/inviteLink/messages",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"from\":\"+16315551111\",\"id\":\"synthetic\",\"wabaId\":\"whatsapp-business-account-id\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"languageCode\":\"en_US\",\"parameters\":[],\"templateName\":\"group_invite_link\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "6b63c3e41a059a8da9288001d65e06fd12313c0ea49dea8fd1f81b17f0de6a34",
+      "domain": "ycloud-whatsapp-groups",
+      "kind": "operation",
+      "method": "PATCH",
+      "operationId": "whatsapp_group-update-settings",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/settings",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "fd6e6952ca51e81662695f2423eb455b2e8176b5a300030a849f3ca9c3cd361f",
+      "domain": "ycloud-whatsapp-inbound-messages",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_inbound_message-mark-as-read",
+      "owner": "ycloud-whatsapp-inbound-messages",
+      "path": "/whatsapp/inboundMessages/{id}/markAsRead",
+      "primarySuccessResponse": {
+        "bodyPresent": false,
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "29b577f0242e9c909cc1817a4f12e23f0543fde9dbc43d58ce5af419d4110dc6",
+      "domain": "ycloud-whatsapp-inbound-messages",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_inbound_message-typing",
+      "owner": "ycloud-whatsapp-inbound-messages",
+      "path": "/whatsapp/inboundMessages/{id}/typing",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"success\":true}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "030012301fae01057d5b159984238047a6f57a61eea9a25ac767b7e6569356c7",
+      "domain": "ycloud-whatsapp-media",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_media-upload",
+      "owner": "ycloud-whatsapp-media",
+      "path": "/whatsapp/media/{phoneNumber}/upload",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"file\":\"synthetic\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "19890776ca971094727a5ff18d22a31fabb0a962062d46f66bce8ef3d286763b",
+      "domain": "ycloud-whatsapp-messages",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_message-retrieve",
+      "owner": "ycloud-whatsapp-messages",
+      "path": "/whatsapp/messages/{id}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"from\":\"+16315551111\",\"id\":\"synthetic\",\"wabaId\":\"whatsapp-business-account-id\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "ce30d60c917ddf6a39a3b2f5d5a2f9f886eeb9c6ced18fd334bc770131269db3",
+      "domain": "ycloud-whatsapp-messages",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_message-send",
+      "owner": "ycloud-whatsapp-messages",
+      "path": "/whatsapp/messages",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"from\":\"+16315551111\",\"id\":\"synthetic\",\"wabaId\":\"whatsapp-business-account-id\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"from\":\"+16315551111\",\"type\":\"template\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "b5a12ff55d09be95e7b58592030c1ef880617889026ebe45b0173a1d3f5294fa",
+      "domain": "ycloud-whatsapp-messages",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_message-send-directly",
+      "owner": "ycloud-whatsapp-messages",
+      "path": "/whatsapp/messages/sendDirectly",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"from\":\"+16315551111\",\"id\":\"synthetic\",\"wabaId\":\"whatsapp-business-account-id\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"from\":\"+16315551111\",\"type\":\"template\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "3e7660fed1b955e5f4cc9da7cb601e194682cf94b5790113379c7499b0685760",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "DELETE",
+      "operationId": "whatsapp_phone_number-delete-business-username",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "09dfaf095cd3967f056a388d376f9e0f3d9ef6e659f51fa405b3a96335e55917",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "DELETE",
+      "operationId": "whatsapp_phone_number-delete-contact-book-entry",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/contactBook/{bsuid}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"deleted\":true,\"success\":true}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "cfc1bf9860a51f5a578bc2b2ede272c0078c6675e35e5b167f0243720c388b93",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-list",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"length\":0,\"limit\":1,\"offset\":0}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "93616e5341985ccd58b446804f775e93139bb21d06d16edd117ee33d99752a10",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_phone_number-register",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/register",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "198a03db15087904297bdd0e9e30fd6f7fc565e52d55263085ee46c2bf24c67f",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "f332e3c25d8a5572ac7acdb55e3392c476347a17f4a4a1afb47f5b6c6d0646c8",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve-business-username",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "0d22219d7ebabdc869a9d56bba94c46b65bdfb8a88de9cbeb67f46a78cc90068",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve-business-username-suggestions",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername/suggestions",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "dfc078f946cb68db5298426da34ee04063228b421e8f26d649a6452672e4384f",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve-commerce-settings",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/whatsappCommerceSettings",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "07a26812a157c33057204879a9eb609190dabd00bf20b55ad156cb584de949d8",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve-profile",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/profile",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "d148763fb92d8236fe548ccbd81edde8fefa389b051a1d8ed62abc072550c303",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_phone_number-retrieve-settings",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/settings",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "5d7b72c087ab9f58f619813659e10f6299e04ac7f1c1e806bfc6effe9d40c96a",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_phone_number-save-settings",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/settings",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "cc189f150468b48f8b15cfe3c66d5ed92d6384fc8a469b4625782ed2259065a4",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "PATCH",
+      "operationId": "whatsapp_phone_number-update-business-username",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"username\":\"acme.support\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "099bd5395a756a87d934dedeca12042b1a06fb03e1bbcf8bcabff91fd062c38e",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "PATCH",
+      "operationId": "whatsapp_phone_number-update-commerce-settings",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/whatsappCommerceSettings",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "a566703ff3c35cd36931d7130b07841941530011630b3c2a49426aa9aca142fc",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "PATCH",
+      "operationId": "whatsapp_phone_number-update-displayName",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/displayName",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "d89195d6d9ac499b5b79bb8764987f7a3ea091136b75a244528491c745abcdd4",
+      "domain": "ycloud-whatsapp-phone-numbers",
+      "kind": "operation",
+      "method": "PATCH",
+      "operationId": "whatsapp_phone_number-update-profile",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/profile",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "8242a1de6c6ead94b6a69a98472a3d8311503a2fe4ded335e19e99704b0b15e7",
+      "domain": "ycloud-whatsapp-templates",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_template-analytics",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates/analytics",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"analyticsStatus\":\"ENABLED\",\"dataPoints\":[],\"endDate\":\"2026-01-01\",\"language\":\"synthetic\",\"officialTemplateId\":\"synthetic\",\"startDate\":\"2026-01-01\",\"templateName\":\"synthetic\",\"timezone\":\"synthetic\",\"wabaId\":\"synthetic\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"endDate\":\"2026-07-07\",\"startDate\":\"2026-07-01\",\"wabaId\":\"102012345678901\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "6777dde2782748b098e155df0c08be1cca81a5592755323395a00ce32d48cf8a",
+      "domain": "ycloud-whatsapp-templates",
+      "kind": "operation",
+      "method": "POST",
+      "operationId": "whatsapp_template-create",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"language\":\"en\",\"name\":\"synthetic\",\"wabaId\":\"whatsapp-business-account-id\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"category\":\"UTILITY\",\"components\":[{\"example\":{\"body_text\":[[\"ORDER-5555\",\"99 USD\",\"February 25, 2023\"]]},\"text\":\"Your order {{1}} for a total of {{2}} is confirmed. The expected delivery is {{3}}.\",\"type\":\"BODY\"}],\"language\":\"en_US\",\"name\":\"order_confirmation\",\"wabaId\":\"<WABA_ID>\"}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "c6f210354473d8487a728c552d087a04609bb10524a7fed9df36f4f1560a3322",
+      "domain": "ycloud-whatsapp-templates",
+      "kind": "operation",
+      "method": "DELETE",
+      "operationId": "whatsapp_template-delete-by-name",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates/{wabaId}/{name}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "[]",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "5fe843b065356d1dc0d924134aa54b9f60e8253007af1f2b8ba00133872b23e7",
+      "domain": "ycloud-whatsapp-templates",
+      "kind": "operation",
+      "method": "DELETE",
+      "operationId": "whatsapp_template-delete-by-name-and-language",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates/{wabaId}/{name}/{language}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"language\":\"en\",\"name\":\"synthetic\",\"wabaId\":\"whatsapp-business-account-id\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "84b7bd5633e8433196f3de725652b1323bcedede565d8197f1e83f0303b124bb",
+      "domain": "ycloud-whatsapp-templates",
+      "kind": "operation",
+      "method": "PATCH",
+      "operationId": "whatsapp_template-edit-by-name-and-language",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates/{wabaId}/{name}/{language}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"language\":\"en\",\"name\":\"synthetic\",\"wabaId\":\"whatsapp-business-account-id\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "9d8c43fe7d111b797452c4a067a81eaaf2a4f328ce5115cbaf26991213ad3ef4",
+      "domain": "ycloud-whatsapp-templates",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_template-list",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"length\":0,\"limit\":1,\"offset\":0}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "3ed6bab6574eb0a4c900b895aa0243268a12e09f02a3405836898bcff3521bbb",
+      "domain": "ycloud-whatsapp-templates",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_template-retrieve-by-name-and-language",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates/{wabaId}/{name}/{language}",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{\"language\":\"en\",\"name\":\"synthetic\",\"wabaId\":\"whatsapp-business-account-id\"}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "77c98ddd416ac617fafcf2c6de1ad1777645cc88e08bed78548a8d1f4ffab579",
+      "domain": "ycloud-whatsapp-business-accounts",
+      "kind": "operation",
+      "method": "GET",
+      "operationId": "whatsapp_waba-retrieve-automatic-creative-optimizations",
+      "owner": "ycloud-whatsapp-business-accounts",
+      "path": "/whatsapp/businessAccounts/{wabaId}/automatic-creative-optimizations",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": false,
+      "requestFixtureJson": null,
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "contractDigest": "c0784cbb7dd4d01f8645c0326a3df584a6cdc7cfc9757edb2aa80a367ce4f786",
+      "domain": "ycloud-whatsapp-business-accounts",
+      "kind": "operation",
+      "method": "PATCH",
+      "operationId": "whatsapp_waba-update-automatic-creative-optimizations",
+      "owner": "ycloud-whatsapp-business-accounts",
+      "path": "/whatsapp/businessAccounts/{wabaId}/automatic-creative-optimizations",
+      "primarySuccessResponse": {
+        "bodyFixtureJson": "{}",
+        "bodyPresent": true,
+        "contentType": "application/json",
+        "statusCode": "200"
+      },
+      "requestBodyRequired": true,
+      "requestFixtureJson": "{\"creativeOptimizationFeatures\":{\"image_brightness_and_contrast\":\"OPT_IN\",\"image_touchups\":\"OPT_OUT\"}}",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ],
+      "successContentTypes": [
+        "application/json"
+      ],
+      "successStatuses": [
+        "200"
+      ]
+    },
+    {
+      "domain": "authentication",
+      "kind": "authentication",
+      "operationId": "crosscutting:api-authentication",
+      "owner": "ycloud-api-authentication",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ]
+    },
+    {
+      "domain": "webhook-receiver",
+      "kind": "webhook-receiver",
+      "operationId": "crosscutting:webhook-receiver",
+      "owner": "ycloud-webhook-endpoints",
+      "requiredSurfaces": [
+        "backend",
+        "tests"
+      ]
+    }
+  ],
+  "profile": "full-whatsapp-operations-v1",
+  "schemaVersion": 1
+}

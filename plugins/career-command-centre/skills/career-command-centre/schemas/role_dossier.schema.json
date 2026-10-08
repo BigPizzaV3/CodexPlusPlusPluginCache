@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://career-command-centre.local/schemas/role-dossier-v4.json",
+  "title": "Career Centre Role Dossier",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "role_id",
+    "track",
+    "decision",
+    "fit_score",
+    "shortlist_chance_percent",
+    "salary",
+    "employment",
+    "identity",
+    "recruiter_contact",
+    "main_match",
+    "main_risk",
+    "cv_angle",
+    "recommended_cv_base",
+    "add_to_tracker",
+    "skip_reason",
+    "requirement_map"
+  ],
+  "properties": {
+    "schema_version": {"const": "4.0"},
+    "role_id": {"type": "string", "minLength": 1},
+    "track": {"type": "string", "minLength": 1},
+    "decision": {"enum": ["apply", "maybe", "skip"]},
+    "fit_score": {"type": "number", "minimum": 0, "maximum": 10},
+    "shortlist_chance_percent": {"type": "integer", "minimum": 0, "maximum": 100},
+    "salary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["band", "basis", "currency"],
+      "properties": {
+        "band": {"type": "string", "minLength": 1},
+        "basis": {"enum": ["listed", "estimated", "day-rate", "annualised-contract-estimate"]},
+        "currency": {"type": "string", "minLength": 3, "maxLength": 3},
+        "evidence_note": {"type": "string"}
+      }
+    },
+    "employment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "duration", "deprioritisation_note"],
+      "properties": {
+        "type": {"enum": ["permanent", "contract", "fixed-term", "part-time", "casual", "other", "unknown"]},
+        "duration": {"type": ["string", "null"]},
+        "deprioritisation_note": {"type": ["string", "null"]}
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["company", "title", "location", "exact_posting_url", "source", "external_job_id", "posting_status", "link_status", "checked_at", "content_fingerprint", "synthetic"],
+      "properties": {
+        "company": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1},
+        "location": {"type": "string", "minLength": 1},
+        "exact_posting_url": {"type": "string", "format": "uri"},
+        "source": {"type": "string", "minLength": 1},
+        "external_job_id": {"type": ["string", "null"]},
+        "posting_status": {"enum": ["open", "closed", "unknown"]},
+        "link_status": {"enum": ["verified_exact", "unverified", "generic", "missing"]},
+        "checked_at": {"type": "string", "minLength": 1},
+        "content_fingerprint": {"type": "string", "minLength": 8},
+        "synthetic": {"type": "boolean"}
+      }
+    },
+    "recruiter_contact": {"type": ["string", "null"]},
+    "main_match": {"type": "string", "minLength": 1},
+    "main_risk": {"type": "string", "minLength": 1},
+    "cv_angle": {"type": "string", "minLength": 1},
+    "recommended_cv_base": {"type": "string", "minLength": 1},
+    "add_to_tracker": {"type": "boolean"},
+    "skip_reason": {"type": ["string", "null"]},
+    "requirement_map": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement", "importance", "assessment", "evidence_ids", "gap_note"],
+        "properties": {
+          "requirement": {"type": "string", "minLength": 1},
+          "importance": {"enum": ["essential", "important", "desirable"]},
+          "assessment": {"enum": ["direct", "adjacent", "gap", "unknown"]},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}},
+          "gap_note": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

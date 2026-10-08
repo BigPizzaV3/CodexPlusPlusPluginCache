@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "BallRoller Games",
+    "url": "https://github.com/tabutyn/build-3d-game-rooms"
+  },
+  "description": "An end-to-end workflow for conceiving props, generating references and Meshy meshes, composing Blender rooms, and shipping them.",
+  "homepage": "https://github.com/tabutyn/build-3d-game-rooms",
+  "interface": {
+    "capabilities": [
+      "skills",
+      "image generation",
+      "3D generation",
+      "Blender automation"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Conceive the props and build an approved 3D room in Blender.",
+      "Generate reference images and convert them into Meshy 5 assets.",
+      "Audit this Blender room and prepare it for runtime."
+    ],
+    "developerName": "BallRoller Games",
+    "displayName": "Build 3D Game Rooms",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Conceive coherent room props, generate isolated reference images, convert approved images into tracked Meshy 5 assets, compose the room in Blender, audit it, and ship it through blocking Function, Form, and Runtime gates.",
+    "privacyPolicyURL": "https://github.com/tabutyn/build-3d-game-rooms/blob/main/PRIVACY.md",
+    "shortDescription": "Build 3D rooms in Blender.",
+    "termsOfServiceURL": "https://github.com/tabutyn/build-3d-game-rooms/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/tabutyn/build-3d-game-rooms"
+  },
+  "keywords": [
+    "3d",
+    "blender",
+    "game-development",
+    "room-design",
+    "spatial-design"
+  ],
+  "license": "MIT",
+  "name": "build-3d-game-rooms",
+  "repository": "https://github.com/tabutyn/build-3d-game-rooms",
+  "skills": "./skills/",
+  "version": "0.3.3"
+}

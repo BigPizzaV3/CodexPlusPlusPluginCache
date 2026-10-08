@@ -1,0 +1,45 @@
+{
+  "author": {
+    "email": "support@b12.io",
+    "name": "B12",
+    "url": "https://www.b12.io"
+  },
+  "description": "Draw how your business actually works \u2014 process flows, client onboarding, swimlanes, decision trees, org charts and timelines \u2014 as a real .svg in your brand colors, with every arrow labeled and marked placeholders instead of invented steps, plus an optional B12 website in the same colors.",
+  "homepage": "https://www.b12.io",
+  "interface": {
+    "brandColor": "#4B22E8",
+    "brandColorDark": "#4B22E8",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Map our client onboarding from first enquiry to kickoff call",
+      "Turn our intake process into a flowchart for our services page",
+      "Draw a swimlane showing what we handle and what the client handles"
+    ],
+    "developerName": "B12",
+    "displayName": "Diagram Builder",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Describe how your work actually flows \u2014 the steps, the people, the handoffs \u2014 and it draws the diagram: process flows, swimlanes, decision trees, org charts, timelines and journey maps, with every arrow labeled and nothing invented.\n\nYou get a real .svg file in your brand colors, sharp at any size, no account needed and nothing uploaded. Ask for a matching website too, and you'll get a free B12 website link in the same colors.",
+    "privacyPolicyURL": "https://www.b12.io/privacy-policy/",
+    "shortDescription": "Diagrams, ready to publish",
+    "supportURL": "https://www.b12.io/contact-us/",
+    "termsOfServiceURL": "https://www.b12.io/terms-of-service/",
+    "websiteURL": "https://www.b12.io"
+  },
+  "keywords": [
+    "diagram",
+    "flowchart",
+    "process map",
+    "swimlane",
+    "org chart",
+    "b12"
+  ],
+  "license": "Apache-2.0",
+  "name": "diagram-builder",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

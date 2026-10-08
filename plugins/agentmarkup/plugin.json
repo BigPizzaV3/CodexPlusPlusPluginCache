@@ -1,0 +1,41 @@
+{
+  "name": "agentmarkup",
+  "description": "Make a JavaScript web repo readable by LLMs and AI agents at build time: generate llms.txt, JSON-LD, markdown mirrors, AI-crawler robots.txt rules and Content-Signal headers, then validate the built output. Picks the right @agentmarkup adapter for whichever layer owns your final HTML (Vite, Astro, Next, Nuxt, or any static build via the CLI) and asks before changing anything.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Sebastian Cochinescu",
+    "email": "hello@animafelix.com",
+    "url": "https://animafelix.com"
+  },
+  "homepage": "https://agentmarkup.dev",
+  "repository": "https://github.com/agentmarkup/agentmarkup",
+  "license": "MIT",
+  "keywords": [
+    "llms-txt",
+    "json-ld",
+    "geo",
+    "ai-crawler"
+  ],
+  "interface": {
+    "displayName": "AgentMarkup",
+    "shortDescription": "Generate llms.txt, JSON-LD, markdown mirrors and AI-crawler rules for a JavaScript web repo at build time, then validate the built output. Asks before changing anything.",
+    "longDescription": "agentmarkup generates the machine-readable layer of a website at build time: llms.txt, JSON-LD structured data, markdown mirrors, AI-crawler robots.txt rules and Content-Signal headers, then validates what the build actually produced. It works out which layer owns your final HTML and installs the matching adapter rather than guessing from what is already in package.json: Vite, Astro, Next or Nuxt, plus a framework-agnostic CLI for any other directory of built HTML, and core helpers for custom pipelines and dynamic SSR routes. Inspecting your repo is read-only. Before installing a package, writing config, running a build, or making an outbound request to a deployed site, it stops and presents a single plan naming the package, every file that would change, and the exact commands. Validation is deterministic: a missing required field is an error, a missing recommended field is a warning. There is no score, grade or percentage. Existing curated llms.txt, robots.txt, _headers and JSON-LD are preserved unless you explicitly opt into replacement. Open source and MIT licensed.",
+    "developerName": "Anima Felix",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://agentmarkup.dev",
+    "privacyPolicyURL": "https://agentmarkup.dev/privacy/",
+    "termsOfServiceURL": "https://agentmarkup.dev/terms/",
+    "defaultPrompt": [
+      "Set up llms.txt and JSON-LD for this site so AI agents can read it.",
+      "Agents only see an empty div on my site. What should I do?",
+      "Add a CI gate so our machine-readable output cannot silently break."
+    ],
+    "brandColor": "#4f7cff",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}

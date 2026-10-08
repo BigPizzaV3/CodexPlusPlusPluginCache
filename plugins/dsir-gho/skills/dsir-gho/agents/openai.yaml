@@ -1,0 +1,4 @@
+interface:
+  display_name: "DSIR GHO Health Data Skill"
+  short_description: "Find and retrieve WHO GHO data with provenance"
+  default_prompt: "Use $dsir-gho to find the right WHO GHO indicator, retrieve my selected locations and years, and save CSV and JSON with source details."

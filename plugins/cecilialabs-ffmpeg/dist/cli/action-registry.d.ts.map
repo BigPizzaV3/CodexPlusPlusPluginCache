@@ -1,0 +1,1 @@
+{"version":3,"file":"action-registry.d.ts","sourceRoot":"","sources":["../../src/cli/action-registry.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAYzC,MAAM,MAAM,aAAa,GAAG,CAAC,OAAO,EAAE,OAAO,EAAE,UAAU,EAAE,SAAS,OAAO,EAAE,KAAK,OAAO,CAAC,IAAI,CAAC,GAAG,IAAI,CAAC;AAuCvG,wBAAgB,oBAAoB,CAAC,IAAI,EAAE,MAAM,GAAG,aAAa,GAAG,SAAS,CAE5E"}

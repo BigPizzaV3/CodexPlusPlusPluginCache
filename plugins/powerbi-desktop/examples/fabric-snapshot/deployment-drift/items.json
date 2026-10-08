@@ -1,0 +1,3 @@
+[
+  { "id": "dataset-prod", "name": "Sales Model Prod", "type": "SemanticModel", "owner": "release.owner@example.com", "endorsement": "Certified", "sensitivityLabel": "Confidential", "workspaceId": "workspace-deploy", "usageScore": 95, "trustScore": 82 }
+]

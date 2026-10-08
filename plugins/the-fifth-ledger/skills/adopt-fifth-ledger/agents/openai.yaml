@@ -1,0 +1,6 @@
+interface:
+  display_name: "Adopt Fifth Ledger"
+  short_description: "Create a target-routed governance profile"
+  default_prompt: "Use $adopt-fifth-ledger to establish a target-routed governance profile without overriding existing authority."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,709 @@
+{
+  "catalogVersion": "1.0.0",
+  "lastUpdated": "2026-09-19",
+  "source": "Información pública de referencia de O2 España",
+  "disclaimer": "Datos de demostración y precios de referencia. TeleCall es una empresa ficticia y no representa a O2. Los datos no constituyen una oferta contractual vinculante.",
+  "products": [
+    {
+      "id": "fiber-300",
+      "name": "Fibra 300 Mb",
+      "type": "fiber",
+      "active": true,
+      "description": "Fibra simétrica de 300 Mbps con línea fija incluida. Ideal para navegación habitual, teletrabajo estándar y streaming HD.",
+      "price": {
+        "monthly": 23,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 300,
+        "symmetric": true
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true
+      },
+      "source": {
+        "sourceName": "O2 España - Catálogo público",
+        "sourceUrl": "https://o2online.es/fibra/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "fiber-600",
+      "name": "Fibra 600 Mb",
+      "type": "fiber",
+      "active": true,
+      "description": "Fibra simétrica de 600 Mbps con línea fija incluida. Gran velocidad para varios dispositivos simultáneos, streaming 4K y descargas rápidas.",
+      "price": {
+        "monthly": 27,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 600,
+        "symmetric": true
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true
+      },
+      "source": {
+        "sourceName": "O2 España - Catálogo público",
+        "sourceUrl": "https://o2online.es/fibra/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "fiber-1000",
+      "name": "Fibra 1 Gb",
+      "type": "fiber",
+      "active": true,
+      "description": "Fibra simétrica de 1 Gbps (1.000 Mbps) con línea fija incluida. Máximo rendimiento para gaming competitivo, teletrabajo intensivo y hogares hiperconectados.",
+      "price": {
+        "monthly": 31,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 1000,
+        "symmetric": true
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true
+      },
+      "source": {
+        "sourceName": "O2 España - Catálogo público",
+        "sourceUrl": "https://o2online.es/fibra/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "mobile-50",
+      "name": "Móvil 50 GB",
+      "type": "mobile",
+      "active": true,
+      "description": "Línea móvil principal con 50 GB de datos acumulables/alta velocidad 5G y llamadas nacionales ilimitadas.",
+      "price": {
+        "monthly": 7,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "mobile": {
+        "dataGB": 50,
+        "unlimitedCalls": true,
+        "unlimitedSms": true,
+        "network": "5G"
+      },
+      "conditions": {
+        "permanence": false
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas móvil",
+        "sourceUrl": "https://o2online.es/tarifas-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "mobile-100",
+      "name": "Móvil 100 GB",
+      "type": "mobile",
+      "active": true,
+      "description": "Línea móvil con 100 GB de datos 5G y llamadas nacionales ilimitadas. Perfecta para uso intensivo de redes sociales y streaming.",
+      "price": {
+        "monthly": 10,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "mobile": {
+        "dataGB": 100,
+        "unlimitedCalls": true,
+        "unlimitedSms": true,
+        "network": "5G"
+      },
+      "conditions": {
+        "permanence": false
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas móvil",
+        "sourceUrl": "https://o2online.es/tarifas-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "mobile-150",
+      "name": "Móvil 150 GB",
+      "type": "mobile",
+      "active": true,
+      "description": "Línea móvil con 150 GB de datos 5G y llamadas nacionales ilimitadas. Amplia holgura para usuarios exigentes.",
+      "price": {
+        "monthly": 15,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "mobile": {
+        "dataGB": 150,
+        "unlimitedCalls": true,
+        "unlimitedSms": true,
+        "network": "5G"
+      },
+      "conditions": {
+        "permanence": false
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas móvil",
+        "sourceUrl": "https://o2online.es/tarifas-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "mobile-300",
+      "name": "Móvil 300 GB",
+      "type": "mobile",
+      "active": true,
+      "description": "Línea móvil con 300 GB de datos 5G y llamadas nacionales ilimitadas. La opción de mayor capacidad para compartir internet y uso sin límites.",
+      "price": {
+        "monthly": 20,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "mobile": {
+        "dataGB": 300,
+        "unlimitedCalls": true,
+        "unlimitedSms": true,
+        "network": "5G"
+      },
+      "conditions": {
+        "permanence": false
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas móvil",
+        "sourceUrl": "https://o2online.es/tarifas-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "combined-600-35-mplus",
+      "name": "Fibra 600 Mb + Móvil 35 GB + Movistar Plus+",
+      "type": "fiber_mobile",
+      "active": true,
+      "description": "Pack convergente: Fibra 600 Mb simétrica, 1 línea móvil de 35 GB con llamadas ilimitadas y plataforma Movistar Plus+ incluida.",
+      "price": {
+        "monthly": 38,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 600,
+        "symmetric": true
+      },
+      "mobile": {
+        "dataGB": 35,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "television": {
+        "movistarPlus": true,
+        "netflix": false,
+        "disneyPlus": false,
+        "sports": true,
+        "football": false
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true,
+        "allowsAdditionalLines": true
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas Fibra y Móvil",
+        "sourceUrl": "https://o2online.es/fibra-y-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "combined-600-60-mplus",
+      "name": "Fibra 600 Mb + Móvil 60 GB + Movistar Plus+",
+      "type": "fiber_mobile",
+      "active": true,
+      "description": "Pack convergente: Fibra 600 Mb simétrica, 1 línea móvil de 60 GB con llamadas ilimitadas y suscripción a Movistar Plus+ incluida.",
+      "price": {
+        "monthly": 45,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 600,
+        "symmetric": true
+      },
+      "mobile": {
+        "dataGB": 60,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "television": {
+        "movistarPlus": true,
+        "netflix": false,
+        "disneyPlus": false,
+        "sports": true,
+        "football": false
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true,
+        "allowsAdditionalLines": true
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas Fibra y Móvil",
+        "sourceUrl": "https://o2online.es/fibra-y-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "combined-600-60-netflix",
+      "name": "Fibra 600 Mb + Móvil 60 GB + Movistar Plus+ + Netflix",
+      "type": "fiber_mobile",
+      "active": true,
+      "description": "Pack convergente de entretenimiento: Fibra 600 Mb, Móvil 60 GB, Movistar Plus+ y suscripción a Netflix Estándar incluida.",
+      "price": {
+        "monthly": 47,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 600,
+        "symmetric": true
+      },
+      "mobile": {
+        "dataGB": 60,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "television": {
+        "movistarPlus": true,
+        "netflix": true,
+        "disneyPlus": false,
+        "sports": true,
+        "football": false
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true,
+        "allowsAdditionalLines": true
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas Fibra, Móvil y TV",
+        "sourceUrl": "https://o2online.es/fibra-y-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "combined-600-60-disney-netflix",
+      "name": "Fibra 600 Mb + Móvil 60 GB + Movistar Plus+ + Disney+ + Netflix",
+      "type": "fiber_mobile",
+      "active": true,
+      "description": "Pack integral de streaming: Fibra 600 Mb, Móvil 60 GB, Movistar Plus+, Disney+ y Netflix.",
+      "price": {
+        "monthly": 52,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 600,
+        "symmetric": true
+      },
+      "mobile": {
+        "dataGB": 60,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "television": {
+        "movistarPlus": true,
+        "netflix": true,
+        "disneyPlus": true,
+        "sports": true,
+        "football": false
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true,
+        "allowsAdditionalLines": true
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas Fibra, Móvil y TV",
+        "sourceUrl": "https://o2online.es/fibra-y-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "combined-1000-350-mplus",
+      "name": "Fibra 1 Gb + Móvil 350 GB + Movistar Plus+",
+      "type": "fiber_mobile",
+      "active": true,
+      "description": "Pack de alto rendimiento: Fibra 1 Gbps simétrica, Móvil con 350 GB y Movistar Plus+.",
+      "price": {
+        "monthly": 50,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 1000,
+        "symmetric": true
+      },
+      "mobile": {
+        "dataGB": 350,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "television": {
+        "movistarPlus": true,
+        "netflix": false,
+        "disneyPlus": false,
+        "sports": true,
+        "football": false
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true,
+        "allowsAdditionalLines": true
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas Fibra y Móvil",
+        "sourceUrl": "https://o2online.es/fibra-y-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "combined-1000-375-disney",
+      "name": "Fibra 1 Gb + Móvil 375 GB + Movistar Plus+ + Disney+",
+      "type": "fiber_mobile",
+      "active": true,
+      "description": "Pack premium: Fibra 1 Gbps simétrica, Móvil 375 GB, Movistar Plus+ y Disney+.",
+      "price": {
+        "monthly": 56,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 1000,
+        "symmetric": true
+      },
+      "mobile": {
+        "dataGB": 375,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "television": {
+        "movistarPlus": true,
+        "netflix": false,
+        "disneyPlus": true,
+        "sports": true,
+        "football": false
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true,
+        "allowsAdditionalLines": true
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas Fibra, Móvil y TV",
+        "sourceUrl": "https://o2online.es/fibra-y-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "combined-1000-375-netflix",
+      "name": "Fibra 1 Gb + Móvil 375 GB + Movistar Plus+ + Netflix",
+      "type": "fiber_mobile",
+      "active": true,
+      "description": "Pack premium: Fibra 1 Gbps simétrica, Móvil 375 GB, Movistar Plus+ y Netflix.",
+      "price": {
+        "monthly": 58,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 1000,
+        "symmetric": true
+      },
+      "mobile": {
+        "dataGB": 375,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "television": {
+        "movistarPlus": true,
+        "netflix": true,
+        "disneyPlus": false,
+        "sports": true,
+        "football": false
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true,
+        "allowsAdditionalLines": true
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas Fibra, Móvil y TV",
+        "sourceUrl": "https://o2online.es/fibra-y-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "combined-1000-375-all-tv",
+      "name": "Fibra 1 Gb + Móvil 375 GB + Movistar Plus+ + Netflix + Disney+",
+      "type": "fiber_mobile",
+      "active": true,
+      "description": "Máxima conectividad y entretenimiento completo: Fibra 1 Gbps, 375 GB móviles, Movistar Plus+, Netflix y Disney+.",
+      "price": {
+        "monthly": 62,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 1000,
+        "symmetric": true
+      },
+      "mobile": {
+        "dataGB": 375,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "television": {
+        "movistarPlus": true,
+        "netflix": true,
+        "disneyPlus": true,
+        "sports": true,
+        "football": false
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "landlineIncluded": true,
+        "allowsAdditionalLines": true
+      },
+      "source": {
+        "sourceName": "O2 España - Tarifas Fibra, Móvil y TV",
+        "sourceUrl": "https://o2online.es/fibra-y-movil/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "additional-line-40",
+      "name": "Línea Adicional 40 GB",
+      "type": "additional_line",
+      "active": true,
+      "description": "Línea móvil adicional con 40 GB 5G y llamadas ilimitadas para añadir a tu paquete de Fibra y Móvil.",
+      "price": {
+        "monthly": 5,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "mobile": {
+        "dataGB": 40,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "conditions": {
+        "permanence": false,
+        "requiresParentPlan": "fiber_mobile"
+      },
+      "source": {
+        "sourceName": "O2 España - Líneas adicionales",
+        "sourceUrl": "https://o2online.es/lineas-adicionales/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "additional-line-150",
+      "name": "Línea Adicional 150 GB",
+      "type": "additional_line",
+      "active": true,
+      "description": "Línea móvil adicional con 150 GB 5G y llamadas ilimitadas para miembros de la familia o dispositivos extra.",
+      "price": {
+        "monthly": 10,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "mobile": {
+        "dataGB": 150,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "conditions": {
+        "permanence": false,
+        "requiresParentPlan": "fiber_mobile"
+      },
+      "source": {
+        "sourceName": "O2 España - Líneas adicionales",
+        "sourceUrl": "https://o2online.es/lineas-adicionales/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "additional-line-300",
+      "name": "Línea Adicional 300 GB",
+      "type": "additional_line",
+      "active": true,
+      "description": "Línea móvil adicional con 300 GB 5G y llamadas ilimitadas con la máxima capacidad de datos.",
+      "price": {
+        "monthly": 15,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "mobile": {
+        "dataGB": 300,
+        "unlimitedCalls": true,
+        "unlimitedSms": true
+      },
+      "conditions": {
+        "permanence": false,
+        "requiresParentPlan": "fiber_mobile"
+      },
+      "source": {
+        "sourceName": "O2 España - Líneas adicionales",
+        "sourceUrl": "https://o2online.es/lineas-adicionales/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "second-residence-300",
+      "name": "Segunda Residencia Fibra 300 Mb",
+      "type": "second_residence",
+      "active": true,
+      "description": "Fibra óptica para tu segunda vivienda (300 Mbps simétricos). Precio especial exclusivo para clientes con contrato principal de Fibra y Móvil.",
+      "price": {
+        "monthly": 15,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 300,
+        "symmetric": true
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "requiresExistingCustomer": true
+      },
+      "source": {
+        "sourceName": "O2 España - Segunda Residencia",
+        "sourceUrl": "https://o2online.es/segunda-residencia/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "second-residence-600",
+      "name": "Segunda Residencia Fibra 600 Mb",
+      "type": "second_residence",
+      "active": true,
+      "description": "Fibra óptica de 600 Mbps para tu segunda vivienda. Precio especial para clientes existentes.",
+      "price": {
+        "monthly": 20,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 600,
+        "symmetric": true
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "requiresExistingCustomer": true
+      },
+      "source": {
+        "sourceName": "O2 España - Segunda Residencia",
+        "sourceUrl": "https://o2online.es/segunda-residencia/",
+        "retrievedAt": "2026-09-19"
+      }
+    },
+    {
+      "id": "second-residence-1000",
+      "name": "Segunda Residencia Fibra 1 Gb",
+      "type": "second_residence",
+      "active": true,
+      "description": "Fibra de 1 Gbps para tu segunda residencia. Máxima velocidad para teletrabajar o disfrutar de vacaciones.",
+      "price": {
+        "monthly": 27,
+        "currency": "EUR",
+        "promotional": false
+      },
+      "fiber": {
+        "speedMbps": 1000,
+        "symmetric": true
+      },
+      "conditions": {
+        "permanence": false,
+        "installationIncluded": true,
+        "routerIncluded": true,
+        "requiresExistingCustomer": true
+      },
+      "source": {
+        "sourceName": "O2 España - Segunda Residencia",
+        "sourceUrl": "https://o2online.es/segunda-residencia/",
+        "retrievedAt": "2026-09-19"
+      }
+    }
+  ],
+  "roaming": {
+    "zones": {
+      "zone_1_eu": {
+        "name": "Zona 1 (Unión Europea, EEE y Reino Unido)",
+        "description": "Incluye los 27 países de la UE, Islandia, Liechtenstein, Noruega y acuerdos vigentes para Reino Unido.",
+        "countries": [
+          "Alemania", "Austria", "Bélgica", "Bulgaria", "Chipre", "Croacia", "Dinamarca", "Eslovaquia",
+          "Eslovenia", "Estonia", "Finlandia", "Francia", "Grecia", "Hungría", "Irlanda", "Islandia",
+          "Italia", "Letonia", "Liechtenstein", "Lituania", "Luxemburgo", "Malta", "Noruega", "Países Bajos",
+          "Polonia", "Portugal", "Reino Unido", "República Checa", "Rumanía", "Suecia"
+        ],
+        "pricing": {
+          "calls": "Incluidas en tu tarifa nacional (llamadas a números de España y del país visitado de Zona 1 sin coste adicional)",
+          "sms": "Incluidos en tu tarifa nacional",
+          "data": "Puedes usar los gigas de tu tarifa nacional sujetos a la política de uso razonable (Fair Use Policy) de la regulación europea.",
+          "extraCosts": false
+        },
+        "notes": "El roaming regulado aplica en la Zona 1. No incluye llamadas internacionales realizadas desde España a números extranjeros."
+      },
+      "zone_2_and_3_international": {
+        "name": "Zona 2 y Zona 3 (Resto del Mundo)",
+        "description": "Países fuera de la Unión Europea y el Espacio Económico Europeo (ej. Tailandia, EE. UU., Japón, Suiza, Marruecos, etc.).",
+        "popularCountries": [
+          "Tailandia", "Estados Unidos", "Suiza", "Andorra", "Marruecos", "México", "Japón", "Turquía",
+          "Argentina", "Colombia", "China", "Brasil", "Australia", "Canadá", "Egipto", "Emiratos Árabes"
+        ],
+        "pricing": {
+          "callsOutgoing": "Aproximadamente 1,82 €/min + 0,57 € de establecimiento de llamada (según país)",
+          "callsIncoming": "Aproximadamente 1,45 €/min + 0,57 € de establecimiento",
+          "sms": "Aproximadamente 0,73 € por SMS enviado",
+          "data": "Aproximadamente 12,10 € por MB (o bonos diarios/semanales específicos si están activos en destino)",
+          "extraCosts": true
+        },
+        "recommendation": "Para destinos fuera de la UE (como Tailandia o EE. UU.), se recomienda desactivar la itinerancia de datos o utilizar una eSIM local / bono internacional específico para evitar costes elevados."
+      }
+    }
+  }
+}

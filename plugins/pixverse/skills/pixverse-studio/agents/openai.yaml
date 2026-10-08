@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Studio"
+  short_description: "Discover and plan workflows"
+  default_prompt: "Use $pixverse-studio to choose the right existing workflow for my project."
+policy:
+  allow_implicit_invocation: true

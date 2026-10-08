@@ -1,0 +1,4 @@
+interface:
+  display_name: "FLOWSTACK UI Compose"
+  short_description: "Compose plans through Brick"
+  default_prompt: "Use $flowstack-ui-compose to map this supplied plan through exact FLOWSTACK Brick guidance."

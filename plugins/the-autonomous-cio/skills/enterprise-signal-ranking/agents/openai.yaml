@@ -1,0 +1,5 @@
+interface:
+  display_name: "Enterprise Signal Ranking"
+  short_description: "Explicit-only."
+policy:
+  allow_implicit_invocation: false

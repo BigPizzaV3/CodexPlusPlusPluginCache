@@ -1,0 +1,2605 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/tahr-security/tahr-security-skills/main/skills/tahr-threat-model-app/assets/threat-model.schema.json",
+  "title": "Tahr Full Application Threat Model",
+  "description": "Canonical full-mode, claim-provenanced threat model for an entire existing application.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "metadata",
+    "executive_summary",
+    "evidence",
+    "entities",
+    "boundaries",
+    "flows",
+    "invariants",
+    "controls",
+    "threats",
+    "attack_paths",
+    "decisions",
+    "validation_tests",
+    "coverage",
+    "questions",
+    "privacy_analysis",
+    "ai_analysis",
+    "quality_review"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "metadata": {
+      "$ref": "#/$defs/metadata"
+    },
+    "executive_summary": {
+      "$ref": "#/$defs/executiveSummary"
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/evidenceRecord"
+      }
+    },
+    "entities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/entity"
+      }
+    },
+    "boundaries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/boundary"
+      }
+    },
+    "flows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/flow"
+      }
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/invariant"
+      }
+    },
+    "controls": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/control"
+      }
+    },
+    "threats": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/threat"
+      }
+    },
+    "attack_paths": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/attackPath"
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/decision"
+      }
+    },
+    "validation_tests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/validationTest"
+      }
+    },
+    "coverage": {
+      "$ref": "#/$defs/coverage"
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/question"
+      }
+    },
+    "privacy_analysis": {
+      "$ref": "#/$defs/privacyAnalysis"
+    },
+    "ai_analysis": {
+      "$ref": "#/$defs/aiAnalysis"
+    },
+    "quality_review": {
+      "$ref": "#/$defs/qualityReview"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "metadata": {
+            "properties": {
+              "model_status": {
+                "const": "complete"
+              }
+            },
+            "required": [
+              "model_status"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "coverage": {
+            "properties": {
+              "unread_high_risk_count": {
+                "const": 0
+              },
+              "items": {
+                "not": {
+                  "contains": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "const": "pending"
+                      },
+                      "risk_if_unreviewed": {
+                        "enum": [
+                          "critical",
+                          "high"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "status",
+                      "risk_if_unreviewed"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "quality_review": {
+            "properties": {
+              "overall_status": {
+                "const": "pass"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metadata": {
+            "properties": {
+              "model_status": {
+                "const": "incomplete_high_risk_coverage"
+              }
+            },
+            "required": [
+              "model_status"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "quality_review": {
+            "properties": {
+              "overall_status": {
+                "enum": [
+                  "fail",
+                  "incomplete"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "metadata": {
+            "properties": {
+              "assurance_status": {
+                "enum": [
+                  "partially_runtime_validated",
+                  "runtime_validated"
+                ]
+              }
+            },
+            "required": [
+              "assurance_status"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "source_type": {
+                  "enum": [
+                    "runtime_observation",
+                    "test_result"
+                  ]
+                }
+              },
+              "required": [
+                "source_type"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z][A-Za-z0-9._:-]*$"
+    },
+    "evidenceId": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 128,
+      "pattern": "^EVD-[A-Za-z0-9._:-]+$"
+    },
+    "evidenceIdArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/evidenceId"
+      }
+    },
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "idArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "optionalIdArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      }
+    },
+    "stringArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nonEmptyString"
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "statement",
+        "evidence_class",
+        "evidence_ids",
+        "confidence"
+      ],
+      "properties": {
+        "claim_id": {
+          "$ref": "#/$defs/id"
+        },
+        "statement": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidence_class": {
+          "enum": [
+            "observed",
+            "intended",
+            "inferred",
+            "unknown"
+          ]
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/evidenceIdArray"
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "caveats": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "mode",
+        "model_status",
+        "assurance_status",
+        "created_at",
+        "updated_at",
+        "next_review_at",
+        "change_triggers",
+        "runtime_authorization",
+        "authors",
+        "repository"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "mode": {
+          "const": "full"
+        },
+        "model_status": {
+          "enum": [
+            "complete",
+            "incomplete_high_risk_coverage"
+          ]
+        },
+        "assurance_status": {
+          "enum": [
+            "source_observed",
+            "partially_runtime_validated",
+            "runtime_validated"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "next_review_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "change_triggers": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "runtime_authorization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "targets",
+            "constraints"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "not_authorized",
+                "requires_authorization",
+                "authorized"
+              ]
+            },
+            "targets": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            },
+            "constraints": {
+              "$ref": "#/$defs/nonEmptyStringArray"
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "status": {
+                    "const": "authorized"
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "targets": {
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "previous_model": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "authors": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "repository": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "root",
+            "revision",
+            "scope"
+          ],
+          "properties": {
+            "name": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "root": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "revision": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "scope": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "coverage_target",
+                "description",
+                "included_paths",
+                "included_packages",
+                "deployment_environments",
+                "supplied_documents",
+                "excluded_paths",
+                "excluded_environments"
+              ],
+              "properties": {
+                "coverage_target": {
+                  "const": "entire_application"
+                },
+                "description": {
+                  "$ref": "#/$defs/nonEmptyString"
+                },
+                "included_paths": {
+                  "$ref": "#/$defs/nonEmptyStringArray"
+                },
+                "included_packages": {
+                  "$ref": "#/$defs/nonEmptyStringArray"
+                },
+                "deployment_environments": {
+                  "$ref": "#/$defs/nonEmptyStringArray"
+                },
+                "excluded_paths": {
+                  "$ref": "#/$defs/stringArray"
+                },
+                "excluded_environments": {
+                  "$ref": "#/$defs/stringArray"
+                },
+                "supplied_documents": {
+                  "$ref": "#/$defs/stringArray"
+                },
+                "limitations": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/$defs/claim"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "executiveSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system_purpose",
+        "overall_assessment",
+        "model_status_rationale",
+        "highest_risk_threat_ids",
+        "priority_decision_ids"
+      ],
+      "properties": {
+        "system_purpose": {
+          "$ref": "#/$defs/claim"
+        },
+        "overall_assessment": {
+          "$ref": "#/$defs/claim"
+        },
+        "model_status_rationale": {
+          "$ref": "#/$defs/claim"
+        },
+        "highest_risk_threat_ids": {
+          "$ref": "#/$defs/optionalIdArray"
+        },
+        "priority_decision_ids": {
+          "$ref": "#/$defs/optionalIdArray"
+        },
+        "assurance_limitations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        }
+      }
+    },
+    "evidenceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "evidence_class",
+        "source_type",
+        "title",
+        "summary",
+        "locator",
+        "collected_at",
+        "reliability",
+        "redaction"
+      ],
+      "properties": {
+        "evidence_id": {
+          "$ref": "#/$defs/evidenceId"
+        },
+        "evidence_class": {
+          "enum": [
+            "observed",
+            "intended",
+            "inferred",
+            "unknown"
+          ]
+        },
+        "source_type": {
+          "enum": [
+            "source_code",
+            "configuration",
+            "infrastructure_as_code",
+            "repository_manifest",
+            "api_specification",
+            "design_document",
+            "diagram",
+            "role_matrix",
+            "policy",
+            "runtime_observation",
+            "test_result",
+            "interview",
+            "unknown"
+          ]
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "summary": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "locator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository_path",
+            "revision",
+            "location"
+          ],
+          "properties": {
+            "repository_path": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "revision": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "location": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "external_uri": {
+              "type": "string",
+              "format": "uri",
+              "minLength": 1
+            },
+            "content_hash": {
+              "$ref": "#/$defs/nonEmptyString"
+            }
+          }
+        },
+        "collected_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reliability": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "redaction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "applied",
+            "details"
+          ],
+          "properties": {
+            "applied": {
+              "type": "boolean"
+            },
+            "details": {
+              "$ref": "#/$defs/nonEmptyString"
+            }
+          }
+        }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_id",
+        "type",
+        "name",
+        "description",
+        "criticality",
+        "data_classification",
+        "owner",
+        "external"
+      ],
+      "properties": {
+        "entity_id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "enum": [
+            "actor",
+            "asset",
+            "component",
+            "trust_zone",
+            "data_store",
+            "integration",
+            "entrypoint",
+            "principal"
+          ]
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "description": {
+          "$ref": "#/$defs/claim"
+        },
+        "criticality": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "data_classification": {
+          "enum": [
+            "none",
+            "public",
+            "internal",
+            "confidential",
+            "restricted",
+            "unknown"
+          ]
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "external": {
+          "type": "boolean"
+        },
+        "zone_id": {
+          "$ref": "#/$defs/id"
+        },
+        "trust_level": {
+          "enum": [
+            "untrusted",
+            "partially_trusted",
+            "trusted",
+            "privileged",
+            "unknown"
+          ]
+        },
+        "roles": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "technologies": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "related_entity_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "entrypoint"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "entity_id": {
+                "type": "string",
+                "pattern": "^ENTRYPOINT-[A-Za-z0-9._:-]+$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boundary_id",
+        "name",
+        "from_zone_id",
+        "to_zone_id",
+        "direction",
+        "description",
+        "trust_change",
+        "asset_ids"
+      ],
+      "properties": {
+        "boundary_id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "from_zone_id": {
+          "$ref": "#/$defs/id"
+        },
+        "to_zone_id": {
+          "$ref": "#/$defs/id"
+        },
+        "direction": {
+          "enum": [
+            "unidirectional",
+            "bidirectional"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/claim"
+        },
+        "trust_change": {
+          "$ref": "#/$defs/claim"
+        },
+        "asset_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "control_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      }
+    },
+    "flow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "flow_id",
+        "name",
+        "description",
+        "actor_ids",
+        "asset_ids",
+        "entrypoint_entity_ids",
+        "trigger",
+        "input",
+        "hops",
+        "sink_or_final_state"
+      ],
+      "properties": {
+        "flow_id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "description": {
+          "$ref": "#/$defs/claim"
+        },
+        "actor_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "asset_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "entrypoint_entity_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "trigger": {
+          "$ref": "#/$defs/claim"
+        },
+        "input": {
+          "$ref": "#/$defs/claim"
+        },
+        "hops": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/flowHop"
+          }
+        },
+        "sink_or_final_state": {
+          "$ref": "#/$defs/claim"
+        },
+        "side_effects": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "unresolved_question_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      }
+    },
+    "flowHop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hop_id",
+        "sequence",
+        "from_entity_id",
+        "to_entity_id",
+        "boundary_id",
+        "channel",
+        "operation",
+        "data_asset_ids",
+        "identity_context",
+        "security_decisions",
+        "control_ids"
+      ],
+      "properties": {
+        "hop_id": {
+          "$ref": "#/$defs/id"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "from_entity_id": {
+          "$ref": "#/$defs/id"
+        },
+        "to_entity_id": {
+          "$ref": "#/$defs/id"
+        },
+        "boundary_id": {
+          "$ref": "#/$defs/id"
+        },
+        "channel": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "operation": {
+          "$ref": "#/$defs/claim"
+        },
+        "data_asset_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "identity_context": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "principal",
+            "tenant",
+            "roles",
+            "trust_basis"
+          ],
+          "properties": {
+            "principal": {
+              "$ref": "#/$defs/claim"
+            },
+            "tenant": {
+              "$ref": "#/$defs/claim"
+            },
+            "roles": {
+              "$ref": "#/$defs/claim"
+            },
+            "trust_basis": {
+              "$ref": "#/$defs/claim"
+            }
+          }
+        },
+        "security_decisions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "decision_type",
+              "outcome"
+            ],
+            "properties": {
+              "decision_type": {
+                "enum": [
+                  "authentication",
+                  "authorization",
+                  "ownership",
+                  "tenant_scope",
+                  "role_policy",
+                  "validation",
+                  "serialization",
+                  "rate_or_usage"
+                ]
+              },
+              "outcome": {
+                "$ref": "#/$defs/claim"
+              }
+            }
+          }
+        },
+        "control_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      }
+    },
+    "invariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "invariant_id",
+        "statement",
+        "owner",
+        "status",
+        "asset_ids",
+        "flow_ids",
+        "threat_ids",
+        "control_ids",
+        "validation_test_ids"
+      ],
+      "properties": {
+        "invariant_id": {
+          "$ref": "#/$defs/id"
+        },
+        "statement": {
+          "$ref": "#/$defs/claim"
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "status": {
+          "enum": [
+            "implemented",
+            "partial",
+            "assumed",
+            "missing",
+            "unknown"
+          ]
+        },
+        "asset_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "flow_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "threat_ids": {
+          "$ref": "#/$defs/optionalIdArray"
+        },
+        "control_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "validation_test_ids": {
+          "$ref": "#/$defs/optionalIdArray"
+        }
+      }
+    },
+    "control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "control_id",
+        "name",
+        "category",
+        "description",
+        "implementation_status",
+        "owner",
+        "entity_ids",
+        "flow_ids",
+        "invariant_ids",
+        "threat_ids",
+        "validation_test_ids",
+        "effectiveness"
+      ],
+      "properties": {
+        "control_id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "category": {
+          "enum": [
+            "authentication",
+            "authorization",
+            "tenant_isolation",
+            "ownership",
+            "input_validation",
+            "serialization",
+            "queue_security",
+            "network_security",
+            "least_privilege",
+            "data_protection",
+            "logging_and_audit",
+            "retention",
+            "rate_and_usage_control",
+            "privacy",
+            "supply_chain",
+            "other"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/claim"
+        },
+        "implementation_status": {
+          "enum": [
+            "observed",
+            "intended",
+            "assumed",
+            "partial",
+            "missing",
+            "unknown"
+          ]
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "entity_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "flow_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "invariant_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "threat_ids": {
+          "$ref": "#/$defs/optionalIdArray"
+        },
+        "validation_test_ids": {
+          "$ref": "#/$defs/optionalIdArray"
+        },
+        "effectiveness": {
+          "$ref": "#/$defs/confidence"
+        },
+        "framework_mappings": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "rationale"
+      ],
+      "properties": {
+        "level": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/$defs/claim"
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "likelihood",
+        "impact",
+        "rating",
+        "factors",
+        "rationale"
+      ],
+      "properties": {
+        "likelihood": {
+          "enum": [
+            "rare",
+            "unlikely",
+            "possible",
+            "likely",
+            "almost_certain"
+          ]
+        },
+        "impact": {
+          "enum": [
+            "negligible",
+            "minor",
+            "moderate",
+            "major",
+            "severe"
+          ]
+        },
+        "rating": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "factors": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "exposure",
+            "privilege_required",
+            "attacker_complexity",
+            "user_interaction",
+            "asset_sensitivity",
+            "tenant_reach"
+          ],
+          "properties": {
+            "exposure": {
+              "enum": [
+                "internet",
+                "private_network",
+                "local",
+                "third_party",
+                "unknown"
+              ]
+            },
+            "privilege_required": {
+              "enum": [
+                "none",
+                "authenticated_user",
+                "privileged_user",
+                "service_access",
+                "code_execution",
+                "unknown"
+              ]
+            },
+            "attacker_complexity": {
+              "enum": [
+                "low",
+                "medium",
+                "high",
+                "unknown"
+              ]
+            },
+            "user_interaction": {
+              "enum": [
+                "none",
+                "required",
+                "unknown"
+              ]
+            },
+            "asset_sensitivity": {
+              "enum": [
+                "low",
+                "medium",
+                "high",
+                "critical",
+                "unknown"
+              ]
+            },
+            "tenant_reach": {
+              "enum": [
+                "single_tenant",
+                "cross_tenant",
+                "all_tenants",
+                "unknown"
+              ]
+            }
+          }
+        },
+        "rationale": {
+          "$ref": "#/$defs/claim"
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strategy",
+        "priority",
+        "status",
+        "owner",
+        "next_action",
+        "rationale",
+        "residual_risk",
+        "decision_ids"
+      ],
+      "properties": {
+        "strategy": {
+          "enum": [
+            "mitigate",
+            "accept",
+            "eliminate",
+            "transfer",
+            "investigate"
+          ]
+        },
+        "priority": {
+          "enum": [
+            "p0",
+            "p1",
+            "p2",
+            "p3"
+          ]
+        },
+        "status": {
+          "enum": [
+            "proposed",
+            "planned",
+            "in_progress",
+            "implemented",
+            "accepted",
+            "deferred"
+          ]
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "next_action": {
+          "$ref": "#/$defs/claim"
+        },
+        "rationale": {
+          "$ref": "#/$defs/claim"
+        },
+        "residual_risk": {
+          "$ref": "#/$defs/risk"
+        },
+        "decision_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "target_date": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "threat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "threat_id",
+        "title",
+        "actor_ids",
+        "goal",
+        "asset_ids",
+        "flow_ids",
+        "boundary_ids",
+        "invariant_ids",
+        "control_ids",
+        "preconditions",
+        "abuse_path",
+        "contradiction_checks",
+        "business_impact",
+        "risk",
+        "confidence",
+        "response",
+        "status",
+        "validation_test_ids"
+      ],
+      "properties": {
+        "threat_id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "actor_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "goal": {
+          "$ref": "#/$defs/claim"
+        },
+        "asset_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "flow_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "boundary_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "invariant_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "control_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "preconditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "abuse_path": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "sequence",
+              "action",
+              "entity_ids",
+              "flow_id"
+            ],
+            "properties": {
+              "sequence": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "action": {
+                "$ref": "#/$defs/claim"
+              },
+              "entity_ids": {
+                "$ref": "#/$defs/idArray"
+              },
+              "flow_id": {
+                "$ref": "#/$defs/id"
+              },
+              "boundary_id": {
+                "$ref": "#/$defs/id"
+              }
+            }
+          }
+        },
+        "contradiction_checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "business_impact": {
+          "$ref": "#/$defs/claim"
+        },
+        "risk": {
+          "$ref": "#/$defs/risk"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "response": {
+          "$ref": "#/$defs/response"
+        },
+        "status": {
+          "enum": [
+            "modeled",
+            "validation_required",
+            "accepted",
+            "rejected"
+          ]
+        },
+        "validation_test_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      }
+    },
+    "attackPath": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attack_path_id",
+        "title",
+        "actor_id",
+        "preconditions",
+        "hops",
+        "final_asset_ids",
+        "final_impact",
+        "risk",
+        "confidence",
+        "status",
+        "decision_ids",
+        "validation_test_ids"
+      ],
+      "properties": {
+        "attack_path_id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "actor_id": {
+          "$ref": "#/$defs/id"
+        },
+        "preconditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "hops": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/attackPathHop"
+          }
+        },
+        "final_asset_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "final_impact": {
+          "$ref": "#/$defs/claim"
+        },
+        "risk": {
+          "$ref": "#/$defs/risk"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "conditional",
+            "rejected"
+          ]
+        },
+        "decision_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "validation_test_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      }
+    },
+    "attackPathHop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "from_entity_id",
+        "to_entity_id",
+        "flow_id",
+        "flow_hop_id",
+        "boundary_id",
+        "threat_ids",
+        "control_ids",
+        "condition",
+        "outcome"
+      ],
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "from_entity_id": {
+          "$ref": "#/$defs/id"
+        },
+        "to_entity_id": {
+          "$ref": "#/$defs/id"
+        },
+        "flow_id": {
+          "$ref": "#/$defs/id"
+        },
+        "flow_hop_id": {
+          "$ref": "#/$defs/id"
+        },
+        "boundary_id": {
+          "$ref": "#/$defs/id"
+        },
+        "threat_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "control_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "condition": {
+          "$ref": "#/$defs/claim"
+        },
+        "outcome": {
+          "$ref": "#/$defs/claim"
+        },
+        "intermediate_asset_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_id",
+        "title",
+        "question",
+        "status",
+        "owner",
+        "threat_ids",
+        "invariant_ids",
+        "control_ids",
+        "flow_ids",
+        "options",
+        "recommendation",
+        "rationale",
+        "validation_test_ids"
+      ],
+      "properties": {
+        "decision_id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "question": {
+          "$ref": "#/$defs/claim"
+        },
+        "status": {
+          "enum": [
+            "proposed",
+            "approved",
+            "in_progress",
+            "implemented",
+            "accepted",
+            "blocked"
+          ]
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "threat_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "invariant_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "control_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "flow_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "option_id",
+              "description",
+              "security_effect",
+              "tradeoffs"
+            ],
+            "properties": {
+              "option_id": {
+                "$ref": "#/$defs/id"
+              },
+              "description": {
+                "$ref": "#/$defs/claim"
+              },
+              "security_effect": {
+                "$ref": "#/$defs/claim"
+              },
+              "tradeoffs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/claim"
+                }
+              }
+            }
+          }
+        },
+        "selected_option_id": {
+          "$ref": "#/$defs/id"
+        },
+        "recommendation": {
+          "$ref": "#/$defs/claim"
+        },
+        "rationale": {
+          "$ref": "#/$defs/claim"
+        },
+        "validation_test_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      }
+    },
+    "signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "signal_id",
+        "type",
+        "observation",
+        "interpretation"
+      ],
+      "properties": {
+        "signal_id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "enum": [
+            "http_response",
+            "authorization_decision",
+            "database_trace",
+            "queue_event",
+            "object_store_event",
+            "audit_event",
+            "metric",
+            "log",
+            "state_inspection",
+            "other"
+          ]
+        },
+        "observation": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "interpretation": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "testResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "summary",
+        "observed_signal_ids",
+        "executed_at",
+        "executor",
+        "evidence_ids"
+      ],
+      "properties": {
+        "outcome": {
+          "enum": [
+            "control_held",
+            "control_failed",
+            "inconclusive"
+          ]
+        },
+        "summary": {
+          "$ref": "#/$defs/claim"
+        },
+        "observed_signal_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "executed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "executor": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/evidenceIdArray"
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        }
+      }
+    },
+    "validationTest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "test_id",
+        "title",
+        "hypothesis",
+        "threat_ids",
+        "invariant_ids",
+        "actor_id",
+        "asset_ids",
+        "boundary_ids",
+        "flow_ids",
+        "preconditions",
+        "fixture_setup",
+        "baseline",
+        "attacker_case",
+        "control_case",
+        "evidence_to_collect",
+        "target_skill",
+        "safety",
+        "cleanup",
+        "execution_status",
+        "confidence"
+      ],
+      "properties": {
+        "test_id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "hypothesis": {
+          "$ref": "#/$defs/claim"
+        },
+        "threat_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "invariant_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "actor_id": {
+          "$ref": "#/$defs/id"
+        },
+        "asset_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "boundary_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "flow_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "preconditions": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "fixture_setup": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "baseline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "description",
+            "steps",
+            "expected_signals",
+            "evidence_to_collect"
+          ],
+          "properties": {
+            "description": {
+              "$ref": "#/$defs/claim"
+            },
+            "steps": {
+              "$ref": "#/$defs/nonEmptyStringArray"
+            },
+            "expected_signals": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/signal"
+              }
+            },
+            "evidence_to_collect": {
+              "$ref": "#/$defs/nonEmptyStringArray"
+            }
+          }
+        },
+        "attacker_case": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "objective",
+            "steps",
+            "attacker_success_signal",
+            "expected_denial_signal"
+          ],
+          "properties": {
+            "objective": {
+              "$ref": "#/$defs/claim"
+            },
+            "steps": {
+              "$ref": "#/$defs/nonEmptyStringArray"
+            },
+            "attacker_success_signal": {
+              "$ref": "#/$defs/signal"
+            },
+            "expected_denial_signal": {
+              "$ref": "#/$defs/signal"
+            }
+          }
+        },
+        "control_case": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "expected_control_ids",
+            "steps",
+            "control_success_signal",
+            "control_failure_signal"
+          ],
+          "properties": {
+            "expected_control_ids": {
+              "$ref": "#/$defs/idArray"
+            },
+            "steps": {
+              "$ref": "#/$defs/nonEmptyStringArray"
+            },
+            "control_success_signal": {
+              "$ref": "#/$defs/signal"
+            },
+            "control_failure_signal": {
+              "$ref": "#/$defs/signal"
+            }
+          }
+        },
+        "evidence_to_collect": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "target_skill": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "safety": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "authorized_target",
+            "authorization_status",
+            "synthetic_data_only",
+            "destructive_actions_prohibited",
+            "constraints",
+            "stop_conditions",
+            "evidence_handling"
+          ],
+          "properties": {
+            "authorized_target": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "authorization_status": {
+              "enum": [
+                "authorized",
+                "not_authorized",
+                "requires_authorization"
+              ]
+            },
+            "synthetic_data_only": {
+              "type": "boolean"
+            },
+            "destructive_actions_prohibited": {
+              "type": "boolean"
+            },
+            "constraints": {
+              "$ref": "#/$defs/nonEmptyStringArray"
+            },
+            "stop_conditions": {
+              "$ref": "#/$defs/nonEmptyStringArray"
+            },
+            "evidence_handling": {
+              "$ref": "#/$defs/nonEmptyStringArray"
+            }
+          }
+        },
+        "cleanup": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "steps",
+            "verification_signals",
+            "owner"
+          ],
+          "properties": {
+            "steps": {
+              "$ref": "#/$defs/nonEmptyStringArray"
+            },
+            "verification_signals": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/signal"
+              }
+            },
+            "owner": {
+              "$ref": "#/$defs/nonEmptyString"
+            }
+          }
+        },
+        "blocker": {
+          "$ref": "#/$defs/claim"
+        },
+        "result": {
+          "$ref": "#/$defs/testResult"
+        },
+        "execution_status": {
+          "enum": [
+            "planned",
+            "passed",
+            "failed",
+            "inconclusive",
+            "blocked"
+          ]
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "execution_status": {
+                "enum": [
+                  "passed",
+                  "failed",
+                  "inconclusive"
+                ]
+              }
+            },
+            "required": [
+              "execution_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "result"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "execution_status": {
+                "const": "blocked"
+              }
+            },
+            "required": [
+              "execution_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "blocker"
+            ]
+          }
+        }
+      ]
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "inventory",
+        "items",
+        "unread_high_risk_count"
+      ],
+      "properties": {
+        "summary": {
+          "$ref": "#/$defs/claim"
+        },
+        "inventory": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "manifest",
+            "expected_subject_ids"
+          ],
+          "properties": {
+            "method": {
+              "$ref": "#/$defs/claim"
+            },
+            "manifest": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "evidence_id",
+                "revision",
+                "content_hash",
+                "included_paths",
+                "included_packages",
+                "deployment_environments",
+                "supplied_documents",
+                "excluded_paths",
+                "excluded_environments"
+              ],
+              "properties": {
+                "evidence_id": {
+                  "$ref": "#/$defs/evidenceId"
+                },
+                "revision": {
+                  "$ref": "#/$defs/nonEmptyString"
+                },
+                "content_hash": {
+                  "$ref": "#/$defs/sha256"
+                },
+                "included_paths": {
+                  "$ref": "#/$defs/nonEmptyStringArray"
+                },
+                "included_packages": {
+                  "$ref": "#/$defs/nonEmptyStringArray"
+                },
+                "deployment_environments": {
+                  "$ref": "#/$defs/nonEmptyStringArray"
+                },
+                "supplied_documents": {
+                  "$ref": "#/$defs/stringArray"
+                },
+                "excluded_paths": {
+                  "$ref": "#/$defs/stringArray"
+                },
+                "excluded_environments": {
+                  "$ref": "#/$defs/stringArray"
+                }
+              }
+            },
+            "expected_subject_ids": {
+              "$ref": "#/$defs/idArray"
+            }
+          }
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/coverageItem"
+          }
+        },
+        "unread_high_risk_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "coverageItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coverage_id",
+        "category",
+        "subject_id",
+        "description",
+        "status",
+        "reason",
+        "risk_if_unreviewed",
+        "evidence_ids",
+        "owner",
+        "next_action"
+      ],
+      "properties": {
+        "coverage_id": {
+          "$ref": "#/$defs/id"
+        },
+        "category": {
+          "enum": [
+            "entrypoint",
+            "authentication",
+            "authorization",
+            "asset",
+            "boundary",
+            "flow",
+            "integration",
+            "worker",
+            "admin_surface",
+            "deployment_zone",
+            "security_decision",
+            "data_store",
+            "privacy",
+            "control",
+            "other"
+          ]
+        },
+        "subject_id": {
+          "$ref": "#/$defs/id"
+        },
+        "description": {
+          "$ref": "#/$defs/claim"
+        },
+        "status": {
+          "enum": [
+            "reviewed",
+            "reviewed_no_issue",
+            "out_of_scope",
+            "deferred_with_specific_reason",
+            "pending"
+          ]
+        },
+        "reason": {
+          "$ref": "#/$defs/claim"
+        },
+        "risk_if_unreviewed": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/evidenceIdArray"
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "next_action": {
+          "$ref": "#/$defs/claim"
+        },
+        "scope_exclusion": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "out_of_scope"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "scope_exclusion"
+            ]
+          }
+        }
+      ]
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question_id",
+        "question",
+        "priority",
+        "owner",
+        "related_ids",
+        "blocking",
+        "status",
+        "resolution_criteria"
+      ],
+      "properties": {
+        "question_id": {
+          "$ref": "#/$defs/id"
+        },
+        "question": {
+          "$ref": "#/$defs/claim"
+        },
+        "priority": {
+          "enum": [
+            "p0",
+            "p1",
+            "p2",
+            "p3"
+          ]
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "related_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "blocking": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "open",
+            "answered",
+            "deferred"
+          ]
+        },
+        "resolution_criteria": {
+          "$ref": "#/$defs/claim"
+        },
+        "answer": {
+          "$ref": "#/$defs/claim"
+        }
+      }
+    },
+    "analysisFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "analysis_id",
+        "topic",
+        "status",
+        "analysis"
+      ],
+      "properties": {
+        "analysis_id": {
+          "$ref": "#/$defs/id"
+        },
+        "topic": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "status": {
+          "enum": [
+            "not_applicable",
+            "reviewed_no_issue",
+            "risk_identified",
+            "unknown"
+          ]
+        },
+        "analysis": {
+          "$ref": "#/$defs/claim"
+        },
+        "asset_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "threat_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "decision_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "question_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      }
+    },
+    "privacyAnalysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "applicable",
+        "rationale",
+        "data_categories",
+        "findings"
+      ],
+      "properties": {
+        "applicable": {
+          "type": "boolean"
+        },
+        "rationale": {
+          "$ref": "#/$defs/claim"
+        },
+        "data_categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/privacyDataCategory"
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/analysisFinding"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "applicable": {
+                "const": true
+              }
+            },
+            "required": [
+              "applicable"
+            ]
+          },
+          "then": {
+            "properties": {
+              "data_categories": {
+                "minItems": 1
+              },
+              "findings": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "privacyDataCategory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category_id",
+        "name",
+        "classification",
+        "asset_ids",
+        "purposes",
+        "subjects",
+        "recipients",
+        "retention_requirement",
+        "description"
+      ],
+      "properties": {
+        "category_id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "classification": {
+          "enum": [
+            "personal",
+            "sensitive",
+            "regulated",
+            "confidential",
+            "unknown"
+          ]
+        },
+        "asset_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "purposes": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "subjects": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "recipients": {
+          "$ref": "#/$defs/nonEmptyStringArray"
+        },
+        "retention_requirement": {
+          "$ref": "#/$defs/claim"
+        },
+        "description": {
+          "$ref": "#/$defs/claim"
+        }
+      }
+    },
+    "aiAnalysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "applicable",
+        "rationale",
+        "system_entity_ids",
+        "findings"
+      ],
+      "properties": {
+        "applicable": {
+          "type": "boolean"
+        },
+        "rationale": {
+          "$ref": "#/$defs/claim"
+        },
+        "system_entity_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/analysisFinding"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "applicable": {
+                "const": true
+              }
+            },
+            "required": [
+              "applicable"
+            ]
+          },
+          "then": {
+            "properties": {
+              "system_entity_ids": {
+                "minItems": 1
+              },
+              "findings": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "qualityFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finding_id",
+        "title",
+        "severity",
+        "status",
+        "description",
+        "related_ids",
+        "owner",
+        "disposition"
+      ],
+      "properties": {
+        "finding_id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "severity": {
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "status": {
+          "enum": [
+            "open",
+            "resolved",
+            "dismissed"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/claim"
+        },
+        "related_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "owner": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "disposition": {
+          "$ref": "#/$defs/claim"
+        }
+      }
+    },
+    "qualityReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "overall_status",
+        "reviewed_at",
+        "reviewer",
+        "challenge_findings",
+        "gates",
+        "consistency_checks",
+        "unresolved_high_severity_finding_ids",
+        "final_assessment"
+      ],
+      "properties": {
+        "overall_status": {
+          "enum": [
+            "pass",
+            "fail",
+            "incomplete"
+          ]
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reviewer": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "challenge_findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/qualityFinding"
+          }
+        },
+        "gates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "gate_id",
+              "gate",
+              "status",
+              "findings"
+            ],
+            "properties": {
+              "gate_id": {
+                "$ref": "#/$defs/id"
+              },
+              "gate": {
+                "enum": [
+                  "scope_and_evidence",
+                  "architecture_inventory",
+                  "flow_completeness",
+                  "contradiction",
+                  "material_threat",
+                  "attack_path",
+                  "risk_ranking",
+                  "privacy_applicability",
+                  "ai_applicability",
+                  "validation_safety",
+                  "coverage"
+                ]
+              },
+              "status": {
+                "enum": [
+                  "passed",
+                  "failed",
+                  "incomplete",
+                  "not_applicable"
+                ]
+              },
+              "findings": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/claim"
+                }
+              }
+            }
+          }
+        },
+        "consistency_checks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "all_ids_connected",
+            "all_material_claims_have_provenance",
+            "all_flows_have_hops",
+            "all_threats_connected",
+            "all_tests_have_safety",
+            "coverage_reconciled"
+          ],
+          "properties": {
+            "all_ids_connected": {
+              "type": "boolean"
+            },
+            "all_material_claims_have_provenance": {
+              "type": "boolean"
+            },
+            "all_flows_have_hops": {
+              "type": "boolean"
+            },
+            "all_threats_connected": {
+              "type": "boolean"
+            },
+            "all_tests_have_safety": {
+              "type": "boolean"
+            },
+            "coverage_reconciled": {
+              "type": "boolean"
+            }
+          }
+        },
+        "unresolved_high_severity_finding_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "release_blockers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "final_assessment": {
+          "$ref": "#/$defs/claim"
+        }
+      }
+    }
+  }
+}

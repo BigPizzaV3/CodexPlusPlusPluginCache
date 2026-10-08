@@ -1,0 +1,11 @@
+interface:
+  display_name: "Create Surfer Content Brief"
+  short_description: "Build an SEO and AI Search content brief"
+  default_prompt: "Use $surfer-create-content-brief to prepare a writer-ready brief for [keyword]."
+dependencies:
+  tools:
+    - type: mcp
+      value: surfer
+      description: Surfer MCP server for content editors, guidelines, scores, and recommendations
+      transport: streamable_http
+      url: https://mcp.surferseo.com/mcp

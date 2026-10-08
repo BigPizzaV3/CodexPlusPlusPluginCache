@@ -1,0 +1,9 @@
+interface:
+  display_name: "Design Shotgun"
+  short_description: "Generate and compare several materially different design directions before selecting one."
+  default_prompt: "Use Design Shotgun for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

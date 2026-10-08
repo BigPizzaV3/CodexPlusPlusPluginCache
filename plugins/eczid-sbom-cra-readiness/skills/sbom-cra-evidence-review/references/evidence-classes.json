@@ -1,0 +1,173 @@
+{
+  "generatedFrom": {
+    "extension": "ecocitizenz.eczid-sbom-readiness",
+    "version": "0.3.0"
+  },
+  "detectors": [
+    {
+      "id": "sbom.machinereadable",
+      "label": "Machine-readable SBOM (CycloneDX or SPDX)",
+      "patterns": [
+        "(^|/)s?bom\\.(json|xml)$",
+        "cyclonedx",
+        "\\.cdx\\.(json|xml)$",
+        "spdx",
+        "\\.spdx(\\.(json|ya?ml))?$"
+      ]
+    },
+    {
+      "id": "sbom.cyclonedx",
+      "label": "CycloneDX SBOM",
+      "patterns": [
+        "(^|/)s?bom\\.(json|xml)$",
+        "cyclonedx",
+        "\\.cdx\\.(json|xml)$"
+      ]
+    },
+    {
+      "id": "sbom.spdx",
+      "label": "SPDX SBOM",
+      "patterns": [
+        "spdx",
+        "\\.spdx(\\.(json|ya?ml))?$"
+      ]
+    },
+    {
+      "id": "sbom.lockfile",
+      "label": "Dependency lockfile",
+      "patterns": [
+        "(^|/)(package-lock\\.json|pnpm-lock\\.yaml|yarn\\.lock|poetry\\.lock|Cargo\\.lock|go\\.sum|requirements\\.txt|Gemfile\\.lock|composer\\.lock|Pipfile\\.lock|uv\\.lock)$"
+      ]
+    },
+    {
+      "id": "sbom.vex",
+      "label": "VEX / CSAF vulnerability statements",
+      "patterns": [
+        "(^|[^a-z])vex([^a-z]|$)",
+        "\\.vex\\.(json|xml)$",
+        "openvex",
+        "csaf"
+      ]
+    },
+    {
+      "id": "sbom.disclosure",
+      "label": "Vulnerability disclosure policy / security contact",
+      "patterns": [
+        "(^|/)security\\.md$",
+        "(^|/)security\\.txt$",
+        "vulnerability-?disclosure",
+        "coordinated-?disclosure",
+        "cvd-?policy",
+        "security-?policy"
+      ]
+    },
+    {
+      "id": "sbom.provenance",
+      "label": "Build provenance / attestations",
+      "patterns": [
+        "provenance",
+        "(^|[^a-z])slsa([^a-z]|$)",
+        "in-?toto",
+        "\\.intoto\\.jsonl?$",
+        "attestation",
+        "sigstore",
+        "cosign"
+      ]
+    },
+    {
+      "id": "sbom.release",
+      "label": "Release record (changelog / release notes / release workflow)",
+      "patterns": [
+        "(^|/)changelog(\\.md|\\.txt|\\.rst)?$",
+        "release-?notes",
+        "(^|/)releases?/",
+        "goreleaser",
+        "release-?please",
+        "(^|/)\\.github/workflows/[^/]*release"
+      ]
+    }
+  ],
+  "guidance": [
+    {
+      "detectorId": "sbom.machinereadable",
+      "whyItMatters": "CRA Annex I, Part II, point (1) requires manufacturers to identify and document vulnerabilities and components, including by drawing up a software bill of materials in a commonly used and machine-readable format covering at least the top-level dependencies. Without one, identifying an affected component starts from nothing inside the 24-hour early-warning window.",
+      "reviewWhenObserved": "Open the SBOM and check it names the release it describes, lists at least the top-level dependencies with versions, and was generated from the same lockfile or build the release shipped from.",
+      "reviewWhenNotObserved": "Generate one from the lockfile or the build (CycloneDX or SPDX), keep it with the release, and record which release it describes.",
+      "weightWhenNotObserved": "high",
+      "capability": {
+        "label": "SBOM vendor credentialing (TrustOps)",
+        "url": "https://trustops.ecocitizenz.com/start?flow=dora-sbom",
+        "note": "Give buyers and auditors a resolver-verifiable view of your SBOM posture instead of exchanging documents."
+      }
+    },
+    {
+      "detectorId": "sbom.cyclonedx",
+      "whyItMatters": "CycloneDX is one of the two commonly used machine-readable SBOM formats, and the one many buyers and tools ask for by name. Format posture only: one current format is what matters.",
+      "reviewWhenObserved": "Check the CycloneDX document is current for the latest release and validates against the schema version it declares.",
+      "reviewWhenNotObserved": "Only needed if a customer or tool asks for CycloneDX specifically; an SPDX document covers the same requirement.",
+      "weightWhenNotObserved": "normal"
+    },
+    {
+      "detectorId": "sbom.spdx",
+      "whyItMatters": "SPDX is the other commonly used machine-readable SBOM format and an ISO standard. Format posture only: one current format is what matters.",
+      "reviewWhenObserved": "Check the SPDX document is current for the latest release and validates against the version it declares.",
+      "reviewWhenNotObserved": "Only needed if a customer or tool asks for SPDX specifically; a CycloneDX document covers the same requirement.",
+      "weightWhenNotObserved": "normal"
+    },
+    {
+      "detectorId": "sbom.lockfile",
+      "whyItMatters": "A lockfile pins the exact component versions a build used. It is what an SBOM is regenerated from, and what lets you say within the reporting window whether a named vulnerable component and version is actually in the release.",
+      "reviewWhenObserved": "Confirm the lockfile is committed, current for the release, and that the SBOM was generated from it rather than by hand.",
+      "reviewWhenNotObserved": "Commit a lockfile for each package manager in use so component versions are reproducible.",
+      "weightWhenNotObserved": "normal",
+      "capability": {
+        "label": "ECZ-ID Dependency Security (free VS Code extension)",
+        "url": "https://open-vsx.org/extension/ecocitizenz/eczid-dependency-security",
+        "note": "Review lockfile and dependency evidence gaps in this workspace, locally and free."
+      }
+    },
+    {
+      "detectorId": "sbom.vex",
+      "whyItMatters": "CRA Article 14(2) asks for the general nature of the exploit and the vulnerability and any corrective or mitigating measures within 72 hours. A VEX or CSAF document is the machine-readable way to state whether a known vulnerability affects your product and what to do about it.",
+      "reviewWhenObserved": "Check the statements reference the same product and component identifiers as the SBOM, and carry a status and justification per vulnerability.",
+      "reviewWhenNotObserved": "Start a VEX or CSAF document for the current release, even if every entry is not affected. It is the artefact that turns an SBOM into an answer.",
+      "weightWhenNotObserved": "elevated",
+      "capability": {
+        "label": "Cyber Resilience Passport (TrustOps)",
+        "url": "https://trustops.ecocitizenz.com/start?flow=critical-cyber-resilience",
+        "note": "Make vulnerability-handling evidence part of a credential others can verify in Resolver."
+      }
+    },
+    {
+      "detectorId": "sbom.disclosure",
+      "whyItMatters": "CRA Annex I, Part II requires a coordinated vulnerability disclosure policy and a contact address for reporting vulnerabilities, and Annex VII lists both in the technical documentation. A SECURITY.md or security.txt is where a reporter, and an authority, look first.",
+      "reviewWhenObserved": "Confirm it names a monitored contact address, the response process and the coordinated disclosure policy.",
+      "reviewWhenNotObserved": "Add a SECURITY.md or security.txt with a monitored contact address and the disclosure policy.",
+      "weightWhenNotObserved": "elevated",
+      "capability": {
+        "label": "Cyber Resilience Passport (TrustOps)",
+        "url": "https://trustops.ecocitizenz.com/start?flow=critical-cyber-resilience",
+        "note": "A published disclosure posture becomes part of a resolver-verifiable credential."
+      }
+    },
+    {
+      "detectorId": "sbom.provenance",
+      "whyItMatters": "Build provenance and attestations (SLSA, in-toto, Sigstore) tie an artefact to the build that produced it, so the SBOM you cite in a notification can be shown to describe the shipped bytes. The CRA requires the vulnerability handling processes and the secure distribution of updates to be documented (Annex I Part II, Annex VII).",
+      "reviewWhenObserved": "Check the attestation covers the released artefact digest and that verification instructions exist.",
+      "reviewWhenNotObserved": "Consider generating provenance in CI for release builds. Supporting evidence; the SBOM comes first.",
+      "weightWhenNotObserved": "normal",
+      "capability": {
+        "label": "ECZ-ID CI/CD Trust (free VS Code extension)",
+        "url": "https://open-vsx.org/extension/ecocitizenz/eczid-cicd-trust",
+        "note": "Review pipeline and provenance evidence in this workspace, locally and free."
+      }
+    },
+    {
+      "detectorId": "sbom.release",
+      "whyItMatters": "A changelog, release notes or release workflow is what lets you say which release a component and its SBOM belong to. Article 14 notifications describe the product concerned and the corrective measures taken, and both are per release.",
+      "reviewWhenObserved": "Check the latest release entry names the version the SBOM describes and where that release's SBOM and VEX are kept.",
+      "reviewWhenNotObserved": "Add a changelog or release notes and record where each release's SBOM lives. Supporting evidence.",
+      "weightWhenNotObserved": "normal"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Web rendering"
+  short_description: "Fix web rendering, hydration and server boundaries"
+  default_prompt: "Use $vibe-web to fix the reported hydration issue and verify the server/client boundary."

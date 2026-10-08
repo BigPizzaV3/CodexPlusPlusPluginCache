@@ -1,0 +1,23 @@
+name: 💡 Feature or Doodle Template Request
+description: Propose a new humor mechanic, dialect, visual format, or doodle meme template
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea for a hilarious new doodle template or a new regional dialect nuance? Tell us!
+  - type: textarea
+    id: feature
+    attributes:
+      label: Proposal Summary
+      description: Describe the feature, template, or comedic mechanism you would like added.
+      placeholder: "e.g. Add a 'Galaxy Brain' doodle SVG template with 4 expanding panels"
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case & Real-World Friction
+      description: What specific relatable workplace, tech, or cultural situation does this solve?
+    validations:
+      required: true

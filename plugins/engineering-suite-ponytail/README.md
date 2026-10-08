@@ -1,0 +1,21 @@
+# Ponytail
+
+Apply Ponytail to remove over-engineering, unnecessary dependencies, abstractions, bloat, and deferred complexity while preserving required behavior.
+
+## Usage
+
+Select this plugin in ChatGPT or Codex and describe the outcome you want in natural language. The entry skill routes to the bundled workflow; you do not need to remember internal skill names.
+
+## Bundled skills
+
+- `ponytail`
+- `ponytail-audit`
+- `ponytail-debt`
+- `ponytail-gain`
+- `ponytail-help`
+- `ponytail-review`
+- `code-simplification`
+
+## Packaging
+
+This is a skills-only EngineeringSuite public plugin. Dependencies are bundled locally so no cross-plugin installation is required.

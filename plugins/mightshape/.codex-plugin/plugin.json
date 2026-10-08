@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Grant Holt"
+  },
+  "description": "Human-centered Design Thinking for Codex and ChatGPT with a deeply modeled ten-person Council, evidence-safe inquiry, visible workshop steps, and visual design artifacts.",
+  "interface": {
+    "brandColor": "#6457FF",
+    "brandColorDark": "#6457FF",
+    "capabilities": [
+      "Research",
+      "Analysis",
+      "Write",
+      "Interactive"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Challenge this product idea before we build it, then identify the cheapest useful experiment.",
+      "Open Inquiry Lab, research this unfamiliar role, and build a Reality Packet before any synthetic interview.",
+      "Run a sealed Council round or create a source-linked visual affinity map, preserving dissent and outliers."
+    ],
+    "developerName": "Grant Holt",
+    "displayName": "MightShape",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Think wider. Frame better. Build what matters. MightShape preserves the momentum of a promising idea while testing whether it solves the right human problem. It combines an adaptive human-centered design practice, ten persistent fictional collaborators with complete lives and bounded expertise, sealed independent divergence, strict evidence provenance, research-grounded synthetic inquiry, real-human interview workflows, visual affinity and process maps, rapid prototypes, and an advisory Build Gate. Optional separately deployed adapters bring facilitated team exercises to Slack, Discord, and Microsoft Teams.",
+    "shortDescription": "Shape the Right Thing"
+  },
+  "keywords": [
+    "design-thinking",
+    "human-centered-design",
+    "product-discovery",
+    "product-strategy",
+    "user-research",
+    "research",
+    "ideation",
+    "prototyping",
+    "innovation"
+  ],
+  "license": "MIT",
+  "name": "mightshape",
+  "skills": "./skills/",
+  "version": "1.0.1"
+}

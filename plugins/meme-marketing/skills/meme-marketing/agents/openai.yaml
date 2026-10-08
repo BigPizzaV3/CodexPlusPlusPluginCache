@@ -1,0 +1,9 @@
+interface:
+  display_name: "Meme Marketing"
+  short_description: "Craft relatable memes & cards"
+  default_prompt: "Craft 3 relatable memes for our developer audience about Friday deployments."
+policy:
+  allow_implicit_invocation: true
+  products:
+    - CHAT
+    - CODEX

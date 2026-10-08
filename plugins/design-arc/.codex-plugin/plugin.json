@@ -1,0 +1,39 @@
+{
+  "author": {
+    "name": "James Yeang"
+  },
+  "description": "Live: outcome-led UI journey design for Codex.",
+  "interface": {
+    "capabilities": [
+      "Outcome-led journey design",
+      "Evidence-grounded validation"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "$design-arc Help me make our onboarding less confusing.",
+      "$design-arc Audit how customers complete checkout and propose a better complete journey.",
+      "$design-arc Redesign account recovery so people can get back in without weakening security."
+    ],
+    "developerName": "James Yeang",
+    "displayName": "Design Arc",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Turn vague product feedback into a complete, evidence-backed design direction. Design Arc confirms the outcome, audits the real journey, grounds recommendations in current platform guidance and optional product benchmarks, and checks every important state before frontend implementation.",
+    "privacyPolicyURL": "https://github.com/friedbeef1/design-arc/blob/main/docs/privacy.md",
+    "shortDescription": "Evidence-backed UI journeys",
+    "supportURL": "https://github.com/friedbeef1/design-arc/blob/main/docs/support.md",
+    "termsOfServiceURL": "https://github.com/friedbeef1/design-arc/blob/main/docs/terms.md",
+    "websiteURL": "https://github.com/friedbeef1/design-arc"
+  },
+  "keywords": [
+    "ux",
+    "journey-design",
+    "outcomes",
+    "evidence"
+  ],
+  "license": "MIT",
+  "name": "design-arc",
+  "repository": "https://github.com/friedbeef1/design-arc",
+  "skills": "./skills/",
+  "version": "1.5.5"
+}

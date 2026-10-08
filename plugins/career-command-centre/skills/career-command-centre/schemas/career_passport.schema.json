@@ -1,0 +1,279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://career-command-centre.local/schemas/career-passport-v4.json",
+  "title": "Career Centre Career Passport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile",
+    "preferences",
+    "evidence",
+    "role_history",
+    "application_events",
+    "corrections",
+    "feedback",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "4.0"},
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "headline", "location", "contact", "work_rights"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "headline": {"type": "string"},
+        "location": {"type": "string"},
+        "contact": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/contact"}
+        },
+        "work_rights": {"type": ["string", "null"]}
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_directions",
+        "locations",
+        "remote_preference",
+        "salary_minimum",
+        "currency",
+        "employment_types",
+        "excluded_employers",
+        "excluded_role_patterns",
+        "selectivity",
+        "source_preferences",
+        "document_preferences"
+      ],
+      "properties": {
+        "target_directions": {"type": "array", "items": {"type": "string"}},
+        "locations": {"type": "array", "items": {"type": "string"}},
+        "remote_preference": {"enum": ["remote", "hybrid", "onsite", "flexible", "unknown"]},
+        "salary_minimum": {"type": ["number", "null"], "minimum": 0},
+        "salary_basis": {"enum": ["base", "fixed", "total_compensation", "ctc", "hourly", "daily", "annual_package", "unspecified"]},
+        "currency": {"type": "string", "minLength": 3, "maxLength": 3},
+        "employment_types": {
+          "type": "array",
+          "items": {"enum": ["permanent", "contract", "fixed-term", "part-time", "casual", "other"]}
+        },
+        "excluded_employers": {"type": "array", "items": {"type": "string"}},
+        "excluded_role_patterns": {"type": "array", "items": {"type": "string"}},
+        "selectivity": {"enum": ["focused", "balanced", "explore"]},
+        "source_preferences": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["strategy", "preferred", "excluded"],
+          "properties": {
+            "strategy": {"enum": ["automatic", "preferred", "broad"]},
+            "preferred": {"type": "array", "items": {"type": "string"}},
+            "excluded": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "document_preferences": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["format_mode", "reference_template_name", "page_strategy", "section_order", "additional_sections", "omitted_sections", "cover_letter_mode", "style_notes"],
+          "properties": {
+            "format_mode": {"enum": ["smart_default", "reference"]},
+            "reference_template_name": {"type": ["string", "null"]},
+            "page_strategy": {"enum": ["adaptive", "one_page", "two_page"]},
+            "section_order": {"type": "array", "items": {"type": "string"}},
+            "additional_sections": {"type": "array", "items": {"type": "string"}},
+            "omitted_sections": {"type": "array", "items": {"type": "string"}},
+            "cover_letter_mode": {"enum": ["paired", "cv_only", "ask_each_time"]},
+            "style_notes": {"type": "array", "items": {"type": "string"}},
+            "language": {"type": "string", "minLength": 2},
+            "regional_spelling": {"type": ["string", "null"]},
+            "field_preferences": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["contact_field_order", "hidden_contact_fields", "show_location", "show_work_rights", "headline_mode", "date_style", "section_label_overrides", "notes"],
+              "properties": {
+                "contact_field_order": {"type": "array", "items": {"type": "string"}},
+                "hidden_contact_fields": {"type": "array", "items": {"type": "string"}},
+                "show_location": {"type": "boolean"},
+                "show_work_rights": {"type": "boolean"},
+                "headline_mode": {"enum": ["role_specific", "preserve", "user_confirmed"]},
+                "date_style": {"enum": ["preserve", "month_year", "year_only"]},
+                "section_label_overrides": {
+                  "type": "object",
+                  "additionalProperties": {"type": "string", "minLength": 1}
+                },
+                "notes": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          }
+        }
+      }
+    },
+    "source_documents": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/source_document"}
+    },
+    "document_versions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/document_version"}
+    },
+    "evidence": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence"}
+    },
+    "role_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role_id", "company", "title", "exact_posting_url", "content_fingerprint", "first_seen_at", "last_seen_at", "recommendation"],
+        "properties": {
+          "role_id": {"type": "string", "minLength": 1},
+          "company": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "exact_posting_url": {"type": "string", "format": "uri"},
+          "content_fingerprint": {"type": "string", "minLength": 8},
+          "first_seen_at": {"type": "string"},
+          "last_seen_at": {"type": "string"},
+          "recommendation": {"enum": ["apply", "maybe", "skip"]},
+          "last_application_stage": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "application_events": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/application_event"}
+    },
+    "corrections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "old_value", "new_value", "recorded_at", "source"],
+        "properties": {
+          "field": {"type": "string", "minLength": 1},
+          "old_value": {},
+          "new_value": {},
+          "recorded_at": {"type": "string"},
+          "source": {"const": "user"}
+        }
+      }
+    },
+    "feedback": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["feedback_id", "category", "statement", "confirmed", "recorded_at"],
+        "properties": {
+          "feedback_id": {"type": "string", "minLength": 1},
+          "category": {"enum": ["search", "role", "document", "workflow"]},
+          "statement": {"type": "string", "minLength": 1},
+          "confirmed": {"type": "boolean"},
+          "recorded_at": {"type": "string"}
+        }
+      }
+    },
+    "automation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "cadence", "local_time", "timezone", "max_displayed_roles", "application_pack_mode", "destination"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "cadence": {"enum": ["manual", "daily", "weekdays", "weekly", "custom"]},
+        "local_time": {"type": ["string", "null"], "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$"},
+        "timezone": {"type": "string", "minLength": 1},
+        "max_displayed_roles": {"type": "integer", "minimum": 1, "maximum": 10},
+        "application_pack_mode": {"enum": ["on_request", "apply_roles"]},
+        "destination": {"enum": ["scheduled_result_task", "continuing_task"]},
+        "continuity_mode": {"enum": ["task_context", "snapshot_only", "verified_persistent"]}
+      }
+    },
+    "updated_at": {"type": "string"}
+  },
+  "$defs": {
+    "source_document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "name", "source_type", "target_directions", "is_primary", "ingested_at"],
+      "properties": {
+        "source_id": {"type": "string", "pattern": "^SRC-[A-Z0-9-]+$"},
+        "name": {"type": "string", "minLength": 1},
+        "source_type": {"enum": ["current_cv", "historical_cv", "linkedin_export", "career_passport", "uploaded_evidence", "pasted_text"]},
+        "target_directions": {"type": "array", "items": {"type": "string"}},
+        "is_primary": {"type": "boolean"},
+        "version_date": {"type": ["string", "null"]},
+        "content_fingerprint": {"type": ["string", "null"]},
+        "notes": {"type": "array", "items": {"type": "string"}},
+        "ingested_at": {"type": "string"}
+      }
+    },
+    "document_version": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version_id", "document_type", "role_id", "file_name", "source_document_ids", "created_at", "status", "change_summary"],
+      "properties": {
+        "version_id": {"type": "string", "pattern": "^DOC-[A-Z0-9-]+$"},
+        "document_type": {"enum": ["cv_base", "tailored_cv", "cover_letter"]},
+        "role_id": {"type": ["string", "null"]},
+        "file_name": {"type": "string", "minLength": 1},
+        "source_document_ids": {"type": "array", "items": {"type": "string", "pattern": "^SRC-[A-Z0-9-]+$"}},
+        "created_at": {"type": "string"},
+        "status": {"enum": ["ready", "partial", "superseded"]},
+        "change_summary": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "text"],
+      "properties": {
+        "label": {"type": "string", "minLength": 1},
+        "text": {"type": "string", "minLength": 1},
+        "url": {"type": ["string", "null"]}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "claim",
+        "safe_wording",
+        "source_type",
+        "source_name",
+        "source_excerpt",
+        "confidence",
+        "restrictions",
+        "role_relevance",
+        "captured_at"
+      ],
+      "properties": {
+        "evidence_id": {"type": "string", "pattern": "^EV-[A-Z0-9-]+$"},
+        "claim": {"type": "string", "minLength": 1},
+        "safe_wording": {"type": "string", "minLength": 1},
+        "source_type": {"enum": ["current_cv", "historical_cv", "user_confirmed", "uploaded_evidence", "external_source"]},
+        "source_name": {"type": "string", "minLength": 1},
+        "source_excerpt": {"type": "string", "minLength": 1},
+        "confidence": {"enum": ["source_only", "user_confirmed", "externally_corroborated"]},
+        "restrictions": {"type": "array", "items": {"type": "string"}},
+        "role_relevance": {"type": "array", "items": {"type": "string"}},
+        "corroborating_sources": {"type": "array", "items": {"type": "string"}},
+        "captured_at": {"type": "string"}
+      }
+    },
+    "application_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_id", "role_id", "stage", "recorded_at", "source", "note"],
+      "properties": {
+        "event_id": {"type": "string", "minLength": 1},
+        "role_id": {"type": "string", "minLength": 1},
+        "stage": {"enum": ["discovered", "reviewed", "preparing", "applied", "follow_up", "interview", "reference", "offer", "rejected", "withdrawn", "closed", "reposted"]},
+        "recorded_at": {"type": "string"},
+        "source": {"enum": ["user", "posting", "system"]},
+        "note": {"type": "string"}
+      }
+    }
+  }
+}

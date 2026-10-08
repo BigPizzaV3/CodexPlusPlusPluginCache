@@ -1,0 +1,44 @@
+{
+  "author": {
+    "email": "hello@gabrieloperator.com",
+    "name": "Gabriel Operator",
+    "url": "https://github.com/Gabriel-Operator"
+  },
+  "description": "Interview you and help you build your dream AI persona faster.",
+  "homepage": "https://github.com/Gabriel-Operator/gabriel-operator-coding-agent-plugin",
+  "interface": {
+    "brandColor": "#2563EB",
+    "brandColorDark": "#2563EB",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "I signed up on Gabriel Operator and connected my Gabi token. Create a persona from this description.",
+      "Define lists, pipeline stages, and chat copy for this persona.",
+      "Draft a team-agent workflow for this Gabriel persona."
+    ],
+    "developerName": "Gabriel Operator",
+    "displayName": "Gabriel Operator",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Tell this plugin what your AI persona should do. It asks a few questions, then builds a complete end-to-end persona on Gabriel Operator: research, tools, prepared actions, your approval, then the real workflow. Ready to chat, try, and improve - not a stack of disconnected agents.\n\nPlease Sign up at https://gabrieloperator.com/signup. Open Workspace, go to Dashboard, and copy your Gabi token (the key that starts with gabi_). Connect that token in ChatGPT before you run this plugin. Do not paste the raw token into chat.\n",
+    "privacyPolicyURL": "https://gabrieloperator.com/privacy",
+    "shortDescription": "AI Persona Builder",
+    "supportURL": "https://gabrieloperator.com/docs/gateway",
+    "termsOfServiceURL": "https://gabrieloperator.com/terms",
+    "websiteURL": "https://gabrieloperator.com"
+  },
+  "keywords": [
+    "gabriel-operator",
+    "persona-builder",
+    "digital-twin",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "gabriel-operator",
+  "repository": "https://github.com/Gabriel-Operator/gabriel-operator-coding-agent-plugin",
+  "skills": "./skills/",
+  "version": "1.5.1"
+}

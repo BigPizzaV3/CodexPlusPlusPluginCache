@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:style-profile-metadata:1",
+  "title": "note Workspace style profile metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "request_id", "payload_sha256", "revision", "approved_at",
+    "saved_at", "status", "reason", "samples", "user_preferences", "profile",
+    "uncertainties", "profile_path", "profile_sha256", "external_actions"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string"},
+    "payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "revision": {"type": "integer", "minimum": 1},
+    "approved_at": {"type": "string", "format": "date-time"},
+    "saved_at": {"type": "string", "format": "date-time"},
+    "status": {"enum": ["provisional", "confirmed"]},
+    "reason": {"type": "string"},
+    "samples": {"type": "array"},
+    "user_preferences": {"type": "object"},
+    "profile": {"type": "object"},
+    "uncertainties": {"type": "array"},
+    "profile_path": {"type": "string", "pattern": "^profile/style-profile-history/style-profile-r[0-9]{3}\\.md$"},
+    "profile_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "external_actions": {"const": []}
+  }
+}

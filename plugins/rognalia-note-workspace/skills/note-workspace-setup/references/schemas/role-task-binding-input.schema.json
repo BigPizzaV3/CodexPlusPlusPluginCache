@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:role-task-binding-input:1",
+  "title": "note Workspace role task binding input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "role",
+    "slot",
+    "task_id",
+    "host_id",
+    "task_title",
+    "binding_origin",
+    "ready_receipt",
+    "replaces_event_id"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"
+    },
+    "role": {"enum": ["strategy", "tracker", "writer", "image", "diary", "compact"]},
+    "slot": {
+      "type": "string",
+      "pattern": "^(?:primary|extra-[a-z0-9][a-z0-9-]{2,63})$"
+    },
+    "task_id": {"$ref": "#/$defs/oneLineText"},
+    "host_id": {"$ref": "#/$defs/oneLineText"},
+    "task_title": {"$ref": "#/$defs/oneLineText"},
+    "binding_origin": {"enum": ["reused_setup", "created"]},
+    "ready_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verification_method",
+        "challenge_proof_sha256",
+        "host_evidence_sha256",
+        "kickoff_message_id",
+        "kickoff_message_sha256",
+        "ready_message_id",
+        "ready_message_sha256",
+        "ready_nonce",
+        "observed_task_id",
+        "observed_host_id",
+        "observed_task_title",
+        "observed_workspace_id",
+        "observed_workspace_path",
+        "observed_role",
+        "standing_instructions_revision",
+        "observed_at",
+        "verified_at"
+      ],
+      "properties": {
+        "verification_method": {"const": "verified_host_export_v1"},
+        "challenge_proof_sha256": {"$ref": "#/$defs/sha256"},
+        "host_evidence_sha256": {"$ref": "#/$defs/sha256"},
+        "kickoff_message_id": {"$ref": "#/$defs/oneLineText"},
+        "kickoff_message_sha256": {"$ref": "#/$defs/sha256"},
+        "ready_message_id": {"$ref": "#/$defs/oneLineText"},
+        "ready_message_sha256": {"$ref": "#/$defs/sha256"},
+        "ready_nonce": {
+          "type": "string",
+          "pattern": "^ready-[a-z0-9][a-z0-9-]{11,63}$"
+        },
+        "observed_task_id": {"$ref": "#/$defs/oneLineText"},
+        "observed_host_id": {"$ref": "#/$defs/oneLineText"},
+        "observed_task_title": {"$ref": "#/$defs/oneLineText"},
+        "observed_workspace_id": {"$ref": "#/$defs/oneLineText"},
+        "observed_workspace_path": {"$ref": "#/$defs/oneLineText"},
+        "observed_role": {"enum": ["strategy", "tracker", "writer", "image", "diary", "compact"]},
+        "standing_instructions_revision": {"type": "integer", "minimum": 0},
+        "observed_at": {"type": "string", "format": "date-time"},
+        "verified_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "replaces_event_id": {
+      "description": "Current active binding replaced by this ready receipt, including a task reused in another mode or role.",
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^task-binding-[0-9]{8}-[0-9a-f]{12}$"
+        },
+        {"type": "null"}
+      ]
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "oneLineText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\r\\n]+$"
+    }
+  }
+}

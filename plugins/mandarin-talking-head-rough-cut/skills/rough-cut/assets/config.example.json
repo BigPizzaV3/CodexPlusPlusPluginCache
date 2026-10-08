@@ -1,0 +1,21 @@
+{
+  "_说明": "这是空白模板。必须填写安装者自己的火山凭证；不得使用其他用户的账号。不要把真实密钥放回 Skill、发给 Agent 或提交到版本库。",
+  "volc_asr": {
+    "app_id": "填你的火山 App ID",
+    "access_token": "填你的火山 Access Token",
+    "api_key": "",
+    "resource_id": "volc.seedasr.auc",
+    "endpoint": "https://openspeech.bytedance.com",
+    "enable_words": true,
+    "enable_speaker": true,
+    "_填写提示": "新版豆包语音控制台填 api_key，并把 app_id/access_token 留空；旧版控制台同时填 app_id 和 access_token，并把 api_key 留空。不要填 TOS 的 Access Key。"
+  },
+  "volc_tos": {
+    "access_key": "填火山访问密钥 AccessKeyId",
+    "secret_key": "填火山访问密钥 SecretAccessKey",
+    "endpoint": "如 tos-cn-beijing.volces.com",
+    "region": "如 cn-beijing",
+    "bucket": "你建的桶名",
+    "_填写提示": "这里填写安装者自己的 TOS AK/SK 和私有桶信息；endpoint、region 从该桶的概览页复制，不要照抄示例地域。"
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ycloud.com/schemas/developer-kit/failure-contract-v1.json",
+  "title": "YCloud Developer Kit Failure Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "contractVersion",
+    "retrievedAt",
+    "sources",
+    "authorityLayers",
+    "errorEnvelope",
+    "responseHeaders",
+    "idempotency",
+    "decisionVocabulary",
+    "ambiguousOutcomePolicy",
+    "decisionRules",
+    "unknownPolicy",
+    "ycloudErrorCodes",
+    "whatsappErrorCodes",
+    "coverage",
+    "operationProfiles"
+  ],
+  "properties": {
+    "$schema": {"const": "./failure-contract.schema.json"},
+    "schemaVersion": {"const": 1},
+    "contractVersion": {"const": "failure-contract-v1"},
+    "retrievedAt": {"type": "string", "format": "date"},
+    "sources": {"type": "object", "minProperties": 1},
+    "authorityLayers": {
+      "type": "array",
+      "minItems": 3,
+      "items": {"type": "object"}
+    },
+    "errorEnvelope": {"type": "object"},
+    "responseHeaders": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+    "idempotency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["providerContract", "externalId", "projectDecisionRequirements"],
+      "properties": {
+        "providerContract": {
+          "type": "object",
+          "required": ["generalIdempotencyKey", "mutationReplayGuarantee", "authority"],
+          "properties": {
+            "generalIdempotencyKey": {"const": "not_documented"},
+            "mutationReplayGuarantee": {"const": "not_documented"},
+            "authority": {"const": "confirmed_provider_contract_gap"}
+          }
+        },
+        "externalId": {
+          "type": "object",
+          "required": ["role", "grantsReplaySafety", "authority"],
+          "properties": {
+            "role": {"const": "application_correlation"},
+            "grantsReplaySafety": {"const": false},
+            "authority": {"const": "confirmed_provider_contract"}
+          }
+        },
+        "projectDecisionRequirements": {
+          "type": "array",
+          "minItems": 6,
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "decisionVocabulary": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/action"}
+    },
+    "ambiguousOutcomePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "signals", "automaticRetry", "requiredAction", "authority"],
+      "properties": {
+        "state": {"const": "ambiguous_outcome"},
+        "signals": {
+          "type": "array",
+          "minItems": 3,
+          "items": {"enum": ["timeout", "connection_loss", "response_lost"]},
+          "uniqueItems": true
+        },
+        "automaticRetry": {"const": false},
+        "requiredAction": {"const": "reconcile"},
+        "authority": {"const": "developer_kit_policy"}
+      }
+    },
+    "decisionRules": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/decisionRule"}},
+    "unknownPolicy": {
+      "type": "object",
+      "required": ["decision", "automaticRetry", "preserveOriginalCode"],
+      "properties": {
+        "decision": {"const": "unknown"},
+        "automaticRetry": {"const": false},
+        "preserveOriginalCode": {"const": true}
+      }
+    },
+    "ycloudErrorCodes": {
+      "type": "array",
+      "minItems": 20,
+      "items": {"$ref": "#/$defs/errorCode"}
+    },
+    "whatsappErrorCodes": {
+      "type": "array",
+      "minItems": 20,
+      "items": {"$ref": "#/$defs/whatsappCode"}
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coveredOperations", "profilesWithOpenapiFailureResponseGap", "safeReadProfiles", "mutationProfiles"],
+      "properties": {
+        "coveredOperations": {"const": 88},
+        "profilesWithOpenapiFailureResponseGap": {"type": "integer", "minimum": 0},
+        "safeReadProfiles": {"type": "integer", "minimum": 1},
+        "mutationProfiles": {"type": "integer", "minimum": 1}
+      }
+    },
+    "operationProfiles": {
+      "type": "array",
+      "minItems": 88,
+      "maxItems": 88,
+      "items": {"$ref": "#/$defs/operationProfile"}
+    }
+  },
+  "$defs": {
+    "transience": {"enum": ["transient", "non_transient", "conditional", "unknown"]},
+    "action": {
+      "enum": [
+        "correct_request",
+        "reauthenticate",
+        "reauthorize",
+        "reconcile",
+        "wait",
+        "retry_if_replay_safe",
+        "await_async_status",
+        "do_not_retry",
+        "escalate",
+        "unknown"
+      ]
+    },
+    "decisionRule": {
+      "type": "object",
+      "required": ["signal", "safeReadDecision", "mutationDecision", "authority"],
+      "properties": {
+        "signal": {"type": "string"},
+        "safeReadDecision": {"type": "string"},
+        "mutationDecision": {"type": "string"},
+        "authority": {"type": "string"}
+      }
+    },
+    "errorCode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "httpStatus", "failureClass", "transience", "action", "source", "authority"],
+      "properties": {
+        "code": {"type": "string", "minLength": 1},
+        "httpStatus": {"type": "integer", "minimum": 400, "maximum": 599},
+        "failureClass": {"type": "string"},
+        "transience": {"$ref": "#/$defs/transience"},
+        "action": {"$ref": "#/$defs/action"},
+        "source": {"type": "string"},
+        "authority": {"type": "string"}
+      }
+    },
+    "whatsappCode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "channels", "observedHttpStatus", "failureClass", "transience", "action", "source", "authority"],
+      "properties": {
+        "code": {"type": "string", "pattern": "^[0-9]+$"},
+        "channels": {"type": "array", "minItems": 1, "items": {"enum": ["synchronous_response", "asynchronous_webhook"]}},
+        "observedHttpStatus": {"type": ["integer", "null"], "minimum": 400, "maximum": 599},
+        "failureClass": {"type": "string"},
+        "transience": {"$ref": "#/$defs/transience"},
+        "action": {"$ref": "#/$defs/action"},
+        "source": {"type": "string"},
+        "authority": {"type": "string"}
+      }
+    },
+    "operationProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operationId",
+        "owner",
+        "method",
+        "path",
+        "sideEffect",
+        "resultChannel",
+        "replaySafety",
+        "automaticRetry",
+        "lostResponseDecision",
+        "declaredFailureStatuses",
+        "openapiFailureResponseGap",
+        "authority"
+      ],
+      "properties": {
+        "operationId": {"type": "string"},
+        "owner": {"type": "string"},
+        "method": {"enum": ["GET", "POST", "PATCH", "DELETE"]},
+        "path": {"type": "string", "pattern": "^/"},
+        "sideEffect": {"enum": ["read", "create", "update", "delete", "send", "upload", "rotate"]},
+        "resultChannel": {"type": "string"},
+        "replaySafety": {"enum": ["replay_safe_read", "not_confirmed"]},
+        "automaticRetry": {"enum": ["conditional", "never"]},
+        "lostResponseDecision": {"enum": ["retry_if_replay_safe", "reconcile"]},
+        "declaredFailureStatuses": {"type": "array", "items": {"type": "string"}},
+        "openapiFailureResponseGap": {"type": "boolean"},
+        "authority": {"const": "developer_kit_policy"}
+      }
+    }
+  }
+}

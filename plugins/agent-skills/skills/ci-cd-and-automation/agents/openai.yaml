@@ -1,0 +1,9 @@
+interface:
+  display_name: CI CD And Automation
+  short_description: Automates CI/CD pipeline setup
+  default_prompt: Use $ci-cd-and-automation for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

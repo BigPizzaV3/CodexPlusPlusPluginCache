@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Captions"
+  short_description: "Captions matched to real audio"
+  default_prompt: "Use $pixverse-captions to add readable burned-in Chinese captions to this video while preserving its soundtrack."
+policy:
+  allow_implicit_invocation: true

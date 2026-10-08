@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "STRICTUS LLC"
+  },
+  "description": "Deploy and operate web apps on Keelson with the Keelson CLI.",
+  "homepage": "https://keelson.dev",
+  "interface": {
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": null,
+    "developerName": "STRICTUS LLC",
+    "displayName": "keelson",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Agent skill for deploying and operating web apps on Keelson (keelson.run) with the Keelson CLI. Covers login, deploy, status, logs, diagnose, secrets, writing or fixing keelson.yaml, and adapting apps to run on Keelson (SQLite -> managed libSQL, PORT binding). The skill and public repository are free and MIT-licensed. The Keelson hosting service is paid, with a free trial. The skill invokes the local Keelson CLI; it does not include an MCP server.",
+    "privacyPolicyURL": "https://keelson.dev/privacy",
+    "shortDescription": "Deploy web apps on Keelson",
+    "supportURL": "https://keelson.dev/contact/",
+    "termsOfServiceURL": "https://keelson.dev/terms/",
+    "websiteURL": "https://keelson.dev"
+  },
+  "license": "MIT",
+  "name": "keelson",
+  "skills": "./skills/",
+  "version": "0.6.7"
+}

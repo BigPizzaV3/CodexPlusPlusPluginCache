@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Rafe Blandford",
+    "url": "https://rafeblandford.com/"
+  },
+  "description": "Turn early digital-product ideas into proposition sketches, mechanism boards, product storyboards and interactive prototypes.",
+  "homepage": "https://rafeblandford.com/product-idea-pack/",
+  "interface": {
+    "brandColor": "#C29B00",
+    "brandColorDark": "#FFD83D",
+    "capabilities": [
+      "Create editable concept artefacts",
+      "Package visual idea packs"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Turn this product idea into the most useful visual format.",
+      "Create an editable mechanism board for this product idea.",
+      "Develop this conversation into a visual product idea pack."
+    ],
+    "developerName": "Rafe Blandford",
+    "displayName": "Product Idea Pack",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Explore an early (digital) product idea as a proposition sketch, mechanism board, product storyboard or interactive prototype, then package accepted artefacts for discussion and hand-off.",
+    "privacyPolicyURL": "https://rafeblandford.com/privacy/",
+    "shortDescription": "Make product ideas visible",
+    "supportURL": "https://github.com/rafeblandford/skills/issues",
+    "termsOfServiceURL": "https://github.com/rafeblandford/skills/blob/main/LICENSE",
+    "websiteURL": "https://rafeblandford.com/product-idea-pack/"
+  },
+  "keywords": [
+    "product",
+    "ideation",
+    "prototype",
+    "sketch"
+  ],
+  "license": "Apache-2.0",
+  "name": "product-idea-pack",
+  "repository": "https://github.com/rafeblandford/skills",
+  "skills": "./skills/",
+  "version": "0.1.2"
+}

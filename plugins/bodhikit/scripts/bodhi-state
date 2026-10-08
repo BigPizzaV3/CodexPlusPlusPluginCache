@@ -1,0 +1,2705 @@
+#!/usr/bin/env python3
+"""bodhi-state — deterministic writer for BodhiKit tracking files.
+
+Skills decide WHAT happened (the pedagogical judgment); this script performs
+the file mutations (the mechanical part). It owns: Leitner box math, the
+bloomLevel ratchet, the consecutiveCorrectAtL4Plus counter, sessionHistory
+type vocabulary, unknown-field preservation, the mastery formula, the
+prerequisite gate verdict, and the v2->v3 spaced-review migration.
+
+Canonical shapes: skills/state-schema/SKILL.md. Canonical intervals and
+update rules: skills/spaced-repetition/SKILL.md. This script implements
+those KBs; if they change, change this script in the same PR (dev/check.sh
+pins the constants).
+
+No dependencies beyond the Python 3 standard library.
+
+All subcommands print a JSON result to stdout. Exit 0 = success, 1 = error
+(human-readable message on stderr plus JSON error object on stdout when
+possible), 2 = bad usage.
+"""
+
+import argparse
+import datetime
+import json
+import os
+import re
+import shutil
+import sys
+import tempfile
+
+try:
+    import fcntl  # POSIX only; locking degrades gracefully elsewhere
+except ImportError:  # pragma: no cover
+    fcntl = None
+
+# --- Canonical constants (mirrors spaced-repetition KB; lint pins these) ---
+
+BOX_INTERVALS = {1: 1, 2: 3, 3: 7, 4: 14, 5: 30}
+MAX_BOX = 5
+
+# Canonical sessionHistory[].type vocabulary (state-ops KB).
+SESSION_TYPES = {
+    "spaced-review", "quiz", "targeted-reteach", "diagnostic-after-gap",
+    "learner-forget", "learner-park", "pair", "practice", "evaluate", "other",
+}
+
+CONFIDENCE_VALUES = {"sure", "mostly", "guessing"}
+
+# Learner-facing rendering of a Bloom level (blooms-taxonomy KB, canonical).
+# The number is an instructor-facing instrument. A learner reads the OUTCOME
+# clause on its own; the LABEL is spoken only at a rung-crossing
+# (record-review's crossedLevel) and in /progress's legend. Every emitter that
+# returns a bloomLevel also returns bloomLabel/bloomOutcome, so skills render
+# and never translate.
+BLOOM_LABELS = {0: None, 1: "Remember", 2: "Understand", 3: "Apply",
+                4: "Analyze", 5: "Evaluate", 6: "Create"}
+BLOOM_OUTCOMES = {
+    0: "nothing observed yet",
+    1: "you can recall the terms and what they refer to",
+    2: "you can explain what it does in your own words",
+    3: "you can apply it in working code with some guidance",
+    4: "you can reason about why it behaves as it does and debug it on your own",
+    5: "you can weigh approaches and defend a design choice",
+    6: "you can design something new with it and teach it",
+}
+
+
+def bloom_render(level):
+    """{bloomLabel, bloomOutcome} for a level; clamps junk to the 0..6 scale."""
+    try:
+        lvl = int(level)
+    except (TypeError, ValueError):
+        lvl = 0
+    lvl = max(0, min(6, lvl))
+    return {"bloomLabel": BLOOM_LABELS[lvl], "bloomOutcome": BLOOM_OUTCOMES[lvl]}
+
+
+def bloom_scale():
+    """The full ladder, for dashboards that render a legend."""
+    return [{"level": n, "label": BLOOM_LABELS[n], "outcome": BLOOM_OUTCOMES[n]}
+            for n in range(1, 7)]
+
+# Prerequisite-gate recency window (1.11.0): a bloomLevel >= 3 concept only
+# auto-satisfies the gate if its retention evidence is current — box >= 3 OR
+# reviewed within this many days. Otherwise it is "stale" and the gate offers
+# a quick reconfirm instead of a free pass.
+GATE_RECENCY_DAYS = 30
+
+# lastActivity length guidance (state-ops KB: "one short sentence (<=120
+# chars)"). One home for the value: touch-state truncates to it, verify warns
+# above it, and the message quotes it. Before 1.14.x these were three different
+# numbers — truncate at 120, warn above 160, message said 120 — so a 140-char
+# lastActivity passed silently and a 165-char one was told the limit was 120.
+LAST_ACTIVITY_MAX = 120
+
+PROFILE_COUNTERS = {
+    "totalSessions", "totalExercises", "totalConceptsLearned",
+    "totalMilestonesReached", "totalProjects", "teachBacksWritten",
+    "teachBacksPublished",
+}
+
+# Required fields on .bodhi-profile.projects.json list entries (state-schema
+# KB). Since 1.16.0 the profile-* subcommands own these mutations and construct
+# schema-complete entries; verify additionally backstops the shape so a
+# fallback-path hand-edit that drops a field cannot pass silently.
+PROFILE_ACTIVE_FIELDS = {
+    "name", "topic", "startedAt", "currentPhase", "currentModule",
+    "bloomLevel", "pace", "status", "trackPurpose",
+}
+PROFILE_COMPLETED_FIELDS = {
+    "name", "completedAt", "finalBloomLevel", "trackPurpose",
+}
+
+# profile-update-patterns threshold (state-schema KB): a sub-topic with this
+# many assessment-history entries at Bloom <3 is a persistent challenge; at
+# Bloom 4+ a consistent strength. One home for the value — skills cite the
+# subcommand, never re-tally assessments in prose.
+PATTERNS_MIN_ASSESSMENTS = 3
+
+
+# --- Helpers ---------------------------------------------------------------
+
+def _today_override():
+    """BODHI_TODAY=YYYY-MM-DD pins the script's clock. For the test suite
+    (which otherwise races midnight against its own `date.today()`) and for
+    date-travel checks of the Leitner schedule. Never set in a real
+    session; a malformed value fails loudly rather than silently shifting
+    every review date."""
+    raw = os.environ.get("BODHI_TODAY")
+    if not raw:
+        return None
+    try:
+        return datetime.date.fromisoformat(raw.strip())
+    except ValueError:
+        die(f"BODHI_TODAY {raw!r} is not an ISO date (YYYY-MM-DD)")
+
+
+def today():
+    return _today_override() or datetime.date.today()
+
+
+def iso(d):
+    return d.isoformat()
+
+
+def now_iso():
+    now = datetime.datetime.now().replace(microsecond=0)
+    pinned = _today_override()
+    if pinned:
+        now = datetime.datetime.combine(pinned, now.time())
+    return now.isoformat()
+
+
+_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}($|T)")
+
+
+def parse_date(s):
+    """YYYY-MM-DD, or an ISO date-time; anything else (ints, prose, junk
+    suffixes) is None so callers report it instead of computing on it."""
+    if not isinstance(s, str) or not _DATE_RE.match(s):
+        return None
+    try:
+        return datetime.date.fromisoformat(s[:10])
+    except ValueError:
+        return None
+
+
+def die(msg, code=1):
+    print(json.dumps({"ok": False, "error": msg}))
+    print(f"bodhi-state: {msg}", file=sys.stderr)
+    sys.exit(code)
+
+
+_WRITE_NOTES = {}   # merged into the next emit(): e.g. migratedFromVersion
+
+
+def emit(obj):
+    obj.setdefault("ok", True)
+    obj.update(_WRITE_NOTES)
+    print(json.dumps(obj, indent=2, ensure_ascii=False))
+
+
+def load_json_raw(path):
+    """Raw loader — raises. Used by `verify`, which reports errors itself."""
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_json(path, expect=dict):
+    """Loader for every other subcommand: clean error instead of a traceback."""
+    try:
+        data = load_json_raw(path)
+    except json.JSONDecodeError as e:
+        die(f"{path} is not valid JSON ({e.msg} at line {e.lineno}) — do not "
+            f"hand-edit; run `bodhi-state verify` and restore from a backup "
+            f"if needed")
+    except OSError as e:
+        die(f"cannot read {path}: {e}")
+    if expect is not None and not isinstance(data, expect):
+        die(f"{path} top level is {type(data).__name__}, expected "
+            f"{expect.__name__} — the file is structurally broken; run "
+            f"`bodhi-state verify`")
+    return data
+
+
+def write_json(path, obj):
+    """Atomic write: unique temp file in the same directory, then rename.
+    The temp file takes the target's existing mode (or the umask default
+    for a new file) — mkstemp creates 0600 and the rename would otherwise
+    carry that over, making the learner's tracking files owner-only."""
+    fd, tmp = tempfile.mkstemp(dir=os.path.dirname(os.path.abspath(path)),
+                               prefix=os.path.basename(path) + ".",
+                               suffix=".tmp")
+    try:
+        try:
+            mode = os.stat(path).st_mode & 0o777
+        except OSError:
+            umask = os.umask(0)
+            os.umask(umask)
+            mode = 0o666 & ~umask
+        try:
+            os.chmod(tmp, mode)
+        except OSError:
+            pass  # a filesystem without modes: keep going, the write matters more
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            json.dump(obj, f, indent=2, ensure_ascii=False)
+            f.write("\n")
+        os.replace(tmp, path)
+    except BaseException:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        raise
+
+
+_LOCK_HANDLES = []  # held until process exit
+
+
+def acquire_lock(directory, shared=False):
+    """Per-directory lock spanning the whole read-mutate-write run.
+
+    Writers take it exclusive (prevents the two-terminal lost-update race).
+    Read-only subcommands take it shared, and only if a writer has already
+    created the lock file — a read must never leave a .bodhi-state.lock
+    behind that makes a merely-inspected project look touched. POSIX-only;
+    on platforms without fcntl the script still works, just without the guard.
+    """
+    if fcntl is None:
+        return
+    lock_path = os.path.join(directory, ".bodhi-state.lock")
+    try:
+        if shared:
+            if not os.path.exists(lock_path):
+                return
+            handle = open(lock_path, "r")
+            fcntl.flock(handle, fcntl.LOCK_SH)
+        else:
+            handle = open(lock_path, "a")
+            fcntl.flock(handle, fcntl.LOCK_EX)
+        _LOCK_HANDLES.append(handle)
+    except OSError:
+        pass  # locking is best-effort; never block the actual work on it
+
+
+def bodhi_dir(project):
+    d = os.path.join(project, ".bodhi")
+    if not os.path.isdir(d):
+        die(f"no .bodhi/ directory under {project!r} — is this a BodhiKit project?")
+    return d
+
+
+def sr_path(project):
+    return os.path.join(bodhi_dir(project), "spaced-review.json")
+
+
+def state_path(project):
+    return os.path.join(bodhi_dir(project), "state.json")
+
+
+_LOADED_VERSION = {}   # spaced-review path -> version found on disk at load
+_UPGRADE_FIELDS = {}   # spaced-review path -> per-concept fields the load added
+
+V3_CONCEPT_DEFAULTS = (("bloomLevel", 0), ("feynmanPassed", False),
+                       ("consecutiveCorrectAtL4Plus", 0), ("question", ""),
+                       ("lastResult", ""), ("reviewHistory", list))
+
+
+def upgrade_to_v3(data):
+    """THE v1/v2 -> v3 upgrade, shared by the load path (in memory, persisted
+    by the next write) and `migrate-spaced-review` (explicit). One function
+    so both paths produce the same file — before 1.18.x the write path
+    added three fields and no marker, migrate added five and a marker, and
+    migrate then reported noop on a file the write path had half-upgraded.
+    Returns the number of per-concept fields added."""
+    added = 0
+    for c in data.get("concepts", []):
+        if not isinstance(c, dict):
+            continue
+        for key, default in V3_CONCEPT_DEFAULTS:
+            if key not in c:
+                c[key] = default() if callable(default) else default
+                added += 1
+    data.setdefault("sessionHistory", [])
+    return added
+
+
+def is_v3_complete(data):
+    return data.get("version") == 3 and all(
+        isinstance(c, dict) and all(k in c for k, _ in V3_CONCEPT_DEFAULTS)
+        for c in data.get("concepts", []))
+
+
+def write_migration_marker(bdir, from_version, concepts, fields_added, performed_by):
+    """`.bodhi/.migration-1.10.md`, written once by whichever path upgraded
+    the file first. Returns the marker path."""
+    marker = os.path.join(bdir, ".migration-1.10.md")
+    if not os.path.exists(marker):
+        with open(marker, "w", encoding="utf-8") as f:
+            f.write(f"# Migration to 1.10 — {iso(today())}\n\n"
+                    f"Performed by {performed_by}.\n\n"
+                    f"- spaced-review.json: v{from_version} -> v3\n"
+                    f"- concepts touched: {concepts}\n"
+                    f"- fields added: {fields_added}\n"
+                    f"- backup: `.bodhi/.pre-1.10-backup/spaced-review.json`\n")
+    return marker
+
+
+def ensure_pre_v3_backup(path):
+    """Copy a v1/v2 spaced-review.json to .pre-1.10-backup/ once. Never
+    overwrites — the first copy may be the only pre-v3 one."""
+    backup_dir = os.path.join(os.path.dirname(path), ".pre-1.10-backup")
+    backup = os.path.join(backup_dir, "spaced-review.json")
+    if not os.path.exists(backup):
+        os.makedirs(backup_dir, exist_ok=True)
+        shutil.copyfile(path, backup)
+        load_json(backup)  # backup must parse before we mutate the source
+    return backup
+
+
+def write_spaced_review(path, data):
+    """Every mutating subcommand's write. A file loaded at v1/v2 is backed up
+    before it is stamped v3 — previously any write silently upgraded the file
+    and `migrate-spaced-review` then reported noop, so the pre-v3 backup its
+    contract promises was never made."""
+    loaded = _LOADED_VERSION.get(path, 3)
+    if loaded < 3 and os.path.exists(path):
+        backup = ensure_pre_v3_backup(path)
+        _WRITE_NOTES["migratedFromVersion"] = loaded
+        _WRITE_NOTES["backup"] = backup
+        _WRITE_NOTES["marker"] = write_migration_marker(
+            os.path.dirname(path), loaded, len(data.get("concepts", [])),
+            _UPGRADE_FIELDS.get(path, 0), "the first `bodhi-state` write on the file")
+    data["version"] = 3
+    write_json(path, data)
+
+
+def load_spaced_review(project, create=False):
+    path = sr_path(project)
+    if not os.path.exists(path):
+        if create:
+            return path, {"version": 3, "lastReviewCheck": None,
+                          "concepts": [], "sessionHistory": []}
+        die(f"{path} does not exist")
+    data = load_json(path)
+    v = data.get("version", 1)
+    _LOADED_VERSION[path] = v if isinstance(v, int) else 1
+    # Read-tolerate v1/v2: fill v3 per-concept fields in memory; persisted on
+    # the next write (state-migration KB pattern).
+    if not isinstance(data.get("concepts", []), list):
+        die(f"{path}: concepts is {type(data.get('concepts')).__name__}, "
+            f"expected list — run `bodhi-state verify`")
+    for i, c in enumerate(data.get("concepts", [])):
+        if not isinstance(c, dict):
+            die(f"{path}: concepts[{i}] is {type(c).__name__}, expected object "
+                f"— run `bodhi-state verify`")
+    _UPGRADE_FIELDS[path] = upgrade_to_v3(data)
+    validate_spaced_review(data, path)
+    return path, data
+
+
+def _is_int(x):
+    return isinstance(x, int) and not isinstance(x, bool)
+
+
+def _coerce_int(x, lo, hi):
+    """The lossless int repair: a numeric string in range. Anything else
+    (a bool, prose, a float) is None — normalize never guesses."""
+    if isinstance(x, str) and re.fullmatch(r"\s*\d+\s*", x):
+        v = int(x)
+        if lo <= v <= hi:
+            return v
+    return None
+
+
+def _coerce_bool(x):
+    """The lossless bool repair: the strings true/false, or the ints 0/1."""
+    if isinstance(x, str) and x.strip().lower() in ("true", "false"):
+        return x.strip().lower() == "true"
+    if _is_int(x) and x in (0, 1):
+        return bool(x)
+    return None
+
+
+def concept_shape_errors(c):
+    """THE shape table for one spaced-review concept — the single source
+    behind load-time validation (dies on the first), `verify` (reports them
+    all) and `normalize` (repairs the ones with a lossless fix). Returns
+    [(field, actual, expected, repair)] where repair is the coerced value
+    or None. Two hand-kept copies of these rules drifted in 1.18.0 (verify
+    accepted a bool box that every other subcommand then died on)."""
+    errs = []
+    name = c.get("name")
+    if not isinstance(name, str) or not name.strip():
+        errs.append(("name", name, "non-empty string", None))
+    b = c.get("box")
+    if not (_is_int(b) and 1 <= b <= MAX_BOX):
+        errs.append(("box", b, f"int 1-{MAX_BOX}", _coerce_int(b, 1, MAX_BOX)))
+    # The v3 fields may be absent on a v1/v2 file that verify inspects
+    # without upgrading; the load path fills them first.
+    if "bloomLevel" in c:
+        bl = c["bloomLevel"]
+        if not (_is_int(bl) and 0 <= bl <= 6):
+            errs.append(("bloomLevel", bl, "int 0-6", _coerce_int(bl, 0, 6)))
+    if "feynmanPassed" in c:
+        fp = c["feynmanPassed"]
+        if not isinstance(fp, bool):
+            errs.append(("feynmanPassed", fp, "true|false", _coerce_bool(fp)))
+    if "consecutiveCorrectAtL4Plus" in c:
+        cc = c["consecutiveCorrectAtL4Plus"]
+        if not (_is_int(cc) and cc >= 0):
+            errs.append(("consecutiveCorrectAtL4Plus", cc, "int >= 0",
+                         _coerce_int(cc, 0, 10**6)))
+    rh = c.get("reviewHistory", [])
+    if not isinstance(rh, list):
+        errs.append(("reviewHistory", rh, "list", None))
+    elif any(not isinstance(h, dict) for h in rh):
+        errs.append(("reviewHistory", "…", "list of objects", None))
+    return errs
+
+
+def history_entry_errors(h):
+    """Shape table for one reviewHistory entry — the fields readers compute
+    on. Review finding 7 (2026-09-07): `verify` passed a history bloomLevel of
+    "three" that session-brief then died on with a TypeError, so the Stop
+    hook certified a project /teach could not read. Rule: whatever verify
+    accepts, every read subcommand must handle. Returns the same
+    (field, actual, expected, repair) tuples as concept_shape_errors; dates
+    are not here — readers skip an unparseable date, so verify only warns."""
+    errs = []
+    if h.get("deferred"):
+        if "days" in h and not (_is_int(h["days"]) and h["days"] >= 0):
+            errs.append(("days", h["days"], "int >= 0", _coerce_int(h["days"], 0, 10**6)))
+        return errs
+    if "bloomLevel" in h:
+        bl = h["bloomLevel"]
+        if not (_is_int(bl) and 0 <= bl <= 6):
+            errs.append(("bloomLevel", bl, "int 0-6", _coerce_int(bl, 0, 6)))
+    if "boxBefore" in h:
+        bb = h["boxBefore"]
+        if not (_is_int(bb) and 1 <= bb <= MAX_BOX):
+            errs.append(("boxBefore", bb, f"int 1-{MAX_BOX}", _coerce_int(bb, 1, MAX_BOX)))
+    for flag in ("applied", "retry", "selfReport"):
+        if flag in h and not isinstance(h[flag], bool):
+            errs.append((flag, h[flag], "true|false", _coerce_bool(h[flag])))
+    return errs
+
+
+def shape_error_text(name, field, actual, expected, repair):
+    """One wording for both paths; names `normalize` only when it can fix it."""
+    msg = f"concept {name!r} {field} {actual!r} not {expected}"
+    if repair is not None:
+        msg += " — run `bodhi-state normalize`"
+    return msg
+
+
+def validate_spaced_review(data, path):
+    """Type-check the fields every subcommand computes on, once, at load.
+    A string box or a null name used to traceback in some subcommands and
+    pass silently through others; now every command fails the same way,
+    naming the field and — when there is one — the repair."""
+    for i, c in enumerate(data.get("concepts", [])):
+        errs = concept_shape_errors(c)
+        if errs:
+            field, actual, expected, repair = errs[0]
+            label = c.get("name") if isinstance(c.get("name"), str) else f"index {i}"
+            die(f"{path}: " + shape_error_text(label, field, actual, expected, repair)
+                + ("; " if repair is not None else " — fix it by hand; ")
+                + "`bodhi-state verify` lists every problem")
+        for h in c.get("reviewHistory", []) if isinstance(c.get("reviewHistory"), list) else []:
+            if not isinstance(h, dict):
+                continue
+            herrs = history_entry_errors(h)
+            if herrs:
+                field, actual, expected, repair = herrs[0]
+                label = c.get("name") if isinstance(c.get("name"), str) else f"index {i}"
+                die(f"{path}: " + shape_error_text(label, f"reviewHistory {field}",
+                                                   actual, expected, repair)
+                    + ("; " if repair is not None else " — fix it by hand; ")
+                    + "`bodhi-state verify` lists every problem")
+    if not isinstance(data.get("sessionHistory"), list):
+        die(f"{path}: sessionHistory is not a list — run `bodhi-state verify`")
+
+
+def note_activity(project, text):
+    """Point state.json.lastActivity at what just happened (forget, park).
+    No-op when the project has no state.json yet."""
+    state = state_if_present(project)
+    if state is None:
+        return
+    sp = state_path(project)
+    state["lastActivity"] = text[:LAST_ACTIVITY_MAX]
+    write_json(sp, state)
+
+
+def load_state(project):
+    """state.json with the fields the script branches on type-checked; the
+    drift patterns `normalize` repairs (dict currentModule, nested session
+    bookkeeping) fail here with the repair named instead of a traceback."""
+    sp = state_path(project)
+    state = load_json(sp)
+    for key in ("currentModule", "previousModule", "lastActivity"):
+        v = state.get(key)
+        if v is not None and not isinstance(v, str):
+            die(f"{sp}: {key} is {type(v).__name__}, expected string — "
+                f"run `bodhi-state normalize`")
+    if not isinstance(state.get("sessionDates", []), list):
+        die(f"{sp}: sessionDates is not a list — run `bodhi-state normalize`")
+    return sp, state
+
+
+def require_state(project):
+    """state.json for the subcommands that cannot run without it."""
+    sp = state_path(project)
+    if not os.path.exists(sp):
+        die(f"{sp} does not exist")
+    return sp, load_state(project)[1]
+
+
+def state_if_present(project, default=None):
+    """state.json for the subcommands that degrade gracefully without it."""
+    return load_state(project)[1] if os.path.exists(state_path(project)) else default
+
+
+def resolve_concepts(data, names, hint=""):
+    """The shared preamble of forget/park/defer: no names or an untracked
+    name dies; otherwise the concept dicts, in the order given, each
+    looked up once."""
+    names = [n for n in names if n]
+    if not names:
+        die("no concepts given (use --concept, repeatable" + hint + ")")
+    found = [(n, find_concept(data, n)) for n in names]
+    missing = [n for n, c in found if c is None]
+    if missing:
+        die(f"not tracked: {', '.join(missing)} — resolve names first "
+            f"(or add-concept them)")
+    return [c for _, c in found]
+
+
+def find_concept(data, name):
+    for c in data.get("concepts", []):
+        if c.get("name", "").strip().lower() == name.strip().lower():
+            return c
+    return None
+
+
+def new_concept(name, module, question="", bloom=0):
+    """bloom: the level a /learn or /assess classification observed (0 = not
+    classified). Before this flag every seed entered at 0 even though /learn
+    only seeds sub-topics it classified at >= 1, so the assessment's own
+    reading was dropped at the door: the gate saw `no-opinion`, /continue saw
+    `neverTaught`, and session-brief opened with a pretest on material the
+    learner had just been assessed on (review finding 3, 2026-09-07)."""
+    t = today()
+    return {
+        "name": name,
+        "module": module,
+        "introduced": iso(t),
+        "box": 1,
+        "nextReview": iso(t + datetime.timedelta(days=BOX_INTERVALS[1])),
+        "lastReviewed": None,
+        "question": question,
+        "lastResult": "",
+        "bloomLevel": bloom,
+        "feynmanPassed": False,
+        "consecutiveCorrectAtL4Plus": 0,
+        "reviewHistory": [],
+    }
+
+
+def find_profile(project):
+    """Walk up from the project dir looking for .bodhi-profile.json."""
+    d = os.path.abspath(project)
+    for _ in range(4):
+        p = os.path.join(d, ".bodhi-profile.json")
+        if os.path.exists(p):
+            return p
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    return None
+
+
+HISTORY_CAP = 100  # per concept; older entries roll into reviewHistoryArchived
+
+
+def promotion_hold(concept, t):
+    """Why a correct on date `t` earns no box movement, or None when it is a
+    spaced recall (spaced-repetition KB). A Leitner interval is earned by
+    recalling AFTER the gap, so the box and the L4+ streak move only on a
+    DUE review; any other correct is evidence (history, Bloom ratchet,
+    applied) but not a spaced success.
+
+    Until 1.23.0 only a second review on the same date was held, so corrects
+    on consecutive days climbed Box 1 -> 5 and reached mastery in four days
+    with no gap longer than one. Performance right after instruction is a
+    poor index of what is retained (Soderstrom & Bjork 2015); the rule makes
+    the box measure the delayed recall.
+
+    - "already reviewed today": a same-day miss still demotes (forgetting is
+      forgetting); the correct that follows it is the relearning rep and
+      holds, exactly as --retry does.
+    - "first review": nothing has been spaced yet — a lesson's own check, or
+      the first grade on a /learn seed (overdue on paper since the day after
+      seeding) is first contact, not a delayed recall.
+    - "not yet due": reviewed before nextReview. With no readable
+      nextReview (parked, legacy, malformed) the interval is measured from
+      lastReviewed; with neither date there is nothing to be early against.
+    """
+    if any(h.get("date") == iso(t) and not h.get("deferred")
+           and h.get("result") in ("correct", "incorrect", "partial")
+           for h in concept.get("reviewHistory", [])):
+        return "already reviewed today"
+    last = parse_date(concept.get("lastReviewed"))
+    if last is None and exposure_of(concept) == "seeded":
+        return "first review"
+    due = parse_date(concept.get("nextReview"))
+    if due is None and last is not None:
+        due = last + datetime.timedelta(days=BOX_INTERVALS.get(concept.get("box", 1), 1))
+    if due is not None and t < due:
+        return "not yet due"
+    return None
+
+
+def apply_review(concept, result, tested_bloom, confidence=None, note=None,
+                 source=None, retry=False, applied=False):
+    """Canonical per-concept update (spaced-repetition + state-schema KBs).
+
+    correct   -> box up one (max 5), nextReview = today + new interval, when
+                 the review is due; otherwise evidence only (promotion_hold)
+    incorrect -> box 1, nextReview tomorrow, counter reset
+    partial   -> box held, nextReview tomorrow (re-test soon), counter reset
+                 (1.11.2: not a Leitner demotion, but it breaks the
+                 consecutive-correct mastery streak)
+    retry     -> successive-relearning rep (1.11.1): history entry only.
+                 The Rawson & Dunlosky in-session retry is additional evidence,
+                 not a substitute — the original miss's Box-1 demotion and
+                 tomorrow's review stand; no box/counter/bloom movement.
+    bloomLevel only ever ratchets up (demotion is /forget's job, and even
+    /forget demotes the box, not the Bloom classification).
+    `applied` marks the entry as demonstrated in working code the tutor read
+    (an exercise, a driven piece) rather than in an explanation or a quiz
+    answer. It is a separate axis from the level: the rubric still sets
+    `--tested-bloom`, and the flag is what the gate and the mastery formula
+    read for "can the learner actually build with it" (1.20.0).
+    """
+    t = today()
+    old_box = concept.get("box", 1)
+    old_bloom = concept.get("bloomLevel", 0)
+    if result not in ("correct", "incorrect", "partial"):
+        die(f"result must be correct|incorrect|partial, got {result!r}")
+    box_held = None
+    if not retry:
+        if result == "correct":
+            box_held = promotion_hold(concept, t)
+            if box_held is None:
+                concept["box"] = min(old_box + 1, MAX_BOX)
+                concept["nextReview"] = iso(t + datetime.timedelta(days=BOX_INTERVALS[concept["box"]]))
+            elif box_held == "first review":
+                # The clock starts at first contact: a /learn seed taught
+                # weeks after seeding is overdue on paper, and without this
+                # it would stay in `due` for the rest of the day it was taught.
+                nr = parse_date(concept.get("nextReview"))
+                if nr is None or nr <= t:
+                    concept["nextReview"] = iso(t + datetime.timedelta(days=BOX_INTERVALS.get(old_box, 1)))
+            if tested_bloom is not None:
+                concept["bloomLevel"] = max(concept.get("bloomLevel", 0), tested_bloom)
+                if tested_bloom >= 4 and box_held is None:
+                    concept["consecutiveCorrectAtL4Plus"] = concept.get("consecutiveCorrectAtL4Plus", 0) + 1
+        elif result == "incorrect":
+            concept["box"] = 1
+            concept["nextReview"] = iso(t + datetime.timedelta(days=1))
+            concept["consecutiveCorrectAtL4Plus"] = 0
+        elif result == "partial":
+            concept["nextReview"] = iso(t + datetime.timedelta(days=1))
+            # 1.11.2: a partial retrieval breaks the consecutive-correct
+            # mastery streak (state-schema KB) — the box is held, but
+            # "3 consecutive correct at L4+" means uninterrupted corrects.
+            concept["consecutiveCorrectAtL4Plus"] = 0
+    concept["lastReviewed"] = iso(t)
+    concept["lastResult"] = note or (f"{result} (relearning retry)" if retry else result)
+    # bloomLevel is recorded only when a level was tested: a bare `correct`
+    # used to write 0, indistinguishable from "graded at 0".
+    entry = {"date": iso(t), "result": result, "boxBefore": old_box}
+    if tested_bloom is not None:
+        entry["bloomLevel"] = tested_bloom
+    if retry:
+        entry["retry"] = True
+    if confidence:
+        entry["confidence"] = confidence
+    if source:
+        entry["source"] = source
+    if applied:
+        entry["applied"] = True
+    history = concept.setdefault("reviewHistory", [])
+    history.append(entry)
+    if len(history) > HISTORY_CAP:
+        overflow = len(history) - HISTORY_CAP
+        archive_history(concept, history[:overflow])
+        del history[:overflow]
+    new_bloom = concept.get("bloomLevel", 0)
+    out = {"concept": concept["name"], "box": f"{old_box} -> {concept['box']}",
+            "retry": retry,
+            "applied": bool(applied),
+            "appliedEvidence": applied_evidence(concept),
+            "bloomLevel": new_bloom,
+            **bloom_render(new_bloom),
+            # 1.14.0: THIS write crossed the Bloom-3 line — the exact condition
+            # for /teach's bump-profile totalConceptsLearned duty. Executors
+            # previously re-derived it ("if unsure, scan progress.md").
+            "crossedBloom3": old_bloom < 3 <= new_bloom,
+            "crossedLevel": new_bloom > old_bloom,   # the one moment the label is spoken
+            "consecutiveCorrectAtL4Plus": concept.get("consecutiveCorrectAtL4Plus", 0),
+            "nextReview": concept["nextReview"]}
+    if box_held:
+        out["boxHeld"] = box_held
+    return out
+
+
+# --- Subcommands ------------------------------------------------------------
+
+def cmd_add_concept(args):
+    path, data = load_spaced_review(args.project, create=True)
+    if find_concept(data, args.concept):
+        emit({"action": "noop", "reason": f"concept {args.concept!r} already tracked"})
+        return
+    bloom = args.bloom or 0
+    if not 0 <= bloom <= 6:
+        die(f"--bloom must be 0-6, got {bloom}")
+    data.setdefault("concepts", []).append(
+        new_concept(args.concept, args.module, args.question or "", bloom))
+    write_spaced_review(path, data)
+    emit({"action": "added", "concept": args.concept, "module": args.module,
+          "box": 1, "nextReview": data["concepts"][-1]["nextReview"],
+          "bloomLevel": bloom, **bloom_render(bloom)})
+
+
+def cmd_record_review(args):
+    if args.confidence and args.confidence not in CONFIDENCE_VALUES:
+        die(f"confidence must be one of {sorted(CONFIDENCE_VALUES)}")
+    path, data = load_spaced_review(args.project, create=True)
+    concept = find_concept(data, args.concept)
+    created = False
+    new_module = False
+    if concept is None:
+        if not args.module:
+            die(f"concept {args.concept!r} not tracked; pass --module to auto-create it")
+        known = {str(c.get("module", "")).strip().lower()
+                 for c in data.get("concepts", [])}
+        st = state_if_present(args.project)
+        if st is not None:
+            known |= {str(st.get(k) or "").strip().lower()
+                      for k in ("currentModule", "previousModule")}
+        # A module name nothing else has seen is usually a typo of one that
+        # exists; the write still happens (the skill's judgment stands), the
+        # flag lets it notice.
+        new_module = args.module.strip().lower() not in known
+        concept = new_concept(args.concept, args.module, args.question or "")
+        data.setdefault("concepts", []).append(concept)
+        created = True
+    change = apply_review(concept, args.result, args.tested_bloom,
+                          confidence=args.confidence, note=args.note,
+                          source=args.source, retry=args.retry,
+                          applied=args.applied)
+    data["lastReviewCheck"] = now_iso()
+    write_spaced_review(path, data)
+    change["created"] = created
+    if created:
+        change["newModule"] = new_module
+    emit(change)
+
+
+def cmd_set_feynman(args):
+    path, data = load_spaced_review(args.project)
+    concept = find_concept(data, args.concept)
+    if concept is None:
+        die(f"concept {args.concept!r} not tracked")
+    concept["feynmanPassed"] = True  # set, never unset
+    # 1.23.0: the date of the most recent pass. Mastery counts the
+    # explain-back only when it postdates the last miss (feynman_current).
+    concept["feynmanPassedAt"] = iso(today())
+    write_spaced_review(path, data)
+    emit({"concept": concept["name"], "feynmanPassed": True,
+          "feynmanPassedAt": concept["feynmanPassedAt"],
+          "feynmanCurrent": feynman_current(concept)})
+
+
+def cmd_record_session(args):
+    if args.type not in SESSION_TYPES:
+        die(f"type {args.type!r} is not in the canonical vocabulary "
+            f"{sorted(SESSION_TYPES)} (state-schema KB). Use 'other' with "
+            f"--subtype for genuinely novel sessions.")
+    if args.type == "other" and not args.subtype:
+        die("type 'other' requires --subtype (state-schema KB)")
+    extra = {}
+    if args.data:
+        try:
+            extra = json.loads(args.data)
+        except json.JSONDecodeError as e:
+            die(f"--data is not valid JSON: {e}")
+        if not isinstance(extra, dict):
+            die("--data must be a JSON object")
+    # Reserved keys come from flags only — --data must not bypass the
+    # vocabulary check (1.11.1: a smuggled "type" defeated enforcement and
+    # then tripped the Stop hook on the script's own write).
+    for reserved in ("type", "subtype", "date"):
+        extra.pop(reserved, None)
+    path, data = load_spaced_review(args.project, create=True)
+    entry = {"date": iso(today()), "type": args.type}
+    if args.subtype:
+        entry["subtype"] = args.subtype
+    entry.update(extra)
+    data.setdefault("sessionHistory", []).append(entry)
+    write_spaced_review(path, data)
+    emit({"action": "session-recorded", "entry": entry})
+
+
+ASSESSMENT_TRIGGERS = {"learn-phase2", "assess", "evaluate", "plan-regenerate"}
+
+
+def cmd_record_assessment(args):
+    """Append an entry to the append-only assessment-history.json."""
+    if args.trigger not in ASSESSMENT_TRIGGERS:
+        die(f"trigger must be one of {sorted(ASSESSMENT_TRIGGERS)}")
+    try:
+        entry = json.loads(args.data)
+    except json.JSONDecodeError as e:
+        die(f"--data is not valid JSON: {e}")
+    if not isinstance(entry, dict):
+        die("--data must be a JSON object")
+    entry["date"] = entry.get("date") or iso(today())
+    entry["trigger"] = args.trigger
+    path = os.path.join(bodhi_dir(args.project), "assessment-history.json")
+    if os.path.exists(path):
+        data = load_json(path)
+    else:
+        data = {"version": 1, "entries": []}
+    data.setdefault("entries", []).append(entry)
+    write_json(path, data)
+    emit({"action": "assessment-recorded", "trigger": args.trigger,
+          "entries": len(data["entries"])})
+
+
+def cmd_forget(args):
+    # --concept (repeatable) is the exact-name path — required for names that
+    # themselves contain commas. --concepts remains the comma-list convenience.
+    names = list(args.concept or [])
+    if args.concepts:
+        names.extend(n.strip() for n in args.concepts.split(",") if n.strip())
+    path, data = load_spaced_review(args.project)
+    concepts = resolve_concepts(data, names, ', or --concepts "a, b"')
+    names = [c["name"] for c in concepts]
+    t = today()
+    box_changes = {}
+    for c in concepts:
+        box_changes[c["name"]] = f"{c.get('box', 1)} -> 1"
+        c["box"] = 1
+        c["nextReview"] = iso(t + datetime.timedelta(days=1))
+        c["consecutiveCorrectAtL4Plus"] = 0
+        # feynmanPassed and bloomLevel preserved by design (state-schema KB).
+        c.setdefault("reviewHistory", []).append(
+            {"date": iso(t), "result": "incorrect", "selfReport": True,
+             "note": "learner-initiated demote"})  # nothing was tested: no bloomLevel
+        c["lastReviewed"] = iso(t)
+        c["lastResult"] = "learner-initiated demote"
+    entry = {"date": iso(t), "type": "learner-forget",
+             "conceptsDemoted": names,
+             "boxChanges": box_changes}
+    if args.note:
+        entry["notes"] = args.note
+    data.setdefault("sessionHistory", []).append(entry)
+    write_spaced_review(path, data)
+    note_activity(args.project, args.activity or
+                  f"Demoted {len(names)} concept(s): {', '.join(names)}")
+    emit({"action": "demoted", "concepts": names, "boxChanges": box_changes})
+
+
+def cmd_park(args):
+    """Take a concept out of review rotation, or return it (--resume).
+
+    /forget --park (1.16.0): a working learner who has
+    consciously deprioritized a concept needs "stop scheduling it", not
+    "review it tomorrow, harder" — otherwise review rot accumulates on
+    concepts they no longer maintain and the due pile stops being trusted.
+    Parking is scheduling, never an outcome: box, bloom, counters,
+    feynmanPassed, and history all stand. --resume re-enters rotation with a
+    review tomorrow and the box preserved.
+    """
+    path, data = load_spaced_review(args.project)
+    concepts = resolve_concepts(data, args.concept or [])
+    names = [c["name"] for c in concepts]
+    t = today()
+    changed = {}
+    for c in concepts:
+        if args.resume:
+            if not c.get("parked"):
+                die(f"{c['name']!r} is not parked — nothing to resume")
+            c["parked"] = False
+            c["nextReview"] = iso(t + datetime.timedelta(days=1))
+        else:
+            if c.get("parked"):
+                die(f"{c['name']!r} is already parked")
+            c["parked"] = True
+            c["nextReview"] = None
+        changed[c["name"]] = c["nextReview"]
+    key = "conceptsResumed" if args.resume else "conceptsParked"
+    entry = {"date": iso(t), "type": "learner-park",
+             key: names}
+    if args.note:
+        entry["notes"] = args.note
+    data.setdefault("sessionHistory", []).append(entry)
+    write_spaced_review(path, data)
+    verb = "Resumed" if args.resume else "Parked"
+    note_activity(args.project, f"{verb} {len(names)} concept(s): {', '.join(names)}")
+    emit({"action": "resumed" if args.resume else "parked",
+          "concepts": changed})
+
+
+def cmd_defer(args):
+    """Roll a due-but-unreviewed concept forward WITHOUT inventing an outcome.
+
+    1.12.1 — found in the wild: sessions that ran out of time hand-wrote
+    result: "skipped" and rolled nextReview by hand. Deferral is scheduling,
+    never an outcome: box, bloom, counters, and lastReviewed stay untouched.
+    """
+    days = args.days if args.days is not None else 1
+    if days <= 0:
+        die(f"--days must be a positive number of days (got {days})")
+    path, data = load_spaced_review(args.project)
+    concepts = resolve_concepts(data, args.concept or [])
+    t = today()
+    rolled = {}
+    for c in concepts:
+        c["nextReview"] = iso(t + datetime.timedelta(days=days))
+        entry = {"date": iso(t), "deferred": True, "days": days}
+        if args.note:
+            entry["note"] = args.note
+        c.setdefault("reviewHistory", []).append(entry)
+        rolled[c["name"]] = c["nextReview"]
+    write_spaced_review(path, data)
+    emit({"action": "deferred", "days": days, "concepts": rolled})
+
+
+def cmd_touch_state(args):
+    sp, state = require_state(args.project)
+    t = iso(today())
+    dates = state.setdefault("sessionDates", [])
+    if not isinstance(dates, list):
+        die(f"state.json sessionDates is {type(dates).__name__}, expected a "
+            f"list — run `bodhi-state verify`")
+    new_session = t not in dates
+    profile_bumped = False
+    if new_session:
+        yesterday = iso(today() - datetime.timedelta(days=1))
+        state["currentStreak"] = (state.get("currentStreak", 0) + 1
+                                  if yesterday in dates else 1)
+        dates.append(t)
+        state["totalSessions"] = state.get("totalSessions", 0) + 1
+        # 1.11.1: the script owns the cross-project session counter too —
+        # the first touch-state of the day bumps it, so it no longer depends
+        # on which skill in the chain happens to run touch-state first.
+        pp = find_profile(args.project)
+        if pp:
+            profile = load_json(pp)
+            stats = profile.setdefault("cumulativeStats", {})
+            stats["totalSessions"] = stats.get("totalSessions", 0) + 1
+            profile["lastUpdated"] = now_iso()
+            write_json(pp, profile)
+            profile_bumped = True
+    state["lastSessionAt"] = now_iso()
+    if args.activity:
+        state["lastActivity"] = args.activity[:LAST_ACTIVITY_MAX]
+    if args.module:
+        if state.get("currentModule") and state["currentModule"] != args.module:
+            state["previousModule"] = state["currentModule"]
+        state["currentModule"] = args.module
+    if args.module_index is not None:
+        state["currentModuleIndex"] = args.module_index
+    if args.phase:
+        state["currentPhase"] = args.phase
+    if args.completion is not None:
+        state["overallCompletion"] = max(0, min(100, args.completion))
+    state["version"] = 2
+    write_json(sp, state)
+    emit({"action": "state-updated", "newSession": new_session,
+          "currentStreak": state.get("currentStreak"),
+          "totalSessions": state.get("totalSessions"),
+          "profileSessionsBumped": profile_bumped,
+          "lastActivity": state.get("lastActivity")})
+
+
+def cmd_bump_profile(args):
+    if args.counter not in PROFILE_COUNTERS:
+        die(f"counter must be one of {sorted(PROFILE_COUNTERS)}")
+    p = find_profile(args.project)
+    if not p:
+        die("no .bodhi-profile.json found walking up from the project "
+            "(it is created by /learn)")
+    profile = load_json(p)
+    stats = profile.setdefault("cumulativeStats", {})
+    stats[args.counter] = stats.get(args.counter, 0) + 1
+    profile["lastUpdated"] = now_iso()
+    write_json(p, profile)
+    emit({"action": "profile-bumped", "counter": args.counter,
+          "value": stats[args.counter], "file": p})
+
+
+# --- Cross-project profile-list ownership (1.16.0) --------------------------
+# Until 1.15.x the .bodhi-profile.projects.json list was "the one mutation the
+# script does not own" — /learn and /evaluate hand-edited it, guarded only by
+# verify's entry-shape backstop. These subcommands close that last
+# hand-edit hole: the script constructs schema-complete entries, the skills
+# supply only the pedagogical values.
+
+def load_profile_projects(project):
+    """Locate .bodhi-profile.projects.json beside .bodhi-profile.json."""
+    pp = find_profile(project)
+    if not pp:
+        die("no .bodhi-profile.json found walking up from the project "
+            "(it is scaffolded by /learn) — the projects list lives beside it")
+    lp = os.path.join(os.path.dirname(pp), ".bodhi-profile.projects.json")
+    if os.path.exists(lp):
+        data = load_json(lp)
+    else:
+        data = {"version": 2, "activeProjects": [], "completedProjects": []}
+    for key in ("activeProjects", "completedProjects"):
+        if not isinstance(data.get(key), list):
+            data[key] = []
+        for i, e in enumerate(data[key]):
+            if not isinstance(e, dict):
+                die(f"{lp}: {key}[{i}] is {type(e).__name__}, expected object "
+                    f"— run `bodhi-state verify` and repair the entry")
+    return pp, lp, data
+
+
+def find_project_entry(entries, name):
+    want = name.strip().lower()
+    return next((e for e in entries if isinstance(e, dict)
+                 and str(e.get("name", "")).strip().lower() == want), None)
+
+
+def cmd_profile_add_project(args):
+    pp, lp, data = load_profile_projects(args.project)
+    if find_project_entry(data["activeProjects"], args.name):
+        die(f"{args.name!r} is already in activeProjects — "
+            f"use profile-update-project to refresh it")
+    if find_project_entry(data["completedProjects"], args.name):
+        die(f"{args.name!r} is already in completedProjects — "
+            f"pick a distinct project name")
+    entry = {
+        "name": args.name,
+        "topic": args.topic,
+        "startedAt": iso(today()),
+        "currentPhase": args.phase or "1",
+        "currentModule": args.module or "",
+        "bloomLevel": args.bloom if args.bloom is not None else 0,
+        "pace": args.pace or "steady",
+        "status": args.status or "active",
+        "trackPurpose": args.track_purpose or "",
+    }
+    data["activeProjects"].append(entry)
+    data["version"] = 2
+    write_json(lp, data)
+    emit({"action": "profile-project-added", "entry": entry,
+          "activeProjects": len(data["activeProjects"]), "file": lp})
+
+
+def cmd_profile_update_project(args):
+    _, lp, data = load_profile_projects(args.project)
+    entry = find_project_entry(data["activeProjects"], args.name)
+    if entry is None:
+        names = [str(e.get("name")) for e in data["activeProjects"]]
+        die(f"{args.name!r} is not in activeProjects {names} — "
+            f"add it with profile-add-project first")
+    updated = []
+    for flag, field in (("topic", "topic"), ("phase", "currentPhase"),
+                        ("module", "currentModule"), ("bloom", "bloomLevel"),
+                        ("pace", "pace"), ("status", "status"),
+                        ("track_purpose", "trackPurpose")):
+        value = getattr(args, flag)
+        if value is not None:
+            entry[field] = value
+            updated.append(field)
+    if not updated:
+        die("nothing to update — pass at least one field flag")
+    write_json(lp, data)
+    emit({"action": "profile-project-updated", "entry": entry,
+          "updatedFields": updated, "file": lp})
+
+
+def cmd_profile_complete_project(args):
+    _, lp, data = load_profile_projects(args.project)
+    entry = find_project_entry(data["activeProjects"], args.name)
+    if entry is None:
+        names = [str(e.get("name")) for e in data["activeProjects"]]
+        die(f"{args.name!r} is not in activeProjects {names} — "
+            f"nothing to complete")
+    data["activeProjects"].remove(entry)
+    completed = {
+        "name": entry.get("name", args.name),
+        "completedAt": iso(today()),
+        "finalBloomLevel": (args.final_bloom if args.final_bloom is not None
+                            else entry.get("bloomLevel", 0)),
+        "trackPurpose": entry.get("trackPurpose", ""),
+    }
+    if args.status:
+        # /learn Phase 1.5(c) replace-archive: "archived: replaced by <new>".
+        completed["status"] = args.status
+    data["completedProjects"].append(completed)
+    write_json(lp, data)
+    emit({"action": "profile-project-completed", "entry": completed,
+          "activeProjects": len(data["activeProjects"]),
+          "completedProjects": len(data["completedProjects"]), "file": lp})
+
+
+def cmd_profile_update_patterns(args):
+    """Append persistent challenges / consistent strengths from assessment
+    counts. Pure counting (state-schema KB) — the model never tallies."""
+    pp = find_profile(args.project)
+    if not pp:
+        die("no .bodhi-profile.json found walking up from the project "
+            "(it is scaffolded by /learn)")
+    hist_path = os.path.join(bodhi_dir(args.project), "assessment-history.json")
+    if not os.path.exists(hist_path):
+        emit({"action": "profile-patterns-updated", "addedChallenges": [],
+              "addedStrengths": [],
+              "note": "no assessment-history.json yet — nothing to count"})
+        return
+    hist = load_json(hist_path)
+    low, high = {}, {}
+    for e in hist.get("entries", []):
+        if not isinstance(e, dict):
+            continue
+        for st in e.get("subTopics", []):
+            if not isinstance(st, dict):
+                continue
+            name = str(st.get("name", "")).strip()
+            bloom = st.get("bloomLevel")
+            if not name or not isinstance(bloom, int):
+                continue
+            if bloom < 3:
+                low[name] = low.get(name, 0) + 1
+            if bloom >= 4:
+                high[name] = high.get(name, 0) + 1
+    profile = load_json(pp)
+    patterns = profile.setdefault("patterns", {})
+    added = {}
+    for key, counts in (("persistentChallenges", low),
+                        ("consistentStrengths", high)):
+        arr = patterns.setdefault(key, [])
+        if not isinstance(arr, list):
+            arr = patterns[key] = []
+        have = {str(x).strip().lower() for x in arr}
+        added[key] = sorted(n for n, c in counts.items()
+                            if c >= PATTERNS_MIN_ASSESSMENTS
+                            and n.strip().lower() not in have)
+        arr.extend(added[key])
+    if added["persistentChallenges"] or added["consistentStrengths"]:
+        profile["lastUpdated"] = now_iso()
+        write_json(pp, profile)
+    emit({"action": "profile-patterns-updated",
+          "addedChallenges": added["persistentChallenges"],
+          "addedStrengths": added["consistentStrengths"],
+          "counts": {"belowBloom3": low, "bloom4Plus": high},
+          "threshold": PATTERNS_MIN_ASSESSMENTS, "file": pp})
+
+
+def cmd_due(args):
+    _, data = load_spaced_review(args.project)
+    t = today()
+    due, unparseable = [], []
+    parked_count = 0
+    for c in data.get("concepts", []):
+        if c.get("parked") is True:
+            # Consciously out of rotation (park) — excluded from the due
+            # pile, surfaced as a count so it is never a silent hole.
+            parked_count += 1
+            continue
+        raw = c.get("nextReview")
+        nr = parse_date(raw)
+        if nr is None:
+            # A concept with an unparseable schedule silently leaves rotation
+            # forever — surface it, never skip it quietly (1.11.1).
+            unparseable.append({"name": c.get("name", "(unnamed)"),
+                                "nextReview": raw})
+            continue
+        if nr <= t:
+            # neverTaught / exposure: see exposure_of. A concept /learn seeded
+            # from the assessment, or one only ever quizzed below the apply
+            # rung, has a schedule but nothing to space — /continue routes
+            # these to /teach first. Knowledge shown at the apply rung, or
+            # taught, or built, is real review material whatever its source.
+            exposure = exposure_of(c)
+            # The due list is the surface skills narrate from, so it carries
+            # the words a learner may hear (dueSince / overdueDays / the
+            # outcome clause) and NOT the box or Bloom number — 1/2 Fable
+            # runs read "box: 1" straight into "Query planning — Box 1".
+            # Ordering is by box then date; `priority` is the rank.
+            due.append({"name": c["name"], "module": c.get("module", ""),
+                        "dueSince": raw, "overdueDays": (t - nr).days,
+                        "neverTaught": exposure in ("seeded", "quizzed-only"),
+                        "exposure": exposure,
+                        "bloomOutcome": bloom_render(c.get("bloomLevel", 0))["bloomOutcome"],
+                        "question": c.get("question", ""),
+                        "_sort": (c.get("box", 1), raw)})
+    due.sort(key=lambda d: d.pop("_sort"))
+    for i, d in enumerate(due, 1):
+        d["priority"] = i
+    out = {"dueToday": len(due),
+           "neverTaughtCount": sum(1 for d in due if d["neverTaught"]),
+           "concepts": due}
+    if parked_count:
+        out["parkedCount"] = parked_count
+    if args.limit is not None and len(due) > args.limit:
+        out["concepts"] = due[:args.limit]
+        out["truncated"] = len(due) - args.limit
+    if unparseable:
+        out["unparseableDates"] = unparseable
+    emit(out)
+
+
+def is_mastered(c):
+    """Canonical mastery formula (state-ops KB; field semantics in state-schema).
+
+    Five conjuncts since 1.20.0: the fifth, one correct demonstrated in
+    working code since the last miss, is what keeps "Solid" from being
+    earned entirely in conversation. Since 1.23.0 the explain-back must
+    also postdate the last miss (feynman_current). Do not redefine inline.
+    """
+    return (_mastery_core(c)
+            and feynman_current(c)
+            and applied_evidence(c) >= 1)
+
+
+def _mastery_core(c):
+    """The three retention conjuncts of is_mastered: level, streak, box."""
+    return (c.get("bloomLevel", 0) >= 4
+            and c.get("consecutiveCorrectAtL4Plus", 0) >= 3
+            and c.get("box", 1) >= 4)
+
+
+def concept_tier(c):
+    """Canonical concept tier (blooms-taxonomy KB ladder). Do not re-derive.
+
+    Ordered top-down; first match wins. `mastered` is the predicate name and
+    reuses is_mastered so the four-conjunct formula has exactly one home; the
+    learner-facing words (Solid/Working/Introduced) are /progress's rendering
+    of these keys, not separate logic.
+
+    Implements the KB's `familiar` and `introduced` tiers in code so /progress
+    renders a computed tier instead of inferring one from two booleans.
+    """
+    if c.get("bloomLevel", 0) <= 0:
+        return "unclassified"
+    if is_mastered(c):
+        return "mastered"
+    if c.get("bloomLevel", 0) >= 3 and c.get("box", 1) >= 2:
+        return "familiar"
+    return "introduced"
+
+
+def due_for_check(c, t):
+    """A mastered concept whose last check has aged: overdue by more than
+    its box interval, i.e. more than twice the gap the schedule chose.
+
+    It stays mastered (is_mastered does not read the clock): a skipped
+    check is unverified, not known forgotten — access fades while storage
+    persists and relearning is fast (Bjork & Bjork 1992) — so mastery
+    counts, tiers and the anonymized export do not flicker with absence.
+    /progress renders it *Solid, due for a check* (1.23.0). Parked and
+    unscheduled concepts are out of rotation and never flagged."""
+    if c.get("parked") is True or not is_mastered(c):
+        return False
+    nr = parse_date(c.get("nextReview"))
+    return nr is not None and (t - nr).days > BOX_INTERVALS.get(c.get("box", 1), 1)
+
+
+def new_module_row():
+    """Per-module tally shape shared by `mastery` and `snapshot`."""
+    return {"concepts": 0, "mastered": 0, "classified": 0, "applied": 0,
+            "dueForCheck": 0,
+            "tiers": {"unclassified": 0, "introduced": 0,
+                      "familiar": 0, "mastered": 0}}
+
+
+def tally_module(m, c, t):
+    """Fold one concept into a module row (counts + tier distribution)."""
+    m["concepts"] += 1
+    if c.get("bloomLevel", 0) > 0:
+        m["classified"] += 1
+    if is_mastered(c):
+        m["mastered"] += 1
+    if applied_evidence(c) >= 1:
+        m["applied"] += 1
+    if due_for_check(c, t):
+        m["dueForCheck"] += 1
+    m["tiers"][concept_tier(c)] += 1
+
+
+def finalize_module_rows(modules):
+    """masteryPct per module; an all-unclassified module is not computable
+    (None), never 0% — legacy concepts have no opinion, not a bad one."""
+    for m in modules.values():
+        m["masteryPct"] = (None if m["classified"] == 0
+                           else round(100 * m["mastered"] / m["concepts"]))
+
+
+def retention_tier(b):
+    """spaced-repetition KB 3-tier rollup: Box 4-5 strong, 2-3 building,
+    1 needs_review. The one home for these thresholds (lint pins them)."""
+    if isinstance(b, int) and b >= 4:
+        return "strong"
+    if isinstance(b, int) and b >= 2:
+        return "building"
+    return "needs_review"
+
+
+def blocked_on_feynman(concepts):
+    """is_mastered minus its explain-back conjunct: every other criterion met
+    (the applied one included), and /progress names the one step left."""
+    return [c["name"] for c in concepts
+            if _mastery_core(c)
+            and not feynman_current(c)
+            and applied_evidence(c) >= 1]
+
+
+def blocked_on_applied(concepts):
+    """is_mastered minus its working-code conjunct: a learner who has
+    explained and recalled a concept to every other bar but never built
+    with it since the last miss. /progress names the one step left."""
+    return [c["name"] for c in concepts
+            if _mastery_core(c)
+            and feynman_current(c)
+            and applied_evidence(c) == 0]
+
+
+def review_rollup(concepts, t):
+    """The per-concept scan shared by `mastery` and `snapshot`: module
+    tallies, retention tiers, due windows, box distribution. Parked concepts
+    keep their module/mastery standing but leave the retention and due
+    surfaces — a parked concept must not nag as "needs review"."""
+    modules = {}
+    rollup = {"strong": [], "building": [], "needs_review": []}
+    due_today, due_week, parked, due_check = [], [], [], []
+    boxes = {str(b): 0 for b in range(1, MAX_BOX + 1)}
+    overdue10 = unparseable = 0
+    for c in concepts:
+        tally_module(modules.setdefault(c.get("module", "(none)"),
+                                        new_module_row()), c, t)
+        if due_for_check(c, t):
+            due_check.append(c["name"])
+        if c.get("parked") is True:
+            parked.append(c["name"])
+            continue
+        b = c.get("box", 1)
+        boxes[str(b)] += 1
+        rollup[retention_tier(b)].append(c["name"])
+        nr = parse_date(c.get("nextReview"))
+        if nr is None:
+            if c.get("nextReview") is not None:
+                unparseable += 1
+            continue
+        if nr <= t:
+            due_today.append(c["name"])
+            if (t - nr).days >= 10:
+                overdue10 += 1
+        elif nr <= t + datetime.timedelta(days=7):
+            due_week.append(c["name"])
+    finalize_module_rows(modules)
+    return {"modules": modules, "rollup": rollup, "dueToday": due_today,
+            "dueThisWeek": due_week, "parked": parked, "boxes": boxes,
+            "dueForCheck": due_check,
+            "overdue10": overdue10, "unparseable": unparseable}
+
+
+def cmd_mastery(args):
+    _, data = load_spaced_review(args.project)
+    concepts = data.get("concepts", [])
+    r = review_rollup(concepts, today())
+    out = {"modules": r["modules"],
+           "retentionRollup": {k: len(v) for k, v in r["rollup"].items()},
+           "retentionConcepts": r["rollup"], "dueToday": r["dueToday"],
+           "dueThisWeek": r["dueThisWeek"],
+           "blockedOnFeynman": blocked_on_feynman(concepts),
+           "blockedOnApplied": blocked_on_applied(concepts),
+           "masteredDueForCheck": r["dueForCheck"]}
+    if r["parked"]:
+        out["parked"] = r["parked"]
+    emit(out)
+
+
+def calibration_summary(data):
+    """Confidence-vs-outcome calibration from reviewHistory[].confidence.
+
+    Shared by `calibration` and `export-anonymized` — the export strips the
+    per-concept event lists (they carry concept names).
+    """
+    buckets = {c: {"correct": 0, "incorrect": 0, "partial": 0}
+               for c in CONFIDENCE_VALUES}
+    overconfident_events = []
+    underconfident_events = []
+    total = 0
+    for c in data.get("concepts", []):
+        for h in c.get("reviewHistory", []):
+            conf = h.get("confidence")
+            if conf not in CONFIDENCE_VALUES:
+                continue
+            res = h.get("result")
+            if res not in ("correct", "incorrect", "partial"):
+                continue
+            buckets[conf][res] += 1
+            total += 1
+            if conf == "sure" and res == "incorrect":
+                overconfident_events.append({"concept": c["name"], "date": h.get("date")})
+            if conf == "guessing" and res == "correct":
+                underconfident_events.append({"concept": c["name"], "date": h.get("date")})
+    def rate(n, d):
+        return round(n / d, 2) if d else None
+    sure = buckets["sure"]
+    guess = buckets["guessing"]
+    return {
+        "taggedAnswers": total,
+        "buckets": buckets,
+        "overconfidenceRate": rate(sure["incorrect"], sum(sure.values())),
+        "underconfidenceRate": rate(guess["correct"], sum(guess.values())),
+        "overconfidentEvents": overconfident_events[-5:],
+        "underconfidentEvents": underconfident_events[-5:],
+    }
+
+
+def cmd_calibration(args):
+    _, data = load_spaced_review(args.project)
+    emit(calibration_summary(data))
+
+
+# Spacing-gap buckets for retention analysis (name, min days, max days).
+GAP_BUCKETS = (
+    ("same-day", 0, 0),
+    ("1d", 1, 1),
+    ("2-3d", 2, 3),
+    ("4-7d", 4, 7),
+    ("8-14d", 8, 14),
+    ("15-30d", 15, 30),
+    ("31d+", 31, None),
+)
+
+
+def is_self_report(h):
+    """A /forget entry: the learner asked for a reset, nobody tested them.
+    Entries written before the `selfReport` field carry the note."""
+    return h.get("selfReport") is True or h.get("note") == "learner-initiated demote"
+
+
+def bucket_for_gap(days):
+    for name, lo, hi in GAP_BUCKETS:
+        if days >= lo and (hi is None or days <= hi):
+            return name
+    return None  # negative gap: clock skew or hand-edited dates
+
+
+def retention_summary(data):
+    """Retention-at-review: % correct grouped by actual spacing gap and by
+    box-at-review-time (boxBefore, 1.11.3).
+
+    reviewHistory is a longitudinal retention dataset — every due-review
+    outcome is a natural experiment on whether the Leitner intervals are
+    calibrated. Relearning retries are excluded (same-session reps, not
+    spacing evidence); so are self-reports (/forget writes an `incorrect`
+    nobody tested — review finding 5: one /forget on a fresh concept read as
+    "1 review, 0% recall"). The gap for a concept's first review runs from
+    its `introduced` date. `delayedSuccessRate` drops the same-day bucket,
+    which is immediate post-instruction performance, not retention.
+    """
+    def new_bucket():
+        return {"correct": 0, "incorrect": 0, "partial": 0}
+    by_gap = {name: new_bucket() for name, _, _ in GAP_BUCKETS}
+    by_box = {str(b): new_bucket() for b in range(1, MAX_BOX + 1)}
+    totals = new_bucket()
+    relearning = 0
+    skipped = 0
+    deferrals = 0
+    self_reports = 0
+    legacy_no_box = 0
+    delayed = new_bucket()
+    for c in data.get("concepts", []):
+        # After a truncation the first retained gap runs from the last
+        # archived review, not from `introduced` (review finding 6).
+        prev = (parse_date(archived_summary(c).get("through"))
+                or parse_date(c.get("introduced")))
+        for h in c.get("reviewHistory", []):
+            if h.get("deferred"):
+                deferrals += 1  # scheduling event, not retrieval evidence
+                continue
+            if is_self_report(h):
+                self_reports += 1  # nothing was asked; not retrieval evidence
+                continue
+            d = parse_date(h.get("date"))
+            res = h.get("result")
+            if d is None or res not in ("correct", "incorrect", "partial"):
+                skipped += 1
+                continue
+            if h.get("retry"):
+                relearning += 1
+                continue
+            if prev is not None:
+                bucket = bucket_for_gap((d - prev).days)
+                if bucket:
+                    by_gap[bucket][res] += 1
+                    if bucket != "same-day":
+                        delayed[res] += 1
+            prev = d
+            totals[res] += 1
+            bb = h.get("boxBefore")
+            if isinstance(bb, int) and 1 <= bb <= MAX_BOX:
+                by_box[str(bb)][res] += 1
+            else:
+                legacy_no_box += 1
+    def with_rate(bucket):
+        n = sum(bucket.values())
+        out = dict(bucket)
+        out["reviews"] = n
+        out["successRate"] = round(bucket["correct"] / n, 2) if n else None
+        return out
+    total_n = sum(totals.values())
+    delayed_n = sum(delayed.values())
+    return {
+        "reviews": total_n,
+        "overallSuccessRate": round(totals["correct"] / total_n, 2) if total_n else None,
+        "delayedReviews": delayed_n,
+        "delayedSuccessRate": round(delayed["correct"] / delayed_n, 2) if delayed_n else None,
+        "byGap": {k: with_rate(v) for k, v in by_gap.items()},
+        "byBoxAtReview": {k: with_rate(v) for k, v in by_box.items()},
+        "relearningRetriesExcluded": relearning,
+        "deferralsExcluded": deferrals,
+        "selfReportsExcluded": self_reports,
+        "entriesWithoutBoxBefore": legacy_no_box,
+        "entriesSkipped": skipped,
+    }
+
+
+def cmd_retention(args):
+    _, data = load_spaced_review(args.project)
+    out = retention_summary(data)
+    out["note"] = ("Leitner targets roughly 80-90% success at review time: "
+                   "persistently above suggests intervals too conservative; "
+                   "persistently below, too aggressive")
+    emit(out)
+
+
+def cmd_export_anonymized(args):
+    """Shareable stats block: counts and rates only — no concept names,
+    no questions, no notes, no free text of any kind (1.11.3)."""
+    _, data = load_spaced_review(args.project)
+    boxes = {str(b): 0 for b in range(1, MAX_BOX + 1)}
+    blooms = {str(b): 0 for b in range(0, 7)}
+    feynman = 0
+    mastered = 0
+    applied = 0
+    for c in data.get("concepts", []):
+        b = c.get("box", 1)
+        if isinstance(b, int) and 1 <= b <= MAX_BOX:
+            boxes[str(b)] += 1
+        bl = c.get("bloomLevel", 0)
+        if isinstance(bl, int) and 0 <= bl <= 6:
+            blooms[str(bl)] += 1
+        if c.get("feynmanPassed") is True:
+            feynman += 1
+        if is_mastered(c):
+            mastered += 1
+        if applied_evidence(c) >= 1:
+            applied += 1
+    session_types = {}
+    for s in data.get("sessionHistory", []):
+        t = s.get("type") if isinstance(s.get("type"), str) else "(untyped)"
+        session_types[t] = session_types.get(t, 0) + 1
+    calibration = calibration_summary(data)
+    calibration.pop("overconfidentEvents", None)   # carry concept names
+    calibration.pop("underconfidentEvents", None)
+    out = {
+        "exportVersion": 1,
+        "generated": iso(today()),
+        "concepts": len(data.get("concepts", [])),
+        "boxDistribution": boxes,
+        "bloomDistribution": blooms,
+        "feynmanPassed": feynman,
+        "applied": applied,
+        "mastered": mastered,
+        "sessionTypeCounts": session_types,
+        "retention": retention_summary(data),
+        "calibration": calibration,
+    }
+    state = state_if_present(args.project)
+    if state is not None:
+        created = parse_date(state.get("createdAt"))
+        out["project"] = {
+            "totalSessions": state.get("totalSessions", 0),
+            "currentStreak": state.get("currentStreak", 0),
+            "overallCompletion": state.get("overallCompletion", 0),
+            "daysSinceStart": (today() - created).days if created else None,
+        }
+    emit(out)
+
+
+def cmd_session_brief(args):
+    """Mechanical branch detection for /teach (1.14.0).
+
+    Pretest-vs-retrieval-open and the targeted-reteach duty are pure state
+    predicates; executors were re-deriving them from prose — the same
+    judgment-tree residue class 1.11.0 closed for writes. Read-only.
+    """
+    state = state_if_present(args.project, {})
+    _, data = load_spaced_review(args.project, create=True)
+    t = today()
+    c = find_concept(data, args.concept)
+    if c is None:
+        emit({"concept": args.concept, "tracked": False,
+              "firstExposure": True, "pretestApplies": True,
+              "isReteach": False, "dueForReview": False, "reviews": 0,
+              "currentModule": state.get("currentModule")})
+        return
+    history = [h for h in c.get("reviewHistory", []) if not h.get("deferred")]
+    # First exposure: never classified by a v3 writer AND no real review has
+    # ever happened (deferrals are scheduling, not exposure evidence).
+    first_exposure = c.get("bloomLevel", 0) == 0 and not history
+    last = parse_date(c.get("lastReviewed"))
+    last_result = history[-1].get("result") if history else None
+    nr = parse_date(c.get("nextReview"))
+    emit({
+        "concept": c["name"],
+        "tracked": True,
+        "firstExposure": first_exposure,
+        "pretestApplies": first_exposure,  # pretesting research covers untaught material only
+        # Targeted re-teach: the concept has real history and sits demoted
+        # (Box 1) or its latest real outcome was a demonstrated forgetting.
+        "isReteach": bool(history) and (c.get("box", 1) == 1
+                                        or last_result == "incorrect"),
+        "box": c.get("box", 1),
+        "bloomLevel": c.get("bloomLevel", 0),
+        **bloom_render(c.get("bloomLevel", 0)),
+        "evidenceAt3Plus": evidence_at_3_plus(c),
+        "appliedEvidence": applied_evidence(c),
+        "feynmanPassed": c.get("feynmanPassed", False),
+        "feynmanCurrent": feynman_current(c),
+        "lastReviewed": c.get("lastReviewed"),
+        "daysSinceLastReview": (t - last).days if last else None,
+        "lastResult": last_result,
+        "dueForReview": nr is not None and nr <= t,
+        "reviews": len(history) + (c.get("reviewHistoryArchived", 0) or 0),
+        "currentModule": state.get("currentModule"),
+    })
+
+
+def slugify(text, limit=40):
+    """kebab-case for a file name: 'B-tree indexes' -> 'b-tree-indexes'."""
+    out = re.sub(r"[^a-z0-9]+", "-", str(text).lower()).strip("-")
+    return out[:limit].rstrip("-") or "session"
+
+
+def cmd_revision_brief(args):
+    """What today's revision sheet is about (1.18.0). Read-only.
+
+    The sheet is the learner's take-home; the model writes the prose, this
+    reports the facts: every concept with a non-deferred review dated today
+    (what was actually studied — seeding via /learn or an /assess writes no
+    review, so those days need no sheet), the file name to write, and any
+    sheet already written today (append, never duplicate). The Stop hook
+    reads `sessionToday` and `existing` to refuse a stop without a sheet."""
+    t = iso(today())
+    state = state_if_present(args.project, {})
+    _, data = load_spaced_review(args.project, create=True)
+    studied = []
+    for c in data.get("concepts", []):
+        todays = [h for h in c.get("reviewHistory", [])
+                  if not h.get("deferred") and h.get("date") == t]
+        if not todays and c.get("introduced") != t:
+            continue
+        studied.append({
+            "name": c["name"], "module": c.get("module", ""),
+            "resultsToday": [h.get("result") for h in todays],
+            "sourcesToday": sorted({h.get("source") for h in todays if h.get("source")}),
+            "box": c.get("box", 1), "nextReview": c.get("nextReview"),
+            "bloomLevel": c.get("bloomLevel", 0),
+            **bloom_render(c.get("bloomLevel", 0)),
+            "question": c.get("question", ""),
+            "feynmanPassed": c.get("feynmanPassed", False),
+        })
+    # the sheet is named after the taught concept when there is one
+    studied.sort(key=lambda d: (0 if "teach" in d["sourcesToday"] else 1,
+                                -len(d["resultsToday"]), d["name"].lower()))
+    rev_dir = os.path.join(args.project, "revision")
+    existing = sorted(f for f in (os.listdir(rev_dir) if os.path.isdir(rev_dir) else [])
+                      if f.startswith(t) and f.endswith(".md"))
+    if studied:
+        slug = slugify(studied[0]["name"] if len(studied) == 1 or "teach" in studied[0]["sourcesToday"]
+                       else (studied[0]["module"] or studied[0]["name"]))
+    else:
+        slug = "session"
+    emit({"date": t, "project": os.path.basename(os.path.abspath(args.project)),
+          "module": state.get("currentModule"),
+          "session": state.get("totalSessions"),
+          "sessionToday": bool(studied),
+          "concepts": studied,
+          "suggestedFile": os.path.join("revision", f"{t}-{slug}.md"),
+          "existing": [os.path.join("revision", f) for f in existing],
+          "resourcesFile": ".bodhi/resources.md"
+                           if os.path.exists(os.path.join(args.project, ".bodhi", "resources.md")) else None})
+
+
+def cmd_snapshot(args):
+    """Single-call dashboard rollup for /progress (1.14.0). Read-only.
+
+    Merges the state.json position, session cadence, due/box/mastery counts,
+    and the calibration rates into one JSON so /progress reads this plus the
+    live progress.md — its context cost stays O(1) in session count instead
+    of growing with the tracking files.
+    """
+    sp, state = require_state(args.project)
+    _, data = load_spaced_review(args.project, create=True)
+    t = today()
+
+    dates = sorted({d for d in state.get("sessionDates", [])
+                    if isinstance(d, str) and parse_date(d)})
+    def sessions_since(days):
+        cutoff = t - datetime.timedelta(days=days)
+        return sum(1 for d in dates if parse_date(d) >= cutoff)
+    last_date = parse_date(dates[-1]) if dates else None
+
+    concepts = data.get("concepts", [])
+    r = review_rollup(concepts, t)
+    mastered = sum(1 for c in concepts if is_mastered(c))
+    feynman = sum(1 for c in concepts if c.get("feynmanPassed") is True)
+    classified = sum(1 for c in concepts if c.get("bloomLevel", 0) > 0)
+    applied = sum(1 for c in concepts if applied_evidence(c) >= 1)
+
+    calibration = calibration_summary(data)
+    calibration.pop("overconfidentEvents", None)
+    calibration.pop("underconfidentEvents", None)
+
+    emit({
+        "project": {
+            "name": state.get("projectName"),
+            "topic": state.get("topic"),
+            "createdAt": state.get("createdAt"),
+            "currentPhase": state.get("currentPhase"),
+            "currentModule": state.get("currentModule"),
+            "currentModuleIndex": state.get("currentModuleIndex"),
+            "lastActivity": state.get("lastActivity"),
+            "overallCompletion": state.get("overallCompletion", 0),
+            "initialBloomLevel": state.get("initialBloomLevel", {}),
+            "currentBloomLevel": state.get("currentBloomLevel", {}),
+        },
+        "cadence": {
+            "totalSessions": state.get("totalSessions", 0),
+            "currentStreak": state.get("currentStreak", 0),
+            "lastSessionAt": state.get("lastSessionAt"),
+            "daysSinceLastSession": (t - last_date).days if last_date else None,
+            "sessionsLast7d": sessions_since(7),
+            "sessionsLast30d": sessions_since(30),
+        },
+        "review": {
+            "concepts": len(concepts),
+            "dueToday": len(r["dueToday"]), "dueTodayConcepts": r["dueToday"],
+            "dueThisWeek": len(r["dueThisWeek"]), "dueThisWeekConcepts": r["dueThisWeek"],
+            "overdue10dPlus": r["overdue10"],
+            "boxDistribution": r["boxes"],
+            "retentionRollup": {k: len(v) for k, v in r["rollup"].items()},
+            "retentionConcepts": r["rollup"],
+            "unparseableDates": r["unparseable"],
+            "parked": len(r["parked"]),
+        },
+        "mastery": {
+            "mastered": mastered,
+            "feynmanPassed": feynman,
+            "applied": applied,
+            "classified": classified,
+            "modules": r["modules"],
+            "blockedOnFeynman": blocked_on_feynman(concepts),
+            "blockedOnApplied": blocked_on_applied(concepts),
+            "masteredDueForCheck": r["dueForCheck"],
+        },
+        "calibration": calibration,
+        "bloomScale": bloom_scale(),
+    })
+
+
+def evidence_at_3_plus(c):
+    """Independent observations of the apply rung SINCE THE LAST MISS: correct
+    results graded at Bloom >= 3, counted from the most recent `incorrect`
+    (a learner-initiated /forget writes one, so it resets the count too).
+    Evidence that predates a demonstrated forgetting event is not current
+    evidence; without the reset, two old corrects kept a concept `satisfied`
+    through any number of later misses. Deferred entries are scheduling
+    notes, not observations, and are skipped; archived entries are carried
+    by archivedSummary."""
+    seed = archived_summary(c)
+    return _evidence_counts(c.get("reviewHistory", []),
+                            seed.get("appliedEvidence", 0) or 0,
+                            seed.get("evidenceAt3Plus", 0) or 0)[1]
+
+
+EXPOSURE_RANK = {"seeded": 0, "quizzed-only": 1, "demonstrated": 2,
+                 "taught": 3, "built": 4}
+
+
+def archived_summary(c):
+    s = c.get("archivedSummary")
+    return s if isinstance(s, dict) else {}
+
+
+def _evidence_counts(entries, applied=0, at3plus=0):
+    """(applied corrects, level-3+ corrects) since the most recent miss over
+    `entries`, continuing from the seeds — the one loop behind
+    applied_evidence, evidence_at_3_plus and archive_history."""
+    for h in entries:
+        if not isinstance(h, dict) or h.get("deferred"):
+            continue
+        result = h.get("result")
+        if result == "incorrect":
+            applied = at3plus = 0
+        elif result == "correct":
+            if h.get("applied") is True:
+                applied += 1
+            if (h.get("bloomLevel") or 0) >= 3:
+                at3plus += 1
+    return applied, at3plus
+
+
+def archive_history(c, archived):
+    """Fold the entries about to leave reviewHistory into archivedSummary so
+    no reader's answer changes at the cut (review finding 6, 2026-09-07:
+    truncation used to turn a taught, built concept into neverTaught with
+    zero applied evidence, and to measure the first retained gap from
+    `introduced`). Accumulates across repeated truncations."""
+    prev = archived_summary(c)
+    applied, at3plus = _evidence_counts(
+        archived, prev.get("appliedEvidence", 0) or 0, prev.get("evidenceAt3Plus", 0) or 0)
+    summary = {"appliedEvidence": applied, "evidenceAt3Plus": at3plus}
+    dates = [h.get("date") for h in archived
+             if isinstance(h, dict) and parse_date(h.get("date"))]
+    through = dates[-1] if dates else prev.get("through")
+    if through:
+        summary["through"] = through
+    misses = [d for d in (parse_date(h.get("date")) for h in archived
+                          if isinstance(h, dict) and h.get("result") == "incorrect")
+              if d] + [d for d in [parse_date(prev.get("lastMiss"))] if d]
+    if misses:
+        summary["lastMiss"] = iso(max(misses))
+    # Instruction facts never reset; the evidence-derived states are
+    # recomputed from the seeds, so only these two are worth carrying.
+    graded = [h for h in archived if isinstance(h, dict) and not h.get("deferred")
+              and h.get("result") in ("correct", "incorrect", "partial")]
+    exposure = prev.get("exposure")
+    if any(h.get("applied") is True and h.get("result") == "correct" for h in graded):
+        exposure = "built"
+    elif exposure != "built" and any(h.get("source") in INSTRUCTIONAL_SOURCES for h in graded):
+        exposure = "taught"
+    if exposure in ("taught", "built"):
+        summary["exposure"] = exposure
+    c["reviewHistoryArchived"] = (c.get("reviewHistoryArchived", 0) or 0) + len(archived)
+    c["archivedSummary"] = summary
+
+
+def applied_evidence(c):
+    """Correct results demonstrated in working code (`applied: true`) SINCE
+    THE LAST MISS, the same reset as evidence_at_3_plus. The level says how
+    well the learner can *talk about* a concept; this says whether they have
+    *built* with it. Every recorded level before 1.20.0 came from an
+    explanation or a quiz answer, so the gate and the mastery formula could
+    be satisfied without the learner ever writing a line: the learner
+    finding that motivated the flag. Deferred entries are skipped; archived
+    entries are carried by archivedSummary."""
+    seed = archived_summary(c)
+    return _evidence_counts(c.get("reviewHistory", []),
+                            seed.get("appliedEvidence", 0) or 0,
+                            seed.get("evidenceAt3Plus", 0) or 0)[0]
+
+
+def last_miss(c):
+    """Date of the most recent `incorrect` on record — live history, else
+    archivedSummary.lastMiss. The anchor for "since the last miss" when a
+    reader needs a date rather than a count (feynman_current)."""
+    dates = [parse_date(h.get("date")) for h in c.get("reviewHistory", [])
+             if isinstance(h, dict) and not h.get("deferred")
+             and h.get("result") == "incorrect"]
+    dates = [d for d in dates if d]
+    archived = parse_date(archived_summary(c).get("lastMiss"))
+    if archived:
+        dates.append(archived)
+    return max(dates) if dates else None
+
+
+def feynman_current(c):
+    """The explain-back conjunct of is_mastered (1.23.0): passed, and dated
+    AFTER the most recent miss. An explanation given before the concept was
+    forgotten says nothing about the understanding that came back — a real
+    learner's delayed quiz (2026-09-25) missed a concept whose explain-back
+    had passed 17 days earlier, and the flag still counted. A pass on the day of
+    the miss does not count (dates carry no order within a day, and an
+    explanation right after relearning is the fluency peak); an undated
+    pre-1.23.0 flag counts only when no miss is on record."""
+    if c.get("feynmanPassed") is not True:
+        return False
+    miss = last_miss(c)
+    if miss is None:
+        return True
+    passed = parse_date(c.get("feynmanPassedAt"))
+    return passed is not None and passed > miss
+
+
+# Review sources that are instruction: the tutor taught, or watched the
+# learner build. A quiz answer or a /reflect retrieval is evidence of
+# knowledge, not of teaching. debug-together writes no reviews today; listed
+# so a future write from it counts as instruction without a script change.
+INSTRUCTIONAL_SOURCES = {"teach", "practice", "pair", "debug-together"}
+
+
+def exposure_of(c):
+    """How the learner has met this concept, from the evidence on record:
+      seeded        — tracked (by /learn's assessment or a skill), never graded
+      quizzed-only  — graded, but only by quiz/reflect retrievals and none of
+                      them reached the apply rung since the last miss
+      demonstrated  — no instruction on record, but the learner has answered
+                      at the apply rung or above (a seed assessed high and
+                      quizzed correctly): knowledge acquired elsewhere
+      taught        — at least one review from an instructional source
+      built         — at least one `applied` correct on record
+    Review finding 3 (2026-09-07): `neverTaught` used to mean only "no
+    source=teach entry", so a concept mastered through /practice with working
+    code was routed to first teaching, and knowledge shown in quizzes did not
+    count. It now means exposure in {seeded, quizzed-only} — the two states
+    where quizzing it would test nothing the learner has been given."""
+    graded = [h for h in c.get("reviewHistory", []) if isinstance(h, dict)
+              and not h.get("deferred")
+              and h.get("result") in ("correct", "incorrect", "partial")]
+    floor = archived_summary(c).get("exposure")
+    if floor == "built" or any(h.get("applied") is True and h.get("result") == "correct"
+                               for h in graded):
+        return "built"
+    if floor == "taught" or any(h.get("source") in INSTRUCTIONAL_SOURCES for h in graded):
+        return "taught"
+    if not graded and not c.get("reviewHistoryArchived"):
+        return "seeded"
+    if evidence_at_3_plus(c) >= 1:
+        return "demonstrated"
+    return "quizzed-only"
+
+
+def never_taught(c):
+    return exposure_of(c) in ("seeded", "quizzed-only")
+
+
+def gate_verdict(c, t):
+    """(status, reason) for one prerequisite (canonical).
+
+    The Bloom ratchet is one-way and a single LLM grade is noisy, so a level-3
+    reached by exactly one review is not treated as settled: it earns one
+    reconfirm question (the stale-reconfirm path), not a free pass. Two
+    level-3+ corrects since the last miss, or Box >= 3 (which already implies
+    two spaced successes), clear the gate. `single-evidence` means "fewer than
+    two such corrects on record since the last miss" — after a /forget that
+    count is zero and the gate asks again, which is the point of forgetting.
+
+    1.20.0: recall alone never satisfies the gate. A concept whose box or
+    explain-back evidence would pass, but with no `applied` correct since the
+    last miss, earns one reconfirm that is a small piece of code, not a
+    question (`stale-reconfirm`, reason `no-applied-evidence`). That covers
+    every concept tracked before the flag existed exactly once.
+    """
+    bloom = c.get("bloomLevel", 0)
+    box = c.get("box", 1)
+    last = parse_date(c.get("lastReviewed"))
+    recent = last is not None and (t - last).days <= GATE_RECENCY_DAYS
+    built = applied_evidence(c) >= 1
+    if bloom == 0:
+        return "no-opinion", "unclassified"   # never classified by a v3 writer; allow
+    if bloom >= 3:
+        if box >= 3:
+            return ("satisfied", "box") if built else ("stale-reconfirm", "no-applied-evidence")
+        if recent and evidence_at_3_plus(c) >= 2:
+            return ("satisfied", "evidence") if built else ("stale-reconfirm", "no-applied-evidence")
+        if recent:
+            return "stale-reconfirm", "single-evidence"
+        return "stale-reconfirm", "stale"    # Bloom ratchet alone is not current evidence
+    # 1 <= bloom < 3: strong v2 retention evidence fallthrough (1.10.10)
+    hist = [h.get("result") for h in c.get("reviewHistory", [])
+            if not h.get("deferred")]
+    if box >= 3 and len(hist) >= 2 and hist[-1] == hist[-2] == "correct":
+        # gate-time read only; bloomLevel untouched. Reliable recall of a
+        # concept never built with is still a code reconfirm, not a pass.
+        return ("apply-equivalent", "box") if built else ("stale-reconfirm", "no-applied-evidence")
+    return "gap", "below-apply"
+
+
+def gate_status(c, t):
+    return gate_verdict(c, t)[0]
+
+
+def cmd_gate_check(args):
+    sp, state = require_state(args.project)
+    current = args.module or state.get("currentModule", "")
+    if not str(current).strip():
+        emit({"fires": False,
+              "reason": "no currentModule set in state.json — set it via "
+                        "touch-state --module before gating",
+              "currentModule": current})
+        return
+    _, data = load_spaced_review(args.project, create=True)
+    concepts = data.get("concepts", [])
+    t = today()
+
+    # Module entry is detected by graded ACTIVITY in the module, not by
+    # tracked membership: /learn seeds every assessed sub-topic into its
+    # module with add-concept on day 1, so "any concept tracked here" made a
+    # seeded module a continuation session before it was ever taught and
+    # the gate never fired on the journey it exists for (review finding 2b).
+    in_module = [c for c in concepts
+                 if c.get("module", "").strip().lower() == current.strip().lower()]
+    started = [c for c in in_module if any(
+        not h.get("deferred") and h.get("result") in ("correct", "incorrect", "partial")
+        for h in c.get("reviewHistory", []) if isinstance(h, dict))]
+    if not concepts:
+        emit({"fires": False, "reason": "first-ever session — nothing to gate against",
+              "currentModule": current})
+        return
+    if started:
+        emit({"fires": False,
+              "reason": f"continuation session — {len(started)} concept(s) graded "
+                        f"in module {current!r}",
+              "currentModule": current})
+        return
+    seeded_only = len(in_module)
+
+    # First session on a new module: identify prerequisites.
+    if args.prereqs:
+        names = [n.strip().lower() for n in args.prereqs.split(",") if n.strip()]
+        prereqs = [c for c in concepts
+                   if c.get("name", "").strip().lower() in names]
+        source = "declared"
+    else:
+        prior = args.prior_module or state.get("previousModule")
+        if not prior:
+            # 1.15.x: the old fallback here INFERRED a prior module by
+            # string-sorting `introduced` dates — a weak heuristic that was
+            # honestly flagged as inferred but still did real gating work in
+            # real sessions. A noisy gate is worse than no gate (false
+            # reconfirm questions erode trust in the real ones), so with
+            # nothing declared and no tracked previousModule the gate now
+            # declines to fire instead of guessing.
+            emit({"fires": False,
+                  "reason": "no prerequisites declared and no previousModule "
+                            "tracked — pass --prereqs (the plan's "
+                            "'Prerequisites for next module' line) or "
+                            "--prior-module to gate this module",
+                  "currentModule": current})
+            return
+        prereqs = [c for c in concepts
+                   if c.get("module", "").strip().lower() == str(prior).strip().lower()]
+        source = "prior-module"
+
+    report = []
+    for c in prereqs:
+        status, reason = gate_verdict(c, t)
+        report.append({"name": c["name"], "bloomLevel": c.get("bloomLevel", 0),
+                       **bloom_render(c.get("bloomLevel", 0)),
+                       "box": c.get("box", 1), "lastReviewed": c.get("lastReviewed"),
+                       "evidenceAt3Plus": evidence_at_3_plus(c),
+                       "appliedEvidence": applied_evidence(c),
+                       "status": status, "reason": reason})
+    gaps = [r for r in report if r["status"] == "gap"]
+    stale = [r for r in report if r["status"] == "stale-reconfirm"]
+    emit({"fires": True, "currentModule": current,
+          "seededOnly": seeded_only,   # tracked in the module, none graded yet
+          "prerequisiteSource": source,
+          "prerequisites": report,
+          "gaps": [r["name"] for r in gaps],
+          "staleReconfirm": [r["name"] for r in stale],
+          "verdict": ("offer" if gaps or stale else "clear")})
+
+
+def cmd_migrate(args):
+    """spaced-review.json v1/v2 -> v3. Idempotent, backed up, marker-writing.
+
+    Replaces the prose 5f-bis procedure in /housekeep migrate. Preserves every
+    non-canonical field by mutating the parsed JSON in place.
+    """
+    bdir = bodhi_dir(args.project)
+    path = os.path.join(bdir, "spaced-review.json")
+    if not os.path.exists(path):
+        die(f"{path} does not exist")
+    data = load_json(path)
+    version = data.get("version", 1)
+    concepts = data.get("concepts", [])
+    if is_v3_complete(data):
+        emit({"action": "noop", "reason": "already at v3 with all per-concept fields"})
+        return
+
+    # Snapshot THIS RUN's input before any mutation — post-write verification
+    # compares against this, never against an on-disk backup that may predate
+    # this run (1.11.1: a stale backup produced a false mismatch whose error
+    # message advised a data-destroying restore).
+    snapshot = json.loads(json.dumps(data))
+
+    # Backup (never overwrite an existing backup — it may be the only pre-v3 copy).
+    backup = ensure_pre_v3_backup(path)
+
+    fields_added = upgrade_to_v3(data)
+    data["version"] = 3
+    write_json(path, data)
+
+    # Post-write verification against this run's input snapshot.
+    after = load_json(path)
+    if len(after.get("concepts", [])) != len(snapshot.get("concepts", [])):
+        die("verification failed: concept count changed during this run — "
+            "the live file may be partially written; inspect it before "
+            f"considering the backup at {backup}")
+    for b, a in zip(snapshot.get("concepts", []), after.get("concepts", [])):
+        lost = set(b.keys()) - set(a.keys())
+        if lost:
+            die(f"verification failed: concept {b.get('name')!r} lost fields "
+                f"{sorted(lost)} during this run — inspect the live file; "
+                f"backup at {backup}")
+
+    marker = write_migration_marker(bdir, version, len(concepts), fields_added,
+                                    "`bodhi-state migrate-spaced-review`")
+    emit({"action": "migrated", "fromVersion": version, "toVersion": 3,
+          "concepts": len(concepts), "fieldsAdded": fields_added,
+          "backup": backup, "marker": marker})
+
+
+def cmd_normalize(args):
+    """One-shot repair of pre-1.11.0 executor drift (1.12.1). Idempotent.
+
+    Patterns come from real learning projects: nested session bookkeeping,
+    dict lastActivity/previousModule, plural *BloomLevels, duplicate
+    sessionDates, invented reviewHistory results, invented sessionHistory
+    types. Canonical fields are repaired; everything the drift invented is
+    preserved (moved under *Legacy or kept in place) — learner data is sacred.
+    """
+    bdir = bodhi_dir(args.project)
+    backup_dir = os.path.join(bdir, ".pre-normalize-backup")
+    changes = []
+
+    def backup(path):
+        os.makedirs(backup_dir, exist_ok=True)
+        dest = os.path.join(backup_dir, os.path.basename(path))
+        if not os.path.exists(dest):  # first normalize wins; never overwrite
+            shutil.copyfile(path, dest)
+
+    sp = state_path(args.project)
+    state = load_json(sp) if os.path.exists(sp) else None
+    state_changes = 0
+    if state is not None:
+        for nested_key in ("session", "sessions"):
+            nested = state.get(nested_key)
+            if isinstance(nested, dict) and ("sessionDates" in nested
+                                             or "totalSessions" in nested):
+                for k in ("totalSessions", "currentStreak"):
+                    if k in nested and k not in state:
+                        state[k] = nested.pop(k)
+                if "sessionDates" in nested:
+                    lifted = nested.pop("sessionDates")
+                    dates = list(state.get("sessionDates", []))
+                    if isinstance(lifted, list):
+                        dates += [d for d in lifted if isinstance(d, str)]
+                    state["sessionDates"] = dates
+                if not nested:
+                    state.pop(nested_key)
+                changes.append(f"lifted {nested_key!r} bookkeeping to top level")
+                state_changes += 1
+        dates = state.get("sessionDates")
+        if isinstance(dates, list) and (len(dates) != len(set(dates))
+                                        or dates != sorted(dates)):
+            state["sessionDates"] = sorted(set(dates))
+            changes.append("deduped and sorted sessionDates")
+            state_changes += 1
+        for key in ("lastActivity", "previousModule"):
+            v = state.get(key)
+            if v is not None and not isinstance(v, str):
+                legacy_key = key + "Legacy"
+                if legacy_key not in state:
+                    state[legacy_key] = v
+                if isinstance(v, dict):
+                    s = v.get("name") or v.get("id") or v.get("result") or json.dumps(v)
+                else:
+                    s = str(v)
+                state[key] = str(s)[:LAST_ACTIVITY_MAX]
+                changes.append(f"stringified {key} (original kept in {legacy_key})")
+                state_changes += 1
+        # Scalar-but-wrong-type currentModule (int module numbers in the wild):
+        # str() is lossless, no legacy copy needed.
+        cm = state.get("currentModule")
+        if cm is not None and not isinstance(cm, str):
+            if isinstance(cm, (int, float)):
+                state["currentModule"] = str(cm)
+            else:
+                if "currentModuleLegacy" not in state:
+                    state["currentModuleLegacy"] = cm
+                state["currentModule"] = (cm.get("name") or cm.get("id") or
+                                          json.dumps(cm))[:LAST_ACTIVITY_MAX] if isinstance(cm, dict) else str(cm)[:LAST_ACTIVITY_MAX]
+            changes.append("stringified currentModule")
+            state_changes += 1
+        for plural, singular in (("initialBloomLevels", "initialBloomLevel"),
+                                 ("currentBloomLevels", "currentBloomLevel")):
+            if plural in state and singular not in state:
+                state[singular] = state.pop(plural)
+                changes.append(f"renamed {plural} -> {singular}")
+                state_changes += 1
+
+    srp = sr_path(args.project)
+    sr = load_json(srp) if os.path.exists(srp) else None
+    sr_changes = 0
+    if sr is not None:
+        for c in sr.get("concepts", []):
+            if not isinstance(c, dict):
+                continue
+            # Typed-field repairs from the shape table — only the lossless
+            # ones (numeric strings, string booleans); anything else stays
+            # for verify to report and a human to fix.
+            for field, actual, expected, repair in concept_shape_errors(c):
+                if repair is not None:
+                    c[field] = repair
+                    changes.append(f"{field} {actual!r} -> {repair!r} ({c.get('name')})")
+                    sr_changes += 1
+            if not isinstance(c.get("reviewHistory"), list):
+                continue
+            for h in c.get("reviewHistory", []):
+                if not isinstance(h, dict):
+                    continue
+                for field, actual, expected, repair in history_entry_errors(h):
+                    if repair is not None:
+                        changes.append(f"reviewHistory {field} {actual!r} -> "
+                                       f"{repair!r} ({c.get('name')})")
+                        h[field] = repair
+                        sr_changes += 1
+                if h.get("deferred"):
+                    continue
+                res = h.get("result")
+                if res is not None and res not in ("correct", "incorrect", "partial"):
+                    h.pop("result")
+                    h["deferred"] = True
+                    h.setdefault("note", f"normalized from invented result {res!r}")
+                    changes.append(f"reviewHistory result {res!r} -> deferral "
+                                   f"({c.get('name')})")
+                    sr_changes += 1
+        for s in sr.get("sessionHistory", []):
+            st = s.get("type")
+            if isinstance(st, str) and st not in SESSION_TYPES:
+                s["type"] = "other"
+                s["subtype"] = st
+                changes.append(f"sessionHistory type {st!r} -> other+subtype")
+                sr_changes += 1
+
+    if not changes:
+        emit({"action": "noop", "reason": "nothing to normalize"})
+        return
+    if state_changes and state is not None:
+        backup(sp)
+        write_json(sp, state)
+    if sr_changes and sr is not None:
+        backup(srp)
+        write_json(srp, sr)
+    emit({"action": "normalized", "changes": changes, "backup": backup_dir})
+
+
+def cmd_verify(args):
+    """Schema sanity check. Used by dev/check.sh and the Stop hook."""
+    errors, warnings = [], []
+    project = args.project
+    bdir = os.path.join(project, ".bodhi")
+    if not os.path.isdir(bdir):
+        die(f"no .bodhi/ under {project!r}")
+
+    sp = os.path.join(bdir, "state.json")
+    if os.path.exists(sp):
+        try:
+            state = load_json_raw(sp)
+            if not isinstance(state, dict):
+                raise TypeError(f"top level is {type(state).__name__}, expected object")
+            if state.get("version") != 2:
+                warnings.append(f"state.json version is {state.get('version')!r}, expected 2")
+            for legacy in ("lastSessionSummary", "bloomResetNote"):
+                if legacy in state:
+                    errors.append(f"state.json carries v1 narrative field {legacy!r}")
+            if not isinstance(state.get("sessionDates", []), list):
+                errors.append("state.json sessionDates is not a list")
+            la = state.get("lastActivity", "")
+            if isinstance(la, str) and len(la) > LAST_ACTIVITY_MAX:
+                warnings.append(
+                    f"state.json lastActivity exceeds {LAST_ACTIVITY_MAX}-char "
+                    f"guidance (state-ops KB)")
+            # 1.12.1 drift checks — patterns found in real pre-1.11.0 data,
+            # where executors invented a parallel schema that shadows the
+            # canonical fields. All repairable by `bodhi-state normalize`.
+            for nested in ("session", "sessions"):
+                v = state.get(nested)
+                if isinstance(v, dict) and ("sessionDates" in v or "totalSessions" in v):
+                    errors.append(f"state.json nests session bookkeeping under "
+                                  f"{nested!r} — canonical fields are top-level; "
+                                  f"run `bodhi-state normalize`")
+            for key in ("lastActivity", "previousModule", "currentModule"):
+                v = state.get(key)
+                if v is not None and not isinstance(v, str):
+                    errors.append(f"state.json {key} is {type(v).__name__}, "
+                                  f"expected string — run `bodhi-state normalize`")
+            for plural in ("initialBloomLevels", "currentBloomLevels"):
+                if plural in state:
+                    warnings.append(f"state.json {plural!r} should be the singular "
+                                    f"map — run `bodhi-state normalize`")
+            dates = state.get("sessionDates")
+            if isinstance(dates, list) and len(dates) != len(set(dates)):
+                warnings.append("state.json sessionDates has duplicates — "
+                                "run `bodhi-state normalize`")
+        except (json.JSONDecodeError, OSError) as e:
+            errors.append(f"state.json unreadable: {e}")
+        except Exception as e:  # drift the checks above did not anticipate
+            errors.append(f"state.json structurally broken ({type(e).__name__}: {e}) "
+                          f"— run `bodhi-state normalize`")
+    else:
+        errors.append("state.json missing")
+
+    srp = os.path.join(bdir, "spaced-review.json")
+    if os.path.exists(srp):
+        try:
+            sr = load_json_raw(srp)
+            if not isinstance(sr, dict):
+                raise TypeError(f"top level is {type(sr).__name__}, expected object")
+            v = sr.get("version")
+            if v not in (1, 2, 3):
+                errors.append(f"spaced-review.json version is {v!r}")
+            elif v != 3:
+                warnings.append(f"spaced-review.json at v{v} — run "
+                                "`bodhi-state migrate-spaced-review`")
+            seen_names = {}
+            concepts = sr.get("concepts", [])
+            if not isinstance(concepts, list):
+                errors.append(f"spaced-review.json concepts is "
+                              f"{type(concepts).__name__}, expected list")
+                concepts = []
+            for i, c in enumerate(concepts):
+                if not isinstance(c, dict):
+                    errors.append(f"spaced-review concepts[{i}] is "
+                                  f"{type(c).__name__}, expected object")
+                    continue
+                name = c.get("name")
+                if not isinstance(name, str) or not name.strip():
+                    errors.append(f"spaced-review concepts[{i}] name is "
+                                  f"{name!r}, expected non-empty string")
+                    name = f"index {i}"
+                key = name.strip().lower()
+                if key in seen_names:
+                    errors.append(f"duplicate concept names (case-insensitive): "
+                                  f"{seen_names[key]!r} and {name!r} — writers "
+                                  f"match first-found; merge them")
+                seen_names[key] = name
+                for field, actual, expected, repair in concept_shape_errors(c):
+                    if field == "name":
+                        continue  # reported above with the index fallback
+                    errors.append(shape_error_text(name, field, actual, expected, repair))
+                if c.get("nextReview") is not None and parse_date(c.get("nextReview")) is None:
+                    errors.append(f"concept {name!r} nextReview "
+                                  f"{c.get('nextReview')!r} is not an ISO date — "
+                                  f"the concept has silently left review rotation")
+                if c.get("lastReviewed") is not None and parse_date(c.get("lastReviewed")) is None:
+                    warnings.append(f"concept {name!r} lastReviewed "
+                                    f"{c.get('lastReviewed')!r} is not an ISO date")
+                if c.get("feynmanPassedAt") is not None and parse_date(c.get("feynmanPassedAt")) is None:
+                    warnings.append(f"concept {name!r} feynmanPassedAt "
+                                    f"{c.get('feynmanPassedAt')!r} is not an ISO date — "
+                                    f"read as an undated explain-back")
+                if v == 3:
+                    for k in ("bloomLevel", "feynmanPassed", "consecutiveCorrectAtL4Plus"):
+                        if k not in c:
+                            errors.append(f"concept {name!r} missing v3 field {k!r}")
+                rh = c.get("reviewHistory", [])
+                if not isinstance(rh, list):
+                    rh = []
+                for h in rh:
+                    if not isinstance(h, dict):
+                        continue  # shape table reported it
+                    for field, actual, expected, repair in history_entry_errors(h):
+                        errors.append(shape_error_text(name, f"reviewHistory {field}",
+                                                       actual, expected, repair)
+                                      + ("" if repair is not None else " — fix it by hand"))
+                    if h.get("date") is not None and parse_date(h.get("date")) is None:
+                        warnings.append(f"concept {name!r} reviewHistory date "
+                                        f"{h.get('date')!r} is not an ISO date — "
+                                        f"readers skip this entry")
+                    if h.get("deferred"):
+                        if "result" in h:
+                            errors.append(f"concept {name!r} deferral entry carries "
+                                          f"a result — deferral is scheduling, not "
+                                          f"an outcome")
+                        continue
+                    hres = h.get("result")
+                    if hres not in ("correct", "incorrect", "partial"):
+                        errors.append(f"concept {name!r} reviewHistory result "
+                                      f"{hres!r} not in canonical vocabulary "
+                                      f"(correct|incorrect|partial) — run "
+                                      f"`bodhi-state normalize`")
+            sh = sr.get("sessionHistory", [])
+            if not isinstance(sh, list):
+                errors.append("spaced-review.json sessionHistory is not a list")
+                sh = []
+            for s in sh:
+                if not isinstance(s, dict):
+                    errors.append(f"sessionHistory entry {s!r} is not an object")
+                    continue
+                st = s.get("type")
+                if st not in SESSION_TYPES:
+                    errors.append(f"sessionHistory type {st!r} not in canonical vocabulary")
+                elif st == "other" and not s.get("subtype"):
+                    errors.append("sessionHistory 'other' entry missing subtype")
+        except (json.JSONDecodeError, OSError) as e:
+            errors.append(f"spaced-review.json unreadable: {e}")
+        except Exception as e:
+            errors.append(f"spaced-review.json structurally broken "
+                          f"({type(e).__name__}: {e}) — run `bodhi-state normalize`")
+    elif os.path.exists(os.path.join(bdir, "state.json")):
+        warnings.append("spaced-review.json missing while state.json exists — "
+                        "the review schedule may have been deleted")
+
+    pp = find_profile(project)
+    if pp:
+        try:
+            profile = load_json_raw(pp)
+            if profile.get("version") != 2:
+                warnings.append(f"profile version is {profile.get('version')!r}, expected 2")
+            for inline in ("activeProjects", "completedProjects"):
+                if inline in profile:
+                    errors.append(f"profile carries {inline!r} inline — belongs in "
+                                  ".bodhi-profile.projects.json (v2 split)")
+        except (json.JSONDecodeError, OSError) as e:
+            errors.append(f"profile unreadable: {e}")
+        except Exception as e:
+            errors.append(f"profile structurally broken ({type(e).__name__}: {e})")
+
+        # Project-list entry shape. Hand-edited by /learn and /evaluate; no
+        # write path enforces it, so a dropped field would otherwise survive
+        # silently until a cross-project skill read the entry and found a hole.
+        lp = os.path.join(os.path.dirname(pp), ".bodhi-profile.projects.json")
+        if os.path.exists(lp):
+            try:
+                plists = load_json_raw(lp)
+                if plists.get("version") != 2:
+                    warnings.append(f"profile projects list version is "
+                                    f"{plists.get('version')!r}, expected 2")
+                for key, required in (("activeProjects", PROFILE_ACTIVE_FIELDS),
+                                      ("completedProjects", PROFILE_COMPLETED_FIELDS)):
+                    entries = plists.get(key)
+                    if entries is None:
+                        continue
+                    if not isinstance(entries, list):
+                        errors.append(f"profile projects list {key!r} is "
+                                      f"{type(entries).__name__}, expected list")
+                        continue
+                    for i, entry in enumerate(entries):
+                        if not isinstance(entry, dict):
+                            errors.append(f"{key}[{i}] is {type(entry).__name__}, "
+                                          f"expected object")
+                            continue
+                        label = entry.get("name") or f"index {i}"
+                        missing = sorted(required - set(entry))
+                        if missing:
+                            errors.append(
+                                f"{key} entry {label!r} missing required "
+                                f"field(s): {', '.join(missing)} — the project "
+                                f"list is hand-edited by /learn and /evaluate; "
+                                f"restore the field(s) per the state-schema KB")
+            except (json.JSONDecodeError, OSError) as e:
+                errors.append(f"profile projects list unreadable: {e}")
+            except Exception as e:
+                errors.append(f"profile projects list structurally broken "
+                              f"({type(e).__name__}: {e})")
+
+    result = {"ok": not errors, "project": project,
+              "errors": errors, "warnings": warnings}
+    print(json.dumps(result, indent=2))
+    sys.exit(0 if not errors else 1)
+
+
+# --- CLI --------------------------------------------------------------------
+
+READ_ONLY_COMMANDS = {cmd_due, cmd_mastery, cmd_calibration, cmd_retention,
+                      cmd_export_anonymized, cmd_session_brief, cmd_snapshot,
+                      cmd_gate_check, cmd_verify, cmd_revision_brief}
+
+def main():
+    p = argparse.ArgumentParser(prog="bodhi-state", description=__doc__,
+                                formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--project", default=".",
+                   help="path to the learning project (the dir containing .bodhi/)")
+    sub = p.add_subparsers(dest="cmd", required=True)
+
+    s = sub.add_parser("add-concept", help="track a new concept (Box 1, review tomorrow)")
+    s.add_argument("--concept", required=True)
+    s.add_argument("--module", required=True)
+    s.add_argument("--question", default="")
+    s.add_argument("--bloom", type=int, default=0,
+                   help="level an assessment classified it at (0-6; 0 = unclassified)")
+    s.set_defaults(fn=cmd_add_concept)
+
+    s = sub.add_parser("record-review",
+                       help="record a retrieval outcome (Leitner + Bloom ratchet + history)")
+    s.add_argument("--concept", required=True)
+    s.add_argument("--result", required=True, choices=["correct", "incorrect", "partial"])
+    s.add_argument("--tested-bloom", type=int, choices=range(0, 7), default=None,
+                   help="Bloom level the question actually tested at")
+    s.add_argument("--confidence", choices=sorted(CONFIDENCE_VALUES), default=None,
+                   help="learner's pre-reveal confidence tag")
+    s.add_argument("--module", default=None, help="auto-create the concept under this module if untracked")
+    s.add_argument("--question", default="")
+    s.add_argument("--note", default=None, help="short lastResult note")
+    s.add_argument("--source", default=None, help="which skill produced this review")
+    s.add_argument("--applied", action="store_true",
+                   help="the outcome was demonstrated in working code the tutor "
+                        "read (exercise, driven piece), not an explanation or "
+                        "quiz answer; feeds the gate and the mastery formula")
+    s.add_argument("--retry", action="store_true",
+                   help="successive-relearning retry: history entry only, no "
+                        "box/counter/bloom movement (the original demotion stands)")
+    s.set_defaults(fn=cmd_record_review)
+
+    s = sub.add_parser("set-feynman", help="mark a concept's Feynman explain-back gate passed")
+    s.add_argument("--concept", required=True)
+    s.set_defaults(fn=cmd_set_feynman)
+
+    s = sub.add_parser("record-session", help="append a sessionHistory entry (vocabulary-checked)")
+    s.add_argument("--type", required=True)
+    s.add_argument("--subtype", default=None)
+    s.add_argument("--data", default=None, help="JSON object of optional fields")
+    s.set_defaults(fn=cmd_record_session)
+
+    s = sub.add_parser("record-assessment",
+                       help="append an entry to assessment-history.json (append-only)")
+    s.add_argument("--trigger", required=True)
+    s.add_argument("--data", required=True, help="JSON object: topic, subTopics[], overallNote, predictionDelta")
+    s.set_defaults(fn=cmd_record_assessment)
+
+    s = sub.add_parser("forget", help="learner-initiated demote (box 1, counter reset, history)")
+    s.add_argument("--concept", action="append", default=None,
+                   help="exact concept name (repeatable; use for names containing commas)")
+    s.add_argument("--concepts", default=None, help="comma-separated concept names")
+    s.add_argument("--note", default=None)
+    s.add_argument("--activity", default=None, help="override the state.json lastActivity line")
+    s.set_defaults(fn=cmd_forget)
+
+    s = sub.add_parser("park",
+                       help="take a concept out of review rotation "
+                            "(learner-deprioritized; --resume returns it)")
+    s.add_argument("--concept", action="append", default=None,
+                   help="exact concept name (repeatable)")
+    s.add_argument("--resume", action="store_true",
+                   help="return a parked concept to rotation (review tomorrow, box preserved)")
+    s.add_argument("--note", default=None)
+    s.set_defaults(fn=cmd_park)
+
+    s = sub.add_parser("defer",
+                       help="roll a due-but-unreviewed concept forward (no outcome invented)")
+    s.add_argument("--concept", action="append", default=None,
+                   help="exact concept name (repeatable)")
+    s.add_argument("--days", type=int, default=1,
+                   help="days to roll nextReview forward (default 1)")
+    s.add_argument("--note", default=None)
+    s.set_defaults(fn=cmd_defer)
+
+    s = sub.add_parser("normalize",
+                       help="repair pre-1.11.0 executor drift (backed up, idempotent)")
+    s.set_defaults(fn=cmd_normalize)
+
+    s = sub.add_parser("touch-state", help="update state.json session bookkeeping")
+    s.add_argument("--activity", default=None, help="lastActivity one-liner (<=120 chars)")
+    s.add_argument("--module", default=None, help="advance currentModule (records previousModule)")
+    s.add_argument("--module-index", type=int, default=None)
+    s.add_argument("--phase", default=None)
+    s.add_argument("--completion", type=int, default=None)
+    s.set_defaults(fn=cmd_touch_state)
+
+    s = sub.add_parser("profile-add-project",
+                       help="append a schema-complete activeProjects entry "
+                            "(creates .bodhi-profile.projects.json if missing)")
+    s.add_argument("--name", required=True)
+    s.add_argument("--topic", required=True)
+    s.add_argument("--phase", default=None, help="currentPhase (default 1)")
+    s.add_argument("--module", default=None, help="currentModule (default empty)")
+    s.add_argument("--bloom", type=int, choices=range(0, 7), default=None,
+                   help="starting bloomLevel (default 0)")
+    s.add_argument("--pace", default=None, help="default steady")
+    s.add_argument("--status", default=None, help="default active")
+    s.add_argument("--track-purpose", default=None)
+    s.set_defaults(fn=cmd_profile_add_project)
+
+    s = sub.add_parser("profile-update-project",
+                       help="refresh fields on an activeProjects entry in place")
+    s.add_argument("--name", required=True)
+    s.add_argument("--topic", default=None)
+    s.add_argument("--phase", default=None, help="currentPhase")
+    s.add_argument("--module", default=None, help="currentModule")
+    s.add_argument("--bloom", type=int, choices=range(0, 7), default=None)
+    s.add_argument("--pace", default=None)
+    s.add_argument("--status", default=None)
+    s.add_argument("--track-purpose", default=None)
+    s.set_defaults(fn=cmd_profile_update_project)
+
+    s = sub.add_parser("profile-complete-project",
+                       help="move an entry activeProjects -> completedProjects "
+                            "(learner-confirmed completion, or /learn replace-archive)")
+    s.add_argument("--name", required=True)
+    s.add_argument("--final-bloom", type=int, choices=range(0, 7), default=None,
+                   help="finalBloomLevel (defaults to the entry's bloomLevel)")
+    s.add_argument("--status", default=None,
+                   help="optional note, e.g. 'archived: replaced by <new> on <date>'")
+    s.set_defaults(fn=cmd_profile_complete_project)
+
+    s = sub.add_parser("profile-update-patterns",
+                       help="append persistent challenges / consistent strengths "
+                            "from assessment-history counts (append-only, deduped)")
+    s.set_defaults(fn=cmd_profile_update_patterns)
+
+    s = sub.add_parser("bump-profile", help="increment a cumulativeStats counter")
+    s.add_argument("--counter", required=True)
+    s.set_defaults(fn=cmd_bump_profile)
+
+    s = sub.add_parser("due", help="list concepts due for review")
+    s.add_argument("--limit", type=int, default=None,
+                   help="cap the listed concepts (full count still reported)")
+    s.set_defaults(fn=cmd_due)
+
+    s = sub.add_parser("mastery", help="per-module mastery + retention rollup (canonical formula)")
+    s.set_defaults(fn=cmd_mastery)
+
+    s = sub.add_parser("calibration", help="confidence-vs-outcome calibration summary")
+    s.set_defaults(fn=cmd_calibration)
+
+    s = sub.add_parser("retention",
+                       help="retention-at-review rates by spacing gap and box (outcome data)")
+    s.set_defaults(fn=cmd_retention)
+
+    s = sub.add_parser("export-anonymized",
+                       help="shareable anonymized stats: counts and rates only, no concept names or free text")
+    s.set_defaults(fn=cmd_export_anonymized)
+
+    s = sub.add_parser("session-brief",
+                       help="mechanical branch detection for /teach: firstExposure, pretestApplies, isReteach (read-only)")
+    s.add_argument("--concept", required=True)
+    s.set_defaults(fn=cmd_session_brief)
+
+    s = sub.add_parser("snapshot",
+                       help="single-call dashboard rollup for /progress: position, cadence, due, mastery, calibration (read-only)")
+    s.set_defaults(fn=cmd_snapshot)
+
+    s = sub.add_parser("revision-brief",
+                       help="today's studied concepts + the revision sheet file to write (read-only)")
+    s.set_defaults(fn=cmd_revision_brief)
+
+    s = sub.add_parser("gate-check", help="prerequisite Bloom gate verdict for /teach Phase 1")
+    s.add_argument("--module", default=None, help="module to gate (default: state.json currentModule)")
+    s.add_argument("--prior-module", default=None)
+    s.add_argument("--prereqs", default=None,
+                   help="comma-separated declared prerequisite concepts (from the plan file)")
+    s.set_defaults(fn=cmd_gate_check)
+
+    s = sub.add_parser("migrate-spaced-review",
+                       help="one-shot spaced-review.json v1/v2 -> v3 (backed up, idempotent)")
+    s.set_defaults(fn=cmd_migrate)
+
+    s = sub.add_parser("verify", help="schema sanity check (lint + Stop hook)")
+    s.set_defaults(fn=cmd_verify)
+
+    args = p.parse_args()
+    # One exclusive lock per project for the whole read-mutate-write run —
+    # closes the two-terminal lost-update race (1.11.1). Profile writes lock
+    # the profile's directory too.
+    shared = args.fn in READ_ONLY_COMMANDS
+    bdir = os.path.join(args.project, ".bodhi")
+    if os.path.isdir(bdir):
+        acquire_lock(bdir, shared=shared)
+    profile = find_profile(args.project)
+    if profile:
+        acquire_lock(os.path.dirname(profile), shared=shared)
+    args.fn(args)
+
+
+if __name__ == "__main__":
+    main()

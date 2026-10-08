@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Jacob Vogan"
+  },
+  "description": "Offline biological sequence/music conversion with reversible MIDI, WAV, and MusicXML, accessible score notation, and lossy arbitrary-audio transcription.",
+  "interface": {
+    "brandColor": "#6D5EF6",
+    "brandColorDark": "#6D5EF6",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Scientific Research",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Turn this FASTA into playable music and a visible score, then turn it back into FASTA to confirm the sequence was preserved.",
+      "Recover the sequence from this Seq2Music WAV or MusicXML, return FASTA and a score, and confirm whether recovery is exact.",
+      "Turn this WAV into an amino acid sequence, show its score, and explain how the sound was mapped."
+    ],
+    "developerName": "Jacob Michael Vogan",
+    "displayName": "Seq2Music",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Seq2Music turns protein, DNA, and RNA sequences into music and score sheets. It can both encode and decode. It can also convert your audio a new protein, DNA, or RNA sequence by matching sounds and notes to sequence letters.",
+    "privacyPolicyURL": "https://github.com/jvogan/seq2music/blob/main/PRIVACY.md",
+    "shortDescription": "Convert sequences to music ",
+    "supportURL": "https://github.com/jvogan/seq2music/issues",
+    "termsOfServiceURL": "https://github.com/jvogan/seq2music/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/jvogan/seq2music"
+  },
+  "keywords": [
+    "bioinformatics",
+    "sonification",
+    "protein",
+    "sequence",
+    "midi"
+  ],
+  "license": "MIT",
+  "name": "seq2music",
+  "skills": "./skills/",
+  "version": "0.3.2"
+}

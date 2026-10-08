@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Test Business Workflows"
+  short_description: "Test stateful business logic for abuse"
+  default_prompt: "Use $tahr-test-business-workflows to model and abuse-test critical workflows in this application."

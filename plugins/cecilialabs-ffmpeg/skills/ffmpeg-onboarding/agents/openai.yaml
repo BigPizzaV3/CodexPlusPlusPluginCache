@@ -1,0 +1,4 @@
+interface:
+  display_name: "FFmpeg Onboarding"
+  short_description: "Inspect and prepare FFmpeg execution"
+  default_prompt: "Use $ffmpeg-onboarding to verify the execution context and FFmpeg capabilities before media work."

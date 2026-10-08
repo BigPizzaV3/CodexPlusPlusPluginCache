@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "\u0421\u0435\u0440\u0433\u0435\u0439 \u0413\u0443\u0441\u0435\u0432",
+    "url": "https://github.com/Comdir2/Codex-engineering-guardrails"
+  },
+  "description": "Skills-only bundle for scoped software implementation and independent code verification in Codex.",
+  "homepage": "https://github.com/Comdir2/Codex-engineering-guardrails",
+  "interface": {
+    "brandColor": "#2563EB",
+    "brandColorDark": "#2563EB",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Implement this change with strict scope control and fresh verification.",
+      "Review this code independently and report evidence-backed findings.",
+      "Plan safe parallel work, then verify the integrated result."
+    ],
+    "developerName": "\u0421\u0435\u0440\u0433\u0435\u0439 \u0413\u0443\u0441\u0435\u0432",
+    "displayName": "Codex Engineering Guardrails",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Pairs code-work and code-verification for strict scope control, test-backed changes, adaptive parallelism, and fresh independent evidence.",
+    "privacyPolicyURL": "https://github.com/Comdir2/Codex-engineering-guardrails/blob/main/PRIVACY.md",
+    "shortDescription": "Implement and verify code",
+    "supportURL": "https://github.com/Comdir2/Codex-engineering-guardrails/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/Comdir2/Codex-engineering-guardrails/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/Comdir2/Codex-engineering-guardrails"
+  },
+  "keywords": [
+    "codex",
+    "software-engineering",
+    "code-review",
+    "testing",
+    "verification"
+  ],
+  "license": "MIT",
+  "name": "codex-engineering-guardrails",
+  "repository": "https://github.com/Comdir2/Codex-engineering-guardrails",
+  "skills": "./skills/",
+  "version": "1.1.1"
+}

@@ -1,0 +1,11 @@
+interface:
+  display_name: "ECZ-ID MCP Verifier"
+  short_description: "ECZ-ID public proof checks"
+  icon_small: "./assets/logo.png"
+  icon_large: "./assets/logo.png"
+  default_prompt: "Use $ecz-id-verify to explain what public ECZ-ID proof means for an MCP server and how to check it."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

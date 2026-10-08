@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "forrestchang",
+    "url": "https://github.com/forrestchang"
+  },
+  "description": "Behavioral coding guidelines that emphasize explicit assumptions, simplicity, surgical changes, and verifiable outcomes.",
+  "homepage": "https://github.com/forrestchang/andrej-karpathy-skills",
+  "interface": {
+    "capabilities": [
+      "Coding guidance",
+      "Complexity review"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this code using the Karpathy-inspired guidelines",
+      "Make this implementation smaller and easier to review",
+      "Check this change for unnecessary complexity"
+    ],
+    "developerName": "RONALD FERRARI SOARES",
+    "displayName": "Andrej Karpathy Skills",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Applies concise coding principles inspired by Andrej Karpathy public guidance to help agents make smaller, safer, easier-to-review code changes.",
+    "shortDescription": "Safer coding guidelines"
+  },
+  "keywords": [
+    "coding",
+    "guidelines",
+    "simplicity",
+    "review",
+    "best-practices"
+  ],
+  "license": "MIT",
+  "name": "andrej-karpathy-skills",
+  "repository": "https://github.com/forrestchang/andrej-karpathy-skills",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

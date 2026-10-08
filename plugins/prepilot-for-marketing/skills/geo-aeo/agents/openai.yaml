@@ -1,0 +1,6 @@
+interface:
+  display_name: "GEO and AEO"
+  short_description: "Improve AI answer visibility and citation readiness."
+  default_prompt: "Use GEO and AEO to help with this marketing task."
+policy:
+  allow_implicit_invocation: true

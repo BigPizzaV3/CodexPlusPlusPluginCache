@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Skarn Software O\u00dc",
+    "url": "https://getskarn.com"
+  },
+  "description": "Audit AI coding sessions and assistant configs with the locally installed skarn CLI: leaked credentials and risky hooks or MCP servers, reported on this machine with every secret masked.",
+  "homepage": "https://getskarn.com",
+  "interface": {
+    "brandColor": "#0B0F14",
+    "brandColorDark": "#2FE3B0",
+    "capabilities": [
+      "Scan AI coding sessions for leaked credentials",
+      "Vet assistant hooks, MCP servers and permission grants"
+    ],
+    "category": "Security",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Scan my AI coding sessions from the last 24 hours with skarn and tell me what to rotate first.",
+      "Vet my assistant configuration with skarn and list any hook or MCP server that could send data off this machine.",
+      "Run skarn assess here and summarize the highest-severity findings without revealing any secret."
+    ],
+    "developerName": "Skarn Software O\u00dc",
+    "displayName": "Skarn",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Skarn is a command-line security scanner for AI coding sessions. The audit skill, skarn-audit, teaches the model to run the skarn CLI on this machine and act on what it reports.\n\nThe skill runs two passes. skarn assess reads the session transcripts that AI coding assistants have already written to disk and reports leaked credentials, prompt injection, exfiltration attempts, and the chains that connect them; each finding carries the standards mappings that apply to it, drawn from MITRE ATLAS, the OWASP Top 10 for LLM Applications 2025, the OWASP Agentic Top 10, and CWE. skarn vet reads the assistant configuration files on the same machine and reports risky declarations: hooks, MCP servers, and permission grants that could run remote code or send data off the machine.\n\nBoth passes run entirely on this machine and make no network call. Neither modifies a session transcript or a configuration file, and every credential value in the output is masked, so a finding names a rule and a masked preview and never the credential itself. Skarn surfaces findings and does not rotate a credential or edit a configuration on its own: the skill proposes, and the user decides. The one thing the skill can write is a baseline entry recording a finding the user has explicitly confirmed as a false positive.\n\nThe skill runs a local shell command, so it is offered in Codex. It does not carry the skarn binary, which is installed separately:\n\nbrew install skarn-security/tap/skarn\nnpm install -g @skarn-security/skarn\nRelease binaries: https://github.com/skarn-security/skarn-dist/releases/latest\n\nWhen the binary is not installed, the skill says how to install it and stops rather than inventing a result. skarn assess and skarn vet need no account and no license.\n\nSkarn also ships a hook that inspects a tool call before Codex runs it, and a skill that reconstructs recent work from session history. Both are distributed through the plugin marketplace at https://github.com/skarn-security/agent-guard.\n\nDocumentation: https://getskarn.com/integrations/\nSupport: hello@getskarn.com",
+    "privacyPolicyURL": "https://getskarn.com/privacy/",
+    "shortDescription": "AI session security scanner",
+    "supportURL": "https://getskarn.com/integrations/#support",
+    "termsOfServiceURL": "https://getskarn.com/terms/",
+    "websiteURL": "https://getskarn.com/"
+  },
+  "keywords": [
+    "security",
+    "secrets",
+    "credential-leak",
+    "ai-coding-sessions",
+    "audit",
+    "codex"
+  ],
+  "license": "MIT",
+  "name": "skarn",
+  "skills": "./skills/",
+  "version": "0.27.0"
+}

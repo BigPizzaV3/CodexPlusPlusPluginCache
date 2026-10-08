@@ -1,0 +1,13 @@
+LOCUS       MINI_CIRCLE      24 bp    DNA     circular SYN 20-JUN-2026
+DEFINITION  Minimal circular sequence workbench fixture.
+ACCESSION   MINI_CIRCLE
+FEATURES             Location/Qualifiers
+     source          1..24
+                     /organism="synthetic construct"
+     gene            join(20..24,1..4)
+                     /gene="origin_gene"
+     promoter        6..12
+                     /label="demo promoter"
+ORIGIN
+        1 aaaaccccgg ggttttaaaa cccc
+//

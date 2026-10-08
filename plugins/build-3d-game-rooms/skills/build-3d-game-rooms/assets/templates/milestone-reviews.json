@@ -1,0 +1,7 @@
+{
+  "schema": "game-room.milestone-reviews.v1",
+  "roomId": "__ROOM_ID__",
+  "function": {"status": "pending", "approvedBy": "", "approvedAt": "", "evidence": [], "strangestElement": "", "notes": ""},
+  "form": {"status": "pending", "approvedBy": "", "approvedAt": "", "evidence": [], "strangestElement": "", "notes": ""},
+  "runtime": {"status": "pending", "approvedBy": "", "approvedAt": "", "evidence": [], "strangestElement": "", "notes": ""}
+}

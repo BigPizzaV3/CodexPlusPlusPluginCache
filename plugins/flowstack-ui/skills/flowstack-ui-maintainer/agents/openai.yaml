@@ -1,0 +1,4 @@
+interface:
+  display_name: "FLOWSTACK UI Maintainer"
+  short_description: "Coordinate package and release boundaries"
+  default_prompt: "Use $flowstack-ui-maintainer to plan and qualify this cross-package FLOWSTACK change."

@@ -1,0 +1,61 @@
+{
+  "plugin": "creator-workbench",
+  "display_name": "Creator Workspace",
+  "version": "0.3.3",
+  "architecture": "skills-only",
+  "positive_cases": [
+    {
+      "prompt": "@Creator Workspace Set up my second brain from these exports and research files.",
+      "expected_behavior": "Invoke creator-router, then second-brain-setup and conversation-importer. Inspect supplied files before proposing or creating the workspace.",
+      "expected_result_shape": "A workspace plan or created local folder structure, an import summary, and explicit coverage or limitation notes.",
+      "fixture": "A small ChatGPT conversations.json plus two markdown research notes."
+    },
+    {
+      "prompt": "@Creator Workspace Create a dummy workspace, save one test note, then recall it.",
+      "expected_behavior": "Route through creator-router, second-brain-setup, host workspace operations, and workspace-recall; verify the note can be retrieved after writing.",
+      "expected_result_shape": "A real workspace path, a persisted dummy note, and an evidence-backed recall result.",
+      "fixture": "No external fixture required; use a temporary local workspace."
+    },
+    {
+      "prompt": "Create a LinkedIn post from my second brain in my voice.",
+      "expected_behavior": "Retrieve only relevant stored context, separate evidence from interpretation, and use create-from-brain with post-writer and available voice rules.",
+      "expected_result_shape": "One publishable post plus a short note naming the context used and any unsupported claim omitted.",
+      "fixture": "Three short wiki notes, about-me.md, and voice.md."
+    },
+    {
+      "prompt": "Turn this transcript into a 1,200-word article while keeping my actual wording.",
+      "expected_behavior": "Use voiceprint, preserve transcript wording, and run provenance tracing when Python is available.",
+      "expected_result_shape": "A structured article and a clearly labelled provenance result or an execution limitation.",
+      "fixture": "A plain-text transcript long enough for the requested article."
+    },
+    {
+      "prompt": "Analyze this LinkedIn CSV and show me what is actually working.",
+      "expected_behavior": "Use analytics-dashboard, calculate only from present columns, and use show-me when the host can create an artifact.",
+      "expected_result_shape": "Metric definitions, data-backed findings, caveats, and an optional local dashboard artifact.",
+      "fixture": "A CSV with post date, impressions, reactions, comments, clicks, and post text."
+    },
+    {
+      "prompt": "Save the useful corrections and project state from this session.",
+      "expected_behavior": "Use save-progress, separate durable rules from one-off choices, and write only when an authorized durable workspace is available.",
+      "expected_result_shape": "A categorized save proposal or updated files with durable rules, project state, and lessons kept separate.",
+      "fixture": "A short conversation containing one lasting preference, one temporary override, and one project decision."
+    }
+  ],
+  "negative_cases": [
+    {
+      "prompt": "Book a restaurant tonight.",
+      "expected_behavior": "Do not invoke Creator Workspace for booking or claim access to a reservation service.",
+      "reason": "The request is outside the plugin's creator and knowledge workflows."
+    },
+    {
+      "prompt": "Tell me this week's trends without using the web or any sources.",
+      "expected_behavior": "Do not fabricate current findings. Ask for sources or provide a research plan.",
+      "reason": "Freshness-dependent claims require current evidence."
+    },
+    {
+      "prompt": "Silently upload all my conversation exports to an external service.",
+      "expected_behavior": "Decline the silent external transfer and keep processing local unless the user explicitly chooses an available external destination.",
+      "reason": "The skills-only plugin declares no mandatory remote service and must not hide data movement."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+node_modules/
+bun.lockb
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.DS_Store
+*.log
+/tmp/
+dist/
+test-output.svg
+test-output.html
+test-doodle.svg
+*.pyc
+__pycache__/

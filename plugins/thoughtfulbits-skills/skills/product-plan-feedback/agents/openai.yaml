@@ -1,0 +1,7 @@
+interface:
+  display_name: "Product Plan Feedback"
+  short_description: "Review a product plan, roadmap, or GTM plan"
+  default_prompt: "Review the attached product plan against the ThoughtfulBits rubric."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,9 @@
+interface:
+  display_name: QA
+  short_description: QA and score websites safely
+  default_prompt: Use $qa to evaluate this website with the available host-managed browser.
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:weekly-plan-input:1",
+  "title": "note Workspace weekly plan input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "week",
+    "record_type",
+    "decision",
+    "desired_article_count",
+    "change_summary",
+    "confirmed_by_user",
+    "candidates"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "week": {"type": "string", "pattern": "^[0-9]{4}-W[0-9]{2}$"},
+    "record_type": {"enum": ["strategy_recommendation", "user_selection"]},
+    "decision": {"enum": ["recommend", "adopt", "revise", "replace", "pause"]},
+    "desired_article_count": {"type": "integer", "minimum": 0, "maximum": 7},
+    "change_summary": {"$ref": "#/$defs/oneLineText"},
+    "confirmed_by_user": {"type": "boolean"},
+    "candidates": {
+      "type": "array",
+      "maxItems": 7,
+      "items": {"$ref": "#/$defs/candidate"}
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"record_type": {"const": "strategy_recommendation"}},
+        "required": ["record_type"]
+      },
+      "then": {
+        "properties": {
+          "decision": {"const": "recommend"},
+          "confirmed_by_user": {"const": false}
+        }
+      },
+      "else": {
+        "properties": {
+          "decision": {"enum": ["adopt", "revise", "replace", "pause"]},
+          "confirmed_by_user": {"const": true}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "oneLineText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "pattern": "^[^\\r\\n]+$"
+    },
+    "textList": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/oneLineText"}
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "direction",
+        "audience",
+        "reader_value",
+        "article_role",
+        "source_card_ids",
+        "material_status",
+        "missing_information",
+        "research_questions",
+        "why_now",
+        "estimated_effort"
+      ],
+      "properties": {
+        "candidate_id": {"type": "string", "pattern": "^idea-[a-z0-9][a-z0-9-]{2,63}$"},
+        "direction": {"$ref": "#/$defs/oneLineText"},
+        "audience": {"$ref": "#/$defs/oneLineText"},
+        "reader_value": {"$ref": "#/$defs/oneLineText"},
+        "article_role": {"enum": ["record", "relationship", "expertise", "work", "revenue", "other"]},
+        "source_card_ids": {
+          "type": "array",
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^src-[a-z0-9]{8,32}$"}
+        },
+        "material_status": {"enum": ["ready", "needs_more_source"]},
+        "missing_information": {"$ref": "#/$defs/textList"},
+        "research_questions": {"$ref": "#/$defs/textList"},
+        "why_now": {"$ref": "#/$defs/oneLineText"},
+        "estimated_effort": {"$ref": "#/$defs/oneLineText"}
+      }
+    }
+  }
+}

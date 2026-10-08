@@ -1,0 +1,9 @@
+# ChatGPT presentation metadata (Agent Skills open standard).
+# Claude ignores this file entirely - the same skill folder works on both platforms.
+# Schema: https://github.com/openai/codex/blob/main/codex-rs/skills/src/assets/samples/skill-creator/references/openai_yaml.md
+interface:
+  display_name: "Marketo Personalization"
+  short_description: "Write and debug Marketo tokens and Velocity"
+  default_prompt: "Use $marketo-velocity to review this Marketo email for tokens or Velocity that would fail at send time."
+policy:
+  allow_implicit_invocation: true

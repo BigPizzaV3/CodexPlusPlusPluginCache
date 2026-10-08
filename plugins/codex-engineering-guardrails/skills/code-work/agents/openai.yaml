@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Work"
+  short_description: "Scoped, test-backed software implementation"
+  default_prompt: "Use $code-work to implement this coding task in small, verified increments while preserving the approved scope."

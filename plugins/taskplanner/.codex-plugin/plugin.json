@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "refined",
+    "url": "https://github.com/smekai"
+  },
+  "description": "AI-directed markdown task management in your repo. Generates AGENTS.md, CLAUDE.md, and .cursorrules workflows. Tracked by git.",
+  "homepage": "https://github.com/smekai/taskplanner#readme",
+  "interface": {
+    "brandColor": "#6C63FF",
+    "brandColorDark": "#6C63FF",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Show my TaskPlanner board.",
+      "Pick the next task and make a plan.",
+      "Create a new task for this repository."
+    ],
+    "developerName": "refined",
+    "displayName": "Task Plan AI",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "AI-directed markdown task management in your repo. Uses git-tracked .tasks files and gives Codex tools and skills to read, create, prioritize, plan, update, and move work.",
+    "privacyPolicyURL": "https://github.com/smekai/taskplanner/blob/main/PRIVACY.md",
+    "shortDescription": "Markdown task management",
+    "termsOfServiceURL": "https://github.com/smekai/taskplanner/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/smekai/taskplanner"
+  },
+  "keywords": [
+    "tasks",
+    "planner",
+    "markdown",
+    "project-management",
+    "ai-workflow"
+  ],
+  "license": "MIT",
+  "name": "taskplanner",
+  "repository": "https://github.com/smekai/taskplanner",
+  "skills": "./skills/",
+  "version": "2.1.1"
+}

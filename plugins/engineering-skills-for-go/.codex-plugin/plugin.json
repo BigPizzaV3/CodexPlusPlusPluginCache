@@ -1,0 +1,47 @@
+{
+  "author": {
+    "name": "Ashwin Gopalsamy",
+    "url": "https://ashwingopalsamy.in"
+  },
+  "description": "Evidence-backed Go language, API, service, testing, performance, security, operations, and engineering-review skills.",
+  "homepage": "https://golangskills.com",
+  "interface": {
+    "brandColor": "#071A2B",
+    "brandColorDark": "#D4E7F8",
+    "capabilities": [
+      "Build production Go systems",
+      "Test and diagnose Go software",
+      "Review Go changes"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this Go change for correctness and production risk. Report concrete, causal findings only; skip style comments.",
+      "Diagnose this Go production issue from evidence. Find the failure mechanism, what to measure next, and the smallest safe fix.",
+      "Design or implement this Go change. Preserve behavior and compatibility; make the smallest coherent change and verify it."
+    ],
+    "developerName": "Ashwin Gopalsamy",
+    "displayName": "Go: Production Engineering",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Evidence-backed Go language, API, service, testing, performance, security, operations, and engineering-review skills.",
+    "privacyPolicyURL": "https://github.com/ashwingopalsamy/golangskills.com/blob/main/docs/privacy.md",
+    "shortDescription": "Build, test & operate Go",
+    "termsOfServiceURL": "https://github.com/ashwingopalsamy/golangskills.com/blob/main/docs/terms.md",
+    "websiteURL": "https://github.com/ashwingopalsamy/golangskills.com"
+  },
+  "keywords": [
+    "go",
+    "golang",
+    "backend",
+    "api-development",
+    "testing",
+    "performance",
+    "security",
+    "code-review"
+  ],
+  "license": "Apache-2.0",
+  "name": "engineering-skills-for-go",
+  "repository": "https://github.com/ashwingopalsamy/golangskills.com",
+  "skills": "./skills/",
+  "version": "0.4.0"
+}

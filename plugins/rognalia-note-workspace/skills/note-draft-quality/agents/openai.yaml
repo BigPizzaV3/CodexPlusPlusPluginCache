@@ -1,0 +1,5 @@
+interface:
+  display_name: "note Workspace 原稿品質ゲート"
+  short_description: "一次性と文体を内部確認し、納品原稿だけを返す"
+policy:
+  allow_implicit_invocation: true

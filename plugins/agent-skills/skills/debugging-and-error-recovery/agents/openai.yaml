@@ -1,0 +1,9 @@
+interface:
+  display_name: Debugging And Error Recovery
+  short_description: Guides systematic root-cause debugging
+  default_prompt: Use $debugging-and-error-recovery for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

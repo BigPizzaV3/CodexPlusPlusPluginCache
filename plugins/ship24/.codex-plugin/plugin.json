@@ -1,0 +1,44 @@
+{
+  "author": {
+    "email": "contact@ship24.com",
+    "name": "Ship24",
+    "url": "https://www.ship24.com"
+  },
+  "description": "Ship24 shipment tracking for AI coding agents: skills to integrate the Ship24 Tracking API, build webhook receivers, look up courier codes, map tracking statuses and troubleshoot errors.",
+  "homepage": "https://github.com/ship24/ship24-ai-plugin#readme",
+  "interface": {
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "How do I add Ship24 shipment tracking to my app?",
+      "Build a Ship24 webhook receiver and verify it end to end.",
+      "Which Ship24 courier code should I use for USPS, and does it need a postcode?"
+    ],
+    "developerName": "Ship24 Limited",
+    "displayName": "Ship24 Tracking API",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Ship24 shipment tracking for AI coding agents. Guides you through integrating the Ship24 Tracking API into your own project end to end: every endpoint and schema from the OpenAPI spec, webhook receivers versus polling, courier codes and required fields, tracking status mapping, the official Node SDK, and error and rate-limit troubleshooting. Your code calls Ship24 with your own API key.",
+    "privacyPolicyURL": "https://www.ship24.com/privacy-policy",
+    "shortDescription": "Integrate shipment tracking",
+    "supportURL": "https://www.ship24.com/contact-us",
+    "termsOfServiceURL": "https://www.ship24.com/terms",
+    "websiteURL": "https://www.ship24.com"
+  },
+  "keywords": [
+    "ship24",
+    "tracking",
+    "shipment-tracking",
+    "package-tracking",
+    "parcel-tracking",
+    "courier",
+    "logistics",
+    "mcp",
+    "agent-skills"
+  ],
+  "license": "MIT",
+  "name": "ship24",
+  "repository": "https://github.com/ship24/ship24-ai-plugin",
+  "skills": "./skills",
+  "version": "1.0.0"
+}

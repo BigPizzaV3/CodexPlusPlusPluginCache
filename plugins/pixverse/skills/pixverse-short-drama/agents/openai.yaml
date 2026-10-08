@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Short Drama"
+  short_description: "Create vertical drama scenes"
+  default_prompt: "Use $pixverse-short-drama to create a vertical drama scene with a clear conflict and cliffhanger."
+policy:
+  allow_implicit_invocation: true

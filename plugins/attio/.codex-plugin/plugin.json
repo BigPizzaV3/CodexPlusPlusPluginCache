@@ -1,0 +1,32 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Attio Ltd",
+    "url": "https://attio.com"
+  },
+  "description": "Attio connects ChatGPT directly to your CRM workspace, letting you manage customer relationships through natural conversation. \n\nSearch and filter contacts, companies, and deals with flexible queries. Create, update, and organize records without switching between screens. Add notes, manage tasks, and track your sales pipeline\u2014all through simple requests. \n\nKey capabilities: \n- Search records using powerful filters (find companies by size, industry, last contact date) \n- Create and update people, companies, and deal records \n- Manage notes attached to any record \n- Track and complete tasks \n- Navigate lists and organize your data \n\nWhether you're preparing for a meeting, updating deal stages, or researching prospects, Attio brings your CRM data into your conversation \u2014 no manual data entry required.",
+  "homepage": "https://attio.com",
+  "interface": {
+    "capabilities": [],
+    "category": "Business & Operations",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Find the latest notes and next steps in Attio"
+    ],
+    "developerName": "Attio Ltd",
+    "displayName": "Attio",
+    "logo": "./assets/logo.png",
+    "longDescription": "Attio connects Codex directly to your CRM workspace, letting you manage customer relationships through natural conversation. \n\nSearch and filter contacts, companies, and deals with flexible queries. Create, update, and organize records without switching between screens. Add notes, manage tasks, and track your sales pipeline\u2014all through simple requests. \n\nKey capabilities: \n- Search records using powerful filters (find companies by size, industry, last contact date) \n- Create and update people, companies, and deal records \n- Manage notes attached to any record \n- Track and complete tasks \n- Navigate lists and organize your data \n\nWhether you're preparing for a meeting, updating deal stages, or researching prospects, Attio brings your CRM data into your conversation \u2014 no manual data entry required.",
+    "privacyPolicyURL": "https://attio.com/legal/privacy",
+    "screenshots": [],
+    "shortDescription": "Manage your CRM with ChatGPT",
+    "supportURL": "https://attio.com/help",
+    "termsOfServiceURL": "https://attio.com/legal/terms-and-conditions",
+    "websiteURL": "https://attio.com"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "attio",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

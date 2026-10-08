@@ -1,0 +1,28 @@
+{
+  "author": {
+    "name": "Willy SEO"
+  },
+  "description": "Willy SEO \u2014 Asesor y Auditor SEO Inteligente (MCP + Apps SDK)",
+  "interface": {
+    "capabilities": [],
+    "category": "Other",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": null,
+    "developerName": "Willy SEO",
+    "displayName": "Willy SEO",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Willy SEO - Asesor y Consultor SEO Inteligente",
+    "shortDescription": "Willy SEO - Consultor SEO "
+  },
+  "keywords": [
+    "seo",
+    "audit",
+    "mcp",
+    "onpage",
+    "chatgpt"
+  ],
+  "license": "MIT",
+  "name": "willy-seo",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

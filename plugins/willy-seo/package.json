@@ -1,0 +1,27 @@
+{
+  "name": "willy-seo",
+  "version": "1.0.0",
+  "description": "Willy SEO — Complemento y Asesor SEO Inteligente para ChatGPT (Apps SDK + MCP)",
+  "main": "dist/src/server.js",
+  "type": "module",
+  "scripts": {
+    "build": "node node_modules/typescript/bin/tsc",
+    "start": "node dist/src/server.js",
+    "dev": "tsx watch src/server.ts",
+    "test": "node --test dist/tests/auditor.test.js",
+    "pack:zip": "npm run build && zip -r willy-seo.zip . -x 'node_modules/*' '.git/*' '*.DS_Store' '*.zip'"
+  },
+  "keywords": ["seo", "chatgpt", "mcp", "apps-sdk", "audit", "onpage"],
+  "author": "Willy SEO",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.0",
+    "cheerio": "^1.0.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}

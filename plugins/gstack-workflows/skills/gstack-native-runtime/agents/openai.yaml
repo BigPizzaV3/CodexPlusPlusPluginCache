@@ -1,0 +1,8 @@
+interface:
+  display_name: "gstack Native Runtime"
+  short_description: "Route gstack workflows."
+  default_prompt: "Use gstack Native Runtime for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

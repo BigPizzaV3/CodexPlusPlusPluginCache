@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/evaluator-drift-report-0.1.schema.json",
+  "title": "RAGOps evaluator drift report 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_version", "scenario_id", "passed", "confidence", "case_count",
+    "reference_observations", "current_observations", "method", "resamples", "seed",
+    "failed_gates", "metrics", "provenance"
+  ],
+  "properties": {
+    "report_version": {"const": "0.1"},
+    "scenario_id": {"type": "string", "minLength": 1},
+    "passed": {"type": "boolean"},
+    "confidence": {"type": "number", "exclusiveMinimum": 0.5, "exclusiveMaximum": 1},
+    "case_count": {"type": "integer", "minimum": 1},
+    "reference_observations": {"type": "integer", "minimum": 1},
+    "current_observations": {"type": "integer", "minimum": 1},
+    "method": {"const": "paired_hierarchical_bootstrap_two_sided_equivalence"},
+    "resamples": {"type": "integer", "minimum": 100},
+    "seed": {"type": "integer"},
+    "failed_gates": {"type": "array", "items": {"type": "string"}},
+    "metrics": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reference_mean", "current_mean", "delta", "lower_bound", "upper_bound",
+          "max_absolute_change", "passed"
+        ],
+        "properties": {
+          "reference_mean": {"type": "number"},
+          "current_mean": {"type": "number"},
+          "delta": {"type": "number"},
+          "lower_bound": {"type": ["number", "null"]},
+          "upper_bound": {"type": ["number", "null"]},
+          "max_absolute_change": {"type": "number", "minimum": 0},
+          "passed": {"type": "boolean"}
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenario_digest", "dataset", "evidence", "reference_evaluator",
+        "current_evaluator", "application", "model", "model_config", "environment"
+      ],
+      "properties": {
+        "scenario_digest": {"type": "string"},
+        "dataset": {"type": "string"},
+        "evidence": {"type": "string"},
+        "reference_evaluator": {"type": "string"},
+        "current_evaluator": {"type": "string"},
+        "application": {"type": "string"},
+        "model": {"type": "string"},
+        "model_config": {"type": "string"},
+        "environment": {"type": "string"}
+      }
+    }
+  }
+}

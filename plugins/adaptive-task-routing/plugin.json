@@ -1,0 +1,36 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Adaptive Task Routing contributors"
+  },
+  "description": "Recommend what to do next at task boundaries: keep, hand off, or change AI settings when worthwhile.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [],
+        "category": "Productivity",
+        "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+        "defaultPrompt": [
+          "Use adaptive task routing before the next substantial phase."
+        ],
+        "developerName": "\u54f2\u5100 \u6731",
+        "displayName": "Adaptive Task Routing",
+        "logo": "./.codex-plugin/assets/logo.png",
+        "longDescription": "Adaptive Task Routing assesses conversation, model and reasoning resources at meaningful task boundaries. It shows the action to take now before a concise reason, distinguishing task-fit settings from whether a switch is worthwhile. Keeping a suitable setup and retaining provisionally under uncertainty are separate outcomes. Default ask confirms proposed changes or material blockers; retention and nonblocking defer continue only already authorized work. Plan-only requests never authorize implementation. Auto applies only justified, authorized, callable and verifiable changes. Compact uses a plain heading and one conversation sentence. Verified keep shows only the observed current AI; detailed adds task-fit alternatives, minimum settings and upgrade rationale. Ordinary changes ask only about the target setting. Actual savings and reliability improvements require evidence.",
+        "shortDescription": "Choose when to keep or switch",
+        "supportURL": "https://github.com/zyzdev/adaptive-task-routing/issues",
+        "websiteURL": "https://github.com/zyzdev/adaptive-task-routing"
+      }
+    }
+  },
+  "keywords": [
+    "agent-skills",
+    "context-routing",
+    "model-routing",
+    "reasoning-effort",
+    "agentic-workflows"
+  ],
+  "license": "MIT",
+  "name": "adaptive-task-routing",
+  "version": "0.5.0"
+}

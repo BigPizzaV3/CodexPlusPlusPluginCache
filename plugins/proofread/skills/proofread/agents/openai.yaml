@@ -1,0 +1,6 @@
+interface:
+  display_name: "Proofread"
+  short_description: "Meaning-preserving edits"
+  default_prompt: "Use $proofread to correct and polish this text without changing its meaning or voice."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Customer Research"
+  short_description: "Synthesize customer evidence into useful insights."
+  default_prompt: "Use Customer Research to help with this marketing task."
+policy:
+  allow_implicit_invocation: true

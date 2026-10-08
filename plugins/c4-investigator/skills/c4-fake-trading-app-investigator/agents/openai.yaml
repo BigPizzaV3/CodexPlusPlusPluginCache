@@ -1,0 +1,4 @@
+interface:
+  display_name: "C4 Fake Trading App Investigator"
+  short_description: "Investigate fraudulent trading platforms"
+  default_prompt: "Use $c4-fake-trading-app-investigator to guide this fake trading app investigation from evidence intake to a review-ready report."

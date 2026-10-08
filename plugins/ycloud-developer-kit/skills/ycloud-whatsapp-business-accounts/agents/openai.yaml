@@ -1,0 +1,6 @@
+interface:
+  display_name: "YCloud WhatsApp Business Accounts"
+  short_description: "Design or implement WABA inventory and ACO handling"
+  default_prompt: "Use $ycloud-whatsapp-business-accounts to design or implement a safe, contract-aware WABA operation."
+policy:
+  allow_implicit_invocation: true

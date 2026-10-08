@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/attack-pack-0.1.schema.json",
+  "title": "RAGOps attack pack 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "name", "attacks"],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "id": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "attacks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "category", "input_text", "expected_rule", "severity"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "category": {"type": "string", "minLength": 1},
+          "input_text": {"type": "string", "minLength": 1},
+          "expected_rule": {"type": "string", "minLength": 1},
+          "severity": {"enum": ["low", "medium", "high", "critical"]},
+          "tags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "PrePilot Marketing Router"
+  short_description: "Route marketing requests to the right workflow."
+  default_prompt: "Use PrePilot Marketing Router to help with this marketing task."
+policy:
+  allow_implicit_invocation: true

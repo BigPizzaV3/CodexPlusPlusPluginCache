@@ -1,0 +1,35 @@
+{
+  "author": {
+    "name": "Saul Mart\u00ed"
+  },
+  "description": "Uses the real vendored Impeccable workflow. Specialized for heuristic UX critique, hierarchy, clarity, information architecture, and prioritized design findings.",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "brandColor": "#22C55E",
+    "brandColorDark": "#3ADD76",
+    "capabilities": [
+      "Critique UX and hierarchy"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Critique this interface and prioritize what to fix",
+      "Review this flow for clarity and cognitive load",
+      "Score this UX and explain the highest-impact problems"
+    ],
+    "developerName": "Saul Mart\u00ed",
+    "displayName": "UXCritique",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Uses the real vendored Impeccable workflow. Specialized for heuristic UX critique, hierarchy, clarity, information architecture, and prioritized design findings.",
+    "shortDescription": "Critique UX and hierarchy"
+  },
+  "keywords": [
+    "engineering-suite",
+    "ux-critique",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "engineering-suite-ux-critique",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

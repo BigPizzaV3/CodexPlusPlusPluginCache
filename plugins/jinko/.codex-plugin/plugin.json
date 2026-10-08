@@ -1,0 +1,54 @@
+{
+  "author": {
+    "email": "oss@novainsilico.ai",
+    "name": "Nova In Silico",
+    "url": "https://www.novainsilico.ai/"
+  },
+  "description": "Skills for quantitative systems pharmacology using Jink\u014d platform. Support the full modeling workflow: gathering evidence and observed data, building and calibrating models, estimating uncertainty, running sensitivity analyses, creating virtual populations, simulating clinical  trials, visualizing results, and producing analysis.",
+  "homepage": "https://www.novainsilico.ai",
+  "interface": {
+    "brandColor": "#232349",
+    "brandColorDark": "#B6B6DC",
+    "capabilities": [
+      "Modeling",
+      "Analytics",
+      "Pharmacology",
+      "In-Silico",
+      "Clinical Trial",
+      "Simulation",
+      "Digital Twins"
+    ],
+    "category": "Healthcare",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "Simulate hepatitis B treatments and predict time to viral suppression.",
+      "Generate an atopic dermatitis virtual population that reproduces observed EASI responses.",
+      "Reproduce the results from this paper in Jinko."
+    ],
+    "developerName": "Nova In Silico",
+    "displayName": "Jink\u014d",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Skills for quantitative systems pharmacology using Jink\u014d platform. Support the full modeling workflow: gathering evidence and observed data, building and calibrating models, estimating uncertainty, running sensitivity analyses, creating virtual populations, simulating clinical  trials, visualizing results, and producing analysis.",
+    "privacyPolicyURL": "https://www.novainsilico.ai/data-policy/",
+    "shortDescription": "Run in-silico clinical trials",
+    "termsOfServiceURL": "https://jinko.ai/terms-of-use",
+    "websiteURL": "https://www.novainsilico.ai"
+  },
+  "keywords": [
+    "jinko",
+    "AI-assisted modeling",
+    "trial simulation and optimization",
+    "virtual patients",
+    "digital twins",
+    "QSP",
+    "MIDD",
+    "in-silico trials"
+  ],
+  "license": "MIT",
+  "name": "jinko",
+  "repository": "https://github.com/novainsilico/jinko-skills",
+  "skills": "./skills/",
+  "version": "1.8.0"
+}

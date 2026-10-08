@@ -1,0 +1,4 @@
+interface:
+  display_name: "Explore World Flags"
+  short_description: "Browse flags, country facts, and quizzes"
+  default_prompt: "Use $explore-world-flags to find countries with green and yellow flags."

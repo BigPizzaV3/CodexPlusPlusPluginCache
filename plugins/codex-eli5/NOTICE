@@ -1,0 +1,12 @@
+ELI5
+Copyright 2026 德荣 张
+
+This project is inspired by the ELI5 plugin in Anthropic's
+claude-plugins-community repository:
+https://github.com/anthropics/claude-plugins-community/tree/main/eli5
+
+The upstream repository root contains the Apache License 2.0; the upstream
+ELI5 plugin manifest separately declares MIT. This project is an independent
+implementation distributed under the Apache License 2.0. It changes the
+package format and expands the workflow, accessibility requirements,
+artifact checks, and documentation for OpenAI Codex.

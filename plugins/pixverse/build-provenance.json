@@ -1,0 +1,8 @@
+{
+  "plugin_version": "1.3.2",
+  "schema_version": "pixverse.plugin_build_provenance.v1",
+  "source_dirty": false,
+  "source_revision": "b36c95b146085df96848aee722f93490e6787b4e",
+  "source_state": "clean",
+  "tracked_diff_sha256": ""
+}

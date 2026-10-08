@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Feature flags & rollouts"
+  short_description: "Feature flags, audiences and rollbacks"
+  default_prompt: "Use $vibe-flags to audit the selected feature flags & rollouts boundary."

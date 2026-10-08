@@ -1,0 +1,5 @@
+interface:
+  display_name: Self-Healing Forecast Governance
+  short_description: Automated forecast safeguards
+policy:
+  allow_implicit_invocation: false

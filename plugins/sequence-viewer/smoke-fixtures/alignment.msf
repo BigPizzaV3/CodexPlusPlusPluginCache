@@ -1,0 +1,10 @@
+PileUp
+
+   MSF: 8  Type: N  Check: 0  ..
+ Name: human Len: 8  Check: 0  Weight: 1.00
+ Name: mouse Len: 8  Check: 0  Weight: 1.00
+
+//
+
+human  ACGT ACGT
+mouse  ACGT AC-T

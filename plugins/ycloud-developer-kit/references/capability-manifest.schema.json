@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ycloud.com/schemas/developer-kit/capability-manifest-v3.json",
+  "title": "YCloud Developer Kit capability manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema", "schemaVersion", "manifestVersion", "coverageProfile", "api",
+    "provenance", "coverage", "domains", "crosscuttingCapabilities", "operations", "messageTypes",
+    "messageConditionalRules", "templateContracts", "webhooks",
+    "runtimeSemantics", "publicSources", "unknowns"
+  ],
+  "properties": {
+    "$schema": {"const": "./capability-manifest.schema.json"},
+    "schemaVersion": {"const": 3},
+    "manifestVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "coverageProfile": {"const": "full-supported-operations-v1"},
+    "api": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["openapiVersion", "apiVersion"],
+      "properties": {
+        "openapiVersion": {"const": "3.0.0"},
+        "apiVersion": {"const": "v2"}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalRepository", "canonicalPath", "canonicalRevision", "pluginVersion", "snapshotSha256", "normalizedOpenapiSha256", "scopeOverlaySha256", "publicDocsFactsSha256", "publicDocsRetrievedAt"],
+      "properties": {
+        "canonicalRepository": {"type": "string", "minLength": 1},
+        "canonicalPath": {"type": "string", "minLength": 1},
+        "canonicalRevision": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "pluginVersion": {"type": "string", "minLength": 1},
+        "snapshotSha256": {"$ref": "#/$defs/sha256"},
+        "normalizedOpenapiSha256": {"$ref": "#/$defs/sha256"},
+        "scopeOverlaySha256": {"$ref": "#/$defs/sha256"},
+        "publicDocsFactsSha256": {"$ref": "#/$defs/sha256"},
+        "publicDocsRetrievedAt": {"type": "string", "format": "date"}
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operations", "firstWaveOperations", "secondWaveOperations", "thirdWaveOperations", "coveredOperations",
+        "futureOperations", "excludedOperations", "messageTypes", "templateComponentTypes",
+        "templateHeaderFormats", "templateButtonTypes", "webhookEvents",
+        "crosscuttingCapabilities", "firstWaveCapabilities", "coveredCapabilities",
+        "coverageRows", "webhookPayloads", "status", "exclusions"
+      ],
+      "properties": {
+        "operations": {"const": 95},
+        "firstWaveOperations": {"const": 17},
+        "secondWaveOperations": {"const": 43},
+        "thirdWaveOperations": {"const": 28},
+        "coveredOperations": {"const": 88},
+        "futureOperations": {"const": 0},
+        "excludedOperations": {"const": 7},
+        "messageTypes": {"const": 11},
+        "templateComponentTypes": {"const": 7},
+        "templateHeaderFormats": {"const": 6},
+        "templateButtonTypes": {"const": 10},
+        "webhookEvents": {"const": 38},
+        "crosscuttingCapabilities": {"const": 2},
+        "firstWaveCapabilities": {"const": 19},
+        "coveredCapabilities": {"const": 90},
+        "coverageRows": {"const": 90},
+        "webhookPayloads": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["typed", "shared", "unmodeled"],
+          "properties": {
+            "typed": {"const": 31},
+            "shared": {"const": 1},
+            "unmodeled": {"const": 6}
+          }
+        },
+        "status": {"const": "partial"},
+        "exclusions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "prefixItems": [
+            {"const": "7 OpenAPI operations are excluded by product decision; this is not provider deprecation."}
+          ],
+          "items": false
+        }
+      }
+    },
+    "domains": {"type": "array", "items": {"type": "object"}},
+    "crosscuttingCapabilities": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["capabilityId", "kind", "owner", "domain", "requiredSurfaces", "wave"],
+        "properties": {
+          "capabilityId": {"enum": ["crosscutting:api-authentication", "crosscutting:webhook-receiver"]},
+          "kind": {"enum": ["authentication", "webhook-receiver"]},
+          "owner": {"enum": ["ycloud-api-authentication", "ycloud-webhook-endpoints"]},
+          "domain": {"enum": ["authentication", "webhook-receiver"]},
+          "requiredSurfaces": {
+            "type": "array",
+            "minItems": 2,
+            "uniqueItems": true,
+            "items": {"enum": ["backend", "ui", "tests"]}
+          },
+          "wave": {"const": "first-wave"}
+        }
+      }
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 95,
+      "maxItems": 95,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["operationId", "method", "path", "tags", "wave", "roadmapStatus", "domainOwner", "sideEffect", "securitySchemes", "request", "declaredResponses", "sourcePointer"],
+        "properties": {
+          "operationId": {"type": "string", "minLength": 1},
+          "method": {"enum": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD", "TRACE"]},
+          "path": {"type": "string", "pattern": "^/"},
+          "tags": {"type": "array", "items": {"type": "string"}},
+          "wave": {"enum": ["first-wave", "second-wave", "third-wave", "future", "excluded-by-product-decision"]},
+          "roadmapStatus": {"enum": ["covered", "future", "excluded-by-product-decision"]},
+          "exclusionReason": {"const": "Excluded from Developer Kit scope by product decision; the provider API remains available and is not deprecated."},
+          "domainOwner": {"type": "string", "minLength": 1},
+          "sideEffect": {"enum": ["read", "create", "update", "delete", "rotate", "send", "upload"]},
+          "securitySchemes": {"type": "array", "items": {"type": "string"}},
+          "request": {"type": ["object", "null"]},
+          "declaredResponses": {"type": "array", "items": {"type": "object"}},
+          "sourcePointer": {"type": "string", "pattern": "^#/paths/"}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"wave": {"const": "excluded-by-product-decision"}}, "required": ["wave"]},
+            "then": {
+              "properties": {"roadmapStatus": {"const": "excluded-by-product-decision"}},
+              "required": ["exclusionReason"]
+            },
+            "else": {"not": {"required": ["exclusionReason"]}}
+          },
+          {
+            "if": {"properties": {"wave": {"const": "future"}}, "required": ["wave"]},
+            "then": {"properties": {"roadmapStatus": {"const": "future"}}}
+          },
+          {
+            "if": {"properties": {"wave": {"enum": ["first-wave", "second-wave", "third-wave"]}}, "required": ["wave"]},
+            "then": {"properties": {"roadmapStatus": {"const": "covered"}}}
+          }
+        ]
+      }
+    },
+    "messageTypes": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {
+        "type": "object",
+        "required": ["type", "payloadProperty", "payloadSchemaRef", "supportedOperations", "sourcePointers", "coverageStatus"],
+        "properties": {
+          "coverageStatus": {"const": "modeled"},
+          "type": {"type": "string"},
+          "payloadProperty": {"type": "string"},
+          "payloadSchemaRef": {"type": "string", "pattern": "^#/components/schemas/"},
+          "supportedOperations": {"type": "array", "items": {"type": "string"}},
+          "sourcePointers": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "messageConditionalRules": {"type": "array", "items": {"type": "object"}},
+    "templateContracts": {
+      "type": "object",
+      "required": ["componentTypes", "headerFormats", "buttonTypes", "sourcePointers"],
+      "properties": {
+        "componentTypes": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"type": "string"}},
+        "headerFormats": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"type": "string"}},
+        "buttonTypes": {"type": "array", "minItems": 10, "maxItems": 10, "items": {"type": "string"}},
+        "sourcePointers": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "webhooks": {
+      "type": "object",
+      "required": ["commonEnvelopeSchemaRef", "events"],
+      "properties": {
+        "commonEnvelopeSchemaRef": {"const": "#/components/schemas/Event"},
+        "events": {
+          "type": "array",
+          "minItems": 38,
+          "maxItems": 38,
+          "items": {
+            "type": "object",
+            "required": ["eventType", "payloadCoverage", "payloads", "reason", "sourcePointers"],
+            "properties": {
+              "eventType": {"type": "string"},
+              "payloadCoverage": {"enum": ["typed", "shared", "unmodeled"]},
+              "payloads": {"type": "array", "items": {"type": "object"}},
+              "reason": {"type": "string", "minLength": 1},
+              "sourcePointers": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        }
+      }
+    },
+    "runtimeSemantics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "authority", "kind", "appliesTo", "value", "sourceRefs"],
+        "properties": {
+          "id": {"type": "string"},
+          "authority": {"enum": ["provider-contract", "developer-kit-policy", "unknown"]},
+          "kind": {"type": "string"},
+          "appliesTo": {"type": "array", "items": {"type": "string"}},
+          "value": {"type": "string"},
+          "sourceRefs": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "publicSources": {"type": "object"},
+    "unknowns": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

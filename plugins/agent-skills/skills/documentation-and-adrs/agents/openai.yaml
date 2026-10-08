@@ -1,0 +1,9 @@
+interface:
+  display_name: Documentation And Adrs
+  short_description: Records decisions and documentation
+  default_prompt: Use $documentation-and-adrs for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

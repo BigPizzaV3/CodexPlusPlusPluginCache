@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Service Boundaries"
+  short_description: "Protect network protocol boundaries"
+  default_prompt: "Use $go-service-boundaries to engineer this Go service protocol boundary."
+policy:
+  allow_implicit_invocation: true

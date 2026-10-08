@@ -1,0 +1,50 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "briefcase",
+  "version": "1.3.0",
+  "description": "Briefcase Ledger is AI-native accounting software for UK businesses and their accountants. Review what needs approval and why, read profit and loss, balance sheet and aged debtors, raise invoices, post journals and run month-end schedules. Also works for Xero and QuickBooks books through Briefcase Connect.",
+  "author": {
+    "name": "Briefcase",
+    "url": "https://briefcase.so"
+  },
+  "homepage": "https://briefcase.so",
+  "repository": "https://github.com/Briefcase-AI/briefcase-plugin",
+  "license": "MIT",
+  "keywords": [
+    "accounting",
+    "bookkeeping",
+    "financial-close",
+    "invoicing",
+    "management-accounts",
+    "xero",
+    "quickbooks"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Briefcase",
+        "shortDescription": "AI-native bookkeeping & ledger",
+        "longDescription": "Briefcase is bookkeeping and month-end automation for accountants, connected to Xero, QuickBooks and Briefcase Ledger. This plugin connects your assistant to your Briefcase workspace so it can review bills and receipts awaiting approval, explain Autopilot decisions, submit documents, manage expense claims, run prepayments, accruals and depreciation, read profit and loss, balance sheet and aged reports, and raise sales invoices and manual journals on Briefcase Ledger for your clients. The assistant acts as you, on the clients you choose, with your permissions.",
+        "developerName": "Briefcase",
+        "category": "Finance",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://briefcase.so",
+        "supportURL": "https://briefcase.so/help",
+        "privacyPolicyURL": "https://briefcase.so/privacy-policy",
+        "termsOfServiceURL": "https://briefcase.so/terms-of-service",
+        "defaultPrompt": [
+          "Which of my clients have bills awaiting review in Briefcase?",
+          "How is my client doing this year compared with last year?",
+          "Who owes my client money, and which invoices are overdue?"
+        ],
+        "brandColor": "#429AAA",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

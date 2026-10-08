@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "FetchUpstream"
+  },
+  "description": "An unofficial ChatGPT port of pstack workflows.",
+  "interface": {
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Explain how this subsystem works. Trace the code flow and flag the parts most likely to confuse developers.",
+      "Review this PR for blast radius. Find what could break outside the diff and what still needs verification.",
+      "Rewrite this to sound human. Keep the meaning and tone, but remove AI tells, filler, and generic phrasing."
+    ],
+    "developerName": "FetchUpstream",
+    "displayName": "pstack",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "An unofficial ChatGPT port of pstack, providing rigorous reusable workflows for engineering, reasoning, review, and writing.",
+    "shortDescription": "Engineering agent workflows",
+    "supportURL": "https://github.com/FetchUpstream/pstack-plugin",
+    "websiteURL": "https://github.com/FetchUpstream/pstack-plugin"
+  },
+  "keywords": [
+    "pstack",
+    "workflow",
+    "engineering",
+    "writing",
+    "unslop"
+  ],
+  "license": "MIT",
+  "name": "pstack-plugin",
+  "skills": "./skills/",
+  "version": "0.2.0"
+}

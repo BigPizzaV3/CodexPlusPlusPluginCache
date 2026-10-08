@@ -1,0 +1,9 @@
+interface:
+  display_name: "Skillify"
+  short_description: "Convert a proven repeatable workflow into a reusable Skill with clear triggers and checks."
+  default_prompt: "Use Skillify for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

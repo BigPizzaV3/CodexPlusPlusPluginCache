@@ -1,0 +1,7 @@
+interface:
+  display_name: "Ship24 Webhooks"
+  short_description: "Build and secure a Ship24 webhook receiver"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon-large.png"
+  brand_color: "#FCB016"
+  default_prompt: "Build a Ship24 webhook receiver for this project."

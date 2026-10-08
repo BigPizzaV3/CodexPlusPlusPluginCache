@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate CastReader audio"
+  short_description: "Create playable audio with costs and recovery"
+  default_prompt: "Use $generate-audio to create an MP3 and show the actual cost."

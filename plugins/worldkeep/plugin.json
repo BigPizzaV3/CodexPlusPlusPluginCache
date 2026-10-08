@@ -1,0 +1,23 @@
+{
+  "name": "worldkeep",
+  "displayName": "Worldkeep",
+  "version": "0.3.3",
+  "description": "Worldkeep: capture and view a structured worldbuilding canon",
+  "author": {
+    "name": "Worldkeep project",
+    "url": "https://github.com/vadim-chiriac/worldkeep"
+  },
+  "homepage": "https://github.com/vadim-chiriac/worldkeep",
+  "repository": "https://github.com/vadim-chiriac/worldkeep",
+  "license": "MIT",
+  "keywords": [
+    "worldbuilding",
+    "canon",
+    "capture",
+    "visualization"
+  ],
+  "metadata": {
+    "kernelVersion": "v0.19",
+    "scribeVersion": "v0.13"
+  }
+}

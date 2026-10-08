@@ -1,0 +1,10 @@
+{
+  "name": "heygrc",
+  "description": "GRC compliance review for your pull requests. Reviews each PR against ISO 27001, SOC 2, GDPR and the EU AI Act, grounded in your company profile. Public repos are free.",
+  "version": "0.1.1",
+  "author": {
+    "name": "Better ISMS",
+    "email": "support@ismscopilot.com",
+    "url": "https://heygrc.com"
+  }
+}

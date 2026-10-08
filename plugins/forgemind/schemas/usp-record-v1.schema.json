@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rweisssieker-xp/RW-Forgemind-Codex-Plugin/schemas/usp-record-v1.schema.json",
+  "title": "ForgeMind USP record v1",
+  "type": "object",
+  "required": ["schemaVersion", "id", "title", "sourceSignalIds", "hypothesis", "experiment", "status", "score"],
+  "properties": { "schemaVersion": { "const": 1 } },
+  "additionalProperties": true
+}

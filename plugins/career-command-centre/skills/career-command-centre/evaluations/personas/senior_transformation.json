@@ -1,0 +1,283 @@
+{
+  "persona_id": "P01",
+  "synthetic": true,
+  "profile": {
+    "name": "Maya Patel",
+    "headline": "Enterprise Transformation and Operating Model Leader",
+    "location": "Melbourne, Australia",
+    "contact": [
+      {"label": "email", "text": "maya.patel@example.test", "url": "mailto:maya.patel@example.test"},
+      {"label": "linkedin", "text": "LinkedIn", "url": "https://www.linkedin.com/in/maya-patel-synthetic"}
+    ],
+    "work_rights": "Australian permanent resident"
+  },
+  "preferences": {
+    "target_directions": ["Transformation Director", "Operating Model Lead", "Future of Work Lead"],
+    "locations": ["Melbourne", "Sydney", "Remote Australia"],
+    "remote_preference": "hybrid",
+    "salary_minimum": 180000,
+    "currency": "AUD",
+    "employment_types": ["permanent"],
+    "excluded_employers": ["Example Advisory Group"],
+    "excluded_role_patterns": ["pure sales", "software engineer"],
+    "selectivity": "focused",
+    "source_preferences": {
+      "strategy": "automatic",
+      "preferred": [],
+      "excluded": []
+    },
+    "document_preferences": {
+      "format_mode": "smart_default",
+      "reference_template_name": null,
+      "page_strategy": "adaptive",
+      "section_order": ["Professional Summary", "Role-Match Experience", "Professional Experience", "Core Skills", "Education", "Recognition and Certification"],
+      "additional_sections": [],
+      "omitted_sections": [],
+      "cover_letter_mode": "paired",
+      "style_notes": []
+    }
+  },
+  "source_cv": {
+    "summary": "Enterprise transformation and operating-model leader with 14 years across healthcare and retail. Experienced in multi-country organisation design, workforce-platform governance, adoption and practical generative-AI workflow prototypes.",
+    "experience": [
+      {
+        "role": "Transformation Director",
+        "company": "Northstar Health",
+        "location": "Melbourne",
+        "dates": "2021–Present",
+        "bullets": [
+          "Led the operating-model redesign for an 8,000-person regional workforce across Australia and Asia.",
+          "Clarified decision rights and governance across 12 corporate and operational functions.",
+          "Established program governance, adoption measures and executive decision forums for a workforce-platform rollout; 82% of managers completed the pilot adoption pathway.",
+          "Introduced a strategic workforce-planning cycle across six business units.",
+          "Facilitated 25 executive design workshops to resolve accountabilities, interfaces and implementation choices.",
+          "Established a design-assurance forum that reviewed 40 operating-model proposals and maintained a transparent decision log.",
+          "Built a network of 90 change champions across 12 functions to test guidance and surface adoption risks.",
+          "Consolidated workforce scenarios into a quarterly executive review that identified 240 critical capability gaps for prioritisation.",
+          "Built a GenAI manager-guidance prototype using structured prompts, human review gates and feedback capture."
+        ]
+      },
+      {
+        "role": "Senior Manager, Organisation Transformation",
+        "company": "Harbour Retail",
+        "location": "Melbourne",
+        "dates": "2016–2021",
+        "bullets": [
+          "Led organisation-transformation initiatives across retail operations and corporate functions.",
+          "Redesigned spans and layers across a 150-site service network, identifying 12% overlapping management positions for staged removal through vacancies and natural attrition.",
+          "Designed a transformation-leadership program completed by 600 people leaders.",
+          "Facilitated 30 process and interface-mapping sessions across the service network to clarify hand-offs between stores, regions and corporate teams.",
+          "Facilitated executive operating-model decisions and translated them into practical change roadmaps."
+        ]
+      },
+      {
+        "role": "Organisation Design Manager",
+        "company": "Civic Utilities",
+        "location": "Melbourne",
+        "dates": "2012–2016",
+        "bullets": [
+          "Supported organisation design, role clarity and workforce planning initiatives.",
+          "Created a role architecture covering 120 recurring job profiles to improve role clarity and workforce reporting.",
+          "Reduced the role-approval cycle from 20 to 9 business days by clarifying decision rights and standardising role documentation."
+        ]
+      }
+    ],
+    "skills": ["Operating model design", "Organisation design", "Transformation governance", "Workforce technology adoption", "Executive facilitation", "Practical GenAI workflows"],
+    "education": ["MBA, Southern Coast University", "Prosci Change Practitioner"]
+  },
+  "evidence": [
+    {
+      "evidence_id": "EV-P01-001",
+      "claim": "Led a multi-country operating model redesign covering 8,000 employees.",
+      "safe_wording": "Led a multi-country operating model redesign covering 8,000 employees.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Led the operating model redesign for an 8,000-person regional workforce across Australia and Asia.",
+      "confidence": "source_only",
+      "restrictions": ["Do not imply independent verification of the 8,000-person scope."],
+      "role_relevance": ["operating model", "transformation"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-002",
+      "claim": "Established governance and adoption routines for a workforce-platform rollout.",
+      "safe_wording": "Established governance, adoption and decision routines for a workforce-platform rollout.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Established program governance, adoption measures and executive decision forums for a workforce platform rollout.",
+      "confidence": "source_only",
+      "restrictions": ["Do not name a platform that is not in the CV."],
+      "role_relevance": ["workforce technology", "adoption"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-003",
+      "claim": "Built a practical generative-AI workflow prototype for manager guidance.",
+      "safe_wording": "Built a practical generative-AI workflow prototype for manager guidance, using structured prompts, review gates and feedback capture.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Built a GenAI manager-guidance prototype using structured prompts, human review gates and feedback capture.",
+      "confidence": "source_only",
+      "restrictions": ["Describe as a prototype, not a launched enterprise product.", "Do not position as an AI engineer."],
+      "role_relevance": ["AI adoption", "future of work"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-004",
+      "claim": "Held transformation leadership roles at Northstar Health and Harbour Retail.",
+      "safe_wording": "Held senior transformation leadership roles across healthcare and retail organisations.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Transformation Director, Northstar Health; Senior Manager, Organisation Transformation, Harbour Retail.",
+      "confidence": "source_only",
+      "restrictions": [],
+      "role_relevance": ["leadership", "transformation"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-005",
+      "claim": "Completed a Master of Business Administration and Prosci Change Practitioner certification.",
+      "safe_wording": "MBA; Prosci Change Practitioner.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "MBA, Southern Coast University; Prosci Change Practitioner.",
+      "confidence": "source_only",
+      "restrictions": ["Synthetic fixture only."],
+      "role_relevance": ["education", "certification"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-006",
+      "claim": "Achieved 82 percent manager completion in a workforce-platform pilot adoption pathway.",
+      "safe_wording": "Achieved 82% manager completion in the workforce-platform pilot adoption pathway.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "82% of managers completed the pilot adoption pathway for the workforce-platform rollout.",
+      "confidence": "source_only",
+      "restrictions": ["Keep the metric tied to pilot manager completion, not enterprise adoption."],
+      "role_relevance": ["adoption", "workforce technology"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-007",
+      "claim": "Facilitated 25 executive design workshops.",
+      "safe_wording": "Facilitated 25 executive design workshops to resolve accountabilities, interfaces and implementation choices.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Facilitated 25 executive design workshops to resolve accountabilities, interfaces and implementation choices.",
+      "confidence": "source_only",
+      "restrictions": ["Do not describe all attendees as C-suite."],
+      "role_relevance": ["executive facilitation", "operating model"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-008",
+      "claim": "Redesigned spans and layers across a 150-site service network.",
+      "safe_wording": "Redesigned spans and layers across a 150-site service network, identifying 12% overlapping management positions for staged removal through vacancies and natural attrition.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Redesigned spans and layers across a 150-site service network, identifying 12% overlapping management positions for staged removal through vacancies and natural attrition.",
+      "confidence": "source_only",
+      "restrictions": ["Do not describe the 12% as immediate redundancies or realised cost savings."],
+      "role_relevance": ["organisation design", "spans and layers"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-009",
+      "claim": "Introduced strategic workforce planning across six business units.",
+      "safe_wording": "Introduced a strategic workforce-planning cycle across six business units.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Introduced a strategic workforce-planning cycle across six business units.",
+      "confidence": "source_only",
+      "restrictions": ["Do not imply ownership of financial planning."],
+      "role_relevance": ["workforce planning", "transformation"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-010",
+      "claim": "Designed a transformation leadership program completed by 600 leaders.",
+      "safe_wording": "Designed a transformation-leadership program completed by 600 people leaders.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Designed a transformation-leadership program completed by 600 people leaders.",
+      "confidence": "source_only",
+      "restrictions": ["Completion does not prove behaviour change or business impact."],
+      "role_relevance": ["capability", "change leadership"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-011",
+      "claim": "Created a role architecture covering 120 recurring job profiles.",
+      "safe_wording": "Created a role architecture covering 120 recurring job profiles to improve role clarity and workforce reporting.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Created a role architecture covering 120 recurring job profiles to improve role clarity and workforce reporting.",
+      "confidence": "source_only",
+      "restrictions": ["Do not imply a formal job-evaluation methodology."],
+      "role_relevance": ["role architecture", "organisation design"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-012",
+      "claim": "Established a design assurance forum that reviewed 40 operating-model proposals.",
+      "safe_wording": "Established a design-assurance forum that reviewed 40 operating-model proposals and maintained a transparent decision log.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Established a design-assurance forum that reviewed 40 operating-model proposals and maintained a transparent decision log.",
+      "confidence": "source_only",
+      "restrictions": ["Do not describe the forum as a statutory governance body."],
+      "role_relevance": ["governance", "operating model"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-013",
+      "claim": "Built a network of 90 change champions across 12 functions.",
+      "safe_wording": "Built a network of 90 change champions across 12 functions to test guidance and surface adoption risks.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Built a network of 90 change champions across 12 functions to test guidance and surface adoption risks.",
+      "confidence": "source_only",
+      "restrictions": ["Do not imply direct line management of all champions."],
+      "role_relevance": ["adoption", "change network"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-014",
+      "claim": "Consolidated workforce scenarios into quarterly executive review and identified 240 capability gaps.",
+      "safe_wording": "Consolidated workforce scenarios into a quarterly executive review that identified 240 critical capability gaps for prioritisation.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Consolidated workforce scenarios into a quarterly executive review that identified 240 critical capability gaps for prioritisation.",
+      "confidence": "source_only",
+      "restrictions": ["The 240 figure refers to capability gaps identified, not roles eliminated or hired."],
+      "role_relevance": ["workforce strategy", "capability"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-015",
+      "claim": "Facilitated 30 process and interface mapping sessions across a service network.",
+      "safe_wording": "Facilitated 30 process and interface-mapping sessions across the 150-site service network to clarify hand-offs between stores, regions and corporate teams.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Facilitated 30 process and interface-mapping sessions across the service network to clarify hand-offs between stores, regions and corporate teams.",
+      "confidence": "source_only",
+      "restrictions": ["Do not call this end-to-end process reengineering."],
+      "role_relevance": ["operating model", "process interfaces"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P01-016",
+      "claim": "Reduced role approval cycle from 20 to 9 business days.",
+      "safe_wording": "Reduced the role-approval cycle from 20 to 9 business days by clarifying decision rights and standardising role documentation.",
+      "source_type": "current_cv",
+      "source_name": "Maya_Patel_Mock_CV.docx",
+      "source_excerpt": "Reduced the role-approval cycle from 20 to 9 business days by clarifying decision rights and standardising role documentation.",
+      "confidence": "source_only",
+      "restrictions": ["Keep the metric tied to the role-approval cycle."],
+      "role_relevance": ["role architecture", "process improvement"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    }
+  ],
+  "expected_journey": "CV-first search; ask only for missing hard exclusions if the supplied prompt already includes salary and geography; return selective senior roles."
+}

@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 1,
+  "retrievedAt": "2026-08-29",
+  "sources": {
+    "api-examples-overview": {
+      "url": "https://newdocs.ycloud.com/en/api-reference/guides/examples/overview",
+      "observedUpdated": "retrieve at use time; no cached payload"
+    },
+    "authentication": {
+      "url": "https://docs.ycloud.com/reference/authentication",
+      "observedUpdated": "over 1 year ago"
+    },
+    "errors": {
+      "url": "https://docs.ycloud.com/reference/errors",
+      "observedUpdated": "over 1 year ago"
+    },
+    "message-status": {
+      "url": "https://docs.ycloud.com/reference/whatsapp-message-updated-webhook-examples",
+      "observedUpdated": "4 months ago"
+    },
+    "message-sending-guide": {
+      "url": "https://docs.ycloud.com/reference/whatsapp-message-sending-guide",
+      "observedUpdated": "8 months ago"
+    },
+    "pagination": {
+      "url": "https://docs.ycloud.com/reference/pagination",
+      "observedUpdated": "about 1 year ago"
+    },
+    "rate-limits": {
+      "url": "https://docs.ycloud.com/reference/rate-limits",
+      "observedUpdated": "3 months ago"
+    },
+    "request-ids": {
+      "url": "https://docs.ycloud.com/reference/request-ids",
+      "observedUpdated": "over 1 year ago"
+    },
+    "template-edit": {
+      "url": "https://docs.ycloud.com/reference/whatsapp_template-edit-by-name-and-language",
+      "observedUpdated": "about 2 months ago"
+    },
+    "template-list": {
+      "url": "https://docs.ycloud.com/reference/whatsapp_template-list",
+      "observedUpdated": "about 2 months ago"
+    },
+    "versioning": {
+      "url": "https://docs.ycloud.com/reference/versioning",
+      "observedUpdated": "about 1 year ago"
+    },
+    "webhook-integration-guide": {
+      "url": "https://docs.ycloud.com/reference/webhook-integration-guide",
+      "observedUpdated": "8 months ago"
+    },
+    "webhook-guide-v2": {
+      "url": "https://newdocs.ycloud.com/en/guides/webhooks",
+      "observedUpdated": "modified 2026-07-16"
+    },
+    "webhooks": {
+      "url": "https://docs.ycloud.com/reference/configure-webhooks",
+      "observedUpdated": "over 1 year ago"
+    },
+    "whatsapp-errors": {
+      "url": "https://docs.ycloud.com/reference/whatsapp-errors",
+      "observedUpdated": "11 days ago; observed 2026-08-29"
+    },
+    "whatsapp-media-upload": {
+      "url": "https://docs.ycloud.com/reference/whatsapp_media-upload",
+      "observedUpdated": "about 2 months ago"
+    }
+  },
+  "common": {
+    "sources": [
+      "api-examples-overview",
+      "errors",
+      "rate-limits",
+      "request-ids",
+      "versioning",
+      "webhook-guide-v2"
+    ],
+    "facts": [
+      "A successful API request uses a 2xx status; documented failures use 4xx for client-caused errors and 5xx for YCloud server errors.",
+      "The standard failure envelope is {error:{status,code,message?,target?,docUrl?,requestId?,whatsappApiError?}}. status and code are required; message is diagnostic text and must not be exposed directly to end users.",
+      "YCloud-Request-ID is returned as a response header and is also mirrored by error.requestId when present; preserve it for correlation and support without logging credentials or customer payloads.",
+      "Throttling is reported with HTTP 429. Retry-After is a delay in seconds; when present on any response, wait before a new request instead of treating it as a successful-delivery signal.",
+      "RateLimit-Limit, RateLimit-Policy, RateLimit-Remaining, and RateLimit-Reset may be returned. The published header format is beta and based on an IETF draft, so parse defensively and do not make it a required response shape.",
+      "The Management API table and example header publish 10000 requests per hour, while one explanatory sentence on the same page says 1000. Treat the table value as documented guidance, prefer runtime headers, and report source drift instead of hard-coding the conflicting prose.",
+      "Documented 429 codes include ACCOUNT_RATE_LIMITED, SENDER_RATE_LIMITED, and TOO_MANY_REQUESTS; branch on the received HTTP status and error.code rather than error.message text.",
+      "YCloud treats added optional request parameters, response properties, resources, enum values, and changes to opaque-string formats as backward-compatible. Clients must ignore unknown response properties and preserve an explicit unknown branch for enum or event-type values instead of failing exhaustive decoding.",
+      "Treat YCloud-generated IDs as opaque, case-sensitive strings. Do not parse fixed prefixes; support values up to 255 characters as documented by the versioning policy."
+    ],
+    "unknowns": [
+      "The public cross-cutting pages do not define a general client idempotency key or guarantee that replaying a mutating request is safe.",
+      "Do not invent endpoint-specific errors, undocumented retry counts, or a generic retry policy when the selected operation/reference does not provide one."
+    ]
+  },
+  "domains": {
+    "ycloud-api-authentication": {
+      "sources": [
+        "authentication"
+      ],
+      "facts": [
+        "An invalid API key is documented as HTTP 401 with error.code UNAUTHORIZED. Keep the key in the X-API-Key request header on a trusted server and never echo the supplied value."
+      ],
+      "unknowns": [
+        "The public authentication page does not define key expiry, validation, rotation overlap, or recovery behavior."
+      ]
+    },
+    "ycloud-integration-architect": {
+      "sources": [
+        "authentication",
+        "message-status",
+        "pagination",
+        "webhooks",
+        "whatsapp-errors"
+      ],
+      "facts": [
+        "Design one shared response mapper for the standard error envelope, request-ID correlation, and rate-limit headers, then keep operation-specific handling inside each domain adapter.",
+        "Queued WhatsApp failures can arrive asynchronously through whatsapp.message.updated; direct-send failures may include error.whatsappApiError synchronously. Plan for both channels without equating submission acceptance with delivery.",
+        "Webhook receiving now has an official contract for fast 2xx acknowledgement, retries, and HMAC-SHA256 verification, but event-type payload schemas remain selected separately.",
+        "For list integrations, select only pagination modes confirmed by the exact endpoint. Offset pagination uses 1-based page and limit 1 through 100 (default 10); request includeTotal only when needed because counting costs more. Cursor pagination must pass the returned cursor.after unchanged as pageAfter and stop when length is zero or cursor.after is absent."
+      ],
+      "unknowns": [
+        "Do not select a framework-specific retry, queue, deduplication TTL, or SDK implementation until the local project and operation semantics support it."
+      ]
+    },
+    "ycloud-webhook-endpoints": {
+      "sources": [
+        "message-status",
+        "pagination",
+        "versioning",
+        "webhook-integration-guide",
+        "webhook-guide-v2",
+        "webhooks"
+      ],
+      "facts": [
+        "Webhook endpoint management shares the documented Management API policy: 200 requests per second and 10000 requests per hour per account across the shared management quota.",
+        "A receiver should quickly return a 2xx response before complex processing. If YCloud does not quickly receive 2xx, the documented retry intervals are 10s, 30s, 5m, 30m, 1h, 2h, and 2h, up to 7 retries; after those retries YCloud does not retry that event again.",
+        "YCloud-Signature has the form t=<unix-seconds>,s=<64 lowercase hex HMAC-SHA256>. Using the endpoint secret as key, sign ASCII decimal timestamp, one period byte, and the exact raw request body bytes in that order. There is no trailing delimiter.",
+        "Parse t and s from comma-separated key/value elements, compare signatures using a constant-time facility, and apply an application-selected timestamp tolerance. The docs require a tolerance check but do not prescribe its numeric value.",
+        "Verify the unmodified raw request bytes before parsing or JSON reserialization, then acknowledge and process asynchronously. Whitespace, Unicode encoding, property order, and terminal newlines are signed data. Treat the event id as a deduplication key because delivery is retried; the retention duration is an application decision, not a YCloud guarantee.",
+        "whatsapp.message.updated notifications are not guaranteed to arrive in order and may be duplicated; a later delivered event can appear around failed events, so consumers must use idempotent state handling rather than append-only assumptions.",
+        "The canonical WhatsApp event names are dotted: whatsapp.inbound_message.received and whatsapp.message.updated. Legacy underscore aliases and singular update variants are not subscription event names.",
+        "Webhook receivers must be publicly reachable and must not use a private/internal IP; HTTPS is strongly recommended. An account can configure at most 20 webhook endpoints, with URL length up to 500 characters and description length up to 400 characters.",
+        "Incoming requests include Content-Type: application/json, YCloud-Signature, and X-Webhook-Endpoint-ID. Preserve the endpoint ID as non-secret routing/correlation metadata while keeping the endpoint secret redacted.",
+        "Return a 2xx quickly (within 6 seconds is recommended; responses slower than 10 seconds may be deprioritized), then process asynchronously. The response body is ignored.",
+        "A URL can be suspended after 200 failures per minute or 10 minutes of cumulative failure time per minute. Suspension lasts 3 minutes, sends no webhooks during that interval, and resumes automatically; the public contract does not promise backfill for events created during suspension.",
+        "Treat new webhook event types and response properties as backward-compatible additions. Verify the common envelope, acknowledge safely, and route unfamiliar types to an observable unsupported-event path instead of rejecting the entire receiver.",
+        "Webhook endpoint list uses offset pagination: page is 1-based, limit is 1 through 100 with default 10, and total is returned only when includeTotal=true."
+      ],
+      "unknowns": [
+        "The public page does not define a universal deduplication TTL, exact timeout cutoff, fixed timestamp tolerance, dual-secret rotation window, or rollback behavior."
+      ]
+    },
+    "ycloud-whatsapp-media": {
+      "sources": [
+        "message-sending-guide",
+        "whatsapp-media-upload"
+      ],
+      "facts": [
+        "The general docs say all API requests are rate limited, but the media upload endpoint has no numeric policy in the researched rate-limit table. Handle 429 and documented headers without assigning an invented upload quota.",
+        "CONTENT_TOO_LARGE is documented as HTTP 413, but do not claim that it is exhaustive.",
+        "The upload endpoint accepts one multipart file. If several files are supplied, only the first is processed; reject multi-file input locally rather than silently dropping files.",
+        "Uploaded media is encrypted and persists for 30 days. Treat YCloud media IDs as temporary delivery references, not durable application storage.",
+        "The reviewed messaging guide documents images (JPG/PNG) up to 5 MB, videos (MP4/3GP) up to 16 MB, audio (AAC/MP3/AMR/OGG) up to 16 MB, and documents up to 100 MB. Validate the exact type and size before upload and keep the operation reference authoritative if it is stricter.",
+        "Using the returned media id is recommended over a link for normal media messages, but interactive-message headers cannot use a Media ID for image, document, video, or audio and must use a link. Upload still does not send a message."
+      ],
+      "unknowns": [
+        "The researched public pages do not define a media-upload-specific quota, safe replay rule, durable retention beyond the documented 30-day period, or client idempotency key."
+      ]
+    },
+    "ycloud-whatsapp-messages": {
+      "sources": [
+        "message-status",
+        "message-sending-guide",
+        "whatsapp-errors"
+      ],
+      "facts": [
+        "POST /v2/whatsapp/messages is documented at 200 requests per second per sender. YCloud accepts at that rate while submitting to Meta at a lower documented rate, so accepted is still not delivered.",
+        "POST /v2/whatsapp/messages/sendDirectly is documented at 80 requests per second per sender by default, with a possible automatic upgrade to 1000 requests per second; runtime headers and account behavior take precedence over hard-coded assumptions.",
+        "Direct-send failures may include error.whatsappApiError when YCloud reached Meta. Queued submission does not synchronously return that upstream error; subscribe to whatsapp.message.updated for supported asynchronous failures.",
+        "Message status notifications may be duplicated and are not guaranteed to arrive in order. Model accepted, sent, failed, delivered, and read as asynchronous observations rather than a monotonic sequence.",
+        "On 429, honor Retry-After before another attempt. The Errors page also recommends exponential backoff for TOO_MANY_REQUESTS. Do not automatically replay a send POST unless the application has an explicit duplicate-prevention/idempotency decision.",
+        "Free-form messages are documented for the 24-hour customer-service window after the user contacts the business; outside that window, initiate contact with an approved template. Keep this policy distinct from transport acceptance.",
+        "Track final state with GET /v2/whatsapp/messages/{id} or the recommended whatsapp.message.updated webhook. Use externalId only as the application's correlation value and preserve the YCloud message ID separately."
+      ],
+      "unknowns": [
+        "No general client idempotency key or exactly-once send guarantee is documented for the three selected message operations."
+      ]
+    },
+    "ycloud-whatsapp-templates": {
+      "sources": [
+        "pagination",
+        "template-edit",
+        "template-list"
+      ],
+      "facts": [
+        "The /v2/whatsapp/templates/* family shares the documented Management API policy: 200 requests per second and 10000 requests per hour per account across the management quota.",
+        "Documented template-related error codes include WHATSAPP_TEMPLATE_UNAVAILABLE and WHATSAPP_TEMPLATE_UNEDITABLE; WHATSAPP_WABA_UNAVAILABLE is documented for an unavailable business account. Preserve the received code and status rather than inferring from message text.",
+        "Template list uses 1-based page and limit 1 through 100 (default 10). Set includeTotal=true only when a count is needed; archived templates are included when they match and filter.status=ARCHIVED selects them explicitly.",
+        "Template edits replace the old contents entirely. Include every component that must be preserved; only APPROVED, REJECTED, or PAUSED templates are editable, and ARCHIVED templates cannot be edited.",
+        "Treat template status values as extensible. Preserve unfamiliar values for observability and stop state-dependent mutation instead of coercing them into a known lifecycle state."
+      ],
+      "unknowns": [
+        "The public cross-cutting docs do not establish safe automatic replay for template create, edit, or delete operations."
+      ]
+    },
+    "ycloud-whatsapp-business-accounts": {
+      "sources": ["pagination", "versioning"],
+      "facts": [
+        "Use only pagination parameters declared by the selected business-account operation, preserve returned opaque identifiers, and tolerate added response properties."
+      ],
+      "unknowns": [
+        "The reviewed cross-cutting pages do not establish safe automatic replay for business-account setting mutations."
+      ]
+    },
+    "ycloud-whatsapp-phone-numbers": {
+      "sources": ["pagination", "versioning"],
+      "facts": [
+        "Use only pagination parameters declared by the selected phone-number operation and preserve WABA IDs, phone-number values, and returned resource IDs without parsing assumed prefixes."
+      ],
+      "unknowns": [
+        "The reviewed cross-cutting pages do not establish safe automatic replay for registration, profile, settings, commerce, username, or contact-book mutations."
+      ]
+    },
+    "ycloud-whatsapp-groups": {
+      "sources": ["pagination", "versioning"],
+      "facts": [
+        "Use the exact selected operation for list behavior and preserve business-phone-number, group, participant, and join-request identifiers as opaque contract values."
+      ],
+      "unknowns": [
+        "The reviewed cross-cutting pages do not define a general idempotency key or safe automatic replay for group or membership mutations."
+      ]
+    },
+    "ycloud-whatsapp-flows": {
+      "sources": ["pagination", "versioning"],
+      "facts": [
+        "Use only lifecycle states and pagination parameters declared by the selected Flow operation, and preserve unfamiliar response properties or enum values for compatibility."
+      ],
+      "unknowns": [
+        "The reviewed cross-cutting pages do not define safe automatic replay or infer missing lifecycle transitions for Flow mutations."
+      ]
+    },
+    "ycloud-whatsapp-inbound-messages": {
+      "sources": ["message-status", "versioning"],
+      "facts": [
+        "Keep an inbound message ID distinct from outbound message IDs and application correlation values; use the exact selected operation for read and typing side effects."
+      ],
+      "unknowns": [
+        "The reviewed cross-cutting pages do not define safe automatic replay or final-delivery semantics for inbound read and typing mutations."
+      ]
+    },
+    "ycloud-balance": {
+      "sources": ["versioning"],
+      "facts": [
+        "Treat balance response properties as forward-compatible and keep account balance separate from message acceptance or delivery state."
+      ],
+      "unknowns": [
+        "The reviewed cross-cutting pages do not define a balance freshness or reservation guarantee."
+      ]
+    },
+    "ycloud-contacts": {
+      "sources": ["pagination", "versioning"],
+      "facts": [
+        "Use only pagination parameters declared by the selected Contact operation, preserve contact and note identifiers as separate opaque, case-sensitive strings, and tolerate added response properties."
+      ],
+      "unknowns": [
+        "The reviewed cross-cutting pages do not establish safe automatic replay for Contact or Contact Note mutations."
+      ]
+    },
+    "ycloud-custom-events": {
+      "sources": ["versioning"],
+      "facts": [
+        "Preserve unknown response properties and keep event-definition, property-definition, and event-ingestion outcomes as separate lifecycle evidence."
+      ],
+      "unknowns": [
+        "The reviewed cross-cutting pages do not establish safe automatic replay or downstream completion guarantees for Custom Event mutations or ingestion."
+      ]
+    },
+    "ycloud-unsubscribers": {
+      "sources": ["pagination", "versioning"],
+      "facts": [
+        "Use only pagination parameters declared by the selected Unsubscriber operation and preserve customer and channel values as opaque, case-sensitive strings."
+      ],
+      "unknowns": [
+        "The reviewed cross-cutting pages do not establish safe automatic replay or a provider send/delivery guarantee from Unsubscriber state."
+      ]
+    },
+    "ycloud-whatsapp-calling": {
+      "sources": ["versioning"],
+      "facts": [
+        "Preserve call, phone-number, message, event, and media identifiers as separate opaque, case-sensitive strings, and keep command acceptance distinct from final call state."
+      ],
+      "unknowns": [
+        "The reviewed cross-cutting pages do not establish safe automatic replay, final call-session transitions, or durable authorization for downloaded call media."
+      ]
+    }
+  }
+}

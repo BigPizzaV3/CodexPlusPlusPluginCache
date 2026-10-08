@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+  <title id="title">Conversational Narrative wordmark dark</title>
+  <desc id="desc">Conversational Narrative horizontal SVG wordmark for dark surfaces.</desc>
+  <rect width="1200" height="320" rx="48" fill="#15171C"/>
+  <g transform="translate(42 32) scale(.5)">
+    <path d="M378 151c-30-39-75-63-126-63-91 0-164 74-164 164s73 164 164 164c49 0 94-22 124-58" fill="none" stroke="#8FA8FF" stroke-width="44" stroke-linecap="round"/>
+    <path d="M179 347V177l154 170V177" fill="none" stroke="#8FA8FF" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M139 335c55-11 102-3 142 21 39 23 78 27 128-3" fill="none" stroke="#FFD46A" stroke-width="18" stroke-linecap="round"/>
+  </g>
+  <line x1="300" y1="66" x2="300" y2="254" stroke="#343947" stroke-width="2"/>
+  <text x="350" y="142" fill="#F5F6F8" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="600" letter-spacing="-1">Conversational</text>
+  <text x="350" y="224" fill="#8FA8FF" font-family="Georgia, 'Times New Roman', serif" font-size="82" font-weight="700" letter-spacing="-1">Narrative</text>
+  <path d="M350 250c161 22 316 22 462-4" fill="none" stroke="#FFD46A" stroke-width="8" stroke-linecap="round"/>
+</svg>

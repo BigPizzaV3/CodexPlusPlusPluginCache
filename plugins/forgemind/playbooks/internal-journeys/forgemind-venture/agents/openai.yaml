@@ -1,0 +1,6 @@
+interface:
+  display_name: "Venture"
+  short_description: "Market evidence, pricing, and business-case decisions."
+  default_prompt: "Use $forgemind-venture with its Zero-Input Default when no additional outcome is supplied."
+policy:
+  allow_implicit_invocation: false

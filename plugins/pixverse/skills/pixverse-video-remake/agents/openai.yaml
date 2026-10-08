@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Video Remake"
+  short_description: "Remake reference videos"
+  default_prompt: "Use $pixverse-video-remake to rebuild this reference video with my product and presenter, keeping its hook, pacing and on-screen graphics."
+policy:
+  allow_implicit_invocation: true

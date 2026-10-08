@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Naming"
+  short_description: "Choose idiomatic names for Go identifiers"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-naming to review and improve names in this Go code."

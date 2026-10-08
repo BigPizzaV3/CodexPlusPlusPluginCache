@@ -1,0 +1,4 @@
+interface:
+  display_name: "DSIR SDG Data Skill"
+  short_description: "Find UN SDG data with verified series and scope."
+  default_prompt: "Use $dsir-sdg to retrieve historical UHC service coverage for the Western Pacific Region from the UN SDG database."

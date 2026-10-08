@@ -1,0 +1,9 @@
+interface:
+  display_name: "Design Consultation"
+  short_description: "Create or refine a design system and its implementation guidance."
+  default_prompt: "Use Design Consultation for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

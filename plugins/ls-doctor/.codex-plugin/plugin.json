@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "Harry Blanchflower"
+  },
+  "description": "Diagnose TikTok LIVE Studio issues with optional desktop inspection",
+  "interface": {
+    "brandColor": "#B43A24",
+    "brandColorDark": "#DB614B",
+    "capabilities": [
+      "Desktop inspection and diagnostics",
+      "Audio route tracing",
+      "Camera and source checks",
+      "Link source and alert checks",
+      "Performance and network triage",
+      "Access and eligibility guidance"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Diagnose why my microphone is missing or doubled in TikTok LIVE Studio.",
+      "Find what is causing lag or dropped frames in TikTok LIVE Studio.",
+      "Help me fix a locked camera or OBS Virtual Camera in TikTok LIVE Studio."
+    ],
+    "developerName": "Harry Blanchflower",
+    "displayName": "LS Doctor",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Diagnose TikTok LIVE Studio access, camera, audio, source, layout, alert, performance, network, update, and inactivity-check problems on Windows and macOS. LS Doctor works on the web for guided troubleshooting, but works best in the ChatGPT desktop app with Computer Use enabled: after you approve access, it can inspect LIVE Studio and relevant system settings. When direct inspection is unavailable, it links the official desktop download and continues with questions, screenshots, or bounded local diagnostics. It never requests credentials or stream keys, bypasses eligibility controls, automates inactivity checks, or uploads raw logs.",
+    "privacyPolicyURL": "https://ls-doctor-legal.wg-mojo.chatgpt.site/privacy",
+    "shortDescription": "Fix LIVE Studio problems",
+    "supportURL": "https://www.toktutorials.com/contact",
+    "termsOfServiceURL": "https://ls-doctor-legal.wg-mojo.chatgpt.site/terms",
+    "websiteURL": "https://ls-doctor-legal.wg-mojo.chatgpt.site/"
+  },
+  "keywords": [
+    "tiktok-live-studio",
+    "streaming",
+    "audio",
+    "camera",
+    "performance",
+    "troubleshooting"
+  ],
+  "license": "MIT",
+  "name": "ls-doctor",
+  "skills": "./skills/",
+  "version": "1.0.3"
+}

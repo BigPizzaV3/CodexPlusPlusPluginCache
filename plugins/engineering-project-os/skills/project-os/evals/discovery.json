@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "name": "direct-codex-overview",
+      "category": "direct",
+      "surface": "CODEX",
+      "prompt": "$project-os overview",
+      "expected_activation": true,
+      "expected_intent": "overview",
+      "expected": [
+        "state that Engineering Project OS was built for Codex and return a concise product explanation rather than the technical help menu",
+        "distinguish project knowledge from reusable user-owned lessons",
+        "end with the next useful Codex workflow, then mention the ChatGPT companion"
+      ]
+    },
+    {
+      "name": "direct-chatgpt-codex-overview",
+      "category": "direct",
+      "surface": "CHATGPT",
+      "prompt": "@Engineering Project OS Tell me how Project OS helps Codex resume real engineering work across sessions.",
+      "expected_activation": true,
+      "expected_intent": "overview",
+      "expected": [
+        "explain the Codex-first developer audience and practical benefits without requiring repository files",
+        "describe ChatGPT as a companion for supplied files and portable knowledge bundles",
+        "explain that reusable failure knowledge is user-owned and moves only through an explicit reviewed transfer",
+        "make no repository changes"
+      ]
+    },
+    {
+      "name": "direct-setup",
+      "category": "direct",
+      "surface": "CODEX",
+      "prompt": "$project-os Help me set up Project OS for this repository and start with a safe preview.",
+      "expected_activation": true,
+      "expected_intent": "bootstrap-or-adopt",
+      "expected": [
+        "inspect existing repository authority before choosing bootstrap or adoption",
+        "preview every proposed write",
+        "create an empty reusable knowledge registry rather than product-authored failure lessons"
+      ]
+    },
+    {
+      "name": "direct-chatgpt-supplied-files",
+      "category": "direct",
+      "surface": "CHATGPT",
+      "prompt": "@Engineering Project OS Inspect the attached AGENTS.md and .agents records without changing them.",
+      "expected_activation": true,
+      "expected_intent": "inspect",
+      "expected": [
+        "inspect only the files supplied in the conversation",
+        "describe ChatGPT as a companion rather than a live repository workspace",
+        "report unsupported repository claims as unverified",
+        "make no repository changes"
+      ]
+    },
+    {
+      "name": "direct-cross-project-reuse",
+      "category": "direct",
+      "surface": "BOTH",
+      "prompt": "Help me reuse verified failure knowledge from an earlier project in this one.",
+      "expected_activation": true,
+      "expected_intent": "knowledge-import",
+      "expected": [
+        "ask for a source repository or portable bundle when none is available",
+        "preview applicable and skipped lessons with reasons",
+        "import only after explicit confirmation"
+      ]
+    },
+    {
+      "name": "indirect-lost-session-context",
+      "category": "indirect",
+      "surface": "CODEX",
+      "prompt": "I keep losing engineering decisions and verification state between Codex sessions. Help me keep that working context with the repository.",
+      "expected_activation": true,
+      "expected_intent": "overview",
+      "expected": [
+        "recognize a repository-local continuity need",
+        "explain Project OS before asking for implementation context"
+      ]
+    },
+    {
+      "name": "indirect-user-owned-failure-library",
+      "category": "indirect",
+      "surface": "BOTH",
+      "prompt": "I solved dozens of React Native failures in an older project and do not want to repeat them in my next project.",
+      "expected_activation": true,
+      "expected_intent": "knowledge-transfer",
+      "expected": [
+        "recognize a cross-project failure knowledge workflow",
+        "keep the user's library independent from Project OS releases",
+        "offer direct repository transfer in Codex or a portable bundle in either product"
+      ]
+    },
+    {
+      "name": "indirect-batch-lesson-review",
+      "category": "indirect",
+      "surface": "CODEX",
+      "prompt": "Turn every confirmed project failure into portable lessons, show me one batch review and let me choose what to keep.",
+      "expected_activation": true,
+      "expected_intent": "knowledge-prepare",
+      "expected": [
+        "prepare a sanitized read-only batch proposal",
+        "exclude project identity, local paths, detected URL forms and evidence locations",
+        "write only selected lessons after approval"
+      ]
+    },
+    {
+      "name": "incomplete-import-source",
+      "category": "incomplete",
+      "surface": "BOTH",
+      "prompt": "Import my reusable failure knowledge into this project.",
+      "expected_activation": true,
+      "expected_intent": "knowledge-import",
+      "expected": [
+        "ask for the missing source repository or portable bundle",
+        "make no change before source validation and preview"
+      ]
+    },
+    {
+      "name": "incomplete-review-without-records",
+      "category": "incomplete",
+      "surface": "CHATGPT",
+      "prompt": "@Engineering Project OS Review my Project OS setup.",
+      "expected_activation": true,
+      "expected_intent": "check",
+      "expected": [
+        "ask for AGENTS.md and .agents or another relevant project bundle",
+        "do not substitute an empty host workspace"
+      ]
+    },
+    {
+      "name": "negative-ordinary-code-fix",
+      "category": "negative",
+      "surface": "CODEX",
+      "prompt": "Fix the null check in this backend handler and run the focused test.",
+      "expected_activation": false,
+      "expected_intent": "ordinary-engineering",
+      "expected": [
+        "do not invoke Project OS implicitly",
+        "follow existing repository instructions"
+      ]
+    },
+    {
+      "name": "negative-generic-roadmap",
+      "category": "negative",
+      "surface": "BOTH",
+      "prompt": "Create a quarterly product roadmap for my team.",
+      "expected_activation": false,
+      "expected_intent": "generic-project-management",
+      "expected": [
+        "do not invoke Project OS implicitly"
+      ]
+    },
+    {
+      "name": "negative-personal-wiki",
+      "category": "negative",
+      "surface": "BOTH",
+      "prompt": "Help me organize my personal notes into a reusable wiki.",
+      "expected_activation": false,
+      "expected_intent": "generic-knowledge-management",
+      "expected": [
+        "do not invoke Project OS implicitly"
+      ]
+    },
+    {
+      "name": "edge-read-only-constraint",
+      "category": "edge",
+      "surface": "CODEX",
+      "prompt": "Inspect whether this repository has durable plans, state and evidence, but do not change files.",
+      "expected_activation": true,
+      "expected_intent": "inspect",
+      "expected": [
+        "honor the read-only constraint",
+        "report evidence without bootstrapping or repairing"
+      ]
+    },
+    {
+      "name": "edge-reject-automatic-sharing",
+      "category": "edge",
+      "surface": "BOTH",
+      "prompt": "Automatically upload everything learned in this private repository into a global Project OS failure database.",
+      "expected_activation": true,
+      "expected_intent": "knowledge",
+      "expected": [
+        "state that Project OS has no hosted or author-managed global failure database",
+        "reject automatic or unsanitized sharing",
+        "offer a user-controlled prepare, approve, export and import workflow"
+      ]
+    },
+    {
+      "name": "edge-import-all-override",
+      "category": "edge",
+      "surface": "BOTH",
+      "prompt": "Import all active lessons from this valid bundle, including lessons outside the detected stack.",
+      "expected_activation": true,
+      "expected_intent": "knowledge-import-all",
+      "expected": [
+        "show the full reviewed import preview",
+        "honor the explicit all override without hiding applicability warnings",
+        "require confirmation before writing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "dotenc",
+    "url": "https://github.com/dotenc"
+  },
+  "description": "Operate Git-native encrypted environments with the dotenc CLI.",
+  "homepage": "https://dotenc.org",
+  "interface": {
+    "brandColor": "#155EEF",
+    "brandColorDark": "#155EEF",
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Check this project with dotenc doctor.",
+      "Set up dotenc in this repository.",
+      "Run my tests with the development environment."
+    ],
+    "developerName": "Ivan Filho",
+    "displayName": "dotenc",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Keep API keys, passwords, and other app secrets encrypted in your project. Use dotenc to set up secure storage, manage who has access, and run your app with the secrets it needs.\n\nRequires the dotenc CLI installed in your working environment and access to your project.",
+    "shortDescription": "Protect your app secrets",
+    "supportURL": "https://github.com/dotenc/dotenc/issues",
+    "websiteURL": "https://dotenc.org"
+  },
+  "keywords": [
+    "dotenc",
+    "encrypted-environments",
+    "ssh",
+    "developer-tools"
+  ],
+  "license": "MIT",
+  "name": "dotenc",
+  "repository": "https://github.com/dotenc/skills",
+  "skills": "./skills/",
+  "version": "0.1.3"
+}

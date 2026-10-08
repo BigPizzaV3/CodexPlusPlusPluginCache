@@ -1,0 +1,1166 @@
+# Changelog
+
+## 1.30.2 — 2026-09-28
+
+- Stops `tt doctor` from crashing on consoles that cannot encode its output,
+  such as CP1250 on a Czech Windows install. Lines the console cannot encode
+  fall back to ASCII, and characters with no substitute print as `?`.
+  Reported in issue #46.
+- Stops `tt doctor` from failing the Codex upload package for a missing Claude
+  Code manifest. That package ships `hooks/hooks.json` only, so the Claude
+  routes are now required only where Claude Code can load them. A failure names
+  the file and client that lack routes.
+
+## 1.30.0 — 2026-08-24
+
+- Separates recency from attention volume throughout the live dashboard. Color
+  now depends only on time since the last read: hot through one day, warm
+  through three days, active through seven days, cool through 30 days, and cold
+  afterward. Five-cell bars and `h` retain the existing 30-day decayed heat
+  model, while lifetime counts remain durable evidence.
+- Makes `[f]` a persistent newest-activity-first sort instead of an eight-second
+  pulse followed by heat ordering. `[h]` continues to rank decayed attention;
+  `[c]` now puts untouched and oldest paths first. Folder color follows its most
+  recently read current child, so a large folder cannot stay visually hot from
+  accumulated old reads alone.
+- Carries the same split encoding into the HTML insights report and interactive
+  website demo, with explicit legends and documentation for each signal.
+
+## 1.29.1 — 2026-08-02
+
+- Stops a stale Codex install from blocking a session. Codex persists a hook's
+  resolved command, so upgrading left hooks pointing at a version directory that
+  had been removed. The interpreter exited 2 before any trigger-tree code ran,
+  and Codex treats a non-zero `UserPromptSubmit` hook as a blocking error, so
+  the user's prompt was refused. The logger's own fail-open guarantee cannot
+  cover a file that is not there.
+- Every Codex hook command now checks the script exists and exits 0 when it does
+  not, on POSIX and Windows alike. A stale path degrades to no telemetry instead
+  of a broken session, which is the rule this plugin holds itself to.
+
+## 1.29.0 — 2026-08-01
+
+- Reports when a project's `TT_ALWAYS_LOADED_REGEX` predates the current
+  version and misses a surface the client injects. `/tt setup` snapshots the
+  bundled defaults into the project, so an install created before
+  `.claude/rules/` was added to that pattern still classifies rule files as
+  evaluable documentation: they appear as untouched and lower the health score,
+  with nothing to say why. Reported from a live deployment.
+- Counts only `.claude/agents/*.md` files carrying YAML frontmatter as personas.
+  A project-level `agents/` directory is documentation in this tool's own
+  inventory, so scanning it counted READMEs and templates as agent definitions.
+- Splits persona cost. A definition's name and description are injected on every
+  request; its body is paid only when the agent runs. Charging whole files to
+  every request overstated the recurring cost by an order of magnitude, so
+  `estimated_tokens_per_session` now covers the injected part and
+  `estimated_tokens_when_invoked` the body.
+- `/tt insights` now says how to enable agent capture when personas are defined
+  but capture is off, instead of staying silent. `tt doctor` and the HTML report
+  already did.
+
+## 1.28.2 — 2026-07-29
+
+- Treats the install location as authoritative when identifying the client. A
+  Codex marketplace install resolves its manifest's `./skills/` to the
+  repository's Claude skill, because the portal validator requires that path,
+  and that skill asserts `--client claude`. A Codex session was therefore
+  reported as Claude. Where the files live is observable, so it now outranks the
+  flag in `tt-open.sh`, `tt-stats.py`, and `tt-watch.py`. Recorded telemetry was
+  never affected: the `client` field comes from the hook manifests, not this
+  flag.
+- Explains that a runtime which blocks the first watcher launch is usually
+  asking for approval rather than failing permanently, so the retry that
+  succeeds no longer reads as a broken command.
+- Documents Codex invocation as `@trigger-tree <command>`, alongside the
+  plain-language form; both reach the same workflows.
+
+## 1.28.1 — 2026-07-29
+
+- Completes the agent-persona surfaces. 1.28.0 added the measurement and the
+  stats payload but left the rendered surfaces silent, so `/tt insights`
+  published an HTML report that said nothing about personas while the skill
+  pointed at them.
+- The HTML report gains an agent-personas section with invocations, sessions,
+  last use, and never-invoked definitions. The live dashboard gains one line
+  with the most used persona and the never-invoked count. The published demo
+  report shows both, since that is what most people see first.
+- `tt suggestions` reports never-invoked personas as an observation, never as a
+  numbered edit: this tool proposes verified router changes only, and an unused
+  persona needs judgment rather than an edit.
+- Every surface stays silent when agent capture is off, because silence would
+  then measure missing instrumentation rather than disuse.
+- Documents the new surfaces in the dashboard guide and answers the persona
+  question in the FAQ.
+
+## 1.28.0 — 2026-07-29
+
+- Measures subagent personas. Every definition under `.claude/agents/` or
+  `agents/` puts its description in the system prompt on every request, so a
+  persona never invoked is recurring cost in exactly the way an untriggered
+  directive is. The stats payload now reports invocations per persona, sessions,
+  first and last use, and which definitions have never been invoked.
+- Capture is opt-in through the new `TT_LOG_AGENTS`, written by `/tt setup` and
+  absent-means-off, so no existing install starts recording more. Only the
+  persona name is stored; the launch payload's task prompt and description are
+  never read.
+- Never-invoked is reported only over sessions where agent capture was actually
+  running. Otherwise the status is `awaiting-capture` and no cost claim is made,
+  the same distinction the adherence report draws.
+- `tt doctor` names persona definitions found while capture is off, so silence
+  cannot be mistaken for an unused persona.
+- The Claude Code tool name and payload field were verified against real
+  transcripts before implementation rather than assumed. Codex routes the same
+  tool names, but whether it surfaces a subagent launch to hooks is unverified
+  and documented as such instead of silently degrading.
+
+## 1.27.2 — 2026-07-28
+
+- Completes the issue #21 fix for Codex. Codex exports no session id, so the
+  current-session liveness check never reaches its strict branch there and a
+  Codex user in a Claude-only project still saw a clean pass. Every liveness
+  line now names the clients that have actually recorded, on the recency branch
+  Codex reaches as well as the strict one, so one client's telemetry cannot read
+  as another client's hooks working.
+- Capture was never affected on either client: hook events take the session id
+  from the payload on stdin, so Codex and Claude telemetry has always been
+  attributed correctly.
+
+## 1.27.1 — 2026-07-28
+
+- Fixes `tt doctor`'s current-session liveness check, which could never run
+  under Claude Code (issue #21, reported by @BartWaardenburg). It read
+  `CLAUDE_SESSION_ID`, which Claude Code substitutes into hook command strings
+  but never exports, so the strict branch was unreachable and every run fell
+  through to a lenient check that passes on any recent event from any client. A
+  project carrying only Codex telemetry reported healthy Claude hooks.
+- Session identity now resolves through one shared helper that prefers
+  `CLAUDE_CODE_SESSION_ID` and keeps `CLAUDE_SESSION_ID` and `TT_SESSION_ID` as
+  fallbacks. The same variable was used for external, shell-capture, and note
+  events, which lost their session attribution the same way. Hook events read
+  the id from the payload on stdin and were never affected.
+- Names the clients that have recorded events when the running client's session
+  is absent, so one client's telemetry cannot read as another's hooks working.
+- Scrubs ambient session ids in the test suite. The previous tests set the
+  variable production read, so they passed either way and kept the mismatch
+  invisible; they now assert the variable Claude Code actually exports.
+
+## 1.27.0 — 2026-07-27
+
+- Adds an optional `reason` to `unobservable` probes: `subjective-condition`,
+  `requires-diff`, `requires-judgment`, or `outside-capture`. The unobservable
+  count previously merged two unrelated findings. A directive with no
+  objectively testable condition is unlikely to fire for the model either, since
+  it cannot recognise when the rule applies any more reliably than a probe can,
+  and that is advice the author can act on. A directive needing the diff is a
+  boundary of this tool and says nothing about the rule.
+- Reports the two separately, adding `no_testable_condition` and
+  `unobservable_reasons` to the stats payload, and prints a line about untestable
+  conditions only when there are any.
+- The field is optional, so manifests written before it validate and report
+  exactly as they did.
+
+## 1.26.1 — 2026-07-27
+
+- Counts every file reached through a `CLAUDE.md` `@import` chain toward the
+  always-loaded cost estimate, including files outside the watched documentation
+  tree. An imported memory or notes file the agent maintains itself was
+  previously invisible, so the cost headline understated what a session is
+  actually billed for.
+- Imports resolve only to real regular files inside the project. Symlinks,
+  parent-directory escapes, absolute paths, `~` paths, and URLs are ignored, and
+  the walk is bounded.
+- Adds `always_loaded_injected` to the stats payload. `always_loaded_imports`,
+  `always_loaded_inventory`, and every untouched/heat calculation keep their
+  existing inventory-scoped meaning, so this is additive only.
+
+## 1.26.0 — 2026-07-27
+
+- Adds `tt instructions --selftest`, which proves each probe can fire by
+  constructing evidence in memory and running the probe against it. A directive
+  sitting at zero was previously ambiguous between "the rule never applied" and
+  "the probe is written so nothing could ever match it"; the two are now
+  distinguishable without running an agent, reading history, or spending tokens.
+- Reports a `route_followed` probe whose declared path does not exist as
+  `unsatisfiable`. Reads of a renamed or deleted doc can never be recorded, so
+  the directive would otherwise sit at zero forever while looking merely
+  unlucky.
+- `tt doctor` now fails when any probe can never fire, ahead of capture
+  warnings, because that is broken authoring rather than a missing setting.
+- The self-test exits 1 on an unreachable or unsatisfiable probe so CI can hold
+  a manifest honest. It proves reachability only and says so: a command pattern
+  is never tested against the commands you actually run.
+
+## 1.25.2 — 2026-07-27
+
+- Binds recorded adherence evidence to a probe fingerprint (declared topics and
+  command patterns) instead of the whole manifest. Editing, rewording, or moving
+  a line of `CLAUDE.md` and refreshing the hashes now keeps every prior
+  opportunity, so the before/after trend the feature exists to show survives the
+  edit that motivates it. Changing a probe's topics or patterns still discards
+  evidence captured under the previous semantics.
+- Separates "the rule never applied" from "nothing was watching". A directive is
+  only `never-triggered` over sessions where its capture was actually running;
+  otherwise it is the new `awaiting-capture`, which carries no cost implication.
+  The always-loaded cost headline uses that scoped denominator rather than the
+  total session count.
+- Reports a `path_avoided` rule that nobody breached as `no-violations-observed`
+  rather than `never-triggered`, so a rule that is working is no longer counted
+  as unused context in the cost line.
+- Makes `tt instructions --check` state how many observable directives it
+  actually measured, and adds `--min-measured N` so CI can refuse to pass on an
+  empty evidence set.
+
+## 1.25.1 — 2026-07-27
+
+- Fixes the Codex upload manifest to resolve its skills from the packaged
+  `skills/` root. The deterministic ZIP builder already placed the skill
+  there, but the v1.25.0 manifest still pointed at the repository-only
+  `codex-skills/` source directory, so Codex rejected the upload.
+- Polishes the marketing site's comparison and health sections with consistent
+  inset spacing, contained borders, and cleaner mobile stacking.
+
+## 1.25.0 — 2026-07-27
+
+- Adds deterministic instruction-adherence measurement: a hash-bound,
+  schema-validated directive manifest, six observable probe types plus explicit
+  unobservable probes, per-session evidence, confidence and maturity labels,
+  compaction-aware uncertainty, weekly trends, and `tt instructions` commands
+  for initialization, inspection, explanation, and CI checks.
+- Extends local hook capture with bounded topic labels, successful in-project
+  edit paths, classified command-pattern IDs, skill use, and observable commit
+  boundaries. Capture gaps are reported as `capture-disabled` or `unobserved`,
+  never silently counted as instruction violations.
+- Keeps the new telemetry privacy-preserving and opt-in per project: topics and
+  command capture default to off, edit capture defaults to matching nothing,
+  setup explains and enables bounded topics, classified commands, and a
+  conservative edit scope, and raw prompts, diffs, command output, and external
+  paths are never required for adherence metrics.
+- Documents the manifest and probe contract, observability limits, configuration
+  and privacy boundaries, injected instruction imports, dashboard/report
+  interpretation, and the distinction between static instruction validation and
+  local evidence-based adherence.
+
+## 1.24.0 — 2026-07-23
+
+Both findings below were reported by @BartWaardenburg — thank you.
+
+- The structural inventory follows git's view of the repository (#16): a file
+  excluded by `.gitignore` can no longer surface as a router member, orphan,
+  or missing entry point in `tt-stats` or `tt gate`. The scope scanner and
+  the structure inventory now share one git-visible source of truth; the
+  filesystem walk remains the fallback outside git repositories.
+- Watched surfaces behind a directory symlink are named instead of silently
+  missing (#15): the stats payload gains `unfollowed_surfaces` (path, target,
+  reason), the health grade states its scope explicitly (evaluable docs), a
+  health driver counts unfollowed surfaces, and `tt doctor` warns with the
+  paths. Symlinks are still never followed — bytes outside the repository
+  stay out of the deterministic score by design; the boundary is documented
+  in the heat-model guide.
+
+## 1.23.2 — 2026-07-23
+
+- Codex tag pinning now pins the installed bytes (#6 reopen, verified by
+  @BartWaardenburg): the Codex marketplace manifest hardcoded its plugin
+  source to the repository's `main` ref, so a marketplace added with
+  `--ref vX.Y.Z` still installed whatever `main` contained. The source is
+  now relative (`./`), which makes a pinned marketplace checkout install
+  its own bytes — verified against Codex CLI 0.145.0 with a checkout whose
+  version deliberately differed from `main`. A release-integrity guard now
+  fails any change that reintroduces a hardcoded ref. Pinning works for
+  tags from v1.23.2 onward; earlier tags carry the old manifest and still
+  resolve `main`.
+
+## 1.23.1 — 2026-07-23
+
+- The dashboard launcher fails gracefully in GUI-less runtimes (#14): sandboxed
+  application runtimes such as Codex Desktop have no GUI session for
+  AppleScript, which made `osascript` die mid-script under `set -e` without a
+  word. Every launch route now detects its own failure, cleans up the generated
+  temporary launcher, and prints the exact `tt-watch.py` command to paste into
+  a second terminal. Running from a real terminal is unaffected.
+- The Codex directory subtitle in the plugin manifest respects the OpenAI
+  portal's 30-character limit.
+
+## 1.23.0 — 2026-07-23
+
+- User-wide configuration layer (#13, requested by @BartWaardenburg): every
+  key now resolves as bundled plugin default → user-wide
+  `~/.trigger-tree/config.sh` (location overridable via `TT_USER_CONFIG`) →
+  project override, so one person can set a privacy default such as
+  `TT_LOG_PROMPTS='off'` for every repository before any project has run
+  setup — without patching the installed plugin snapshot. The project's own
+  choice always wins, and `tt doctor` reports the effective prompt mode with
+  the layer that selected it.
+- Config readers anchor assignments to the start of a line everywhere, so a
+  commented example in any config layer can never be parsed as a value.
+- Copy-paste CI examples: `examples/github-actions.yml` and
+  `examples/gitlab-ci.yml`, linked from the README and the CI-gate guide.
+- The configuration reference now states the actual pre-setup prompt default
+  (`hash`); it still described the old `truncate` default.
+
+## 1.22.0 — 2026-07-23
+
+- GitLab CI support for the gate: `tt gate --code-quality PATH` writes a
+  deterministic CodeClimate issue list — the format GitLab renders as a Code
+  Quality widget on merge requests — with a stable fingerprint per rule and
+  path so pipelines announce only new findings. The CI-gate guide documents
+  the `.gitlab-ci.yml` job, the artifact wiring, and the badge route; the
+  gate itself was already a plain pip-installable CLI, so no wrapper is
+  needed on GitLab.
+
+## 1.21.3 — 2026-07-23
+
+- Corrects the GitHub release body footer: the Codex install is generated as
+  `codex plugin marketplace add Hedde/trigger_tree --ref vX.Y.Z` plus
+  `codex plugin add trigger-tree@trigger-tree`, pinned to the release's own
+  tag — `codex plugin install` does not exist (#12, reported by
+  @BartWaardenburg). The seventeen published release bodies carrying the dead
+  command (v1.13.0–v1.21.2) were corrected in place, and the docs-currency
+  guard now requires every install command in the footer template to exist
+  verbatim in the README so the surfaces cannot drift apart again.
+
+## 1.21.2 — 2026-07-23
+
+- Documents Codex hook trust: after an install or upgrade Codex silently skips
+  untrusted hooks, and non-interactive `codex exec` runs never persist trust —
+  the quick start, FAQ, and website now say to review and trust the four hooks
+  in the TUI, and to repeat the review after an upgrade that changes a hook
+  (#11, reported by @BartWaardenburg).
+- `tt doctor` reads the persisted Codex trust state (`$CODEX_HOME/config.toml`)
+  whenever a Codex install carries the plugin: untrusted or partially trusted
+  hooks warn with the exact remedy instead of a generic missing-liveness hint.
+  The trusted hashes themselves are Codex-internal, so doctor states what it
+  can verify and what it cannot (#11).
+- SARIF output reports the real tool version for pip installs by falling back
+  to the package metadata when the plugin manifest is not in the wheel.
+- The README quick start renders as per-client command blocks instead of a
+  two-column table that misaligned on narrow viewports.
+
+## 1.21.1 — 2026-07-23
+
+- Parses git-listed paths NUL-separated and decodes them as UTF-8 explicitly, so
+  markdown files with non-ASCII names are counted instead of silently dropped by
+  git's quoting — or mangled by the Windows locale codepage (#8 follow-up).
+- Stamps newly written events without an attributed client as `client: "unknown"`
+  explicitly — absence now only means pre-1.21 history (#9 follow-up).
+- Corrects the FAQ: Codex does support version pinning via
+  `codex plugin marketplace add owner/repo --ref vX.Y.Z`; the earlier claim that
+  installs always follow the default branch was outdated (#6 follow-up).
+- Removes contradictory privacy sentences the v1.21.0 rewrite left in the FAQ and
+  SECURITY.md; every surface now states the same rule: hash before a project's
+  consent, truncate only after setup chose it (#7 follow-up).
+
+## 1.21.0 — 2026-07-23
+
+All five findings below were reported by @BartWaardenburg — thank you.
+
+- Restores `hash` as the prompt-logging fallback before a project's setup: plugin
+  installs are user-wide, so no repository records prompt text without its own
+  explicit choice (#7). Setup still recommends `truncate` interactively, and the
+  privacy documentation states the boundary precisely.
+- Scans documentation the way git sees it — tracked plus untracked-but-not-ignored
+  markdown via `git ls-files`, filesystem walk as fallback: `.agents/` and
+  `.codex/` are no longer hard-skipped, ignored scratch trees cannot crowd out
+  real docs, and a capped scan reports itself as incomplete (#8).
+- Stamps every telemetry event with its originating client (`claude`, `codex`,
+  `external`), carried from the hook adapters through shell capture and ingest;
+  stats expose a per-client breakdown and treat missing values as unknown (#9).
+- Supports Python 3.14 across CI, doctor, and packaging, and doctor reports the
+  interpreter path so hook and diagnostic environments can be compared (#10).
+- Documents the real Codex install command (`codex plugin add
+  trigger-tree@trigger-tree`) and the current marketplace ref limitation (#6).
+
+## 1.20.0 — 2026-07-23
+
+- Adds `TT_SCOPE_IGNORE`: comma-separated globs that acknowledge intentionally
+  unwatched markdown (issue templates, changelogs). Acknowledged files leave the
+  gate findings, the SARIF report, and the watch-scope denominator through one
+  committed, reviewable config line; a path the watch regex matches is never
+  ignored. The gate, doctor, and their shared scanner all honor it, which also
+  auto-resolves the code-scanning alerts this repository had filed against its
+  own human-only files.
+- Watches this repository's Codex workflow contract and links it from the docs
+  router; with the acknowledgments in place the dogfood discoverability score is
+  an honest 100.
+- Anchors config parsing to line starts so commented example values can never be
+  mistaken for assignments.
+
+## 1.19.2 — 2026-07-23
+
+- Ships the inline README badge row in a release, because the GitHub Marketplace
+  listing renders the README of the latest published release rather than the
+  default branch — the fix on `main` alone never reached the listing.
+
+## 1.19.1 — 2026-07-23
+
+- Shortens the action description to fit the GitHub Marketplace 125-character
+  limit, unblocking the Marketplace listing.
+
+## 1.19.0 — 2026-07-23
+
+- Exports gate findings as deterministic SARIF 2.1.0 (`--sarif`, action input
+  `sarif`): one rule per category with warning/note levels, file locations for
+  per-file code-scanning annotations, and score/components/verdict in the run
+  properties; this repository uploads its own report to GitHub code scanning.
+- Stops the test suite from appending fixture reports to the real CI job summary:
+  the hermetic-environment scrub now also covers `GITHUB_STEP_SUMMARY`, so the run
+  page shows exactly one gate verdict, now prefixed ✅/❌.
+- Bumps the pinned action reference in all usage snippets.
+
+## 1.18.2 — 2026-07-23
+
+- Reframes the watch-scope findings as a review prompt: leaving human-only files
+  (issue templates, changelogs) unwatched is named as a valid choice instead of an
+  implied defect.
+- Documents the gate's honest boundaries in the README, on the site, and in the CI
+  gate reference: it verifies link wiring, never whether the root context file
+  actually instructs routing (that is what local telemetry proves), and a root
+  entry-file existence check is named as a planned addition.
+
+## 1.18.1 — 2026-07-23
+
+- Names the markdown files outside the watch scope as a fourth offender category,
+  so a lowered watch-scope component is as actionable as the other three.
+- Writes the gate verdict — score table, findings, pass/fail — to the GitHub run's
+  step summary when CI provides the hook, so reviewers see why a score is not 100%
+  without opening the job log.
+
+## 1.18.0 — 2026-07-23
+
+- Adds `tt gate` / `/tt gate`: a deterministic, telemetry-free CI gate for static
+  documentation discoverability — router coverage, orphaned docs, folder entry
+  points, and watch scope — with a committed no-regression baseline, an optional
+  absolute threshold, shields.io badge output, and exact per-file findings.
+  Discoverable never means discovered: read telemetry stays local and is not used.
+- Ships a composite GitHub Action at the repository root
+  (`uses: Hedde/trigger_tree@v1.18.0`) that installs its own pinned version inside
+  the runner and uploads nothing; any other CI uses `pip install trigger-tree`.
+- Eats the dogfood: this repository runs the gate through the published action on
+  every build, commits its 95% baseline, links the /tt command contract from the
+  docs router (fixing its own orphan finding), and publishes a live
+  docs-discoverability badge alongside coverage.
+- Showcases the gate on the website with a self-contained baseline pill that a test
+  locks to the committed `.trigger-tree/gate.json`, so the shown score can never
+  drift from the enforced one.
+
+## 1.17.0 — 2026-07-22
+
+- Publishes an example insights report on the website, generated from fixed
+  synthetic telemetry by a committed `make demo-report` generator and clearly
+  labeled as demo data on the page itself; real reports remain local-only.
+- Stops the `/tt suggestions` skill from repeating output the tool result already
+  shows: the script gains `--no-apply-prompt`, the Claude contract now answers
+  with a single apply-question line, and protected-summary reasons aggregate
+  reference counts as "heavily referenced" instead of listing every count.
+
+## 1.16.0 — 2026-07-22
+
+- Restructures `/tt suggestions` into tiers: at most five numbered, appliable router
+  edits (verified add-link gaps, unlisted router members, missing folder entry
+  points, each with evidence numbers), up to two unnumbered "Worth a look"
+  observations for telemetry signals that need judgment, and one summary line for
+  low-read but likely-critical files — the apply-prompt now appears only when at
+  least one numbered edit exists.
+- Classifies `.claude/rules/**` as always-loaded context: Claude Code injects rules
+  into the system prompt, so Read telemetry can never observe them and they no
+  longer appear as untouched review candidates.
+- Skips template files in unlisted-member proposals, deduplicates the same path
+  across suggestion categories, guards empty folders out of cold-folder lines, and
+  marks warming-stage telemetry observations as early signals.
+
+## 1.15.1 — 2026-07-22
+
+- Fixes a Codex dashboard regression where the detached watcher could bind to the
+  installed plugin directory instead of the user's project, showing zero telemetry
+  while events were being recorded correctly: every entry script and the launcher
+  now honor an explicit `TT_PROJECT_DIR`, and the Codex skill contract runs all
+  commands from the project directory with that override set, never from the
+  plugin root.
+
+## 1.15.0 — 2026-07-22
+
+- Replaces the README hero with a real terminal recording of the live dashboard
+  (regenerable via `make demo-gif` and the committed VHS tape) and embeds the same
+  footage as a compact self-hosted video on the website, clearly labeled against
+  the interactive mock demo.
+- Adds one-click copy buttons to the website install blocks and documents the
+  `uvx --from trigger-tree tt` zero-install route beside `pipx` in the README and
+  on the site; the site remains free of external requests.
+
+## 1.14.1 — 2026-07-22
+
+- Brings the website demo to parity with the real dashboard controls: the
+  advertised `[s]` settings panel now opens and switches the demo's prompt-privacy
+  mode for future prompts, maintenance tips rotate on the real 30-second cadence,
+  recently active folders bubble to the top of the focus sort and settle back
+  after eight seconds, and always-loaded context appears with its `injected`
+  label instead of being omitted.
+
+## 1.14.0 — 2026-07-22
+
+- Ships trigger-tree as a standalone PyPI package: `pipx install trigger-tree`
+  provides a `tt` console command dispatching to the same bundled scripts and hook
+  manifests, for CI use, git-hook ingestion, and dashboards without a plugin.
+- Publishes to PyPI automatically on version tags through trusted publishing (OIDC,
+  no stored secrets) after tests and release integrity pass; release integrity now
+  also verifies the packaged version, and the README, site, and development docs
+  document the standalone install.
+
+## 1.13.0 — 2026-07-22
+
+- Publishes GitHub release notes automatically from the changelog on every version
+  tag: idempotent create-or-update, normalized `vX.Y.Z` titles, and a fixed install
+  footer after tests and release integrity pass.
+- Adds search presence to the static site — a canonical URL, SoftwareApplication
+  structured data, a sitemap and robots file, and three honestly phrased common
+  questions — with zero new external requests.
+- Keeps distribution submission drafts and the weekly scout prompt as local,
+  gitignored material; automated community posting remains explicitly out of scope.
+
+## 1.12.0 — 2026-07-22
+
+- Records that installation may store a recognizable, gitignored 200-character
+  prompt preview before setup, and states that behavior plainly across the README,
+  site, FAQ, privacy, and security docs.
+- Recognizes root `GEMINI.md` alongside `CLAUDE.md` and `AGENTS.md`, and classifies
+  root or nested Gemini context as injected/always loaded rather than an untouched
+  candidate; `index.md` remains an ordinary folder router.
+- Adds a CI and tag-time documentation-currency guard for command parity, top
+  changelog/version parity, and relative-link integrity, with induced-drift tests.
+- Removes the obsolete hidden setup flag, standardizes visible search terminology,
+  recompresses the report capture, and verifies the recent release-tag integrity
+  chain and tracked-artifact hygiene.
+
+## 1.11.1 — 2026-07-22
+
+- Makes recognizable, locally stored 200-character prompt previews the consistent
+  plugin and runtime default instead of falling back to hashed prompts before setup.
+- Asks new interactive setups to choose `truncate`, `hash`, or `off`, recommends
+  `truncate`, keeps automation non-blocking, and preserves existing project choices
+  unless a mode is passed explicitly.
+- Updates both Claude and Codex setup workflows to ask for the privacy choice and
+  pass it explicitly, with matching configuration and security documentation.
+
+## 1.11.0 — 2026-07-22
+
+- Turns the local insights output into a self-contained evidence report with a
+  grade-first hierarchy, compact navigation, generation metadata, and the same
+  section order as `/tt insights`, while retaining every underlying table.
+- Adds pure-Python SVG sparklines, separate count and ratio trend charts, neutral
+  note ticks, small-sample dashes, and a maturity-gated indented documentation tree;
+  cold-start, single-bucket, outlier, long-name, and 100+-file cases are covered.
+- Validates the shared five-step heat palette under protan, deutan, and tritan
+  simulations in CI, and flattens report and site treatments to avoid decorative
+  rails, rounded evidence cards, and other visual noise.
+- Saves an inspected render of the generated report for documentation reuse while
+  deliberately retaining the clearer synthetic dashboard demo instead of claiming
+  mock footage is a real terminal recording.
+- Moves docs-health badge publication to an explicit local-evidence command,
+  `make badge-publish`; CI now updates measured coverage without overwriting that
+  local aggregate with a permanently immature checkout result.
+
+## 1.10.0 — 2026-07-22
+
+- Reframes the project around its measurable documentation-discovery loop with a
+  short demo-first README, a routed reference tree, canonical glossary, and concise
+  root `CLAUDE.md`, while preserving every measurement and platform caveat.
+- Adds `/tt badge` and `tt-stats.py --badge`, which atomically write a shields.io
+  endpoint and publish only `measuring…` until the dataset is mature; CI now carries
+  both coverage and docs-health endpoints on the badges branch.
+- Makes empty dashboards explain how evidence appears, aligns the HTML report with
+  the product heat palette and grade-first hierarchy, and adds mature cached grades
+  to the statusline without recomputing stats on every refresh.
+- Keeps the interactive mock TUI as the canonical demo, adds an optimized static
+  dashboard capture and regenerable VHS tape, and gives the site an honest health
+  story, comparison positioning, privacy statement, accessible contrast, and
+  reduced-motion-safe additions.
+- Adds a 1200×630 social card plus Open Graph and Twitter metadata, with no external
+  site requests or analytics, and corrects cross-platform badge tests discovered by
+  the full Windows CI matrix.
+
+## 1.9.1 — 2026-07-22
+
+- Fixes a critical v1.9.0 regression where Claude Code could load both bundled hook
+  files and double-record session, prompt, and test events. Explicit client markers
+  now make the Codex hook file a silent no-op under Claude while preserving stale-file
+  compatibility and tool-event idempotency.
+- Makes the test suite hermetic when trigger-tree's own shell-capture variables are
+  present in the developer environment; the hostile-environment run remains at 100%
+  coverage.
+- Restores `/tt` to explicit user invocation and documents that Windows Claude hooks
+  require a `python3` command on `PATH`, because the documented hook schema has no
+  operating-system condition for exec-form handlers.
+
+## 1.9.0 — 2026-07-22
+
+- Consolidates Claude telemetry behind its declared hook manifest, routes both clients
+  through one adapter, and suppresses duplicate tool events with a bounded per-session
+  idempotency window.
+- Uses Claude's documented shell-free hook execution across platforms and separates the
+  Claude `/tt` contract from the Codex-only `trigger-tree` skill package.
+- Audits the effective documentation watch scope during setup and doctor runs, proposes
+  observed-layout regexes without applying them implicitly, and distinguishes static
+  hook-file integrity from current, recent, stale, or never-seen hook activity.
+- Counts conservative static directory prefixes for pathless Glob and Grep file-glob
+  calls, keeps direct Claude and Codex events in one git-root dataset, and broadens MCP
+  capture while retaining explicit local-file and non-HTTP filtering.
+- Adds `/tt uninstall` to remove only trigger-tree's copied statusline and registration;
+  telemetry data and gitignore entries always remain for explicit manual deletion.
+- Updates the README, command contracts, packaging smoke checks, and website to describe
+  the verified behavior and native Windows hook-execution boundary accurately.
+
+## 1.8.3 — 2026-07-21
+
+- Prevents report and session-cache symlink escapes: HTML reports are written through
+  private atomic files, project-controlled symlink parents are refused, and lock/cache
+  paths no longer follow links outside the repository.
+- Keeps runtime shell capture correct and cheap: reads after `cd` resolve from the real
+  working directory, unsupported POSIX shells retain fallback telemetry, and irrelevant
+  reader commands avoid starting Python when the watched extension is known.
+- Uses safe launcher files for Terminal.app paths containing quotes, and consistently
+  prefers Codex-native client markers over Claude compatibility aliases. Launcher
+  creation uses one portable template across BSD/macOS and GNU/Linux `mktemp`.
+- Rejects structurally corrupt current-schema events instead of crashing reports, and
+  excludes symlinked documentation and history files from local analysis.
+- Bounds co-read pair generation and watcher prompt state, streams watcher startup
+  history, and avoids rescanning every archive for genuinely new sessions.
+- Clarifies that hooks store paths and metadata while selected documentation content is
+  read only for local analysis and is never stored in telemetry or uploaded.
+- Exercises symlink-refusal regressions through portable metadata simulations on every
+  CI platform, including Windows environments without symlink privileges.
+
+## 1.8.0 — 2026-07-21
+
+- Reconciles every current-coverage denominator: the inventory is explicitly split
+  into evaluable and always-loaded files, and touched plus untouched always equals the
+  evaluable total.
+- Separates retired telemetry paths from current heat, coverage, and health while
+  retaining their historical reads and per-agent attribution; folder summaries add a
+  measured retired-read share and median current-file age.
+- Classifies a discovered folder router as a router even when its filename starts with
+  an underscore, reports unread routers directly, and uses one full reference graph for
+  both inbound counts and displayed samples.
+- Compresses untouched review into one ranked table with folded detail and one caveat,
+  hides redundant heat windows and empty folder rows, labels small trend samples, and
+  exposes main-versus-subagent reads in the current heat table.
+- Filters client-injected envelopes and command-only noise from task-cluster examples,
+  falling back to the latest real user prompt or no example at all.
+
+## 1.7.1 — 2026-07-21
+
+- Makes insights proposals evidence-thresholded rather than quota-shaped: zero is a
+  valid result, and every proposed link must be re-verified against two existing files
+  and an absent router reference.
+- Adds direct folder-router coverage using the repository's actual `README.md`,
+  `_index.md`, `index.md`, or `CLAUDE.md`; unrelated in-links no longer hide files that
+  are absent from their own folder entry point.
+- Reclassifies scans as non-causal search activity with tool mix, session reach,
+  maximum-session share, and concentrated/distributed patterns. Concentrated bulk work
+  no longer creates router suggestions or lowers the documentation health score.
+- Updates the HTML report, README, website, and live terminology to explain the tighter
+  evidence boundaries without adding any project-specific context.
+
+## 1.6.5 — 2026-07-21
+
+- Excludes injected instruction files and injected-only folders from cold sorting;
+  always-loaded context remains visible in focus/name views without being mislabeled
+  as untouched or cold.
+- Preserves the explicit Claude/Codex tip identity and cache-path fallback from the
+  unreleased 1.6.4 candidate.
+
+## 1.6.4 — 2026-07-21
+
+- Fixes empty dashboard tips by passing Claude/Codex identity explicitly from each
+  command contract into the detached watcher process.
+- Adds installed-cache-path detection as a fallback plus regression coverage for both
+  Claude and Codex launch paths.
+
+## 1.6.3 — 2026-07-21
+
+- Keeps the live dashboard footer visible when a busy tree overflows the terminal:
+  the rotating tip, sort controls, and navigation help can no longer be clipped by
+  the generated `files hidden` and focused-folder summary rows.
+- Adds a crowded-dashboard regression fixture covering the exact failure mode.
+
+## 1.6.2 — 2026-07-21
+
+- Moves maintenance tips into the live dashboard as a quiet, deterministic line that
+  rotates every 30 seconds; Claude and Codex receive only their own relevant guidance.
+- Keeps `/tt tips` available for direct use but removes it from the prominent command
+  overview. The statusline remains stable and dedicated to current telemetry.
+- Passes client identity through every terminal launcher and adds regression coverage
+  for detection, rotation, prompt-history suppression, and launcher quoting.
+
+## 1.6.1 — 2026-07-21
+
+- Fixes every Claude `/tt` subcommand resolving scripts relative to the nested command
+  skill instead of the plugin root. `/tt watch` now opens directly without a failed
+  command and filesystem search first.
+- Extends source and isolated-install regression checks so every documented command
+  references a real packaged script through `CLAUDE_PLUGIN_ROOT`.
+
+## 1.6.0 — 2026-07-21
+
+- Distinguishes injected instruction context from thermal activity: `CLAUDE.md`,
+  `AGENTS.md`, and configured always-loaded paths are labeled `injected` and cannot
+  misleadingly appear as cold documentation.
+- Adds in-dashboard prompt privacy settings (`s`) with atomic, symlink-safe updates;
+  makes `n` genuinely toggle A–Z/Z–A and aligns root/nested heat columns exactly.
+- Makes the live watcher bounded by file count, preserves partial JSONL appends, and
+  reduces inventory walks without sacrificing deletion detection.
+- Keeps statusline totals across history rotation through private per-session summaries,
+  serializes concurrent hook writes, and avoids rescanning the growing history on every
+  refresh.
+- Hardens telemetry against symlink writes and terminal escape injection, makes setup
+  writes atomic, applies private permissions, and preserves Bash/zsh reader aliases.
+- Adds Python fallback without retrying failed hooks and expands regression coverage for
+  every behavior above across the supported platforms.
+
+## 1.5.0 — 2026-07-21
+
+- Makes prompt history recognizable after setup: `/tt setup` now creates a project
+  config using local, gitignored 200-character previews. `/tt setup hash`, `truncate`,
+  and `off` explicitly switch modes; existing history is never rewritten.
+- Preserves the privacy-safe installation boundary: before setup, or without a readable
+  project config, prompt logging still falls back to hashes and stores no prompt text.
+- Reworks dashboard temperature into a coherent blue → cyan → green → amber → red
+  spectrum. Untouched stays neutral gray, folder colors reflect aggregate heat, and a
+  permanent adaptive heat legend separates temperature from lifetime read counts.
+- Updates the README, privacy policy, Claude/Codex workflows, and website demo while
+  preserving the website's six-card, three-column desktop USP grid.
+
+## 1.4.0 — 2026-07-21
+
+- Adds concise, read-only maintenance tips with strict client separation: Claude Code
+  receives `/memory`, CLAUDE.md, and scoped-rule guidance; Codex receives AGENTS.md and
+  reproducible-environment guidance. Neither client sees advice for the other.
+- Grounds tips in repository evidence such as missing or oversized instruction files,
+  unscoped Claude rules, and absent Codex verification commands. Output is deterministic,
+  bounded to four tips, and never edits instruction or memory files automatically.
+- Documents the official Anthropic and OpenAI guidance behind the recommendations and
+  adds `/tt tips` to the Claude command and equivalent Codex natural-language workflow.
+
+## 1.3.2 — 2026-07-20
+
+- Restores Claude Code startup and `/tt` discovery after the withdrawn v1.3.1 package:
+  shared hooks now use the Claude-compatible plugin-root variable that Codex also
+  provides, and the Claude command has an explicit conventional `skills/tt/SKILL.md`.
+- Prevents duplicate shared Claude events while retaining Claude-only skill, failure,
+  and session-end telemetry. Codex-only Stop outcomes no longer run in Claude.
+- Adds installed-package regression checks for the command skill and hook environment.
+
+## 1.3.1 — 2026-07-20
+
+- Clearly separates Claude Code and Codex installation, invocation, hooks, and
+  statusline behavior in the README and website.
+- Explains that direct GitHub marketplace installation is immediately usable but is
+  distinct from an OpenAI Curated listing, which requires submission and review.
+- Keeps the website's six USP cards in the fixed three-column desktop grid.
+
+## 1.3.0 — 2026-07-20
+
+- Adds a native Codex plugin manifest, marketplace catalog, trigger-tree skill, and
+  lifecycle hooks while retaining the existing Claude Code plugin in the same repo.
+- Normalizes Codex unified-exec `cmd` payloads, native reads, and filesystem MCP reads
+  into the shared telemetry schema. Repository-root resolution keeps one dataset when
+  Codex starts in a nested directory; hook failures remain silent and non-blocking.
+- Documents and tests both installation paths. The website remains exactly six USP
+  cards in a three-column desktop grid.
+
+## 1.2.2 — 2026-07-20
+
+- Keeps the v1.2.1 dedicated sort-legend fix while replacing the replay integration
+  test's wall-clock race with a deterministic clock. Slow or suspended macOS runners
+  can no longer miss the replay branch and report platform-specific 99.8% coverage.
+- v1.2.1 was withdrawn because its tag CI was not fully green. v1.2.2 is the first
+  valid release of the permanent wide/compact dashboard sort legend.
+
+## 1.2.1 — 2026-07-20
+
+- Moves the live sort controls onto a permanent dedicated legend row instead of
+  sharing space with the heartbeat. Wide panes show `[f] focus`, `[h] hot`,
+  `[c] cold`, and `[n] A–Z`; narrow panes get an equally complete compact legend.
+- Keeps the active `sort:<mode>` visible and moves prompt navigation, quit, and
+  heartbeat state to their own row, so no sort key disappears in normal split panes.
+
+## 1.2.0 — 2026-07-20
+
+- Makes historical prompts identifiable without weakening the privacy default:
+  hashed prompts show their stable short ID, marker-only prompts say text is off,
+  and opt-in truncated prompt previews expand with the terminal up to 120 characters.
+- Replaces vertical spark glyphs with comparable horizontal five-cell heat bars and
+  moves the heat/lifetime column to the available right edge, making better use of
+  wide split panes while retaining safe narrow-pane truncation.
+- Adds explicit live sorting: `f` recent-focus, `h` hottest, `c` coldest (including
+  untouched inventory), and `n` A–Z. The footer always exposes the keys and active
+  mode; prompt browsing remains a separate bounded chronological timeline.
+- Updates the README, plugin help, and six-card/three-column interactive website
+  demo to match the new dashboard behavior.
+
+## 1.1.0 — 2026-07-20
+
+- Separates current documentation attention from lifetime popularity. Every
+  timestamped read now contributes exponentially decaying heat with a 30-day
+  half-life, while lifetime reads and last-read evidence never disappear.
+- Adds deterministic 7-, 30-, and 90-day windows plus file and folder heat to the
+  stats contract and HTML report. Future clock skew is bounded; undated legacy
+  reads remain in lifetime totals without being presented as current heat.
+- Updates the live watcher to color and sort by current heat while showing heat and
+  lifetime counts side by side. Prompt browsing remains an exact per-prompt view.
+- Makes the watcher a true full-screen TUI: it clears inherited scrollback, disables
+  autowrap while active, and restores the terminal on every exit, preventing refresh
+  frames from accumulating above the dashboard.
+- Updates the plugin instructions, README, and six-card/three-column website example
+  to explain the temporal model and its safety boundary: cold means inactive now,
+  never unimportant or safe to remove.
+
+## 1.0.4 — 2026-07-19
+
+- Fixes an urgent zsh compatibility regression in the runtime reader wrapper:
+  `status` is a read-only zsh parameter, so assigning it after a successful reader
+  command skipped telemetry and changed the command result to exit 1. The wrapper
+  now uses a private, shell-neutral exit-code variable.
+- Runs the exact variable/command-substitution/loop capture regression in both bash
+  and zsh, proving that reader output and exit status remain unchanged while expanded
+  documentation paths are recorded.
+
+## 1.0.3 — 2026-07-19
+
+- Captures the expanded runtime arguments of successful Bash `cat`, `head`, `tail`,
+  non-mutating `sed`, and `awk` calls. Documentation reads through variables,
+  command substitutions, loops, and shell globs now produce exact file-level read
+  events without storing commands, output, patterns, or contents.
+- Installs the capture functions through Claude Code's session-scoped environment
+  preamble without rewriting commands or changing permissions. Environments without
+  Bash retain the conservative literal-path parser, and PostToolUse suppresses
+  duplicate reads when runtime capture is active.
+- Updates the README, privacy contract, and website copy. The website remains six
+  USP cards in a fixed three-column desktop grid with responsive two/one-column
+  fallbacks.
+
+## 1.0.2 — 2026-07-19
+
+- Keeps the statusline live for scan-only discovery: scan events now participate in
+  freshness and latest-path display, render as folder paths with a trailing slash,
+  and get their own counter while file/folder/depth totals remain read-derived.
+- Records existing watched documentation files consumed by Bash `cat`, `head`,
+  `tail`, non-mutating `sed`, and `awk` commands as ordinary file-level reads.
+  Multiple file arguments are preserved; `sed -i` variants and non-doc files are
+  ignored. End-to-end coverage proves these reads flow through the live watcher.
+
+## 1.0.1 — 2026-07-19
+
+- Makes the advertised critical-tag and widely-linked safety protections explicit,
+  isolated regression contracts. Critical tags are verified without another
+  protection as a fallback; widely-linked docs are verified at the three-in-link
+  threshold. Both must remain protected, rare-but-critical review items.
+
+## 1.0.0 — 2026-07-19
+
+- Promotes the verified 1.0 release-candidate contract to stable: context-aware
+  always-loaded classification, safe rare-critical review candidates, history
+  schema migration, hardened diagnostics, and the opt-in experimental outcome view.
+- The stable tag is held to the same Linux/macOS/Windows, Python 3.10–3.13,
+  100%-coverage, formatting, shell, workflow-security, plugin-install, and
+  release-integrity gates used for the release candidate.
+
+## 1.0.0-rc.1 — 2026-07-19
+
+- Recursively resolves the `CLAUDE.md` `@import` graph and classifies injected files
+  as always-loaded instead of cold. Subagent reads retain `agent_id`/`agent_type`,
+  while stable tool-call IDs prevent replayed events around compaction from inflating
+  counts.
+- Reframes untouched documentation as review candidates. Always-loaded files,
+  safety paths, high-in-link documents, configured critical globs, critical tags,
+  and templates are protected with an explicit likely-keep explanation and a
+  rare-but-critical caveat.
+- Adds history schema version 1. Legacy schema-less events migrate explicitly in
+  memory; unknown future versions are rejected and surfaced rather than misread.
+- Expands `/tt doctor` with exact hook-route, config, supported-Python, rotated-log,
+  corrupt-line, legacy-migration, and future-schema diagnostics. Rotation now keeps
+  every archive even when multiple rotations happen in the same second.
+- Adds an opt-in `TT_EXPERIMENTAL_OUTCOMES='on'` view joining documentation reads
+  with local commit and test-command signals. It is labeled correlational—not causal—
+  and remains disabled by default.
+
+## 0.8.0 — 2026-07-18
+
+- **Trustworthy compatibility contract:** supported end-user runtimes are now the
+  security-supported Python 3.10–3.13 range, verified independently in CI alongside
+  the Ubuntu, macOS, and Windows test matrix and a strict 100% coverage gate.
+- Added Black and Ruff gates, pinned development/test dependencies, and documented a
+  venv-only contributor workflow. Runtime hooks remain dependency-free stdlib Python.
+- Added actionlint and zizmor workflow audits, immutable action pins, least-privilege
+  job permissions, and Dependabot coverage for Actions, Python, and npm dependencies.
+- Claude plugin validation now uses a locked CLI on Node 22, rejects incomplete npm
+  installs, and proves a real marketplace install inside an isolated Claude config.
+- Release tags now fail CI unless the tag, plugin manifest, marketplace, and changelog
+  agree. README and website trust claims now describe the gates that actually run.
+
+## 0.7.5 — 2026-07-18
+
+- **Privacy-hardened prompt markers:** the default is now `hash`, so prompt text is
+  never stored unless a project explicitly opts in to `truncate`. `off` remains
+  available for marker-only telemetry; existing project overrides keep their choice.
+- Clarified that trigger-tree records local telemetry but sends nothing off-device,
+  and aligned plugin, marketplace, README, security, privacy, and website copy around
+  “See which docs your AI actually discovers.”
+
+## 0.7.4 — 2026-07-18
+
+- The live overview is now focused on at most ten folders with proven activity:
+  recent activity first, then cumulative reads/searches. Untouched folders and
+  files collapse into one quiet/unread summary instead of filling the viewport.
+- Prompt-history remains exact and `/tt insights` retains the complete cold-path
+  inventory, so focus does not discard evidence.
+
+## 0.7.3 — 2026-07-18
+
+- The live dashboard now brings the currently active and recently touched folders
+  to the top of the viewport. After eight seconds they return to deterministic
+  alphabetical order; files inside each folder never jump around.
+- Prompt-history views remain strictly alphabetical for predictable comparison.
+
+## 0.7.2 — 2026-07-18
+
+- Updated the CI toolchain to the current Node 24-based GitHub Actions majors:
+  `actions/checkout@v7`, `actions/setup-python@v6`, and `actions/setup-node@v7`.
+  This removes the Node 20 deprecation warnings from every CI job.
+
+## 0.7.1 — 2026-07-18
+
+- **Deleted docs no longer haunt the live tree.** Historical Read events retain
+  their counters but cannot re-add a path that no longer exists; historical scans
+  of removed folders likewise stay out of the live overview.
+- The watcher refreshes its documentation inventory every second, so a file or
+  folder removed while the pane is open disappears without a restart. Prompt
+  history still shows the original evidence when browsing ←/→.
+
+## 0.7.0 — 2026-07-18
+
+- **Folders no longer look untouched while being searched.** Every folder row now
+  keeps `🔍 N searches` separate from `N unread`: scans increase the first counter;
+  only actual Read events lower the second. Scan-only prompts get a visible folder
+  row, and ←/→ browsing recalculates both signals for the selected prompt.
+- **Concise `/tt suggestions`.** A deterministic formatter captures full stats
+  internally and writes only its evidence scope plus at most five prioritized
+  router edits to stdout. It explicitly says nothing changes until confirmation;
+  cold-start and no-finding states stay one or two lines.
+- The interactive website demo mirrors the new folder counters.
+
+## 0.6.2 — 2026-07-18
+
+- **End-to-end proof for Bash discovery telemetry.** A cross-process regression
+  test now proves the complete live progression: the watcher starts at
+  `0 reads · 0 scans`, an external Bash hook moves it to `0 reads · 1 scan`, and
+  only a later Read hook moves it to `1 read · 1 scan`.
+- The hook manifest itself is regression-tested, ensuring Bash, native search/read,
+  and Skill events cannot silently lose their logger route.
+- Arrow escape decoding now tolerates briefly delayed bytes on loaded terminals;
+  the previous 30 ms window proved flaky on a macOS CI runner and could recreate
+  the same ignored/right-arrow symptom under local system load.
+- Cross-platform CI now runs every matrix leg even if another platform fails, so
+  release evidence is complete rather than hidden by fail-fast cancellation.
+
+## 0.6.1 — 2026-07-18
+
+- **Bash doc searches are visible.** PostToolUse telemetry now recognizes executed
+  `rg`, `grep`, and `find` command segments when they explicitly target existing
+  documentation paths. They appear as scans, never reads, so the live prompt view
+  no longer reports `0 scans` while the transcript visibly contains `rg` lookups.
+- Classification is deliberately conservative and private: commands, patterns,
+  output, nonexistent paths, source-code searches, and quoted mentions of `rg` are
+  not logged. Repeated search segments targeting the same folder in one Bash call
+  produce one scan.
+
+## 0.6.0 — 2026-07-17
+
+- **Prompt navigation is directional and predictable.** ← always moves older and
+  → always moves newer; both ends clamp instead of wrapping or changing mode, and
+  `a` explicitly returns to the live overview. The input decoder now also handles
+  fragmented, application-cursor, and modified arrow escape sequences atomically.
+- **`/tt doctor` removes setup guesswork.** One command verifies the hook manifest,
+  local-data gitignore, optional statusline, and valid telemetry in the invoking
+  repository, with a concrete recovery action for each problem.
+- **Real-time means the invoking repo, without path exceptions.** The split launcher
+  safely handles spaces, apostrophes, and shell metacharacters. Cross-process tests
+  prove a running watcher displays hook events appended after startup and remains
+  bound to the exact repository.
+- **100% is now the release floor.** CI raises its cross-platform coverage gate from
+  80% to 100%.
+
+## 0.5.3 — 2026-07-17
+
+- **Fix: both arrow keys browsed backwards.** The key loop mixed `select()` on
+  the raw fd with buffered `sys.stdin.read()`: the buffered read slurped the
+  whole escape sequence, the follow-up `select()` saw an empty fd, and the
+  leftover `[` replayed on the *next* keypress — so ← and → both acted as
+  "prev", one press late. Keys are now read raw via `os.read()` (`read_key()`),
+  with a pipe-based regression test.
+
+## 0.5.2 — 2026-07-17
+
+- **Arrow keys** now browse prompts too (←/→ on macOS/Linux escape sequences and
+  Windows console codes), and the hint lines say so in plain words
+  ("←/→ browse per prompt"). Fixes a truncation assertion in the 0.5.1 test run.
+- **Bounded prompt detail**: the browser keeps the last 20 prompts (500 events
+  each) while dashboard totals keep aggregating the full history — endless
+  sessions can't grow memory.
+- **Website demo** now demonstrates per-prompt browsing with ←/→ as well.
+
+## 0.5.1 — 2026-07-17
+
+- **Typed prompts are now instantly visible in the live view**: every prompt
+  appears in the ticker (`▸ "…"`) the moment you hit enter, and the footer counts
+  prompts alongside reads — so "5 prompts · 0 reads" self-explains an
+  injected-context session instead of looking stale.
+
+## 0.5.0 — 2026-07-17
+
+- **Per-prompt browsing in the dashboard**: `[` and `]` step through every typed
+  prompt; the tree filters to exactly what that input aggregated (reads, scans,
+  skill uses) with the prompt text in the header; `a` returns to live. Reads
+  before the first prompt land in a "(session start)" bucket.
+- **End-to-end regression guard**: a test now spawns the watcher and the logger as
+  separate processes (exactly how real hooks write) and asserts the live tail
+  picks the events up — the "is it updating?" question is CI-proven forever.
+
+## 0.4.2 — 2026-07-17
+
+- **Liveness heartbeat** in the dashboard hint line: "live · last event 12s ago",
+  or "listening for doc reads (injected context never shows here)" when nothing
+  has arrived yet — answers "is it stale or is nothing happening?" at a glance.
+
+## 0.4.1 — 2026-07-17
+
+- Launcher pane messages now explain exit causes: SIGTERM/SIGINT (e.g. an external
+  `kill`) reads "terminated from outside — not a crash" instead of a bare status
+  code; real crashes say "crashed". Ends the status-143 confusion.
+
+## 0.4.0 — 2026-07-17
+
+- **External ingestion adapter**: `tt-log.py ingest '<event-json>'` — a stable,
+  validated entry point so any tool (a Codex wrapper, a git hook, an editor
+  plugin) can append telemetry to the same history. Missing ts/session stamped,
+  invalid events dropped silently. Completes the plugin side of multi-tool support.
+
+## 0.3.7 — 2026-07-17
+
+- `/tt watch` confirmation line now prints the running plugin version
+  ("trigger-tree v0.3.7 watcher opened …") so a stale session cache is instantly
+  visible. FAQ entry added for the flash-and-disappear symptom (stale pre-v0.3.3
+  cache → `/reload-plugins`).
+
+## 0.3.6 — 2026-07-17
+
+- **Positioning, research-backed**: README and site now state the validated gap —
+  agent observability tools measure tokens/traces, none measure per-task doc reads;
+  Anthropic's guidance says to prune CLAUDE.md but nothing validates the pruning;
+  the Fallow analogy (unused code → unused docs). Added a who-is-it-for table and
+  an honest Limitations section (official-plugin convention).
+
+## 0.3.5 — 2026-07-17
+
+- **Branding: lowercase everywhere.** The plugin now presents itself as
+  `trigger-tree` across README, website, dashboard banner, SKILL, report and
+  manifests — matching the naming convention of official Claude Code plugins
+  (`commit-commands`, `security-guidance`, …). The `/tt` command is unchanged.
+
+## 0.3.4 — 2026-07-17
+
+- **Stability: layered, crash-proof config resolution** in all scripts (project
+  override → plugin default → hardcoded; broken regexes skipped). Fixes the
+  instant-crash of `/tt watch` in projects with a partial `.trigger-tree/config.sh`.
+- **Multi-session safe splits**: the iTerm2 split now targets the exact session
+  that invoked it (via `ITERM_SESSION_ID`) — two Claude sessions in different
+  projects each get their own split, never the frontmost window by accident.
+- **Discovery-structure awareness**: folders without an entry point are flagged
+  ("no index file") and `/tt suggestions` proposes adding one; `_template.md`-style
+  files are auto-classified as intentional archive; nested `CLAUDE.md`/
+  `CLAUDE.local.md` files count as always-loaded (they inject on demand and are
+  invisible to read-telemetry — per official memory docs).
+- **README/site**: layman-first hero, "Why measure documentation?" and a sourced
+  "Structuring your docs for discovery" guide; site now has six feature cards and
+  a "Why this matters" section.
+
+## 0.3.3 — 2026-07-17
+
+- **Fix: iTerm2 split closed instantly.** iTerm2's AppleScript `command` parameter
+  is exec-style (no shell), so the compound `cd … && …` command died on launch.
+  The split now runs a generated launcher script (shebang + shell), which also
+  keeps the pane open with the error message if the watcher ever exits non-zero.
+
+## 0.3.2 — 2026-07-17
+
+- **Dashboard visual parity with the website demo**: three-tier heat palette
+  (green → amber → red), clean folder lines (untouched counters only appear when
+  files are collapsed), "just now" ticker, dim `q quit` hint line.
+- **Documentation health grade**: deterministic A–F score (coverage, router gaps,
+  hunting ratio) in stats, `/tt status`, `/tt insights` and as hero card in the
+  HTML report — one number a product owner can track sprint over sprint.
+
+## 0.3.1 — 2026-07-17
+
+- `/tt watch` on macOS now stays in the terminal you called it from: iTerm2 users
+  get a split pane in the current window (detected via `TERM_PROGRAM`), with a
+  new-window fallback; Terminal.app remains the fallback for everything else.
+
+## 0.3.0 — 2026-07-17
+
+- **Windows support**: posix path normalization, utf-8 everywhere, ANSI console
+  enable + msvcrt keys in the dashboard, `wt.exe`/`start` launcher branch,
+  `python3||python` fallbacks. CI test matrix now runs ubuntu + macos + windows.
+- **Folder heat & cold map**: per-folder coverage and read volume in stats and the
+  HTML report.
+- **Router-gap detection**: untouched files are cross-referenced against all docs —
+  "untouched and unreferenced" pinpoints where the router is blind.
+- **`/tt suggestions`**: max 5 prioritized, evidence-backed router fixes, applied
+  only after confirmation.
+- **README overhaul** (hero, how-it-works with hook transparency, FAQ, platform
+  matrix) and a **website** at hedde.github.io/trigger_tree — an interactive
+  recreation of the live dashboard, with a few easter eggs for the curious.
+
+## 0.2.1 — 2026-07-17
+
+- Rename plugin id `tt` → `trigger-tree` for the plugin directory (unique, descriptive
+  name). The `/tt` command is unchanged — it comes from the root skill's `name` field.
+- GitHub Pages docs site: https://hedde.github.io/trigger_tree/
+
+## 0.2.0 — 2026-07-17
+
+- **Skill-tool telemetry**: PostToolUse hook on `Skill` logs skill invocations; an
+  invoked skill's SKILL.md counts as touched, shrinking the `always_loaded` blind spot.
+- **Portability**: logger and statusline rewritten in pure python3 (jq and BSD `date`
+  dependencies dropped); `/tt watch` opens a tmux split, macOS Terminal, or
+  gnome-terminal/konsole/xterm.
+- **Prompt privacy**: `TT_LOG_PROMPTS=truncate|hash|off` — fingerprints keep working
+  in all modes.
+- **Log rotation**: history.jsonl rotates to timestamped archives beyond
+  `TT_ROTATE_BYTES` (default 5 MB); aggregator and watcher read all archives.
+- **Trend + annotations**: daily/weekly reads-scans buckets with hunting ratio;
+  `/tt note <text>` marks router changes on the timeline so their effect is visible.
+- **Task clusters**: fingerprints grouped by Jaccard similarity (≥ 0.6) instead of
+  exact-set matching.
+- **`/tt setup`**: idempotent project wiring (gitignore, statusline copy +
+  registration, optional config override).
+- **CI**: unit + smoke tests with an 80% coverage gate, shellcheck,
+  `claude plugin validate`. Measured coverage is published as a live badge
+  (shields endpoint JSON on the `badges` branch — no external coverage service).
+- **Community files**: CONTRIBUTING, code of conduct, security policy, issue/PR
+  templates, README badges.
+
+## 0.1.0 — 2026-07-17
+
+Initial release.
+
+- Telemetry hooks (SessionStart, UserPromptSubmit, PostToolUse on Read|Glob|Grep) →
+  `.trigger-tree/history.jsonl`, shell-side, zero model tokens.
+- `/tt` root skill with subcommands: `status`, `watch [demo|replay]`, `insights`, `help`.
+- Live ASCII pulse dashboard (`tt-watch.py`): heat-colored doc tree, white flash +
+  upward ripple per read, hunting ticker, subagent attribution.
+- Deterministic aggregator (`tt-stats.py`): per-file read counts, task fingerprints,
+  co-read pairs, hunting, untouched paths with a maturity model
+  (cold-start → warming → mature).
+- Self-contained HTML report (`tt-report.py`), published via Artifact from `/tt insights`.
+- Statusline script with age-based pulse dot (ships with the plugin; registered per
+  project).

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Causal Attribution"
+  short_description: "Test whether media caused lift"
+  default_prompt: "Audit this attribution claim and tell me what we can actually say about incremental impact."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

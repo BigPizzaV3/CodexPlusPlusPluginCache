@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Trylle",
+    "url": "https://trylle.com"
+  },
+  "description": "Create and manage repositories, pull requests and reviews, issues, stacked changes, CI workflows, automations, secrets and variables, organization settings, SSH keys, and developer utilities on Trylle.",
+  "homepage": "https://trylle.com/trylle/skills",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Show my current Trylle repository context.",
+      "Check the status of this repository's pull request.",
+      "Triage open issues in this Trylle repository."
+    ],
+    "developerName": "Trylle",
+    "displayName": "Trylle",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Create and manage repositories, pull requests and reviews, issues, stacked changes, CI workflows, automations, secrets and variables, organization settings, SSH keys, and developer utilities on Trylle.",
+    "privacyPolicyURL": "https://trylle.com/privacy",
+    "shortDescription": "Manage your PRs, CI and Issues",
+    "termsOfServiceURL": "https://trylle.com/terms",
+    "websiteURL": "https://https://trylle.com"
+  },
+  "keywords": [
+    "trylle",
+    "git",
+    "pull-requests",
+    "issues",
+    "ci"
+  ],
+  "license": "MIT",
+  "name": "trylle",
+  "repository": "https://trylle.com/trylle/skills",
+  "skills": "./skills/",
+  "version": "0.1.6"
+}

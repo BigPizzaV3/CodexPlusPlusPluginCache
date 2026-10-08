@@ -1,0 +1,7 @@
+interface:
+  display_name: Post Formatter
+  short_description: Structure social posts with clear narrative
+  brand_color: '#E45B32'
+  default_prompt: Use $post-formatter to structure these notes into a ready-to-publish social post.
+policy:
+  allow_implicit_invocation: true

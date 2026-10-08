@@ -1,0 +1,37 @@
+{
+  "author": {
+    "name": "Yack Security Inc"
+  },
+  "description": "Evidence-backed application security workflows for finding, validating, and fixing vulnerabilities.",
+  "interface": {
+    "brandColor": "#7A00F9",
+    "brandColorDark": "#8006FF",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Security",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "Run a comprehensive evidence-backed security review of this application and prioritize demonstrated findings.",
+      "Map this application's attack surface, roles, trust boundaries, routes, parameters, and exposed interfaces.",
+      "Verify this security fix in the original vulnerable context and test for bypasses and regressions."
+    ],
+    "developerName": "Tahr Security Inc",
+    "displayName": "Tahr Security",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Review applications with an evidence-first security workflow that maps attack surfaces, tests authentication and access controls, traces dangerous inputs, models threats, and verifies fixes.",
+    "privacyPolicyURL": "https://tahr.one/privacy",
+    "shortDescription": "Evidence-backed app security",
+    "supportURL": "https://tahr.one/contact",
+    "termsOfServiceURL": "https://tahr.one/terms",
+    "websiteURL": "https://tahr.one"
+  },
+  "license": "GPL-3.0-only",
+  "name": "tahr-codex-plugin",
+  "repository": "https://github.com/tahr-security/tahr-security-skills",
+  "skills": "./skills",
+  "version": "0.3.3"
+}

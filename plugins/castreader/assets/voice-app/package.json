@@ -1,0 +1,17 @@
+{
+  "name": "castreader-multilingual-flashcards-example",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "plan": "node generate.mjs --plan",
+    "generate": "node generate.mjs --run"
+  },
+  "dependencies": {
+    "@castreader/voice-api": "https://voice.castreader.com/sdk/castreader-voice-api-0.2.3.tgz"
+  }
+}

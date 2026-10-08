@@ -1,0 +1,5 @@
+interface:
+  display_name: "Executive Narrative Generator"
+  short_description: "Explicit-only."
+policy:
+  allow_implicit_invocation: false

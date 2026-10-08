@@ -1,0 +1,6 @@
+interface:
+  display_name: "YCloud Webhook Endpoints"
+  short_description: "Design or implement endpoints and event receivers"
+  default_prompt: "Use $ycloud-webhook-endpoints to design or implement safe endpoint management or event receiving."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rognalia.com/schemas/note-workspace/workspace-manifest-v1.json",
+  "title": "note Workspace workspace manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "product_id",
+    "generator_version",
+    "workspace_id",
+    "created_at",
+    "updated_at",
+    "data_owner",
+    "runtime_guide",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "product_id": {"const": "note-workspace"},
+    "generator_version": {"type": "string", "minLength": 1},
+    "workspace_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{7,63}$"
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "data_owner": {"const": "user"},
+    "runtime_guide": {"const": "STUDIO.md"},
+    "status": {"enum": ["ready", "migration_required", "hold"]}
+  }
+}

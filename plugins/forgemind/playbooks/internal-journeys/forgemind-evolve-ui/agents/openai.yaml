@@ -1,0 +1,6 @@
+interface:
+  display_name: "ForgeMind Evolve UI"
+  short_description: "Evolve UI through reversible outcome-first experiments."
+  default_prompt: "Use $forgemind-evolve-ui to replace the highest-friction UI flow safely."
+policy:
+  allow_implicit_invocation: false

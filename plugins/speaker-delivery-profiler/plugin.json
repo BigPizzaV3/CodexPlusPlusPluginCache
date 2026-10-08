@@ -1,0 +1,38 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "description": "Profile observable speaking mechanics and convert scripts into quantified Seedance prompts while preserving dialogue exactly.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [
+          "Delivery profiling, exact-script segmentation, and Seedance prompt generation"
+        ],
+        "category": "Productivity",
+        "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+        "defaultPrompt": [
+          "Whose speaking style should I profile?",
+          "Analyze only pace, pauses, emphasis, gestures, eye contact, framing, and energy from this speaker.",
+          "Use the saved delivery profile to split this exact script into 10-second Seedance prompts."
+        ],
+        "developerName": "AIGC Pte Ltd",
+        "displayName": "Speaker Delivery Profiler",
+        "logo": "./.codex-plugin/assets/logo.png",
+        "longDescription": "A skills-only workflow for analyzing observable speaking mechanics and segmenting scripts into quantified Seedance prompts without describing identity, appearance, or voiceprint.",
+        "privacyPolicyURL": "https://aigcmasterclass.com/privacy/",
+        "shortDescription": "Profile speaking delivery",
+        "supportURL": "https://aigcmasterclass.com/support/",
+        "termsOfServiceURL": "https://aigcmasterclass.com/terms/",
+        "websiteURL": "https://aigcmasterclass.com/"
+      }
+    }
+  },
+  "keywords": [
+    "speech delivery",
+    "Seedance",
+    "video prompts",
+    "presentation"
+  ],
+  "license": "MIT",
+  "name": "speaker-delivery-profiler",
+  "version": "1.0.1"
+}

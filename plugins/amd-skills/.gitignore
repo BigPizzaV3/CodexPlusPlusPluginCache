@@ -1,0 +1,16 @@
+# Local-only working area (briefings, drafts, generated decks).
+internal/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# uv
+.uv-cache/
+
+# Eval run artifacts (JSON reports and kept transcripts)
+eval/runs/
+
+# Sphinx docs: _toc.yml is generated from _toc.yml.in at build time
+docs/rocm-docs/sphinx/_toc.yml

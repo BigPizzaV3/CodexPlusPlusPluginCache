@@ -1,0 +1,234 @@
+---
+name: mergify-stack
+description: Use Mergify stacks for git push, commit, branch, and PR creation. ALWAYS use this skill when pushing code, creating commits, creating branches, or creating PRs. Triggers on push, commit, branch, PR, pull request, stack, stacked, git, rebase, checkout, reorder, move, sync, amend, note, revision history.
+---
+
+# Mergify Stack Workflow
+
+## Stack Philosophy
+
+A branch is a stack. Keep stacks short and focused:
+- A stack should only contain commits that **depend on each other**
+- Rationale: longer stacks take longer to merge
+
+**Proactive stack management:**
+- If an existing stack can be split into independent stacks, offer to do so
+- When asked to do something new: if it can be done on a separate branch, either do so or ask if in doubt
+- Default to creating a new branch for unrelated changes
+
+## Core Conventions
+
+- **Push**: Use `mergify stack push` (never `git push`)
+- **Fixes**: Use `git commit --amend` (never create new commits to fix issues)
+- **Amend notes**: When amending a commit that already has a PR (i.e. has been pushed), attach a `mergify stack note` BEFORE `mergify stack push` to record *why* the commit was amended. The note appears in the PR's "Revision history" comment and JSON marker, so reviewers can see the reason without diffing.
+- **Mid-stack fixes**: Stash any local changes first (`git stash -u`), then use `mergify stack edit <SHA-or-Change-Id-prefix>` to pause the rebase at the target commit. Amend it with `git commit --amend`, then `git rebase --continue`, then `mergify stack push`, then `git stash pop`. Non-interactive — never use `git rebase -i` for this. (Calling `mergify stack edit` with no argument falls back to a fully interactive `git rebase -i` and will hang in agent contexts — always pass a commit prefix.)
+- **Reordering**: Stash any local changes first (`git stash -u`), then use `mergify stack reorder` (list all commits in desired order) or `mergify stack move` (move a single commit) instead of manual `git rebase -i` — non-interactive and avoids `GIT_SEQUENCE_EDITOR` quoting issues
+- **Fixup**: Stash any local changes first (`git stash -u`), then use `mergify stack fixup <SHA>...` to fold a commit into its parent (drops the listed commit's message). Non-interactive — never use `git rebase -i` for this.
+- **Squash**: Stash any local changes first (`git stash -u`), then use `mergify stack squash SRC... into TARGET [-m "msg"]` to combine multiple commits into one, with an optional custom message. Non-interactive — never use `git rebase -i` for this.
+- **Reword**: Stash any local changes first (`git stash -u`), then use `mergify stack reword <SHA> -m "new message"` to change a commit's message in place. Non-interactive when `-m` is given — never use `git rebase -i` for this.
+- **Drop**: Stash any local changes first (`git stash -u`), then use `mergify stack drop <SHA>...` to remove commits from the stack. Non-interactive — never use `git rebase -i` for this.
+- **Commit titles**: Follow [Conventional Commits](https://www.conventionalcommits.org/) (e.g., `feat:`, `fix:`, `docs:`)
+- **PR title & body**: `mergify stack` copies the commit message title to the PR title and the commit message body to the PR body — so write commit messages as if they were PR descriptions. **Everything that should appear in the PR (ticket references, context, test plans) MUST go in the commit message.**
+- **Ticket references**: Include ticket/issue references (e.g., `MRGFY-1234`, `Fixes #123`) in the commit message body, not added separately to the PR.
+- **PR lifecycle is fully managed by `mergify stack`**: NEVER edit PR titles, bodies, or labels with `gh pr edit` or the GitHub MCP — they will be overwritten on the next push. NEVER close or merge PRs manually — `mergify stack` handles the entire PR lifecycle (creation, updates, and cleanup).
+- **Draft PRs**: NEVER mark a PR as ready-for-review — all PRs stay as drafts. The user will manually move them out of draft after reviewing.
+- **Each commit must pass CI independently**: Every commit in a stack becomes its own PR. Each PR runs CI separately, so every commit must be self-contained — it must compile, pass linters, and pass tests on its own without depending on later commits in the stack. When formatting or linting fixes are needed, they must be included in the commit that introduced the issue, not deferred to a later commit.
+
+## Common Mistakes
+
+| Wrong | Right | Why |
+|-------|-------|-----|
+| `git push` | `mergify stack push` | Git push bypasses stack management and breaks PR relationships |
+| New commit to fix lint/typo | `git commit --amend` (HEAD) or `git commit --fixup <SHA>` + `git rebase --autosquash` (mid-stack) | Each commit = a PR; fix commits create unwanted extra PRs |
+| `gh pr edit --title "..."` | Edit the commit message, then `mergify stack push` | PR title/body are overwritten from commit messages on every push |
+| `gh pr merge` or `gh pr close` | PR lifecycle is fully managed — do nothing | PR lifecycle is fully managed by the stack tool |
+| `git commit` on `main` | `mergify stack new <name>` first | `mergify stack push` will fail on the default branch |
+| `git rebase -i` to fixup a commit | `mergify stack fixup <SHA>` | Non-interactive — works inside LLM/agent sessions; no editor spawned |
+| `git rebase -i` to squash commits | `mergify stack squash A B into X [-m "..."]` | Non-interactive — works inside LLM/agent sessions; no editor spawned |
+| `git rebase -i` to change a commit message | `mergify stack reword <SHA> -m "..."` | Non-interactive — works inside LLM/agent sessions; no editor spawned |
+| `git rebase -i` to amend a mid-stack commit | `mergify stack edit <SHA-or-Change-Id-prefix>` then `git commit --amend` then `git rebase --continue` | Non-interactive — pauses the rebase at the target commit without spawning an editor |
+| `git rebase -i` to drop a commit | `mergify stack drop <SHA>...` | Non-interactive — works inside LLM/agent sessions; no editor spawned |
+| `GIT_SEQUENCE_EDITOR='sed -i ...' git rebase -i` (any variant) | One of `mergify stack {edit,fixup,squash,reorder,move}` | Hand-rolled sequence-editor scripts are brittle; there is already a non-interactive command for every common rewrite |
+| Deferring lint fixes to a later commit | Include the fix in the commit that caused it | Each commit runs CI independently; later commits won't save earlier ones |
+| Rebase/reorder/checkout/sync with dirty worktree | `git stash -u` first, then `git stash pop` after | Uncommitted changes are lost or cause conflicts during these operations |
+| Amending a pushed commit with no explanation | `mergify stack note -m "why"` before `mergify stack push` | The reason is recorded in the PR's Revision history table and JSON marker, so reviewers don't need to diff to understand the change |
+
+## Commands
+
+```bash
+mergify stack new NAME       # Create a new stack/branch for new work
+mergify stack push           # Push and create/update PRs (also registers as a GitHub-native stack by default)
+mergify stack push --no-github-native  # ...without registering it as a GitHub-native stack
+mergify stack checkout BRANCH    # Checkout an existing stack from GitHub (e.g. someone else's)
+mergify stack checkout PR_URL    # Same, from any PR in the stack — middle included
+mergify stack sync           # Fetch trunk, remove merged commits, rebase
+mergify stack list           # Show commit <-> PR mapping for current stack
+mergify stack list --json    # Same, but machine-readable JSON output
+mergify stack reorder C A B  # Reorder all commits (pass SHA or Change-Id prefixes)
+mergify stack move X first   # Move commit X to the top of the stack
+mergify stack move X last    # Move commit X to the bottom of the stack
+mergify stack move X before Y  # Move commit X before commit Y
+mergify stack move X after Y   # Move commit X after commit Y
+mergify stack fixup X              # Fold commit X into its parent (drops X's message)
+mergify stack fixup X Y Z          # Fold each into its parent (multi-fixup)
+mergify stack squash X into Y      # Reorder X adjacent to Y, fold X into Y (keeps Y's message)
+mergify stack squash X Y into Z -m "msg"  # Fold X Y into Z with a custom message
+mergify stack reword X -m "msg"    # Change commit X's message non-interactively
+mergify stack reword X             # Change commit X's message via $GIT_EDITOR (TTY only)
+mergify stack edit X               # Pause the rebase at X so you can `git commit --amend` it (X is required; no-arg form is interactive)
+mergify stack drop X               # Drop commit X from the stack
+mergify stack drop X Y Z           # Drop multiple commits in one rebase
+mergify stack note -m "why"        # Attach an amend reason to HEAD (shown in PR revision history)
+mergify stack note <SHA-or-Change-Id-prefix> -m "why"  # Attach to a specific commit in the stack
+mergify stack note --append -m "more"                  # Append to an existing note
+mergify stack note --remove                            # Remove the note from a commit
+```
+
+Use `mergify stack checkout` to check out a stack that exists on GitHub (e.g. a colleague's stack). The argument is either the stack's remote branch name — whatever prefix it uses, no assumption that it contains an author — or the URL of any pull request in the stack, including one from the middle. It fetches all stacked PRs, creates a local branch, and sets up tracking.
+
+The local branch defaults to the stack branch with your own stack branch prefix removed, so a stack you pushed from `feature/login` comes back as `feature/login` and a later `mergify stack push` updates the same PRs. For a stack that is not under your prefix — a colleague's — the last segment is used and checkout warns you: you can work on those commits, but `mergify stack push` from that branch would create a separate stack rather than update their pull requests. Use `--branch` to override the name. A pull request URL carries its own `owner/repo`, so `--repository` is ignored in that form.
+
+Use `mergify stack sync` to bring your stack up to date. It fetches the latest trunk, detects which PRs have been merged, removes those commits from your local branch, and rebases the remaining commits. Run this before starting new work on an existing stack.
+
+Use `mergify stack list` to see which commits have been pushed, which PRs they map to, and whether the stack is up to date with the remote. It also shows CI status, review status, and merge conflicts for each PR. Use `--verbose` for detailed check names and reviewer names. Use `--json` when you need to parse the output programmatically — it includes full CI check details and review data.
+
+## GitHub-native stacks (experimental, on by default)
+
+`mergify stack push` registers the stack with GitHub's own Stacks API by
+default, so GitHub renders it as a stack. Opt out per invocation with
+`--no-github-native`, or per repo with
+`git config mergify-cli.stack-github-native false`.
+
+Change-Ids, branch layout, stack comments and revision history are unchanged,
+and it degrades quietly: where the API isn't available (older GitHub
+Enterprise, a repo without the feature) the push reports
+`not registered on GitHub` and succeeds exactly as it would have.
+
+Three things to know:
+
+- **A stack needs at least 2 pull requests.** GitHub rejects a 1-PR stack, so a
+  single-change stack stays a plain PR — and a 2-PR stack that loses a member
+  is dissolved rather than re-registered.
+- **The `Depends-On:` header goes away.** A registered stack *is* the
+  dependency between two pull requests, so the CLI stops writing a second copy
+  of it into the PR descriptions. It is keyed off the registration, not off the
+  flag: when a push degrades to `not registered on GitHub`, the headers are
+  written back in the same push and Mergify keeps ordering the stack. Your
+  commit messages are never touched either way — the header only ever existed
+  in the rendered PR description.
+- **Registering changes how the PRs merge.** While a stack is registered,
+  GitHub refuses the classic merge endpoint
+  (`PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge` → 403) for
+  its members. That is GitHub's contract, not ours; it is the reason
+  `--no-github-native` exists.
+
+Pushing stays cheap. Refreshing commits (amend, reword, force-push) leaves the
+registration untouched, and adding a change on top extends the same stack.
+Only a push that moves a pull request's base — a reorder, a drop, a change
+inserted in the middle — dissolves the registration first and rebuilds it at
+the end, because GitHub rejects any base-branch change while a PR is stacked.
+An interrupted push therefore leaves the stack merely unregistered — never
+half-registered. It can also leave it without its `Depends-On:` headers, since
+those are restored at the end of the push; re-running `mergify stack push`
+settles both, because every push re-renders the descriptions and recomputes the
+`Depends-On:` markers from the stack's current shape — including with
+`--keep-pull-request-title-and-body`, where the description is re-rendered from
+the pull request's own body rather than the commit message, and the marker is
+still stripped and re-appended rather than carried over.
+
+## Amend Notes
+
+`mergify stack note` records *why* a commit was amended. The note travels with the stack:
+
+- The reason is stored locally under `refs/notes/mergify/stack` against the commit SHA.
+- On `mergify stack push`, the reason is consumed into the change's revision history; the note on the pushed head commit is replaced by the **full revision history** (human digest + the `<!-- mergify-revision-data: {...} -->` JSON marker). Git notes — not the PR comment — are the machine-readable source of truth; the PR's "Revision history" comment is rendered from them.
+- At merge time, Mergify copies the head commit's history note onto the merge/squash commit, so `git log --notes=mergify/stack` on the base branch shows why each change was revised.
+
+**When to attach a note** — any time you amend or rewrite a commit that already has a PR open (i.e. it has been pushed at least once). The note answers "why is this revision different?" so the reviewer doesn't have to diff old vs new SHAs to find out.
+
+**Workflow** — attach the note BEFORE `mergify stack push`:
+
+```bash
+# Edit HEAD, then:
+git commit --amend
+mergify stack note -m "address review: rename foo() to bar()"
+mergify stack push
+
+# Or for a mid-stack commit (after the rebase that amended it):
+mergify stack note <SHA-or-Change-Id-prefix> -m "fix lint reported in CI"
+mergify stack push
+```
+
+A note is per-commit, not per-revision. Each amend (or other history rewrite) creates a new commit SHA, so you must run `mergify stack note` again for the new SHA — the previous note stays attached to the old SHA and won't carry over. Use `--append` only when the current target commit already has a note and you want to add another reason; use `--remove` to clear it. Notes on commits that haven't changed since the last push are preserved but won't add a new revision row.
+
+## CRITICAL: Check Branch Before ANY Commit
+
+**BEFORE staging or committing anything**, always check the current branch and assess stack state:
+
+```bash
+git branch --show-current
+mergify stack list
+```
+
+- If you're on `main` (or the repo's default branch): you **MUST** create a feature branch first
+- **NEVER commit directly on `main`** — `mergify stack push` will fail
+- This check must happen before `git add`, not after `git commit`
+
+## CRITICAL: Stash Local Changes Before Worktree-Modifying Operations
+
+**BEFORE running any operation that rewrites history or switches branches**, check for uncommitted changes and stash them:
+
+```bash
+git status --short          # Check for uncommitted changes
+git stash -u                # Stash tracked + untracked changes if any
+```
+
+**Operations that require this check:**
+- `mergify stack edit <commit>` (mid-stack fixes)
+- `mergify stack reorder` / `mergify stack move`
+- `mergify stack fixup`
+- `mergify stack squash`
+- `mergify stack reword`
+- `mergify stack drop`
+- `mergify stack checkout`
+- `mergify stack sync`
+- `mergify stack new` (switches to new branch)
+- `git checkout <branch>`
+
+**After the operation completes**, restore the stashed changes:
+
+```bash
+git stash pop
+```
+
+If you skip this step, uncommitted work will be **silently lost** or cause rebase conflicts.
+
+## Starting New Work
+
+When asked to start a new piece of work, create a new feature, or work on something unrelated to the current stack:
+
+1. **Check current branch**: `git branch --show-current`
+2. **Create a new stack**: `mergify stack new <branch-name>`
+   - Use descriptive branch names following the pattern: `type/short-description` (e.g., `feat/add-login`, `fix/memory-leak`)
+3. **Make commits** following conventional commits
+4. **Push**: `mergify stack push`
+
+## Adding to Existing Stack
+
+When continuing work on an existing feature branch:
+
+1. **Check current branch**: `git branch --show-current`
+   - If on the right branch: proceed with commits
+   - If on `main`: switch to the feature branch first with `git checkout <branch>` or create a new stack
+
+## Conflict Resolution
+
+When a rebase causes conflicts (during `git rebase -i` or `mergify stack push`):
+
+1. Resolve conflicts in your editor
+2. Stage resolved files with `git add`
+3. Continue with `git rebase --continue`
+
+To abort instead: `git rebase --abort`
+
+After resolving, run `mergify stack push` to sync the updated stack.

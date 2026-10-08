@@ -1,0 +1,35 @@
+{
+  "author": {
+    "name": "Shanlong Ding"
+  },
+  "description": "Discover UN SDG indicators and series, retrieve complete observations, and preserve DSIR cleaning semantics with dimensions and provenance.",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.jpg",
+    "defaultPrompt": [
+      "Compare UHC service coverage in China, Japan and the Philippines.",
+      "Get Philippine TB incidence since 2015 from UN SDG.",
+      "Find the current SDG financial protection measure."
+    ],
+    "developerName": "Shanlong Ding",
+    "displayName": "DSIR SDG Data Skill",
+    "logo": "./.codex-plugin/assets/logo.jpg",
+    "longDescription": "Query public UN SDG data using natural language. Confirm indicators, series, locations, units and population dimensions; export complete CSV and JSON. Requires Python 3.10+ and script HTTPS access, with no R or hosted service.",
+    "shortDescription": "Find UN SDG data and verify"
+  },
+  "keywords": [
+    "DSIR",
+    "SDG",
+    "UN",
+    "health-data",
+    "sustainable-development"
+  ],
+  "license": "MIT",
+  "name": "dsir-sdg",
+  "skills": "./skills",
+  "version": "0.1.0"
+}

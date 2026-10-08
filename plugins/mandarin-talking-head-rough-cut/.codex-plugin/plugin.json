@@ -1,0 +1,43 @@
+{
+  "author": {
+    "email": "liukecen@a2hmarket.ai",
+    "name": "\u73c2\u5c91 \u5218",
+    "url": "https://m15851855393-boop.github.io/mandarin-talking-head-rough-cut-site/"
+  },
+  "description": "Information-preserving rough cutting for Mandarin talking-head videos",
+  "homepage": "https://m15851855393-boop.github.io/mandarin-talking-head-rough-cut-site/",
+  "interface": {
+    "brandColor": "#005267",
+    "brandColorDark": "#98EAFF",
+    "capabilities": [
+      "Write"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "\u4f7f\u7528 $rough-cut \u5bf9\u8fd9\u6761\u4e2d\u6587\u53e3\u64ad\u505a\u4fe1\u606f\u4fdd\u7559\u578b\u7c97\u526a\uff0c\u5e76\u8f93\u51fa\u6210\u7247\u548c\u526a\u8f91\u62a5\u544a\u3002",
+      "\u8bc6\u522b\u5e76\u5220\u9664\u8fd9\u6761\u53e3\u64ad\u4e2d\u7684\u524d\u6447\u3001\u53e3\u8bef\u3001NG \u548c\u4f5c\u5e9f\u91cd\u5f55\uff0c\u53ea\u4fdd\u7559\u6700\u7ec8\u6709\u6548\u8868\u8fbe\u3002",
+      "\u5728\u4fdd\u7559\u89c2\u70b9\u3001\u6570\u5b57\u3001\u6848\u4f8b\u548c\u56e0\u679c\u5173\u7cfb\u7684\u524d\u63d0\u4e0b\uff0c\u7cbe\u7b80\u8fd9\u6761\u4e2d\u6587\u53e3\u64ad\u5e76\u751f\u6210\u526a\u8f91\u62a5\u544a\u3002"
+    ],
+    "developerName": "\u73c2\u5c91 \u5218",
+    "displayName": "\u4e2d\u6587\u53e3\u64ad\u667a\u80fd\u7c97\u526a",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "\u9762\u5411\u4e2d\u6587\u5355\u4eba\u6216\u8f7b\u5bf9\u8c08\u53e3\u64ad\u7684\u5b8c\u6574\u7c97\u526a\u6d41\u7a0b\uff1a\u57fa\u4e8e\u8bcd\u7ea7\u65f6\u95f4\u8f74\u6e05\u7406\u524d\u6447\u3001\u53e3\u8bef\u3001NG\u3001\u591a take\u3001\u91cd\u590d\u3001\u8bed\u6c14\u8bcd\u548c\u573a\u5916\u63d2\u8bdd\uff0c\u590d\u67e5\u4fe1\u606f\u4e0e\u903b\u8f91\u540e\u6e32\u67d3\u53ef\u5ba1\u9605\u6210\u7247\uff0c\u5e76\u53ef\u9009\u751f\u6210\u5b57\u5e55\u3001\u5305\u88c5\u548c\u526a\u8f91\u62a5\u544a\u3002",
+    "privacyPolicyURL": "https://m15851855393-boop.github.io/mandarin-talking-head-rough-cut-site/privacy/",
+    "shortDescription": "\u6e05\u7406\u53e3\u8bef\u3001NG\u3001\u91cd\u590d\u548c\u5e9f\u8bdd\uff0c\u540c\u65f6\u4fdd\u7559\u89c2\u70b9\u3001\u4f8b\u5b50\u4e0e\u903b\u8f91",
+    "supportURL": "https://m15851855393-boop.github.io/mandarin-talking-head-rough-cut-site/support/",
+    "termsOfServiceURL": "https://m15851855393-boop.github.io/mandarin-talking-head-rough-cut-site/terms/",
+    "websiteURL": "https://m15851855393-boop.github.io/mandarin-talking-head-rough-cut-site/"
+  },
+  "keywords": [
+    "video-editing",
+    "talking-head",
+    "mandarin",
+    "rough-cut",
+    "captions"
+  ],
+  "license": "Apache-2.0",
+  "name": "mandarin-talking-head-rough-cut",
+  "skills": "./skills/",
+  "version": "1.1.0"
+}

@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "Saul Mart\u00ed"
+  },
+  "description": "Use the original stateful teaching workflow to learn a skill or technical concept over multiple sessions in the current workspace.",
+  "interface": {
+    "brandColor": "#22C55E",
+    "brandColorDark": "#3ADD76",
+    "capabilities": [
+      "Teach concepts across sessions"
+    ],
+    "category": "Education & Research",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Teach me this concept using the current repository",
+      "Create a learning path for this technology",
+      "Continue teaching me from where we left off"
+    ],
+    "developerName": "Saul Mart\u00ed",
+    "displayName": "Teach",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Use the original stateful teaching workflow to learn a skill or technical concept over multiple sessions in the current workspace.",
+    "shortDescription": "Teach concepts across sessions"
+  },
+  "keywords": [
+    "engineering-suite",
+    "teach",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "engineering-suite-teach",
+  "skills": "./skills/",
+  "version": "2.0.0"
+}

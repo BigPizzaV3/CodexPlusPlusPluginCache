@@ -1,0 +1,11 @@
+interface:
+  display_name: "Write Surfer Article"
+  short_description: "Write an SEO and AI Search optimized article"
+  default_prompt: "Use $surfer-write-article to write an optimized article for [keyword]."
+dependencies:
+  tools:
+    - type: mcp
+      value: surfer
+      description: Surfer MCP server for content editors, guidelines, scores, and recommendations
+      transport: streamable_http
+      url: https://mcp.surferseo.com/mcp

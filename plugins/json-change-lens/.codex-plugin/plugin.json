@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "ailuntz"
+  },
+  "description": "Compare JSON snapshots with exact numbers, ID-based array matching, and readable change reports.",
+  "interface": {
+    "brandColor": "#146B55",
+    "brandColorDark": "#94EBD5",
+    "capabilities": [
+      "Read JSON files",
+      "Compare structured data",
+      "Create change reports"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Compare these two JSON files and explain the changes.",
+      "Compare these API snapshots, matching object arrays by id.",
+      "Compare these configs and ignore updated_at at every depth."
+    ],
+    "developerName": "ailuntz",
+    "displayName": "JSON Change Lens",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Understand what changed between two JSON files. JSON Change Lens compares configuration snapshots and API responses, ignores object-key order, distinguishes type changes, and preserves decimal precision. Match arrays of objects by a unique ID field to avoid reorder noise, ignore explicitly selected timestamp keys, and generate Markdown or JSON reports with paths into both original files. The helper reads two selected files and makes no network requests; reports are written only to a new output path when requested. Requires Python 3.9+ and a terminal or code execution environment. Host chat and execution-environment data handling still applies. It does not apply patches or determine API compatibility without a supplied contract. Independent community software.",
+    "shortDescription": "Compare JSON with clear diffs"
+  },
+  "keywords": [
+    "json",
+    "diff",
+    "configuration",
+    "api",
+    "comparison"
+  ],
+  "license": "MIT",
+  "name": "json-change-lens",
+  "skills": "./skills/",
+  "version": "1.0.1"
+}

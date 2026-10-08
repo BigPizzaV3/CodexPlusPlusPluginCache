@@ -1,0 +1,59 @@
+#!/bin/sh
+# Shared scientific-viewer-platform launcher; regenerate plugin copies instead of editing them.
+set -eu
+
+if [ "$#" -lt 1 ]; then
+  printf '%s\n' 'Scientific viewer could not start: missing Node entrypoint.' >&2
+  exit 64
+fi
+
+try_node() {
+  case "$1" in
+    /*)
+      if [ -f "$1" ] && [ -x "$1" ]; then
+        node_path=$1
+        shift
+        exec "$node_path" "$@"
+      fi
+      ;;
+  esac
+  return 0
+}
+
+try_node "${CODEX_MCP_NODE_PATH:-}" "$@"
+try_node "${CODEX_BROWSER_USE_NODE_PATH:-}" "$@"
+
+if [ -n "${CODEX_ELECTRON_RESOURCES_PATH:-}" ]; then
+  try_node "$CODEX_ELECTRON_RESOURCES_PATH/cua_node/bin/node" "$@"
+fi
+case "${CODEX_CLI_PATH:-}" in
+  /*) try_node "${CODEX_CLI_PATH%/*}/cua_node/bin/node" "$@" ;;
+esac
+
+if [ -n "${XDG_CACHE_HOME:-}" ]; then
+  try_node "$XDG_CACHE_HOME/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node" "$@"
+fi
+if [ -n "${HOME:-}" ]; then
+  try_node "$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node" "$@"
+fi
+
+# A relative PATH entry must not hide a later absolute runtime.
+remaining_path=${PATH:-}
+while [ -n "$remaining_path" ]; do
+  case "$remaining_path" in
+    *:*)
+      node_directory=${remaining_path%%:*}
+      remaining_path=${remaining_path#*:}
+      ;;
+    *)
+      node_directory=$remaining_path
+      remaining_path=
+      ;;
+  esac
+  case "$node_directory" in
+    /*) try_node "$node_directory/node" "$@" ;;
+  esac
+done
+
+printf '%s\n' 'Scientific viewer could not find a Node runtime. Update Codex or install a supported Node version on PATH.' >&2
+exit 127

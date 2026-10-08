@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Testing"
+  short_description: "Write reliable and focused Go tests"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-testing to write or improve tests for this Go code."

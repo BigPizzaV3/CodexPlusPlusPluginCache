@@ -1,0 +1,32 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Docket AI",
+    "url": "https://www.docket.io/"
+  },
+  "description": "Docket AI makes your sales knowledge your instant superpower. Sales reps get accurate, on-demand answers to product, competitive, technical, and customer questions\u2014pulled directly from your unified Sales Knowledge Lake\u2122. Guided by verified company intel, reps handle objections confidently, uncover prospect details, and craft personalised responses on the spot.",
+  "homepage": "https://www.docket.io/",
+  "interface": {
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Check docket how our partnership with commonwealth bank"
+    ],
+    "developerName": "Docket AI",
+    "displayName": "Docket",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
+    "longDescription": "Docket AI makes your sales knowledge your instant superpower. Sales reps get accurate, on-demand answers to product, competitive, technical, and customer questions\u2014pulled directly from your unified Sales Knowledge Lake\u2122. Guided by verified company intel, reps handle objections confidently, uncover prospect details, and craft personalised responses on the spot.",
+    "privacyPolicyURL": "https://www.docket.io/privacy-policy",
+    "screenshots": [],
+    "shortDescription": "Your product knowledge expert",
+    "termsOfServiceURL": "https://www.docket.io/terms-and-conditions",
+    "websiteURL": "https://www.docket.io/"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "docket",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

@@ -1,0 +1,42 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Cap table, ESOP, founders' agreement, investment agreement review, SaaS terms, India startup compliance, and term sheet review skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#BE123C",
+    "brandColorDark": "#ED416B",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Model the dilution from this new financing round.",
+      "Review this term sheet for off-market or founder-adverse terms.",
+      "Draft a founders' agreement with reverse vesting and IP assignment."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Startup",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Seven reusable startup workflows covering cap table dilution modelling, ESOP scheme drafting, founders' agreements, SHA/SSA review, SaaS terms of service, India startup compliance, and term sheet review.",
+    "shortDescription": "Startup legal workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "startup",
+    "venture",
+    "cap-table",
+    "esop",
+    "saas"
+  ],
+  "license": "MIT",
+  "name": "startup",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

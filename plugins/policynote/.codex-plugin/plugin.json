@@ -1,0 +1,32 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "FiscalNote",
+    "url": "https://fiscalnote.com/products/policynote-api"
+  },
+  "description": "Use the PolicyNote app to access structured policy and regulatory intelligence from around the world. Search legislation, regulatory actions, policy updates, and government activity across jurisdictions.\n\nThe app enables developers, analysts, and policy professionals to retrieve policy data programmatically and integrate it into internal tools, research workflows, dashboards, or monitoring systems. Queries return structured information about policy developments, government sources, and regulatory changes.\n\nPolicyNote helps teams track public policy activity, build alerts, power analysis tools, and integrate government intelligence into their applications.",
+  "homepage": "https://fiscalnote.com/products/policynote-api",
+  "interface": {
+    "capabilities": [],
+    "category": "Data & Analytics",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Summarize the relevant policy context from PolicyNote"
+    ],
+    "developerName": "FiscalNote",
+    "displayName": "PolicyNote",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
+    "longDescription": "Use the PolicyNote app to access structured policy and regulatory intelligence from around the world. Search legislation, regulatory actions, policy updates, and government activity across jurisdictions.\n\nThe app enables developers, analysts, and policy professionals to retrieve policy data programmatically and integrate it into internal tools, research workflows, dashboards, or monitoring systems. Queries return structured information about policy developments, government sources, and regulatory changes.\n\nPolicyNote helps teams track public policy activity, build alerts, power analysis tools, and integrate government intelligence into their applications.",
+    "privacyPolicyURL": "https://fiscalnote.com/privacy",
+    "screenshots": [],
+    "shortDescription": "Search global policy data",
+    "termsOfServiceURL": "https://data.policynote.com/terms",
+    "websiteURL": "https://fiscalnote.com/products/policynote-api"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "policynote",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

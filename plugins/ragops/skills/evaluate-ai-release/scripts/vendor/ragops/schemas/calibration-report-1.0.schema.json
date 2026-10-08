@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/calibration-report-1.0.schema.json",
+  "title": "RAGOps evaluator calibration report 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "evaluator", "decision", "case_count", "labeled_case_count", "coverage", "accuracy", "mae", "false_pass_rate", "false_block_rate", "reviewer_agreement", "reviewer_pair_count", "failed_gates"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "evaluator": {"type": "string", "minLength": 1},
+    "decision": {"enum": ["PASS", "BLOCK"]},
+    "case_count": {"type": "integer", "minimum": 1},
+    "labeled_case_count": {"type": "integer", "minimum": 0},
+    "coverage": {"type": "number", "minimum": 0, "maximum": 1},
+    "accuracy": {"type": "number", "minimum": 0, "maximum": 1},
+    "mae": {"type": "number", "minimum": 0, "maximum": 1},
+    "false_pass_rate": {"type": "number", "minimum": 0, "maximum": 1},
+    "false_block_rate": {"type": "number", "minimum": 0, "maximum": 1},
+    "reviewer_agreement": {"type": ["number", "null"]},
+    "reviewer_pair_count": {"type": "integer", "minimum": 0},
+    "failed_gates": {"type": "array", "items": {"type": "string"}}
+  }
+}

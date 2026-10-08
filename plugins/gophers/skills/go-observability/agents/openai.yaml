@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Observability"
+  short_description: "Add metrics and traces to Go services"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-observability to instrument this Go service with useful metrics and traces."

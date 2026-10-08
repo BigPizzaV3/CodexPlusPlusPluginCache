@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/trace-graph-1.0.schema.json",
+  "title": "RAGOps portable trace graph 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "trace_id", "spans", "metadata"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "trace_id": {"type": "string", "minLength": 1},
+    "spans": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+    "metadata": {"type": "object"}
+  }
+}

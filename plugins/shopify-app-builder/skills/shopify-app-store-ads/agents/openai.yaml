@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shopify App Store Ads"
+  short_description: "Launch and optimize App Store ad tests."
+  default_prompt: "Use $shopify-app-store-ads to prepare a safe Shopify App Store ads test."

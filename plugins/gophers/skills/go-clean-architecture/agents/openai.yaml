@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Clean Architecture"
+  short_description: "Structure Go services with clean architecture"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-clean-architecture to design or review this Go service architecture."

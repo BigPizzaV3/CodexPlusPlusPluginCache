@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/theisegoria/chatgpt-skill-plugins/schemas/portable-mindmaps/canonical-v2.schema.json",
+  "title": "Portable Mind Maps canonical document v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "title", "root"],
+  "properties": {
+    "version": {"const": 2},
+    "title": {"$ref": "#/$defs/text"},
+    "description": {"$ref": "#/$defs/optionalText"},
+    "root": {"$ref": "#/$defs/node"},
+    "crossLinks": {"type": "array", "maxItems": 4000, "items": {"$ref": "#/$defs/crossLink"}}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "maxLength": 10000},
+    "optionalText": {"oneOf": [{"$ref": "#/$defs/text"}, {"type": "null"}]},
+    "id": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_.-]{0,127}$"},
+    "url": {"type": "string", "minLength": 1, "maxLength": 10000, "pattern": "^(?!.*\\\\)(?:https?://[^\\s]+|mailto:[^\\s?]+(?:\\?[^\\s]*)?)$"},
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "children"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "text": {"$ref": "#/$defs/text"},
+        "note": {"$ref": "#/$defs/optionalText"},
+        "url": {"oneOf": [{"$ref": "#/$defs/url"}, {"type": "null"}]},
+        "tags": {"type": "array", "maxItems": 4000, "items": {"$ref": "#/$defs/text"}},
+        "status": {"$ref": "#/$defs/optionalText"},
+        "priority": {"oneOf": [{"type": "integer", "minimum": 1, "maximum": 9}, {"type": "null"}]},
+        "children": {"type": "array", "maxItems": 4000, "items": {"$ref": "#/$defs/node"}}
+      }
+    },
+    "crossLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to"],
+      "properties": {"from": {"$ref": "#/$defs/id"}, "to": {"$ref": "#/$defs/id"}, "label": {"$ref": "#/$defs/optionalText"}}
+    }
+  }
+}

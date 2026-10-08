@@ -1,0 +1,6 @@
+interface:
+  display_name: "Kling AI"
+  short_description: "Generate images and videos; reuse subjects and motion"
+  default_prompt: "Use $kling-ai to generate an image or video, reuse a subject, or transfer motion through the local Kling CLI."
+policy:
+  allow_implicit_invocation: true

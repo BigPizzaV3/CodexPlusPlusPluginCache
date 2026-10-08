@@ -1,0 +1,39 @@
+{
+  "author": {
+    "name": "Harsha Vardhan Gaddam"
+  },
+  "description": "Find which credit card in your wallet earns the most at a specific store.",
+  "homepage": "https://github.com/harshavgaddam/CashbackFinder",
+  "interface": {
+    "capabilities": [
+      "Web research",
+      "Reward calculation",
+      "Local wallet storage"
+    ],
+    "category": "Finance",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Which of my cards earns the most at Costco?",
+      "What card should I use at Target today?",
+      "Best card for a 2,000 rupee fill-up at HP?"
+    ],
+    "developerName": "Harsha vardhan Gaddam",
+    "displayName": "Cashback Card",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Name a store and get the card in your wallet that nets the most on that purchase. Accounts for how the merchant actually codes (Target is a discount store, not a supermarket), spending caps you have partly used, categories you have not activated, what your points are really worth, and foreign transaction or fuel surcharge fees. Verifies rates against issuer terms rather than quoting them from memory. Covers the US, India and the UK.",
+    "privacyPolicyURL": "https://github.com/harshavgaddam/CashbackFinder",
+    "shortDescription": "Which cards should I use here?",
+    "websiteURL": "https://github.com/harshavgaddam/CashbackFinder"
+  },
+  "keywords": [
+    "cashback",
+    "credit-cards",
+    "shopping",
+    "rewards",
+    "merchant-category-code"
+  ],
+  "license": "MIT",
+  "name": "cashback-card-finder",
+  "skills": "./skills/",
+  "version": "2.0.1"
+}

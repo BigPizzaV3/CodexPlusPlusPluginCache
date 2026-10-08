@@ -1,0 +1,36 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "http://alation.com/",
+    "url": "https://www.alation.com"
+  },
+  "description": "Alation brings trusted enterprise data context into ChatGPT.\n\nConnect ChatGPT to Alation\u2019s enterprise data catalog, governance, and trusted business context so users can discover, understand, and use data with confidence.\n\nThe Alation Intelligence Operating System (AIOS) helps AI ground responses in trusted enterprise context, including catalog metadata, governance policies, semantic definitions, lineage, data quality, and documentation. The app is designed for enterprise teams that need AI-led data discovery without losing trust, context, or governance.",
+  "homepage": "https://www.alation.com",
+  "interface": {
+    "brandColor": "#FF7A1A",
+    "brandColorDark": "#FF7A1A",
+    "capabilities": [],
+    "category": "Data & Analytics",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Verify if the data you are working with is fresh and certified",
+      "Verify data using widgets rendered from Alation primitives",
+      "Securely run queries on your database without leaving the app"
+    ],
+    "developerName": "http://alation.com/",
+    "displayName": "Alation",
+    "logo": "./assets/logo.png",
+    "longDescription": "Alation brings trusted enterprise data context into ChatGPT.\n\nConnect ChatGPT to Alation\u2019s enterprise data catalog, governance, and trusted business context so users can discover, understand, and use data with confidence.\n\nThe Alation Intelligence Operating System (AIOS) helps AI ground responses in trusted enterprise context, including catalog metadata, governance policies, semantic definitions, lineage, data quality, and documentation. The app is designed for enterprise teams that need AI-led data discovery without losing trust, context, or governance.",
+    "privacyPolicyURL": "https://www.alation.com/privacy-policy/",
+    "screenshots": [],
+    "shortDescription": "Governed Knowledge Layer",
+    "supportURL": "https://www.alation.com/contact-us/",
+    "termsOfServiceURL": "https://www.alation.com/legal/msa/",
+    "websiteURL": "https://www.alation.com"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "alation",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

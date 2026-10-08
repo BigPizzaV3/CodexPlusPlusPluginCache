@@ -1,0 +1,4 @@
+OrderId,CustomerId,OrderDate,RequestedDeliveryDate,Status,Amount,Currency,PaymentTerms
+SO-1,C-1,2026-01-05,2026-01-12,Released,1000,EUR,30D
+SO-2,,2026-01-06,,Released,-50,EUR,
+SO-3,C-3,,2026-01-20,Draft,500,,

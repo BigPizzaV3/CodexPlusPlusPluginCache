@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Settlement and Reconciliation"
+  short_description: "Match every external money movement"
+  default_prompt: "Use $go-clearing-settlement-reconciliation to design this Go settlement or reconciliation flow."
+policy:
+  allow_implicit_invocation: true

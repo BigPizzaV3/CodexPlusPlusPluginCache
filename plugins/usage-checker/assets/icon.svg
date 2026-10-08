@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Usage icon</title>
+  <desc id="desc">A white gauge needle on a green rounded square.</desc>
+  <rect width="512" height="512" rx="112" fill="#10A37F"/>
+  <path d="M116 328a148 148 0 0 1 280 0" fill="none" stroke="#fff" stroke-width="48" stroke-linecap="round"/>
+  <path d="M256 318l88-92" fill="none" stroke="#fff" stroke-width="36" stroke-linecap="round"/>
+  <circle cx="256" cy="318" r="38" fill="#fff"/>
+</svg>

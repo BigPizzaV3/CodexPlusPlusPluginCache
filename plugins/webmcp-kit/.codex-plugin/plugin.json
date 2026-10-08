@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "nekuda",
+    "url": "https://github.com/nekuda-ai"
+  },
+  "description": "Add WebMCP tools to a web app: read the repo, propose a reviewable tool plan, implement the tools, and verify them in a browser.",
+  "homepage": "https://github.com/nekuda-ai/webmcp-kit",
+  "interface": {
+    "capabilities": [
+      "Add WebMCP tools",
+      "Verify WebMCP tools"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Add WebMCP tools to this web application.",
+      "Verify my WebMCP tools implementation. ",
+      "Add WebMCP tools to this website."
+    ],
+    "developerName": "nekuda",
+    "displayName": "WebMCP Kit",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Add WebMCP tools to a website or web app through a guided workflow that analyzes the codebase, proposes a tool plan for approval, implements the tools with @nekuda/webmcp-sdk, and verifies them in a real browser.",
+    "privacyPolicyURL": "https://docs.nekuda.ai/privacy",
+    "shortDescription": "Add WebMCP tools to your site",
+    "termsOfServiceURL": "https://docs.nekuda.ai/privacy",
+    "websiteURL": "https://github.com/nekuda-ai/webmcp-kit"
+  },
+  "keywords": [
+    "webmcp",
+    "model-context",
+    "browser-agents",
+    "nekuda",
+    "agent-tools"
+  ],
+  "license": "MIT",
+  "name": "webmcp-kit",
+  "repository": "https://github.com/nekuda-ai/webmcp-kit",
+  "skills": "./skills/",
+  "version": "0.4.0"
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/trace-0.3.schema.json",
+  "title": "RAGOps portable trace envelope 0.3",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["case_id", "output", "latency_ms"],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "output": {
+      "type": "object",
+      "required": ["answer"],
+      "properties": {
+        "answer": {"type": "string"},
+        "citation_ids": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "retrieval": {
+      "type": "object",
+      "properties": {
+        "document_ids": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "latency_ms": {"type": "integer", "minimum": 0},
+    "usage": {
+      "type": "object",
+      "properties": {"cost_usd": {"type": "number", "minimum": 0}}
+    },
+    "human_approved": {"type": "boolean"}
+  }
+}

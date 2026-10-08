@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Error Handling"
+  short_description: "Design idiomatic Go error handling"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-error-handling to design or review error handling in this Go code."

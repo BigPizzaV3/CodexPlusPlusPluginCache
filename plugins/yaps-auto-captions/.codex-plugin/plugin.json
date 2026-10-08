@@ -1,0 +1,64 @@
+{
+  "author": {
+    "email": "support@yaps.ai",
+    "name": "Yaps AI",
+    "url": "https://www.yaps.ai"
+  },
+  "description": "Add editable TikTok, Reels, and Shorts-style captions to any video with Yaps.",
+  "homepage": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins",
+  "interface": {
+    "brandColor": "#D4775B",
+    "brandColorDark": "#D4775B",
+    "capabilities": [
+      "Add captions to video",
+      "Auto caption video",
+      "Animated caption styles",
+      "Word-by-word karaoke captions",
+      "Curated caption templates",
+      "Correct captions by ID",
+      "Split and merge captions",
+      "Burned-in subtitle export",
+      "Local transcription"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Add Bold Highlight captions to demo.mp4 and export a new MP4.",
+      "Add TikTok-style captions to my clip and export a new MP4.",
+      "Correct the names in this video's captions, then render the finished video."
+    ],
+    "developerName": "Yaps AI",
+    "displayName": "Yaps Video Captions",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Turn any video into a finished, captioned MP4 with Yaps desktop. Yaps transcribes speech locally, aligns captions to the spoken words, and offers a curated set of caption styles \u2014 bold social highlights, karaoke sweeps, lower thirds, editorial serif, typewriter reveals, and cinematic frost. Review and correct wording by caption ID, replace repeated mistakes, split or merge captions, change the style, then burn everything into a new video without touching the source. The plugin checks Yaps, sign-in, trial or Yaps Pro access, the local model, and FFmpeg readiness first. It produces a finished captioned video rather than only a separate .srt file. Requires a local-capable ChatGPT Desktop Work or Codex session; ChatGPT web and cloud sessions cannot reach the installed Yaps engine. Users can also run the feature directly in Yaps.",
+    "privacyPolicyURL": "https://www.yaps.ai/privacy",
+    "shortDescription": "Add captions to any video",
+    "termsOfServiceURL": "https://www.yaps.ai/terms",
+    "websiteURL": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins"
+  },
+  "keywords": [
+    "add-captions-to-video",
+    "auto-caption-video",
+    "video-caption-generator",
+    "tiktok-captions",
+    "reels-captions",
+    "animated-captions",
+    "youtube-shorts-captions",
+    "instagram-reels-captions",
+    "video-subtitle-editor",
+    "burn-subtitles-into-video",
+    "subtitle-a-video",
+    "captions",
+    "auto-captions",
+    "karaoke-captions",
+    "word-by-word-captions",
+    "caption-video",
+    "captions-for-video"
+  ],
+  "license": "MIT",
+  "name": "yaps-auto-captions",
+  "repository": "https://github.com/richawo/yaps-codex-plugin",
+  "skills": "./skills/",
+  "version": "0.1.11"
+}

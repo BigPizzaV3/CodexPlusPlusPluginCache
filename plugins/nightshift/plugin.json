@@ -1,0 +1,24 @@
+{
+  "name": "nightshift",
+  "version": "0.25.3",
+  "description": "Keep long Claude Code runs on task: enforce the punch list, park questions, preserve progress, recover crashes, and run product or quality shifts until done.",
+  "author": {
+    "name": "Orwa Mahmoud",
+    "url": "https://github.com/orwa-mahmoud"
+  },
+  "homepage": "https://nightshift.orwamahmoud.com/",
+  "repository": "https://github.com/orwa-mahmoud/nightshift",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "plugin",
+    "agent-harness",
+    "autonomous-agents",
+    "ai-agents",
+    "hooks",
+    "crash-recovery",
+    "session-resume",
+    "api-error-500",
+    "product-evolution"
+  ]
+}

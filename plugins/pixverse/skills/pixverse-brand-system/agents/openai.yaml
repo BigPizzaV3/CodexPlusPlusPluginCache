@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Brand Visuals"
+  short_description: "Create brand visuals & mockups"
+  default_prompt: "Use $pixverse-brand-system to generate coherent logo concepts, palette boards and branded mockup images from my brief."
+policy:
+  allow_implicit_invocation: true

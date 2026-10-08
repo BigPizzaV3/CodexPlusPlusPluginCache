@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Power BI Desktop plugin icon">
+  <rect width="128" height="128" rx="24" fill="#F2C811"/>
+  <rect x="28" y="66" width="14" height="34" rx="4" fill="#171717"/>
+  <rect x="52" y="46" width="14" height="54" rx="4" fill="#171717"/>
+  <rect x="76" y="28" width="14" height="72" rx="4" fill="#171717"/>
+  <path d="M28 102h72" stroke="#171717" stroke-width="6" stroke-linecap="round"/>
+</svg>

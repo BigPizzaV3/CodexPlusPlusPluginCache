@@ -1,0 +1,47 @@
+{
+  "name": "onenote",
+  "version": "0.1.4",
+  "description": "Work with OneNote using the configured Microsoft OneNote app connector.",
+  "author": {
+    "name": "OpenAI",
+    "email": "support@openai.com",
+    "url": "https://openai.com/"
+  },
+  "homepage": "https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app",
+  "repository": "https://github.com/openai/plugins",
+  "license": "MIT",
+  "keywords": [
+    "onenote",
+    "notes",
+    "notebooks",
+    "microsoft",
+    "microsoft 365",
+    "office 365",
+    "checklists",
+    "knowledge management",
+    "collaboration"
+  ],
+  "skills": "./skills/",
+  "apps": "./.app.json",
+  "interface": {
+    "displayName": "OneNote (Beta)",
+    "shortDescription": "Read, export, organize, and safely update OneNote",
+    "longDescription": "Use OneNote to find and summarize notebook content, export personal pages as Markdown files, organize sections and pages, and safely create or update personal and shared notes through the connected Microsoft OneNote app.",
+    "developerName": "OpenAI",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app",
+    "privacyPolicyURL": "https://www.microsoft.com/en-us/privacy/privacystatement",
+    "termsOfServiceURL": "https://www.microsoft.com/en-us/servicesagreement/",
+    "defaultPrompt": [
+      "Find the right OneNote page, summarize or export it, or make a safe update"
+    ],
+    "brandColor": "#7719AA",
+    "composerIcon": "./assets/onenote-small.svg",
+    "logo": "./assets/onenote.svg",
+    "screenshots": []
+  }
+}

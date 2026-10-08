@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "vimihi",
+    "url": "https://github.com/prime-vimihi/codex-sdlc"
+  },
+  "description": "Run evidence-backed software delivery across one or more repositories with Codex.",
+  "homepage": "https://github.com/prime-vimihi/codex-sdlc#readme",
+  "interface": {
+    "brandColor": "#168B67",
+    "brandColorDark": "#74E9C5",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Initialize codex-sdlc here. Explain the setup choices and show the dry run before applying changes.",
+      "Initialize codex-sdlc across this coordinator and my backend, web, and mobile repositories.",
+      "Start or resume a codex-sdlc feature delivery with independent quality control."
+    ],
+    "developerName": "vimihi",
+    "displayName": "codex-sdlc",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Set up resumable software delivery across Git repositories, choose models for each delivery role, and coordinate requirements, implementation, independent quality control, and advisory AI Product Owner review with final human acceptance.",
+    "privacyPolicyURL": "https://github.com/prime-vimihi/codex-sdlc/blob/main/docs/privacy.md",
+    "shortDescription": "Run evidence-backed SDLC",
+    "supportURL": "https://github.com/prime-vimihi/codex-sdlc/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/prime-vimihi/codex-sdlc/blob/main/docs/terms.md",
+    "websiteURL": "https://github.com/prime-vimihi/codex-sdlc/blob/main/docs/getting-started.md"
+  },
+  "keywords": [
+    "sdlc",
+    "software-delivery",
+    "multi-repository",
+    "requirements",
+    "quality-assurance"
+  ],
+  "license": "Apache-2.0",
+  "name": "codex-sdlc",
+  "repository": "https://github.com/prime-vimihi/codex-sdlc",
+  "skills": "./skills",
+  "version": "1.0.0"
+}

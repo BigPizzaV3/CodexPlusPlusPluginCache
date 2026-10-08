@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Listing Images"
+  short_description: "Accurate product detail cards"
+  default_prompt: "Use $pixverse-listing-images to make a product listing image set with accurate specifications and readable Chinese copy."
+policy:
+  allow_implicit_invocation: true

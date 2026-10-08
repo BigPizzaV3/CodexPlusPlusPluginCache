@@ -1,0 +1,8 @@
+'Sales'[All Customer Sales] =
+CALCULATE (
+    [Total Sales],
+    FILTER ( ALL ( 'Customer' ), 'Customer'[IsActive] = TRUE () )
+)
+
+'Sales'[Refresh Sensitive Sales] =
+IF ( TODAY () > DATE ( 2026, 1, 1 ), [Total Sales], BLANK () )

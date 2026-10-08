@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Temporal"
+  short_description: "Workflow determinism, replay and version compatibility"
+  default_prompt: "Use $vibe-temporal to audit the selected temporal boundary."

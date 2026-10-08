@@ -1,0 +1,3 @@
+InvoiceId,OrderId,DeliveryId,InvoiceDate,DueDate,Status,Amount,Currency
+INV-1,SO-1,D-1,2026-01-12,2026-02-12,Paid,1000,EUR
+INV-2,SO-404,D-404,2026-01-15,2026-02-15,Open,-20,EUR

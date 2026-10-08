@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit Repository Workflows"
+  short_description: "Audit GitHub Actions trust boundaries safely"
+  default_prompt: "Use $audit-repository-workflows to audit this repository and explain the highest-risk findings."

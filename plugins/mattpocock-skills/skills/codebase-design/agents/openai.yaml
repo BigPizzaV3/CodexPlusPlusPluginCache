@@ -1,0 +1,9 @@
+interface:
+  display_name: Codebase Design
+  short_description: Vocabulary for deep-module design
+  default_prompt: Use $codebase-design for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

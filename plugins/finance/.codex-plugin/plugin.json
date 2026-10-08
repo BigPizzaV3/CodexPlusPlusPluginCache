@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Loan, guarantee, security, recovery, SARFAESI, and India securities-compliance skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#0F766E",
+    "brandColorDark": "#89F0E8",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Review this loan, guarantee, and security package for risk.",
+      "Build a lawful recovery or SARFAESI enforcement strategy.",
+      "Map the Indian securities compliance steps for this transaction."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Finance",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Six reusable legal workflows covering guarantees, loan review, security documentation, debt recovery, Indian SARFAESI enforcement, and securities compliance.",
+    "shortDescription": "Finance law workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "finance",
+    "lending",
+    "security",
+    "securities"
+  ],
+  "license": "MIT",
+  "name": "finance",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

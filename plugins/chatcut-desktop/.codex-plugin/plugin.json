@@ -1,0 +1,46 @@
+{
+  "author": {
+    "email": "dev@chatcut.io",
+    "name": "ChatCut",
+    "url": "https://chatcut.io"
+  },
+  "description": "ChatCut Codex plugin for editable video editing and creation workflows from Codex.",
+  "homepage": "https://chatcut.io",
+  "interface": {
+    "brandColor": "#111827",
+    "brandColorDark": "#D8DFEE",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Help me connect to ChatCut Web"
+    ],
+    "developerName": "ChatCut",
+    "displayName": "ChatCut",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Workflow skills for routing video editing and creation work to ChatCut: importing local or attached media, creating editable projects, editing timelines, adding captions/subtitles, transcribing and cleaning talking-head videos, adding B-roll or overlays, using generation tools for image/video/voice/sound/music/shader assets, exporting, and verifying editor-visible changes.",
+    "shortDescription": "Create videos in ChatCut",
+    "websiteURL": "https://chatcut.io"
+  },
+  "keywords": [
+    "chatcut",
+    "video",
+    "video-editing",
+    "editor",
+    "captions",
+    "subtitles",
+    "transcription",
+    "timeline",
+    "local-video",
+    "codex",
+    "mcp"
+  ],
+  "license": "GPL-3.0-only",
+  "name": "chatcut-desktop",
+  "repository": "https://github.com/ChatCut-Inc/agent-plugin.git",
+  "skills": "./skills/",
+  "version": "1.10.14"
+}

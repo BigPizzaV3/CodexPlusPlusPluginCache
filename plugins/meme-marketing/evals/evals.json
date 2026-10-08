@@ -1,0 +1,163 @@
+{
+  "skill_name": "meme-marketing",
+  "evals": [
+    {
+      "id": 0,
+      "name": "egyptian-b2b-saas",
+      "prompt": "عايز 3 ميمز لصفحة PrePilot، ودي منصة بتساعد الماركتير يبني ميديا بلان ويحسب الميزانية والتوقعات قبل ما يطلق الحملة. الجمهور بتاعنا performance marketers وأصحاب وكالات صغيرة في مصر. الميمز هتنزل على لينكد إن وفيسبوك.",
+      "expected_output": "3 meme specs in Egyptian Arabic, each with caption, in-image line, named visual format + fallback, and design specs. Specific moments with receipts, product appears as a character not a pitch, no CTA inside the image.",
+      "files": [],
+      "assertions": [
+        "Delivers exactly 3 meme specs",
+        "Every meme has caption, in-image line, visual and design sections",
+        "Every meme names a fallback visual",
+        "Every meme names a one-word emotional state",
+        "No denial-then-reveal contrast construction anywhere",
+        "For dialogue or reaction memes with in-image text, on-image copy is concise and adds meaning; text-free concepts need no in-image line",
+        "No CTA, hashtag or emoji inside any in-image line",
+        "Each meme has at least one credible scene-specific detail; numbers are optional unless the brief supplies one",
+        "Audience is defined as one specific person, not a job category",
+        "Each meme is built on a specific recurring moment rather than a general observation",
+        "The image-text relation fits the chosen format; dialogue has distinct voices and intentional echoes change meaning",
+        "Copy reads as spoken dialect rather than Modern Standard Arabic",
+        "The product appears as an element of the situation rather than as a benefit statement or pitch",
+        "At least one idea offers a different usable visual with the same caption",
+        "No unsupported audience data, invented client results or automatically assumed trend recency",
+        "Visuals have a workable original or authorized-asset fallback",
+        "Each concept identifies a distinct humor mechanism and image-text relationship"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "saudi-logistics-dialect",
+      "prompt": "اكتبلي ميمز لعميل سعودي، شركة شحن وتوصيل B2B في الرياض، جمهورها مدراء العمليات وأصحاب المتاجر الإلكترونية. عايز 3 ميمز باللهجة السعودية ينزلوا على X.",
+      "expected_output": "3 meme specs in Saudi dialect with Gulf-appropriate cultural references and vocabulary, not Egyptian. Full spec per meme.",
+      "files": [],
+      "assertions": [
+        "Delivers exactly 3 meme specs",
+        "Every meme has caption, in-image line, visual and design sections",
+        "Every meme names a fallback visual",
+        "Every meme names a one-word emotional state",
+        "No denial-then-reveal contrast construction anywhere",
+        "For dialogue or reaction memes with in-image text, on-image copy is concise and adds meaning; text-free concepts need no in-image line",
+        "No CTA, hashtag or emoji inside any in-image line",
+        "Each meme has at least one credible scene-specific detail; numbers are optional unless the brief supplies one",
+        "Audience is defined as one specific person, not a job category",
+        "Each meme is built on a specific recurring moment rather than a general observation",
+        "The image-text relation fits the chosen format; dialogue has distinct voices and intentional echoes change meaning",
+        "Copy reads as spoken dialect rather than Modern Standard Arabic",
+        "Saudi run contains no Egyptian dialect markers in the copy",
+        "Visual references are Gulf-appropriate or global, with no Egyptian cinema references",
+        "Copy uses recognisable Gulf vocabulary such as الحين، كذا، ما فيه، أبي، كيف، الدوام",
+        "No unsupported audience data, invented client results or automatically assumed trend recency",
+        "Visuals have a workable original or authorized-asset fallback",
+        "Each concept identifies a distinct humor mechanism and image-text relationship"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "consumer-dental-clinic",
+      "prompt": "عندي كلاينت عيادة أسنان في القاهرة وعايزين يعملوا كونتنت خفيف على انستجرام. الجمهور ناس من 25 لـ 40 سنة. اعملي 3 ميمز.",
+      "expected_output": "3 consumer-facing meme specs in Egyptian Arabic for a non-B2B, non-marketing vertical. Tests whether the skill generalizes beyond the agency-pain domain it was derived from.",
+      "files": [],
+      "assertions": [
+        "Delivers exactly 3 meme specs",
+        "Every meme has caption, in-image line, visual and design sections",
+        "Every meme names a fallback visual",
+        "Every meme names a one-word emotional state",
+        "No denial-then-reveal contrast construction anywhere",
+        "For dialogue or reaction memes with in-image text, on-image copy is concise and adds meaning; text-free concepts need no in-image line",
+        "No CTA, hashtag or emoji inside any in-image line",
+        "Each meme has at least one credible scene-specific detail; numbers are optional unless the brief supplies one",
+        "Audience is defined as one specific person, not a job category",
+        "Each meme is built on a specific recurring moment rather than a general observation",
+        "The image-text relation fits the chosen format; dialogue has distinct voices and intentional echoes change meaning",
+        "Copy reads as spoken dialect rather than Modern Standard Arabic",
+        "Memes centre the patient's lived experience rather than the clinic's services",
+        "Nothing punches down at patients, their appearance, or their ability to pay",
+        "No unsupported audience data, invented client results or automatically assumed trend recency",
+        "Visuals have a workable original or authorized-asset fallback",
+        "Each concept identifies a distinct humor mechanism and image-text relationship"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "developer-outage-no-template",
+      "prompt": "Make 3 English memes for senior developers after the internal coding assistant has a two-hour outage. Our team has no licensed reaction-image library and would prefer original visuals. Keep it naturally technical.",
+      "expected_output": "Original scenes, staged UI and/or text-led memes that land without copyrighted templates; no made-up outage data presented as measured results.",
+      "files": [],
+      "assertions": [
+        "All three concepts use different micro-moments or humor mechanisms",
+        "At least one idea uses no famous reaction template",
+        "No protected character is requested for generation",
+        "No unverified facts about the outage or its effects",
+        "Text-free or UI-only forms are allowed"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "egyptian-family-affection",
+      "prompt": "عايز ميمز مصرية عن الموقف النادر لما أخوك الصغير يفتكر الطلب اللي قولتله يجيبه من السوبر ماركت. بعيد عن جو الشغل والنكد.",
+      "expected_output": "Affectionate family meme ideas, not 3 complaints or toxic manager re-skins.",
+      "files": [],
+      "assertions": [
+        "An affectionate or delighted humor mechanism appears",
+        "No forced workplace context",
+        "At least two different visual forms across batch",
+        "The scene has a specific household trigger"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "template-freshness-unknown",
+      "prompt": "اعمل ميم سريع عن آخر ترند ظهر امبارح في السعودية. لو مش قادر تتأكد إنه ترند جديد، هات فكرة original بديلة ولا تألف تاريخ.",
+      "expected_output": "When no dated source exists, marks freshness unknown and uses original fallback.",
+      "files": [],
+      "assertions": [
+        "Never claims a template spread yesterday without dated corroboration",
+        "Shows unknown freshness when research unavailable",
+        "Provides original fallback",
+        "Audience-specific localized observation remains present"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "voice-revision-tuning",
+      "prompt": "دي 3 ميمز عجبتني و2 رفضتهم مع أسباب. استخرج Taste Profile مخصص لفيسبوك وبعدين عدل آخر ميم، وخلي القواعد tentative لحد ما أوافق عليها.",
+      "expected_output": "Provenance-aware profile hypotheses, local repair and explicit confirmation before treating preferences as permanent.",
+      "files": [],
+      "assertions": [
+        "Separates accepted, rejected and revised examples",
+        "Does not turn one rejection into a universal ban",
+        "No fake claim of cross-session memory",
+        "Preserves user supplied rhythm rather than adding manufactured mistakes"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "medical-sensitive",
+      "prompt": "محتاج 3 ميمز لعيادة بتعالج القلق. المرضى ممكن يكونوا مستنيين نتيجة تشخيص مهمة. عايز حاجة خفيفة من غير تخويف أو سخرية من الحالة.",
+      "expected_output": "Respectful low-stakes administrative or appointment humor, or explains when humor is unsuitable.",
+      "files": [],
+      "assertions": [
+        "No humor targets patient symptoms or vulnerabilities",
+        "No treatment, cure or diagnostic claims",
+        "Any staged screenshot is identifiable as fictional",
+        "Use original or licensed visual direction"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "cross-platform-english",
+      "prompt": "Make a short meme batch for a Canadian freelance photographer: one for Instagram, one for LinkedIn, one for X, same topic but three different real moments. Provide at least one visual-only option.",
+      "expected_output": "Platform-native English with different moments, forms and creative relationships.",
+      "files": [],
+      "assertions": [
+        "Three different recognizable situations",
+        "Visual-only option has no invented on-image dialogue",
+        "Platform conventions reflected in ratio and image dependence",
+        "No forced numeric receipts or borrowed Egyptian expressions"
+      ]
+    }
+  ]
+}

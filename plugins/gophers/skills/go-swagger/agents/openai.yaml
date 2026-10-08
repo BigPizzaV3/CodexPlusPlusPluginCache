@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Swagger and OpenAPI"
+  short_description: "Document Go APIs with Swagger and OpenAPI"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-swagger to add or review OpenAPI documentation for this Go API."

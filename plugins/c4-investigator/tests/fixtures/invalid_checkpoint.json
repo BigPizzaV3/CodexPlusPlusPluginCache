@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "case": {},
+  "allegation_summary": {},
+  "evidence": [],
+  "entities": [],
+  "iocs": [],
+  "transactions": [],
+  "timeline": [],
+  "hypotheses": [],
+  "findings": [{"id": "wrong", "type": "inference", "statement": "Unsupported conclusion", "evidence_ids": []}],
+  "legal_candidates": [],
+  "actions": [],
+  "contradictions": [],
+  "limitations": [],
+  "open_questions": [],
+  "readiness": {"status": "Active — material gaps remain", "checks": {}, "investigator_confirmed": false, "rationale": ""}
+}

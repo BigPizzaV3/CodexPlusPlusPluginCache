@@ -1,0 +1,1 @@
+{"version":3,"file":"context.d.ts","sourceRoot":"","sources":["../../src/skill-runtime/context.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAiB,oBAAoB,EAAE,qBAAqB,EAAE,MAAM,YAAY,CAAC;AAkD7F,wBAAgB,mBAAmB,CACjC,SAAS,EAAE,qBAAqB,GAAG,SAAS,EAC5C,WAAW,GAAE,MAAM,CAAC,UAAwB,GAC3C,oBAAoB,CAWtB;AAED,wBAAgB,eAAe,CAAC,OAAO,EAAE,oBAAoB,GAAG,MAAM,EAAE,CAevE"}

@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "profile": "custom",
+  "duration": 60,
+  "topic_summary": "用一句话写清本片主题和论证方向",
+  "structure": [
+    {"id": "hook", "label": "钩子", "trigger_text": "开场触发台词"},
+    {"id": "body", "label": "正文", "trigger_text": "正文开始台词"},
+    {"id": "close", "label": "收束", "trigger_text": "收束开始台词"}
+  ],
+  "modules": {
+    "foundation": {
+      "topic": {
+        "style": "topic-two-tone",
+        "lines": ["第一行白色", "第二行黄色"],
+        "mode": "persistent",
+        "safe_zone": "top"
+      },
+      "identity": {
+        "name": "主讲人姓名",
+        "lines": ["身份标签一", "身份标签二"],
+        "side": "auto",
+        "spans": [[0.4, 6.0]]
+      },
+      "captions": {
+        "style": "speaker-default",
+        "max_chars_soft": 8,
+        "semantic_paging": true,
+        "keyword_color_limit": 2
+      },
+      "voice": {
+        "priority": "highest",
+        "denoise": "as-needed",
+        "global_speed": 1.0
+      }
+    },
+    "audio": {
+      "bgm": {"enabled": false},
+      "sfx_budget": 5
+    }
+  },
+  "events": [
+    {
+      "id": "hook-01",
+      "module": "hook-intro",
+      "trigger_text": "开场问题",
+      "end_text": "开场问题结束",
+      "start": 0,
+      "end": 3,
+      "confidence": "conditional",
+      "reason": "开场需要建立问题和主题",
+      "visual": {"shot": "close", "region": "full-frame"},
+      "caption_policy": "normal"
+    }
+  ],
+  "qa": {
+    "readthrough_required": true,
+    "subtitle_review_required": true,
+    "visual_collision_check_required": true,
+    "audio_listen_check_required": true
+  }
+}

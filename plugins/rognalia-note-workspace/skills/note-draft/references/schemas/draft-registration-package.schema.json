@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:draft-registration-package:1",
+  "title": "note Workspace draft registration package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "request_id", "payload_sha256", "article_id",
+    "article_revision", "registration_revision", "created_at", "status",
+    "target", "approval", "selected_title", "article_metadata_path",
+    "article_metadata_sha256", "draft_path", "draft_sha256",
+    "body_char_count", "headings", "note_tags", "tag_line", "body_urls",
+    "additional_links", "thumbnail", "inline_images", "registration_path",
+    "external_actions"
+  ],
+  "$defs": {
+    "heading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "text", "line_number"],
+      "properties": {
+        "kind": {"enum": ["large", "small"]},
+        "text": {"type": "string", "minLength": 1, "maxLength": 300},
+        "line_number": {"type": "integer", "minimum": 1}
+      }
+    },
+    "additional_link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "insertion_heading", "insertion_after"],
+      "properties": {
+        "url": {"type": "string", "pattern": "^https?://", "maxLength": 2000},
+        "insertion_heading": {"type": "string", "minLength": 1, "maxLength": 300},
+        "insertion_after": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind", "asset_revision", "metadata_path", "metadata_sha256",
+        "image_path", "image_sha256", "width", "height",
+        "insertion_heading", "insertion_after", "caption", "alt"
+      ],
+      "properties": {
+        "kind": {"enum": ["thumbnail", "inline"]},
+        "asset_revision": {"type": "integer", "minimum": 1},
+        "metadata_path": {"type": "string"},
+        "metadata_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "image_path": {"type": "string"},
+        "image_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1},
+        "insertion_heading": {"oneOf": [{"type": "null"}, {"type": "string"}]},
+        "insertion_after": {"oneOf": [{"type": "null"}, {"type": "string"}]},
+        "caption": {"oneOf": [{"type": "null"}, {"type": "string"}]},
+        "alt": {"oneOf": [{"type": "null"}, {"type": "string"}]}
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confirmed", "prompt", "source", "approved_at", "scope", "delivery_sha256"],
+      "properties": {
+        "confirmed": {"const": true},
+        "prompt": {"const": "noteの下書き登録まで進めますか？ 公開はしません。"},
+        "source": {"enum": ["prompt_response", "direct_request"]},
+        "approved_at": {"type": "string", "format": "date-time"},
+        "scope": {"const": "new_note_draft_once"},
+        "delivery_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "article_id": {"type": "string", "pattern": "^article-[a-z0-9][a-z0-9-]{2,63}$"},
+    "article_revision": {"type": "integer", "minimum": 1},
+    "registration_revision": {"type": "integer", "minimum": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "status": {"const": "approved_for_new_draft"},
+    "target": {"const": "new_note_draft"},
+    "approval": {"$ref": "#/$defs/approval"},
+    "selected_title": {"type": "string", "minLength": 1, "maxLength": 200},
+    "article_metadata_path": {"type": "string"},
+    "article_metadata_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "draft_path": {"type": "string"},
+    "draft_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "body_char_count": {"type": "integer", "minimum": 1},
+    "headings": {"type": "array", "maxItems": 50, "items": {"$ref": "#/$defs/heading"}},
+    "note_tags": {"type": "array", "minItems": 5, "maxItems": 6, "uniqueItems": true, "items": {"type": "string"}},
+    "tag_line": {"type": "string", "minLength": 1},
+    "body_urls": {"type": "array", "maxItems": 50, "uniqueItems": true, "items": {"type": "string", "pattern": "^https?://"}},
+    "additional_links": {"type": "array", "maxItems": 20, "items": {"$ref": "#/$defs/additional_link"}},
+    "thumbnail": {"$ref": "#/$defs/asset"},
+    "inline_images": {"type": "array", "maxItems": 10, "items": {"$ref": "#/$defs/asset"}},
+    "registration_path": {"type": "string"},
+    "external_actions": {"const": []}
+  }
+}

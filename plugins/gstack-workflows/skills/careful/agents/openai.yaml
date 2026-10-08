@@ -1,0 +1,9 @@
+interface:
+  display_name: "Careful"
+  short_description: "Apply an extra safety check before destructive or difficult-to-reverse operations."
+  default_prompt: "Use Careful for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: false

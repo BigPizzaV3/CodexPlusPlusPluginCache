@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Moinul Moin",
+    "url": "https://github.com/moinulmoin"
+  },
+  "description": "Audit, build, and refine interfaces with evidence-based findings and accessibility guidance.",
+  "homepage": "https://github.com/moinulmoin/design-partner",
+  "interface": {
+    "brandColor": "#254B36",
+    "brandColorDark": "#B4DAC5",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review my billing page and prioritize improvements. Do not change files yet.",
+      "Fix keyboard navigation, labels, and focus in my signup flow.",
+      "Polish this dashboard's typography and spacing while preserving its brand and behavior."
+    ],
+    "developerName": "Ideaplexa LLC",
+    "displayName": "Design Partner",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Build new screens, critique existing interfaces, or rethink an entire visual direction. Design Partner works in your project to improve layout, typography, color, motion, interaction states, and accessibility.\n\nIts 19 modes cover design audits, responsive layouts, brand expression, reusable components and tokens, and final polish. Remove generic AI-looking patterns, strengthen a landing page\u2019s identity, or make a dashboard hold up to real data, loading, and errors.\n\nAsk for findings only or implementation. The agent uses your existing stack, carries relevant audit findings into follow-up work, and reports what it verified.",
+    "privacyPolicyURL": "https://github.com/moinulmoin/design-partner/blob/main/PRIVACY.md",
+    "shortDescription": "Build, critique, and polish UI",
+    "supportURL": "https://github.com/moinulmoin/design-partner/issues",
+    "termsOfServiceURL": "https://github.com/moinulmoin/design-partner/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/moinulmoin/design-partner"
+  },
+  "keywords": [
+    "design",
+    "frontend",
+    "accessibility",
+    "ui",
+    "ux"
+  ],
+  "license": "MIT",
+  "name": "design-partner",
+  "repository": "https://github.com/moinulmoin/design-partner",
+  "skills": "./skills/",
+  "version": "0.1.5"
+}

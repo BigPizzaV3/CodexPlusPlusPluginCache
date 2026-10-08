@@ -1,0 +1,9 @@
+interface:
+  display_name: Wizard
+  short_description: Generate an interactive setup wizard
+  default_prompt: Use $wizard for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Declarations"
+  short_description: "Write clear Go declarations and initialization"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-declarations to review these Go declarations and initializers."

@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kb4beast/coupon-hive/blob/main/skills/coupon-hive/references/lifecycle-spec.schema.json",
+  "title": "Coupon Hive LifecycleSpec",
+  "description": "A separately confirmed pause, resume, or delete mutation for one exact host task.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "skill_version",
+    "confirmation",
+    "mutation",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "skill_version": {
+      "const": "0.1.0"
+    },
+    "confirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "confirmed_by_user",
+        "confirmed_at",
+        "lifecycle_card_summary",
+        "approved_mutation_digest"
+      ],
+      "properties": {
+        "confirmed_by_user": {
+          "const": true
+        },
+        "confirmed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lifecycle_card_summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "approved_mutation_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "host_surface",
+        "existing_task_id",
+        "task_title",
+        "action",
+        "expected_current_state",
+        "expected_final_state"
+      ],
+      "properties": {
+        "host_surface": {
+          "enum": [
+            "chatgpt_plugin",
+            "codex_skill"
+          ]
+        },
+        "existing_task_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300,
+          "pattern": "^\\S(?:[^\\r\\n\\u0085\\u2028\\u2029]*\\S)?$"
+        },
+        "task_title": {
+          "type": "string",
+          "minLength": 15,
+          "maxLength": 120,
+          "pattern": "^Coupon Hive — \\S(?:[^\\r\\n\\u0085\\u2028\\u2029]*\\S)?$"
+        },
+        "action": {
+          "enum": [
+            "pause",
+            "resume",
+            "delete"
+          ]
+        },
+        "expected_current_state": {
+          "enum": [
+            "active",
+            "paused"
+          ]
+        },
+        "expected_final_state": {
+          "enum": [
+            "active",
+            "paused",
+            "deleted"
+          ]
+        }
+      }
+    },
+    "status": {
+      "const": "confirmed"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mutation": {
+            "properties": {
+              "action": {
+                "const": "pause"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "mutation": {
+            "properties": {
+              "expected_final_state": {
+                "const": "paused"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mutation": {
+            "properties": {
+              "action": {
+                "const": "resume"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "mutation": {
+            "properties": {
+              "expected_final_state": {
+                "const": "active"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mutation": {
+            "properties": {
+              "action": {
+                "const": "delete"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "mutation": {
+            "properties": {
+              "expected_final_state": {
+                "const": "deleted"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

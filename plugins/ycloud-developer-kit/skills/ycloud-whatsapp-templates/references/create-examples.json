@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "ycloud-whatsapp-template-create-examples/v1",
+  "source": "https://docs.ycloud.com/reference/whatsapp-template-creation-examples",
+  "retrievedAt": "2026-09-01",
+  "authority": "confirmed_provider_documentation",
+  "liveCallsAllowed": false,
+  "examples": [
+    {
+      "id": "utility-order-confirmation",
+      "purpose": "default-smoke-test",
+      "request": {
+        "wabaId": "<WABA_ID>",
+        "name": "order_confirmation",
+        "language": "en_US",
+        "category": "UTILITY",
+        "components": [
+          {
+            "type": "BODY",
+            "text": "Your order {{1}} for a total of {{2}} is confirmed. The expected delivery is {{3}}.",
+            "example": {
+              "body_text": [
+                [
+                  "ORDER-5555",
+                  "99 USD",
+                  "February 25, 2023"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "authentication-copy-code",
+      "purpose": "authentication-shape-test",
+      "request": {
+        "wabaId": "<WABA_ID>",
+        "name": "otp_copy_code",
+        "language": "en_US",
+        "category": "AUTHENTICATION",
+        "messageSendTtlSeconds": 600,
+        "components": [
+          {
+            "type": "BODY",
+            "add_security_recommendation": true
+          },
+          {
+            "type": "FOOTER",
+            "code_expiration_minutes": 5
+          },
+          {
+            "type": "BUTTONS",
+            "buttons": [
+              {
+                "type": "OTP",
+                "otp_type": "COPY_CODE",
+                "text": "Copy Code"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

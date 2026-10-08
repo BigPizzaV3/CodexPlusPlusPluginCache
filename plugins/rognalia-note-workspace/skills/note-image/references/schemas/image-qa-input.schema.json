@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:image-qa-input:1",
+  "title": "note Workspace image QA input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "request_id", "brief_path", "generated_at", "reviewed_at",
+    "generation_attempts", "generator_label", "visual_review_completed",
+    "article_match", "anatomy_integrity", "crop_safety", "text_accuracy",
+    "extra_text_absent", "small_preview_readability", "preview_sha256",
+    "visual_copy_integration", "unresolved_issues", "caption", "alt"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "brief_path": {"type": "string"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "reviewed_at": {"type": "string", "format": "date-time"},
+    "generation_attempts": {"type": "integer", "minimum": 1, "maximum": 2},
+    "generator_label": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "minLength": 1, "maxLength": 200}
+      ]
+    },
+    "visual_review_completed": {"const": true},
+    "article_match": {"const": "pass"},
+    "anatomy_integrity": {"const": "pass"},
+    "crop_safety": {"const": "pass"},
+    "text_accuracy": {"enum": ["pass", "not_applicable"]},
+    "extra_text_absent": {"const": true},
+    "small_preview_readability": {"enum": ["pass", "not_applicable"]},
+    "preview_sha256": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      ]
+    },
+    "visual_copy_integration": {"enum": ["pass", "not_applicable"]},
+    "unresolved_issues": {"type": "array", "maxItems": 0},
+    "caption": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "minLength": 1, "maxLength": 300}
+      ]
+    },
+    "alt": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "minLength": 1, "maxLength": 80}
+      ]
+    }
+  }
+}

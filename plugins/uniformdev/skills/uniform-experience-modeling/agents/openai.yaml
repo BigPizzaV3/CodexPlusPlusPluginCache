@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uniform Experience Modeling"
+  short_description: "Design and review Uniform components"
+  default_prompt: "Review my component library with $uniform-experience-modeling"

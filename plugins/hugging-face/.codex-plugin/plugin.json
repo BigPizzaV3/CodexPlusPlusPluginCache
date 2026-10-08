@@ -1,0 +1,45 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Hugging Face",
+    "url": "https://huggingface.co"
+  },
+  "description": "Inspect models, datasets, Spaces, and research",
+  "homepage": "https://huggingface.co",
+  "interface": {
+    "brandColor": "#DAB31A",
+    "brandColorDark": "#E5BE25",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Generate a realistic farm using FLUX.1"
+    ],
+    "developerName": "Hugging Face",
+    "displayName": "Hugging Face",
+    "logo": "./assets/logo.png",
+    "longDescription": "Connect to the Hugging Face Hub to explore Models and Datasets, access SDK Documentation and more. Manage Machine Learning Jobs and connect to thousands of AI applications via Spaces.",
+    "privacyPolicyURL": "https://huggingface.co/privacy",
+    "screenshots": [],
+    "shortDescription": "Inspect models, datasets, Spaces, and research",
+    "supportURL": "https://huggingface.co/docs/hugs/en/help",
+    "termsOfServiceURL": "https://huggingface.co/terms-of-service",
+    "websiteURL": "https://huggingface.co"
+  },
+  "keywords": [
+    "hugging-face",
+    "models",
+    "datasets",
+    "spaces",
+    "machine-learning"
+  ],
+  "license": "MIT",
+  "name": "hugging-face",
+  "repository": "https://github.com/openai/plugins",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

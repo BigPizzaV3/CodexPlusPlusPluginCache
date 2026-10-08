@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "Renaissance Geek Inc",
+    "url": "https://impeccable.style"
+  },
+  "description": "Design and refine frontend interfaces with coding agents.",
+  "homepage": "https://impeccable.style",
+  "interface": {
+    "brandColor": "#E2AE38",
+    "brandColorDark": "#E2AE38",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "critique this interface and prioritize what to fix.",
+      "craft a distinctive landing page, then polish the result.",
+      "start impeccable live so I can explore bolder or more delightful variants."
+    ],
+    "developerName": "Renaissance Geek Inc",
+    "displayName": "Impeccable",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Create, critique, and refine frontend interfaces with your coding agent. Impeccable provides 23 focused design commands, live browser iteration for exploring visual directions, and automatic checks that flag common design anti-patterns as you work.",
+    "privacyPolicyURL": "https://impeccable.style/privacy",
+    "shortDescription": "Design and refine interfaces",
+    "supportURL": "https://github.com/pbakaus/impeccable/issues",
+    "termsOfServiceURL": "https://github.com/pbakaus/impeccable/blob/main/LICENSE",
+    "websiteURL": "https://impeccable.style"
+  },
+  "keywords": [
+    "design",
+    "frontend",
+    "ui",
+    "ux",
+    "accessibility",
+    "anti-patterns"
+  ],
+  "license": "Apache-2.0",
+  "name": "impeccable",
+  "repository": "https://github.com/pbakaus/impeccable",
+  "skills": "./skills/",
+  "version": "4.3.1"
+}

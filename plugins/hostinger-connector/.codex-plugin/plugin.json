@@ -1,0 +1,48 @@
+{
+  "author": {
+    "email": "support@hostinger.com",
+    "name": "Hostinger",
+    "url": "https://www.hostinger.com"
+  },
+  "description": "Manage your Hostinger account from your coding agent \u2014 deploy sites, run WordPress, configure domains and DNS, administer a VPS, and set up a store.",
+  "homepage": "https://www.hostinger.com",
+  "interface": {
+    "brandColor": "#673DE6",
+    "brandColorDark": "#673DE6",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Deploy this project to Hostinger.",
+      "Create a new website at Hostinger with a fresh WordPress.",
+      "What DNS records does my domain have right now?"
+    ],
+    "developerName": "Hostinger International Ltd",
+    "displayName": "Hostinger Connector",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Manage your Hostinger account from wherever you write code. Deploy a static site or a Node.js app straight from the project you have open, install and run WordPress, buy and configure domains, edit DNS records, administer a VPS, or set up an online store. You sign in through your browser with the account you already have, so there is no API key to paste. Anything destructive or billable asks you first.",
+    "privacyPolicyURL": "https://www.hostinger.com/legal/privacy-policy",
+    "shortDescription": "Deploy and manage your hosting",
+    "supportURL": "https://support.hostinger.com",
+    "termsOfServiceURL": "https://www.hostinger.com/legal/universal-terms-of-service-agreement",
+    "websiteURL": "https://www.hostinger.com/connector"
+  },
+  "keywords": [
+    "hosting",
+    "deployment",
+    "wordpress",
+    "dns",
+    "vps",
+    "ecommerce",
+    "email-marketing",
+    "node.js"
+  ],
+  "license": "MIT",
+  "name": "hostinger-connector",
+  "repository": "https://github.com/hostinger/api-mcp-server",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

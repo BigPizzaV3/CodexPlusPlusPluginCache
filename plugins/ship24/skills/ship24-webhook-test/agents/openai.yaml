@@ -1,0 +1,7 @@
+interface:
+  display_name: "Ship24 Webhook Testing"
+  short_description: "Test and verify a Ship24 webhook receiver end to end"
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon-large.png"
+  brand_color: "#FCB016"
+  default_prompt: "Test my Ship24 webhook receiver end to end."

@@ -1,0 +1,41 @@
+{
+  "author": {
+    "email": "hello@callstack.com",
+    "name": "Callstack",
+    "url": "https://www.callstack.com/"
+  },
+  "description": "React Native testing support spanning test authoring, device automation, and QA workflows.",
+  "homepage": "https://github.com/callstackincubator/agent-skills/tree/main/plugins/testing-react-native-apps",
+  "interface": {
+    "capabilities": [
+      "Write React Native tests",
+      "Run device-level QA",
+      "Check accessibility"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Add tests for a newly added navigator public interface.",
+      "Verify accessibility for a core checkout flow and check whether it meets EEA guidelines.",
+      "Verify this PR on a simulator and record the full flow."
+    ],
+    "developerName": "Callstack",
+    "displayName": "Testing React Native Apps",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Helps developers write reliable React Native tests, verify real app flows on devices, check accessibility, and run structured exploratory QA.",
+    "shortDescription": "React Native testing and QA",
+    "supportURL": "https://www.callstack.com/contact",
+    "websiteURL": "https://github.com/callstackincubator/agent-skills/tree/main/plugins/testing-react-native-apps"
+  },
+  "keywords": [
+    "react-native",
+    "testing",
+    "qa",
+    "automation"
+  ],
+  "license": "MIT",
+  "name": "testing-react-native-apps",
+  "repository": "https://github.com/callstackincubator/agent-skills",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

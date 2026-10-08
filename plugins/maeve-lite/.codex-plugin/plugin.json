@@ -1,0 +1,38 @@
+{
+  "author": {
+    "email": "info@maeven.ai",
+    "name": "Maeven Inc.",
+    "url": "https://www.maeven.ai"
+  },
+  "description": "Follow-ups, matter updates, meeting briefs, and prospect signals for law firm partners, sourced from the inbox you already have and the public web.",
+  "homepage": "https://www.maeven.ai",
+  "interface": {
+    "capabilities": [
+      "Find unanswered asks, unkept promises, and stalled prospect threads in your mailbox",
+      "Turn recent mail into update-ready litigation and deal updates",
+      "Build a one-page meeting brief from your own history with the attendees",
+      "Lay out the week's meetings, stated deadlines, and prep from your mailbox",
+      "Surface recent public developments about a prospect or client, with a source behind every fact"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Find my overdue follow-ups and separate what I owe from what I am waiting on.",
+      "What's changed recently with [name] at [company]?",
+      "Extract recent matter developments from my inbox into update-ready litigation and deal records."
+    ],
+    "developerName": "Maeven Inc.",
+    "displayName": "Maeve Lite",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Most business development support tools want your data and tell you what to do. Maeve Lite reads the inbox you already have, keeps everything inside your ChatGPT workspace, quotes rather than guesses, and never touches a deadline.\n\nFive skills for the partner who runs relationships out of email: Follow-up Radar finds what you owe, what you're waiting on, and which prospect threads have gone quiet. Matter Pulse turns recent mail into update-ready litigation and deal updates for your business development or operations team. Meeting Brief gives you the one page you read before a call, built from your own history with the people in the room. Week Ahead lays out what's scheduled, what's due, and what needs preparing. Client News Monitor finds recent public developments about a named prospect or client and their company, with an opened source behind every fact.\n\nBuilt for how relationship-owning lawyers actually work. The mailbox is treated as the record because the CRM rarely is. Every line, date, client scope and output cites the email it came from, so you can verify it in one step. The output is a reading of your mail, not a floating recommendation.\n\nNothing leaves your workspace. The mailbox skills use the Gmail or Outlook account already authorized in ChatGPT and are read-only by default; Follow-up Radar and Matter Pulse can create one unsent draft on explicit request, and no skill ever sends email. Client News Monitor uses public web search only and never touches email or other connected data. Maeve operates no server behind these skills: no analytics, no callbacks, and no transfer of prompts, outputs, mailbox content, or credentials to Maeve. Confidential matter details never go into a web query.\n\nIntended for ChatGPT Business or Enterprise workspaces, where terms exclude training on your content. Maeve Lite does not provide legal advice. Maeve Lite runs on one partner's mailbox; Maeve brings the same signals firm-wide across matters, people, and clients \u2014 for enterprise product contact www.maeven.ai.",
+    "privacyPolicyURL": "https://www.maeven.ai/privacy",
+    "shortDescription": "Partner inbox intelligence",
+    "supportURL": "https://www.maeven.ai/support",
+    "termsOfServiceURL": "https://www.maeven.ai/terms",
+    "websiteURL": "https://www.maeven.ai"
+  },
+  "license": "Apache-2.0",
+  "name": "maeve-lite",
+  "skills": "./skills/",
+  "version": "1.0.1"
+}

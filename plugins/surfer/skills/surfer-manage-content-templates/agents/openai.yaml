@@ -1,0 +1,11 @@
+interface:
+  display_name: "Manage Surfer Templates"
+  short_description: "Create and manage Surfer content templates"
+  default_prompt: "Use $surfer-manage-content-templates to create a reusable content template."
+dependencies:
+  tools:
+    - type: mcp
+      value: surfer
+      description: Surfer MCP server for content editors, guidelines, scores, and recommendations
+      transport: streamable_http
+      url: https://mcp.surferseo.com/mcp

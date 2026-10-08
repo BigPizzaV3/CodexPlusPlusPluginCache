@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{pageTitle}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="icon" href="__ICON_URL__">
+  <style>__STYLE__</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="mark" aria-hidden="true">↗</span>VIBE CODING</div>
+  <div class="header-actions"><span class="version">CODEX + CLAUDE CODE / __VERSION__</span>__LANGUAGE_PICKER__</div>
+</header>
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow" data-i18n="eyebrow">{{eyebrow}}</div>
+      <h1><span class="headline" data-i18n="headline">{{headline}}</span><br><span data-i18n="headlineAccent">{{headlineAccent}}</span></h1>
+      <p class="intro" data-i18n="intro">{{intro}}</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><strong>__SKILLS__</strong><span data-i18n="skills">{{skills}}</span></div>
+      <div class="stat"><strong>__COUNT__</strong><span data-i18n="workflows">{{workflows}}</span></div>
+      <div class="stat"><strong>__DOMAINS__</strong><span data-i18n="domains">{{domains}}</span></div>
+    </div>
+  </section>
+  <nav class="site-links"><a href="https://github.com/arty-kk/vibe-coding#install" data-i18n="install">{{install}}</a><a href="privacy.html" data-local-link data-i18n="privacy">{{privacy}}</a><a href="terms.html" data-local-link data-i18n="terms">{{terms}}</a></nav>
+  <div class="starter" aria-label="{{quickStart}}" data-i18n-aria="quickStart">
+    <button data-skill="vibe-map" data-i18n="map">{{map}}</button>
+    <button data-skill="vibe-review" data-i18n="review">{{review}}</button>
+    <button data-skill="vibe-probe" data-i18n="probe">{{probe}}</button>
+    <button data-skill="vibe-task" data-i18n="task">{{task}}</button>
+  </div>
+  <section aria-label="{{catalog}}" data-i18n-aria="catalog">
+    <div class="tools">
+      <label><span data-i18n="search">{{search}}</span><input id="query" type="search" placeholder="{{searchPlaceholder}}" data-i18n-placeholder="searchPlaceholder" autocomplete="off"></label>
+      <label><span data-i18n="category">{{category}}</span><select id="category"><option value="">{{allCategories}}</option></select></label>
+      <label><span data-i18n="action">{{action}}</span><select id="mode"><option value="">{{allActions}}</option></select></label>
+    </div>
+    <div class="resultbar"><span id="count" role="status" aria-live="polite"></span><button id="reset" data-i18n="reset">{{reset}}</button></div>
+    <div class="rows" id="rows"></div>
+    <div id="empty" class="empty" hidden data-i18n="empty">{{empty}}</div>
+    <noscript><p>{{noScript}}</p></noscript>
+  </section>
+  <footer><span data-i18n="local">{{local}}</span><a href="https://github.com/arty-kk/vibe-coding#readme" data-i18n="guide">{{guide}}</a><a href="https://github.com/arty-kk/vibe-coding">GitHub</a><a href="https://github.com/arty-kk/vibe-coding/issues" data-i18n="support">{{support}}</a></footer>
+</main>
+<dialog id="detail" aria-labelledby="detail-title">
+  <div class="dialogtop"><span id="detail-badge" class="badge"></span><button class="close" id="close" aria-label="{{close}}" data-i18n-aria="close">×</button></div>
+  <h2 id="detail-title"></h2><p class="detailmeta" id="detail-meta"></p><p id="detail-summary" class="detailmeta"></p>
+  <label class="language-label"><span data-i18n="host">{{host}}</span><select id="host"><option value="codex">Codex</option><option value="claude">Claude Code</option></select></label>
+  <label for="prompt" class="help" data-i18n="promptHelp">{{promptHelp}}</label>
+  <textarea class="prompt" id="prompt" readonly></textarea>
+  <div class="actions"><button class="copy" id="copy" data-i18n="copy">{{copy}}</button><span id="copy-status" class="status" role="status"></span></div>
+  <details><summary data-i18n="instructions">{{instructions}}</summary><pre id="body" lang="en"></pre></details>
+  <p class="source" id="source"></p>
+</dialog>
+<script type="application/json" id="recipe-data">__RECIPE_DATA__</script>
+<script type="application/json" id="search-data">__SEARCH_DATA__</script>
+<script type="application/json" id="locale-data">__LOCALE_DATA__</script>
+<script>__LANGUAGE_JS__</script>
+<script>__CATALOG_JS__</script>
+</body>
+</html>

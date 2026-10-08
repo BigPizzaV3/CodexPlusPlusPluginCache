@@ -1,0 +1,25 @@
+{
+  "canonical_source": {
+    "repository": "https://github.com/tahr-security/tahr-security-skills",
+    "sha": "028c11900555638cabe9b7c8c4ee768a04d9e2c1"
+  },
+  "plugin_version": "0.2.0",
+  "skills": [
+    "tahr-audit-android",
+    "tahr-audit-secrets-config",
+    "tahr-map-attack-surface",
+    "tahr-review-tahr-findings",
+    "tahr-secure-app",
+    "tahr-test-access-control",
+    "tahr-test-ai-agents",
+    "tahr-test-authentication",
+    "tahr-test-business-workflows",
+    "tahr-threat-model-app",
+    "tahr-trace-dangerous-inputs",
+    "tahr-verify-security-fix"
+  ],
+  "wrapper": {
+    "repository": "https://github.com/tahr-security/tahr-codex-plugin",
+    "sha": "c6c9cccaab56a5dcbd966705205aa92d95a5880f"
+  }
+}

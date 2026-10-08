@@ -1,0 +1,4 @@
+interface:
+  display_name: "Musical"
+  short_description: "Interactive music theory teaching and practice"
+  default_prompt: "Use Musical to quiz me on intervals."

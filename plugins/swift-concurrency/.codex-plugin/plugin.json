@@ -1,0 +1,51 @@
+{
+  "author": {
+    "email": "contact@avanderlee.com",
+    "name": "Antoine van der Lee",
+    "url": "https://www.avanderlee.com"
+  },
+  "description": "Expert guidance on Swift Concurrency best practices, patterns, and implementation. Covers async/await, actors, tasks, Sendable conformance, data race prevention, and Swift 6 migration strategies.",
+  "homepage": "https://github.com/AvdLee/Swift-Concurrency-Agent-Skill",
+  "interface": {
+    "brandColor": "#F05138",
+    "brandColorDark": "#F05138",
+    "capabilities": [],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Migrate this class to Swift 6 strict concurrency.",
+      "Diagnose the data race warnings in this file and fix them.",
+      "Refactor this completion handler code to async/await."
+    ],
+    "developerName": "Antoine van der Lee",
+    "displayName": "Swift Concurrency",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Expert guidance on Swift Concurrency best practices, patterns, and implementation. Covers async/await, actors, tasks, Sendable conformance, data race prevention, and Swift 6 migration strategies.",
+    "shortDescription": "Master Swift 6 concurrency",
+    "supportURL": "https://github.com/AvdLee/Swift-Concurrency-Agent-Skill/issues",
+    "termsOfServiceURL": "https://github.com/AvdLee/Swift-Concurrency-Agent-Skill/blob/main/LICENSE",
+    "websiteURL": "https://github.com/AvdLee/Swift-Concurrency-Agent-Skill"
+  },
+  "keywords": [
+    "swift",
+    "concurrency",
+    "async-await",
+    "actors",
+    "sendable",
+    "swift6",
+    "data-races",
+    "threading",
+    "task-groups",
+    "main-actor",
+    "core-data",
+    "migration",
+    "ios",
+    "macos",
+    "apple"
+  ],
+  "license": "MIT",
+  "name": "swift-concurrency",
+  "repository": "https://github.com/AvdLee/Swift-Concurrency-Agent-Skill",
+  "skills": "./skills/",
+  "version": "2.3.0"
+}

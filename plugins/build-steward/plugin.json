@@ -1,0 +1,13 @@
+{
+  "name": "build-steward",
+  "version": "0.1.1",
+  "description": "Audit agent and build residue, prepare exact reclaim plans, and apply only approved safe items with receipts.",
+  "author": {
+    "name": "Dimitri Stefanopoulos",
+    "url": "https://github.com/FibonacciAi"
+  },
+  "homepage": "https://github.com/FibonacciAi/build-steward",
+  "repository": "https://github.com/FibonacciAi/build-steward",
+  "license": "MIT",
+  "keywords": ["disk-space", "build-cache", "xcode", "worktrees", "local-first"]
+}

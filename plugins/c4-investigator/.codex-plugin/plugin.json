@@ -1,0 +1,37 @@
+{
+  "author": {
+    "name": "C4 Lab"
+  },
+  "description": "Guided, evidence-led workflows for cryptocurrency and cyber-enabled investigations.",
+  "interface": {
+    "brandColor": "#08C7D9",
+    "brandColorDark": "#26E5F7",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Investigate a suspected fake trading app.",
+      "Organize this case evidence and identify gaps.",
+      "Draft a review-ready investigation report."
+    ],
+    "developerName": "C4 Lab",
+    "displayName": "C4 Investigator",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "C4 Investigator guides evidence-led cryptocurrency and cyber-enabled investigations from intake and preservation through analysis, legal review, and structured reporting.",
+    "shortDescription": "Guided Investigations"
+  },
+  "keywords": [
+    "investigation",
+    "cryptocurrency",
+    "blockchain-forensics",
+    "fake-trading-app",
+    "evidence"
+  ],
+  "license": "MIT",
+  "name": "c4-investigator",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

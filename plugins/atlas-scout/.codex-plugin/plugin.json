@@ -1,0 +1,46 @@
+{
+  "author": {
+    "email": "support@atlasscout.dev",
+    "name": "Zagu\u00e1n Labs",
+    "url": "https://atlasscout.dev"
+  },
+  "description": "Local, read-only structural code navigation for Codex",
+  "homepage": "https://atlasscout.dev/docs",
+  "interface": {
+    "brandColor": "#E8935C",
+    "brandColorDark": "#E8935C",
+    "capabilities": [
+      "Read-only",
+      "Local workspace",
+      "Structural navigation"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Find this symbol and show its exact source range.",
+      "Show callers and references for this function.",
+      "Estimate this change's impact and likely tests."
+    ],
+    "developerName": "Stig-\u00d8rjan Smelror",
+    "displayName": "Atlas Scout",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Atlas Scout gives Codex local structural-index evidence for definitions, exact source ranges, references, static call paths, architecture, and bounded edit impact. Source code stays on the workstation; the separately installed runtime creates a disposable SQLite index in the selected workspace.",
+    "privacyPolicyURL": "https://atlasscout.dev/legal/privacy",
+    "shortDescription": "Local structural code maps",
+    "supportURL": "https://atlasscout.dev/docs",
+    "termsOfServiceURL": "https://atlasscout.dev/legal/eula",
+    "websiteURL": "https://atlasscout.dev"
+  },
+  "keywords": [
+    "mcp",
+    "code-navigation",
+    "symbols",
+    "references",
+    "local-index"
+  ],
+  "license": "Apache-2.0",
+  "name": "atlas-scout",
+  "repository": "https://github.com/ZaguanLabs/atlas-scout-codex-plugin",
+  "skills": "./skills/",
+  "version": "1.0.0-preview.29"
+}

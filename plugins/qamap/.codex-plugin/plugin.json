@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "IvoryCanvas",
+    "url": "https://github.com/IvoryCanvas"
+  },
+  "description": "Turn PR changes into traceable local QA decisions and optional automation handoffs without an LLM call.",
+  "homepage": "https://github.com/IvoryCanvas/QAMap#readme",
+  "interface": {
+    "brandColor": "#0E7490",
+    "brandColorDark": "#6FD5F1",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Analyze this branch with QAMap and show what must be verified before merge.",
+      "Trace this PR's highest-risk QA scenario to its exact diff evidence with QAMap.",
+      "Show QAMap's selected validation and its action contract before running anything."
+    ],
+    "developerName": "Hansung Kwon",
+    "displayName": "QAMap",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Review PR changes with local source and test evidence, affected behavior, and suggested QA checks. QAMap makes no model calls. An agent can interpret its bounded report, but still uses model tokens; missing evidence stays explicit and tests do not run automatically.",
+    "privacyPolicyURL": "https://github.com/IvoryCanvas/QAMap/blob/main/PRIVACY.md",
+    "shortDescription": "Trace PR risk before merge",
+    "supportURL": "https://github.com/IvoryCanvas/QAMap/issues/new/choose",
+    "termsOfServiceURL": "https://github.com/IvoryCanvas/QAMap/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/IvoryCanvas/QAMap"
+  },
+  "keywords": [
+    "qa",
+    "pull-request",
+    "local-first",
+    "agent-skill",
+    "e2e"
+  ],
+  "license": "MIT",
+  "name": "qamap",
+  "repository": "https://github.com/IvoryCanvas/QAMap",
+  "skills": "./skills/",
+  "version": "0.5.1"
+}

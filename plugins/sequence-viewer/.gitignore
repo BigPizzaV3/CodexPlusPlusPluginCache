@@ -1,0 +1,7 @@
+bundle/
+debug-viewer.html
+dist/
+e2e/generated-viewer.html
+EXEC_PLAN.md
+node_modules/
+output/playwright/

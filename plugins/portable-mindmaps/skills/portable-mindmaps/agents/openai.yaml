@@ -1,0 +1,4 @@
+interface:
+  display_name: "Portable Mind Maps"
+  short_description: "Author, merge, diff, and preview portable mind maps"
+  default_prompt: "Use $portable-mindmaps to author, safely merge, diff, convert, or structurally preview a rich portable mind map."

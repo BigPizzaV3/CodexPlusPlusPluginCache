@@ -1,0 +1,40 @@
+schema = "fifth-ledger.project.v1"
+status = "proposed"
+profile_path = ".fifth-ledger/project.toml"
+visibility = "tracked-public"
+last_verified = "unverified"
+verification_scope = "Routing and placement only; this is not a project, deployment, publication, or release-state claim."
+
+routed_paths = [
+  "AGENTS.md",
+]
+
+evidence_expectations = [
+  "Record required validation commands, exact identity, freshness, mutation parity, and unavailable evidence.",
+  "Treat routed_paths as flat reachability only; keep topic ownership and precedence in project canon or record the Canon gap.",
+]
+
+surfaces = [
+  "Record runtime, API/schema, UI/generated, documentation/support, and public/private surfaces when material.",
+]
+
+protected_invariants = [
+  "Replace this example with project-owned invariants before acceptance.",
+]
+
+[authority]
+project_owner_state = "unavailable"
+project_owner = "unavailable"
+owner_resolution_authority = "An explicit human owner decision recorded in project canon."
+profile_acceptance_authority_state = "unavailable"
+profile_acceptance_authority = "unavailable"
+profile_acceptance_resolution_authority = "The project owner or an explicitly delegated profile authority."
+
+[lifecycle]
+proposal_decision = "Proposed profile; no acceptance inferred."
+implementation = "Profile authoring only."
+validation = "Unverified until the required structural and project checks run."
+commit = "No staging or commit inferred."
+installation_marketplace = "No installation or marketplace state inferred."
+publication_release = "No publication or release state inferred."
+closeout = "Record the explicit decision and exact evidence without collapsing later gates."

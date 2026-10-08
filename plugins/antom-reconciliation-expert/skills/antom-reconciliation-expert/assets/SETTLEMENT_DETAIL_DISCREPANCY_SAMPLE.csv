@@ -1,0 +1,2 @@
+settlementBatchId,transactionId,transactionRequestId,transactionType,paymentMethodType,transactionAmountValue,transactionCurrency,settlementAmountValue,settlementCurrency,settlementInitiatedDate,cardBrand,cardCountry,paymentMethodFeeAmountValue
+sample-batch-002,sample-tx-003,sample-request-003,PAYMENT,CARD,50.00,USD,48.00,USD,2026-08-31,MASTERCARD,SG,-1.50

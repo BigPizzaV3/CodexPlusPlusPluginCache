@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Data Consistency"
+  short_description: "Preserve durable invariants under races"
+  default_prompt: "Use $go-data-consistency to design this Go persistence invariant and transaction boundary."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,48 @@
+{
+  "author": {
+    "name": "Oximy",
+    "url": "https://oximy.com"
+  },
+  "description": "Ten evidence-led checks for understanding what AI work touched, changed, remembered, and actually completed.",
+  "homepage": "https://github.com/OximyHQ/oximy-reality-checks#readme",
+  "interface": {
+    "brandColor": "#FF4D00",
+    "brandColorDark": "#FF4D00",
+    "capabilities": [
+      "Read",
+      "Analyze",
+      "Write local reports"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "Check whether this agent task actually finished.",
+      "Review this material before I share it with AI.",
+      "Find where this agent run first went wrong."
+    ],
+    "developerName": "Oximy",
+    "displayName": "Oximy Reality Checks",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Ten local-first checks for consequential AI work. Trace where data moved, review what an agent can remember, compare AI drafts with accepted work, right-size agent access, diagnose failed runs, and verify claimed outcomes against durable systems of record. Every check separates evidence from inference, preserves unknowns, and ends with a visible completion criterion.",
+    "privacyPolicyURL": "https://oximy.com/privacy",
+    "shortDescription": "Verify consequential AI work",
+    "supportURL": "https://github.com/OximyHQ/oximy-reality-checks/issues",
+    "termsOfServiceURL": "https://oximy.com/terms",
+    "websiteURL": "https://github.com/OximyHQ/oximy-reality-checks"
+  },
+  "keywords": [
+    "ai",
+    "audit",
+    "evidence",
+    "privacy",
+    "security",
+    "workflows"
+  ],
+  "license": "MIT",
+  "name": "oximy-reality-checks",
+  "repository": "https://github.com/OximyHQ/oximy-reality-checks",
+  "skills": "./skills",
+  "version": "0.1.2"
+}

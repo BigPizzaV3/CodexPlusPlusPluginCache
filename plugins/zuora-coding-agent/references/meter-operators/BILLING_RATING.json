@@ -1,0 +1,76 @@
+{
+  "key": "BILLING_RATING",
+  "nodeType": "PROCESSOR",
+  "operatorType": "BILLING_RATING",
+  "metadata": {
+    "fieldMappings": [
+      {
+        "name": "SubscriptionNumber",
+        "field": null,
+        "required": true,
+        "type": null
+      },
+      {
+        "name": "ChargeNumber",
+        "field": null,
+        "required": true,
+        "type": null
+      },
+      {
+        "name": "Quantity",
+        "field": null,
+        "required": true,
+        "type": null
+      },
+      {
+        "name": "StartDateTime",
+        "field": null,
+        "dateFormat": "yyyy-MM-dd",
+        "required": false,
+        "type": null
+      },
+      {
+        "name": "UniqueId",
+        "field": null,
+        "required": false,
+        "type": null
+      },
+      {
+        "name": "AccountNumber",
+        "field": null,
+        "required": false,
+        "type": null
+      }
+    ]
+  },
+  "label": "Billing Rating",
+  "hints": {
+    "fieldMappings[].type": "string | number | boolean | datetime | object | array — if an EventSchema is available (from call_mediation_api), look up the schema field definitions and use the matching type; do not guess or default arbitrarily. Hints show valid options — the schema tells you which one to use."
+  },
+  "assumptions": [
+    {
+      "iterate": "fieldMappings",
+      "item_when": {
+        "field": "name",
+        "equals": "StartDateTime"
+      },
+      "item_field_to_set": "dateFormat",
+      "value": "yyyy-MM-dd",
+      "field_label_template": "fieldMappings[StartDateTime].dateFormat",
+      "reason": "ISO date format is the standard for Zuora billing start dates.",
+      "confidence": 0.85
+    }
+  ],
+  "blockers": [
+    {
+      "iterate": "fieldMappings",
+      "item_when": {
+        "field": "required",
+        "equals": true
+      },
+      "require_item_field": "field",
+      "field_label_template": "fieldMappings[{name}].field",
+      "message_template": "BILLING_RATING requires a source field mapped to '{name}'. Which event field contains this value?"
+    }
+  ]
+}

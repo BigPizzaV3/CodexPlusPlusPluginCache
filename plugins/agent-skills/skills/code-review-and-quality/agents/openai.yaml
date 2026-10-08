@@ -1,0 +1,9 @@
+interface:
+  display_name: Code Review And Quality
+  short_description: Conducts multi-axis code review
+  default_prompt: Use $code-review-and-quality for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

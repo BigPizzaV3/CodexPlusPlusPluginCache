@@ -1,0 +1,5 @@
+interface:
+  display_name: Forecast Trust Market
+  short_description: Forecast confidence governance
+policy:
+  allow_implicit_invocation: false

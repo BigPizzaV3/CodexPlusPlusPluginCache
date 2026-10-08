@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:metrics-observation-input:1",
+  "title": "note Workspace metrics observation input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "request_id", "run_id", "collection_mode", "observed_at",
+    "article", "metrics", "note"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "run_id": {"type": "string", "pattern": "^run-[a-z0-9][a-z0-9._:-]{6,127}$"},
+    "collection_mode": {"enum": ["manual", "scheduled"]},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "article": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "origin", "article_id", "article_revision", "registry_event_sha256",
+        "title", "public_url", "published_at"
+      ],
+      "properties": {
+        "origin": {"enum": ["workspace_draft", "existing_public_article"]},
+        "article_id": {"type": "string", "pattern": "^article-[a-z0-9][a-z0-9-]{2,63}$"},
+        "article_revision": {"type": ["integer", "null"], "minimum": 1},
+        "registry_event_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "title": {"type": "string", "minLength": 1, "maxLength": 200},
+        "public_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://(?:www\\.)?note\\.com/(?:[A-Za-z0-9_-]+/)?n/[A-Za-z0-9_-]+$",
+          "maxLength": 1000
+        },
+        "published_at": {"type": ["string", "null"], "format": "date-time"}
+      },
+      "allOf": [{
+        "if": {"properties": {"origin": {"const": "workspace_draft"}}, "required": ["origin"]},
+        "then": {
+          "properties": {
+            "article_revision": {"type": "integer", "minimum": 1},
+            "registry_event_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          }
+        },
+        "else": {
+          "properties": {
+            "article_revision": {"type": "null"},
+            "registry_event_sha256": {"type": "null"}
+          }
+        }
+      }]
+    },
+    "metrics": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["metric", "status", "value", "source", "reason"],
+        "properties": {
+          "metric": {"enum": ["views", "likes", "comments"]},
+          "status": {"enum": ["available", "unavailable", "not_visible", "fetch_failed", "not_applicable"]},
+          "value": {"type": ["integer", "null"], "minimum": 0},
+          "source": {"enum": ["note_public_page", "note_creator_dashboard", "manual_user_report", "not_observed"]},
+          "reason": {"type": ["string", "null"], "maxLength": 500}
+        },
+        "allOf": [{
+          "if": {"properties": {"status": {"const": "available"}}, "required": ["status"]},
+          "then": {
+            "properties": {
+              "value": {"type": "integer", "minimum": 0},
+              "reason": {"type": "null"},
+              "source": {"enum": ["note_public_page", "note_creator_dashboard", "manual_user_report"]}
+            }
+          },
+          "else": {
+            "properties": {
+              "value": {"type": "null"},
+              "reason": {"type": "string", "minLength": 1, "maxLength": 500}
+            }
+          }
+        }]
+      }
+    },
+    "note": {"type": ["string", "null"], "maxLength": 500}
+  }
+}

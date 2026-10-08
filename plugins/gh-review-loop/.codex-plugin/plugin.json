@@ -1,0 +1,53 @@
+{
+  "author": {
+    "email": "oren.as@gmail.com",
+    "name": "Oren Ashkenazy",
+    "url": "https://github.com/OrenAshkenazy"
+  },
+  "description": "Clears AI reviewer feedback on your PR: reads real review-thread state, sweeps the sibling instances the reviewer missed, gates every push on your repo's own tests, then requests re-review \u2014 hard-capped at 3 re-review requests. Offers Codex first; any reviewer bot can be configured.",
+  "homepage": "https://github.com/OrenAshkenazy/gh-review-loop",
+  "interface": {
+    "brandColor": "#1F6FEB",
+    "brandColorDark": "#1F6FEB",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Execute"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Run the AI reviewer loop",
+      "Only fix high-severity reviewer findings",
+      "Just audit reviewer comments, don't touch anything"
+    ],
+    "developerName": "Oren Ashkenazy",
+    "displayName": "GH Review Loop",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Clears AI reviewer feedback on a GitHub PR without leaving your coding agent. Waits for the configured reviewer (Codex, CodeRabbit, Copilot, or any compatible bot), reads real review-thread state via GraphQL so resolved, outdated, and already-answered threads are skipped, then fixes what is actionable in severity order. Findings are clustered by kind, so a pattern flagged at two sites gets swept across the PR's changed files in one cycle instead of dripping back over three reviews. Every fix is gated on your repository's own tests and linters before it is pushed, and re-review requests are hard-capped (default 3) so the loop cannot spam the PR. Optional per-finding triage flags false positives before you spend a cycle on them, and each run leaves an audit trail plus local stats.",
+    "privacyPolicyURL": "https://github.com/OrenAshkenazy/gh-review-loop/blob/main/PRIVACY.md",
+    "shortDescription": "Capped AI PR review fix loop",
+    "termsOfServiceURL": "https://github.com/OrenAshkenazy/gh-review-loop/blob/main/LICENSE",
+    "websiteURL": "https://github.com/OrenAshkenazy/gh-review-loop"
+  },
+  "keywords": [
+    "code-review",
+    "ai-code-review",
+    "pull-request",
+    "review-automation",
+    "codex",
+    "coderabbit",
+    "copilot",
+    "review-bot",
+    "gh-cli",
+    "claude-code-plugin",
+    "codex-plugin",
+    "agent-skills",
+    "gemini-code-assist"
+  ],
+  "license": "MIT",
+  "name": "gh-review-loop",
+  "repository": "https://github.com/OrenAshkenazy/gh-review-loop",
+  "skills": "./skills/",
+  "version": "0.4.2"
+}

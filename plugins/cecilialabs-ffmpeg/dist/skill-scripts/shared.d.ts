@@ -1,0 +1,21 @@
+import type { ExecutionContextInfo, SkillResultEnvelope, SkillScriptHandlerContext, SkillScriptHandlerResult, SkillScriptRequest } from "../skill-runtime/types.js";
+export type SkillInput = Record<string, unknown>;
+export declare function objectInput(value: unknown): SkillInput;
+export declare function requiredString(input: SkillInput, name: string): string;
+export declare function optionalString(input: SkillInput, name: string): string | undefined;
+export declare function requiredNumber(input: SkillInput, name: string): number;
+export declare function optionalNumber(input: SkillInput, name: string): number | undefined;
+export declare function optionalBoolean(input: SkillInput, name: string): boolean | undefined;
+export declare function optionalStringArray(input: SkillInput, name: string): string[] | undefined;
+export declare function requiredStringArray(input: SkillInput, name: string): string[];
+export declare function enumValue<T extends string>(input: SkillInput, name: string, allowed: readonly T[]): T | undefined;
+export declare function requiredEnum<T extends string>(input: SkillInput, name: string, allowed: readonly T[]): T;
+export declare function inputPath(input: SkillInput, name: string, request: SkillScriptRequest<SkillInput>): string;
+export declare function runtimeOptions(input: SkillInput, request: SkillScriptRequest<SkillInput>, context: ExecutionContextInfo, signal: AbortSignal): Record<string, unknown>;
+export declare function contextPlan(input: SkillInput, context: ExecutionContextInfo, next: string): SkillScriptHandlerResult<Record<string, unknown>> | undefined;
+export declare function artifactsForReport(report: unknown): SkillResultEnvelope["artifacts"];
+export declare function reportResult(input: SkillInput, report: unknown, next?: readonly string[]): SkillScriptHandlerResult<unknown>;
+type SkillHandler = (context: SkillScriptHandlerContext<SkillInput>) => Promise<SkillScriptHandlerResult<unknown>>;
+export declare function executeSkillScript(operation: string, handler: SkillHandler): Promise<void>;
+export {};
+//# sourceMappingURL=shared.d.ts.map

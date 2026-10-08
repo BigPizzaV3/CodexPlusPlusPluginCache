@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "IP enforcement, infringement, assignment, portfolio, licensing, and India trademark-proceeding skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#7C3AED",
+    "brandColorDark": "#7C3AED",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Analyse this IP right, accused conduct, evidence, defences, and remedies.",
+      "Draft or review this IP assignment, licence, or enforcement notice.",
+      "Audit this portfolio or prepare this Indian trademark opposition matter."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: IP",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Six reusable intellectual-property workflows covering enforcement notices, infringement analysis, assignments, portfolio audits, licensing, and Indian trademark opposition and rectification proceedings.",
+    "shortDescription": "IP law workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "intellectual-property",
+    "licensing",
+    "trademarks",
+    "copyright"
+  ],
+  "license": "MIT",
+  "name": "ip",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Scenario Simulation"
+  short_description: "Model what-if campaign outcomes"
+  default_prompt: "Model these marketing scenarios and show which assumptions could flip the decision."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

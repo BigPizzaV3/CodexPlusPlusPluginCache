@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Family maintenance, matrimonial, settlement, succession, and will-drafting skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#9D4EDD",
+    "brandColorDark": "#9D4EDD",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Model a transparent family maintenance proposal from these figures.",
+      "Draft the matrimonial or family settlement documents for these facts.",
+      "Map the succession position or prepare a will from these instructions."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Family",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Five reusable legal workflows covering maintenance, Indian matrimonial petitions and succession, family settlements, and wills.",
+    "shortDescription": "Family law workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "family",
+    "matrimonial",
+    "succession",
+    "wills"
+  ],
+  "license": "MIT",
+  "name": "family",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.3"
+}

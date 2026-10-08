@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "note-workspace",
+  "display_name": "note Workspace｜ROGNALIA",
+  "distribution": "openai-plugin",
+  "plugin_manifest": "plugin.json",
+  "alternative_distribution": "standalone-agent-skills",
+  "license": "Apache-2.0",
+  "entry_skill": "note-workspace-setup",
+  "lifecycle": {
+    "setup_entry": "note-workspace-setup",
+    "workspace_phase_after_setup": "operation",
+    "workspace_runtime_guide": "STUDIO.md",
+    "user_entry": "natural_language"
+  },
+  "skills": [
+    {
+      "id": "note-workspace-setup",
+      "path": "skills/note-workspace-setup",
+      "required": true,
+      "status": "implemented"
+    },
+    {
+      "id": "note-strategist",
+      "path": "skills/note-strategist",
+      "required": true,
+      "status": "implemented"
+    },
+    {
+      "id": "note-source-log",
+      "path": "skills/note-source-log",
+      "required": true,
+      "status": "implemented"
+    },
+    {
+      "id": "note-draft-quality",
+      "path": "skills/note-draft-quality",
+      "required": true,
+      "status": "implemented"
+    },
+    {
+      "id": "note-writer",
+      "path": "skills/note-writer",
+      "required": true,
+      "status": "implemented"
+    },
+    {
+      "id": "note-image",
+      "path": "skills/note-image",
+      "required": true,
+      "status": "implemented"
+    },
+    {
+      "id": "note-draft",
+      "path": "skills/note-draft",
+      "required": true,
+      "status": "implemented"
+    },
+    {
+      "id": "note-style-profile",
+      "path": "skills/note-style-profile",
+      "required": true,
+      "status": "implemented"
+    },
+    {
+      "id": "note-tracker",
+      "path": "skills/note-tracker",
+      "required": true,
+      "status": "implemented"
+    }
+  ]
+}

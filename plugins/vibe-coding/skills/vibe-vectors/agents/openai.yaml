@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Vector databases"
+  short_description: "Vector search, ACLs, recall and reindexing"
+  default_prompt: "Use $vibe-vectors to audit the selected vector databases boundary."

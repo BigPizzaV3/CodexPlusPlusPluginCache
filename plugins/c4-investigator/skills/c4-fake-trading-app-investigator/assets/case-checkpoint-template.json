@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.1.0",
+  "case": {
+    "reference": "",
+    "title": "",
+    "status": "Active — material gaps remain",
+    "purpose": "",
+    "jurisdiction": {"country": "India", "state_or_ut": "", "locations": []},
+    "incident_start": "",
+    "incident_end": "",
+    "investigator_role": "",
+    "authority_basis": "",
+    "checkpoint_at": ""
+  },
+  "allegation_summary": {"neutral_summary": "", "claimed_loss": []},
+  "evidence": [],
+  "entities": [],
+  "iocs": [],
+  "transactions": [],
+  "timeline": [],
+  "hypotheses": [],
+  "findings": [],
+  "legal_candidates": [],
+  "actions": [],
+  "contradictions": [],
+  "limitations": [],
+  "open_questions": [],
+  "readiness": {
+    "status": "Active — material gaps remain",
+    "checks": {},
+    "investigator_confirmed": false,
+    "rationale": ""
+  }
+}

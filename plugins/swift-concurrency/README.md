@@ -1,0 +1,205 @@
+<p align="center">
+    <a href="https://www.swiftconcurrencycourse.com?utm_source=github&utm_medium=agent-skill&utm_campaign=swift-concurrency-skill">
+        <img width="900px" src="assets/github_readme_banner.jpg" alt="Swift Concurrency Agent Skill banner">
+    </a>
+</p>
+
+# Swift Concurrency Agent Skill
+
+Expert guidance for any AI coding tool that supports the [Agent Skills open format](https://agentskills.io/home) — safe concurrency, performance, and Swift 6+ migration.
+
+Based on the comprehensive [Swift Concurrency Course](https://www.swiftconcurrencycourse.com?utm_source=github&utm_medium=agent-skill&utm_campaign=swift-concurrency-skill), distilled into actionable, concise references for agents.
+
+This repository is packaged as a portable [Agent Plugin](https://agent-plugins.org) (spec 1.0.0): compatible clients discover the skill automatically from the root `plugin.json` manifest and the `skills/` directory. Client-specific manifests for Claude Code, Cursor, Codex, and pi are included as well, and the plugin is published in the OpenAI Plugins Directory for ChatGPT and Codex.
+
+## Who this is for
+- Teams migrating to Swift 6 / strict concurrency who need safe defaults and quick triage.
+- Developers debugging data races, isolation errors, or flaky async tests.
+- Anyone wanting performance-minded concurrency patterns (actors, tasks, Sendable, async streams).
+
+## See also my other skills:
+- [SwiftUI Expert](https://github.com/AvdLee/SwiftUI-Agent-Skill)
+- [Core Data Expert](https://github.com/AvdLee/Core-Data-Agent-Skill)
+- [Swift Testing Expert](https://github.com/AvdLee/Swift-Testing-Agent-Skill)
+
+## How to Use This Skill
+
+### Option A: Using skills.sh (recommended)
+Install this skill with a single command:
+```bash
+npx skills add https://github.com/avdlee/swift-concurrency-agent-skill --skill swift-concurrency
+```
+
+For more information, visit the [skills.sh platform page](https://skills.sh/avdlee/swift-concurrency-agent-skill/swift-concurrency).
+
+Then use the skill in your AI agent, for example:  
+> Use the swift concurrency skill and analyze the current project for Swift Concurrency improvements
+
+### Option B: ChatGPT & Codex (OpenAI Plugins Directory)
+
+This plugin is published in the universal OpenAI Plugins Directory shared by ChatGPT and Codex:
+
+1. In the ChatGPT desktop app, select **Codex** (or ChatGPT with **Work** enabled), or use the plugin browser in Codex CLI.
+2. Open **Plugins** and search for "Swift Concurrency".
+3. Install the plugin. The skill becomes available in new chats and sessions.
+
+### Option C: Claude Code Plugin
+
+#### Personal Usage
+
+To install this Skill for your personal use in Claude Code:
+
+1. Add the marketplace:
+   ```bash
+   /plugin marketplace add AvdLee/Swift-Concurrency-Agent-Skill
+   ```
+
+2. Install the Skill:
+   ```bash
+   /plugin install swift-concurrency@swift-concurrency-agent-skill
+   ```
+
+#### Project Configuration
+
+To automatically provide this Skill to everyone working in a repository, configure the repository's `.claude/settings.json`:
+
+```json
+{
+  "enabledPlugins": {
+    "swift-concurrency@swift-concurrency-agent-skill": true
+  },
+  "extraKnownMarketplaces": {
+    "swift-concurrency-agent-skill": {
+      "source": {
+        "source": "github",
+        "repo": "AvdLee/Swift-Concurrency-Agent-Skill"
+      }
+    }
+  }
+}
+```
+
+When team members open the project, Claude Code will prompt them to install the Skill.
+
+### Option D: Cursor Plugin
+
+Load the plugin from a local clone by placing it in `~/.cursor/plugins/local`, or install it from the Cursor Marketplace once listed. Cursor supports both the portable Agent Plugins manifest (`plugin.json`) and the Cursor Plugin manifest (`.cursor-plugin/plugin.json`) included in this repository.
+
+### Using another tool?
+
+See [INSTALLATION.md](INSTALLATION.md) for all other installation options: pi, Gemini CLI, Autohand Code, and manual installation.
+
+**How to verify**: 
+
+Your agent should reference the triage/playbook in `skills/swift-concurrency/SKILL.md` and jump into the relevant reference file for your error or task.
+
+## What This Skill Offers
+
+This skill gives your AI coding tool comprehensive Swift Concurrency guidance. It can:
+
+### Guide Your Concurrency Decisions
+- Choose the right tool for the job (async/await, actors, tasks, task groups)
+- Understand when to use `@MainActor`, custom actors, or `nonisolated`
+- Navigate isolation domains and prevent data races at compile time
+- Apply `Sendable` conformance correctly for value and reference types
+
+### Write Safe Concurrent Code
+- Avoid common pitfalls like actor reentrancy and retain cycles
+- Prevent data races with proper isolation
+- Handle task cancellation and error propagation correctly
+- Manage memory safely in concurrent contexts
+
+### Optimize Performance
+- Choose between serialized, asynchronous, and parallel execution
+- Reduce actor contention and unnecessary suspension points
+- Understand the tradeoffs of parallelism
+
+### Migrate to Swift 6
+- Step-by-step migration strategies for existing codebases
+- Enable strict concurrency checking incrementally
+- Rewrite closure-based code to async/await
+- Migrate from Combine/RxSwift to Swift Concurrency
+- Use migration tooling for upcoming Swift features
+
+### Test Concurrent Code
+- Write reliable tests using Swift Testing (recommended) or XCTest
+- Handle `@MainActor` isolation in tests
+- Use `withMainSerialExecutor` for deterministic testing
+- Avoid flaky tests with proper async handling
+
+### Integrate with Core Data
+- Safely pass data between isolation domains using `NSManagedObjectID`
+- Implement the Data Access Object (DAO) pattern
+- Use custom actor executors when needed
+- Avoid common Core Data concurrency pitfalls
+
+## What Makes This Skill Different
+
+**Expert Knowledge**: Based on real-world experience migrating large production codebases to Swift 6, distilled from the comprehensive [Swift Concurrency Course](https://www.swiftconcurrencycourse.com?utm_source=github&utm_medium=agent-skill&utm_campaign=swift-concurrency-skill).
+
+**Non-Opinionated**: Focuses on industry-standard best practices and compile-time safety, not architectural preferences. Works with any Swift project, coding style, or architecture.
+
+**Swift 6.2 Ready**: Covers the latest Swift Concurrency features including:
+- Default Actor Isolation
+- `isolated deinit`
+- Global Actor Conformance for protocols
+- `nonisolated(nonsending)` and `@concurrent`
+- Approachable Concurrency build settings
+- Concurrency-safe notifications (iOS 26+)
+
+**Practical & Concise**: Assumes your AI agent is already smart. Focuses on what developers need to know, not what they already understand. Includes code examples for every pattern.
+
+## See it in action
+[![Youtube Video](assets/agent_skills_watch_on_youtube.png)](https://www.youtube.com/watch?v=khekVi1PK3o)
+
+
+## Skill Structure
+
+```
+skills/swift-concurrency/
+├── SKILL.md                # Main skill file with decision trees
+└── references/
+    ├── _index.md               # Quick navigation index for all reference files
+    ├── actors.md               # Actor isolation, global actors, reentrancy
+    ├── async-algorithms.md     # AsyncAlgorithms operators: debounce, merge, zip, Combine migration
+    ├── async-await-basics.md   # Fundamentals of async/await syntax
+    ├── async-sequences.md      # AsyncSequence and AsyncStream patterns
+    ├── core-data.md            # Core Data integration patterns
+    ├── glossary.md             # Terms & concepts for Swift Concurrency
+    ├── linting.md              # Linting rules for strict concurrency
+    ├── memory-management.md    # Retain cycles, weak self, isolated deinit
+    ├── migration.md            # Step-by-step Swift 6 migration guide
+    ├── observation.md          # @Observable isolation, observation tracking, Sendable snapshots
+    ├── performance.md          # Optimization with Xcode Instruments
+    ├── sendable.md             # Isolation domains and Sendable conformance
+    ├── tasks.md                # Task lifecycle, cancellation, priorities
+    ├── testing.md              # Testing concurrent code
+    └── threading.md            # Threads vs tasks, suspension points
+```
+
+## Contributing
+
+Contributions are welcome! This repository follows the [Agent Skills open format](https://agentskills.io/home), which has specific structural requirements.
+
+**We strongly recommend using AI assistance for contributions:**
+- Use the [skill-creator skill](https://github.com/anthropics/skills/tree/main/skills/skill-creator) with Claude to ensure proper formatting
+- This helps maintain the Agent Skills format and ensures your contribution works correctly with AI agents
+
+**Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:**
+- How to use the skill-creator skill for contributions
+- Agent Skills format requirements
+- Quality standards and best practices
+- Pull request process
+
+This skill is maintained to reflect the latest Swift Concurrency best practices and will be updated as the language evolves.
+
+## About the Author
+
+Created by [Antoine van der Lee](https://www.avanderlee.com), a Swift Concurrency expert and creator of the [Swift Concurrency Course](https://www.swiftconcurrencycourse.com?utm_source=github&utm_medium=agent-skill&utm_campaign=swift-concurrency-skill). With years of experience in Swift & Swift Concurrency, this skill distills practical knowledge into actionable guidance for AI assistants. He [published tens of articles on Swift Concurrency](https://www.avanderlee.com/category/concurrency/) on his blog called SwiftLee.
+
+## License
+
+This skill is open-source and available under the MIT License. See [LICENSE](LICENSE) for details.
+
+
+

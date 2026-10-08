@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Matt Pocock",
+    "url": "https://www.aihero.dev"
+  },
+  "description": "Matt Pocock's composable engineering and productivity skills for planning, implementation, TDD, review, research, architecture, handoffs, and teaching.",
+  "homepage": "https://www.aihero.dev/s/skills-newsletter",
+  "interface": {
+    "capabilities": [
+      "Planning",
+      "TDD",
+      "Code review",
+      "Architecture guidance"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Choose the best workflow for this TypeScript task",
+      "Review this React or TypeScript implementation",
+      "Help me debug this coding problem using the relevant skill"
+    ],
+    "developerName": "RONALD FERRARI SOARES",
+    "displayName": "Matt Pocock Skills",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Provides reusable engineering workflows and references for TypeScript, React, tooling, debugging, and coding-agent work.",
+    "shortDescription": "Engineering workflow skills"
+  },
+  "keywords": [
+    "engineering",
+    "tdd",
+    "code-review",
+    "architecture",
+    "productivity",
+    "research"
+  ],
+  "license": "MIT",
+  "name": "mattpocock-skills",
+  "repository": "https://github.com/mattpocock/skills",
+  "skills": "./skills/",
+  "version": "1.2.3"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "frontier-infra",
+  "description": "Help developers build standalone governed agent systems using Frontier Infra standards and SDK components.",
+  "version": "0.3.2",
+  "author": {
+    "name": "Jason Brashear",
+    "url": "https://frontierinfra.org"
+  },
+  "homepage": "https://frontierinfra.org",
+  "repository": "https://github.com/frontier-infra/plugins",
+  "license": "MIT",
+  "keywords": [
+    "agent-harness",
+    "governance",
+    "verification",
+    "attestation",
+    "agent-readable-web",
+    "reliability"
+  ]
+}

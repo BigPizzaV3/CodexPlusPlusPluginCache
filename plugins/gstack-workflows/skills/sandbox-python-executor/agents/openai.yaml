@@ -1,0 +1,9 @@
+interface:
+  display_name: "Sandbox Python Executor"
+  short_description: "Route gstack workflows."
+  default_prompt: "Use Sandbox Python Executor for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: false

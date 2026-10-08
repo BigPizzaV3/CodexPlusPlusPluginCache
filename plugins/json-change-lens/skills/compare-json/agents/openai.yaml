@@ -1,0 +1,4 @@
+interface:
+  display_name: "JSON Change Lens"
+  short_description: "Explain meaningful changes between JSON files"
+  default_prompt: "Use $compare-json to compare these two JSON files and summarize what changed."

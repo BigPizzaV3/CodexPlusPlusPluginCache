@@ -1,0 +1,31 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Domotz",
+    "url": "https://www.domotz.com"
+  },
+  "description": "Monitor and manage your network infrastructure through natural language. Query devices, check alerts, inspect metrics, manage configurations, and control power across all your sites. Requires a Domotz account enabled to the MCP Preview program.",
+  "homepage": "https://www.domotz.com",
+  "interface": {
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Summarize the current network state in Domotz"
+    ],
+    "developerName": "Domotz",
+    "displayName": "Domotz (Preview)",
+    "logo": "./assets/logo.png",
+    "longDescription": "Monitor and manage your network infrastructure through natural language. Query devices, check alerts, inspect metrics, manage configurations, and control power across all your sites. Requires a Domotz account enabled to the MCP Preview program.",
+    "privacyPolicyURL": "https://www.domotz.com/product-privacy-policy.php",
+    "screenshots": [],
+    "shortDescription": "Monitor and manage networks",
+    "termsOfServiceURL": "https://www.domotz.com/terms-and-conditions.php",
+    "websiteURL": "https://www.domotz.com"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "domotz-preview",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

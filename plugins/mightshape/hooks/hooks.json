@@ -1,0 +1,19 @@
+{
+  "description": "Optional read-only MightShape project-state recovery.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${PLUGIN_ROOT}/hooks/session_start.py",
+            "statusMessage": "Checking MightShape project state",
+            "additionalContextLimit": 1800,
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

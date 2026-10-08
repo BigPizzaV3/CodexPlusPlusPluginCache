@@ -1,0 +1,1 @@
+{"version":3,"file":"output-preflight.d.ts","sourceRoot":"","sources":["../../src/cli/output-preflight.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,MAAM,WAAW,CAAC;AAGzC,OAAO,KAAK,EAAE,gBAAgB,EAAE,MAAM,qBAAqB,CAAC;AA2B5D,wBAAgB,cAAc,CAAC,OAAO,EAAE,OAAO,GAAG,MAAM,CAQvD;AAED,wBAAsB,0BAA0B,CAC9C,OAAO,EAAE,OAAO,EAChB,OAAO,EAAE,gBAAgB,GACxB,OAAO,CAAC,IAAI,CAAC,CAQf"}

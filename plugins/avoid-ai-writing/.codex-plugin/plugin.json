@@ -1,0 +1,52 @@
+{
+  "author": {
+    "name": "Conor Bronsdon",
+    "url": "https://github.com/conorbronsdon/avoid-ai-writing"
+  },
+  "description": "Audit AI-writing patterns, rewrite text while preserving voice and facts, edit files carefully, and verify that protected content survives the rewrite.",
+  "homepage": "https://github.com/conorbronsdon/avoid-ai-writing",
+  "interface": {
+    "brandColor": "#171717",
+    "brandColorDark": "#E8E8E8",
+    "capabilities": [
+      "AI-pattern audit",
+      "Detect-only review",
+      "Voice-preserving rewrite",
+      "Targeted file editing",
+      "Preservation verification",
+      "False-positive review",
+      "Multi-step writing cleanup"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Scan this text for AI writing patterns and flag only, without rewriting it.",
+      "Rewrite this draft to remove AI-isms while preserving my voice, facts, and structure.",
+      "Clean this file in place, then verify that protected content was preserved."
+    ],
+    "developerName": "Conor Bronsdon",
+    "displayName": "Avoid AI Writing",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Audit writing for recurring AI-like patterns, rewrite only what needs changing, preserve the writer's voice and source facts, edit named files with narrow changes, and verify that protected material such as code, quotes, links, numbers, frontmatter, and tables survives the edit. The package keeps the original Avoid AI Writing skill intact and adds focused ChatGPT and Codex routing for detect-only review, voice-preserving rewrites, file edits, preservation checks, and false-positive review. Its signals are writing-quality indicators, not proof of AI authorship.",
+    "privacyPolicyURL": "https://github.com/conorbronsdon/avoid-ai-writing/blob/main/PRIVACY.md",
+    "shortDescription": "Detect and rewrite AI-isms",
+    "supportURL": "https://github.com/conorbronsdon/avoid-ai-writing/issues",
+    "termsOfServiceURL": "https://github.com/conorbronsdon/avoid-ai-writing/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/conorbronsdon/avoid-ai-writing"
+  },
+  "keywords": [
+    "writing",
+    "editing",
+    "ai-writing",
+    "humanize",
+    "voice",
+    "style",
+    "audit",
+    "rewrite"
+  ],
+  "license": "MIT",
+  "name": "avoid-ai-writing",
+  "repository": "https://github.com/conorbronsdon/avoid-ai-writing",
+  "skills": "./skills/",
+  "version": "3.29.0"
+}

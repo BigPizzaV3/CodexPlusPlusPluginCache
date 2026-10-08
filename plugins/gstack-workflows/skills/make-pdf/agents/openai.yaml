@@ -1,0 +1,9 @@
+interface:
+  display_name: "Make PDF"
+  short_description: "Turn markdown or structured content into a PDF using the host document or Python capabilities whe..."
+  default_prompt: "Use Make PDF for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

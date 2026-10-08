@@ -1,0 +1,10 @@
+interface:
+  display_name: "Rehearse Japanese Speaking"
+  short_description: "Japanese speaking practice with feedback in your language."
+  icon_small: "./assets/icon-small.png"
+  icon_large: "./assets/icon-large.png"
+  brand_color: "#101A49"
+  default_prompt: "Use $rehearse-japanese-speaking to rehearse a real Japanese speaking task and ask which language I want for coaching if it is unclear."
+
+policy:
+  allow_implicit_invocation: true

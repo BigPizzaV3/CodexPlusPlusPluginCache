@@ -1,0 +1,4 @@
+interface:
+  display_name: "AgentProof"
+  short_description: "Keep a local hash-only receipt of a new Codex session"
+  default_prompt: "Use $agentproof to start a new instrumented Codex session and leave a canonical local hash-only receipt."

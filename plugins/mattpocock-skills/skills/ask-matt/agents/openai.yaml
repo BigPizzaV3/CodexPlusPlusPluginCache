@@ -1,0 +1,9 @@
+interface:
+  display_name: Ask Matt
+  short_description: Choose the right Matt Pocock workflow
+  default_prompt: Use $ask-matt for this task
+policy:
+  allow_implicit_invocation: false
+  products:
+  - CHAT
+  - CODEX

@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Talking Head"
+  short_description: "Speaking takes, word timing"
+  default_prompt: "Use $pixverse-talking-head to record this 40-word script as a natural vertical talking-head take with my presenter and return the word timing."
+policy:
+  allow_implicit_invocation: true

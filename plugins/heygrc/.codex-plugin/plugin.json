@@ -1,0 +1,48 @@
+{
+  "author": {
+    "email": "support@ismscopilot.com",
+    "name": "Better ISMS",
+    "url": "https://heygrc.com"
+  },
+  "description": "GRC compliance review for your pull requests. heyGRC reviews each PR against ISO 27001, SOC 2, GDPR, the EU AI Act and your own company profile, then posts inline findings, a neutral check run, and a sticky summary. Public repos are free.",
+  "homepage": "https://heygrc.com",
+  "interface": {
+    "brandColor": "#815CE9",
+    "brandColorDark": "#815CE9",
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Set up heyGRC compliance review on this repository.",
+      "Install the heyGRC GitHub App and configure ISO 27001, SOC 2, and GDPR on our PRs.",
+      "How do I get compliance findings on this pull request without blocking the merge?"
+    ],
+    "developerName": "BETTER ISMS",
+    "displayName": "heyGRC",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "heyGRC reviews each pull request against the frameworks your company must comply with, grounded in your company profile. It posts inline findings, a neutral check run, and one sticky summary. This plugin does not review code locally. It walks you through installing the heyGRC GitHub App so reviews run server-side. Public repositories are free.",
+    "privacyPolicyURL": "https://trust.ismscopilot.com/en/privacy-policy",
+    "shortDescription": "GRC review for your PRs",
+    "supportURL": "https://docs.heygrc.com",
+    "termsOfServiceURL": "https://trust.ismscopilot.com/en/terms",
+    "websiteURL": "https://heygrc.com"
+  },
+  "keywords": [
+    "grc",
+    "compliance",
+    "security",
+    "code-review",
+    "pull-request",
+    "iso-27001",
+    "soc-2",
+    "gdpr",
+    "eu-ai-act"
+  ],
+  "license": "MIT",
+  "name": "heygrc",
+  "repository": "https://github.com/better-isms/heygrc-plugin",
+  "skills": "./skills",
+  "version": "0.1.1"
+}

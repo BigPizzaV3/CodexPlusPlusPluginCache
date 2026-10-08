@@ -1,0 +1,6 @@
+interface:
+  display_name: "Compass"
+  short_description: "Choose the clearest ForgeMind path."
+  default_prompt: "Use $forgemind-compass with its Zero-Input Default when no additional outcome is supplied."
+policy:
+  allow_implicit_invocation: true

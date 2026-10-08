@@ -1,0 +1,28 @@
+name: Hook Regression
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  hook-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Shell syntax check
+        run: bash -n hooks/track-session.sh setup.sh
+
+      - name: Run Codex hook regression
+        run: node tests/hook-regression.mjs
+
+      - name: Check submission readiness
+        run: node tests/submission-readiness.mjs

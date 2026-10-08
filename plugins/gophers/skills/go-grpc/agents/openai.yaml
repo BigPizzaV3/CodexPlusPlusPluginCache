@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go gRPC"
+  short_description: "Build production gRPC services in Go"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-grpc to design or review this Go gRPC service."

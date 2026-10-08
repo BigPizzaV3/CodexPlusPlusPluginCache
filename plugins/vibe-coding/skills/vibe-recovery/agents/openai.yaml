@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Delivery & recovery"
+  short_description: "Releases, backups, rollbacks and recovery"
+  default_prompt: "Use $vibe-recovery to audit the selected delivery & recovery boundary."

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Close Governance Decision"
+  short_description: "Reconcile a decided proposal without drift"
+  default_prompt: "Use $close-governance-decision to reconcile an authorised decision without inventing implementation or release evidence."
+policy:
+  allow_implicit_invocation: true

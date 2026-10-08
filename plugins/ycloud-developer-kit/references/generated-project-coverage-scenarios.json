@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "profile": "full-supported-operations-v1",
+  "scenarios": [
+    {
+      "scenarioId": "authentication-to-api-domains",
+      "requiredOperations": ["crosscutting:api-authentication", "whatsapp_message-retrieve", "whatsapp_media-upload", "whatsapp_template-list", "webhook_endpoint-list", "contact-list", "custom_events-retrieve-definition", "unsubscriber-list", "whatsapp_call-download-media"],
+      "handoffs": [
+        {"handoffId": "auth-message", "producerOperationId": "crosscutting:api-authentication", "consumerOperationId": "whatsapp_message-retrieve"},
+        {"handoffId": "auth-media", "producerOperationId": "crosscutting:api-authentication", "consumerOperationId": "whatsapp_media-upload"},
+        {"handoffId": "auth-template", "producerOperationId": "crosscutting:api-authentication", "consumerOperationId": "whatsapp_template-list"},
+        {"handoffId": "auth-endpoint", "producerOperationId": "crosscutting:api-authentication", "consumerOperationId": "webhook_endpoint-list"},
+        {"handoffId": "auth-contact", "producerOperationId": "crosscutting:api-authentication", "consumerOperationId": "contact-list"},
+        {"handoffId": "auth-custom-event", "producerOperationId": "crosscutting:api-authentication", "consumerOperationId": "custom_events-retrieve-definition"},
+        {"handoffId": "auth-unsubscriber", "producerOperationId": "crosscutting:api-authentication", "consumerOperationId": "unsubscriber-list"},
+        {"handoffId": "auth-calling-media", "producerOperationId": "crosscutting:api-authentication", "consumerOperationId": "whatsapp_call-download-media"}
+      ]
+    },
+    {
+      "scenarioId": "media-upload-to-message-send",
+      "requiredOperations": ["whatsapp_media-upload", "whatsapp_message-send-directly", "whatsapp_message-send"],
+      "handoffs": [
+        {"handoffId": "media-direct-message", "producerOperationId": "whatsapp_media-upload", "consumerOperationId": "whatsapp_message-send-directly"},
+        {"handoffId": "media-queued-message", "producerOperationId": "whatsapp_media-upload", "consumerOperationId": "whatsapp_message-send"}
+      ]
+    },
+    {
+      "scenarioId": "template-lifecycle-to-message-send",
+      "requiredOperations": ["whatsapp_template-create", "whatsapp_template-retrieve-by-name-and-language", "whatsapp_message-send-directly", "whatsapp_message-send"],
+      "handoffs": [
+        {"handoffId": "template-create-retrieve", "producerOperationId": "whatsapp_template-create", "consumerOperationId": "whatsapp_template-retrieve-by-name-and-language"},
+        {"handoffId": "template-direct-message", "producerOperationId": "whatsapp_template-retrieve-by-name-and-language", "consumerOperationId": "whatsapp_message-send-directly"},
+        {"handoffId": "template-queued-message", "producerOperationId": "whatsapp_template-retrieve-by-name-and-language", "consumerOperationId": "whatsapp_message-send"}
+      ]
+    },
+    {
+      "scenarioId": "message-accepted-to-final-status",
+      "requiredOperations": ["whatsapp_message-send-directly", "whatsapp_message-send", "whatsapp_message-retrieve"],
+      "handoffs": [
+        {"handoffId": "direct-status", "producerOperationId": "whatsapp_message-send-directly", "consumerOperationId": "whatsapp_message-retrieve"},
+        {"handoffId": "queued-status", "producerOperationId": "whatsapp_message-send", "consumerOperationId": "whatsapp_message-retrieve"}
+      ]
+    },
+    {
+      "scenarioId": "endpoint-management-to-receiver",
+      "requiredOperations": ["webhook_endpoint-create", "webhook_endpoint-retrieve", "webhook_endpoint-update", "webhook_endpoint-rotate-secret", "crosscutting:webhook-receiver"],
+      "handoffs": [
+        {"handoffId": "endpoint-create-retrieve", "producerOperationId": "webhook_endpoint-create", "consumerOperationId": "webhook_endpoint-retrieve"},
+        {"handoffId": "endpoint-update-receiver", "producerOperationId": "webhook_endpoint-update", "consumerOperationId": "crosscutting:webhook-receiver"},
+        {"handoffId": "secret-receiver", "producerOperationId": "webhook_endpoint-rotate-secret", "consumerOperationId": "crosscutting:webhook-receiver"}
+      ]
+    },
+    {
+      "scenarioId": "waba-to-phone-number-to-message-template",
+      "requiredOperations": ["whatsapp_business_account-retrieve", "whatsapp_phone_number-retrieve", "whatsapp_phone_number-register", "whatsapp_message-send", "whatsapp_template-list"],
+      "handoffs": [
+        {"handoffId": "waba-phone", "producerOperationId": "whatsapp_business_account-retrieve", "consumerOperationId": "whatsapp_phone_number-retrieve"},
+        {"handoffId": "phone-register-message", "producerOperationId": "whatsapp_phone_number-register", "consumerOperationId": "whatsapp_message-send"},
+        {"handoffId": "phone-template", "producerOperationId": "whatsapp_phone_number-retrieve", "consumerOperationId": "whatsapp_template-list"}
+      ]
+    },
+    {
+      "scenarioId": "group-management-to-message-status",
+      "requiredOperations": ["whatsapp_group-create", "whatsapp_group-retrieve", "whatsapp_group-send-invite-link-message", "whatsapp_message-retrieve"],
+      "handoffs": [
+        {"handoffId": "group-create-retrieve", "producerOperationId": "whatsapp_group-create", "consumerOperationId": "whatsapp_group-retrieve"},
+        {"handoffId": "group-invite-message-status", "producerOperationId": "whatsapp_group-send-invite-link-message", "consumerOperationId": "whatsapp_message-retrieve"}
+      ]
+    },
+    {
+      "scenarioId": "flow-lifecycle-to-message-send",
+      "requiredOperations": ["whatsapp_flow-create", "whatsapp_flow-publish", "whatsapp_flow-retrieve", "whatsapp_message-send"],
+      "handoffs": [
+        {"handoffId": "flow-create-publish", "producerOperationId": "whatsapp_flow-create", "consumerOperationId": "whatsapp_flow-publish"},
+        {"handoffId": "flow-publish-retrieve", "producerOperationId": "whatsapp_flow-publish", "consumerOperationId": "whatsapp_flow-retrieve"},
+        {"handoffId": "flow-message", "producerOperationId": "whatsapp_flow-retrieve", "consumerOperationId": "whatsapp_message-send"}
+      ]
+    },
+    {
+      "scenarioId": "receiver-to-inbound-acknowledgement",
+      "requiredOperations": ["crosscutting:webhook-receiver", "whatsapp_inbound_message-mark-as-read", "whatsapp_inbound_message-typing"],
+      "handoffs": [
+        {"handoffId": "receiver-read", "producerOperationId": "crosscutting:webhook-receiver", "consumerOperationId": "whatsapp_inbound_message-mark-as-read"},
+        {"handoffId": "receiver-typing", "producerOperationId": "crosscutting:webhook-receiver", "consumerOperationId": "whatsapp_inbound_message-typing"}
+      ]
+    },
+    {
+      "scenarioId": "authentication-to-balance-readiness",
+      "requiredOperations": ["crosscutting:api-authentication", "balance-retrieve"],
+      "handoffs": [
+        {"handoffId": "auth-balance", "producerOperationId": "crosscutting:api-authentication", "consumerOperationId": "balance-retrieve"}
+      ]
+    },
+    {
+      "scenarioId": "phone-number-to-webhook-receiver",
+      "requiredOperations": ["whatsapp_phone_number-retrieve", "crosscutting:webhook-receiver"],
+      "handoffs": [
+        {"handoffId": "phone-routing-receiver", "producerOperationId": "whatsapp_phone_number-retrieve", "consumerOperationId": "crosscutting:webhook-receiver"}
+      ]
+    },
+    {
+      "scenarioId": "contact-lifecycle-to-custom-event",
+      "requiredOperations": ["contact-create", "contact-retrieve", "contact-note-create", "custom_events-send-event"],
+      "handoffs": [
+        {"handoffId": "contact-create-retrieve", "producerOperationId": "contact-create", "consumerOperationId": "contact-retrieve"},
+        {"handoffId": "contact-note", "producerOperationId": "contact-retrieve", "consumerOperationId": "contact-note-create"},
+        {"handoffId": "contact-custom-event", "producerOperationId": "contact-retrieve", "consumerOperationId": "custom_events-send-event"}
+      ]
+    },
+    {
+      "scenarioId": "custom-event-definition-to-ingestion",
+      "requiredOperations": ["custom_events-create-definition", "custom_events-create-property-definition", "custom_events-send-event"],
+      "handoffs": [
+        {"handoffId": "event-definition-property", "producerOperationId": "custom_events-create-definition", "consumerOperationId": "custom_events-create-property-definition"},
+        {"handoffId": "event-definition-send", "producerOperationId": "custom_events-create-definition", "consumerOperationId": "custom_events-send-event"}
+      ]
+    },
+    {
+      "scenarioId": "contact-to-unsubscriber-to-queued-message",
+      "requiredOperations": ["contact-retrieve", "unsubscriber-retrieve-by-customer-and-channel", "whatsapp_message-send"],
+      "handoffs": [
+        {"handoffId": "contact-unsubscriber", "producerOperationId": "contact-retrieve", "consumerOperationId": "unsubscriber-retrieve-by-customer-and-channel"},
+        {"handoffId": "contact-message", "producerOperationId": "contact-retrieve", "consumerOperationId": "whatsapp_message-send"},
+        {"handoffId": "unsubscriber-eligibility-message", "producerOperationId": "unsubscriber-retrieve-by-customer-and-channel", "consumerOperationId": "whatsapp_message-send"}
+      ]
+    },
+    {
+      "scenarioId": "receiver-to-whatsapp-calling-lifecycle",
+      "requiredOperations": ["whatsapp_phone_number-retrieve", "crosscutting:webhook-receiver", "whatsapp_call-connect", "whatsapp_call-pre-accept", "whatsapp_call-accept", "whatsapp_call-download-media"],
+      "handoffs": [
+        {"handoffId": "phone-call-connect", "producerOperationId": "whatsapp_phone_number-retrieve", "consumerOperationId": "whatsapp_call-connect"},
+        {"handoffId": "receiver-call-pre-accept", "producerOperationId": "crosscutting:webhook-receiver", "consumerOperationId": "whatsapp_call-pre-accept"},
+        {"handoffId": "call-pre-accept-accept", "producerOperationId": "whatsapp_call-pre-accept", "consumerOperationId": "whatsapp_call-accept"},
+        {"handoffId": "receiver-call-media", "producerOperationId": "crosscutting:webhook-receiver", "consumerOperationId": "whatsapp_call-download-media"}
+      ]
+    }
+  ]
+}

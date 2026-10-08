@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI Router - Route Task"
+  short_description: "Elige superficie, modelo y razonamiento antes de actuar"
+  default_prompt: "Usa $route-task y la rúbrica canónica R1 para analizar esta tarea sin ejecutarla. Ignora la superficie y configuración actuales, compara Chat, Work y Codex, explica la selección manual y espera 'listo' o 'continuar sin cambiar'."
+policy:
+  allow_implicit_invocation: true

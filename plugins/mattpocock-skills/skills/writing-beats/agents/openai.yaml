@@ -1,0 +1,9 @@
+interface:
+  display_name: Writing Beats
+  short_description: Arrange raw material into writing beats
+  default_prompt: Use $writing-beats for this task
+policy:
+  allow_implicit_invocation: false
+  products:
+  - CHAT
+  - CODEX

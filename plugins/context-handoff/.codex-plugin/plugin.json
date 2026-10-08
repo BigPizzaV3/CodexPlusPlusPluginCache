@@ -1,0 +1,46 @@
+{
+  "author": {
+    "email": "timyeou1234@users.noreply.github.com",
+    "name": "Tim Yu",
+    "url": "https://github.com/timyeou1234"
+  },
+  "description": "Detect context compaction and transfer long-running Codex work into a fresh verified thread without losing acceptance criteria or evidence.",
+  "homepage": "https://github.com/timyeou1234/context-handoff",
+  "interface": {
+    "brandColor": "#315C8C",
+    "brandColorDark": "#739ECE",
+    "capabilities": [
+      "Workflow",
+      "Continuity",
+      "Lifecycle hooks"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Checkpoint this task and continue it in a fresh verified thread.",
+      "Prepare a safe handoff packet for this long-running Codex task.",
+      "Check context health and hand off only if a fresh thread is warranted."
+    ],
+    "developerName": "Tim Yu",
+    "displayName": "Context Handoff",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Detect compaction with a trusted local lifecycle hook, then safely checkpoint and continue long-running Codex work in a fresh verified thread. Preserve language, acceptance criteria, evidence, workspace identity, and open risks. Preflight exact workspace compatibility to prevent approval loops, and verify a titled, pinned destination so handoffs remain discoverable from desktop and mobile.",
+    "privacyPolicyURL": "https://github.com/timyeou1234/context-handoff/blob/main/PRIVACY.md",
+    "shortDescription": "Continue work in fresh threads",
+    "supportURL": "https://github.com/timyeou1234/context-handoff/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/timyeou1234/context-handoff/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/timyeou1234/context-handoff"
+  },
+  "keywords": [
+    "codex",
+    "context",
+    "handoff",
+    "continuity",
+    "productivity"
+  ],
+  "license": "MIT",
+  "name": "context-handoff",
+  "repository": "https://github.com/timyeou1234/context-handoff",
+  "skills": "./skills/",
+  "version": "0.3.4"
+}

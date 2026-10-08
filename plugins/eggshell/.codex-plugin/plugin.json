@@ -1,0 +1,40 @@
+{
+  "author": {
+    "name": "momonpya",
+    "url": "https://github.com/momonpya"
+  },
+  "description": "Carry useful work across Codex chats with local memory you control",
+  "homepage": "https://github.com/momonpya/eggshell",
+  "interface": {
+    "brandColor": "#6B6256",
+    "brandColorDark": "#A9A094",
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Set up Eggshell for this Codex project.",
+      "Show what Eggshell handed to this task and why it was selected.",
+      "Help me inspect pending Eggshell work before keeping it."
+    ],
+    "developerName": "momonpya",
+    "displayName": "Eggshell",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Eggshell helps independent Codex chats reuse relevant prior work. It saves requests, tool results, and conclusions in local .egg files, then supplies selected findings when a related task begins. Codex can reuse supported findings, check changed facts, and explain what remains unverified.\n\nMemory organization and retrieval run locally without generative LLM calls. Ordinary Codex task and handoff tokens still count toward model usage. Eggshell has no hosted memory service or telemetry.\n\nThis plugin provides local setup, inspection, and memory controls. First use requires macOS or Linux on ARM64 or x86-64, Python 3, downloads of the runtime and search model, project initialization, and review of Codex command hooks. Automatic memory requires those local hooks; this plugin does not provide automatic memory in ChatGPT.\n\nInspect the delivered handoff with !egg graph and its selection with !egg why. Tool observations can be saved while a turn is running. !egg drop clears the active turn but retains saved observations and queued commits. Use !egg off to disable recording and handoff delivery.",
+    "privacyPolicyURL": "https://github.com/momonpya/eggshell/blob/main/PRIVACY.md",
+    "shortDescription": "Local memory for Codex",
+    "supportURL": "https://github.com/momonpya/eggshell/issues",
+    "termsOfServiceURL": "https://github.com/momonpya/eggshell/blob/main/LICENSE",
+    "websiteURL": "https://github.com/momonpya/eggshell"
+  },
+  "keywords": [
+    "codex",
+    "agent-memory",
+    "work-graph",
+    "productivity"
+  ],
+  "license": "Apache-2.0",
+  "name": "eggshell",
+  "repository": "https://github.com/momonpya/eggshell",
+  "skills": "./skills",
+  "version": "0.1.0"
+}

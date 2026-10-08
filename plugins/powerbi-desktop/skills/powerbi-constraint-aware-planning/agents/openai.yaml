@@ -1,0 +1,5 @@
+interface:
+  display_name: Constraint-Aware Planning
+  short_description: Operationally feasible plans
+policy:
+  allow_implicit_invocation: false

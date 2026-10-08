@@ -1,0 +1,5 @@
+interface:
+  display_name: Fabric Next-Generation USPs
+  short_description: Fabric operations differentiators
+policy:
+  allow_implicit_invocation: false

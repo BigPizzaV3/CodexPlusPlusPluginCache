@@ -1,0 +1,20 @@
+{
+  "name": "local-model-route-planner",
+  "description": "Use before execution with a local route registry; choose the lowest-cost eligible model or agent plan, explain rejected options, and never call a provider.",
+  "version": "0.1.5",
+  "author": {
+    "name": "Orbral"
+  },
+  "homepage": "https://github.com/SpannDaMan/agent-routekit",
+  "repository": "https://github.com/SpannDaMan/agent-routekit",
+  "license": "MIT",
+  "keywords": [
+    "model-routing",
+    "model-selection",
+    "agent-orchestration",
+    "cost-control",
+    "quality-gates",
+    "independent-review",
+    "claude-code"
+  ]
+}

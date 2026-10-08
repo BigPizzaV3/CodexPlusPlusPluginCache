@@ -1,0 +1,9 @@
+interface:
+  display_name: "Budget & Media Allocation"
+  short_description: "Compare where spend should go"
+  default_prompt: "Compare these campaigns and propose evidence-based budget allocation scenarios."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

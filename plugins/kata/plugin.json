@@ -1,0 +1,14 @@
+{
+  "name": "kata",
+  "displayName": "Kata",
+  "description": "Coaches programming reasoning: attempt first, progressive hints, unaided transfer. Not a model trainer.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Anderson Alves",
+    "url": "https://github.com/andersonmalves"
+  },
+  "homepage": "https://github.com/andersonmalves/kata",
+  "repository": "https://github.com/andersonmalves/kata",
+  "license": "MIT",
+  "keywords": ["coaching", "deliberate-practice", "coding", "kata"]
+}

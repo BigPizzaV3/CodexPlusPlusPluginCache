@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rweisssieker-xp/RW-Forgemind-Codex-Plugin/schemas/flight-event-v1.schema.json",
+  "title": "ForgeMind delivery flight event v1",
+  "type": "object",
+  "required": ["schemaVersion", "id", "sequence", "timestamp", "previousDigest", "capability", "action", "subject", "status", "digest"],
+  "properties": { "schemaVersion": { "const": 1 }, "id": { "type": "string" }, "sequence": { "type": "integer", "minimum": 1 }, "previousDigest": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }, "capability": { "type": "string" }, "action": { "type": "string" }, "subject": { "type": "string" }, "status": { "type": "string" }, "digest": { "$ref": "#/$defs/digest" } },
+  "$defs": { "digest": { "type": "object", "required": ["algorithm", "value"], "properties": { "algorithm": { "const": "sha256" }, "value": { "type": "string", "pattern": "^[a-f0-9]{64}$" } } } },
+  "additionalProperties": true
+}

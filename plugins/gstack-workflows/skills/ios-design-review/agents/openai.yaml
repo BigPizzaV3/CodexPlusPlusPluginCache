@@ -1,0 +1,8 @@
+interface:
+  display_name: "iOS Design Review"
+  short_description: "Review an iOS interface against Apple platform conventions using real device evidence when availa..."
+  default_prompt: "Use iOS Design Review for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: true

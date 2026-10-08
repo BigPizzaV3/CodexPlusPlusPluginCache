@@ -1,0 +1,2 @@
+# store screenshots are copied in at zip time; the source of truth is store/screenshots (git-ignored)
+0*.png

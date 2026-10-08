@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Search indexes"
+  short_description: "Search indexes, result freshness and permissions"
+  default_prompt: "Use $vibe-search to audit the selected search indexes boundary."

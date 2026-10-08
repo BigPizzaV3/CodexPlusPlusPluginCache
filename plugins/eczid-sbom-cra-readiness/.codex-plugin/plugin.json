@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "EcoCitizenz Ltd",
+    "url": "https://developers.ecocitizenz.com"
+  },
+  "description": "CRA reporting obligations apply from 11 September 2026. Review whether a workspace holds the SBOM, VEX / CSAF, disclosure, provenance and release evidence needed to identify an affected component within the reporting window. Filename and path only. Free.",
+  "homepage": "https://developers.ecocitizenz.com/sbom/",
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this workspace for SBOM and CRA evidence gaps and tell me what needs attention first.",
+      "Check whether this repository contains enough evidence to identify an affected software component within CRA reporting windows.",
+      "Review the software-supply-chain evidence in this project and give me the Review Priority and next actions."
+    ],
+    "developerName": "EcoCitizenz Ltd",
+    "displayName": "ECZ-ID SBOM & CRA Readiness",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Review a workspace for software-supply-chain evidence relevant to SBOM and EU Cyber Resilience Act readiness. Check for machine-readable SBOMs, CycloneDX, SPDX, lockfiles, VEX/CSAF, vulnerability-disclosure evidence, provenance or attestations, and release records. Receive a deterministic Review Priority with clear guidance on what to review next. The workflow is local and read-only and does not certify compliance.",
+    "privacyPolicyURL": "https://developers.ecocitizenz.com/plugins/sbom-cra-readiness/privacy/",
+    "shortDescription": "SBOM & CRA evidence review",
+    "supportURL": "https://developers.ecocitizenz.com/plugins/sbom-cra-readiness/support/",
+    "termsOfServiceURL": "https://developers.ecocitizenz.com/plugins/sbom-cra-readiness/terms/",
+    "websiteURL": "https://developers.ecocitizenz.com/sbom/"
+  },
+  "keywords": [
+    "ecz-id",
+    "sbom",
+    "cra",
+    "cyber-resilience-act",
+    "cyclonedx",
+    "spdx",
+    "vex",
+    "csaf"
+  ],
+  "license": "MIT",
+  "name": "eczid-sbom-cra-readiness",
+  "repository": "https://github.com/Ecocitizenz/eczid-agent-plugins",
+  "skills": "./skills/",
+  "version": "0.1.1"
+}

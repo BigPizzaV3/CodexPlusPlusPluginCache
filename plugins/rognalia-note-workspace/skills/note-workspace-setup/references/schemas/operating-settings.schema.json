@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rognalia.com/schemas/note-workspace/operating-settings-v1.json",
+  "title": "note Workspace operating settings",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "workspace_id",
+    "updated_at",
+    "lifecycle",
+    "locale",
+    "timezone",
+    "storage",
+    "cadence",
+    "capture",
+    "features",
+    "automation_preferences",
+    "task_topology",
+    "task_names"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "workspace_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{7,63}$"
+    },
+    "updated_at": {"type": "string", "format": "date-time"},
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["phase", "runtime_guide", "setup_skill", "user_entry"],
+      "properties": {
+        "phase": {"const": "operation"},
+        "runtime_guide": {"const": "STUDIO.md"},
+        "setup_skill": {"const": "note-workspace-setup"},
+        "user_entry": {"const": "natural_language"}
+      }
+    },
+    "locale": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+    },
+    "timezone": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*(?:/[A-Za-z0-9][A-Za-z0-9._+-]*)*$"
+    },
+    "storage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "workspace_root", "cloud_sync"],
+      "properties": {
+        "mode": {"const": "local"},
+        "workspace_root": {"const": "."},
+        "cloud_sync": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "provider"],
+          "properties": {
+            "enabled": {"const": false},
+            "provider": {"type": "null"}
+          }
+        }
+      }
+    },
+    "cadence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "desired_frequency", "minimum_frequency"],
+      "properties": {
+        "status": {"enum": ["active", "paused"]},
+        "desired_frequency": {"type": "string", "minLength": 1},
+        "minimum_frequency": {"type": "string", "minLength": 1}
+      }
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["methods"],
+      "properties": {
+        "methods": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["note_draft_registration", "metrics_tracking", "weekly_planning"],
+      "properties": {
+        "note_draft_registration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "approval_mode", "publish", "overwrite_existing_draft"],
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "approval_mode": {"const": "per_article_after_final_assets"},
+            "publish": {"const": false},
+            "overwrite_existing_draft": {"const": false}
+          }
+        },
+        "metrics_tracking": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "unavailable_value"],
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "unavailable_value": {"const": "unavailable"}
+          }
+        },
+        "weekly_planning": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled"],
+          "properties": {"enabled": {"type": "boolean"}}
+        }
+      }
+    },
+    "automation_preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tracking", "weekly_planning"],
+      "properties": {
+        "tracking": {"$ref": "#/$defs/trackingAutomation"},
+        "weekly_planning": {"$ref": "#/$defs/weeklyAutomation"}
+      }
+    },
+    "task_names": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strategy", "tracker", "writer", "image", "compact"],
+      "properties": {
+        "strategy": {"type": "string", "minLength": 1},
+        "writer": {"type": "string", "minLength": 1},
+        "tracker": {"type": "string", "minLength": 1},
+        "image": {"type": "string", "minLength": 1},
+        "diary": {"type": "string", "minLength": 1},
+        "compact": {"type": "string", "minLength": 1}
+      }
+    },
+    "task_topology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "binding_generation",
+        "shared_source_log",
+        "binding_registry",
+        "ready_message_required",
+        "extra_image_tasks"
+      ],
+      "properties": {
+        "mode": {"enum": ["standard_five", "standard_four", "compact_single"]},
+        "binding_generation": {"type": "integer", "minimum": 1},
+        "shared_source_log": {"const": true},
+        "binding_registry": {"const": "strategy/role-task-bindings.jsonl"},
+        "ready_message_required": {"const": true},
+        "extra_image_tasks": {"const": "explicit_approval_only"}
+      }
+    }
+  },
+  "allOf": [{
+    "if": {"properties": {"task_topology": {"properties": {"mode": {"const": "standard_five"}}, "required": ["mode"]}}, "required": ["task_topology"]},
+    "then": {"properties": {"task_names": {"required": ["diary"]}}}
+  }],
+  "$defs": {
+    "trackingAutomation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested", "schedule", "target_role"],
+      "properties": {
+        "requested": {"type": "boolean"},
+        "schedule": {"type": ["string", "null"], "minLength": 1},
+        "target_role": {"const": "tracker"}
+      },
+      "allOf": [{
+        "if": {"properties": {"requested": {"const": true}}, "required": ["requested"]},
+        "then": {"properties": {"schedule": {"type": "string", "minLength": 1}}},
+        "else": {"properties": {"schedule": {"type": "null"}}}
+      }]
+    },
+    "weeklyAutomation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested", "schedule", "target_role", "runs_after"],
+      "properties": {
+        "requested": {"type": "boolean"},
+        "schedule": {"type": ["string", "null"], "minLength": 1},
+        "target_role": {"const": "strategy"},
+        "runs_after": {"const": "tracking"}
+      },
+      "allOf": [{
+        "if": {"properties": {"requested": {"const": true}}, "required": ["requested"]},
+        "then": {"properties": {"schedule": {"type": "string", "minLength": 1}}},
+        "else": {"properties": {"schedule": {"type": "null"}}}
+      }]
+    }
+  }
+}

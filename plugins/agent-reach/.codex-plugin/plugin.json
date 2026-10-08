@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "Neo Reid"
+  },
+  "description": "Agent Reach integration skill for routing internet research and read-only retrieval across supported web, social, developer, career, and media sources.",
+  "homepage": "https://github.com/Panniantong/Agent-Reach",
+  "interface": {
+    "capabilities": [
+      "Research routing",
+      "Read-only retrieval"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Research this topic using the Agent Reach workflow",
+      "Map the most relevant sources for researching this topic",
+      "Create a research plan using Agent Reach"
+    ],
+    "developerName": "RONALD FERRARI SOARES",
+    "displayName": "Agent Reach",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Helps structure web research by routing research requests through Agent Reach guidance and reference material. External runtime features are only available when the host provides them.",
+    "shortDescription": "Research workflow routing"
+  },
+  "keywords": [
+    "research",
+    "search",
+    "web",
+    "social",
+    "github",
+    "video"
+  ],
+  "license": "MIT",
+  "name": "agent-reach",
+  "repository": "https://github.com/Panniantong/Agent-Reach",
+  "skills": "./skills/",
+  "version": "1.5.0"
+}

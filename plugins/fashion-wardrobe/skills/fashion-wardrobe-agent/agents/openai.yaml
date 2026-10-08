@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fashion Wardrobe Agent"
+  short_description: "Build wardrobes and visualize outfits safely"
+  default_prompt: "Use $fashion-wardrobe-agent to create my fashion profile from uploaded photos."

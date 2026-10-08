@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Podcast Clip"
+  short_description: "Two-host conversation clips"
+  default_prompt: "Use $pixverse-podcast-clip to make an 18-second podcast clip where a fitness host convinces a skeptical co-host to try my product, with split-screen opening and speaker captions."
+policy:
+  allow_implicit_invocation: true

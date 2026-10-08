@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rweisssieker-xp/RW-Forgemind-Codex-Plugin/schemas/memory-entry-v1.schema.json",
+  "title": "ForgeMind memory entry v1",
+  "type": "object",
+  "required": ["schemaVersion", "id", "type", "subject", "scope", "statement", "source", "evidence", "createdAt", "confidence", "reviewState", "sensitivity"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^fm_[a-f0-9]{24}$" },
+    "type": { "type": "string", "minLength": 1 },
+    "subject": { "type": "string", "minLength": 1 },
+    "scope": { "enum": ["shared", "personal"] },
+    "statement": { "type": "string", "minLength": 1 },
+    "source": { "type": "string", "minLength": 1 },
+    "evidence": { "type": "array", "items": { "type": "string" } },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "reviewState": { "enum": ["pending", "approved", "rejected"] },
+    "sensitivity": { "enum": ["public", "internal", "sensitive"] }
+  },
+  "additionalProperties": true
+}

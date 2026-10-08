@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Fabio Parlascino",
+    "url": "https://github.com/Scino"
+  },
+  "description": "Founder's Stack for ChatGPT and Codex. Answer leads, close support loops, ship product without slop.",
+  "homepage": "https://onelence.com/open-source/fstack",
+  "interface": {
+    "brandColor": "#F45A22",
+    "brandColorDark": "#F45A22",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Business & Operations",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Work on this in engineer-mode.",
+      "Run /support-loop on this customer complaint.",
+      "Reply to this inbound lead."
+    ],
+    "developerName": "Fabio Parlascino",
+    "displayName": "fstack",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "fstack is a dual-engine skill stack for founders who still write the product. One router classifies the request: founder operations (inbound leads, support, social, strategy, competitive teardown) or engineering (/engineer-mode with 23 playbooks and 24 principles). The bridge skill is /support-loop: diagnose the customer issue, fix the bug with a failing test, draft the reply you can send. Install once. Same skills in ChatGPT, Codex, Cursor, and Claude Code.",
+    "shortDescription": "Talk to users. Build the thing",
+    "websiteURL": "https://onelence.com/open-source/fstack"
+  },
+  "keywords": [
+    "fstack",
+    "founder",
+    "sales",
+    "support",
+    "engineering",
+    "skills",
+    "workflow"
+  ],
+  "license": "MIT",
+  "name": "fstack",
+  "repository": "https://github.com/Scino/fstack",
+  "skills": "./skills/",
+  "version": "1.1.2"
+}

@@ -1,0 +1,62 @@
+{
+  "author": {
+    "email": "app@pixverse.ai",
+    "name": "PixVerse",
+    "url": "https://app.pixverse.ai"
+  },
+  "description": "Official PixVerse workflows to create and edit videos, images and audio, from scripts and supplied reference information to generated shots, sound, captions and Canvas projects.",
+  "homepage": "https://app.pixverse.ai",
+  "interface": {
+    "brandColor": "#6851EB",
+    "brandColorDark": "#6851EB",
+    "capabilities": [
+      "Skills",
+      "Write",
+      "Interactive"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create a short video from my idea.",
+      "Rebuild this reference video with my product and presenter, keeping its structure and on-screen graphics.",
+      "Create a video in PixVerse Canvas from my idea and references, starting with the storyboard."
+    ],
+    "developerName": "PixVerse",
+    "displayName": "PixVerse",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Create videos from ideas, reference videos and supplied media, or edit existing clips. Choose direct workflows for product ads, UGC, explainers, presenters, talking heads, ranking videos, podcast and interview clips, captions, motion graphics and video covers. Rebuild a reference video as your own version, restyle footage while keeping its motion, translate a video into other languages and spin out variants that reuse accepted media. Word-anchored captions, boards and stickers follow the spoken words. Canvas adds connected generation and composition in a visual workspace.",
+    "privacyPolicyURL": "https://pixverse.ai/en/privacy-policy",
+    "shortDescription": "Create and edit videos",
+    "termsOfServiceURL": "https://pixverse.ai/en/terms-of-service",
+    "websiteURL": "https://app.pixverse.ai"
+  },
+  "keywords": [
+    "pixverse",
+    "pixverse-canvas",
+    "video-generation",
+    "video-editing",
+    "subtitles",
+    "image-generation",
+    "ai-image",
+    "ai-video",
+    "aigc",
+    "pixverse-cli",
+    "agent-skills",
+    "codex-plugin",
+    "creative-production",
+    "reference-ad",
+    "storyboard",
+    "ffmpeg",
+    "video-remake",
+    "talking-head",
+    "ranking-video",
+    "podcast-clip",
+    "localization",
+    "karaoke-captions",
+    "word-timing"
+  ],
+  "license": "MIT",
+  "name": "pixverse",
+  "skills": "./skills/",
+  "version": "1.3.2"
+}

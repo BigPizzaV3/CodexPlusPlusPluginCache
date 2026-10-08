@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800" role="img" aria-labelledby="title description">
+  <title id="title">QAMap</title>
+  <desc id="description">병합 전에 무엇을 테스트할지 확인하세요. 코드 변경을 근거로 필요한 QA를 정리합니다.</desc>
+  <rect width="1600" height="800" fill="#07111F"/>
+
+  <g font-family="'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', Inter, sans-serif">
+    <text x="128" y="255" fill="#F4F7FB" font-size="118" font-weight="700">QAMap</text>
+    <text x="128" y="350" fill="#F4F7FB" font-size="46" font-weight="700">병합 전에 무엇을 테스트할지 확인하세요.</text>
+    <text x="128" y="410" fill="#20BCEB" font-size="31">코드 변경을 근거로 필요한 QA를 정리합니다.</text>
+  </g>
+
+  <g transform="translate(840 30) scale(.68)" shape-rendering="geometricPrecision">
+    <path d="M 184 354 H 536 C 490 392 438 420 398 458 C 344 508 338 580 382 626 C 408 654 448 670 498 670 H 720" fill="none" stroke="#20BCEB" stroke-width="72" stroke-linecap="butt" stroke-linejoin="round"/>
+    <path d="M 720 670 H 850" fill="none" stroke="#FFB31A" stroke-width="72" stroke-linecap="butt" stroke-linejoin="round"/>
+    <circle cx="184" cy="354" r="84" fill="#20BCEB"/>
+    <circle cx="184" cy="354" r="40" fill="#F4F7FB"/>
+    <circle cx="536" cy="354" r="84" fill="#20BCEB"/>
+    <circle cx="536" cy="354" r="40" fill="#07111F"/>
+    <circle cx="850" cy="670" r="70" fill="#FFB31A"/>
+    <path d="M 811 670 L 837 696 L 884 642" fill="none" stroke="#F4F7FB" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

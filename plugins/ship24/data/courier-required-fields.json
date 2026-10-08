@@ -1,0 +1,20 @@
+{
+  "source": "https://docs.ship24.com/couriers#required-fields",
+  "values": [
+    {
+      "value": "destinationPostCode",
+      "csvColumn": "is_destination_postcode_required",
+      "description": "This courier requires the recipient's postal code (or ZIP code) in the field `destinationPostCode`."
+    },
+    {
+      "value": "destinationCountryCode",
+      "csvColumn": "is_destination_country_code_required",
+      "description": "This courier requires the recipient's country code in the field `destinationCountryCode`."
+    },
+    {
+      "value": "courierAccount",
+      "csvColumn": "is_courier_account_required",
+      "description": "This courier requires the shipper's account number."
+    }
+  ]
+}

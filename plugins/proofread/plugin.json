@@ -1,0 +1,47 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "kikearciniegas@users.noreply.github.com",
+    "name": "Rafael Arciniegas",
+    "url": "https://github.com/kikearciniegas"
+  },
+  "description": "Conservative proofreading and translation review that preserve meaning, voice, and protected content.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "brandColor": "#315C8C",
+        "brandColorDark": "#739ECE",
+        "capabilities": [
+          "Write"
+        ],
+        "category": "Productivity",
+        "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+        "defaultPrompt": [
+          "Proofread this text without changing its meaning or voice.",
+          "Correct this file and show me the diff before applying it.",
+          "Review this translation against its source and preserve every claim."
+        ],
+        "developerName": "Rafael Arciniegas",
+        "displayName": "Proofread",
+        "logo": "./.codex-plugin/assets/logo.svg",
+        "longDescription": "Correct grammar, spelling, clarity, style, and translated prose while preserving the writer's facts, voice, quotations, code, citations, and exact values.",
+        "privacyPolicyURL": "https://github.com/kikearciniegas/proofread/blob/main/PRIVACY.md",
+        "shortDescription": "Meaning-preserving edits",
+        "termsOfServiceURL": "https://github.com/kikearciniegas/proofread/blob/main/LICENSE",
+        "websiteURL": "https://github.com/kikearciniegas/proofread"
+      }
+    }
+  },
+  "homepage": "https://github.com/kikearciniegas/proofread",
+  "keywords": [
+    "proofreading",
+    "copy-editing",
+    "grammar",
+    "translation-review",
+    "writing"
+  ],
+  "license": "MIT",
+  "name": "proofread",
+  "repository": "https://github.com/kikearciniegas/proofread",
+  "version": "0.4.0"
+}

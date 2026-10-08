@@ -1,0 +1,94 @@
+# OpenAI Plugin Submission
+
+QAMap packages one `skills-only` plugin for the shared OpenAI Plugins Directory. It reuses the same local CLI and `qamap.qa` contract as every other QAMap integration. It does not add an MCP server, hosted service, background hook, or second QA engine.
+
+QAMap is [published in the OpenAI Plugin Directory](https://chatgpt.com/plugins/plugins_6a752ca134a481919b90c45c09ab1629). npm, GitHub, and directory releases move independently. The public listing is the source of truth for the currently approved directory version; a newer npm or GitHub release requires a fresh upload and review before it appears there.
+
+Publishing a newer npm package or repository release does not update the
+directory listing automatically. Keep the approved version available, upload
+the replacement package as a new plugin version, and publish it only after the
+replacement passes review.
+
+| Channel | Current version source | How it updates |
+| --- | --- | --- |
+| npm | [npm package](https://www.npmjs.com/package/@ivorycanvas/qamap) | Maintainer publication |
+| GitHub | [GitHub Releases](https://github.com/IvoryCanvas/QAMap/releases) | Tagged repository release |
+| OpenAI Plugin Directory | [Public QAMap listing](https://chatgpt.com/plugins/plugins_6a752ca134a481919b90c45c09ab1629) | Separate upload, review, and publication |
+
+## Product Boundary
+
+- The 0.5.1 workflow offers report-based review, respects refusal, and runs
+  `qamap qa brief` only after consent or an explicit saved preference. Users
+  record or remove a lasting preference with `qamap consent grant|revoke`
+  (project) or `--global` (user-level host instructions); asking is the default.
+- That command reads source and Git history and writes private local report
+  artifacts. It does not change source or execute tests. The JSON
+  `qa report --handoff` path remains for explicitly requested structured evidence.
+- QAMap reads the checked-out repository locally and does not upload source code.
+- QAMap does not make an additional LLM request. The calling OpenAI product still uses its own model tokens to invoke the skill and interpret the result.
+- A one-off invocation may download the pinned npm package. The skill discloses that network action and follows the host approval policy.
+- Repository command execution, dependency changes, generated test files, and commits remain separate actions with explicit approval requirements.
+- The plugin is intended for an OpenAI surface that can access a checked-out repository and local shell. A web-only chat without repository access cannot perform this workflow.
+
+## Submission Sources
+
+The 0.5.1 bundle requires the matching 0.5.1 CLI, which adds `qa brief`. Do not pair it with 0.5.0 or 0.4.17.
+Before uploading, verify the exact matching package from npm first. A host
+may send returned source excerpts to its own model; the local-analysis guarantee
+does not mean those excerpts stay outside the host's context.
+
+| Artifact | Purpose |
+| --- | --- |
+| `.codex-plugin/plugin.json` | Plugin discovery and listing metadata |
+| `skills/qamap-pr-qa/SKILL.md` | The single agent workflow |
+| `skills/qamap-pr-qa/agents/openai.yaml` | Skill presentation and invocation metadata |
+| `plugin/submission.json` | Listing copy, starter prompts, and evaluation cases |
+| `plugin/assets/` | Dedicated light and dark plugin and composer icons |
+| `PRIVACY.md` | Local data and network boundaries |
+| `TERMS.md` | Usage terms and warranty boundary |
+| `SUPPORT.md` | Public support and security routes |
+
+The submission contract contains five positive cases and three negative cases. Positive cases cover web, testless, API, mobile, and repository-command changes. Negative cases protect against unrelated invocation, fabricated green results, and unapproved side effects.
+
+## Local Gates
+
+Run:
+
+```sh
+pnpm plugin:check
+pnpm plugin:smoke
+```
+
+`plugin:check` verifies version alignment, listing fields, legal URLs, prompt limits, icon dimensions, skill metadata, pinned package use, and the evaluation corpus.
+
+`plugin:smoke` builds an npm tarball, checks the packaged plugin files, installs it into an isolated temporary project with no user npm configuration, and runs the installed QAMap binary against a committed public benchmark. It requires a compact `qamap.qa` result with change intent, scenarios, exact diff evidence, one next action, and `execution: not-run`.
+
+The repository CI and `release:check` run both gates.
+
+## Listing Images
+
+Use the dedicated image for each upload slot instead of resizing or cropping a
+README cover:
+
+| Upload slot | Repository asset |
+| --- | --- |
+| Plugin icon, light mode | `plugin/assets/qamap-plugin-light-256.png` |
+| Plugin icon, dark mode | `plugin/assets/qamap-plugin-dark-256.png` |
+| Composer icon, light mode | `plugin/assets/qamap-composer-light-48.png` |
+| Composer icon, dark mode | `plugin/assets/qamap-composer-dark-48.png` |
+
+The portable skill continues to use the canonical 512px icon at
+`skills/qamap-pr-qa/assets/qamap-logo.png`.
+
+## Maintainer Submission And Update Sequence
+
+1. Complete the normal QAMap release gate and publish the exact package version referenced by the skill.
+2. Run a fresh public-registry install and agent-format smoke against that published version.
+3. Confirm the submitting OpenAI account has completed identity verification and has Apps Management write permission.
+4. Open the [OpenAI plugin submission portal](https://platform.openai.com/plugins) and create a skills-only submission.
+5. Use `plugin/submission.json` as the source of truth for listing copy, starter prompts, and the five positive and three negative evaluations.
+6. Upload all four dedicated images listed in **Listing Images**.
+7. Review every requested permission and test receipt before submitting.
+8. For a new plugin version, keep the currently published listing available until the replacement has been reviewed and is visible.
+
+See the official [Plugins overview](https://developers.openai.com/plugins/) and [submission guide](https://developers.openai.com/plugins/deploy/submission) for current platform requirements.

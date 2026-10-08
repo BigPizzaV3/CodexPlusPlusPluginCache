@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Product Videos"
+  short_description: "Create product and brand ads"
+  default_prompt: "Use $pixverse-product-video to turn this product photo into a short commercial while preserving the product."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Presenter Episodes"
+  short_description: "Keep one host across episodes"
+  default_prompt: "Use $pixverse-presenter to create a complete episode with this presenter, keeping the same identity and natural spoken delivery."
+policy:
+  allow_implicit_invocation: true

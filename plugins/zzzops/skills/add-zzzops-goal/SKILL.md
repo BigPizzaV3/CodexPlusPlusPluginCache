@@ -1,0 +1,20 @@
+---
+name: add-zzzops-goal
+description: "ZzzOps v2.1.0 — official plugin. Capture, add, create, or record one durable ZzzOps goal/TODO. Use for new project work or backlog items; writes canonical goal state by default. Not migration, suggestion, triage, or execution."
+---
+
+# Add Goal
+
+Run `../../rules/INITIALIZATION.md`, then `../../rules/BACKENDS.md`. Hydrate likely duplicate/relationship matches and needed comments. Persist risk/overrides; interview at [[effective engineering rigor]](../../concepts/effective-engineering-rigor.md): `vibe → light`, `structured → standard`, `agentic → thorough`. This controls depth; legacy policy uses reviewed `requirements_interview.capture_depth` or `standard`. Escalate as required; never silently de-escalate below a risk minimum.
+
+Reuse request, repository, goal, and answer evidence. Ask 1–3 consequential gaps; recommend answers. `light`: outcome, observable acceptance, critical constraints. `standard` adds scope/non-goals, examples, dependencies, risks, authority, verification. `thorough` adds architecture, security, data lifecycle, recovery, operations, rollout, accessibility, compatibility, governance. Challenge subjective success/contradictions. Current user owns requirements/acceptance; no multi-party sign-off.
+
+When unfamiliarity/risk could change architecture, scope, acceptance, or quality, run a bounded blind-spot pass for known unknowns, tacit criteria, and blind spots using the cheapest useful reference, research, alternative, or disposable prototype. Skip well-understood work and fixed ceremony.
+
+Stop when independently actionable/verifiable at that depth or unknowns are explicit blockers. Create one human-first current-schema goal with applicable source/value evidence; never invent answers. Use `$execute-zzzops`.
+
+Git-free creation: capture makes no branch, commit, push, PR, or empty checkpoint.
+
+Apply `../../rules/CONTINUATION.md`; active same-task execute intent may resume once, while capture-only/replacement/stop wins. Confirm outcome/link and only next-affecting relationships/unknowns.
+
+Before stopping or handing off, apply `../../rules/FEEDBACK.md`.

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .line { stroke: #0f172a; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .thick { stroke: #0f172a; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .fill-white { fill: #ffffff; }
+      .accent-girl { fill: #f43f5e; opacity: 0.15; }
+      .accent-guy { fill: #3b82f6; opacity: 0.15; }
+      .label-box { fill: #ffffff; stroke: #0f172a; stroke-width: 4; rx: 8; }
+      .label-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 800; font-size: 22px; fill: #0f172a; text-anchor: middle; }
+      .caption-bar { fill: #0f172a; }
+      .caption-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight: 700; font-size: 26px; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="650" class="bg" />
+
+  <!-- Top Caption Bar (if provided) -->
+  <g id="caption-group">
+    <rect x="0" y="0" width="1000" height="70" class="caption-bar" />
+    <text x="500" y="45" class="caption-text">{{TOP_CAPTION}}</text>
+  </g>
+
+  <!-- Ground Line -->
+  <path d="M 50,560 Q 500,565 950,560" class="line" stroke-dasharray="12 8" />
+
+  <!-- Left: The New Shiny Thing (Passing Girl) -->
+  <g transform="translate(180, 240)">
+    <!-- Aura -->
+    <ellipse cx="0" cy="120" rx="90" ry="140" class="accent-girl" />
+    <!-- Doodle Head -->
+    <circle cx="0" cy="0" r="45" class="fill-white" stroke="#0f172a" stroke-width="6" />
+    <!-- Flirty Hair -->
+    <path d="M -35,-25 Q -10,-60 25,-40 Q 55,-20 40,25" class="line" />
+    <path d="M 40,15 Q 60,35 65,70" class="line" />
+    <!-- Winking Face -->
+    <ellipse cx="-12" cy="-5" rx="5" ry="7" fill="#0f172a" />
+    <path d="M 12,-7 Q 22,-2 30,-7" class="line" stroke-width="4" />
+    <path d="M -5,18 Q 10,28 25,16" class="line" stroke-width="5" />
+    <!-- Dress / Body walking away -->
+    <path d="M -20,45 L -45,210 L 45,210 L 20,45 Z" class="fill-white" stroke="#0f172a" stroke-width="6" />
+    <!-- Sassy walking legs -->
+    <path d="M -25,210 L -40,300" class="thick" />
+    <path d="M 25,210 L 45,290 L 65,295" class="thick" />
+    <!-- Label: The New Attraction -->
+    <rect x="-140" y="-120" width="280" height="55" class="label-box" fill="#fef08a" />
+    <text x="0" y="-84" class="label-text">{{NEW_THING}}</text>
+  </g>
+
+  <!-- Center: The Distracted Guy -->
+  <g transform="translate(520, 230)">
+    <!-- Doodle Head turned around backward -->
+    <circle cx="0" cy="0" r="50" class="fill-white" stroke="#0f172a" stroke-width="7" />
+    <!-- Guy Hair -->
+    <path d="M -35,-35 Q 0,-60 35,-35" class="line" />
+    <!-- Big wide eyes looking left at the new thing -->
+    <ellipse cx="-20" cy="-5" rx="14" ry="16" class="fill-white" stroke="#0f172a" stroke-width="4" />
+    <ellipse cx="-26" cy="-5" rx="6" ry="8" fill="#0f172a" />
+    <ellipse cx="15" cy="-5" rx="14" ry="16" class="fill-white" stroke="#0f172a" stroke-width="4" />
+    <ellipse cx="9" cy="-5" rx="6" ry="8" fill="#0f172a" />
+    <!-- Open Drooling / Amazed Mouth -->
+    <path d="M -15,22 Q 0,42 20,24 Z" fill="#0f172a" />
+    <!-- Heart eyes sparkle / sweat -->
+    <path d="M -50,-10 Q -65,-25 -80,-15" class="line" stroke="#f43f5e" stroke-width="4" />
+    <!-- Body walking forward (right) while head turned (left) -->
+    <path d="M -25,50 L -30,220 L 35,220 L 30,50 Z" class="fill-white" stroke="#0f172a" stroke-width="6" />
+    <!-- Left Hand held by girlfriend -->
+    <path d="M 30,80 Q 120,95 240,110" class="thick" />
+    <!-- Right Hand gesturing helplessly towards new girl -->
+    <path d="M -25,90 Q -80,110 -110,80" class="thick" />
+    <!-- Legs walking right -->
+    <path d="M -15,220 L 10,310" class="thick" />
+    <path d="M 25,220 L 50,305" class="thick" />
+    <!-- Label: The Actor / Decision Maker -->
+    <rect x="-130" y="325" width="260" height="55" class="label-box" fill="#e0f2fe" />
+    <text x="0" y="361" class="label-text">{{THE_USER}}</text>
+  </g>
+
+  <!-- Right: The Offended Girlfriend -->
+  <g transform="translate(800, 240)">
+    <!-- Angry Doodle Head -->
+    <circle cx="0" cy="0" r="45" class="fill-white" stroke="#0f172a" stroke-width="6" />
+    <!-- Ponytail / Hair -->
+    <path d="M -30,-20 Q 0,-50 35,-20" class="line" />
+    <path d="M 35,-15 Q 70,-10 80,30" class="line" stroke-width="5" />
+    <!-- Outraged Angled Eyebrows -->
+    <path d="M -25,-12 L -5,-3" class="thick" stroke-width="7" />
+    <path d="M 5,-3 L 25,-12" class="thick" stroke-width="7" />
+    <!-- Shocked Dots Eyes -->
+    <ellipse cx="-15" cy="5" rx="5" ry="6" fill="#0f172a" />
+    <ellipse cx="15" cy="5" rx="5" ry="6" fill="#0f172a" />
+    <!-- Angry Gritted Teeth Mouth -->
+    <rect x="-18" y="20" width="36" height="12" rx="4" class="fill-white" stroke="#0f172a" stroke-width="4" />
+    <line x1="-6" y1="20" x2="-6" y2="32" stroke="#0f172a" stroke-width="3" />
+    <line x1="6" y1="20" x2="6" y2="32" stroke="#0f172a" stroke-width="3" />
+    <!-- Rage steam -->
+    <path d="M 40,-40 Q 60,-55 50,-70" class="line" stroke="#ef4444" stroke-width="4" />
+    <!-- Body -->
+    <path d="M -20,45 L -35,210 L 35,210 L 20,45 Z" class="fill-white" stroke="#0f172a" stroke-width="6" />
+    <!-- Free Arm on Hip / Shocked gesture -->
+    <path d="M 20,80 Q 60,90 45,120" class="thick" />
+    <!-- Legs -->
+    <path d="M -15,210 L -25,300" class="thick" />
+    <path d="M 15,210 L 25,300" class="thick" />
+    <!-- Label: The Ignored Current Priority -->
+    <rect x="-140" y="-120" width="280" height="55" class="label-box" fill="#fee2e2" />
+    <text x="0" y="-84" class="label-text">{{CURRENT_THING}}</text>
+  </g>
+</svg>

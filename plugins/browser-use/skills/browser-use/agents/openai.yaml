@@ -1,0 +1,9 @@
+interface:
+  display_name: Browser Use
+  short_description: Automate approved browser workflows
+  default_prompt: Use $browser-use to carry out this browser task with the host-managed browser.
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

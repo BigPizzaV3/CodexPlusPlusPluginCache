@@ -1,0 +1,45 @@
+{
+  "author": {
+    "email": "fred@alpic.ai",
+    "name": "Fr\u00e9d\u00e9ric Barthelet"
+  },
+  "description": "Make websites WebMCP-compatible by registering page tools on document.modelContext for in-browser AI agents.",
+  "homepage": "https://github.com/alpic-ai/webmcp",
+  "interface": {
+    "brandColor": "#E90060",
+    "brandColorDark": "#FF1676",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "add WebMCP tools to proxy my existing MCP server",
+      "make my e-commerce website checkout flow WebMCP-compatible",
+      "help me craft which user flow should be exposed to an AI browser agent on my website"
+    ],
+    "developerName": "Fr\u00e9d\u00e9ric Barthelet",
+    "displayName": "WebMCP",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Guides an agent to inventory a web app, design non-overlapping page tools, register them via declarative, imperative and/or bridged implementation and dogfood them with Chrome DevTools MCP.",
+    "privacyPolicyURL": "https://alpic.ai/legal/privacy",
+    "shortDescription": "Add WebMCP tools to my website",
+    "supportURL": "https://github.com/alpic-ai/webmcp/issues",
+    "termsOfServiceURL": "https://alpic.ai/legal/terms",
+    "websiteURL": "https://github.com/alpic-ai/webmcp"
+  },
+  "keywords": [
+    "webmcp",
+    "mcp",
+    "browser",
+    "agents",
+    "document.modelContext",
+    "registerTool"
+  ],
+  "license": "MIT",
+  "name": "webmcp",
+  "repository": "https://github.com/alpic-ai/webmcp",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

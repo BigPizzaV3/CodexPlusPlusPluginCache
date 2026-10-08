@@ -1,0 +1,56 @@
+{
+  "author": {
+    "email": "hello@emaillove.com",
+    "name": "Email Love",
+    "url": "https://emaillove.com"
+  },
+  "description": "Build, repair, migrate, and review Email Love emails in Figma, and write or troubleshoot personalization in any email HTML with ten ESP templating skills.",
+  "homepage": "https://help.emaillove.com/plugin/ai/agents-in-figma",
+  "interface": {
+    "brandColor": "#EE2461",
+    "brandColorDark": "#EE2461",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Build an export-ready email in my Figma file.",
+      "Repair this broken Email Love template in Figma.",
+      "Add personalization for my ESP to this email HTML."
+    ],
+    "developerName": "Email Love",
+    "displayName": "Email Love",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Four Figma skills cover Email Love email building, template repair, design-system migration, and quality gates. Ten ESP skills cover Braze Liquid, Customer.io Liquid, HubSpot HubL, Iterable Handlebars, Klaviyo Django, Marketo Velocity, MoEngage Jinja, Sailthru Zephyr, Salesforce Marketing Cloud AMPscript, and Zeta ZML. The ESP skills write, review, and debug personalization in any email HTML, whether or not it came from Email Love, without requiring an MCP connection. This is a skills-only package and does not bundle MCP configuration. Canvas work requires compatible Figma write tools connected separately. Inspiration research, conversion, design-system access, headless export verification, and previews require the relevant Email Love MCP tools connected and authenticated separately. Available Figma workflows depend on the tools exposed in your environment. Conversion begins with a Figma design or supplied screenshot; it is not a free-form HTML generator for chat.",
+    "privacyPolicyURL": "https://emaillove.com/privacy-policy",
+    "shortDescription": "Build HTML Emails in Figma",
+    "termsOfServiceURL": "https://emaillove.com/terms",
+    "websiteURL": "https://emaillove.com"
+  },
+  "keywords": [
+    "email",
+    "figma",
+    "email-design-system",
+    "mjml",
+    "email-love",
+    "esp",
+    "liquid",
+    "ampscript",
+    "handlebars",
+    "jinja",
+    "velocity",
+    "hubl",
+    "zephyr",
+    "klaviyo",
+    "braze",
+    "iterable",
+    "sfmc"
+  ],
+  "license": "MIT",
+  "name": "email-love",
+  "repository": "https://github.com/email-love/codex-agents",
+  "skills": "./skills/",
+  "version": "4.11.3"
+}

@@ -1,0 +1,32 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Particl",
+    "url": "https://www.particl.com"
+  },
+  "description": "Particl Market Research helps teams answer ecommerce research questions directly in ChatGPT. It supports company discovery, product catalog research, product detail and variant analysis, market leader discovery, market trend analysis, marketing asset discovery, retail event tracking, sales timeseries, and product mix breakdowns.\n\nThe app uses your authenticated Particl account and returns structured market intelligence data from Particl APIs.",
+  "homepage": "https://www.particl.com",
+  "interface": {
+    "capabilities": [],
+    "category": "Education & Research",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Pull the relevant market snapshot from Particl"
+    ],
+    "developerName": "Particl",
+    "displayName": "Particl Market Research",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
+    "longDescription": "Particl Market Research helps teams answer ecommerce research questions directly in Codex. It supports company discovery, product catalog research, product detail and variant analysis, market leader discovery, market trend analysis, marketing asset discovery, retail event tracking, sales timeseries, and product mix breakdowns.\n\nThe app uses your authenticated Particl account and returns structured market intelligence data from Particl APIs.",
+    "privacyPolicyURL": "https://www.particl.com/legal/privacy",
+    "screenshots": [],
+    "shortDescription": "Ecommerce market intelligence",
+    "termsOfServiceURL": "https://www.particl.com/legal/terms",
+    "websiteURL": "https://www.particl.com"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "particl-market-research",
+  "repository": "https://github.com/openai/plugins",
+  "version": "2.0.0"
+}

@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "FastAPI Labs",
+    "url": "https://fastapicloud.com/"
+  },
+  "description": "Create, deploy, configure custom domains, connect services, inspect logs, and debug FastAPI apps on FastAPI Cloud.",
+  "homepage": "https://fastapicloud.com",
+  "interface": {
+    "brandColor": "#009485",
+    "brandColorDark": "#6BFFF0",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create and deploy a FastAPI app with a custom domain on FastAPI Cloud.",
+      "Connect a managed service to this FastAPI Cloud app.",
+      "Inspect logs and diagnose this FastAPI Cloud deployment."
+    ],
+    "developerName": "FastAPI Labs",
+    "displayName": "FastAPI Cloud",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Provides skills for creating and deploying FastAPI apps, configuring custom domains, connecting third-party resources, debugging failed deploys, inspecting app logs, and managing environment variables.",
+    "privacyPolicyURL": "https://fastapicloud.com/legal/privacy-policy/",
+    "shortDescription": "Deploy and manage FastAPI apps",
+    "termsOfServiceURL": "https://fastapicloud.com/legal/terms/",
+    "websiteURL": "https://fastapicloud.com/"
+  },
+  "keywords": [
+    "fastapi",
+    "fastapicloud",
+    "fastapi-cloud",
+    "deployment",
+    "custom-domains",
+    "integrations",
+    "python"
+  ],
+  "license": "MIT",
+  "name": "fastapicloud",
+  "skills": "./skills/",
+  "version": "0.3.2"
+}

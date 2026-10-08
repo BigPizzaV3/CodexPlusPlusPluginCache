@@ -1,0 +1,9 @@
+# ChatGPT presentation metadata (Agent Skills open standard).
+# Claude ignores this file entirely - the same skill folder works on both platforms.
+# Schema: https://github.com/openai/codex/blob/main/codex-rs/skills/src/assets/samples/skill-creator/references/openai_yaml.md
+interface:
+  display_name: "HubSpot HubL"
+  short_description: "Write and debug HubL in HubSpot email"
+  default_prompt: "Use $hubspot-hubl to review this HubSpot email template for anything that renders blank or drops the recipient."
+policy:
+  allow_implicit_invocation: true

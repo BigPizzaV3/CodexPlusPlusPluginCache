@@ -1,0 +1,52 @@
+{
+  "author": {
+    "name": "Local developer"
+  },
+  "description": "Provide multilingual California property-assessment appeal guidance with language selection, a preparation-first process map, and one simple question at a time through valuation, evidence, and filing.",
+  "interface": {
+    "brandColor": "#315B4C",
+    "brandColorDark": "#A4CEBF",
+    "capabilities": [
+      "Multilingual and bilingual guidance",
+      "Language selection and mid-case switching",
+      "Up-front process map and preparation checklist",
+      "One-question-at-a-time guided interview",
+      "Plain-language explanations and choices",
+      "Official property valuation research",
+      "Official website fallback when a notice cannot be uploaded",
+      "Step-by-step appeal planning",
+      "Property-specific evidence collection",
+      "Comparable-sales analysis",
+      "Appeal packet drafting",
+      "Verified county online-filing guidance",
+      "Structured case continuity and conflict tracking",
+      "Address-to-county resolution with county parcel confirmation",
+      "Document and proof-of-filing review",
+      "Reminder-ready verified deadline tracking"
+    ],
+    "category": "Finance",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Show language options, then explain the full appeal process and preparation checklist.",
+      "Explain why my valuation may be too high and guide me one question at a time through evidence and appeal steps.",
+      "Help me find my official county record and check whether I can file an appeal online."
+    ],
+    "developerName": "Local developer",
+    "displayName": "CA Property Tax Appeal Guide",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Use the homeowner's preferred language or bilingual mode. First show the complete appeal journey, what may be needed at each step, what the plugin can find, and what they will receive. Then guide them one question at a time through valuation, deadlines, evidence, comparable sales, filing, hearing preparation, and possible outcomes while preserving official English names and form labels.",
+    "shortDescription": "Multilingual  guided appeals."
+  },
+  "keywords": [
+    "california",
+    "property-tax",
+    "property-valuation",
+    "assessment-appeal",
+    "appeal-evidence",
+    "comparable-sales"
+  ],
+  "license": "MIT",
+  "name": "california-property-tax-appeal-guide",
+  "skills": "./skills/",
+  "version": "0.4.0+codex.20260913"
+}

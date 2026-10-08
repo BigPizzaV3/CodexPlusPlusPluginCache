@@ -1,0 +1,7 @@
+interface:
+  display_name: "Documentar Reunião"
+  short_description: "Registre uma reunião e gere um relatório estruturado."
+  default_prompt: "Use $relatorio-reuniao para começar a documentar uma reunião."
+
+policy:
+  allow_implicit_invocation: true

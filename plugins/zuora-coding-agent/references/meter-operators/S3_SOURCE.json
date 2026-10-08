@@ -1,0 +1,68 @@
+{
+  "key": "S3_SOURCE",
+  "nodeType": "SOURCE",
+  "operatorType": "S3",
+  "metadata": {
+    "connectionName": null,
+    "fileFormat": null,
+    "paths": [],
+    "schemaId": null,
+    "schemaName": null,
+    "formatOption": {
+      "hasHeader": true,
+      "delimiter": ","
+    },
+    "incremental": false
+  },
+  "label": "S3 Source",
+  "hints": {
+    "fileFormat": "CSV | EXCEL | PARQUET | JSON | XML | AVRO",
+    "formatOption.hasHeader": "true | false",
+    "incremental": "true | false"
+  },
+  "assumptions": [
+    {
+      "path": "incremental",
+      "value": false,
+      "reason": "Process all files in the path (not just new ones).",
+      "confidence": 0.75
+    },
+    {
+      "path": "fileFormat",
+      "value": "JSON",
+      "reason": "JSON is a common S3 source format; change to CSV, EXCEL, PARQUET, XML, or AVRO if your files differ.",
+      "confidence": 0.7
+    }
+  ],
+  "blockers": [
+    {
+      "path": "connectionName",
+      "message": "S3 connectionName is required. Which Connections entry should this source use?"
+    },
+    {
+      "path": "paths",
+      "message": "S3 paths is required. Provide the S3 path(s) as an array, e.g. [\"s3://bucket/prefix/\"]."
+    },
+    {
+      "path": "fileFormat",
+      "message": "S3 fileFormat is required. Specify CSV, EXCEL, PARQUET, JSON, XML, or AVRO."
+    },
+    {
+      "path": "fileFormat",
+      "allowed_values": ["CSV", "EXCEL", "PARQUET", "JSON", "XML", "AVRO"],
+      "message": "S3 fileFormat '{fileFormat}' is not supported. Allowed values: CSV, EXCEL, PARQUET, JSON, XML, AVRO."
+    },
+    {
+      "path": "schemaId",
+      "message": "schemaId is required. Provide EventSchema ID or name — use call_mediation_api to get EventSchema Details."
+    },
+    {
+      "path": "formatOption",
+      "when": {
+        "path": "fileFormat",
+        "equals": "CSV"
+      },
+      "message": "S3 formatOption is required for CSV files. Specify hasHeader (true/false) and delimiter character (e.g. ','  or '|')."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.1.0",
+  "case": {
+    "reference": "SYNTH-001",
+    "title": "Synthetic fake trading platform case",
+    "status": "Ready for supervisory/legal review",
+    "purpose": "Training and validator test",
+    "jurisdiction": {"country": "India", "state_or_ut": "Karnataka", "locations": ["Bengaluru"]},
+    "incident_start": "2026-01-10T10:00:00+05:30",
+    "incident_end": "2026-01-15T12:00:00+05:30",
+    "investigator_role": "Synthetic test investigator",
+    "authority_basis": "Synthetic test only",
+    "checkpoint_at": "2026-01-20T10:00:00+05:30"
+  },
+  "allegation_summary": {"neutral_summary": "Synthetic complainant reports an induced transfer.", "claimed_loss": [{"amount": "10000", "currency": "INR"}]},
+  "evidence": [{"id": "EV-001", "description": "Synthetic payment receipt", "kind": "original", "sha256": "synthetic"}],
+  "entities": [{"id": "ENT-001", "type": "platform", "name": "Synthetic Trade"}],
+  "iocs": [{"id": "IOC-001", "type": "domain", "value": "example.invalid"}],
+  "transactions": [{"id": "TX-001", "type": "fiat", "amount": "10000", "currency": "INR", "evidence_ids": ["EV-001"]}],
+  "timeline": [{"at": "2026-01-10T10:00:00+05:30", "event": "Synthetic transfer", "evidence_ids": ["EV-001"]}],
+  "hypotheses": [{"id": "H-001", "statement": "Interface was used to induce transfer", "supporting_evidence_ids": ["EV-001"], "contrary_evidence_ids": []}, {"id": "H-002", "statement": "The transfer had an unrelated purpose", "supporting_evidence_ids": [], "contrary_evidence_ids": ["EV-001"]}],
+  "findings": [{"id": "F-001", "type": "fact", "statement": "A synthetic transfer record exists.", "evidence_ids": ["EV-001"]}, {"id": "F-002", "type": "inference", "statement": "The transfer may relate to the synthetic platform.", "evidence_ids": ["EV-001"], "confidence": "low", "rationale": "No independent provider record is present."}],
+  "legal_candidates": [{"provision": "Synthetic candidate only", "official_source_url": "https://www.indiacode.nic.in/", "verified_at": "2026-01-20", "elements": [{"element": "Synthetic element", "status": "not presently supported"}], "review_label": "candidate — verify with IO/legal reviewer"}],
+  "actions": [{"id": "ACT-001", "description": "Supervisor review", "status": "completed"}],
+  "contradictions": [],
+  "limitations": ["All data is synthetic."],
+  "open_questions": [],
+  "readiness": {"status": "Ready for supervisory/legal review", "checks": {"provenance": true, "loss_reconciled": true, "legal_verified": true, "limitations_recorded": true}, "investigator_confirmed": true, "rationale": "Synthetic validator fixture satisfies the structural gate."}
+}

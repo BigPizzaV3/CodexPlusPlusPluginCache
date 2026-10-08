@@ -1,0 +1,44 @@
+{
+  "author": {
+    "email": "support@browseract.com",
+    "name": "BrowserAct",
+    "url": "https://www.browseract.com"
+  },
+  "description": "BrowserAct skills for browser automation and reusable website-skill generation via the browser-act CLI.",
+  "homepage": "https://www.browseract.com",
+  "interface": {
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use BrowserAct to collect the top 20 Amazon US wireless headphone listings. Return data in a CSV file.",
+      "Use browser-act-skill-forge to create a reusable Skill to summarize the 10 latest videos of OpenAI on youtube."
+    ],
+    "developerName": "BrowserAct",
+    "displayName": "BrowserAct",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Browser Act CLI workflow skills for Codex. It gives agents a browser layer for real websites, so they can adapt to real scenarios, run multiple tasks safely, and return clean web data for reasoning. Use BrowserAct when an agent needs to browse, click, extract, fill forms, upload files, work inside logged-in sites, or run repeatable browser workflows. Requires the Browser Act CLI.",
+    "privacyPolicyURL": "https://www.browseract.com/privacy-policy",
+    "shortDescription": "Web browser automation",
+    "supportURL": "https://discord.gg/UpnCKd7GaU",
+    "termsOfServiceURL": "https://www.browseract.com/terms-of-service",
+    "websiteURL": "https://www.browseract.com/cli?co-from=Codex"
+  },
+  "keywords": [
+    "browser",
+    "web-scraping",
+    "chrome",
+    "playwright",
+    "crawler",
+    "skill-generation",
+    "website-automation"
+  ],
+  "license": "MIT",
+  "name": "browser-act",
+  "repository": "https://github.com/browser-act/codex-browser-act-plugin",
+  "skills": "./skills/",
+  "version": "0.1.6"
+}

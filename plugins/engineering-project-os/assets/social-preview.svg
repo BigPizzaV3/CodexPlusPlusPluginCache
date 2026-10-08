@@ -1,0 +1,42 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logo-surface" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#CCFF66"/>
+      <stop offset="1" stop-color="#A4E63D"/>
+    </linearGradient>
+    <filter id="logo-halo" x="52" y="148" width="346" height="346" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" fill="#080A0B"/>
+
+  <path d="M64 72H1216" stroke="#FFFFFF" stroke-opacity="0.09"/>
+  <path d="M64 568H1216" stroke="#FFFFFF" stroke-opacity="0.055"/>
+
+  <rect x="108" y="204" width="234" height="234" rx="69" fill="#B7F34A" fill-opacity="0.34" filter="url(#logo-halo)"/>
+
+  <g>
+    <svg x="104" y="200" width="242" height="242" viewBox="0 0 48 48">
+      <rect x="1" y="1" width="46" height="46" rx="13" fill="url(#logo-surface)"/>
+      <path d="M12.5 12.8V35.2" stroke="#14210B" stroke-width="5.6" stroke-linecap="round"/>
+      <path d="M21.8 12.8L38.2 24L21.8 35.2V12.8Z" fill="#14210B" stroke="#14210B" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </g>
+
+  <text x="410" y="226" fill="#B7F34A" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="650" letter-spacing="2.4">BUILT FOR CODEX</text>
+  <text x="408" y="312" fill="#F5F8F3" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="64" font-weight="720" letter-spacing="-1.9">Engineering</text>
+  <text x="408" y="378" fill="#F5F8F3" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="64" font-weight="720" letter-spacing="-1.9">Project OS</text>
+  <text x="410" y="433" fill="#B7C2B3" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="450">Resume work with durable state and reusable failure knowledge</text>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="16" font-weight="600" letter-spacing="0.8">
+    <rect x="410" y="493" width="126" height="42" rx="12" fill="#B7F34A" fill-opacity="0.1" stroke="#B7F34A" stroke-opacity="0.28"/>
+    <text x="434" y="520" fill="#C9FA6B">CONTEXT</text>
+    <rect x="548" y="493" width="102" height="42" rx="12" fill="#B7F34A" fill-opacity="0.1" stroke="#B7F34A" stroke-opacity="0.28"/>
+    <text x="571" y="520" fill="#C9FA6B">PLANS</text>
+    <rect x="662" y="493" width="132" height="42" rx="12" fill="#B7F34A" fill-opacity="0.1" stroke="#B7F34A" stroke-opacity="0.28"/>
+    <text x="685" y="520" fill="#C9FA6B">EVIDENCE</text>
+    <rect x="806" y="493" width="160" height="42" rx="12" fill="#B7F34A" fill-opacity="0.1" stroke="#B7F34A" stroke-opacity="0.28"/>
+    <text x="829" y="520" fill="#C9FA6B">KNOWLEDGE</text>
+  </g>
+</svg>

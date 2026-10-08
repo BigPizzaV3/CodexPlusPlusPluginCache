@@ -1,0 +1,87 @@
+{
+  "positive": [
+    {
+      "prompt": "@Creator Workspace Set up my second brain from these exports and research files.",
+      "expected": [
+        "creator-router",
+        "second-brain-setup",
+        "conversation-importer"
+      ]
+    },
+    {
+      "prompt": "@Creator Workspace Create a dummy workspace, save one test note, then recall it.",
+      "expected": [
+        "creator-router",
+        "second-brain-setup",
+        "host-workspace-operator",
+        "workspace-recall"
+      ]
+    },
+    {
+      "prompt": "Set up my second brain from these ChatGPT exports.",
+      "expected": [
+        "second-brain-setup",
+        "conversation-importer"
+      ]
+    },
+    {
+      "prompt": "Turn this raw transcript into a 1500 word article using my actual wording.",
+      "expected": [
+        "voiceprint"
+      ]
+    },
+    {
+      "prompt": "Use my notes to write a LinkedIn post in my voice.",
+      "expected": [
+        "create-from-brain",
+        "post-writer"
+      ]
+    },
+    {
+      "prompt": "Show me three visual directions for this carousel.",
+      "expected": [
+        "carousel-generator",
+        "show-me"
+      ]
+    },
+    {
+      "prompt": "Save the useful corrections from this session.",
+      "expected": [
+        "save-progress"
+      ]
+    },
+    {
+      "prompt": "What changed in AI marketing this week that I should post about?",
+      "expected": [
+        "niche-research"
+      ]
+    },
+    {
+      "prompt": "Analyze this LinkedIn CSV and show me what is actually working.",
+      "expected": [
+        "analytics-dashboard",
+        "show-me"
+      ]
+    },
+    {
+      "prompt": "What does my workspace remember about Project Atlas, and what was the latest decision?",
+      "expected": [
+        "workspace-recall"
+      ]
+    }
+  ],
+  "negative": [
+    {
+      "prompt": "Refactor this Python package.",
+      "expected": []
+    },
+    {
+      "prompt": "Book a restaurant tonight.",
+      "expected": []
+    },
+    {
+      "prompt": "What is the weather tomorrow?",
+      "expected": []
+    }
+  ]
+}

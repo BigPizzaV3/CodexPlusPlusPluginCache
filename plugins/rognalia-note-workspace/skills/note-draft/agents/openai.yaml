@@ -1,0 +1,5 @@
+interface:
+  display_name: "note Workspace 下書き登録"
+  short_description: "承認済み完成物をnoteの新規下書き一件へ安全に保存します"
+policy:
+  allow_implicit_invocation: true

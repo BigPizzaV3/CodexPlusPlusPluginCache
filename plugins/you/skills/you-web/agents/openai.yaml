@@ -1,0 +1,13 @@
+interface:
+  display_name: You.com Web
+  short_description: Current web search, URL content extraction, and cited synthesis
+  brand_color: '#6C5CE7'
+  default_prompt: Use You.com to search the web and cite current sources.
+
+dependencies:
+  tools:
+    - type: mcp
+      value: you-web
+      description: You.com web search, content extraction, and research tools
+      transport: streamable_http
+      url: https://api.you.com/mcp

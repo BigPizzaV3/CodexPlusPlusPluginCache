@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uniform Assets"
+  short_description: "Render Uniform images and media assets"
+  default_prompt: "Render a Uniform image with $uniform-assets"

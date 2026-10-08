@@ -1,0 +1,53 @@
+{
+  "name": "heytraders-codex",
+  "version": "1.0.1",
+  "description": "Agent-native access to HeyTraders quantitative research, backtesting, and paper simulation through the Codex browser.",
+  "author": {
+    "name": "HeyTraders, Inc.",
+    "url": "https://github.com/heytraders"
+  },
+  "homepage": "https://hey-traders.com/docs/getting-started",
+  "license": "Apache-2.0",
+  "keywords": [
+    "heytraders",
+    "trading",
+    "browser",
+    "chart",
+    "codex"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Hey-Traders! Quant Trading",
+    "shortDescription": "Agent-native trading infra",
+    "longDescription": "Hey-Traders! Quant Trading gives AI agents access to quantitative market research and strategy testing through the Codex browser, with workflows designed for token-efficient tool use.\n\nManipulate and analyze charts, add technical indicators, research markets, analyze portfolios descriptively, build and backtest trading strategies, and run strategies in simulated paper mode using the tools available in HeyTraders.\n\nThe skills use structured commands and targeted capability discovery to connect research, strategy development, and validation in your HeyTraders workspace. Agents discover the tools relevant to each task and retrieve focused results, keeping interactions concise while working with the application’s current capabilities.\n\nRequires Codex desktop with the Browser plugin and a HeyTraders account. Paper workflows use simulated balances and do not send orders to a trading venue. The public plugin does not place, modify, cancel, or monitor real orders; run live strategies; or connect exchanges. Sign-in is completed by the user in the application.",
+    "developerName": "HeyTraders, Inc.",
+    "category": "Finance",
+    "capabilities": [
+      "Browser",
+      "Chart Analysis",
+      "Backtesting",
+      "Market Research",
+      "Portfolio Analysis",
+      "Paper Simulation"
+    ],
+    "websiteURL": "https://hey-traders.com/",
+    "supportURL": "https://hey-traders.com/",
+    "privacyPolicyURL": "https://hey-traders.com/privacy",
+    "termsOfServiceURL": "https://hey-traders.com/terms",
+    "defaultPrompt": [
+      "Open my chart workspace, add indicators, and research the market to assess current conditions.",
+      "Create a trading strategy and validate it with a backtest.",
+      "Run this strategy in simulated paper mode and report its status."
+    ],
+    "brandColor": "#D79A22",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png"
+  },
+  "extensions": {
+    "com.openai": {
+      "publication": {
+        "release_notes": "Align HeyTraders commands with bridge v7 and the shared help list/help describe catalog. Add ht_client=codex when opening new product or sign-in tabs, preserving existing workspace URLs and application-owned analytics consent."
+      }
+    }
+  }
+}

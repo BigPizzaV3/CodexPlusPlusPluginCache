@@ -1,0 +1,47 @@
+{
+  "author": {
+    "name": "ITSalt",
+    "url": "https://github.com/ITSalt"
+  },
+  "description": "Open-source full-SDLC framework with graph-native project knowledge for agentic development.",
+  "homepage": "https://github.com/ITSalt/NaCl",
+  "interface": {
+    "brandColor": "#0F766E",
+    "brandColorDark": "#89F0E8",
+    "capabilities": [
+      "Analysis",
+      "Planning",
+      "Delivery",
+      "Verification",
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Check my NaCl project and summarize its delivery status.",
+      "Analyze this feature request and route it through the right NaCl workflow.",
+      "Verify this NaCl change and report specification or test gaps."
+    ],
+    "developerName": "ITSalt",
+    "displayName": "NaCl",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "NaCl (reading as Natrium Chloride) is an open-source full-SDLC framework, and its core innovation is how it solves the hardest problem in agentic development: storing and retrieving project knowledge. Instead of markdown specs that agents must re-read every session, all project knowledge \u2014 requirements, architecture decisions, entities, rules, and their relationships \u2014 lives in a Neo4j knowledge graph as first-class queryable objects. The measured effect: planning a single use case takes ~550 tokens (one targeted Cypher query) instead of ~150,000 tokens (reading a ~70-file markdown spec, because the agent doesn't know in advance where the relevant facts live) \u2014 a 99.6% reduction in context per use case, repeated in every planning session.\n\nAround the graph we've built the full tooling for agentic development and testing: 57 skills covering BA \u2192 SA \u2192 TDD development \u2192 review \u2192 QA \u2192 release, quality gates before production, and an autonomous goal orchestrator (/nacl-goal). The framework answers \"how is this built and why\" for any part of the system, regardless of project scale or iteration count. Benchmarked on a real production project (EV charging station management): a classical team was estimated at 5,831 person-hours; running fully on NaCl the same scope takes 1,480 person-hours \u2014 4x fewer person-hours and 60% lower cost.",
+    "privacyPolicyURL": "https://github.com/ITSalt/NaCl/blob/main/PRIVACY.md",
+    "shortDescription": "Develop without IT-specialists",
+    "termsOfServiceURL": "https://github.com/ITSalt/NaCl/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/ITSalt/NaCl"
+  },
+  "keywords": [
+    "developer-tools",
+    "software-delivery",
+    "systems-analysis",
+    "verification"
+  ],
+  "license": "MIT",
+  "name": "nacl",
+  "repository": "https://github.com/ITSalt/NaCl",
+  "skills": "./skills/",
+  "version": "0.2.2"
+}

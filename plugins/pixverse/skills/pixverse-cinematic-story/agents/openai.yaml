@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Cinematic Story Clips"
+  short_description: "Create short cinematic scenes"
+  default_prompt: "Use $pixverse-cinematic-story to turn my story idea into one cinematic scene."
+policy:
+  allow_implicit_invocation: true

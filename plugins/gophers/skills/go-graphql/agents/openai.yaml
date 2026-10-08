@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go GraphQL"
+  short_description: "Build production GraphQL APIs in Go"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-graphql to design or review this Go GraphQL API."

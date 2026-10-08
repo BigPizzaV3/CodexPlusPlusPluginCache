@@ -1,0 +1,5 @@
+interface:
+  display_name: "Task ETA Tracker"
+  short_description: "Track milestones and honest task ETA ranges"
+  brand_color: "#0B2A52"
+  default_prompt: "Use $task-eta-tracker to estimate and track this task with milestone-based ETA ranges."

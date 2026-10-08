@@ -1,0 +1,7 @@
+interface:
+  display_name: "Post Editor"
+  short_description: "Edit short and medium social posts"
+  default_prompt: "Edit this social post for a cold audience without changing the facts or my voice."
+
+policy:
+  allow_implicit_invocation: true

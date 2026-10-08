@@ -1,0 +1,6 @@
+interface:
+  display_name: "Social Content"
+  short_description: "Plan and create channel-native social content."
+  default_prompt: "Use Social Content to help with this marketing task."
+policy:
+  allow_implicit_invocation: true

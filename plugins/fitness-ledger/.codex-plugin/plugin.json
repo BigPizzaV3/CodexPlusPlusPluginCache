@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Fitness Ledger Contributors",
+    "url": "https://github.com/actowery/fitness-ledger"
+  },
+  "description": "Library-native, provenance-aware nutrition and fitness tracking skills.",
+  "homepage": "https://github.com/actowery/fitness-ledger",
+  "interface": {
+    "capabilities": [
+      "Nutrition and hydration logging",
+      "Deterministic daily reports",
+      "Provenance-aware corrections",
+      "Workout and activity reconciliation"
+    ],
+    "category": "Healthcare",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Set up my Fitness Ledger in ChatGPT Library.",
+      " Show my nutrition report.",
+      "Reconcile my latest workout and step-count snapshots."
+    ],
+    "developerName": "CIHAN ADRIAN TOWERY",
+    "displayName": "Fitness Ledger",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Maintain a provenance-aware nutrition and fitness ledger in ChatGPT Library. Log food, hydration, and weight; correct entries without losing history; generate deterministic daily reports; and reconcile workout and activity snapshots without silently combining conflicting sources. Missing nutrient values remain unknown rather than becoming fabricated zeroes. Fitness Ledger is skills-only: it has no publisher-hosted service, telemetry, or required external account. It supports personal tracking and explanation, not medical diagnosis or treatment.",
+    "privacyPolicyURL": "https://github.com/actowery/fitness-ledger/blob/main/PRIVACY.md",
+    "shortDescription": "Track nutrition and fitness",
+    "termsOfServiceURL": "https://github.com/actowery/fitness-ledger/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/actowery/fitness-ledger"
+  },
+  "keywords": [
+    "nutrition",
+    "fitness",
+    "health",
+    "tracking",
+    "provenance"
+  ],
+  "license": "MIT",
+  "name": "fitness-ledger",
+  "repository": "https://github.com/actowery/fitness-ledger",
+  "skills": "./skills/",
+  "version": "1.0.1"
+}

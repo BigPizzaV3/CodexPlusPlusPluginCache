@@ -1,0 +1,9 @@
+interface:
+  display_name: Humanizer
+  short_description: Make prose sound more natural and human
+  default_prompt: Use $humanizer to rewrite this text in my voice without changing its facts
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

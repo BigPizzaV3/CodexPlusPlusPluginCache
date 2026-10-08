@@ -1,0 +1,54 @@
+{
+  "positive": [
+    {
+      "id": "implement-api",
+      "prompt": "Add a paginated GET /users endpoint to this TypeScript service, follow the repository conventions, and verify the behavior before you call it complete.",
+      "expectedBehavior": "Activate GodPrompt, inspect the repository, bound the change, implement the endpoint, and run relevant verification before claiming completion.",
+      "expectedOutputStructure": "Concise implementation result, verification commands/results, and any remaining limitation."
+    },
+    {
+      "id": "debug-test-failure",
+      "prompt": "Debug why these Python tests started failing after the timezone change and fix the root cause without touching unrelated code.",
+      "expectedBehavior": "Activate GodPrompt, reproduce or inspect the failure, identify the root cause, apply a scoped fix, and verify the affected tests.",
+      "expectedOutputStructure": "Root cause, changed behavior/files, verification evidence, and unresolved gaps if any."
+    },
+    {
+      "id": "behavior-preserving-refactor",
+      "prompt": "Refactor this parser to remove duplicated branches while preserving behavior. Prove the refactor did not change outputs.",
+      "expectedBehavior": "Activate GodPrompt, establish the current contract, make a minimal refactor, and run behavior-preserving checks.",
+      "expectedOutputStructure": "Refactor summary, evidence that behavior is preserved, and relevant caveats."
+    },
+    {
+      "id": "code-review",
+      "prompt": "Review this pull request for behavioral regressions, scope creep, and missing tests. Do not edit anything.",
+      "expectedBehavior": "Activate GodPrompt in review-only mode, inspect the supplied change set, prioritize concrete findings, and avoid file mutations.",
+      "expectedOutputStructure": "Findings ordered by severity with evidence, followed by residual risks or testing gaps."
+    },
+    {
+      "id": "release-readiness",
+      "prompt": "Prepare this Node package for release: check the versioned artifacts, run the repository release checks, and tell me whether it is actually ready to ship.",
+      "expectedBehavior": "Activate GodPrompt, inspect release state and repository instructions, run applicable readiness checks, and separate verified readiness from blockers.",
+      "expectedOutputStructure": "Readiness verdict, checks/results, blockers, and next safe release action."
+    }
+  ],
+  "negative": [
+    {
+      "id": "general-knowledge",
+      "prompt": "What is the capital of Slovenia?",
+      "expectedBehavior": "Do not activate GodPrompt; answer the general-knowledge question directly.",
+      "reason": "The request is not a software-engineering execution or review workflow."
+    },
+    {
+      "id": "translation",
+      "prompt": "Translate 'good morning' into German.",
+      "expectedBehavior": "Do not activate GodPrompt; provide the translation directly.",
+      "reason": "The request is a simple language task with no engineering workflow."
+    },
+    {
+      "id": "creative-writing",
+      "prompt": "Write a short birthday poem for my friend.",
+      "expectedBehavior": "Do not activate GodPrompt; handle the creative-writing request normally.",
+      "reason": "The request is unrelated to software engineering and does not explicitly invoke GodPrompt."
+    }
+  ]
+}

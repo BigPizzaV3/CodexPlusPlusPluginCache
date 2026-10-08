@@ -1,0 +1,6 @@
+interface:
+  display_name: "Offer and Pricing"
+  short_description: "Design offers, packages, pricing, and tests."
+  default_prompt: "Use Offer and Pricing to help with this marketing task."
+policy:
+  allow_implicit_invocation: true

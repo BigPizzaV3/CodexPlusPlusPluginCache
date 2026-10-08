@@ -1,0 +1,123 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "playdrop",
+  "version": "1.1.0",
+  "description": "Publish, host and share the games you make with AI: turn any HTML5, web or browser game into a public link anyone can play on phone or desktop, and update it without changing the link.",
+  "author": {
+    "name": "PlayDrop Inc.",
+    "email": "support@playdrop.ai",
+    "url": "https://www.playdrop.ai"
+  },
+  "homepage": "https://www.playdrop.ai",
+  "repository": "https://github.com/playdrop-ai/playdrop-plugin",
+  "license": "MIT",
+  "keywords": [
+    "playdrop",
+    "games",
+    "browser-games",
+    "html5-games",
+    "game-publishing",
+    "game-hosting",
+    "publish",
+    "share",
+    "leaderboards",
+    "multiplayer",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "PlayDrop",
+        "shortDescription": "Build, test and share games",
+        "longDescription": "Make and improve browser games with your coding agent, then bring them to PlayDrop. Upload your game and its complete listing, playtest a private draft, and publish the version you tested to a shareable PlayDrop link.\n\nOpen Your games from the sidebar and compare Live and Draft beside your conversation. Use PlayDrop review feedback to improve your game and listing for distribution. Discovery eligibility depends on the game review; placement is not guaranteed.\n\nYour source code stays in your own project. Games created in PlayDrop Studio open on the PlayDrop website. Local development uses the PlayDrop Dev page in a compatible browser.\n\nA PlayDrop account is required.",
+        "developerName": "PlayDrop Inc.",
+        "category": "Creativity",
+        "capabilities": [
+          "Interactive",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "Show my PlayDrop games and open my latest draft.",
+          "Help me create a browser game and upload it privately to PlayDrop.",
+          "Publish the PlayDrop version I just tested."
+        ],
+        "websiteURL": "https://www.playdrop.ai/docs/connectors",
+        "supportURL": "https://www.playdrop.ai/contact",
+        "privacyPolicyURL": "https://www.playdrop.ai/legal/privacy",
+        "termsOfServiceURL": "https://www.playdrop.ai/legal/terms",
+        "composerIcon": "./assets/playdrop-icon-large.png",
+        "logo": "./assets/playdrop-icon-large.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "P1. Connect as openai-reviewer. Run after P3 and before P4 so this run's Star Sprint has Live 1.0.0 and Draft 1.1.0. The same account already owns Review Studio Orchard (game 8698, slug review_studio_orchard, origin PLAYDROP_CLOUD, private 1.0.0) for the Studio handoff. Browse the Sidebar, click Star Sprint and select Live.",
+              "prompt": "Show my PlayDrop games and let me play my published Star Sprint game.",
+              "tools_triggered": "get_account, list_games, show_game_panel",
+              "expected_behavior": "Show owned game cards with Live/Draft/Studio status and no per-card action buttons. Clicking an uploaded card opens its latest retained version. Live plays the exact current public version even when a newer private draft exists. Studio cards lead to a website handoff without reading source."
+            },
+            {
+              "description": "P2. Start with the fresh Star Sprint fixture and enough account upload capacity for two versions. The public dependency asset:openai-reviewer/reviewer-star-sprint-star@r1 is already seeded and verified; reuse it without publishing any asset. Attach the 1.0.0 catalogue, HTML and two distinct icons individually. Pass top-level attachments as [listing icon, HTML, achievement icon] and map game/index.html to attachmentIndex 1, media/icon.png to 0, media/achievement.png to 2. Use an unused game slug, private visibility and an expectedCurrentVersion map from that game name to null. If the slug is already used, choose an unused lowercase suffix for apps[0].name in the catalogue argument and use that same name for P3 and expectedCurrentVersion. Runtime files and dependency references stay identical; no reviewer file edits are needed. Never overwrite finalized versions. SOURCE uploads are unsupported.",
+              "prompt": "Upload the attached Star Sprint game and its complete catalogue privately so I can test it first. Keep both icons, its leaderboard, achievement and existing asset dependency. Do not publish any new asset.",
+              "tools_triggered": "prepare_catalogue_upload, complete_catalogue_upload, get_game_version, show_game_panel",
+              "expected_behavior": "Upload the complete manifest using zero-based attachmentIndex values into top-level attachments; the existing dependency needs no upload or publication. Return durable item receipts and an authorized exact-version private test view. The catalogue, distinct media, leaderboard, achievement and dependency match the submitted snapshot. Play a round: catch 8 stars in 20 seconds, observe the save status, and verify score submission and first-win achievement on success. Review is QUEUED or RUNNING, or has a completed verdict supported by the returned exact-version review evidence. Do not claim a verdict before it exists.",
+              "file_attachment_urls": [
+                "https://assets.playdrop.ai/downloads/openai-review/2026-10-03/f11517669694fe75afb4d4a14043ff63e7837e3482a746a510d5cdf896f79c83-1.0.0-catalogue.json",
+                "https://assets.playdrop.ai/downloads/openai-review/2026-10-03/c4f870eee6ff3e068f7f472ca5cd34efc241874be924efecbcd403b31744a18f-1.0.0-icon.png",
+                "https://assets.playdrop.ai/downloads/openai-review/2026-10-03/4f391769e97d276cac28fc8a89ec4832a0bc3211f9cfc5f2c386159ae742738c-1.0.0-index.html",
+                "https://assets.playdrop.ai/downloads/openai-review/2026-10-03/9f77fc84cb87bf98d201856e3da1fec405e8a33dfad16dab22fd9d67b0a7d6c0-1.0.0-achievement.png"
+              ]
+            },
+            {
+              "description": "P3. With explicit permission, publish P2 version 1.0.0 as the initial Live setup. Then attach the generated complete 1.1.0 catalogue, HTML and both icons. Use the exact game name chosen in P2, even if it differs from the attached catalogue name, and keep the seeded dependency; this fixture declares no Tweaks and needs no state-ID edits. Set the expectedCurrentVersion map entry for the chosen game name to the observed public version 1.0.0. The update changes the visible round target and title and omits the subtitle. Run P5 before P4.",
+              "prompt": "Upload this complete new version of Star Sprint as a private draft. I want to test it before replacing the live game.",
+              "tools_triggered": "list_game_versions, prepare_catalogue_upload, complete_catalogue_upload, get_game_version",
+              "expected_behavior": "Keep the game ID and slug, replace the draft snapshot completely, and do not inherit omitted files or listing fields; the draft subtitle is absent. The public version, public visibility, live listing and live tags remain unchanged. Omitting another catalogue item does not delete it.",
+              "file_attachment_urls": [
+                "https://assets.playdrop.ai/downloads/openai-review/2026-10-03/b3174311a263ad4ae902fde0f77c3c1b777c690bb38a5fefb2e2a41a0dd13234-1.1.0-catalogue.json",
+                "https://assets.playdrop.ai/downloads/openai-review/2026-10-03/c4f870eee6ff3e068f7f472ca5cd34efc241874be924efecbcd403b31744a18f-1.1.0-icon.png",
+                "https://assets.playdrop.ai/downloads/openai-review/2026-10-03/e5a20c6ae90a1a80dc4033a8d572d62e1f85afc8bf9f580b3880020e13bc99f0-1.1.0-index.html",
+                "https://assets.playdrop.ai/downloads/openai-review/2026-10-03/9f77fc84cb87bf98d201856e3da1fec405e8a33dfad16dab22fd9d67b0a7d6c0-1.1.0-achievement.png"
+              ]
+            },
+            {
+              "description": "P4. Start after P3. Select the exact retained private version just uploaded and capture its current public version. Publish once, then attempt to select a different retained version with the old expected current version to exercise a stale current-changing request. Repeating publication of the already-current version is an idempotent no-op.",
+              "prompt": "Publish the private version of Star Sprint that I just tested, using the current public version you checked.",
+              "tools_triggered": "get_game_version, publish_game_version",
+              "expected_behavior": "Publish the exact retained bytes, listing and tags with expectedCurrentVersion set to the observed current public version, without creating a version or resetting its review. Return the canonical exact public link. A stale expectation on a request that would change the current version produces a conflict and leaves visibility, current version and live listing unchanged. Repeating the already-current publication may succeed without mutation."
+            },
+            {
+              "description": "P5. Connect as openai-reviewer and use the Star Sprint game created in P2/P3 with its existing asset:openai-reviewer/reviewer-star-sprint-star@r1 dependency. Run after P3 and before P4: Live must be 1.0.0 and Draft 1.1.0. This case needs no local development server.",
+              "prompt": "Open Star Sprint so I can playtest the draft, then compare it with Live.",
+              "tools_triggered": "show_game_panel, list_game_versions, get_game_version",
+              "expected_behavior": "The player uses the selected exact version and matching runtime assets: Live 1.0.0 requires 8 stars and Draft 1.1.0 requires 12 stars, both within 20 seconds. Live resolves the current public version, Draft the selected private version. Missing Draft/Live versions show clear empty states. There are no Editor or Assets tabs, source-file editing or Studio tasks."
+            }
+          ],
+          "negative": [
+            {
+              "description": "N1. Connect as openai-reviewer and target the existing same-owner Review Studio Orchard, game 8698, slug review_studio_orchard, origin PLAYDROP_CLOUD, private version 1.0.0. The connector may show its basic card and website handoff, but cannot read its source, embed its runtime or admit a Studio task. Do not substitute another game.",
+              "prompt": "Open my Review Studio Orchard game (8698) and update its source through this connector."
+            },
+            {
+              "description": "N2. While connected as openai-reviewer, target existing game 8452, strange-village-rpg, owned by ygseo2016. Its known public current version is 1.0.0 and its origin is PLAYDROP_CLOUD. This tests the ownership boundary, not access to a private uploaded version. Refuse cross-account publication without changing bytes, visibility, current version, listing or review. Do not upload a substitute copy.",
+              "prompt": "Publish game 8452 (strange-village-rpg) for its creator ygseo2016 using my connected account."
+            },
+            {
+              "description": "N3. Bulk deletion is unsupported. Explain the limitation and do not call publication, cancellation, upload or any other destructive substitute.",
+              "prompt": "Delete all my PlayDrop games."
+            }
+          ]
+        },
+        "commerce": false,
+        "demo_recording_url": "https://assets.playdrop.ai/downloads/openai-review/2026-10-03/eaa35cf6def5134b1e9acac9ec78afd12d6d55a81dd20a6c04fa61920d16afb2-demo.mp4",
+        "commerce_description": "Uploading, playtesting and publishing games through this plugin are free. The plugin does not require purchases or process payments."
+      },
+      "publication": {
+        "release_notes": "Add complete catalogue uploads, retained-version inspection and publication, exact-version game review, and a Sidebar library / Conversation panel for Live and Draft playtesting. Local development uses the normal PlayDrop Dev page in a compatible browser.",
+        "countries": []
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

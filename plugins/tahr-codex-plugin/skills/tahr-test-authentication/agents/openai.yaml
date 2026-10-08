@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Test Authentication"
+  short_description: "Test authentication and session boundaries"
+  default_prompt: "Use $tahr-test-authentication to review login, recovery, MFA, OAuth, and session controls in this application."

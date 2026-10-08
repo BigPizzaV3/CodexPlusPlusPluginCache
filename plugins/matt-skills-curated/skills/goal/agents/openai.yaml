@@ -1,0 +1,3 @@
+interface:
+  display_name: "Goal Prompt Synthesis"
+  short_description: "Synthesize autonomous goal prompts and contracts"

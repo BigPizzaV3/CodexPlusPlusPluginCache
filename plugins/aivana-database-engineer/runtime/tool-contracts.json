@@ -1,0 +1,433 @@
+{
+  "run_tuning_lab": {
+    "version": "1.0", "input": { "required": ["engine", "database", "systemId", "environment", "product", "productVersion", "deployment", "cases", "coverage"], "optional": ["connectionProfile", "repetitions", "concurrency", "ordered", "budgets"] },
+    "output": { "required": ["usp", "source", "scope", "runId", "before", "replay", "after", "review", "executionAuthorized", "limitations"] },
+    "governance": ["administratively_qualified_lab_only", "reviewed_templates", "context_drift_visible", "no_production_change"]
+  },
+  "collect_tempdb_health": {
+    "version": "1.0", "input": { "required": ["engine", "database"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "source", "scope", "sections", "findings", "evidenceGaps", "status", "executionAuthorized", "bottleneckProven", "limitations"] },
+    "governance": ["live_sqlserver_tempdb_only", "instance_shared_scope", "no_shrink_resize_or_restart", "waits_not_causality"]
+  },
+  "collect_replication_health": {
+    "version": "1.0", "input": { "required": ["engine", "database"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "source", "scope", "sections", "findings", "evidenceGaps", "status", "executionAuthorized", "replicationHealthy", "limitations"] },
+    "governance": ["live_postgres_only", "explicit_cluster_scope", "no_slot_or_WAL_deletion", "LSN_distance_not_disk_usage"]
+  },
+  "collect_blocking_frame": {
+    "version": "1.0", "input": { "required": ["engine", "systemId", "database"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "source", "frame", "preview", "executionAuthorized", "queryTextExported", "backgroundMonitoring", "limitations"] },
+    "governance": ["live_postgres_only", "no_SQL_text_export", "bounded_sessions", "hidden_identity_fails_closed", "no_background_polling"]
+  },
+  "blocking_timeline": {
+    "version": "1.0", "input": { "required": ["engine", "systemId", "database", "frames"], "optional": [] },
+    "output": { "required": ["usp", "source", "scope", "timeline", "sessions", "status", "executionAuthorized", "deadlockProven", "rootCauseProven", "continuousBlockingDurationMs", "limitations"] },
+    "governance": ["session_ID_plus_start_time", "missing_blockers_visible", "cycles_not_deadlock_verdicts", "no_KILL_or_auto_remediation"]
+  },
+  "operational_window_compare": {
+    "version": "1.0", "input": { "required": ["engine", "systemId", "database", "before", "after"], "optional": ["slo"] },
+    "output": { "required": ["usp", "source", "status", "comparable", "reasonCodes", "metrics", "queries", "missingQueries", "slo", "causalityEstablished", "improvementEstablished", "backgroundMonitoring", "executionAuthorized"] },
+    "governance": ["equal_nonoverlapping_windows", "same_counter_epoch", "reset_and_missing_evidence_visible", "no_percentile_or_CPU_inference"]
+  },
+  "consulting_project": {
+    "version": "1.0", "input": { "required": ["action", "tenantId", "projectId"], "optional": ["data", "expectedRevision", "format"] },
+    "output": { "required": ["usp", "source", "project", "executionAuthorized", "approvalGranted", "limitations"] },
+    "governance": ["local_tenant_project_namespacing_not_auth", "optimistic_revisions", "referenced_evidence", "supplied_acceptance_not_authorization"]
+  },
+  "collect_dba_maintenance": {
+    "version": "1.0", "input": { "required": ["engine", "database"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "source", "scope", "sections", "evidenceGaps", "executionAuthorized", "restoreVerified", "backupChainVerified", "rpoMet", "rtoMet", "limitations"] },
+    "governance": ["bounded_live_catalogs", "backup_history_not_restore_proof", "no_maintenance_writes"]
+  },
+  "audit_state_recovery": {
+    "version": "1.0", "input": { "required": ["action"], "optional": ["expectedFingerprint", "acknowledgeHistoricalGaps", "reason"] },
+    "output": { "required": ["action", "fingerprint", "changed", "historicalIntegrity", "executionAuthorized"] },
+    "governance": ["inspect_default_workflow", "explicit_new_epoch_acknowledgment", "original_bytes_preserved", "never_claim_legacy_chain_repaired"]
+  },
+  "database_engineer_brief": {
+    "version": "1.0", "input": { "required": ["engine", "database"], "optional": ["connectionProfile", "sql"] },
+    "output": { "required": ["usp", "source", "scope", "capturedAt", "sections", "nextSteps", "evidenceGaps", "status", "executionAuthorized", "healthScore", "performanceImprovementProven", "limitations"] },
+    "governance": ["live_discovery_required", "section_provenance", "explicit_truncation_and_gaps", "no_automatic_remediation"]
+  },
+  "duplicate_index_review": {
+    "version": "1.0", "input": { "required": ["snapshot"], "optional": [] },
+    "output": { "required": ["usp", "source", "engine", "database", "candidates", "excluded", "coverage", "complete", "executionAuthorized", "dropSql", "estimatedSavings", "limitations"] },
+    "governance": ["structural_candidates_not_retirement_proof", "exclude_unique_partial_prefix_expression", "no_DROP_or_invented_savings"]
+  },
+  "compare_native_plans": {
+    "version": "1.0", "input": { "required": ["before", "after"], "optional": ["maxAgeMinutes"] },
+    "output": { "required": ["usp", "source", "scope", "queryHash", "status", "beforePlanHash", "afterPlanHash", "steps", "evidenceGaps", "performanceImprovementProven", "executionAuthorized", "limitations"] },
+    "governance": ["identical_SQL_and_connection_scope", "bounded_fresh_evidence", "plan_change_not_performance_proof"]
+  },
+  "foreign_key_index_review": {
+    "version": "1.0", "input": { "required": ["snapshot"], "optional": [] },
+    "output": { "required": ["usp", "source", "engine", "database", "findings", "skippedIndexes", "coverage", "complete", "executionAuthorized", "indexSql", "limitations"] },
+    "governance": ["native_catalog_shapes", "leading_columns_not_optimizer_proof", "missing_visibility_not_absence", "no_index_DDL"]
+  },
+  "native_query_plan": {
+    "version": "1.0", "input": { "required": ["engine", "database", "sql"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "source", "scope", "capturedAt", "result", "executionAuthorized", "limitations"] },
+    "governance": ["sqlite_mysql_mariadb_only", "native_estimates_not_measurements", "no_analyze_or_write", "explicit_database_scope"]
+  },
+  "schema_contract_check": {
+    "version": "1.0", "input": { "required": ["before", "after", "contract"], "optional": ["reviewedFingerprint"] },
+    "output": { "required": ["usp", "source", "status", "reviewFingerprint", "fingerprintMatches", "findings", "evidenceGaps", "comparison", "executionAuthorized", "deploymentApproved", "limitations"] },
+    "governance": ["protected_objects_override_expected_changes", "exact_review_binding_not_approval", "incomplete_or_stale_evidence_visible", "no_deployment_authorization"]
+  },
+  "compare_database_snapshots": {
+    "version": "1.0", "input": { "required": ["before", "after"], "optional": [] },
+    "output": { "required": ["usp", "source", "engine", "changes", "unchangedCount", "executionAuthorized", "migrationSql", "limitations"] },
+    "governance": ["supplied_evidence", "incomplete_absence_not_deletion", "no_DDL_execution"]
+  },
+  "compare_live_schemas": {
+    "version": "1.0", "input": { "required": ["before", "after"], "optional": [] },
+    "output": { "required": ["usp", "source", "engine", "changes", "observations", "executionAuthorized", "migrationSql", "limitations"] },
+    "governance": ["live_scoped_connections", "sequential_not_atomic", "no_DDL_execution"]
+  },
+  "discover_database": {
+    "version": "1.0", "input": { "required": ["engine", "database"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "source", "scope", "capturedAt", "result", "executionAuthorized", "limitations"] },
+    "governance": ["live_only", "visible_metadata_only", "explicit_database_scope", "no_write_authorization"]
+  },
+  "database_capabilities": {
+    "version": "1.0", "input": { "required": ["engine", "database"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "source", "scope", "capturedAt", "result", "executionAuthorized", "limitations"] },
+    "governance": ["live_only", "not_permission_checks", "no_write_authorization"]
+  },
+  "database_security_findings": {
+    "version": "1.0", "input": { "required": ["engine", "database"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "source", "scope", "capturedAt", "result", "executionAuthorized", "limitations"] },
+    "governance": ["live_only", "unsupported_is_not_healthy", "no_compliance_certification"]
+  },
+  "process_trace_correlation": {
+    "version": "1.0", "input": { "required": ["systemId", "environment", "product", "productVersion", "deployment", "spans"], "optional": [] },
+    "output": { "required": ["usp", "source", "links", "unconnected", "ambiguous", "rootCauseProven", "executionAuthorized"] },
+    "governance": ["explicit_trace_parent_IDs_only", "no_causality_claim", "unresolved_links_visible"]
+  },
+  "business_outcome_measurement": {
+    "version": "1.0", "input": { "required": ["before", "after", "businessControls"], "optional": [] },
+    "output": { "required": ["usp", "source", "decision", "baseline", "candidate", "deltas", "business", "monetaryImpact"] },
+    "governance": ["matched_process_cohort_windows", "correctness_before_performance", "no_invented_ROI"]
+  },
+  "collect_process_evidence": {
+    "version": "1.0", "input": { "required": ["engine", "database", "systemId", "environment", "product", "productVersion", "deployment"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "source", "scope", "traceReview", "databaseContext", "rootCauseProven", "executionAuthorized"] },
+    "governance": ["configured_HTTPS_exporter_only", "read_only_collectors", "unjoined_DB_context_explicit"]
+  },
+  "enterprise_approval_check": {
+    "version": "1.0", "input": { "required": ["receipt", "actor", "tool", "engine", "database", "schema", "environment", "connectionProfile", "statementHash"], "optional": [] },
+    "output": { "required": ["usp", "authorized", "executionAuthorized"] },
+    "governance": ["trusted_signature_and_online_status", "fail_closed", "not_live_IdP_login"]
+  },
+  "enterprise_audit_witness": {
+    "version": "1.0", "input": { "required": ["action", "eventHash"], "optional": [] },
+    "output": { "required": ["usp", "acknowledged", "executionAuthorized"] },
+    "governance": ["configured_remote_hash_witness", "no_tamperproof_storage_claim"]
+  },
+  "live_context_fingerprint": {
+    "version": "1.0", "input": { "required": ["engine", "database", "systemId", "environment", "product", "productVersion", "deployment"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "source", "scope", "capturedAt", "validityContext", "coverage", "executionAuthorized"] },
+    "governance": ["live_only", "visible_metadata_only", "estimates_not_content_hashes"]
+  },
+  "live_workload_replay": {
+    "version": "1.0", "input": { "required": ["engine", "database", "systemId", "environment", "product", "productVersion", "deployment", "cases"], "optional": ["connectionProfile", "concurrency", "repetitions", "ordered"] },
+    "output": { "required": ["usp", "source", "scope", "records", "resultsMatch", "rawRowsExported", "parameterValuesExported", "limitations"] },
+    "governance": ["isolated_lab_only", "administratively_allowlisted_templates", "no_raw_parameters_in_audit", "bounded_execution"]
+  },
+  "live_rewrite_verification": {
+    "version": "1.0", "input": { "required": ["engine", "database", "systemId", "environment", "product", "productVersion", "deployment", "cases", "coverage"], "optional": ["connectionProfile", "concurrency", "repetitions", "ordered"] },
+    "output": { "required": ["usp", "source", "decision", "records", "coverage", "universalEquivalenceProven", "permissionScope"] },
+    "governance": ["recorded_cases_not_universal_proof", "coverage_is_declared", "current_principal_only"]
+  },
+  "live_recommendation_check": {
+    "version": "1.0", "input": { "required": ["engine", "database", "systemId", "environment", "product", "productVersion", "deployment", "caseId"], "optional": ["connectionProfile"] },
+    "output": { "required": ["usp", "status", "reasons", "collection", "continuousMonitoring", "executionAuthorized"] },
+    "governance": ["live_context_overrides_supplied_hashes", "on_demand_not_background"]
+  },
+  "diagnostic_session": {
+    "version": "1.0", "input": { "required": ["action", "systemId", "environment", "product", "productVersion", "deployment"], "optional": ["sessionId", "expectedRevision", "objective", "hypotheses", "tests", "availableEvidence", "maxEstimatedMinutes", "planHash", "testId", "observedOutcomeId", "observedAt", "evidenceRefs", "resultScope", "reason", "causalEvidence", "measurements", "businessControls"] },
+    "output": { "required": ["usp", "source", "session", "nextAction", "executionAuthorized", "rootCauseProven"] },
+    "governance": ["optimistic_concurrency", "scope_and_chronology_bound", "unknown_outcomes_require_model_revision", "no_automatic_execution"]
+  },
+  "diagnostic_test_result": {
+    "version": "1.0", "input": { "required": ["plan", "testId", "observedOutcomeId", "observedAt", "evidenceRefs", "resultScope"], "optional": [] },
+    "output": { "required": ["usp", "source", "remainingHypotheses", "requiresModelRevision", "planHash", "outputHash"] },
+    "governance": ["supplied_observation_not_attested", "no_causality_claim"]
+  },
+  "business_impact_priority": {
+    "version": "1.0", "input": { "required": ["systemId", "environment", "product", "productVersion", "deployment", "processes"], "optional": [] },
+    "output": { "required": ["usp", "source", "rankedProcesses", "ordering", "monetaryImpact", "executionAuthorized"] },
+    "governance": ["missing_metrics_unassessed", "no_invented_ROI", "transparent_lexicographic_order"]
+  },
+  "outcome_evidence_gate": {
+    "version": "1.0", "input": { "required": ["measurements", "businessControls"], "optional": [] },
+    "output": { "required": ["usp", "source", "decision", "performance", "business", "expectedControlCompletenessVerified", "executionAuthorized"] },
+    "governance": ["correctness_before_speed", "scope_and_snapshot_bound", "case_contract_still_required"]
+  },
+  "recommendation_validity": {
+    "version": "1.0", "input": { "required": ["action", "caseId", "systemId", "environment", "product", "productVersion"], "optional": ["validityContext", "expectedRevision", "reason"] },
+    "output": { "required": ["usp", "source", "status", "reasons", "executionAuthorized"] },
+    "governance": ["drift_requires_revalidation", "explicit_invalidation", "no_autonomous_monitor_claim"]
+  },
+  "admin_approval_check": {
+    "version": "1.0", "input": { "required": ["receipt", "actor", "tool", "engine", "database", "schema", "environment", "connectionProfile", "statementHash"], "optional": [] },
+    "output": { "required": ["usp", "source", "authorized", "executionAuthorized"] },
+    "governance": ["trusted_Ed25519_issuer_only", "separate_allowlisted_approver", "not_IdP_login", "verification_does_not_consume_receipt"]
+  },
+  "admin_preflight": {
+    "version": "1.0", "input": { "required": ["engine", "database"], "optional": ["connectionProfile", "schema", "table", "environment"] },
+    "output": { "required": ["usp", "scope", "checkedAt", "status", "checks", "source", "executionAuthorized", "productionReady", "limitations"] },
+    "governance": ["live_only", "read_only", "database_scope_validation", "no_health_or_write_authorization"]
+  },
+  "backup_restore_readiness_guard": {
+    "version": "2.0", "input": { "required": [], "optional": ["lastBackupAgeHours", "lastRestoreTestDays", "rpoHours", "maxRestoreTestAgeDays", "restoreDurationHours", "rtoHours", "restoreTestSucceeded"] },
+    "output": { "required": ["usp", "status", "findings", "missingEvidence", "invalidEvidence", "evidence", "provenance", "executionAuthorized", "source"] },
+    "governance": ["missing_evidence_never_ready", "supplied_not_verified", "no_execution_authorization"]
+  },
+  "next_evidence_test": {
+    "version": "1.0", "input": { "required": ["product", "productVersion", "systemId", "environment", "deployment", "hypotheses", "availableEvidence", "tests"], "optional": ["maxEstimatedMinutes"] },
+    "output": { "required": ["usp", "source", "decision", "selectedTestId", "rankedTests", "inputHash", "executionAuthorized", "measuredInformationGain", "limitations"] },
+    "governance": ["supplied_models_not_probabilities", "no_execution", "scope_and_prerequisite_checks", "worst_case_discrimination"]
+  },
+  "advisor_workflow": {
+    "version": "1.0", "input": { "required": ["action", "systemId", "environment", "product", "productVersion"], "optional": ["objective", "caseId"] },
+    "output": { "required": ["usp", "source", "case", "nextStep", "outcome", "executionAuthorized", "decisionBoundary"] },
+    "governance": ["guided_not_unattended", "no_automatic_approval", "technical_and_business_closure"]
+  },
+  "causal_evidence_review": {
+    "version": "1.0", "input": { "required": ["systemId", "environment", "product", "productVersion", "events", "hypotheses"], "optional": [] },
+    "output": { "required": ["usp", "source", "hypotheses", "evidenceIndex", "inputHash", "rootCauseProven", "nextAction", "limitations"] },
+    "governance": ["correlation_not_causation", "explicit_support_and_refutation", "scope_and_freshness_required"]
+  },
+  "business_reconciliation_compare": {
+    "version": "1.0", "input": { "required": ["before", "after"], "optional": [] },
+    "output": { "required": ["usp", "source", "decision", "differences", "matchedGroups", "inputHash", "snapshotHash", "definitionHash", "precision", "productionApproval", "limitations"] },
+    "governance": ["exact_decimal_strings", "no_cross_company_netting", "scope_snapshot_definition_required", "analysis_only"]
+  },
+  "advisory_case": {
+    "version": "2.0", "input": { "required": ["action", "systemId", "environment", "product", "productVersion"], "optional": ["caseId", "expectedRevision", "objective", "hypothesis", "evidenceRefs", "causalEvidence", "change", "rollback", "testPlan", "workloadId", "customizationHash", "businessContract", "businessControls", "validityContext", "validityHours", "proposalHash", "reviewer", "approvalRef", "approvedAt", "measurements", "outcome", "corrected", "note"] },
+    "output": { "required": ["usp", "source"] },
+    "governance": ["local_state_only", "scope_required", "optimistic_concurrency", "no_execution_authorization", "user_supplied_approval"]
+  },
+  "repeated_benchmark_review": {
+    "version": "1.0", "input": { "required": ["repetitions", "sampling"], "optional": ["minImprovementPct", "minSamples", "maxRegressionPct", "maxCaseRegressionPct", "noiseFloorMs", "caseBudgets"] },
+    "output": { "required": ["usp", "source", "decision", "repetitionCount", "workloadFingerprint", "policyHash", "statisticalSignificanceClaimed", "productionApproval"] },
+    "governance": ["supplied_measurements", "no_significance_claim", "correctness_before_speed"]
+  },
+  "release_qualification_matrix": {
+    "version": "1.0", "input": { "required": ["releaseHash", "receipts"], "optional": [] },
+    "output": { "required": ["usp", "source", "checks", "decision", "independentlyVerified", "publicationAuthorized"] },
+    "governance": ["missing_is_not_run", "release_bound_receipts", "no_publication_authorization"]
+  },
+  "audit_integrity_check": {
+    "version": "1.0", "input": { "required": [], "optional": [] },
+    "output": { "required": ["usp", "status", "records", "issues", "storageIntegrity", "source"] },
+    "governance": ["local_state_only", "no_tamper_proof_claim"]
+  },
+  "erp_crm_import_diagnostics": {
+    "version": "1.0", "input": { "required": ["product", "productVersion", "systemId", "environment", "deployment", "format", "data"], "optional": ["sloMs", "observedAt", "maxEvidenceAgeHours"] },
+    "output": { "required": ["usp", "evidence", "assessment", "recordsProcessed", "exportHash", "source"] },
+    "governance": ["analysis_only", "raw_payload_omitted", "scope_and_freshness_validation"]
+  },
+  "erp_crm_collect_api": {
+    "version": "1.0", "input": { "required": ["product", "productVersion", "systemId", "environment", "deployment", "apiVersion"], "optional": ["sloMs", "soql", "maxPages", "maxEvidenceAgeHours"] },
+    "output": { "required": ["usp", "evidence", "assessment", "collectorOrigin", "pages", "source"] },
+    "governance": ["read_only_get", "environment_credentials_only", "same_origin_pagination", "bounded_collection"]
+  },
+  "workload_regression_guard": {
+    "version": "1.1", "input": { "required": ["before", "after"], "optional": ["minSamples", "maxRegressionPct", "maxCaseRegressionPct", "noiseFloorMs", "caseBudgets"] },
+    "output": { "required": ["usp", "source", "decision", "comparison", "regressions", "casesChecked", "aggregateMaskedRegression", "approvalGranted", "limitations"] },
+    "governance": ["analysis_only", "correctness_before_speed", "no_significance_claim", "no_automatic_approval"]
+  },
+  "benchmark_evidence_compare": {
+    "version": "1.0", "input": { "required": ["before", "after"], "optional": ["minSamples", "maxRegressionPct"] },
+    "output": { "required": ["usp", "decision", "baseline", "candidate", "semanticMismatches", "errors", "inputHash", "source"] },
+    "governance": ["supplied_measurements", "correctness_before_speed", "no_significance_claim"]
+  },
+  "erp_crm_risk_analyzer": {
+    "version": "1.0",
+    "input": { "required": ["product"], "optional": ["productVersion", "systemId", "environment", "deployment", "evidence", "maxEvidenceAgeHours"] },
+    "output": { "required": ["usp", "decision", "findings", "checks", "coverage", "missingContext", "invalidEvidence", "limitations", "source"] },
+    "governance": ["analysis_only", "no_vendor_table_writes", "no_exhaustive_coverage_claim", "scope_and_freshness_validation"]
+  },
+  "erp_crm_vendor_catalog": {
+    "version": "1.0",
+    "input": { "required": [], "optional": [] },
+    "output": { "required": ["usp", "profiles", "rules", "source"] },
+    "governance": ["reference_only"]
+  },
+  "erp_crm_evidence_plan": {
+    "version": "1.0",
+    "input": { "required": ["product"], "optional": [] },
+    "output": { "required": ["usp", "checks", "collect", "requiredContext", "boundaries", "source"] },
+    "governance": ["analysis_only", "no_automatic_collection"]
+  },
+  "objective_to_ops_plan": {
+    "version": "1.0",
+    "input": { "required": ["objective"], "optional": ["service", "sloTargetMs", "environment"] },
+    "output": { "required": ["usp", "autonomyMode", "measurableObjectives", "guardrails", "candidateWorkflows", "source"] },
+    "governance": ["closed_loop_dry_run", "no_production_apply", "human_approval_for_change"]
+  },
+  "autonomous_experiment_planner": {
+    "version": "1.0",
+    "input": { "required": ["objective"], "optional": ["sql", "table", "engine"] },
+    "output": { "required": ["usp", "executionMode", "experiments", "abortCriteria", "source"] },
+    "governance": ["closed_loop_dry_run", "no_production_apply", "no_real_ddl"]
+  },
+  "counterfactual_risk_engine": {
+    "version": "1.0",
+    "input": { "required": ["objective"], "optional": ["proposedChange", "riskTolerance"] },
+    "output": { "required": ["usp", "decision", "scenarios", "evidence", "confidence", "source"] },
+    "governance": ["closed_loop_dry_run", "no_production_apply", "counterfactual_only"]
+  },
+  "decision_evidence_compiler": {
+    "version": "1.0",
+    "input": { "required": ["objective"], "optional": ["evidence", "service"] },
+    "output": { "required": ["usp", "decision", "executivePacket", "missingEvidence", "confidence", "source"] },
+    "governance": ["closed_loop_dry_run", "no_production_apply", "audit_ready_evidence"]
+  },
+  "confidence_budget_manager": {
+    "version": "1.0",
+    "input": { "required": ["evidence"], "optional": ["threshold"] },
+    "output": { "required": ["usp", "decision", "confidenceBudget", "missingEvidence", "source"] },
+    "governance": ["closed_loop_dry_run", "no_production_apply", "confidence_gate_required"]
+  },
+  "autonomy_boundary_enforcer": {
+    "version": "1.0",
+    "input": { "required": ["requestedAction"], "optional": ["environment", "executionMode"] },
+    "output": { "required": ["usp", "decision", "boundary", "requiredApprovals", "source"] },
+    "governance": ["closed_loop_dry_run", "no_production_apply", "approval_boundary_required"]
+  },
+  "operator_goal_monitor": {
+    "version": "1.0",
+    "input": { "required": ["goals"], "optional": ["service"] },
+    "output": { "required": ["usp", "watchCriteria", "escalationPolicy", "source"] },
+    "governance": ["closed_loop_dry_run", "no_production_apply", "monitoring_only"]
+  },
+  "dry_run_action_critic": {
+    "version": "1.0",
+    "input": { "required": ["proposedAction"], "optional": ["hasRollback", "tenantScoped", "evidence"] },
+    "output": { "required": ["usp", "decision", "criticisms", "source"] },
+    "governance": ["closed_loop_dry_run", "no_production_apply", "critique_before_apply"]
+  },
+  "next_best_safe_action": {
+    "version": "1.0",
+    "input": { "required": ["objective"], "optional": ["candidates"] },
+    "output": { "required": ["usp", "decision", "safeNextAction", "evidence", "source"] },
+    "governance": ["closed_loop_dry_run", "no_production_apply", "safe_action_only"]
+  },
+  "autonomous_ops_briefing": {
+    "version": "1.0",
+    "input": { "required": ["objective"], "optional": ["service", "evidence", "candidates"] },
+    "output": { "required": ["usp", "decision", "boardSummary", "risks", "safeNextAction", "source"] },
+    "governance": ["closed_loop_dry_run", "no_production_apply", "board_ready_evidence"]
+  },
+  "ai_strategy_synthesizer": {
+    "version": "1.0",
+    "input": { "required": ["objective"], "optional": ["maturity", "priorities"] },
+    "output": { "required": ["usp", "positioning", "roadmap", "guardrails", "recommendations", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "human_approval_for_change"]
+  },
+  "cognitive_schema_mapper": {
+    "version": "1.0",
+    "input": { "required": ["tables"], "optional": ["domainTerms"] },
+    "output": { "required": ["usp", "ontology", "semanticGaps", "evidence", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "no_permission_inference"]
+  },
+  "llm_prompt_risk_auditor": {
+    "version": "1.0",
+    "input": { "required": ["prompt"], "optional": ["environment"] },
+    "output": { "required": ["usp", "decision", "risks", "safeRewrite", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "prompt_not_executed"]
+  },
+  "ai_decision_simulator": {
+    "version": "1.0",
+    "input": { "required": ["proposedAction"], "optional": ["evidence", "policy"] },
+    "output": { "required": ["usp", "decision", "simulatedDecisions", "evidence", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "simulation_only"]
+  },
+  "autonomous_learning_backlog": {
+    "version": "1.0",
+    "input": { "required": ["outcomes"], "optional": ["incidents"] },
+    "output": { "required": ["usp", "executionMode", "learningBacklog", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "no_model_mutation"]
+  },
+  "knowledge_gap_detector": {
+    "version": "1.0",
+    "input": { "required": ["objective"], "optional": ["evidence"] },
+    "output": { "required": ["usp", "decision", "knowledgeGaps", "safeNextAction", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "evidence_before_recommendation"]
+  },
+  "ai_trust_scorecard": {
+    "version": "1.0",
+    "input": { "required": ["evidence"], "optional": ["threshold"] },
+    "output": { "required": ["usp", "decision", "trustScore", "confidence", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "trust_score_not_authorization"]
+  },
+  "semantic_incident_predictor": {
+    "version": "1.0",
+    "input": { "required": ["signals"], "optional": ["workload"] },
+    "output": { "required": ["usp", "predictions", "safeNextAction", "confidence", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "prediction_not_remediation"]
+  },
+  "cross_agent_consensus_builder": {
+    "version": "1.0",
+    "input": { "required": ["agentFindings"], "optional": ["objective"] },
+    "output": { "required": ["usp", "decision", "consensus", "disagreements", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "preserve_disagreement"]
+  },
+  "ai_roi_narrative_generator": {
+    "version": "1.0",
+    "input": { "required": ["teamHoursSavedMonthly"], "optional": ["avoidedIncidents", "costSavingsMonthly", "sloImprovementPct", "hourlyRate", "incidentCost"] },
+    "output": { "required": ["usp", "executiveNarrative", "roiSignals", "evidence", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "roi_claims_require_evidence"]
+  },
+  "live_evidence_smoke_profile": {
+    "version": "1.0",
+    "input": { "required": ["engine"], "optional": ["evidence"] },
+    "output": { "required": ["usp", "decision", "requiredEvidence", "missingEvidence", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "live_evidence_required"]
+  },
+  "formal_contract_catalog": {
+    "version": "1.0",
+    "input": { "required": ["tools"], "optional": ["version"] },
+    "output": { "required": ["usp", "decision", "contracts", "evidence", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "stable_contracts"]
+  },
+  "governance_proof_packet": {
+    "version": "1.0",
+    "input": { "required": ["action"], "optional": ["policyDecision", "evidence"] },
+    "output": { "required": ["usp", "decision", "proofPacket", "confidence", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "audit_ready_governance"]
+  },
+  "benchmark_roi_proof": {
+    "version": "1.0",
+    "input": { "required": ["baselineP95Ms", "candidateP95Ms"], "optional": ["baselineMonthlyCost", "candidateMonthlyCost"] },
+    "output": { "required": ["usp", "decision", "roiProof", "evidence", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "measured_roi_required"]
+  },
+  "pilot_success_pack": {
+    "version": "1.0",
+    "input": { "required": ["service"], "optional": ["engine"] },
+    "output": { "required": ["usp", "timelineMinutes", "steps", "successCriteria", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "pilot_dry_run_only"]
+  },
+  "visual_executive_report": {
+    "version": "1.0",
+    "input": { "required": ["objective"], "optional": ["decision", "confidence", "risks", "safeNextAction"] },
+    "output": { "required": ["usp", "decision", "reportMarkdown", "format", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "executive_report_only"]
+  },
+  "enterprise_security_proof": {
+    "version": "1.0",
+    "input": { "required": ["secretsRedacted"], "optional": ["tenantScoped", "productionApplyRequested"] },
+    "output": { "required": ["usp", "decision", "securityBoundary", "proof", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "zero_autonomous_write"]
+  },
+  "competitive_battlecards": {
+    "version": "1.0",
+    "input": { "required": ["competitors"], "optional": ["buyerSegment"] },
+    "output": { "required": ["usp", "decision", "battlecards", "source"] },
+    "governance": ["analysis_only", "no_production_apply", "buyer_facing_positioning"]
+  }
+}

@@ -1,0 +1,5 @@
+interface:
+  display_name: Revenue Rescue Mode
+  short_description: Revenue gap actions
+policy:
+  allow_implicit_invocation: false

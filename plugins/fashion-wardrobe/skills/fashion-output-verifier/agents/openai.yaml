@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fashion Output Verifier"
+  short_description: "Audit outfit images before they are shown"
+  default_prompt: "Use $fashion-output-verifier to audit this Fashion Wardrobe image candidate before rendering it."

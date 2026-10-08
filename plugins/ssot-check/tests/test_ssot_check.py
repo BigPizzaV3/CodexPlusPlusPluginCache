@@ -1,0 +1,1175 @@
+"""Unit tests for ssot_check. Run: python3 -m unittest discover tests"""
+
+import io
+import json
+import os
+import subprocess
+import sys
+import tempfile
+import textwrap
+import unittest
+import unittest.mock
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+import ssot_check as sc  # noqa: E402
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+CLI = os.path.join(os.path.dirname(HERE), "ssot_check.py")
+FIXTURES = os.path.join(HERE, "fixtures")
+
+
+def write(path, content):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(content)
+
+
+# --------------------------------------------------------------------------- #
+class ParserTests(unittest.TestCase):
+    def test_nested_maps_and_sequences(self):
+        text = textwrap.dedent("""\
+            ignore_paths:
+              - "*.lock"
+              - vendor/**
+            facts:
+              - name: price
+                type: currency
+                canonical:
+                  file: pricing.md
+                  pattern: 'Price: \\$([\\d,]+)'
+                copies:
+                  - file: home.md
+                    pattern: '\\$([\\d,]+) per month'
+            """)
+        m = sc.parse_manifest(text)
+        self.assertEqual(m["ignore_paths"], ["*.lock", "vendor/**"])
+        self.assertEqual(len(m["facts"]), 1)
+        fact = m["facts"][0]
+        self.assertEqual(fact["name"], "price")
+        self.assertEqual(fact["type"], "currency")
+        self.assertEqual(fact["canonical"]["file"], "pricing.md")
+        self.assertEqual(fact["canonical"]["pattern"], "Price: \\$([\\d,]+)")
+        self.assertEqual(fact["copies"][0]["file"], "home.md")
+
+    def test_quote_aware_comment_stripping(self):
+        # A '#' inside a single-quoted regex must survive; a trailing comment
+        # after whitespace must be removed.
+        text = textwrap.dedent("""\
+            facts:
+              - name: anchor
+                canonical:
+                  file: a.md
+                  pattern: 'id="sec#3">([\\d]+)'   # trailing comment removed
+                copies:
+                  - file: b.md
+                    pattern: '([\\d]+) items'
+            """)
+        m = sc.parse_manifest(text)
+        self.assertEqual(m["facts"][0]["canonical"]["pattern"],
+                         'id="sec#3">([\\d]+)')
+
+    def test_folded_block_scalar(self):
+        text = textwrap.dedent("""\
+            facts:
+              - name: x
+                note: >
+                  This note spans
+                  several lines and
+                  folds to one.
+                canonical:
+                  file: a.md
+                  pattern: '([\\d]+)'
+                copies:
+                  - file: b.md
+                    pattern: '([\\d]+)'
+            """)
+        m = sc.parse_manifest(text)
+        self.assertEqual(m["facts"][0]["note"],
+                         "This note spans several lines and folds to one.")
+
+    def test_line_numbers_tracked(self):
+        text = "facts:\n  - name: x\n    canonical:\n      file: a.md\n"
+        m = sc.parse_manifest(text)
+        self.assertEqual(m.lines["facts"], 1)
+        self.assertEqual(m["facts"][0].lines["name"], 2)
+
+    def test_malformed_tab_indentation(self):
+        with self.assertRaises(sc.ManifestError) as cm:
+            sc.parse_manifest("facts:\n\t- name: x\n")
+        self.assertIsNotNone(cm.exception.lineno)
+
+    def test_malformed_missing_colon(self):
+        # A top-level mapping line with no colon is not 'key: value'.
+        with self.assertRaises(sc.ManifestError) as cm:
+            sc.parse_manifest("notacolon here\nfacts:\n  - name: x\n")
+        self.assertIn("key: value", str(cm.exception))
+
+    def test_empty_manifest_raises(self):
+        with self.assertRaises(sc.ManifestError):
+            sc.parse_manifest("# just a comment\n")
+
+
+# --------------------------------------------------------------------------- #
+class NormalizationTests(unittest.TestCase):
+    def test_integer_thousands_separator(self):
+        ok, _ = sc.values_match("1,234", "1234", "integer")
+        self.assertTrue(ok)
+
+    def test_integer_trailing_plus(self):
+        ok, _ = sc.values_match("62", "62+", "integer")
+        self.assertTrue(ok)
+
+    def test_integer_mismatch(self):
+        ok, _ = sc.values_match("62", "61", "integer")
+        self.assertFalse(ok)
+
+    def test_string_is_literal(self):
+        # Under string type commas are NOT stripped.
+        ok, _ = sc.values_match("1,234", "1234", "string")
+        self.assertFalse(ok)
+        ok2, _ = sc.values_match("hello", "hello", "string")
+        self.assertTrue(ok2)
+
+    def test_currency_symbol_and_separator(self):
+        ok, _ = sc.values_match("$1,500", "1500", "currency")
+        self.assertTrue(ok)
+
+    def test_currency_stays_string_for_k_suffix(self):
+        # "$5k" is not a plain currency amount -> unparseable, reported.
+        ok, detail = sc.values_match("$5k", "5000", "currency")
+        self.assertFalse(ok)
+        self.assertTrue(detail)
+
+    def test_semver_v_prefix(self):
+        ok, _ = sc.values_match("v1.2.3", "1.2.3", "semver")
+        self.assertTrue(ok)
+        ok2, _ = sc.values_match("v1.2.3", "1.2.4", "semver")
+        self.assertFalse(ok2)
+
+    def test_date_formats(self):
+        ok, _ = sc.values_match("2026-07-13", "July 13, 2026", "date")
+        self.assertTrue(ok)
+        ok2, _ = sc.values_match("2026-07-13", "07/13/2026", "date")
+        self.assertTrue(ok2)
+        ok3, _ = sc.values_match("2026-07-13", "2026-07-14", "date")
+        self.assertFalse(ok3)
+
+    def test_rounding_floor_1000(self):
+        ok, _ = sc.values_match("156703", "156000", "integer", "floor-1000")
+        self.assertTrue(ok)
+
+    def test_rounding_floor_1000_as_k(self):
+        ok, _ = sc.values_match("156703", "156", "integer", "floor-1000-as-K")
+        self.assertTrue(ok)
+        bad, _ = sc.values_match("156703", "155", "integer", "floor-1000-as-K")
+        self.assertFalse(bad)
+
+    def test_rounding_floor_10(self):
+        ok, _ = sc.values_match("2865", "2860", "integer", "floor-10")
+        self.assertTrue(ok)
+
+
+# --------------------------------------------------------------------------- #
+class ExtractionTests(unittest.TestCase):
+    def test_capture_group_and_line(self):
+        content = "line one\nTotal Episodes: 62\nfooter\n"
+        val, line, count = sc.extract(content, r"Total Episodes: (\d+)")
+        self.assertEqual(val, "62")
+        self.assertEqual(line, 2)
+        self.assertEqual(count, 1)
+
+    def test_cross_line_pattern(self):
+        content = '<span class="n">1,000</span>\n<span class="label">Subs</span>'
+        val, _, _ = sc.extract(
+            content, r'<span class="n">([\d,]+)</span>\s*<span class="label">')
+        self.assertEqual(val, "1,000")
+
+    def test_multi_match_count(self):
+        content = "5 apples and 7 apples"
+        val, _, count = sc.extract(content, r"(\d+) apples")
+        self.assertEqual(val, "5")
+        self.assertEqual(count, 2)
+
+    def test_no_match(self):
+        val, line, count = sc.extract("nothing here", r"(\d+) apples")
+        self.assertIsNone(val)
+        self.assertEqual(count, 0)
+
+
+# --------------------------------------------------------------------------- #
+class ValidationTests(unittest.TestCase):
+    BASE = textwrap.dedent("""\
+        facts:
+          - name: episode-count
+            type: integer
+            canonical:
+              file: index.md
+              pattern: 'Total: (\\d+)'
+            copies:
+              - file: kit.md
+                pattern: '(\\d+) episodes'
+        """)
+
+    def test_valid_manifest(self):
+        m = sc.parse_manifest(self.BASE)
+        self.assertEqual(sc.validate_manifest(m), [])
+
+    def test_missing_facts(self):
+        m = sc.parse_manifest("ignore_paths:\n  - x\n")
+        errors = sc.validate_manifest(m)
+        self.assertTrue(any("facts" in e for e in errors))
+
+    def test_two_capture_groups_rejected(self):
+        m = sc.parse_manifest(textwrap.dedent("""\
+            facts:
+              - name: x
+                canonical:
+                  file: a.md
+                  pattern: '(\\d+)-(\\d+)'
+                copies:
+                  - file: b.md
+                    pattern: '(\\d+)'
+            """))
+        errors = sc.validate_manifest(m)
+        self.assertTrue(any("one capture group" in e for e in errors))
+
+    def test_bad_type_rejected(self):
+        m = sc.parse_manifest(self.BASE.replace("type: integer", "type: float"))
+        errors = sc.validate_manifest(m)
+        self.assertTrue(any("type" in e for e in errors))
+
+    def test_bad_rounding_rejected(self):
+        m = sc.parse_manifest(self.BASE.replace(
+            "pattern: '(\\d+) episodes'",
+            "pattern: '(\\d+) episodes'\n        rounding: floor-5"))
+        errors = sc.validate_manifest(m)
+        self.assertTrue(any("rounding" in e for e in errors))
+
+    def test_non_kebab_name_flagged(self):
+        m = sc.parse_manifest(self.BASE.replace("episode-count", "Episode_Count"))
+        errors = sc.validate_manifest(m)
+        self.assertTrue(any("kebab" in e for e in errors))
+
+    def test_empty_copies_flagged(self):
+        m = sc.parse_manifest(textwrap.dedent("""\
+            facts:
+              - name: x
+                canonical:
+                  file: a.md
+                  pattern: '(\\d+)'
+                copies: []
+            """))
+        # copies: [] parses to None here (empty block) -> reported as missing/empty
+        errors = sc.validate_manifest(m)
+        self.assertTrue(errors)
+
+
+# --------------------------------------------------------------------------- #
+class CheckTests(unittest.TestCase):
+    def _repo(self, tmp, canonical="Total Episodes: 62", copy="62 episodes"):
+        write(os.path.join(tmp, "index.md"), f"# Index\n{canonical}\n")
+        write(os.path.join(tmp, "kit.md"), f"# Kit\nWe have {copy}.\n")
+        manifest = textwrap.dedent("""\
+            facts:
+              - name: episode-count
+                type: integer
+                canonical:
+                  file: index.md
+                  pattern: 'Total Episodes: (\\d+)'
+                copies:
+                  - file: kit.md
+                    pattern: '(\\d+) episodes'
+            """)
+        write(os.path.join(tmp, ".ssot.yaml"), manifest)
+        return sc.parse_manifest(manifest)
+
+    def test_in_sync(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            m = self._repo(tmp)
+            result = sc.check(tmp, m)
+            self.assertEqual(result["exit_code"], 0)
+            self.assertEqual(result["facts"][0]["status"], "in_sync")
+
+    def test_drifted(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            m = self._repo(tmp, copy="61 episodes")
+            result = sc.check(tmp, m)
+            self.assertEqual(result["exit_code"], 1)
+            self.assertEqual(result["facts"][0]["status"], "drifted")
+            copy = result["facts"][0]["copies"][0]
+            self.assertEqual(copy["value"], "61")
+            self.assertEqual(copy["canonical_value"], "62")
+
+    def test_canonical_moved(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            m = self._repo(tmp)
+            write(os.path.join(tmp, "index.md"), "# Index\nEpisodes now: 62\n")
+            result = sc.check(tmp, m)
+            self.assertEqual(result["exit_code"], 1)
+            self.assertEqual(result["facts"][0]["status"], "canonical_moved")
+
+    def test_stale_entry(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            m = self._repo(tmp)
+            write(os.path.join(tmp, "kit.md"), "# Kit\nReworded, no number here.\n")
+            result = sc.check(tmp, m)
+            self.assertEqual(result["exit_code"], 1)
+            self.assertEqual(result["facts"][0]["copies"][0]["status"],
+                             "stale_entry")
+
+    def test_globbed_copy_and_ignore(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "index.md"), "Total Episodes: 62\n")
+            write(os.path.join(tmp, "a.md"), "62 episodes shipped\n")
+            write(os.path.join(tmp, "b.md"), "61 episodes shipped\n")
+            write(os.path.join(tmp, "skip.md"), "99 episodes shipped\n")
+            manifest = textwrap.dedent("""\
+                ignore_paths:
+                  - skip.md
+                facts:
+                  - name: episode-count
+                    type: integer
+                    canonical:
+                      file: index.md
+                      pattern: 'Total Episodes: (\\d+)'
+                    copies:
+                      - file: '*.md'
+                        pattern: '(\\d+) episodes shipped'
+                """)
+            m = sc.parse_manifest(manifest)
+            result = sc.check(tmp, m)
+            files = {c["file"]: c["status"] for c in result["facts"][0]["copies"]}
+            self.assertIn("a.md", files)
+            self.assertIn("b.md", files)
+            self.assertNotIn("skip.md", files)  # ignored
+            self.assertEqual(files["a.md"], "in_sync")
+            self.assertEqual(files["b.md"], "drifted")
+
+    def test_monotonic_canonical_suspect(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "index.md"), "Followers: 10000\n")
+            write(os.path.join(tmp, "kit.md"), "12000 followers\n")
+            manifest = textwrap.dedent("""\
+                facts:
+                  - name: followers
+                    type: integer
+                    monotonic: true
+                    canonical:
+                      file: index.md
+                      pattern: 'Followers: (\\d+)'
+                    copies:
+                      - file: kit.md
+                        pattern: '(\\d+) followers'
+                """)
+            m = sc.parse_manifest(manifest)
+            result = sc.check(tmp, m)
+            copy = result["facts"][0]["copies"][0]
+            self.assertEqual(copy["status"], "drifted")
+            self.assertEqual(copy.get("direction"), "canonical_suspect")
+
+    def test_rounding_in_check(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "data.md"), "reach: 156703\n")
+            write(os.path.join(tmp, "readme.md"), "156,000+ views\n")
+            manifest = textwrap.dedent("""\
+                facts:
+                  - name: reach
+                    type: integer
+                    canonical:
+                      file: data.md
+                      pattern: 'reach: (\\d+)'
+                    copies:
+                      - file: readme.md
+                        pattern: '([\\d,]+)\\+ views'
+                        rounding: floor-1000
+                """)
+            m = sc.parse_manifest(manifest)
+            result = sc.check(tmp, m)
+            self.assertEqual(result["exit_code"], 0)
+
+
+# --------------------------------------------------------------------------- #
+class CrossRepoTests(unittest.TestCase):
+    def test_is_cross_repo(self):
+        self.assertTrue(sc.is_cross_repo("/repo", "../sibling/x.html"))
+        self.assertTrue(sc.is_cross_repo("/repo", "/abs/x.html"))
+        self.assertFalse(sc.is_cross_repo("/repo", "docs/x.md"))
+
+    def test_cross_repo_read_only_local(self):
+        with tempfile.TemporaryDirectory() as parent:
+            repo = os.path.join(parent, "repo")
+            sib = os.path.join(parent, "sibling")
+            write(os.path.join(repo, "index.md"), "Price: 49\n")
+            write(os.path.join(sib, "page.html"), 'data-price="49"\n')
+            manifest = textwrap.dedent("""\
+                facts:
+                  - name: price
+                    type: integer
+                    canonical:
+                      file: index.md
+                      pattern: 'Price: (\\d+)'
+                    copies:
+                      - file: ../sibling/page.html
+                        pattern: 'data-price="(\\d+)"'
+                """)
+            m = sc.parse_manifest(manifest)
+            result = sc.check(repo, m)
+            copy = result["facts"][0]["copies"][0]
+            self.assertTrue(copy["cross_repo"])
+            self.assertEqual(copy["status"], "in_sync")
+
+
+CROSS_REPO_MANIFEST = textwrap.dedent("""\
+    facts:
+      - name: price
+        type: integer
+        canonical:
+          file: index.md
+          pattern: 'Price: (\\d+)'
+        copies:
+          - file: ../sibling/page.html
+            pattern: 'data-price="(\\d+)"'
+    """)
+
+
+def git(cwd, *args):
+    """Run git in cwd, failing loudly. Test helper only."""
+    proc = subprocess.run(["git"] + list(args), cwd=cwd,
+                          capture_output=True, text=True)
+    if proc.returncode != 0:
+        raise AssertionError(
+            f"git {' '.join(args)} failed in {cwd}: {proc.stderr}")
+    return proc.stdout
+
+
+def has_git():
+    try:
+        subprocess.run(["git", "--version"], capture_output=True)
+        return True
+    except (OSError, subprocess.SubprocessError):  # pragma: no cover
+        return False
+
+
+@unittest.skipUnless(has_git(), "git not available")
+class CrossRepoFetchTests(unittest.TestCase):
+    """`--fetch` is the tool's entire write surface, so its boundary is
+    asserted in both directions: no fetch happens without the flag, a fetch
+    does happen with it. A test that only checked one direction would pass if
+    the flag were wired to nothing, or if it fetched unconditionally."""
+
+    def _fixture(self, parent):
+        """repo/ + sibling/ where sibling's committed remote says 49 and its
+        working tree says 99. Returns (repo_path, sibling_path)."""
+        repo = os.path.join(parent, "repo")
+        write(os.path.join(repo, "index.md"), "Price: 49\n")
+
+        origin = os.path.join(parent, "origin.git")
+        os.makedirs(origin)
+        git(origin, "init", "--bare", "--initial-branch=main", "--quiet")
+
+        seed = os.path.join(parent, "seed")
+        git(parent, "clone", "--quiet", origin, "seed")
+        write(os.path.join(seed, "page.html"), 'data-price="49"\n')
+        git(seed, "add", "page.html")
+        git(seed, "-c", "user.email=t@t", "-c", "user.name=t",
+            "commit", "--quiet", "-m", "seed")
+        git(seed, "push", "--quiet", "origin", "main")
+
+        sib = os.path.join(parent, "sibling")
+        git(parent, "clone", "--quiet", origin, "sibling")
+        git(sib, "checkout", "--quiet", "-b", "old-feature")
+        # Diverge the working tree from what the remote ref holds.
+        write(os.path.join(sib, "page.html"), 'data-price="99"\n')
+        return repo, sib
+
+    def _spy_git(self):
+        """Record every git invocation while still running it for real."""
+        calls = []
+        real_git = sc._git
+
+        def spy(args, cwd):
+            calls.append(list(args))
+            return real_git(args, cwd)
+        return calls, spy, real_git
+
+    def test_fetch_reads_remote_not_working_tree(self):
+        with tempfile.TemporaryDirectory() as parent:
+            repo, _ = self._fixture(parent)
+            m = sc.parse_manifest(CROSS_REPO_MANIFEST)
+
+            # Default: the working tree, which drifted to 99.
+            local = sc.check(repo, m)["facts"][0]["copies"][0]
+            self.assertEqual(local["value"], "99")
+            self.assertEqual(local["status"], "drifted")
+            self.assertIn("local old-feature (", local["source"])
+            self.assertIn("non-default branch; default is origin/main",
+                          local["source"])
+            self.assertIn("dirty working tree", local["source"])
+
+            # --fetch: the remote-tracking ref, still 49.
+            remote = sc.check(repo, m, fetch=True)["facts"][0]["copies"][0]
+            self.assertEqual(remote["value"], "49")
+            self.assertEqual(remote["status"], "in_sync")
+            self.assertIn("origin/main", remote["source"])
+            self.assertNotIn("fetch failed", remote["source"])
+
+    def test_cross_repo_report_labels_local_ref_and_checkout_warnings(self):
+        with tempfile.TemporaryDirectory() as parent:
+            repo, _ = self._fixture(parent)
+            result = sc.check(repo, sc.parse_manifest(CROSS_REPO_MANIFEST))
+
+            with unittest.mock.patch("sys.stdout", new_callable=io.StringIO) \
+                    as output:
+                sc.render_check(result)
+
+            report = output.getvalue()
+            self.assertIn("source:    local old-feature (", report)
+            self.assertIn("WARNING: non-default branch; default is origin/main",
+                          report)
+            self.assertIn("dirty working tree", report)
+
+    def test_no_fetch_without_the_flag(self):
+        """Must-not-fire: the default path touches nothing in the sibling."""
+        with tempfile.TemporaryDirectory() as parent:
+            repo, sib = self._fixture(parent)
+            before = git(sib, "rev-parse", "origin/main").strip()
+            calls, spy, real_git = self._spy_git()
+            sc._git = spy
+            try:
+                sc.check(repo, sc.parse_manifest(CROSS_REPO_MANIFEST))
+            finally:
+                sc._git = real_git
+
+            for call in calls:
+                self.assertNotIn("fetch", call,
+                                 f"fetched without --fetch: git {call}")
+            self.assertEqual(git(sib, "rev-parse", "origin/main").strip(),
+                             before)
+            self.assertFalse(
+                os.path.exists(os.path.join(sib, ".git", "FETCH_HEAD")),
+                "FETCH_HEAD created without --fetch")
+
+    def test_fetch_runs_only_fetch_and_reads(self):
+        """Must-still-fire: --fetch does fetch, and the write surface stops
+        there — no pull/rebase/merge/checkout/reset, and the working tree and
+        HEAD are left exactly as they were."""
+        with tempfile.TemporaryDirectory() as parent:
+            repo, sib = self._fixture(parent)
+            page = os.path.join(sib, "page.html")
+            head_before = git(sib, "rev-parse", "HEAD").strip()
+            with open(page, encoding="utf-8") as fh:
+                tree_before = fh.read()
+            calls, spy, real_git = self._spy_git()
+            sc._git = spy
+            try:
+                sc.check(repo, sc.parse_manifest(CROSS_REPO_MANIFEST),
+                         fetch=True)
+            finally:
+                sc._git = real_git
+
+            self.assertIn(["fetch", "--quiet"], calls,
+                          "--fetch was passed but no fetch ran")
+            for call in calls:
+                self.assertNotIn(call[0],
+                                 ("pull", "rebase", "merge", "checkout",
+                                  "reset", "push", "commit", "clean"),
+                                 f"unexpected write verb: git {call}")
+            # FETCH_HEAD is the expected, documented side effect.
+            self.assertTrue(
+                os.path.exists(os.path.join(sib, ".git", "FETCH_HEAD")),
+                "--fetch should have produced FETCH_HEAD")
+            # ...and nothing beyond it moved.
+            self.assertEqual(git(sib, "rev-parse", "HEAD").strip(), head_before)
+            with open(page, encoding="utf-8") as fh:
+                self.assertEqual(fh.read(), tree_before)
+
+    def test_unverified_when_sibling_has_no_remote_tracking_ref(self):
+        with tempfile.TemporaryDirectory() as parent:
+            repo = os.path.join(parent, "repo")
+            sib = os.path.join(parent, "sibling")
+            write(os.path.join(repo, "index.md"), "Price: 49\n")
+            write(os.path.join(sib, "page.html"), 'data-price="49"\n')
+            git(sib, "init", "--initial-branch=main", "--quiet")
+            git(sib, "add", "page.html")
+            git(sib, "-c", "user.email=t@t", "-c", "user.name=t",
+                "commit", "--quiet", "-m", "local only")
+
+            result = sc.check(repo, sc.parse_manifest(CROSS_REPO_MANIFEST),
+                              fetch=True)
+            copy = result["facts"][0]["copies"][0]
+            self.assertEqual(copy["status"], "unverified")
+            self.assertNotIn("value", copy)
+            self.assertIn("no remote-tracking ref", copy["note"])
+            self.assertEqual(result["exit_code"], 1)
+
+    def test_fetch_help_states_what_it_writes(self):
+        """The flag's help text is the label the scanner faulted. It has to
+        name the write, not just claim read-only."""
+        proc = subprocess.run([sys.executable, CLI, "check", "--help"],
+                              capture_output=True, text=True)
+        self.assertEqual(proc.returncode, 0)
+        help_text = " ".join(proc.stdout.split())
+        self.assertIn("--fetch", help_text)
+        self.assertIn("git fetch", help_text)
+        self.assertIn("FETCH_HEAD", help_text)
+        self.assertIn("never pulls", help_text)
+        self.assertNotIn("read-only", help_text)
+
+
+# --------------------------------------------------------------------------- #
+class FreshnessTests(unittest.TestCase):
+    def test_skips_without_git(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "x.md")
+            write(path, "hi\n")
+            result = sc.check_freshness(
+                path, {"owner": "team", "max_age_days": 30})
+            self.assertTrue(result["skipped"])
+
+
+# --------------------------------------------------------------------------- #
+class DiscoverTests(unittest.TestCase):
+    def _price_manifest(self):
+        return sc.parse_manifest(textwrap.dedent("""\
+            facts:
+              - name: pro-price
+                type: currency
+                canonical:
+                  file: pricing.md
+                  pattern: 'Pro plan: \\$([\\d,]+)'
+                copies:
+                  - file: README.md
+                    pattern: 'costs \\$([\\d,]+)'
+            """))
+
+    def test_proposes_repeated_value(self):
+        tree = os.path.join(FIXTURES, "discover_tree")
+        result = sc.discover(tree)
+        names = {p["name"] for p in result["proposals"]}
+        # 12,500 users appears in 3 prose files -> proposed.
+        self.assertTrue(any(p["value"] == "12500" for p in result["proposals"]),
+                        f"proposals: {[p['value'] for p in result['proposals']]}")
+        self.assertTrue(names)
+
+    def test_flags_live_drift(self):
+        tree = os.path.join(FIXTURES, "discover_tree")
+        result = sc.discover(tree)
+        # integrations: 88 (README, landing) vs 90 (media-kit) -> drift.
+        integ = [d for d in result["drift"] if d["unit"] == "integration"]
+        self.assertTrue(integ, f"drift: {result['drift']}")
+        self.assertEqual(set(integ[0]["values"]), {"88", "90"})
+
+    def test_skips_vendor_dir(self):
+        tree = os.path.join(FIXTURES, "discover_tree")
+        result = sc.discover(tree)
+        for p in result["proposals"]:
+            for occ in p["occurrences"]:
+                self.assertNotIn("vendor/", occ["file"])
+
+    def test_manifest_coverage_reports_only_new_copy(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "pricing.md"), "Pro plan: $49\n")
+            write(os.path.join(tmp, "README.md"), "Pro plan costs $49\n")
+            write(os.path.join(tmp, "launch.md"), "Starts at $49 today.\n")
+
+            result = sc.discover(tmp)
+            sc.add_manifest_coverage(tmp, result, self._price_manifest())
+            uncovered = sc.filter_uncovered_discovery(result)
+
+            prices = [p for p in uncovered["proposals"]
+                      if p["value"] == "49"]
+            self.assertEqual(len(prices), 1)
+            self.assertEqual(prices[0]["files"], ["launch.md"])
+            self.assertEqual(uncovered["uncovered_occurrences"], 1)
+
+    def test_manifest_coverage_suppresses_fully_tracked_fact(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "pricing.md"), "Pro plan: $49\n")
+            write(os.path.join(tmp, "README.md"), "Pro plan costs $49\n")
+
+            result = sc.discover(tmp)
+            sc.add_manifest_coverage(tmp, result, self._price_manifest())
+            uncovered = sc.filter_uncovered_discovery(result)
+
+            self.assertEqual(uncovered["proposals"], [])
+            self.assertEqual(uncovered["drift"], [])
+            self.assertEqual(uncovered["uncovered_occurrences"], 0)
+
+    def test_manifest_coverage_keeps_only_untracked_live_drift(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "pricing.md"), "88 integrations\n")
+            write(os.path.join(tmp, "README.md"), "88 integrations shipped\n")
+            write(os.path.join(tmp, "launch.md"), "90 integrations today\n")
+            manifest = sc.parse_manifest(textwrap.dedent("""\
+                facts:
+                  - name: integration-count
+                    type: integer
+                    canonical:
+                      file: pricing.md
+                      pattern: '(\\d+) integrations'
+                    copies:
+                      - file: README.md
+                        pattern: '(\\d+) integrations'
+                """))
+
+            result = sc.discover(tmp)
+            sc.add_manifest_coverage(tmp, result, manifest)
+            uncovered = sc.filter_uncovered_discovery(result)
+
+            self.assertEqual(len(uncovered["drift"]), 1)
+            self.assertEqual(uncovered["drift"][0]["values"], ["88", "90"])
+            self.assertEqual(uncovered["drift"][0]["files"], ["launch.md"])
+
+    def test_repeated_value_on_one_line_reports_later_occurrence(self):
+        # A locator covers only its first match. A second value on the same
+        # line is a distinct occurrence and must remain visible to discovery.
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "pricing.md"),
+                  "Pro plan: $49 per seat, or $49 billed annually.\n")
+            write(os.path.join(tmp, "README.md"), "The Pro plan costs $49.\n")
+
+            result = sc.discover(tmp)
+            sc.add_manifest_coverage(tmp, result, self._price_manifest())
+
+            for group in result["proposals"] + result["drift"]:
+                for occ in group["occurrences"]:
+                    self.assertIn("covered_by", occ,
+                                  f"{occ['file']}:{occ['line']} unresolved")
+
+            uncovered = sc.filter_uncovered_discovery(result)
+            self.assertEqual(len(uncovered["proposals"]), 1)
+            self.assertEqual(uncovered["proposals"][0]["files"],
+                             ["pricing.md"])
+            self.assertEqual(uncovered["uncovered_occurrences"], 1)
+
+    def test_manifest_coverage_uses_capture_line_for_multiline_locator(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "pricing.md"), "Pro plan:\n$49\n")
+            write(os.path.join(tmp, "README.md"),
+                  "The Pro plan costs:\n$49\n")
+            manifest = sc.parse_manifest(textwrap.dedent("""\
+                facts:
+                  - name: pro-price
+                    type: integer
+                    canonical:
+                      file: pricing.md
+                      pattern: 'Pro plan:\\s*\\$([\\d,]+)'
+                    copies:
+                      - file: README.md
+                        pattern: 'costs:\\s*\\$([\\d,]+)'
+                """))
+
+            result = sc.discover(tmp)
+            sc.add_manifest_coverage(tmp, result, manifest)
+            uncovered = sc.filter_uncovered_discovery(result)
+
+            self.assertEqual(uncovered["proposals"], [])
+            self.assertEqual(uncovered["uncovered_occurrences"], 0)
+
+    def test_manifest_coverage_matches_raw_capture_not_discovery_display(self):
+        cases = [
+            ("integer", "SLA: 99%\n", "Uptime is 99%\n",
+             r"SLA:\s*([\d]+)", r"Uptime is\s*([\d]+)"),
+            ("string", "Audience: 1,200 users\n",
+             "Trusted by 1,200 users\n", r"Audience:\s*([\d,]+)",
+             r"Trusted by\s*([\d,]+)"),
+            ("string", "Price: $5k\n", "It costs $5k\n",
+             r"Price:\s*(\$[\d]+k)", r"costs\s*(\$[\d]+k)"),
+        ]
+        for index, (ftype, canonical, copy, cpattern, pattern) in \
+                enumerate(cases):
+            with self.subTest(ftype=ftype, canonical=canonical):
+                with tempfile.TemporaryDirectory() as tmp:
+                    write(os.path.join(tmp, "a.md"), canonical)
+                    write(os.path.join(tmp, "b.md"), copy)
+                    manifest = sc.parse_manifest(textwrap.dedent(f"""\
+                        facts:
+                          - name: normalization-{index}
+                            type: {ftype}
+                            canonical:
+                              file: a.md
+                              pattern: '{cpattern}'
+                            copies:
+                              - file: b.md
+                                pattern: '{pattern}'
+                        """))
+
+                    result = sc.discover(tmp)
+                    sc.add_manifest_coverage(tmp, result, manifest)
+                    uncovered = sc.filter_uncovered_discovery(result)
+
+                    self.assertEqual(uncovered["proposals"], [])
+                    self.assertEqual(uncovered["uncovered_occurrences"], 0)
+
+    def test_manifest_capture_must_contain_entire_discovered_value(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "a.md"), "Version: v1.2.3\n")
+            write(os.path.join(tmp, "b.md"), "Version: v1.2.3\n")
+            manifest = sc.parse_manifest(textwrap.dedent("""\
+                facts:
+                  - name: major-version
+                    type: integer
+                    canonical:
+                      file: a.md
+                      pattern: 'Version: v(\\d+)'
+                    copies:
+                      - file: b.md
+                        pattern: 'Version: v(\\d+)'
+                """))
+
+            result = sc.discover(tmp)
+            sc.add_manifest_coverage(tmp, result, manifest)
+            uncovered = sc.filter_uncovered_discovery(result)
+
+            self.assertEqual(uncovered["uncovered_occurrences"], 2)
+            self.assertEqual(uncovered["proposals"][0]["value"], "1.2.3")
+
+    def test_same_physical_value_is_deduplicated_across_detectors(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "a.md"), "Currently 100 users\n")
+            write(os.path.join(tmp, "b.md"), "Currently 100 users\n")
+
+            result = sc.discover(tmp)
+            uncovered = sc.filter_uncovered_discovery(result)
+
+            self.assertEqual(uncovered["uncovered_occurrences"], 2)
+            self.assertEqual(len(uncovered["proposals"][0]["occurrences"]), 2)
+
+    def test_coverage_counts_resolved_locators(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "pricing.md"), "Pro plan: $49\n")
+            write(os.path.join(tmp, "README.md"), "Pro plan costs $49\n")
+            result = sc.discover(tmp)
+            sc.add_manifest_coverage(tmp, result, self._price_manifest())
+            self.assertEqual(result["manifest_locators"], 2)
+
+    def test_coverage_reports_zero_locators_when_paths_miss(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "pricing.md"), "Pro plan: $49\n")
+            write(os.path.join(tmp, "README.md"), "Pro plan costs $49\n")
+            manifest = sc.parse_manifest(textwrap.dedent("""\
+                facts:
+                  - name: pro-price
+                    type: currency
+                    canonical:
+                      file: nowhere/pricing.md
+                      pattern: 'Pro plan: \\$([\\d,]+)'
+                    copies:
+                      - file: nowhere/README.md
+                        pattern: 'costs \\$([\\d,]+)'
+                """))
+            result = sc.discover(tmp)
+            sc.add_manifest_coverage(tmp, result, manifest)
+            self.assertEqual(result["manifest_locators"], 0)
+
+    def test_github_annotations_are_advisory_and_deduplicated(self):
+        occurrence = {
+            "file": "docs/launch.md", "line": 3, "value": "90",
+            "_start": 20, "_end": 22, "_col": 7, "_end_column": 9,
+        }
+        result = {
+            "proposals": [{
+                "value": "90", "occurrences": [occurrence],
+            }],
+            "drift": [{
+                "unit": "integration", "values": ["88", "90"],
+                "occurrences": [occurrence],
+            }],
+        }
+        with unittest.mock.patch("sys.stdout", new_callable=io.StringIO) \
+                as output:
+            sc.render_discover_github(result)
+
+        report = output.getvalue()
+        self.assertEqual(report.count("::warning"), 1)
+        self.assertIn("file=docs/launch.md,line=3,col=7,endColumn=9", report)
+        self.assertIn("advisory only", report)
+
+
+# --------------------------------------------------------------------------- #
+class CLIExitCodeTests(unittest.TestCase):
+    def _run(self, args, cwd, env=None):
+        if env is None:
+            # GitHub-hosted runners export their real checkout here. Each CLI
+            # test builds an isolated stand-in workspace under /tmp.
+            env = dict(os.environ, GITHUB_WORKSPACE=cwd)
+        return subprocess.run([sys.executable, CLI] + args, cwd=cwd,
+                              capture_output=True, text=True, env=env)
+
+    def test_check_exit_codes_and_validate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "index.md"), "Total Episodes: 62\n")
+            write(os.path.join(tmp, "kit.md"), "62 episodes\n")
+            manifest = textwrap.dedent("""\
+                facts:
+                  - name: episode-count
+                    type: integer
+                    canonical:
+                      file: index.md
+                      pattern: 'Total Episodes: (\\d+)'
+                    copies:
+                      - file: kit.md
+                        pattern: '(\\d+) episodes'
+                """)
+            write(os.path.join(tmp, ".ssot.yaml"), manifest)
+
+            r = self._run(["check"], tmp)
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+
+            # default subcommand is check
+            r0 = self._run([], tmp)
+            self.assertEqual(r0.returncode, 0)
+
+            write(os.path.join(tmp, "kit.md"), "61 episodes\n")
+            r1 = self._run(["check"], tmp)
+            self.assertEqual(r1.returncode, 1)
+            self.assertIn("DRIFTED", r1.stdout)
+
+            r2 = self._run(["check", "--json"], tmp)
+            self.assertEqual(r2.returncode, 1)
+            self.assertIn('"status": "drifted"', r2.stdout)
+
+            rv = self._run(["validate"], tmp)
+            self.assertEqual(rv.returncode, 0)
+
+    def test_global_options_reach_top_level_parser(self):
+        # Regression: the default-subcommand shim used to prepend `check` to
+        # `--version`/`-h`, routing them into the check subparser (exit 2).
+        with tempfile.TemporaryDirectory() as tmp:
+            rv = self._run(["--version"], tmp)
+            self.assertEqual(rv.returncode, 0, rv.stdout + rv.stderr)
+            self.assertIn("ssot-check", rv.stdout + rv.stderr)
+
+            for flag in ("-h", "--help"):
+                rh = self._run([flag], tmp)
+                self.assertEqual(rh.returncode, 0, rh.stdout + rh.stderr)
+                # top-level help lists the subcommands; check's help does not
+                self.assertIn("validate", rh.stdout)
+
+    def test_config_error_exit_2(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            r = self._run(["check"], tmp)  # no manifest
+            self.assertEqual(r.returncode, 2)
+
+    def test_invalid_manifest_exit_2(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, ".ssot.yaml"),
+                  "facts:\n  - name: x\n    canonical:\n      file: a.md\n"
+                  "      pattern: '(\\d+)-(\\d+)'\n    copies:\n"
+                  "      - file: b.md\n        pattern: '(\\d+)'\n")
+            r = self._run(["validate"], tmp)
+            self.assertEqual(r.returncode, 2)
+
+    def test_untracked_discovery_requires_manifest(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "README.md"), "Costs $49.\n")
+            r = self._run(["discover", "--untracked-only"], tmp)
+            self.assertEqual(r.returncode, 2)
+            self.assertIn("requires a valid SSOT manifest", r.stderr)
+
+    def test_untracked_discovery_emits_github_warning_but_exits_zero(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "pricing.md"), "Pro plan: $49\n")
+            write(os.path.join(tmp, "README.md"), "Pro plan costs $49\n")
+            write(os.path.join(tmp, "launch.md"), "Starts at $49 today.\n")
+            write(os.path.join(tmp, ".ssot.yaml"), textwrap.dedent("""\
+                facts:
+                  - name: pro-price
+                    type: currency
+                    canonical:
+                      file: pricing.md
+                      pattern: 'Pro plan: \\$([\\d,]+)'
+                    copies:
+                      - file: README.md
+                        pattern: 'costs \\$([\\d,]+)'
+                """))
+
+            r = self._run([
+                "discover", "--manifest", ".ssot.yaml",
+                "--untracked-only", "--github-annotations",
+            ], tmp)
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+            self.assertIn("::warning file=launch.md,line=1", r.stdout)
+            self.assertNotIn("file=pricing.md", r.stdout)
+            self.assertNotIn("file=README.md", r.stdout)
+
+    def test_untracked_discovery_resolves_root_from_manifest_dir(self):
+        # Regression: discover defaulted --root to "." while check/explain
+        # default it to the manifest's directory, so a manifest outside the
+        # working directory resolved no locator and every tracked location
+        # was reported as uncovered.
+        with tempfile.TemporaryDirectory() as tmp:
+            sub = os.path.join(tmp, "sub")
+            write(os.path.join(sub, "pricing.md"), "Pro plan: $49 a month.\n")
+            write(os.path.join(sub, "README.md"), "The Pro plan costs $49.\n")
+            write(os.path.join(sub, ".ssot.yaml"), textwrap.dedent("""\
+                facts:
+                  - name: pro-price
+                    type: currency
+                    canonical:
+                      file: pricing.md
+                      pattern: 'Pro plan: \\$([\\d,]+)'
+                    copies:
+                      - file: README.md
+                        pattern: 'costs \\$([\\d,]+)'
+                """))
+
+            rc = self._run(["check", "--manifest", "sub/.ssot.yaml"], tmp)
+            self.assertEqual(rc.returncode, 0, rc.stdout + rc.stderr)
+
+            rd = self._run([
+                "discover", "--manifest", "sub/.ssot.yaml",
+                "--untracked-only", "--github-annotations",
+            ], tmp)
+            self.assertEqual(rd.returncode, 0, rd.stdout + rd.stderr)
+            self.assertNotIn("::warning", rd.stdout)
+            self.assertNotIn("no manifest locator resolved", rd.stderr)
+
+            # An explicit --root still wins over the manifest's directory.
+            re_ = self._run([
+                "discover", "--root", "sub", "--manifest", "sub/.ssot.yaml",
+                "--untracked-only", "--github-annotations",
+            ], tmp)
+            self.assertEqual(re_.returncode, 0, re_.stdout + re_.stderr)
+            self.assertNotIn("::warning", re_.stdout)
+
+    def test_github_annotations_are_relative_to_workspace_not_scan_root(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            docs = os.path.join(tmp, "docs")
+            write(os.path.join(docs, "pricing.md"), "Price: $49\n")
+            write(os.path.join(docs, "README.md"), "Price: $49\n")
+            write(os.path.join(docs, "launch.md"), "Launch price: $49\n")
+            write(os.path.join(docs, ".ssot.yaml"), textwrap.dedent("""\
+                facts:
+                  - name: pro-price
+                    type: integer
+                    canonical:
+                      file: pricing.md
+                      pattern: 'Price:\\s*\\$([\\d,]+)'
+                    copies:
+                      - file: README.md
+                        pattern: 'Price:\\s*\\$([\\d,]+)'
+                """))
+
+            result = self._run([
+                "discover", "--root", "docs",
+                "--manifest", "docs/.ssot.yaml", "--untracked-only",
+                "--github-annotations",
+            ], tmp)
+
+            self.assertEqual(result.returncode, 0,
+                             result.stdout + result.stderr)
+            self.assertIn("::warning file=docs/launch.md,line=1",
+                          result.stdout)
+            self.assertNotIn("::warning file=launch.md", result.stdout)
+
+    def test_github_annotations_use_workspace_when_cwd_is_nested(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            docs = os.path.join(tmp, "docs")
+            write(os.path.join(docs, "pricing.md"), "Price: $49\n")
+            write(os.path.join(docs, "README.md"), "Price: $49\n")
+            write(os.path.join(docs, "launch.md"), "Launch price: $49\n")
+            write(os.path.join(docs, ".ssot.yaml"), textwrap.dedent("""\
+                facts:
+                  - name: pro-price
+                    type: integer
+                    canonical:
+                      file: pricing.md
+                      pattern: 'Price:\\s*\\$([\\d,]+)'
+                    copies:
+                      - file: README.md
+                        pattern: 'Price:\\s*\\$([\\d,]+)'
+                """))
+            env = dict(os.environ, GITHUB_WORKSPACE=tmp)
+
+            result = self._run([
+                "discover", "--manifest", ".ssot.yaml", "--untracked-only",
+                "--github-annotations",
+            ], docs, env=env)
+
+            self.assertEqual(result.returncode, 0,
+                             result.stdout + result.stderr)
+            self.assertIn("::warning file=docs/launch.md,line=1",
+                          result.stdout)
+
+    def test_auto_loaded_draft_manifest_still_applies_valid_ignore_paths(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "a.md"), "Price: $49\n")
+            write(os.path.join(tmp, "archive", "old.md"),
+                  "Old price: $49\n")
+            write(os.path.join(tmp, ".ssot.yaml"), textwrap.dedent("""\
+                ignore_paths:
+                  - archive/**
+                """))
+
+            result = self._run(["discover", "--json"], tmp)
+
+            self.assertEqual(result.returncode, 0,
+                             result.stdout + result.stderr)
+            report = json.loads(result.stdout)
+            self.assertEqual(report["files_scanned"], 1)
+            self.assertNotIn("archive/old.md", result.stdout)
+
+    def test_discovery_json_does_not_expose_internal_capture_offsets(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "a.md"), "Price: $49\n")
+            write(os.path.join(tmp, "b.md"), "Also $49\n")
+
+            result = self._run(["discover", "--json"], tmp)
+
+            self.assertEqual(result.returncode, 0,
+                             result.stdout + result.stderr)
+            report = json.loads(result.stdout)
+            occurrence = report["proposals"][0]["occurrences"][0]
+            self.assertNotIn("_start", occurrence)
+            self.assertNotIn("_end", occurrence)
+
+    def test_github_annotations_require_untracked_only(self):
+        # Regression: the annotation text asserts an occurrence is not covered
+        # by the manifest, which only --untracked-only establishes. Standalone,
+        # it made that claim about fully covered occurrences.
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "pricing.md"), "Pro plan: $49\n")
+            write(os.path.join(tmp, "README.md"), "Pro plan costs $49\n")
+            write(os.path.join(tmp, ".ssot.yaml"), textwrap.dedent("""\
+                facts:
+                  - name: pro-price
+                    type: currency
+                    canonical:
+                      file: pricing.md
+                      pattern: 'Pro plan: \\$([\\d,]+)'
+                    copies:
+                      - file: README.md
+                        pattern: 'costs \\$([\\d,]+)'
+                """))
+            r = self._run(["discover", "--github-annotations"], tmp)
+            self.assertEqual(r.returncode, 2)
+            self.assertIn("requires --untracked-only", r.stderr)
+            self.assertNotIn("::warning", r.stdout)
+
+    def test_untracked_discovery_warns_when_no_locator_resolves(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            write(os.path.join(tmp, "a.md"), "Pro plan: $49 a month.\n")
+            write(os.path.join(tmp, "b.md"), "It costs $49 a month.\n")
+            write(os.path.join(tmp, ".ssot.yaml"), textwrap.dedent("""\
+                facts:
+                  - name: pro-price
+                    type: currency
+                    canonical:
+                      file: nowhere/pricing.md
+                      pattern: 'Pro plan: \\$([\\d,]+)'
+                    copies:
+                      - file: nowhere/README.md
+                        pattern: 'costs \\$([\\d,]+)'
+                """))
+            r = self._run([
+                "discover", "--manifest", ".ssot.yaml",
+                "--untracked-only", "--github-annotations",
+            ], tmp)
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+            self.assertIn("no manifest locator resolved", r.stderr)
+
+
+if __name__ == "__main__":
+    unittest.main()

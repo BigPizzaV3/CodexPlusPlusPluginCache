@@ -1,0 +1,9 @@
+interface:
+  display_name: Doubt Driven Development
+  short_description: Cross-examine assumptions before proceeding
+  default_prompt: Use $doubt-driven-development for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rognalia:note-workspace:schema:draft-registration-input:1",
+  "title": "note Workspace draft registration input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "request_id", "article_id", "article_revision",
+    "article_metadata_path", "thumbnail_metadata_path",
+    "inline_metadata_paths", "additional_links", "approval"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "request_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{7,127}$"},
+    "article_id": {"type": "string", "pattern": "^article-[a-z0-9][a-z0-9-]{2,63}$"},
+    "article_revision": {"type": "integer", "minimum": 1},
+    "article_metadata_path": {"type": "string", "pattern": "^articles/drafts/article-[a-z0-9][a-z0-9-]{2,63}-r[0-9]{3}\\.json$"},
+    "thumbnail_metadata_path": {"type": "string", "pattern": "^assets/article-[a-z0-9][a-z0-9-]{2,63}/thumbnail-r[0-9]{3}\\.json$"},
+    "inline_metadata_paths": {
+      "type": "array",
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^assets/article-[a-z0-9][a-z0-9-]{2,63}/inline-r[0-9]{3}\\.json$"}
+    },
+    "additional_links": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "insertion_heading", "insertion_after"],
+        "properties": {
+          "url": {"type": "string", "pattern": "^https?://", "maxLength": 2000},
+          "insertion_heading": {"type": "string", "minLength": 1, "maxLength": 300},
+          "insertion_after": {"type": "string", "minLength": 1, "maxLength": 500}
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confirmed", "prompt", "source", "approved_at", "scope", "delivery_sha256"],
+      "properties": {
+        "confirmed": {"const": true},
+        "prompt": {"const": "noteの下書き登録まで進めますか？ 公開はしません。"},
+        "source": {"enum": ["prompt_response", "direct_request"]},
+        "approved_at": {"type": "string", "format": "date-time"},
+        "scope": {"const": "new_note_draft_once"},
+        "delivery_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

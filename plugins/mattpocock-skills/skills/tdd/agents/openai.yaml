@@ -1,0 +1,9 @@
+interface:
+  display_name: TDD
+  short_description: Test-driven red-green-refactor
+  default_prompt: Use $tdd for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

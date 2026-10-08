@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Tasks & synthesis"
+  short_description: "Task definition, decomposition and synthesis of findings"
+  default_prompt: "Use $vibe-task to turn this request into a concrete implementation brief."

@@ -1,0 +1,11 @@
+.DS_Store
+build/
+DerivedData/
+*.xcarchive
+*.ipa
+*.xcdistributionlogs
+.env
+.env.*
+*.p8
+AuthKey_*.p8
+node_modules/

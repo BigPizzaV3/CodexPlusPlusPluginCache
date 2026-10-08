@@ -1,0 +1,71 @@
+{
+  "author": {
+    "email": "support@yaps.ai",
+    "name": "Yaps AI",
+    "url": "https://www.yaps.ai"
+  },
+  "description": "Translate text and files locally without metered translation API tokens.",
+  "homepage": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins",
+  "interface": {
+    "brandColor": "#D4775B",
+    "brandColorDark": "#D4775B",
+    "capabilities": [
+      "Translate text",
+      "Translate Markdown and text files",
+      "Translate SRT subtitles",
+      "Automatic language detection",
+      "On-device translation",
+      "No metered translation API tokens",
+      "Private offline processing",
+      "File export"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Translate this into French locally without using API tokens.",
+      "Translate this Markdown document into German and keep its formatting.",
+      "Translate these SRT subtitles into Spanish and preserve every timestamp."
+    ],
+    "developerName": "Yaps AI",
+    "displayName": "Accurate Translation",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Translate text, Markdown, plain-text documents, and SRT subtitles accurately with Yaps desktop 2.1.0 or newer. The translation engine runs entirely on your computer: it does not upload the source, call a hosted translation API, or consume metered cloud translation/API tokens. Preserve Markdown structure, code blocks, image embeds, subtitle timestamps, and cue indices while writing a new file that never changes the source. The plugin checks the Yaps version, sign-in, free-trial or Yaps Pro access, language support, and the installed local translation engine first. Requires a local-capable ChatGPT Desktop Work or Codex session; ChatGPT web and cloud sessions cannot reach the installed Yaps engine. Users can also run the feature directly in Yaps.",
+    "privacyPolicyURL": "https://www.yaps.ai/privacy",
+    "shortDescription": "Translate locally, no tokens",
+    "termsOfServiceURL": "https://www.yaps.ai/terms",
+    "websiteURL": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins"
+  },
+  "keywords": [
+    "translate",
+    "translation",
+    "translate-text",
+    "translate-document",
+    "translate-markdown",
+    "translate-notes",
+    "translate-subtitles",
+    "translate-srt",
+    "accurate-translation",
+    "free-translation",
+    "token-free-translation",
+    "translate-without-api",
+    "save-api-tokens",
+    "no-api-tokens",
+    "local-translator",
+    "offline-translator",
+    "private-translator",
+    "document-translator",
+    "subtitle-translation",
+    "offline-translation",
+    "on-device-translation",
+    "private-translation",
+    "language-translator",
+    "machine-translation",
+    "localize-text"
+  ],
+  "license": "MIT",
+  "name": "yaps-translation",
+  "repository": "https://github.com/richawo/yaps-codex-plugin",
+  "skills": "./skills/",
+  "version": "0.1.12"
+}

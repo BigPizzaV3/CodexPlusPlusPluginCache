@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "hoku-ya",
+    "url": "https://github.com/hoku-ya"
+  },
+  "description": "A bounded, evidence-led workflow for multi-source research in Cloud Work.",
+  "homepage": "https://github.com/hoku-ya/orchestrator-lite-cloud",
+  "interface": {
+    "brandColor": "#172554",
+    "brandColorDark": "#ABB9E8",
+    "capabilities": [
+      "Research"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "Orchestrator\u3092\u4f7f\u3063\u3066\u3001\u3053\u306e\u30c6\u30fc\u30de\u3092\u4e00\u6b21\u60c5\u5831\u4e2d\u5fc3\u306b\u8abf\u67fb\u3057\u3066\u3002",
+      "Use the Orchestrator to research this topic using primary sources."
+    ],
+    "developerName": "hoku-ya",
+    "displayName": "Orchestrator Lite Cloud",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Runs bounded research in Main, automatically covering evidence-led comparisons across multiple named primary sources, and permits one read-only Researcher only when a visible Cloud child-agent capability offers clear value.",
+    "privacyPolicyURL": "https://github.com/hoku-ya/orchestrator-lite-cloud/blob/main/PRIVACY.md",
+    "shortDescription": "Evidence research",
+    "termsOfServiceURL": "https://github.com/hoku-ya/orchestrator-lite-cloud/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/hoku-ya/orchestrator-lite-cloud"
+  },
+  "keywords": [
+    "orchestration",
+    "research",
+    "cloud-work"
+  ],
+  "license": "MIT",
+  "name": "orchestrator-lite-cloud",
+  "repository": "https://github.com/hoku-ya/orchestrator-lite-cloud",
+  "skills": "./skills/",
+  "version": "0.1.5"
+}

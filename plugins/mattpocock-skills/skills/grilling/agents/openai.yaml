@@ -1,0 +1,9 @@
+interface:
+  display_name: Grilling
+  short_description: Stress-test thinking a round of questions at a time
+  default_prompt: Use $grilling for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

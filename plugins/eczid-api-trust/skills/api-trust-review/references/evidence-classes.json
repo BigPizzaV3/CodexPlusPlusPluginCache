@@ -1,0 +1,124 @@
+{
+  "generatedFrom": {
+    "definition": "foundry/plugins.json"
+  },
+  "detectors": [
+    {
+      "id": "api.contract",
+      "label": "API contract (OpenAPI / GraphQL / AsyncAPI)",
+      "patterns": [
+        "(^|/)openapi\\.(json|ya?ml)$",
+        "(^|/)swagger\\.(json|ya?ml)$",
+        "\\.graphqls?$",
+        "(^|/)schema\\.graphql$",
+        "(^|/)asyncapi\\.(json|ya?ml)$",
+        "(^|/)api-?spec"
+      ]
+    },
+    {
+      "id": "api.auth",
+      "label": "Authentication / authorisation configuration",
+      "patterns": [
+        "oauth",
+        "openid",
+        "jwks",
+        "(^|/)auth(z|n)?/",
+        "api-?keys?",
+        "(^|/)scopes?\\.(json|ya?ml)$"
+      ]
+    },
+    {
+      "id": "api.catalog",
+      "label": "API catalogue / discovery",
+      "patterns": [
+        "(^|/)\\.well-known/api-catalog$",
+        "(^|/)apis?\\.json$",
+        "api-?catalog",
+        "(^|/)\\.well-known/openapi"
+      ]
+    },
+    {
+      "id": "api.security",
+      "label": "Security policy / disclosure contact",
+      "patterns": [
+        "(^|/)security\\.md$",
+        "(^|/)security\\.txt$",
+        "(^|/)\\.well-known/security\\.txt$"
+      ]
+    },
+    {
+      "id": "api.tests",
+      "label": "Contract tests / request collections",
+      "patterns": [
+        "postman.*\\.json$",
+        "\\.http$",
+        "insomnia",
+        "contract-?tests?",
+        "(^|/)pacts?/"
+      ]
+    },
+    {
+      "id": "api.resolverRef",
+      "label": "ECZ-ID public proof reference",
+      "patterns": [
+        "(^|/)\\.well-known/ecz-[a-z0-9-]*\\.json$",
+        "(^|/)ecz-api[a-z0-9-]*\\.json$",
+        "(^|/)ecz-id[a-z0-9-]*\\.json$"
+      ]
+    }
+  ],
+  "guidance": [
+    {
+      "detectorId": "api.contract",
+      "whyItMatters": "A contract is the declared surface a consumer, platform or reviewer relies on. Without one, exposure is discovered rather than declared.",
+      "reviewWhenObserved": "Check every path and operation is intended, security schemes are declared, and the version matches what is deployed.",
+      "reviewWhenNotObserved": "Declare the surface: an OpenAPI, GraphQL or AsyncAPI document is the first artefact a consumer asks for.",
+      "weightWhenNotObserved": "high",
+      "capability": {
+        "label": "ECZ-ID API Security for VS Code (free)",
+        "url": "https://marketplace.visualstudio.com/items?itemName=ecocitizenz.eczid-api-security",
+        "note": "Local review of API surfaces and their proof posture."
+      }
+    },
+    {
+      "detectorId": "api.auth",
+      "whyItMatters": "Authentication and authorisation configuration is where access is bounded. Reviewers look for declared schemes, scopes and key handling, never values.",
+      "reviewWhenObserved": "Confirm each security scheme in the contract has matching configuration, scopes are named, and key material lives outside the repository.",
+      "reviewWhenNotObserved": "If the API is not public, record how it is protected; if it is public, declare it in the contract.",
+      "weightWhenNotObserved": "elevated"
+    },
+    {
+      "detectorId": "api.catalog",
+      "whyItMatters": "A catalogue or discovery document tells machines and reviewers which APIs exist and where their contracts are.",
+      "reviewWhenObserved": "Check the catalogue lists the current contract versions.",
+      "reviewWhenNotObserved": "Supporting evidence only.",
+      "weightWhenNotObserved": "normal"
+    },
+    {
+      "detectorId": "api.security",
+      "whyItMatters": "A security policy and disclosure contact are where a reporter, a customer or an authority go first when something is wrong.",
+      "reviewWhenObserved": "Confirm the contact is monitored and the policy states the response process.",
+      "reviewWhenNotObserved": "Add a SECURITY.md or security.txt with a monitored contact.",
+      "weightWhenNotObserved": "normal"
+    },
+    {
+      "detectorId": "api.tests",
+      "whyItMatters": "Contract tests and request collections show the declared surface is exercised, which is how drift between contract and deployment is caught.",
+      "reviewWhenObserved": "Check the tests cover authentication failures as well as success paths.",
+      "reviewWhenNotObserved": "Supporting evidence only.",
+      "weightWhenNotObserved": "normal"
+    },
+    {
+      "detectorId": "api.resolverRef",
+      "whyItMatters": "An ECZ-ID public proof reference lets a consumer or platform check the API's current public posture in Resolver. Absence is neutral.",
+      "reviewWhenObserved": "Run ecz_check_target on the referenced identifier and read the ResultState and ReasonCodes.",
+      "reviewWhenNotObserved": "If you operate the API, an ECZ-ID API Passport in TrustOps gives it a resolver-checkable identity.",
+      "weightWhenNotObserved": "normal",
+      "capability": {
+        "label": "ECZ-ID API Passport (TrustOps)",
+        "url": "https://trustops.ecocitizenz.com/start?flow=api-software",
+        "note": "Set up in TrustOps. Passport issuance is an ECZ-ID platform service, not a function of this plugin."
+      }
+    }
+  ]
+}

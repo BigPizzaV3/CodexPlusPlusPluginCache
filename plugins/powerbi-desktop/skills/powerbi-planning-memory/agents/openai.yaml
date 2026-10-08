@@ -1,0 +1,5 @@
+interface:
+  display_name: Planning Memory
+  short_description: Reusable planning evidence
+policy:
+  allow_implicit_invocation: false

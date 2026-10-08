@@ -1,0 +1,42 @@
+{
+  "author": {
+    "name": "Benjamin Haire",
+    "url": "https://github.com/theisegoria"
+  },
+  "description": "Author, edit, preview, repair, validate, and optionally render portable Mermaid documents.",
+  "homepage": "https://github.com/theisegoria/chatgpt-skill-plugins",
+  "interface": {
+    "brandColor": "#00899E",
+    "brandColorDark": "#61EAFF",
+    "capabilities": [
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Turn this architecture into a validated multi-diagram Mermaid document with a structural preview.",
+      "Safely edit one marked Mermaid fence in this Markdown file without changing the surrounding bytes.",
+      "Create a portable Gantt, timeline, or Kanban diagram for this plan."
+    ],
+    "developerName": "Benjamin Michael Haire",
+    "displayName": "Mermaid Diagrams",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Author, import, safely edit, preview, repair, and validate deterministic Mermaid diagrams and multi-diagram Markdown, including architecture, Gantt, timeline, and Kanban builders, with optional local rendering when requested.",
+    "privacyPolicyURL": "https://github.com/theisegoria/chatgpt-skill-plugins/blob/main/PRIVACY.md",
+    "shortDescription": "Create Mermaid diagrams",
+    "supportURL": "https://github.com/theisegoria/chatgpt-skill-plugins/issues",
+    "termsOfServiceURL": "https://github.com/theisegoria/chatgpt-skill-plugins/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/theisegoria/chatgpt-skill-plugins"
+  },
+  "keywords": [
+    "mermaid",
+    "diagrams",
+    "markdown"
+  ],
+  "license": "Apache-2.0",
+  "name": "mermaid-diagrams",
+  "repository": "https://github.com/theisegoria/chatgpt-skill-plugins",
+  "skills": "./skills/",
+  "version": "2.1.0"
+}

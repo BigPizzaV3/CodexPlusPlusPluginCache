@@ -1,0 +1,7 @@
+interface:
+  display_name: Carousel Generator
+  short_description: Build slide-by-slide social carousels
+  brand_color: '#E45B32'
+  default_prompt: Use $carousel-generator to turn this topic into a slide-by-slide social carousel.
+policy:
+  allow_implicit_invocation: true

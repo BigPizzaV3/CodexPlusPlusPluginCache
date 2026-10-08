@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Street Interview"
+  short_description: "Q&A encounters with reveals"
+  default_prompt: "Use $pixverse-street-interview to make a 25-second street interview where a passer-by shares three rules, each revealed on an on-screen strip when spoken."
+policy:
+  allow_implicit_invocation: true

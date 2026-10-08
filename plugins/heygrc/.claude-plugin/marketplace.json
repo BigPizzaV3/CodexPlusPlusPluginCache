@@ -1,0 +1,25 @@
+{
+  "name": "heygrc",
+  "description": "heyGRC: GRC compliance review for your pull requests, by Better ISMS.",
+  "version": "0.1.1",
+  "owner": {
+    "name": "Better ISMS",
+    "email": "support@ismscopilot.com",
+    "url": "https://heygrc.com"
+  },
+  "plugins": [
+    {
+      "name": "heygrc",
+      "source": "./",
+      "displayName": "heyGRC",
+      "description": "GRC compliance review for your pull requests. Reviews each PR against ISO 27001, SOC 2, GDPR and the EU AI Act, grounded in your company profile. Public repos are free.",
+      "category": "security",
+      "keywords": [
+        "grc",
+        "compliance",
+        "security",
+        "code-review"
+      ]
+    }
+  ]
+}

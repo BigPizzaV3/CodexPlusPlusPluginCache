@@ -1,0 +1,681 @@
+{
+  "schema_version": 1,
+  "instructions": "Run in fresh installed-host sessions. Fixtures are hypothetical, not authority to change real settings. Record CLI/app version, actual model and effort or unknown, explicit/implicit invocation, Skill paths, output, disposition and evidence. Static/native validation is not a behavioral pass. Current UX expectations are not live-validated; previous reports are historical evidence only. No model calls are needed for static package validation.",
+  "cases": [
+    {
+      "id": "B01",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Coordinator sequence / 協調入口順序",
+      "setup": "A substantial debugging request explicitly invokes `adaptive-task-routing`, with both child Skills and shared files available.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A substantial debugging request explicitly invokes `adaptive-task-routing`, with both child Skills and shared files available.",
+      "expected": "Present the requested findings or actionable plan first. Load and delegate context then model decisions. The single routing note uses a divider, plain Adaptive Task Routing heading, action, reason, enabled conversation advice and useful AI setting. In ask, retain/nonblocking defer continue only authorized work; a proposed change or material blocker requires a real decision. The coordinator does not make either child decision itself.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B02",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Improvement-plan delivery / 交付改善計畫",
+      "setup": "The user asks only for a substantial cross-file release-flow, cross-platform consistency, and test-gap audit. The completed findings propose a concrete implementation and validation phase.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: The user asks only for a substantial cross-file release-flow, cross-platform consistency, and test-gap audit. The completed findings propose a concrete implementation and validation phase.",
+      "expected": "Complete the substantial audit and plan first, then show action-first advice for its concrete next phase. A plan-only request ends with that deliverable without implementation or an artificial keep-current question. Compact preserves enabled conversation advice and useful model guidance; detailed can expose both task settings.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B03",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Context continuity with localized visible advice / 對話延續與在地化建議",
+      "setup": "A follow-up depends on definitions and corrections from recent turns, and the running model and effort are both observed and suitable.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A follow-up depends on definitions and corrections from recent turns, and the running model and effort are both observed and suitable.",
+      "expected": "Preserve continuity using a localized conversation advice and a verified keep action. Keep both task settings in internal evidence; compact shows only the observed current pair, never a task-fit alternative. Ask does not pause for retention; continue only authorized work. A pending context change remains independent.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B04",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Unknown current configuration / 目前設定未知",
+      "setup": "The applicable model catalog, supported effort options and task-relevant capability descriptions are known, but the running model and reasoning effort cannot be read.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: The applicable model catalog, supported effort options and task-relevant capability descriptions are known, but the running model and reasoning effort cannot be read.",
+      "expected": "Unknown current values do not erase an evidenced task-fit pair. Use provisional retention and defer automatic switching without claiming suitability or showing a selector. Ask continues already authorized work if no material blocker exists; a concrete quality/destination blocker requires a useful question, not a generic keep-current confirmation.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B05",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Unknown catalog / 模型清單未知",
+      "setup": "Neither the current configuration nor supported model options are available.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: Neither the current configuration nor supported model options are available.",
+      "expected": "After a bounded relevant discovery attempt or a concrete access limitation, report task needs, unknown current model and effort, and the missing catalog evidence. No model identifier is invented. Provisional CURRENT/CURRENT is unverified, not suitable; excluding a subagent menu alone is not a completed catalog exploration.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B06",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Independent off combinations / 獨立 off 組合",
+      "setup": "Test three configurations: both modes `off`, context only `off`, and model only `off`.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: Test three configurations: both modes `off`, context only `off`, and model only `off`.",
+      "expected": "Both off produces no routing evaluation, capability probe, or routing note. Context-off keeps the current context and runs only enabled model routing. Model-off runs only context routing and emits no model recommendation. No third coordinator mode is consulted.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B07",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Mixed App capabilities / App 混合能力",
+      "setup": "An App surface uses `auto`. Its orchestrator can create a new context and set a model for that new run, but it cannot switch the current model or effort.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: An App surface uses `auto`. Its orchestrator can create a new context and set a model for that new run, but it cannot switch the current model or effort.",
+      "expected": "Each operation retains its own capability. Context creation may run automatically and be reported `applied` only after verification. Current-model and effort changes degrade to known user actions and remain awaiting; the App label does not cap all operations to `user_only`.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B08",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Programmable CLI execution / 可程式化 CLI 執行",
+      "setup": "A CLI uses `auto`.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A CLI uses `auto`.",
+      "expected": "A router-initiated model/effort change additionally requires a justified switch assessment. Automatic execution occurs only when the exact operation is callable, authorized, and verifiable. An interactive command or launch flag alone is not capability evidence. After one failed automatic attempt, the router stops retrying and returns an accurate manual fallback without an `applied` claim.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B09",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Deferred destination / 目的地延後",
+      "setup": "Context mode is `ask`, a handoff is recommended, and the prospective destination's model catalog is unknown.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: Context mode is `ask`, a handoff is recommended, and the prospective destination's model catalog is unknown.",
+      "expected": "The model gate is visible but deferred: current observable fields are shown, recommendation model and effort are `null`, `assessment` is `deferred`, and disposition remains awaiting the unresolved context decision. The model gate is rerun in the confirmed destination before execution.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B10",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Missing child or shared dependency / 缺少子元件或共用依賴",
+      "setup": "The coordinator cannot load one child `SKILL.md` or a required shared policy/defaults file from either packaged paths or host resources.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: The coordinator cannot load one child `SKILL.md` or a required shared policy/defaults file from either packaged paths or host resources.",
+      "expected": "It reports the named component as unavailable and the gate as incomplete. It does not fabricate a child result, silently substitute the coordinator's own judgment, or continue as though the full gate succeeded.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B11",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "No recursion and duplicate-gate reuse / 避免循環與重複 Gate",
+      "setup": "The coordinator has completed a gate, and ordinary follow-ups keep the same phase, effective context, preferences, model catalog, and capabilities.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: The coordinator has completed a gate, and ordinary follow-ups keep the same phase, effective context, preferences, model catalog, and capabilities.",
+      "expected": "During a coordinated run, children do not call the coordinator or each other. A child selected directly for a general task dispatches once to the coordinator, whose delegated marker prevents recursion. The existing gate is reused without another routing note. A real model-only stage transition reruns only the model router; context is reconsidered only at a genuine context boundary.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B12",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Compact handoff and clean evaluation / 精簡交接與乾淨評估",
+      "setup": "One task transitions from completed exploration to stable implementation, while another explicitly requests blind independent evaluation.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: One task transitions from completed exploration to stable implementation, while another explicitly requests blind independent evaluation.",
+      "expected": "The first may recommend `HANDOFF` containing only necessary state and no transcript or hidden reasoning. The second recommends `CLEAN` without a task handoff. Difficulty alone does not force either choice.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B13",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Remote host without installation / 遠端主機未安裝",
+      "setup": "A user believes the plugin is installed locally, but the active task runs on another host whose plugin source and task Skill inventory do not contain Adaptive Task Routing.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A user believes the plugin is installed locally, but the active task runs on another host whose plugin source and task Skill inventory do not contain Adaptive Task Routing.",
+      "expected": "Diagnosis first identifies the actual execution host, then checks that host's installation source and the current task's Skill inventory. It reports only the evidenced mismatch. A missing routing note alone is not blamed on an old window, stale inventory, or description matching.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B14",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Stage transition / 階段轉換",
+      "setup": "A deterministic batch completes and the next phase compares competing hypotheses or interprets consequential validation evidence.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A deterministic batch completes and the next phase compares competing hypotheses or interprets consequential validation evidence.",
+      "expected": "Model routing is reconsidered before the reasoning-heavy phase. Context routing is not repeated unless a genuine context boundary also exists. Completion with no substantial next phase adds no artificial gate.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B15",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "First-use capability snapshot / 首次能力快照",
+      "setup": "No capability snapshot exists on first invocation, and the host exposes read-only capability metadata plus a user-managed settings store.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: No capability snapshot exists on first invocation, and the host exposes read-only capability metadata plus a user-managed settings store.",
+      "expected": "The router detects context creation, handoff creation, current-model switching, new-run model selection, and effort control separately, then stores results with surface/fingerprint, evidence, observation time, and confidence. A later unchanged gate performs only a freshness check. A permission, tool, host, session, or failed-operation change invalidates only affected observations. Nothing is written into the installed plugin package.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B16",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Dynamic model catalog and scoring / 動態模型清單與評分",
+      "setup": "A cached model catalog exists, then a new session exposes a changed runtime catalog with one model added and one removed.",
+      "prompt": "Evaluate this fixture under the installed routing Skills: A cached model catalog exists, then a new session exposes a changed runtime catalog with one model added and one removed.",
+      "expected": "The new runtime catalog replaces the stale cache for decisions. The running configuration is still observed separately. Task needs are scored independently of model names and mapped only to current capability evidence. A user-provided list is labeled, and a static fallback is used only when versioned and unexpired; no removed or unknown model is recommended from stale data.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "B17",
+      "kind": "boundary",
+      "openai_submission": false,
+      "title": "Conversational mode control / 對話模式控制",
+      "setup": "In a normal conversation, no writable persistent settings store is available. The user first asks to set Adaptive Task Routing to auto for this conversation, then changes only model routing to ask, and finally asks which modes are active.",
+      "prompt": "For this conversation, set Adaptive Task Routing to auto. Then set only model routing to ask and tell me which modes are active.",
+      "expected": "Treat mode requests as configuration commands before ordinary plugin-question skipping. The unqualified command sets both independent routers to auto for the conversation; the named command then changes only model routing to ask. Confirm context auto and model ask plus conversation scope concisely, without model discovery, a routing recommendation, or a second confirmation. Do not claim persistence into new conversations and do not treat the mode change as task authorization.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "N01",
+      "kind": "negative",
+      "openai_submission": true,
+      "title": "Brief explanation",
+      "setup": "Fresh chat; implicit selection test, no explicit Skill mention.",
+      "prompt": "In one sentence, what is a retry loop?",
+      "expected": "Answer briefly; no routing evaluation, capability probes, switch recommendation, or routing note.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "N02",
+      "kind": "negative",
+      "openai_submission": true,
+      "title": "Tiny edit",
+      "setup": "Fresh chat with a scratch text containing 'teh'; this is the entire authorized task.",
+      "prompt": "Change only 'teh' to 'the' in this sentence: teh cat sat.",
+      "expected": "Make only the tiny correction; no routing gate or model/context switch.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "N03",
+      "kind": "negative",
+      "openai_submission": true,
+      "title": "Plugin status question",
+      "setup": "Fresh chat; no substantial follow-up work requested.",
+      "prompt": "What are the names of the three Skills in this plugin? Only list their names.",
+      "expected": "List the three names; no routing evaluation, capability probe, model suggestion or invented next phase.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "P01",
+      "kind": "positive",
+      "openai_submission": true,
+      "title": "Explicit substantial debugging",
+      "setup": "Fresh chat; both modes ask; tiny synthetic bug fixture; no real changes authorized.",
+      "prompt": "Use adaptive-task-routing to inspect a multi-step retry bug and propose a debugging plan. Do not implement it.",
+      "expected": "Load coordinator, context router and model router in order, resolve shared files, display context plus model/effort or unknown; keep implementation unstarted.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "P02",
+      "kind": "positive",
+      "openai_submission": true,
+      "title": "Implicit architecture plan",
+      "setup": "Fresh chat; plugin enabled; provide a synthetic small service description; ask modes.",
+      "prompt": "Review our service architecture and propose a substantial implementation and validation plan for splitting the worker queue.",
+      "expected": "The primary coordinator description should be selected. If the host selects either child instead, its direct-selection guard dispatches once to the coordinator. Route the proposed next phase with Context and Model blocks before yielding; no implementation from a plan-only request.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "P03",
+      "kind": "positive",
+      "openai_submission": true,
+      "title": "Context-only continuity",
+      "setup": "Recent turns contain a corrected schema needed next; invoke only task-context-router.",
+      "prompt": "Use task-context-router to choose the context for implementing the schema corrections we just agreed on.",
+      "expected": "Load only context router and shared policy, choose CURRENT in structured evidence when continuity is needed, and show localized plain-language advice without the raw enum; do not produce a model recommendation or call the coordinator.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "P04",
+      "kind": "positive",
+      "openai_submission": true,
+      "title": "Model-only validation transition",
+      "setup": "Synthetic deterministic pilot completed; substantial robustness review next; exact catalog/current controls supplied as test fixtures, not real capabilities.",
+      "prompt": "Use research-model-router before comparing competing explanations for the pilot validation results.",
+      "expected": "Load model router and policy, visibly report model and reasoning; use only evidenced options; do not choose a context or execute simulated capabilities.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    },
+    {
+      "id": "P05",
+      "kind": "positive",
+      "openai_submission": true,
+      "title": "Follow-up phase transition",
+      "setup": "Complete a coordinator gate, then provide a synthetic passing batch report; interpretation is authorized.",
+      "prompt": "The batch validation is complete. Continue by evaluating confounding and alternative explanations.",
+      "expected": "Before interpretation re-run model routing. Reuse context unless a real boundary exists; report unknown fields honestly and respect independent modes.",
+      "results": {
+        "chatgpt": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "codex": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "claude": {
+          "status": "not_run",
+          "evidence": null
+        },
+        "gemini": {
+          "status": "not_run",
+          "evidence": null
+        }
+      }
+    }
+  ]
+}

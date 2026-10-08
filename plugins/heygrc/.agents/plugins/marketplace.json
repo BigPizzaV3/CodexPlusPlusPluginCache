@@ -1,0 +1,20 @@
+{
+  "name": "heygrc",
+  "interface": {
+    "displayName": "heyGRC"
+  },
+  "plugins": [
+    {
+      "name": "heygrc",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

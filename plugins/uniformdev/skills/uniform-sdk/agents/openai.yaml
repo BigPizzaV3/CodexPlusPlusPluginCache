@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uniform SDK"
+  short_description: "Uniform SDK auth, CLI, routing and clients"
+  default_prompt: "Configure the Uniform CLI with $uniform-sdk"

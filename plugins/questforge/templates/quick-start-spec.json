@@ -1,0 +1,120 @@
+{
+  "spec_version": 2,
+  "_instructions": "Complete every empty value after the creative conception pass. This file defines structure only; it is intentionally not a playable adventure and must not be run unchanged.",
+  "conception": {
+    "environment": {
+      "biome": "",
+      "climate": "",
+      "season": "",
+      "time_of_day": "",
+      "surface": "",
+      "social_scale": "",
+      "water_relevance": ""
+    },
+    "community": "",
+    "material_conflict": "",
+    "threat": "",
+    "npc_relationships": [
+      {
+        "npc": "",
+        "role": "",
+        "wants": "",
+        "relationship": ""
+      },
+      {
+        "npc": "",
+        "role": "",
+        "wants": "",
+        "relationship": ""
+      }
+    ],
+    "tone": "",
+    "aesthetic": "",
+    "campaign_promise": "",
+    "sensory_palette": {
+      "sight": "",
+      "sound": "",
+      "smell_or_taste": "",
+      "touch_or_temperature": ""
+    },
+    "distinctive_elements": [
+      "",
+      ""
+    ]
+  },
+  "campaign": {
+    "name": "",
+    "language": "",
+    "boundaries": "",
+    "hooks": [
+      "",
+      "",
+      ""
+    ],
+    "core_truths": [
+      ""
+    ],
+    "clue_routes": [
+      "",
+      "",
+      ""
+    ],
+    "faction_intents": [
+      ""
+    ],
+    "outcomes": [
+      "",
+      ""
+    ]
+  },
+  "hero": {
+    "name": "",
+    "class_name": "",
+    "ancestry": "",
+    "background": "",
+    "level": 1,
+    "xp": 0,
+    "max_hp": null,
+    "armor_class": null,
+    "hit_die": "",
+    "initiative_modifier": 0,
+    "abilities": {},
+    "skill_modifiers": {},
+    "currency": {},
+    "resources": {},
+    "spells": {
+      "cantrips": [],
+      "known": [],
+      "prepared": []
+    },
+    "features": [],
+    "notes": [],
+    "visual_description": "",
+    "visual_must_preserve": [],
+    "visual_clothing": "",
+    "visual_gear": "",
+    "visual_colors": "",
+    "items": []
+  },
+  "opening": {
+    "title": "",
+    "location": "",
+    "pressure": "",
+    "npc_intent": "",
+    "sensory_detail": "",
+    "visible_risks": [
+      ""
+    ],
+    "options": [
+      "",
+      ""
+    ],
+    "question": ""
+  },
+  "visual": {
+    "kind": "scene",
+    "label": "",
+    "prompt": ""
+  },
+  "checkpoint_label": "Before session start"
+}

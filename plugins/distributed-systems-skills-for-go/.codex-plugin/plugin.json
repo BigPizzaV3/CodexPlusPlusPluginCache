@@ -1,0 +1,50 @@
+{
+  "author": {
+    "name": "Ashwin Gopalsamy",
+    "url": "https://ashwingopalsamy.in"
+  },
+  "description": "Invariant-driven Go concurrency, consistency, messaging, resilience, coordination, and distributed-change review skills.",
+  "homepage": "https://golangskills.com",
+  "interface": {
+    "brandColor": "#071A2B",
+    "brandColorDark": "#D4E7F8",
+    "capabilities": [
+      "Design failure-safe Go systems",
+      "Diagnose distributed failures",
+      "Review distributed changes",
+      "Gophers",
+      "Golang"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this for consistency, ordering, retries, and partial-failure risk. Report concrete, causal findings.",
+      "Diagnose this prod issue from evidence. Find the failure mechanism, violated invariant and recovery.",
+      "Design or implement this change. Bound concurrency, retries, and ownership; preserve safety under ambiguity and failure."
+    ],
+    "developerName": "Ashwin Gopalsamy",
+    "displayName": "Go: Distributed Systems",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Invariant-driven Go concurrency, consistency, messaging, resilience, coordination, and distributed-change review skills.",
+    "privacyPolicyURL": "https://github.com/ashwingopalsamy/golangskills.com/blob/main/docs/privacy.md",
+    "shortDescription": "Build resilient Go systems",
+    "supportURL": "https://github.com/ashwingopalsamy/golangskills.com/blob/main/docs/support.md",
+    "termsOfServiceURL": "https://github.com/ashwingopalsamy/golangskills.com/blob/main/docs/terms.md",
+    "websiteURL": "https://github.com/ashwingopalsamy/golangskills.com"
+  },
+  "keywords": [
+    "go",
+    "golang",
+    "distributed-systems",
+    "concurrency",
+    "messaging",
+    "consistency",
+    "resilience",
+    "coordination"
+  ],
+  "license": "Apache-2.0",
+  "name": "distributed-systems-skills-for-go",
+  "repository": "https://github.com/ashwingopalsamy/golangskills.com",
+  "skills": "./skills/",
+  "version": "0.4.0"
+}

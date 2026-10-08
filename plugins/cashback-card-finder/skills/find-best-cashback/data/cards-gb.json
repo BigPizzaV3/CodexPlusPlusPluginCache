@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "country": "GB",
+  "currency": "GBP",
+  "as_of": "2026-05",
+  "provenance": "Model-knowledge snapshot, NOT a live feed. Verify against the issuer's current terms before presenting a rate as fact.",
+  "notes": "The UK cashback market is far thinner than the US one. Most cards pay well under 1% and several use annual-spend tiers that this engine flattens to a single base rate; the per-card notes flag where that happens. Section 75 protection and no-FX-fee status are often worth more to a UK cardholder than the headline cashback rate.",
+  "cards": [
+    {
+      "id": "amex-cashback-everyday-uk",
+      "name": "American Express Cashback Everyday (UK)",
+      "issuer": "American Express",
+      "network": "amex",
+      "currency": "GBP",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 0.5,
+      "base_label": "0.5% on the first £10,000 of annual spend",
+      "foreign_transaction_fee_percent": 2.99,
+      "minimum_redemption": 25,
+      "as_of": "2026-05",
+      "source": "https://www.americanexpress.com/uk/credit-cards/cashback-credit-cards/",
+      "rules": [],
+      "notes": "Rate rises to 1% on annual spend above £10,000, and a 5% introductory rate applies for the first few months within a cap. Cashback is only paid once a year and only above a minimum threshold. Amex acceptance is materially worse than Visa/Mastercard in UK supermarkets and small retailers."
+    },
+    {
+      "id": "amex-platinum-cashback-uk",
+      "name": "American Express Platinum Cashback (UK)",
+      "issuer": "American Express",
+      "network": "amex",
+      "currency": "GBP",
+      "reward_type": "cashback",
+      "annual_fee": 30,
+      "base_rate": 0.75,
+      "base_label": "0.75% on the first £10,000 of annual spend",
+      "foreign_transaction_fee_percent": 2.99,
+      "as_of": "2026-05",
+      "source": "https://www.americanexpress.com/uk/credit-cards/cashback-credit-cards/",
+      "rules": [],
+      "notes": "Rate rises to 1.25% above £10,000 of annual spend. Only worth the annual fee at fairly high spend; run the break-even before recommending it over the free version."
+    },
+    {
+      "id": "amex-nectar-uk",
+      "name": "American Express Nectar (UK)",
+      "issuer": "American Express",
+      "network": "amex",
+      "currency": "GBP",
+      "reward_type": "points",
+      "point_value_cents": 0.5,
+      "annual_fee": 30,
+      "base_rate": 2,
+      "base_unit": "points_per_unit",
+      "base_label": "2 Nectar points per £1",
+      "foreign_transaction_fee_percent": 2.99,
+      "as_of": "2026-05",
+      "source": "https://www.americanexpress.com/uk/credit-cards/nectar-credit-card/",
+      "rules": [
+        {
+          "id": "nectar-partners",
+          "label": "3 Nectar points per £1 at Nectar partners",
+          "unit": "points_per_unit",
+          "rate": 3,
+          "match": {"merchants": ["sainsburys", "argos"]},
+          "confidence": "low",
+          "note": "Partner earning depends on linking the Nectar account correctly; verify the current partner list."
+        }
+      ],
+      "notes": "Nectar points are worth roughly 0.5p each at standard redemption, so 2 points per £1 is about 1% - higher only if the user reliably uses Nectar boosted redemptions."
+    },
+    {
+      "id": "barclaycard-rewards-uk",
+      "name": "Barclaycard Rewards",
+      "issuer": "Barclays",
+      "network": "visa",
+      "currency": "GBP",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 0.25,
+      "base_label": "0.25% on everything",
+      "foreign_transaction_fee_percent": 0,
+      "as_of": "2026-05",
+      "source": "https://www.barclaycard.co.uk/personal/credit-cards/rewards",
+      "rules": [],
+      "notes": "The real draw is no foreign transaction fee and no cash withdrawal fee abroad, not the 0.25% rate. For any purchase in a foreign currency this usually beats a 1% cashback card that charges a 3% FX fee."
+    },
+    {
+      "id": "santander-edge-uk",
+      "name": "Santander Edge Credit Card",
+      "issuer": "Santander",
+      "network": "mastercard",
+      "currency": "GBP",
+      "reward_type": "cashback",
+      "annual_fee": 36,
+      "base_rate": 0,
+      "base_label": "no cashback outside bonus categories",
+      "foreign_transaction_fee_percent": 0,
+      "as_of": "2026-05",
+      "source": "https://www.santander.co.uk/personal/credit-cards",
+      "rules": [
+        {
+          "id": "everyday",
+          "label": "2% on supermarket and travel spend in the first year",
+          "unit": "percent",
+          "rate": 2,
+          "match": {"categories": ["grocery", "travel", "transit", "airline", "hotel"]},
+          "cap": {"basis": "reward_cash", "amount": 15, "period": "month", "shared_key": "santander-edge"},
+          "confidence": "low",
+          "note": "Introductory-period rate with a monthly cashback cap and a monthly fee. Verify whether the user is still inside the promotional period."
+        }
+      ]
+    },
+    {
+      "id": "john-lewis-partnership-uk",
+      "name": "John Lewis Partnership Credit Card",
+      "issuer": "NewDay",
+      "network": "mastercard",
+      "currency": "GBP",
+      "reward_type": "points",
+      "point_value_cents": 1,
+      "annual_fee": 0,
+      "base_rate": 0.5,
+      "base_unit": "points_per_unit",
+      "base_label": "0.5 points per £1 elsewhere",
+      "foreign_transaction_fee_percent": 2.95,
+      "as_of": "2026-05",
+      "source": "https://www.johnlewisfinance.com/credit-card.html",
+      "rules": [
+        {
+          "id": "jl-waitrose",
+          "label": "1 point per £1 at John Lewis and Waitrose",
+          "unit": "points_per_unit",
+          "rate": 1,
+          "match": {"merchants": ["waitrose"]},
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Points convert to John Lewis and Waitrose vouchers only, so they are worth face value to a regular John Lewis shopper and nothing to anyone else."
+    }
+  ]
+}

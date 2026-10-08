@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Joan Boluda",
+    "url": "https://boluda.com/"
+  },
+  "description": "A local-first strategy consulting plugin that interrogates business, marketing, positioning, go-to-market, sales, and validation plans, then turns decisions into live working documents.",
+  "homepage": "https://boluda.com/",
+  "keywords": [
+    "consulting",
+    "strategy",
+    "marketing",
+    "value proposition",
+    "offer design",
+    "customer research",
+    "positioning",
+    "competitive research",
+    "pricing",
+    "go-to-market",
+    "business model",
+    "sales",
+    "workshop",
+    "experiments"
+  ],
+  "license": "MIT",
+  "name": "consultor",
+  "version": "0.1.2"
+}

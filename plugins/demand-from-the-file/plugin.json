@@ -1,0 +1,26 @@
+{
+  "name": "demand-from-the-file",
+  "description": "Draft a PI demand from the records you already have. Lists what’s missing. Not a firm brain.",
+  "version": "1.0.1",
+  "author": { "name": "FirmOps" },
+  "homepage": "https://firmops.io/demand-from-the-file",
+  "repository": "https://github.com/premie/demand-from-the-file",
+  "license": "MIT",
+  "keywords": ["personal-injury", "demand", "law-firm", "records"],
+  "interface": {
+    "displayName": "Demand from the File",
+    "shortDescription": "Draft a PI demand from files",
+    "longDescription": "Draft a personal-injury demand from the records you already have. Returns a letterhead-ready draft, damages table, exhibit index, and a gap list. It cannot see case software, mail, or the folder. Not a firm brain. Not legal advice.",
+    "developerName": "FirmOps",
+    "category": "Business & Operations",
+    "brandColor": "#1F3A5F",
+    "composerIcon": "./assets/composer-icon.png",
+    "logo": "./assets/logo.png",
+    "websiteURL": "https://firmops.io/demand-from-the-file",
+    "defaultPrompt": [
+      "Draft a demand from these records",
+      "What’s missing before we can send this",
+      "Which bills belong in the demand"
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+# SkillSpector false-positive allowlist.
+#
+# SkillSpector's static scan is high-recall / moderate-precision and has no
+# native per-finding suppression. This file is the auditable place to record
+# findings that are genuinely false positives so the CI gate
+# (.github/scripts/skillspector_gate.py) does not fail on them. Everything not listed
+# here still fails the build at HIGH/CRITICAL.
+#
+# Each entry suppresses ONE rule for ONE file within ONE skill:
+#   skill:  skill directory name under skills/
+#   rule:   SkillSpector rule id (e.g. YR1)
+#   file:   path as it appears in the report, relative to the skill dir
+#   match:  (optional) substring that must appear in the finding message, so
+#           the suppression stays scoped to the specific signature
+#   reason: why this is a false positive (keep it accurate and specific)
+#
+# Add entries sparingly and only when the finding is demonstrably benign.
+
+suppressions:
+  - skill: local-ai-use
+    rule: SC2
+    file: SKILL.md
+    match: External Script Fetching
+    reason: >-
+      False positive. The flagged `curl ... | python -c ...` is not fetching or
+      executing a remote script: `curl` POSTs an image-generation request to the
+      local loopback Lemonade Server, and the piped `python -c` only
+      base64-decodes the JSON response body and writes it to `out.png`. No
+      remote code is downloaded or run.
+  - skill: local-ai-use
+    rule: SC2
+    file: templates/local-ai-rule.md
+    match: External Script Fetching
+    reason: >-
+      False positive. Same pattern as SKILL.md: the `curl ... | python -c ...`
+      in the installable rule template POSTs to the local Lemonade Server and
+      pipes the JSON response into `python -c` purely to base64-decode the image
+      bytes into `out.png`. No remote script is fetched or executed.
+  - skill: local-ai-use
+    rule: OH1
+    file: scripts/setup_local_ai.py
+    match: Unvalidated Output Injection
+    reason: >-
+      False positive. Both flagged calls (lines 98 and 128) use list-form
+      subprocess.run argv with no shell=True, so there is no shell
+      interpolation. Line 98 is fully hardcoded (`lemonade list --downloaded
+      --json`); line 128 is `lemonade pull <model>` where `model` comes from
+      argparse defaults / explicit --image-model/--tts-model/--stt-model flags,
+      not from LLM or model output. Nothing here consumes unvalidated model
+      output, so there is no injection sink to sanitize.
+  - skill: local-ai-use
+    rule: TM2
+    file: SKILL.md
+    match: Chaining Abuse
+    reason: >-
+      False positive. Line 103 is the documented Ubuntu/Debian install
+      one-liner `sudo add-apt-repository -y ppa:lemonade-team/stable &&
+      sudo apt-get update && sudo apt-get install -y lemonade-server
+      lemonade-desktop`. The `&&` chaining is the standard apt install
+      sequence (add PPA, refresh index, install package), not tool/command
+      chaining of untrusted or model-derived steps. No LLM output feeds the
+      chain and each command is a fixed, reviewable install step.
+  - skill: local-ai-use
+    rule: P2
+    file: templates/local-ai-rule.md
+    match: Hidden Instructions
+    reason: >-
+      False positive. Line 1 is the `<!-- BEGIN amd-skills:local-ai-use -->`
+      HTML comment, a benign machine-readable marker that setup_local_ai.py uses
+      to locate and replace the rule block in AGENTS.md in place on re-runs. It
+      carries no instructions; the surrounding rule text is plain, reviewable
+      content by design (it is the installable routing rule itself).
+  - skill: serving-llms-on-instinct
+    rule: SC2
+    file: data/recipes_cache.json
+    match: External Script Fetching
+    reason: >-
+      False positive. The flag is on a `"guide"` markdown string (a recipe doc
+      embedded in this JSON cache, not runnable code). Its shell snippets are
+      illustrative: `uv pip install ... --extra-index-url https://wheels.vllm.ai/nightly`
+      installs vLLM from an HTTPS package index (the recommended-safe pattern),
+      and `curl http://localhost:8000/... | python3 -m json.tool` pipes a
+      localhost API response into a JSON pretty-printer. There is no
+      download-and-execute of a remote script (no `curl ... | bash`/`sh`).
+  - skill: serving-llms-on-instinct
+    rule: P6
+    file: data/recipes_cache.json
+    match: Direct Prompt Extraction
+    reason: >-
+      False positive. The flag is on a `"guide"` markdown string (the
+      Ministral-3-Instruct recipe doc, not runnable code). The matched Python
+      example downloads the model's own publicly published `SYSTEM_PROMPT.txt`
+      via `hf_hub_download` and passes it as the `system` role of a chat request
+      (Mistral's documented setup) — it constructs a prompt, it does not reveal
+      or extract any hidden system prompt. The only output printed is the
+      model's answer (`response.choices[0].message.content`). The trigger is
+      merely the literal token `SYSTEM_PROMPT` in benign example code.
+  - skill: serving-llms-on-instinct
+    rule: TM2
+    file: reference.md
+    match: Chaining Abuse
+    reason: >-
+      False positive. Line 92 is a Troubleshooting one-liner that disables
+      kernel NUMA balancing for GPU workloads:
+      `echo 0 | sudo tee /proc/sys/kernel/numa_balancing`. The `|` is just the
+      idiomatic way to write a root-owned /proc file (echo piped into `sudo
+      tee`), not multi-step tool/command chaining of untrusted or model-derived
+      steps. It is a single fixed, reviewable, human-run sysctl write — no LLM
+      output feeds the pipe and there is no chain depth to bound.
+  - skill: serving-llms-on-instinct
+    rule: TM1
+    file: scripts/detect.py
+    match: Tool Parameter Abuse
+    reason: >-
+      False positive. Line 32 uses `subprocess.run(cmd, shell=True, ...)`, but
+      `shell=True` is intentional and safe here: every `cmd` passed to `_run`
+      is a fixed in-script literal (`amd-smi static --asic --vram --json`,
+      `amd-smi version --json`, and their `sudo` retries) that relies on no
+      shell metacharacters from user input. The only user-controlled values
+      (`--host`/`--user`/`--port`) never enter the shell string — they flow
+      solely into the SSH branch as list-form argv (`ssh ... ssh_target cmd`,
+      no shell), and `port` is int-coerced by argparse. No untrusted or model
+      output reaches the shell, so there is no parameter abuse to reject.
+  - skill: serving-llms-on-instinct
+    rule: TM1
+    file: scripts/validate.py
+    match: Tool Parameter Abuse
+    reason: >-
+      False positive. Same `_run` helper as detect.py: line 33 uses
+      `subprocess.run(cmd, shell=True, ...)` where every `cmd` is a hardcoded
+      diagnostic literal (`test -e /dev/kfd ...`, `ls /dev/dri/renderD* ...`,
+      `cat /proc/sys/kernel/numa_balancing ...`, `printenv HF_TOKEN ...`, etc.)
+      that deliberately uses shell pipes/redirects/globs. The dynamic inputs
+      (`--host`/`--user`/`--port`) only reach the SSH branch as list-form argv,
+      never the shell string, and `port` is int-coerced. No untrusted/model
+      output is interpolated into the command.
+  - skill: serving-llms-on-instinct
+    rule: TM2
+    file: scripts/validate.py
+    match: Chaining Abuse
+    reason: >-
+      False positive. The flagged lines are the NUMA-balancing fix
+      `echo 0 | sudo tee /proc/sys/kernel/numa_balancing`. Line 122 only runs
+      it under the explicit opt-in `--auto-fix` flag (user-approved), while
+      lines 130 and 137 are human-readable `"fix"` advisory strings that are
+      never executed. The `|` is the idiomatic root-owned /proc write (echo
+      into `sudo tee`), a single fixed sysctl command — not multi-step tool
+      chaining of untrusted or model-derived steps.
+  - skill: serving-llms-on-instinct
+    rule: E2
+    file: scripts/estimate_vram.py
+    match: Env Variable Harvesting
+    reason: >-
+      False positive. Line 175 reads `HF_TOKEN` via `os.environ.get`, which is
+      strictly required: it is passed only to `_fetch`, which sets it as the
+      `Authorization: Bearer` header on requests to `https://huggingface.co`
+      (the token's intended recipient) so the tool can read safetensors/config
+      metadata for gated or private models. The token is never logged, printed,
+      or transmitted anywhere else — the emitted JSON contains only model and
+      VRAM fields.
+  - skill: serving-llms-on-instinct
+    rule: E2
+    file: scripts/validate.py
+    match: Env Variable Harvesting
+    reason: >-
+      False positive. Line 151 runs `printenv HF_TOKEN | head -c 4` purely as a
+      presence check; the captured 4-char value is never emitted — only
+      `out.strip()` truthiness is tested to decide whether to advise the user
+      that HF_TOKEN is unset (needed for gated models). No credential is logged
+      or transmitted.
+  - skill: serving-llms-on-instinct
+    rule: P5
+    file: data/recipes_cache.json
+    match: Harmful Content Injection
+    reason: >-
+      False positive. Line 3524 is the `"guide"` for Qwen3Guard-Gen, a
+      text-only safety/guardrail classifier model. The matched string
+      ("Tell me how to make a bomb.") is the demo *input* used to show the
+      moderation model correctly classifying the request as unsafe — the
+      documented output is `# Safety: Unsafe` / `# Categories: Violent`. No
+      harmful instructions are present; it is content-moderation documentation,
+      the opposite of harmful-content injection.

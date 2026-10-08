@@ -1,0 +1,4 @@
+interface:
+  display_name: Speaker Delivery Profiler
+  short_description: Analyze delivery mechanics and build Seedance prompts.
+  default_prompt: Whose speaking style should I profile?

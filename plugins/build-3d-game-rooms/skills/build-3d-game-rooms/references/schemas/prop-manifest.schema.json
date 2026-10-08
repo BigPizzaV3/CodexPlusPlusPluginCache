@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "game-room.prop-manifest.v1",
+  "type": "object",
+  "required": ["schema", "roomId", "generation", "assets"],
+  "properties": {
+    "schema": {"const": "game-room.prop-manifest.v1"},
+    "roomId": {"type": "string", "minLength": 1},
+    "generation": {
+      "type": "object",
+      "required": ["provider", "apiModel", "pricingSource", "pricingVerifiedAt", "creditsPerTexturedTask", "hardCreditCeiling", "maxChargedAttemptsPerAsset"],
+      "properties": {
+        "provider": {"const": "meshy"},
+        "apiModel": {"const": "meshy-5"},
+        "pricingSource": {"const": "https://docs.meshy.ai/en/api/pricing"},
+        "pricingVerifiedAt": {"type": "string"},
+        "creditsPerTexturedTask": {"type": "integer", "minimum": 1},
+        "hardCreditCeiling": {"type": "integer", "minimum": 0},
+        "maxChargedAttemptsPerAsset": {"const": 2}
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "function", "class", "description", "dimensionsMeters", "attachmentFace", "semanticFront", "intendedInstances", "image", "targetPolycount", "texturePrompt", "rejectionCriteria", "attempts", "acceptedMesh"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "function": {"type": "string", "minLength": 1},
+          "class": {"enum": ["reusable", "hero"]},
+          "description": {"type": "string", "minLength": 1},
+          "dimensionsMeters": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number", "exclusiveMinimum": 0}},
+          "attachmentFace": {"enum": ["floor", "wall", "ceiling", "freestanding"]},
+          "semanticFront": {"enum": ["positive-x", "negative-x", "positive-y", "negative-y", "positive-z", "negative-z"]},
+          "intendedInstances": {"type": "integer", "minimum": 1},
+          "image": {
+            "type": "object",
+            "required": ["prompt", "generator", "model", "source", "approved", "approvedBy"],
+            "properties": {
+              "prompt": {"type": "string", "minLength": 1},
+              "generator": {"type": "string", "minLength": 1},
+              "model": {"type": "string"},
+              "source": {"type": "string", "minLength": 1},
+              "approved": {"type": "boolean"},
+              "approvedBy": {"type": "string"}
+            }
+          },
+          "targetPolycount": {"type": "integer", "minimum": 100, "maximum": 300000},
+          "texturePrompt": {"type": "string", "maxLength": 800},
+          "rejectionCriteria": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "attempts": {"type": "array", "items": {"type": "object"}},
+          "acceptedMesh": {"type": ["object", "null"]}
+        }
+      }
+    }
+  }
+}

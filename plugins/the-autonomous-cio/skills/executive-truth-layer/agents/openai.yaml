@@ -1,0 +1,5 @@
+interface:
+  display_name: "Executive Truth Layer"
+  short_description: "Explicit-only."
+policy:
+  allow_implicit_invocation: false

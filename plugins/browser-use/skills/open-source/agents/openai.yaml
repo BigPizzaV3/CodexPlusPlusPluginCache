@@ -1,0 +1,9 @@
+interface:
+  display_name: Open Source
+  short_description: Review browser-use Python code
+  default_prompt: Use $open-source to review or draft browser-use Python code without changing my environment.
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

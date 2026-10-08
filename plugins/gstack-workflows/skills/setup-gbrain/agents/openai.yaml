@@ -1,0 +1,8 @@
+interface:
+  display_name: "Setup Gbrain"
+  short_description: "Configure gbrain integration only when the native local runtime and required credentials are avai..."
+  default_prompt: "Use Setup Gbrain for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

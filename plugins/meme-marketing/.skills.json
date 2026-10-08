@@ -1,0 +1,20 @@
+{
+  "$schema": "https://skills.sh/schema.json",
+  "name": "meme-marketing",
+  "version": "3.1.1",
+  "description": "Fully Agentic Meme Crafting Engine - Zero cringe, relatable memes with funny doodle line-art and cultural checks",
+  "repository": "https://github.com/imMamdouhaboammar/meme-marketing",
+  "author": "Mamdouh Aboammar",
+  "license": "MIT",
+  "skill": "SKILL.md",
+  "tags": [
+    "meme",
+    "marketing",
+    "agent-skill",
+    "claude-code",
+    "gemini-cli",
+    "antigravity",
+    "cursor",
+    "codex"
+  ]
+}

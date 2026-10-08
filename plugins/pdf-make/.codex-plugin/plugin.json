@@ -1,0 +1,48 @@
+{
+  "author": {
+    "email": "support@b12.io",
+    "name": "B12",
+    "url": "https://www.b12.io"
+  },
+  "description": "Make PDFs that hold up as records \u2014 proposals, invoices, reports, one-pagers, whitepapers \u2014 and read the PDFs you supply: answer questions with page addresses, pull out tables, summarize, and compare two versions. Every fact is sourced or left as a marked placeholder, never invented.",
+  "homepage": "https://www.b12.io",
+  "interface": {
+    "brandColor": "#4B22E8",
+    "brandColorDark": "#4B22E8",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Make a client proposal as a PDF",
+      "Summarize this PDF with page citations",
+      "Compare these two contract versions"
+    ],
+    "developerName": "B12",
+    "displayName": "PDF: Make, Research, Summarize",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Describe the document you need \u2014 proposals, invoices, reports, one-pagers \u2014 and it builds the whole thing as a real PDF. Or attach a PDF you already have and it reads that instead: answering questions with page numbers, pulling out tables, summarizing, comparing two versions.\n\nEvery fact traces to your own words or to a page you supplied, and anything else is left as a marked placeholder rather than quietly invented. It researches the PDFs you hand it, not the web. You get an editable .pdf, no account needed and nothing uploaded. Ask for a matching website too and you'll get a free B12 website link.",
+    "privacyPolicyURL": "https://www.b12.io/privacy-policy/",
+    "shortDescription": "PDFs made simple",
+    "supportURL": "https://www.b12.io/contact-us/",
+    "termsOfServiceURL": "https://www.b12.io/terms-of-service/",
+    "websiteURL": "https://www.b12.io"
+  },
+  "keywords": [
+    "pdf",
+    "document",
+    "proposal",
+    "invoice",
+    "report",
+    "contract",
+    "summarize",
+    "extract",
+    "b12"
+  ],
+  "license": "Apache-2.0",
+  "name": "pdf-make",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

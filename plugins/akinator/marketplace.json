@@ -1,0 +1,26 @@
+{
+  "name": "akinator",
+  "owner": {
+    "name": "Ihab Khaled"
+  },
+  "description": "Akinator - the knowledge-layer operating system for AI-maintained codebases.",
+  "plugins": [
+    {
+      "name": "akinator",
+      "source": "./",
+      "description": "Ask everything, document everything, skillify everything, rule everything. Makes every code change carry its knowledge delta.",
+      "version": "2.0.0",
+      "category": "Productivity",
+      "tags": [
+        "documentation",
+        "knowledge-management",
+        "context",
+        "onboarding",
+        "business-logic",
+        "runbooks",
+        "adr",
+        "ai-agents"
+      ]
+    }
+  ]
+}

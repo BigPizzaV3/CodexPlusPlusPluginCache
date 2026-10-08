@@ -1,0 +1,9 @@
+interface:
+  display_name: "gstack"
+  short_description: "Route to the right gstack workflow."
+  default_prompt: "Use gstack for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

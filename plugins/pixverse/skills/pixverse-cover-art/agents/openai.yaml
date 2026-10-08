@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Video Covers"
+  short_description: "Readable video cover artwork"
+  default_prompt: "Use $pixverse-cover-art to design a readable cover for this video using the supplied person and the title text."
+policy:
+  allow_implicit_invocation: true

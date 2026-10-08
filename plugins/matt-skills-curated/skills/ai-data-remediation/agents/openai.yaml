@@ -1,0 +1,3 @@
+interface:
+  display_name: "AI Data Remediation"
+  short_description: "Self-healing pipeline & data anomaly fixes"

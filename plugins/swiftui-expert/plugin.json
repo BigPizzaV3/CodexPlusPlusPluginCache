@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "contact@avanderlee.com",
+    "name": "Antoine van der Lee",
+    "url": "https://www.avanderlee.com"
+  },
+  "description": "Expert SwiftUI guidance for state management, view composition, performance, modern SDK APIs, and Liquid Glass adoption.",
+  "homepage": "https://github.com/AvdLee/SwiftUI-Agent-Skill",
+  "keywords": [
+    "swift",
+    "swiftui",
+    "ios",
+    "apple",
+    "state-management",
+    "performance",
+    "sdk-27",
+    "liquid-glass",
+    "view-composition",
+    "navigation",
+    "lists",
+    "sheets"
+  ],
+  "license": "MIT",
+  "name": "swiftui-expert",
+  "repository": "https://github.com/AvdLee/SwiftUI-Agent-Skill",
+  "version": "5.2.0"
+}

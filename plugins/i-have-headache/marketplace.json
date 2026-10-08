@@ -1,0 +1,15 @@
+{
+  "name": "i-have-headache",
+  "owner": {
+    "name": "IHAB KHALED FOUAD WAHBA"
+  },
+  "description": "i-have-headache - concise mode for AI coding tools, always on.",
+  "plugins": [
+    {
+      "name": "i-have-headache",
+      "source": "./",
+      "description": "Concise mode, always on: stops AI from being talkative. One skill, one command.",
+      "version": "1.1.0"
+    }
+  ]
+}

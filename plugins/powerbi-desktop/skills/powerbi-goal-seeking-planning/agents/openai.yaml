@@ -1,0 +1,5 @@
+interface:
+  display_name: Goal-Seeking Planning
+  short_description: Reverse target planning
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Object storage"
+  short_description: "File uploads, versions, access and recovery"
+  default_prompt: "Use $vibe-storage to audit the selected object storage boundary."

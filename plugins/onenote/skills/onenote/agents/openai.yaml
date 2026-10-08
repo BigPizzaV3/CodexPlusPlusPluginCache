@@ -1,0 +1,10 @@
+interface:
+  display_name: "OneNote"
+  short_description: "Read, organize, and safely update OneNote"
+  icon_small: "./assets/onenote-small.svg"
+  icon_large: "./assets/onenote.svg"
+  brand_color: "#7719AA"
+  default_prompt: "Use $onenote to find the right notebook or page, summarize visible content, or make a safe, precisely targeted update."
+policy:
+  products:
+    - CODEX

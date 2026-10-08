@@ -1,0 +1,18 @@
+interface:
+  display_name: You.com Discovery
+  short_description: Find the right You.com API, MCP server, SDK, or docs path for an integration
+  brand_color: '#6C5CE7'
+  default_prompt: Use You.com discovery to find the best integration path for an agent or SDK.
+
+dependencies:
+  tools:
+    - type: mcp
+      value: you
+      description: You.com AI Catalog discovery for integration planning
+      transport: streamable_http
+      url: https://api.you.com/mcp
+    - type: mcp
+      value: you-docs
+      description: You.com documentation search for official install and auth steps
+      transport: streamable_http
+      url: https://you.com/docs/_mcp/server

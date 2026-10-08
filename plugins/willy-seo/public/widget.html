@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Willy SEO — Panel Interactivo de Auditoría</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #111827;
+      --bg-card: rgba(17, 24, 39, 0.7);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --accent-cyan: #06b6d4;
+      --accent-blue: #3b82f6;
+      --accent-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      padding: 24px 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header & Branding */
+    .header {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-badge {
+      width: 42px;
+      height: 42px;
+      background: var(--accent-gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: white;
+      box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+    }
+
+    .brand-info h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(180deg, #ffffff 0%, #d1d5db 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .target-url {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      color: var(--accent-cyan);
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Score Hero */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 640px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    .score-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .score-circle {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin-bottom: 12px;
+    }
+
+    .score-circle svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+
+    .score-circle circle {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+    }
+
+    .circle-bg {
+      stroke: rgba(255, 255, 255, 0.08);
+    }
+
+    .circle-progress {
+      stroke: var(--success);
+      stroke-dasharray: 339.29;
+      stroke-dashoffset: 67.85; /* ~80% */
+      transition: stroke-dashoffset 1s ease;
+    }
+
+    .score-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .score-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--success);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: rgba(16, 185, 129, 0.1);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    /* Pillars Summary */
+    .pillars-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      gap: 12px;
+    }
+
+    .pillar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .pillar-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .pillar-bar-bg {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .pillar-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: var(--accent-gradient);
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Quick Wins */
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .quick-wins-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .wins-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .win-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .win-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(6, 182, 212, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .win-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .win-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .win-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .tag-impact {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      white-space: nowrap;
+    }
+
+    /* SERP Simulator */
+    .serp-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .serp-box {
+      background: #202124;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #3c4043;
+      font-family: Arial, sans-serif;
+    }
+
+    .serp-url {
+      font-size: 12px;
+      color: #dadce0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .serp-title {
+      font-size: 18px;
+      line-height: 1.3;
+      color: #8ab4f8;
+      font-weight: 400;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+
+    .serp-title:hover {
+      text-decoration: underline;
+    }
+
+    .serp-desc {
+      font-size: 13px;
+      line-height: 1.4;
+      color: #bdc1c6;
+    }
+
+    /* Footer */
+    .footer-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="willy-seo-app">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand-title">
+        <div class="logo-badge">W</div>
+        <div class="brand-info">
+          <h1>Willy SEO Advisor</h1>
+          <p>Auditoría e Inteligencia SEO para ChatGPT</p>
+        </div>
+      </div>
+      <div class="target-url" id="display-url">https://ejemplo.com/articulo-seo</div>
+    </header>
+
+    <!-- Score & Pillars Grid -->
+    <div class="hero-grid">
+      <!-- Score Circle -->
+      <div class="score-card">
+        <div class="score-circle">
+          <svg viewBox="0 0 120 120">
+            <circle class="circle-bg" cx="60" cy="60" r="54"></circle>
+            <circle class="circle-progress" id="score-ring" cx="60" cy="60" r="54"></circle>
+          </svg>
+          <div class="score-value" id="score-number">84</div>
+        </div>
+        <div class="score-label" id="score-status">Óptimo</div>
+      </div>
+
+      <!-- Pillars -->
+      <div class="pillars-card">
+        <div class="pillar-row">
+          <div class="pillar-header">
+            <span>Técnico e Indexabilidad</span>
+            <span id="p-tech-val">90%</span>
+          </div>
+          <div class="pillar-bar-bg"><div class="pillar-bar-fill" id="p-tech-bar" style="width: 90%;"></div></div>
+        </div>
+
+        <div class="pillar-row">
+          <div class="pillar-header">
+            <span>SEO On-Page & Metas</span>
+            <span id="p-onpage-val">82%</span>
+          </div>
+          <div class="pillar-bar-bg"><div class="pillar-bar-fill" id="p-onpage-bar" style="width: 82%;"></div></div>
+        </div>
+
+        <div class="pillar-row">
+          <div class="pillar-header">
+            <span>Contenido & Semántica</span>
+            <span id="p-sem-val">85%</span>
+          </div>
+          <div class="pillar-bar-bg"><div class="pillar-bar-fill" id="p-sem-bar" style="width: 85%;"></div></div>
+        </div>
+
+        <div class="pillar-row">
+          <div class="pillar-header">
+            <span>Schema & Datos Estructurados</span>
+            <span id="p-schema-val">70%</span>
+          </div>
+          <div class="pillar-bar-bg"><div class="pillar-bar-fill" id="p-schema-bar" style="width: 70%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Wins -->
+    <div class="quick-wins-card">
+      <div class="section-title">
+        <span>🔥</span> Quick Wins de Willy SEO (Alto Impacto)
+      </div>
+      <div class="wins-list" id="wins-container">
+        <div class="win-item">
+          <div class="win-content">
+            <div class="win-title">Optimizar Title Tag para evitar truncamiento en SERP</div>
+            <div class="win-desc">El título actual excede los 580px y corta el mensaje principal.</div>
+          </div>
+          <span class="tag-impact">Impacto Alto</span>
+        </div>
+        <div class="win-item">
+          <div class="win-content">
+            <div class="win-title">Implementar Schema Article JSON-LD</div>
+            <div class="win-desc">Habilita resultados enriquecidos y mejor reconocimiento de entidad en Google.</div>
+          </div>
+          <span class="tag-impact" style="background: rgba(245, 158, 11, 0.15); color: #fcd34d; border-color: rgba(245, 158, 11, 0.3);">Medio</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Google SERP Simulator -->
+    <div class="serp-card">
+      <div class="section-title">
+        <span>🔍</span> Vista Previa en Google SERP (Escritorio)
+      </div>
+      <div class="serp-box">
+        <div class="serp-url" id="serp-preview-url">https://ejemplo.com › articulo-seo</div>
+        <div class="serp-title" id="serp-preview-title">Guía Definitiva de SEO On-Page | Willy SEO Consulting</div>
+        <div class="serp-desc" id="serp-preview-desc">Aprende a optimizar tus titles, encabezados H1-H6 y datos estructurados Schema para multiplicar tu tráfico orgánico en Google. ¡Descúbrelo aquí!</div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Generado por <strong>Willy SEO Apps SDK</strong> — Análisis determinista basado en directrices oficiales de Google.
+    </div>
+  </div>
+
+  <script>
+    // API para actualizar datos desde ChatGPT o MCP
+    window.updateWillySeoWidget = function(reportData) {
+      if (!reportData) return;
+
+      if (reportData.url) {
+        document.getElementById('display-url').textContent = reportData.url;
+        document.getElementById('serp-preview-url').textContent = reportData.url;
+      }
+
+      if (reportData.overallScore !== undefined) {
+        document.getElementById('score-number').textContent = reportData.overallScore;
+        const circumference = 2 * Math.PI * 54;
+        const offset = circumference - (reportData.overallScore / 100) * circumference;
+        document.getElementById('score-ring').style.strokeDashoffset = offset;
+      }
+
+      if (reportData.overallStatus) {
+        const statusEl = document.getElementById('score-status');
+        statusEl.textContent = reportData.overallStatus;
+        if (reportData.overallStatus === 'Crítico') {
+          statusEl.style.color = 'var(--danger)';
+          statusEl.style.borderColor = 'var(--danger)';
+        } else if (reportData.overallStatus === 'Mejorable') {
+          statusEl.style.color = 'var(--warning)';
+          statusEl.style.borderColor = 'var(--warning)';
+        }
+      }
+
+      if (reportData.serpPreview?.desktop) {
+        document.getElementById('serp-preview-title').textContent = reportData.serpPreview.desktop.title;
+        document.getElementById('serp-preview-desc').textContent = reportData.serpPreview.desktop.description;
+      }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "o-k-7",
+    "url": "https://github.com/o-k-7"
+  },
+  "description": "Essential answers first, with focused detail on request.",
+  "homepage": "https://github.com/o-k-7/6X6",
+  "interface": {
+    "brandColor": "#185ADB",
+    "brandColorDark": "#2466E7",
+    "capabilities": [
+      "Concise responses",
+      "Progressive disclosure"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Answer with the essential information first.",
+      "Summarize this in 6X6 without losing key facts.",
+      "Give me the recommendation first, then the tradeoffs."
+    ],
+    "developerName": "o-k-7",
+    "displayName": "6X6",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "6X6 puts the essential answer first and expands when asked. It aims to reduce noise while preserving safety, code, commands, URLs, exact values, and requested formats.",
+    "privacyPolicyURL": "https://github.com/o-k-7/6X6/blob/main/PRIVACY.md",
+    "shortDescription": "Essential answers first",
+    "supportURL": "https://github.com/o-k-7/6X6/issues",
+    "termsOfServiceURL": "https://github.com/o-k-7/6X6/blob/main/LEGAL.md",
+    "websiteURL": "https://github.com/o-k-7/6X6"
+  },
+  "keywords": [
+    "concise",
+    "progressive-disclosure",
+    "productivity"
+  ],
+  "license": "MIT",
+  "name": "6x6",
+  "repository": "https://github.com/o-k-7/6X6",
+  "skills": "./skills/",
+  "version": "1.0.2"
+}

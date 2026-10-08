@@ -1,0 +1,9 @@
+interface:
+  display_name: "CSO"
+  short_description: "Perform an evidence-backed security review using OWASP and STRIDE-oriented checks."
+  default_prompt: "Use CSO for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Kling AI Image Generation"
+  short_description: "Generate precise images with Kling AI"
+  default_prompt: "Use $kling-ai-generate-image to create one image through the local Kling CLI."
+policy:
+  allow_implicit_invocation: true

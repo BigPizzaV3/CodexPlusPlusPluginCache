@@ -1,0 +1,32 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Better",
+    "url": "https://better.com"
+  },
+  "description": "Tinman AI helps loan officers and underwriters quickly underwrite home financing scenarios and answer complex eligibility questions using trusted credit decision data and underwriting logic. Instead of navigating fragmented systems, scattered guidelines, or manual spreadsheets, users can evaluate eligibility, DTI restructuring, and income calculations across a broad set of lenders and investors, instantly identifying which investors a loan qualifies for and why. Tinman AI turns what used to take days or weeks into real-time, compliant decisions that keep loans moving and deals alive.",
+  "homepage": "https://better.com",
+  "interface": {
+    "capabilities": [],
+    "category": "Finance",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "I have borrower at 52% DTI who wants HELOC w/ $450/month"
+    ],
+    "developerName": "Better",
+    "displayName": "Tinman AI",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
+    "longDescription": "Tinman AI helps loan officers and underwriters quickly underwrite home financing scenarios and answer complex eligibility questions using trusted credit decision data and underwriting logic. Instead of navigating fragmented systems, scattered guidelines, or manual spreadsheets, users can evaluate eligibility, DTI restructuring, and income calculations across a broad set of lenders and investors, instantly identifying which investors a loan qualifies for and why. Tinman AI turns what used to take days or weeks into real-time, compliant decisions that keep loans moving and deals alive.",
+    "privacyPolicyURL": "https://better.com/about-us/privacy-policy",
+    "screenshots": [],
+    "shortDescription": "Resolve complex loan scenarios",
+    "termsOfServiceURL": "https://better.com/about-us/terms-of-use",
+    "websiteURL": "https://better.com"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "app-69ca90f7924881918d4b8d06316e8f9c",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

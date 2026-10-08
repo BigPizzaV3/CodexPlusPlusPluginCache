@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Create Videos"
+  short_description: "Create and transform videos"
+  default_prompt: "Use $pixverse-create-video to animate this image as a five-second clip."
+policy:
+  allow_implicit_invocation: true

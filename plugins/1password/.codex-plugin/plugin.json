@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "1Password"
+  },
+  "description": "Use the local 1Password MCP server to manage 1Password Developer Environments and local .env mounts from Codex.",
+  "homepage": "https://www.1password.dev/environments/mcp-codex-server",
+  "interface": {
+    "brandColor": "#0A84FF",
+    "brandColorDark": "#0A84FF",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "List my 1Password Environments",
+      "Create a local .env mount here",
+      "Add a placeholder variable for my OpenAI API key"
+    ],
+    "developerName": "1Password",
+    "displayName": "1Password",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Connects Codex to the local 1Password MCP server and enables Codex to work with 1Password Developer Environments. Codex does not get access to the underlying secrets.",
+    "privacyPolicyURL": "https://1password.com/legal/privacy/",
+    "shortDescription": "Manage Developer Environments",
+    "supportURL": "https://support.1password.com/",
+    "termsOfServiceURL": "https://1password.com/legal/terms-of-service/",
+    "websiteURL": "https://www.1password.dev/"
+  },
+  "keywords": [
+    "1password",
+    "mcp",
+    "developer-environments",
+    "secrets",
+    "environment",
+    "env",
+    ".env"
+  ],
+  "license": "MIT",
+  "name": "1password",
+  "repository": "https://github.com/1Password/1password-codex-plugin",
+  "skills": "./skills/",
+  "version": "0.2.0"
+}

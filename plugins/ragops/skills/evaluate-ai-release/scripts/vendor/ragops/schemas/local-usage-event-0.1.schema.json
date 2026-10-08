@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/thangldw/ragops/schemas/local-usage-event-0.1.schema.json",
+  "title": "RAGOps local usage event 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "recorded_at", "ragops_version", "command", "exit_code"],
+  "properties": {
+    "schema_version": {"const": "ragops-local-usage-event-0.1"},
+    "recorded_at": {"type": "string", "format": "date-time", "pattern": "Z$"},
+    "ragops_version": {"type": "string", "minLength": 1, "maxLength": 64},
+    "command": {"type": "string", "pattern": "^[a-z][a-z0-9-]{0,63}$"},
+    "exit_code": {"type": "integer", "minimum": 0, "maximum": 255}
+  }
+}

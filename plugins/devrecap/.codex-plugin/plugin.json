@@ -1,0 +1,53 @@
+{
+  "author": {
+    "name": "Jo\u00e3o Quinteiro",
+    "url": "https://github.com/jquinteiroo"
+  },
+  "description": "Reconstruct evidence-backed developer work from authorized local coding history and let Codex turn it into polished recaps.",
+  "homepage": "https://github.com/jquinteiroo/devrecap",
+  "interface": {
+    "brandColor": "#19372F",
+    "brandColorDark": "#C8E6DE",
+    "capabilities": [
+      "developer work report",
+      "developert reconstruction",
+      "coding history analysis",
+      "ai code analysis",
+      "git evidence",
+      "standup generation",
+      "weekly reports",
+      "daily reports",
+      "sprint reviews",
+      "reviews",
+      "html reports",
+      "pdf reports"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.webp",
+    "defaultPrompt": [
+      "Help me remember what I worked on this week and generate a detailed report.",
+      "Prepare my daily standup from yesterday's coding work.",
+      "Create a detailed review of the last 14 days, grouped by workstream."
+    ],
+    "developerName": "Jo\u00e3o Quinteiro",
+    "displayName": "DevRecap",
+    "logo": "./.codex-plugin/assets/logo.webp",
+    "longDescription": "DevRecap reconstructs what you actually worked on from explicitly authorized local Codex/Claude history and read-only Git evidence. The host AI then synthesizes those structured facts into polished daily standups, weekly reviews, sprint recaps, and memory reports while DevRecap keeps completion claims evidence-backed.",
+    "privacyPolicyURL": "https://github.com/jquinteiroo/devrecap/blob/main/PRIVACY.md",
+    "shortDescription": "Coding history to work reports",
+    "termsOfServiceURL": "https://github.com/jquinteiroo/devrecap/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/jquinteiroo/devrecap"
+  },
+  "keywords": [
+    "developer-productivity",
+    "daily-standup",
+    "work-recap",
+    "codex",
+    "git"
+  ],
+  "license": "MIT",
+  "name": "devrecap",
+  "repository": "https://github.com/jquinteiroo/devrecap",
+  "skills": "./skills",
+  "version": "0.3.0"
+}

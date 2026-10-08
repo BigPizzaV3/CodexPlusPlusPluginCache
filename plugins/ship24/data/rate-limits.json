@@ -1,0 +1,117 @@
+{
+  "source": "https://docs.ship24.com/rate-limiter",
+  "windowSeconds": 1,
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/trackers",
+      "requestsPerSecond": 10
+    },
+    {
+      "method": "GET",
+      "path": "/trackers",
+      "requestsPerSecond": 10
+    },
+    {
+      "method": "POST",
+      "path": "/trackers/bulk",
+      "requestsPerSecond": 3
+    },
+    {
+      "method": "POST",
+      "path": "/trackers/track",
+      "requestsPerSecond": 10
+    },
+    {
+      "method": "GET",
+      "path": "/trackers/{trackerId}",
+      "requestsPerSecond": 10
+    },
+    {
+      "method": "PATCH",
+      "path": "/trackers/{trackerId}",
+      "requestsPerSecond": 10
+    },
+    {
+      "method": "GET",
+      "path": "/trackers/search/{trackingNumber}/results",
+      "requestsPerSecond": 10
+    },
+    {
+      "method": "GET",
+      "path": "/trackers/{trackerId}/results",
+      "requestsPerSecond": 10
+    },
+    {
+      "method": "POST",
+      "path": "/trackers/{trackerId}/webhook-events/resend",
+      "requestsPerSecond": 1
+    },
+    {
+      "method": "POST",
+      "path": "/tracking/search",
+      "requestsPerSecond": 10
+    },
+    {
+      "method": "GET",
+      "path": "/couriers",
+      "requestsPerSecond": 1
+    }
+  ],
+  "headerSets": [
+    {
+      "name": "RateLimit-*",
+      "note": "This set of headers is the standardization draft adopted by the IETF.",
+      "headers": [
+        {
+          "name": "RateLimit-Limit",
+          "example": "10",
+          "description": "The total requests allowed for a 1-second window"
+        },
+        {
+          "name": "RateLimit-Remaining",
+          "example": "9",
+          "description": "The number of requests left for a 1-second window"
+        },
+        {
+          "name": "RateLimit-Reset",
+          "example": "1",
+          "description": "The delay in seconds before the rate limit is reset"
+        }
+      ]
+    },
+    {
+      "name": "X-RateLimit-*",
+      "note": "",
+      "headers": [
+        {
+          "name": "X-RateLimit-Limit",
+          "example": "10",
+          "description": "The total requests allowed for a 1 second window"
+        },
+        {
+          "name": "X-RateLimit-Remaining",
+          "example": "9",
+          "description": "The number of requests left for a 1 second window"
+        },
+        {
+          "name": "X-RateLimit-Reset",
+          "example": "1645507056",
+          "description": "The Unix timestamp when the rate limit will be reset"
+        }
+      ]
+    },
+    {
+      "name": "Retry-After",
+      "note": "The header `Retry-After` is also available and indicate the delay in seconds before the rate limit is reset. It's equivalent to the `RateLimit-Reset` header.",
+      "headers": [
+        {
+          "name": "Retry-After",
+          "example": "1",
+          "description": "The delay in seconds before the rate limit is reset"
+        }
+      ]
+    }
+  ],
+  "note": "The response headers give you 2 different sets of rate limit headers `RateLimit-*` and `X-RateLimit-*`. You should choose one set of headers that match your needs."
+}

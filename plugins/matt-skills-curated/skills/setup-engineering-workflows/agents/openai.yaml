@@ -1,0 +1,3 @@
+interface:
+  display_name: "Setup Engineering Workflows"
+  short_description: "Configure repo workflow conventions"

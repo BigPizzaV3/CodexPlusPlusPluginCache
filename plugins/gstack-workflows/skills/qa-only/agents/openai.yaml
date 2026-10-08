@@ -1,0 +1,9 @@
+interface:
+  display_name: "QA Only"
+  short_description: "Run end-to-end QA and report findings without changing code."
+  default_prompt: "Use QA Only for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

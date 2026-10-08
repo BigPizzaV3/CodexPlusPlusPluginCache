@@ -1,0 +1,11 @@
+interface:
+  display_name: "ECZ-ID Agent Trust"
+  short_description: "Review agent reach in a repo"
+  icon_small: "./assets/logo.png"
+  icon_large: "./assets/logo.png"
+  default_prompt: "Use $agent-trust-review to review this workspace's agent surfaces and report the Review Priority."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

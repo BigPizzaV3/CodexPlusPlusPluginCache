@@ -1,0 +1,31 @@
+{
+  "contractVersion": 28,
+  "capabilities": {
+    "corePurpose": "repository-task-boundary-visibility",
+    "repositoryLifecycle": "explicit-opt-in",
+    "projectLifecycleTool": "dry-run-first-init-deactivate-migrate-reactivate-purge",
+    "defaultExecution": "one-native-task",
+    "nativeTaskAuthority": "execution-messaging-transcript",
+    "claimOwnership": "per-task-json-record",
+    "claimConflictCheck": "advisory-path-overlap-exclusive-action-only",
+    "activeTaskLimit": "three-default-twelve-hard-user-override",
+    "taskCreation": "reuse-first-then-local-two-or-three-verticals",
+    "taskReuse": "related-local-task-before-create",
+    "goalCoordinator": "user-invoked-goal-scoped-on-demand",
+    "goalCoordinationAction": "goal-coordination",
+    "taskPlacement": "shared-primary-checkout-current-branch",
+    "dependentParallelism": "durable-verticals-or-parent-owned-subagents",
+    "messagePolicy": "coordinator-one-shot-assignment-and-sparse-peer-notices",
+    "transcriptStorage": "none",
+    "currentView": "generated-active-only-non-authoritative",
+    "automaticFanIn": "none",
+    "sessionStart": "marker-only-no-child-process",
+    "stopGuard": "own-active-claim-one-shot-no-transcript",
+    "doctor": "read-only-compatibility-reinstall",
+    "externalWriteConsent": "exact-target-advance-notice",
+    "staleClaimRecovery": "native-terminal-evidence",
+    "stateTool": "scripts/coordination_state.py",
+    "archivePolicy": "cold-compact-receipts",
+    "gitWorkflow": "cooperative-exact-file-commits-shared-branch"
+  }
+}

@@ -1,0 +1,9 @@
+# ChatGPT presentation metadata (Agent Skills open standard).
+# Claude ignores this file entirely - the same skill folder works on both platforms.
+# Schema: https://github.com/openai/codex/blob/main/codex-rs/skills/src/assets/samples/skill-creator/references/openai_yaml.md
+interface:
+  display_name: "Marketing Cloud AMPscript"
+  short_description: "Write and debug AMPscript in Marketing Cloud"
+  default_prompt: "Use $sfmc-ampscript to review this Marketing Cloud content for anything that would error the send."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Context Restore"
+  short_description: "Restore saved project context and verify it against the current repository state."
+  default_prompt: "Use Context Restore for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

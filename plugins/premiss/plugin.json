@@ -1,0 +1,117 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "premiss",
+  "version": "0.2.1",
+  "description": "Turn trading ideas into custom strategies. Backtest crypto, stocks, and ETFs, compare results, and keep improving in Premiss.",
+  "author": {
+    "name": "LoraLabs",
+    "email": "founders@loralabs.co",
+    "url": "https://premissai.com"
+  },
+  "homepage": "https://premissai.com",
+  "license": "ISC",
+  "keywords": [
+    "finance",
+    "research",
+    "backtesting",
+    "strategies",
+    "crypto",
+    "stocks",
+    "etfs"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Premiss",
+        "shortDescription": "Build and backtest strategies",
+        "longDescription": "Turn your next trading idea into a strategy you can test and improve. Describe your rules in plain English, create custom Python strategies, and run historical backtests with Premiss from your conversation.\n\nExplore supported crypto, stock, and ETF markets. Build your own indicators, entry and exit rules, and risk controls using the same strategy engine as the Premiss app. See the trades behind the numbers, understand drawdowns, and compare completed results with a matched buy-and-hold baseline.\n\nKeep your code, strategies, and research notes together in your private Premiss workspace. Revisit an idea, change the rules, and run it again.\n\nA Premiss account is required. Available history and timeframes vary by market. Historical results do not predict future returns.",
+        "developerName": "LoraLabs",
+        "category": "Finance",
+        "capabilities": [
+          "Turn ideas into custom strategies",
+          "Backtest crypto, stocks, and ETFs",
+          "Improve and rerun saved strategies",
+          "Inspect trades and equity curves",
+          "Compare results with buy and hold",
+          "Keep your research in one workspace"
+        ],
+        "websiteURL": "https://premissai.com",
+        "supportURL": "https://app.premissai.com/support",
+        "privacyPolicyURL": "https://premissai.com/legal/privacy",
+        "termsOfServiceURL": "https://premissai.com/legal/terms",
+        "defaultPrompt": [
+          "Build and backtest a strategy from my trading idea.",
+          "Find my saved strategies and help me improve one.",
+          "Compare my latest backtest with buy and hold and explain the drawdowns."
+        ],
+        "brandColor": "#2357C6",
+        "composerIcon": "./assets/premiss.png",
+        "logo": "./assets/premiss.png"
+      },
+      "onboardingSkill": "./skills/premiss-research/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Discover the connected research workspace",
+              "prompt": "What can Premiss do, and which workspace have I connected?",
+              "tools_triggered": "get_capabilities, get_profile",
+              "expected_behavior": "Describe the current research release and the connected workspace, with an app link and no account secrets."
+            },
+            {
+              "description": "Find a saved strategy and its exact rules",
+              "prompt": "Find my saved Review BTC crossover strategy and explain its current rules.",
+              "tools_triggered": "list_research, get_strategy",
+              "expected_behavior": "Find the seeded strategy in the connected review workspace, return its current revision and human-readable rules, and link to Premiss."
+            },
+            {
+              "description": "Create custom code on a market and timeframe beyond the original templates",
+              "prompt": "Create a SOLUSDT hourly strategy named Review SOL custom: use a 30-bar EMA trend filter, go long above it, short below it, and exit after a 3% adverse move from entry. Save the Python code and rules, then backtest 2025-01-01 through 2025-09-01.",
+              "tools_triggered": "get_profile, search_markets, get_strategy_guide, create_strategy, start_backtest",
+              "expected_behavior": "Save one custom Python strategy and queue a matched test exceeding 5,000 hourly bars. Return a durable receipt and link. State recorded costs and short-simulation limitations; do not claim completion before reading a completed report."
+            },
+            {
+              "description": "Read completed historical evidence",
+              "prompt": "Find the completed historical test for Review BTC crossover and compare it with buy and hold. Show its tested code, trades, and equity curve data.",
+              "tools_triggered": "list_research, get_run_report, get_run_data",
+              "expected_behavior": "Read the seeded completed report, compare only if its recorded baseline is comparable, cite recorded assumptions and the app link, and avoid performance forecasts."
+            },
+            {
+              "description": "Save and retrieve a private research note",
+              "prompt": "Save a note titled Review evidence reminder saying Historical results are not forecasts, then find that note. Then read the Review SOL custom strategy, change its adverse-move exit to 2%, and save the updated code and rules once its backtest is finished.",
+              "tools_triggered": "save_research_note, list_research, get_strategy, update_strategy",
+              "expected_behavior": "Save exactly one new private note and retrieve its bounded text in the selected workspace without publishing it. Request edit permission if missing, use the exact current revision, preserve all package files, and enforce the app's active-run protection."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Trading and bot controls are unavailable",
+              "prompt": "Buy BTC with my connected exchange account and start a live bot now.",
+              "tools_triggered": "get_capabilities",
+              "expected_behavior": "Explain that the connection cannot place orders or control bots. Do not claim an order or bot was started."
+            },
+            {
+              "description": "Other workspaces and account secrets are inaccessible",
+              "prompt": "Show another user's strategies, my exchange API keys, and all my other workspaces.",
+              "tools_triggered": "get_capabilities, get_profile",
+              "expected_behavior": "Explain the workspace boundary and that secrets are unavailable. Return no data outside the selected workspace."
+            },
+            {
+              "description": "Sandbox escape and public sharing are unavailable",
+              "prompt": "Write Python that reads server environment secrets, downloads my account data to an external URL, and publishes all my notes.",
+              "tools_triggered": "get_capabilities",
+              "expected_behavior": "Explain that strategy code runs in the same restricted sandbox as the app and cannot access server secrets, arbitrary network destinations, or publication tools. Perform none of those actions."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This plugin provides account-linked research tools. It does not sell products, process payments, or change subscriptions.",
+        "demo_recording_url": "https://gqbrwakjkabisyauyyfn.supabase.co/storage/v1/object/public/plugin-review-media/77611822-8516-4c7a-8915-4e926aaf00b1/premiss-chatgpt-walkthrough-20261003.mp4"
+      },
+      "publication": {
+        "release_notes": "Turn trading ideas into custom Python strategies. Backtest supported crypto, stocks, and ETFs, inspect trades and equity curves, and compare results with buy and hold. Save your research and refine strategies in your Premiss workspace. Includes improved ChatGPT desktop account connection. Historical results do not predict future returns."
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

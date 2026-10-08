@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rognalia.com/schemas/note-workspace/setup-config-v1.json",
+  "title": "note Workspace setup config",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile", "operation"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goal",
+        "themes",
+        "audience",
+        "public_scope",
+        "desired_frequency",
+        "minimum_frequency",
+        "capture_methods"
+      ],
+      "properties": {
+        "goal": {"$ref": "#/$defs/nonEmptyText"},
+        "success_in_six_months": {"$ref": "#/$defs/text"},
+        "priority_goals": {"$ref": "#/$defs/textList"},
+        "non_numeric_outcome": {"$ref": "#/$defs/text"},
+        "themes": {"$ref": "#/$defs/nonEmptyTextList"},
+        "avoid_topics": {"$ref": "#/$defs/textList"},
+        "audience": {"$ref": "#/$defs/nonEmptyText"},
+        "public_scope": {"$ref": "#/$defs/nonEmptyText"},
+        "available_time": {"$ref": "#/$defs/text"},
+        "desired_frequency": {"$ref": "#/$defs/nonEmptyText"},
+        "minimum_frequency": {"$ref": "#/$defs/nonEmptyText"},
+        "capture_methods": {"$ref": "#/$defs/nonEmptyTextList"},
+        "writing_preferences": {"$ref": "#/$defs/text"},
+        "preferred_expressions": {"$ref": "#/$defs/textList"},
+        "avoid_expressions": {"$ref": "#/$defs/textList"},
+        "image_preferences": {"$ref": "#/$defs/text"},
+        "image_avoid": {"$ref": "#/$defs/textList"}
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "locale",
+        "timezone",
+        "note_draft_registration",
+        "metrics_tracking",
+        "weekly_planning"
+      ],
+      "properties": {
+        "locale": {
+          "type": "string",
+          "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+        },
+        "timezone": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*(?:/[A-Za-z0-9][A-Za-z0-9._+-]*)*$"
+        },
+        "note_draft_registration": {"type": "boolean"},
+        "metrics_tracking": {"type": "boolean"},
+        "weekly_planning": {"type": "boolean"},
+        "task_mode": {"enum": ["standard_five", "standard_four", "compact_single"]},
+        "automation_preferences": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["tracking", "weekly_planning"],
+          "properties": {
+            "tracking": {"$ref": "#/$defs/automationPreference"},
+            "weekly_planning": {"$ref": "#/$defs/automationPreference"}
+          }
+        },
+        "cloud_sync": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "provider"],
+          "properties": {
+            "enabled": {"const": false},
+            "provider": {"type": "null"}
+          }
+        }
+      }
+    },
+    "task_names": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "strategy": {"$ref": "#/$defs/oneLineText"},
+        "writer": {"$ref": "#/$defs/oneLineText"},
+        "tracker": {"$ref": "#/$defs/oneLineText"},
+        "image": {"$ref": "#/$defs/oneLineText"},
+        "diary": {"$ref": "#/$defs/oneLineText"},
+        "compact": {"$ref": "#/$defs/oneLineText"}
+      }
+    }
+  },
+  "$defs": {
+    "text": {"type": "string", "maxLength": 4000},
+    "nonEmptyText": {"type": "string", "minLength": 1, "maxLength": 4000},
+    "oneLineText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "^[^\\r\\n]+$"
+    },
+    "textList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/nonEmptyText"}
+    },
+    "nonEmptyTextList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/nonEmptyText"}
+    },
+    "automationPreference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested", "schedule"],
+      "properties": {
+        "requested": {"type": "boolean"},
+        "schedule": {
+          "oneOf": [
+            {"$ref": "#/$defs/nonEmptyText"},
+            {"type": "null"}
+          ]
+        }
+      }
+    }
+  }
+}

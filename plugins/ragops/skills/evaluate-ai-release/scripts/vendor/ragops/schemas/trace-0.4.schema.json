@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ragops.dev/schemas/trace-0.4.schema.json",
+  "title": "RAGOps portable trace envelope 0.4",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version", "case_id", "input", "output", "latency_ms", "metadata"],
+  "properties": {
+    "schema_version": {"const": "0.4"},
+    "case_id": {"type": "string", "minLength": 1},
+    "input": {
+      "type": "object",
+      "required": ["question"],
+      "properties": {
+        "question": {"type": "string"},
+        "role": {"type": "string"}
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": ["answer"],
+      "properties": {
+        "answer": {"type": "string"},
+        "citation_ids": {"type": "array", "items": {"type": "string"}},
+        "decision": {"type": "string"}
+      }
+    },
+    "retrieval": {
+      "type": "object",
+      "properties": {"document_ids": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "latency_ms": {"type": "integer", "minimum": 0},
+    "usage": {
+      "type": "object",
+      "properties": {"cost_usd": {"type": "number", "minimum": 0}}
+    },
+    "human_approved": {"type": "boolean"},
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "application": {"type": "string"},
+        "build": {"type": "string"},
+        "retriever": {"type": "string"},
+        "generator": {"type": "string"},
+        "role": {"type": "string"}
+      }
+    }
+  }
+}

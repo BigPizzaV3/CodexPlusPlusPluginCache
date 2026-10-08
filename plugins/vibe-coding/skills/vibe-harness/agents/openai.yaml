@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Agent execution"
+  short_description: "Agent state, recovery and replay"
+  default_prompt: "Use $vibe-harness to audit the selected agent execution boundary."

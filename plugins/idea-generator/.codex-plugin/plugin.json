@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "Ludi Lab"
+  },
+  "description": "Generate ideas through decomposition, crossbreeding, and mutation while preserving constraints and locks.",
+  "interface": {
+    "capabilities": [],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": null,
+    "developerName": "Ludi Lab",
+    "displayName": "Idea Generator",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Generate ideas by decomposing concepts into Idea DNA, crossbreeding and mutating them while preserving explicit constraints and locks.",
+    "shortDescription": "Crossbreed ideas creatively",
+    "websiteURL": "https://ludi-lab.com"
+  },
+  "license": "MIT",
+  "name": "idea-generator",
+  "repository": "https://github.com/ludi-uni/idea-generator-skill",
+  "skills": "./skills/",
+  "version": "1.0.2"
+}

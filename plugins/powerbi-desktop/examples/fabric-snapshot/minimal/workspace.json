@@ -1,0 +1,7 @@
+{
+  "id": "workspace-minimal",
+  "name": "Minimal BI Workspace",
+  "tenantId": "tenant-demo",
+  "capacityId": "capacity-f2",
+  "owners": ["bi.owner@example.com"]
+}

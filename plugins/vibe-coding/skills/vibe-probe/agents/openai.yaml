@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Quick bug discovery"
+  short_description: "One area, one proven bug and a verified fix"
+  default_prompt: "Use $vibe-probe to find and fix one proven bug in an unvisited area."

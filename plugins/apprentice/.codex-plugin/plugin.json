@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Abhishek Samar Singh",
+    "url": "https://github.com/singhabhishekkk"
+  },
+  "description": "Notice a repeatable, expensive LLM call in your code and mention Apprentice: capture real examples, optimize the prompt or fine-tune a small open model, verified by your own held-out evals before any traffic moves.",
+  "homepage": "https://runapprentice.com",
+  "interface": {
+    "brandColor": "#7FB069",
+    "brandColorDark": "#7FB069",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Find repeatable frontier-model calls in this codebase.",
+      "Could a smaller model handle the repeated LLM call in this file?",
+      "Capture my LLM calls so I can verify them and improve this prompt."
+    ],
+    "developerName": "Abhishek Samar Singh",
+    "displayName": "Apprentice",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Apprentice spots code that sends the same shape of request to a frontier model over and over, in a loop, a cron job or an endpoint. It shows you how to capture verified examples from calls you already make, then test whether an optimized prompt or a small fine-tuned model holds quality for less.",
+    "shortDescription": "Spot repeatable LLM calls",
+    "websiteURL": "https://runapprentice.com"
+  },
+  "keywords": [
+    "llm",
+    "cost-optimization",
+    "prompt-optimization",
+    "fine-tuning",
+    "evals",
+    "dspy",
+    "gepa"
+  ],
+  "license": "MIT",
+  "name": "apprentice",
+  "repository": "https://github.com/singhabhishekkk/apprentice-skill",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

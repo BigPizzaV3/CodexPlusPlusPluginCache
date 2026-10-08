@@ -1,0 +1,7 @@
+interface:
+  display_name: Living Wiki
+  short_description: Maintain a linked research knowledge base
+  brand_color: '#E45B32'
+  default_prompt: Use $living-wiki to process these sources into my linked workspace wiki.
+policy:
+  allow_implicit_invocation: true

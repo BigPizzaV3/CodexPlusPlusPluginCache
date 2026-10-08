@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "Mehmet Riza Arseven"
+  },
+  "description": "A macOS application and Codex workflow for evidence-led career research, personalized intake, application tracking, and tailored CV generation.",
+  "interface": {
+    "brandColor": "#0B6460",
+    "brandColorDark": "#9BF4F0",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Set up Career Command Center.",
+      "Audit my career evidence and generate personalized questions.",
+      "Run my targeted career search now."
+    ],
+    "developerName": "Mehmet Riza Arseven",
+    "displayName": "Career Command Center",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Audits career documents, returns cited project-specific questions in a native macOS workspace, organizes job and PhD opportunities, builds role-family master CVs, creates tailored application packages, and keeps configurable Codex searches synchronized. Career documents and application state remain in a workspace chosen by the user.",
+    "shortDescription": "Find, track applications"
+  },
+  "keywords": [
+    "career",
+    "jobs",
+    "phd",
+    "cv",
+    "applications",
+    "automation"
+  ],
+  "license": "MIT",
+  "name": "career-command-center",
+  "skills": "./skills/",
+  "version": "1.3.0+codex.20260715213050"
+}

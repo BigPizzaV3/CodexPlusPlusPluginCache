@@ -1,0 +1,45 @@
+{
+  "author": {
+    "email": "info@neutral.dev",
+    "name": "Vamsi Alluri"
+  },
+  "description": "Keep the guidance agents need close to the work they do.",
+  "homepage": "https://github.com/neutral/trellis",
+  "interface": {
+    "brandColor": "#4E7D3A",
+    "brandColorDark": "#96C582",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Help a teammate pick up this project without another briefing. Put the working guidance they need in a handbook.",
+      "Help the next organizer prepare a workshop without missed arrangements. Save our preparation routine as a playbook.",
+      "Learn from these review notes so we can avoid the same rework. Suggest handbook improvements for me to choose."
+    ],
+    "developerName": "Vamsi Alluri",
+    "displayName": "Trellis",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "logoDark": "./.codex-plugin/assets/logo-dark.svg",
+    "longDescription": "Help the next person or agent find how you work, what matters, and what to check before calling something ready. Trellis keeps useful working guidance in handbooks beside the work, with READMEs that explain how to use the guidance without Trellis installed.\n\nShape Handbook helps you clarify consequential local decisions, then creates or improves the practices, checks, requested playbooks, and templates that serve your task. It can also review existing handbooks for confusing or conflicting advice. You can ask for easier handoffs, clearer client updates, or a repeatable workshop preparation routine.\n\nLearn From Work examines the experience you select, asks about missing context when the answer would change the lesson, and proposes improvements for you to choose. Both skills explain evidence limits and remaining user decisions; clear requests need no interview.\n\nThe work itself stays in its own files. Handbook editing stays inside selected handbooks; review-only requests and learning leave files unchanged. Trellis maintains the method, while you and your agents carry out the work.",
+    "privacyPolicyURL": "https://github.com/neutral/trellis/blob/main/PRIVACY.md",
+    "shortDescription": "Make good work repeatable",
+    "termsOfServiceURL": "https://github.com/neutral/trellis/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/neutral/trellis"
+  },
+  "keywords": [
+    "agent-skills",
+    "knowledge-work",
+    "handbooks",
+    "practices",
+    "checks",
+    "playbooks"
+  ],
+  "license": "CC0-1.0",
+  "name": "trellis",
+  "repository": "https://github.com/neutral/trellis",
+  "skills": "./skills",
+  "version": "0.6.1"
+}

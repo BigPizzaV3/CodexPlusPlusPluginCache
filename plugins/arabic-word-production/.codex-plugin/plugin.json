@@ -1,0 +1,46 @@
+{
+  "author": {
+    "email": "73133823+Bannovich@users.noreply.github.com",
+    "name": "Bannovich",
+    "url": "https://github.com/Bannovich"
+  },
+  "description": "Create and audit Arabic-first and bilingual Microsoft Word documents with explicit RTL semantics.",
+  "homepage": "https://github.com/Bannovich/arabic-word-production",
+  "interface": {
+    "brandColor": "#4E249F",
+    "brandColorDark": "#8A60DB",
+    "capabilities": [
+      "Create DOCX",
+      "Audit RTL structure"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create an audited Arabic RTL Word document.",
+      "Repair this bilingual DOCX for Word Desktop.",
+      "Audit this Arabic Word file for RTL errors."
+    ],
+    "developerName": "Ahmed Elbanna",
+    "displayName": "Arabic DOCX RTL",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Arabic DOCX RTL creates, repairs, and structurally audits Arabic-first and bilingual Arabic-English DOCX files. It applies explicit paragraph, run, table, and section direction controls so that right alignment is not mistaken for native RTL behavior.\n\nUse it to create a Word document from supplied content, repair a mixed-direction document, inspect structural RTL properties, evaluate wide tables for landscape layout, or report the validation surface honestly. Results distinguish between built, structurally audited, rendered and inspected, and Word Desktop verified files.\n\nThis skills-only plugin has no MCP tools, external account connection, telemetry, or project-operated data service. Compatibility can vary by Word version, font, operating system, renderer, and office suite. Word Desktop verification is claimed only when the exact file was opened and checked there.",
+    "privacyPolicyURL": "https://bannovich.github.io/arabic-word-production/privacy-policy/",
+    "shortDescription": "Audited Arabic Word files",
+    "supportURL": "https://github.com/Bannovich/arabic-word-production/issues",
+    "termsOfServiceURL": "https://bannovich.github.io/arabic-word-production/terms-of-service/",
+    "websiteURL": "https://bannovich.github.io/arabic-word-production/"
+  },
+  "keywords": [
+    "arabic",
+    "bilingual",
+    "docx",
+    "microsoft-word",
+    "rtl",
+    "wordprocessingml"
+  ],
+  "license": "Apache-2.0",
+  "name": "arabic-word-production",
+  "repository": "https://github.com/Bannovich/arabic-word-production",
+  "skills": "./skills/",
+  "version": "0.1.1"
+}

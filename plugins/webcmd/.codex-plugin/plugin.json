@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "AgentRHQ",
+    "url": "https://github.com/agentrhq"
+  },
+  "description": "Self-learning browser infrastructure for AI agents: live browser control plus local sitemap memory that makes repeat runs faster and cheaper.",
+  "homepage": "https://webcmd.dev/docs",
+  "interface": {
+    "brandColor": "#1E88E5",
+    "brandColorDark": "#1E88E5",
+    "capabilities": [
+      "Instructions",
+      "Browser automation",
+      "Sitemap memory"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Research agentic browser automation on Hacker News and Reddit, then return a concise comparison with source links.",
+      "Compare MacBook Air M5 prices and availability on Amazon, Walmart, and Best Buy.",
+      "Find and rank today\u2019s most-discussed AI agent launches across Hacker News, Reddit, Product Hunt, and arXiv."
+    ],
+    "developerName": "AgentRHQ",
+    "displayName": "Webcmd",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Use Webcmd's bundled webcmd-browser skill from Codex to drive a real browser: inspect, click, type, extract, and capture network calls in authenticated sessions. Webcmd keeps sitemap memory locally so later runs need less exploration. Requires the @agentrhq/webcmd npm CLI.",
+    "shortDescription": "Self-learning agent browsing",
+    "websiteURL": "https://webcmd.dev/"
+  },
+  "keywords": [
+    "webcmd",
+    "browser-automation",
+    "cli",
+    "agent-skills"
+  ],
+  "license": "Apache-2.0",
+  "name": "webcmd",
+  "repository": "https://github.com/agentrhq/webcmd",
+  "skills": "./skills/",
+  "version": "0.8.4"
+}

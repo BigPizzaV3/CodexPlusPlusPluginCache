@@ -1,0 +1,8 @@
+interface:
+  display_name: "Codex iOS API Build"
+  short_description: "Automate TestFlight builds from Codex."
+  brand_color: "#0A84FF"
+  default_prompt: "Use $codex-ios-api-build to create and upload a new TestFlight build."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,3 @@
+[
+  { "id": "dataset-refresh", "name": "Refresh Sensitive Model", "type": "SemanticModel", "owner": "ops.owner@example.com", "endorsement": "Promoted", "sensitivityLabel": "Confidential", "workspaceId": "workspace-refresh", "usageScore": 80, "trustScore": 55 }
+]

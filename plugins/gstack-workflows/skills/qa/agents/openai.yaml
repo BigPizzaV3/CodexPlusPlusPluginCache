@@ -1,0 +1,9 @@
+interface:
+  display_name: "QA"
+  short_description: "Run end-to-end QA, fix authorized defects, and re-verify them when host tools permit."
+  default_prompt: "Use QA for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

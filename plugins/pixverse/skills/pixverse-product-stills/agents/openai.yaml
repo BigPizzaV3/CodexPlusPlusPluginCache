@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Product Stills"
+  short_description: "Product photos with fidelity"
+  default_prompt: "Use $pixverse-product-stills to create a white-background product photo and a natural desk scene from this product reference."
+policy:
+  allow_implicit_invocation: true

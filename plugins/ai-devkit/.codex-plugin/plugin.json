@@ -1,0 +1,45 @@
+{
+  "author": {
+    "email": "hoang@codeaholicguy.com",
+    "name": "Hoang Nguyen"
+  },
+  "description": "Make AI coding agents follow a repeatable engineering workflow with memory, verification, skills, and multi-agent setup",
+  "homepage": "https://ai-devkit.com/",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "capabilities": [
+      "Skills",
+      "Hooks"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use AI DevKit to run a structured development lifecycle for this feature.",
+      "Use AI DevKit to debug this issue, capture the root cause, and verify the fix.",
+      "Remote this session from Telegram"
+    ],
+    "developerName": "Hoang Nguyen",
+    "displayName": "AI DevKit",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "AI DevKit gives Codex a repeatable software delivery workflow with skills for requirements, design, planning, implementation, testing, review, memory, verification, debugging, refactoring, and multi-agent coordination.",
+    "shortDescription": "Structured dev workflows",
+    "websiteURL": "https://ai-devkit.com/"
+  },
+  "keywords": [
+    "ai",
+    "development",
+    "codex",
+    "workflow",
+    "memory",
+    "skills",
+    "commands",
+    "testing",
+    "code-review",
+    "debugging"
+  ],
+  "license": "MIT",
+  "name": "ai-devkit",
+  "repository": "https://github.com/codeaholicguy/ai-devkit",
+  "skills": "./skills/",
+  "version": "0.62.1"
+}

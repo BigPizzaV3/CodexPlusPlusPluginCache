@@ -1,0 +1,46 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "email": "support@brighthire.com",
+    "name": "BrightHire by Zoom",
+    "url": "https://www.brighthire.com"
+  },
+  "description": "BrightHire helps users search interview records, retrieve transcripts, AI notes, interview guides, scorecards, job descriptions, candidate summaries, scheduled interview context, and coaching reports they are authorized to view.",
+  "homepage": "https://www.brighthire.com",
+  "interface": {
+    "brandColor": "#2563EB",
+    "brandColorDark": "#2563EB",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use BrightHire to find recent interviews for this candidate.",
+      "Search BrightHire for calls related to this role.",
+      "Summarize the BrightHire interview context for this hiring decision."
+    ],
+    "developerName": "BrightHire by Zoom",
+    "displayName": "BrightHire",
+    "logo": "./assets/logo.png",
+    "longDescription": "BrightHire helps users search interview records, retrieve transcripts, AI notes, interview guides, scorecards, job descriptions, candidate summaries, scheduled interview context, and coaching reports they are authorized to view.",
+    "privacyPolicyURL": "https://brighthire.com/privacy-policy/",
+    "screenshots": [],
+    "shortDescription": "Analyze interviews",
+    "termsOfServiceURL": "https://brighthire.com/terms-of-service/",
+    "websiteURL": "https://brighthire.com"
+  },
+  "keywords": [
+    "brighthire",
+    "interviews",
+    "hiring",
+    "recruiting",
+    "codex"
+  ],
+  "license": "MIT",
+  "name": "brighthire",
+  "repository": "https://github.com/brighthire/brighthire-codex-plugin",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

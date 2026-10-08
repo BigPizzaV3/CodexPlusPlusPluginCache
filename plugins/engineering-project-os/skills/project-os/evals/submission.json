@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "submission_target": "Universal Plugin Directory",
+  "products": ["CODEX", "CHATGPT"],
+  "cases": [
+    {
+      "name": "help-is-complete-and-read-only",
+      "classification": "positive",
+      "prompt": "$project-os help",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case help-is-complete-and-read-only --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Read the Project OS skill instructions.",
+        "Do not change repository files.",
+        "Separate Codex chat requests from Python helper commands."
+      ],
+      "expected_result_shape": [
+        "A concise list of every supported short request and its purpose.",
+        "Required arguments are identified.",
+        "One or two copy-paste examples are included.",
+        "Repository file hashes remain unchanged."
+      ]
+    },
+    {
+      "name": "check-valid-connected-repository",
+      "classification": "positive",
+      "prompt": "$project-os check. Report the result and do not change files.",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case check-valid-connected-repository --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Inspect repository authority and current state.",
+        "Run the bundled checker read-only.",
+        "Keep validation evidence separate from publication evidence."
+      ],
+      "expected_result_shape": [
+        "A PASS result identifies the checked repository and release.",
+        "No files are changed.",
+        "The response does not claim deployment, marketplace acceptance or publication."
+      ]
+    },
+    {
+      "name": "bootstrap-empty-repository",
+      "classification": "positive",
+      "prompt": "$project-os bootstrap",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case bootstrap-empty-repository --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Inspect the target before mutation.",
+        "Run detection and init with --dry-run before apply.",
+        "Create Standard mode without PROGRAM.md.",
+        "Run the checker after initialization."
+      ],
+      "expected_result_shape": [
+        "The response lists the Project OS records created.",
+        "The final checker passes.",
+        "No application code, plan or empty history archive is created."
+      ]
+    },
+    {
+      "name": "bootstrap-react-native-expo-repository",
+      "classification": "positive",
+      "prompt": "$project-os bootstrap this React Native Expo repository",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case bootstrap-react-native-expo-repository --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Interpret the text as a natural-language bootstrap refinement.",
+        "Use package.json and app.json as capability evidence; the fixture has no pre-existing Project OS owners.",
+        "Preview initialization before writing and run the checker afterward."
+      ],
+      "expected_result_shape": [
+        "The mobile capability and react-native-expo overlay are selected.",
+        "React alone does not cause a web capability selection.",
+        "The final checker passes. package.json and app.json are byte-preserved."
+      ]
+    },
+    {
+      "name": "upgrade-current-repository-is-idempotent",
+      "classification": "positive",
+      "prompt": "$project-os upgrade. Preview first and apply only if required.",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case upgrade-current-repository-is-idempotent --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Inspect release, schema and Program state.",
+        "Run upgrade with --dry-run before any apply.",
+        "Avoid writes when the repository is already aligned."
+      ],
+      "expected_result_shape": [
+        "The response reports that no upgrade changes are required.",
+        "The final checker passes.",
+        "Repository file hashes remain unchanged."
+      ]
+    },
+    {
+      "name": "prepare-and-approve-reusable-lessons",
+      "classification": "positive",
+      "prompt": "$project-os knowledge prepare: all. Show one sanitized batch review, then approve only REVIEW-PORTABLE-001.",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case prepare-and-approve-reusable-lessons --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Read the confirmed project lesson and its synthetic evidence.",
+        "Prepare a read-only sanitized batch proposal before writing.",
+        "Approve only the selected portable lesson and run the checker."
+      ],
+      "expected_result_shape": [
+        "The reusable registry contains REVIEW-PORTABLE-001 as active user-reviewed knowledge.",
+        "Repository identity and evidence paths are absent from the reusable entry.",
+        "The project lesson and evidence remain unchanged."
+      ]
+    },
+    {
+      "name": "export-reusable-knowledge-bundle",
+      "classification": "positive",
+      "prompt": "$project-os knowledge export: all active lessons to reusable-lessons.json. Preview first.",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case export-reusable-knowledge-bundle --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Validate the reusable registry and preview the exact destination and lesson IDs.",
+        "Export one deterministic portable bundle without changing source records.",
+        "Report the output SHA-256."
+      ],
+      "expected_result_shape": [
+        "reusable-lessons.json uses the portable bundle schema and contains two active lessons.",
+        "The bundle contains no repository identity, local paths, detected URL forms or evidence locations.",
+        "A repeated export to a new file has identical bytes."
+      ]
+    },
+    {
+      "name": "import-applicable-reusable-lessons",
+      "classification": "positive",
+      "prompt": "$project-os knowledge import: source/reusable-lessons.json. Preview applicable and skipped lessons, then import the applicable set.",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case import-applicable-reusable-lessons --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Validate the source bundle and inspect target capability evidence.",
+        "Preview selected and skipped lessons with applicability reasons.",
+        "Apply an atomic target-only import after confirmation and run the checker."
+      ],
+      "expected_result_shape": [
+        "The mobile lesson is imported and the service-only lesson is skipped.",
+        "The source bundle remains byte-identical.",
+        "A repeated import dry run reports no target changes."
+      ]
+    },
+    {
+      "name": "ambiguous-request-does-not-write",
+      "classification": "negative",
+      "prompt": "$project-os make this better",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case ambiguous-request-does-not-write --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Do not infer a mutating Project OS operation.",
+        "Show relevant help or ask one focused question."
+      ],
+      "expected_result_shape": [
+        "No repository files are changed.",
+        "The response identifies the missing decision without inventing requirements."
+      ]
+    },
+    {
+      "name": "unrelated-code-request-does-not-create-state",
+      "classification": "negative",
+      "prompt": "$project-os Fix the null check in this backend handler and run its focused test.",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case unrelated-code-request-does-not-create-state --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Treat the request as ordinary engineering work.",
+        "Explain that the Project OS prefix is unnecessary.",
+        "Follow existing repository instructions."
+      ],
+      "expected_result_shape": [
+        "No .agents Project OS records are created merely because the skill was invoked.",
+        "Any code work remains scoped to the explicit ordinary request."
+      ]
+    },
+    {
+      "name": "private-lesson-is-not-approved",
+      "classification": "negative",
+      "prompt": "$project-os knowledge prepare: REVIEW-PRIVATE-001. Keep the private name, absolute-path placeholder and signed URL from the lesson.",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case private-lesson-is-not-approved --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Remain read-only while preparing the proposal.",
+        "Reject private or project-specific material from reusable knowledge.",
+        "Offer only a sanitized portable revision when its mechanism is verified."
+      ],
+      "expected_result_shape": [
+        "No reusable knowledge entry is created.",
+        "The response names the privacy boundary and keeps source evidence project-local.",
+        "No absolute path, private name or signed URL is reproduced into a portable artifact."
+      ]
+    },
+    {
+      "name": "conflicting-import-does-not-write",
+      "classification": "negative",
+      "prompt": "$project-os knowledge import: source/conflicting-bundle.json. Do not overwrite local changes.",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case conflicting-import-does-not-write --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Detect the same lesson ID with different content.",
+        "Report the conflict and make no target or source write.",
+        "Require an explicit reviewed revision instead of silent overwrite."
+      ],
+      "expected_result_shape": [
+        "The conflicting IDs and hashes are reported.",
+        "All repository file hashes remain unchanged."
+      ]
+    },
+    {
+      "name": "resume-blocked-plan-after-condition-clears",
+      "classification": "positive",
+      "prompt": "$project-os plan resume: 001. The sample input now exists. Resume the plan, but do not implement its next step yet.",
+      "fixture": {
+        "kind": "repository",
+        "setup": "Run python3 <plugin-root>/skills/project-os/evals/prepare_fixture.py --case resume-blocked-plan-after-condition-clears --target <new-temporary-directory>. The parent directory must exist. Open that target in Codex and record its file hashes before sending the prompt. See evals/README.md for verification commands."
+      },
+      "expected_workflow": [
+        "Read the blocked plan, index and checkpoint.",
+        "Verify sample.txt exists, satisfying the recorded blocker.",
+        "Preview blocked -> active, idle -> running, active_plan -> 001 and the updated checkpoint.",
+        "Apply only the control-plane transition and run the checker."
+      ],
+      "expected_result_shape": [
+        "Plan 001 is active and execution is running.",
+        "STATE names the exact next action; the plan acceptance item stays incomplete.",
+        "sample.txt and application files remain unchanged; the checker passes."
+      ]
+    }
+  ]
+}

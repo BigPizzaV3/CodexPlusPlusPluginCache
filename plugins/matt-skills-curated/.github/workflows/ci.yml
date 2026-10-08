@@ -1,0 +1,32 @@
+name: Plugin CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate curated plugin
+        run: python3 scripts/validate_plugin.py
+      - name: Test wizard shell safety
+        run: |
+          bash -n skills/wizard/template.sh
+          bash -n skills/diagnosing-bugs/scripts/hitl-loop.template.sh
+          python3 scripts/test_wizard_template.py
+      - name: Test graduated skill helpers
+        run: |
+          node --check skills/setup-ts-deep-modules/dependency-cruiser.config.cjs
+          python3 scripts/test_git_safety_guardrails.py
+      - name: Build deterministic packages
+        run: |
+          python3 scripts/package_plugin.py /tmp/plugin-a.zip
+          python3 scripts/package_plugin.py /tmp/plugin-b.zip
+          cmp /tmp/plugin-a.zip /tmp/plugin-b.zip
+          unzip -t /tmp/plugin-a.zip

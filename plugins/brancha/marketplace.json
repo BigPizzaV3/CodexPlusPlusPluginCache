@@ -1,0 +1,33 @@
+{
+  "name": "brancha",
+  "owner": {
+    "name": "Sider AI",
+    "email": "support@chatnext.ai",
+    "url": "https://brancha.ai"
+  },
+  "metadata": {
+    "description": "Marketplace for the Brancha plugin — a local branching canvas for creative exploration.",
+    "version": "0.2.0"
+  },
+  "plugins": [
+    {
+      "name": "brancha",
+      "source": ".",
+      "description": "A local branching canvas for exploring, comparing, and refining creative directions with AI agents.",
+      "version": "0.2.0",
+      "author": {
+        "name": "Sider AI"
+      },
+      "homepage": "https://brancha.ai",
+      "license": "MIT",
+      "category": "creativity",
+      "keywords": [
+        "creative-canvas",
+        "branching",
+        "ideation",
+        "design",
+        "agent"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · AI, RAG & ML"
+  short_description: "AI features, document retrieval and quality evaluation"
+  default_prompt: "Use $vibe-ai to audit the selected ai, rag & ml boundary."

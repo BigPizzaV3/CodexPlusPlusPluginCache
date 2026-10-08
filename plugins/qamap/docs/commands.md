@@ -1,0 +1,428 @@
+# Command Reference
+
+Every QAMap command, with what it produces and when to reach for it. For the shortest path, see the [README](../README.md) quick start; for rollout order, see [adoption](adoption.md).
+
+> **This is a lookup page.** Most users need only `qamap qa`, `qamap qa run`,
+> and `qamap e2e draft --dry-run`. Search for a command name instead of reading
+> this document from top to bottom.
+
+`qamap --help` intentionally shows only that core workflow. Use
+`qamap qa --help` for its analysis and execution options, or `qamap help --all`
+when maintaining an older scanner, CI, manifest, or compatibility workflow.
+
+## Quick Commands
+
+```sh
+pnpm exec qamap qa . --base origin/main --head HEAD
+pnpm exec qamap qa brief
+pnpm exec qamap qa run . --base origin/main --head HEAD
+pnpm exec qamap qa . --base origin/main --head HEAD --format agent
+pnpm exec qamap qa . --manifest /tmp/qamap-manifest.yaml --base origin/main --head HEAD --output QAMAP_QA.md
+pnpm exec qamap scan .
+pnpm exec qamap verify . --base origin/main --head HEAD --pr-body-file pr-body.md
+pnpm exec qamap manifest context .
+pnpm exec qamap manifest init .
+pnpm exec qamap manifest validate .
+pnpm exec qamap manifest explain . --base origin/main --head HEAD
+pnpm exec qamap e2e draft . --base origin/main --head HEAD --dry-run
+pnpm exec qamap init --scripts .
+```
+
+Use `npx --yes @ivorycanvas/qamap@latest ...` for one-off human runs without installing QAMap into the target repository. Packaged agent skills use an explicit `npm exec --package` form so they do not invoke the target repository's package manager or Corepack metadata flow.
+
+`--base` is optional. QAMap resolves it from an explicit flag, CI pull-request metadata, `branch.<name>.qamap-base` or `qamap.base` Git config, and finally the nearest long-lived branch in local Git history. Reports include the selected source and reason. If multiple long-lived refs point to the same commit, they are reported as equivalent rather than presented as separately proven PR metadata.
+
+`--include-working-tree` compares the selected merge base directly with the final worktree, then adds untracked files. This is a net-state comparison: a committed file that was later removed locally does not remain as stale QA evidence.
+
+## Reading The Output
+
+`qamap qa` defaults to a concise `text` report for humans. It shows the inferred change, selected QA scenarios, expected proof, strongest file/line evidence, routing and optional E2E coverage, execution status, and the next explicit action.
+
+Use `--format markdown` for the complete review artifact. It opens with **At a Glance**, then retains every stable **QA Reasoning Trace** from a diff source to affected behavior, risk, routing decision, and optional artifact. Use `--format agent` for the compact versioned machine contract and `--format json` for the full structured result.
+
+Interactive terminal reports are colorized. Files written with `--output`, pipes, CI logs, and machine formats remain plain. The standard `NO_COLOR` and `FORCE_COLOR` environment variables are honored.
+
+### Save A Report Without Reading It
+
+**Requires QAMap 0.5.0 or newer; not available in 0.4.17.** Use a build that lists
+`qa report` in `qamap qa --help`:
+
+```sh
+qamap qa report . --base origin/main --head HEAD
+qamap qa report . --base origin/main --head HEAD --format agent
+```
+
+Both commands perform static analysis without calling an LLM or running tests.
+They save a new private folder under `~/QAMap-reports/` for each run:
+
+| File | Purpose |
+| --- | --- |
+| `report.md` | Human-readable QA report with code evidence. |
+| `summary.json` | Existing bounded agent summary, at most 4,096 UTF-8 bytes. |
+| `report.json` | Full collected analysis, including repository index and impact evidence. Analysis coverage limits still apply. |
+
+Use `--output <directory>` to choose the parent folder, preferably outside the
+repository. Existing reports are never overwritten. Report folders use `0700`
+and files use `0600` permissions on POSIX systems. Reports may contain private
+repository data; review them before sharing and delete unwanted runs yourself.
+They are not automatically expired like temporary agent recovery files.
+
+An interactive terminal shows an ASCII completion banner, absolute paths, and a
+`file://` report link. Link opening depends on terminal support. Pipes and
+`--format json` or `--format agent` receive only a `qamap.qa.report` v1 receipt:
+`analysis`, `execution`, `noLlmToken`, and `files.report/summary/full`, plus the
+schema. Use `--format text` to force the plain banner. This receipt is separate
+from the existing `qamap.qa` analysis schema; it contains no scenarios or commands.
+
+Tell an agent to **save only and stop after returning the paths**. Read
+`summary.json` only when interpretation is requested, then recover relevant
+details from `report.json` when necessary. Invocation and later interpretation
+still use the host model's tokens; this mode avoids returning the full analysis
+automatically, not all agent token usage. Local paths work only where those files
+are accessible, not automatically in web chat. `analysis: complete` always keeps
+`execution.status: not-run` in this mode and does not imply passing QA.
+
+### Review From One Brief
+
+For an agent or a person reviewing a pull request with QAMap 0.5.1 or newer:
+
+```sh
+qamap qa brief
+```
+
+It prints one bounded text brief (24,000 bytes by default, `--max-bytes` to
+change): the numbered diff, each changed declaration's tests and callers with
+their assertion lines, what new or removed code calls, the commits and tests
+behind removed lines, QA focus, and unknowns. The base is auto-selected unless
+`--base` is given. The full report is saved as with `qa report`, and execution
+stays `not-run`. See [the review brief](agent-brief.md).
+
+### Choose Whether Agents Ask First
+
+By default an agent offers QAMap and waits for an answer before each review.
+To let agents run it without asking, record consent (0.5.1 or newer):
+
+```sh
+qamap consent grant            # this project: edits QAMap's section of AGENTS.md
+qamap consent grant --global   # every repository: Claude Code and Codex user instructions
+qamap consent revoke [--global]
+qamap consent status
+```
+
+Agents run `qamap qa brief --require-consent` unless the user asked for QAMap in
+the conversation. Without recorded consent, that command analyzes nothing and
+prints a notice that tells the agent to ask with three answers: this time only,
+always, or not now.
+
+`--global` writes a marked section to `~/.claude/CLAUDE.md` and
+`~/.codex/AGENTS.md` (or `CLAUDE_CONFIG_DIR` and `CODEX_HOME`), only for hosts
+whose configuration directory exists, and never touches the repository.
+`revoke --global` removes that section and leaves the rest of each file as it
+was. A project revoke records "ask each time", which overrides user-level
+consent for that project. Consent covers the local analysis only, not tests,
+edits, installs or model calls by QAMap.
+
+### Return Evidence In One Call
+
+For a consented report-based review with QAMap 0.5.0 or newer:
+
+```sh
+qamap qa report . --base origin/main --head HEAD --handoff
+```
+
+It saves the same files and returns a separate `qamap.qa.handoff` v1 response,
+at most 16,384 UTF-8 bytes for previews or 32,768 for complete lossless inline
+evidence, including the newline. The nested summary still has
+its own 4,096-byte limit. Source/test excerpts preserve supported declaration
+and binding context; omitted context, paths and unresolved modules stay explicit.
+The caller reads that response only, not another source scan. More investigation
+is a separate scope, not a hidden fallback. See [the handoff contract](agent-handoff.md).
+
+### Routing And Execution
+
+Scenario routing and draft mapping answer different questions. Routing explains what the changed behavior should prove before merge. **Draft Mapping And Context Gaps** explains why an optional generated artifact may still need a selector, fixture, runner, or repository fact. Those draft gaps do not invalidate the runner-independent QA judgment and are not automatically PR merge requirements.
+
+Human QA output makes that boundary visible in three layers:
+
+1. **Important QA And Risk Map** keeps every evidence-backed scenario, including cases that require human review.
+2. **Executable Evidence Available Now** lists existing validation commands and structurally self-checked drafts without claiming they ran. When several changed validation contracts require different commands, one appears as the selected command and the rest appear as `Additional required validation`. An explicit `qa run` invocation may attach a receipt only for the selected command; every additional command remains `not run` until it is executed separately. Release-focused metadata changes prefer a declared non-publishing release gate, and commands already invoked by that gate are not repeated as separate requirements. A generic release or publishing script is not eligible.
+3. **Manual Or Agent QA Contracts** preserves the exact setup, action, outcome, and missing evidence for scenarios that cannot yet compile deterministically.
+
+`static-runnable` means the generated artifact has an entrypoint, observable assertion, no skipped placeholder, and passing QAMap self-checks. It does not mean the target application or command was executed.
+
+Draft readiness is reported as a **stage on a fixed four-step journey**, for example `Stage: setup needed (1 of 4) — readiness 0/100`. A fresh repository usually starts at stage 1 — that is the expected starting point, not a failure. Each stage maps to a stable compatibility `readiness.level` value in the `json` and `agent` formats:
+
+| Stage line | JSON `readiness.level` | Meaning |
+| --- | --- | --- |
+| `setup needed (1 of 4)` | `blocked` | Drafts describe the flow but need runner config or other required setup before they can run. |
+| `draft in progress (2 of 4)` | `needs-work` | Drafts exist; close the required action items to make them runnable. |
+| `almost runnable (3 of 4)` | `near-runnable` | Run the drafts locally and clear the remaining review items. |
+| `ready to run (4 of 4)` | `ready` | Drafts are ready to try as local regression evidence. |
+
+Machine consumers should read `route` first. It exposes the applicable basis, an unambiguous `draft-*` or `verification-*` status, the next action, and an exact existing command when one is available. `route.additionalCommands` preserves other changed validation contracts that do not fit inside the single-command `qa run` boundary. `readiness.level` remains for v1 compatibility and describes optional automation only; it is not a PR verdict and is irrelevant when `route.basis` is `repository-validation`.
+
+
+## What QAMap Produces
+
+On a changed branch, QAMap tries to produce reviewable verification artifacts instead of only saying "write more tests":
+
+- a commit-and-diff-backed change intent with confidence, review requirements, and source evidence
+- an ordered trigger, condition, action, state-change, side-effect, and observable-outcome lifecycle
+- runner-independent primary, failure, boundary, and state-transition QA scenarios
+- a stable reasoning trace for every intent-backed scenario, including explicit gaps when diff evidence cannot be joined to the inferred lifecycle
+- draft Playwright, Maestro, CLI command, or manual checklist files when the repository shape supports them
+- a repo-level verification manifest loop where humans correct durable flows once and later PRs get sharper route/check/test draft suggestions
+- a runner setup proposal that explains why Playwright or Maestro fits the changed surface and which files/commands would be created if the team accepts it
+- readiness evidence that explains missing runner config, selectors, fixture data, assertions, validation commands, or flow manifests
+- repo-local suggestions for `.qamap/domains.yml`, `.qamap/flows.yml`, and ignored `.qamap/runs/` history so teams can improve the next run without spending LLM tokens
+
+That means QAMap is most valuable when it becomes the team's verification base: humans define the durable language and critical flows once, QAMap reuses that base on each PR, and generated observations stay local unless the team intentionally promotes them into shared policy.
+
+## Commands
+
+| Command | Purpose |
+| --- | --- |
+| `qamap scan .` | Scan the current repository and print a text report. |
+| `qamap scan . --fail-on medium` | Exit with code `1` when findings at or above the threshold exist. |
+| `qamap scan . --json` | Print machine-readable JSON for custom automation. |
+| `qamap scan . --format sarif --output qamap.sarif` | Generate SARIF for code scanning integrations. |
+| `qamap report . --output QAMAP_REPORT.md` | Generate a Markdown report for PRs or audits. |
+| `qamap doctor . --format markdown` | Summarize whether the repo is ready for AI-assisted work. |
+| `qamap review . --base origin/main --head HEAD --format markdown` | Show new findings and changed risky files introduced by a branch. |
+| `qamap verify . --base origin/main --head HEAD --pr-body-file pr-body.md` | Combine review findings, readiness scoring, domain tests, and next actions. |
+| `qamap eval . --base origin/main --head HEAD --pr-body-file pr-body.md` | Score change readiness across intent, risk, tests, and review size. |
+| `qamap github-action . --mode review --base origin/main --head HEAD` | Generate GitHub Action annotations, step summary, and PR comment body. |
+| `qamap test-plan . --base origin/main --head HEAD --include-working-tree` | Suggest domain test scenarios for changed files. |
+| `qamap qa . --base origin/main --head HEAD` | One-command PR QA: change intent, behavior lifecycle, QA scenarios, affected flows, missing evidence, and optional automation drafts. A single supported changed package is selected automatically, including an independent nested package. |
+| `qamap qa brief` | Print one bounded review brief: numbered diff, tests and callers of changed declarations, calls, history of removed lines, QA focus and unknowns; requires 0.5.1 or newer. |
+| `qamap qa report . --base origin/main --head HEAD` | Save local reports and return paths without their contents; requires 0.5.0 or newer. |
+| `qamap qa report . --base origin/main --head HEAD --handoff` | Save reports and return bounded source/test evidence once; requires 0.5.0 or newer. |
+| `qamap qa run . --base origin/main --head HEAD` | Re-analyze the change and execute only the exact existing repository validation command selected by the canonical route. Additional required commands are reported but not executed. Returns pass, fail, timeout, or blocked evidence; it never installs a runner or runs a proposed product E2E draft. |
+| `qamap qa . --base origin/main --head HEAD --format agent` | The same decision content as one compact JSON line for coding agents — a versioned contract documented in [docs/agent-format.md](agent-format.md). |
+| `qamap e2e plan . --base origin/main --head HEAD` | Derive change intent and QA scenarios, then map them to coverage, test evidence, testability gaps, and an automation adapter. |
+| `qamap e2e plan . --base origin/main --head HEAD --record-history` | Save a compact local run snapshot under `.qamap/runs/` while keeping JSON/Markdown output usable. |
+| `qamap e2e setup . --runner playwright` | Explicitly apply the accepted runner setup and create the first changed-flow E2E draft without overwriting existing files. |
+| `qamap e2e draft . --base origin/main --head HEAD --dry-run` | Preview generated Maestro, Playwright, or manual E2E drafts without writing files. |
+| `qamap e2e run scenario:1a2b3c4d5e6f . --base origin/main --head HEAD` | Execute one compiled scenario through the executor declared in `qamap.config.json`, after materializing its declared fixtures; prints a receipt with pass/fail per assertion, timing, and failure-only artifacts, and compares it to the previous receipt for the same id. |
+| `qamap e2e draft . --base origin/main --head HEAD` | Write generated Maestro, Playwright, or manual E2E drafts with flow language, readiness summaries, and action items. |
+| `qamap manifest init .` | Create a baseline `.qamap/manifest.yaml` with inferred domains, flows, anchors, checks, source, and confidence. |
+| `qamap manifest validate .` | Check whether `.qamap/manifest.yaml` is present, parseable, anchored to real files, and ready to shape PR evidence. |
+| `qamap manifest context .` | Preview repo-local context sources, role classifications, validation commands, safety rules, and manifest repair diagnostics. |
+| `qamap manifest explain . --base origin/main --head HEAD` | Explain which manifest domains, flows, and checks match the current branch and which manifest path to edit if the match is wrong. |
+| `qamap flows init .` | Create a starter `.qamap/flows.yml` for team-approved core flow definitions. |
+| `qamap flows suggest . --base origin/main --head HEAD` | Generate suggested `.qamap/flows.yml` entries with commit-readiness guidance from changed files and E2E plan context. |
+| `qamap domains init .` | Create a starter `.qamap/domains.yml` for shared product/domain language. |
+| `qamap domains suggest . --base origin/main --head HEAD` | Generate suggested `.qamap/domains.yml` entries with commit-readiness guidance from changed files and inferred product language. |
+| `qamap history init .` | Create local QAMap history directories and protect generated run history with `.gitignore`. |
+
+For Python repositories, a declared `uv` or Poetry command is selected only when
+that wrapper is available on the local `PATH`. If it is absent, QAMap can route an
+interpreter-backed module command when both the interpreter and repository
+framework metadata are present. It inspects these facts without executing the
+interpreter. A Compose command also requires the Docker executable to be present;
+when it is missing, QAMap prefers the same repository-declared Python validation
+through an available local wrapper, runner, or interpreter. Otherwise the QA route
+reports that a repository command is needed.
+
+### Setup And Workspace Commands
+
+| Command | Purpose |
+| --- | --- |
+| `qamap doctor services/listing --workspace-root .` | Scan a monorepo package while using root guardrails. |
+| `qamap context . --write AGENTS.md` | Generate starter agent instructions for the repo. |
+| `qamap init .` | Create a starter `qamap.config.json`. |
+| `qamap init --agent .` | One-command agent onboarding: add a marked QAMap Pre-PR QA section to `AGENTS.md`, install the same packaged skill to the portable `.agents/skills/qamap-pr-qa/SKILL.md` path and the Claude-compatible `.claude/skills/qamap-pr-qa/SKILL.md` path, and create `qamap.config.json` if missing. Idempotent; existing instructions and locally modified skills are preserved. |
+| `qamap init --agent . --review-mode report` | Explicitly choose report-based review for this project; preserves user instructions and requires 0.5.0 or newer. |
+| `qamap init --agent . --review-mode ask` | Restore offer-first review. An omitted option preserves an existing saved choice. |
+| `qamap consent grant\|revoke [path] [--global]` | Record or remove consent for agents to run QAMap review without asking, for one project or, with `--global`, in Claude Code and Codex user instructions; requires 0.5.1 or newer. |
+| `qamap consent status [path]` | Show project and user-level consent and whether agents ask first in this project. |
+| `qamap qa brief --require-consent` | Print the brief only when consent is recorded; otherwise analyze nothing and print a notice to ask the user first. Used by the packaged agent instructions. |
+| `qamap init --scripts .` | Add collision-safe `qa`, `qa:local`, `qa:run`, and `qa:e2e` package scripts for repeat use in a JavaScript repository. |
+
+For monorepos, run `qamap qa` at the repository root first. When every changed file belongs to exactly one recognized package declared by `workspaces` or `pnpm-workspace.yaml`, `qa` automatically analyzes that package and reports `automatic-package` as its analysis scope. Package-local routes, scripts, fixtures, and runner settings are used while repo-level guardrails remain available. If multiple packages changed, a root file is also part of the diff, or the package type is unknown, QAMap keeps repository-wide scope and lists the package candidates rather than silently choosing one.
+
+Agent output names the working-directory contract as `analysisScope.commandCwd`. Automatically selected package commands are qualified with their package path and run from `workspace-root`. A package explicitly selected with `--workspace-root` keeps its local command and runs from `selected-package`. Older v1 output may omit the additive field; consumers should default to the workspace root instead of applying `selectedPath` speculatively.
+
+Pass `--workspace-root` when explicitly running another command against a package, or when overriding an ambiguous `qa` result. Package-local checks still use the package directory, while repo-level guardrails such as `AGENTS.md`, `.github/workflows`, `LICENSE`, `SECURITY.md`, and `CONTRIBUTING.md` are read from the workspace root.
+
+Suggested validation commands follow the changed ownership boundary where possible. JavaScript workspaces receive package-scoped commands. When changed tests are connected to affected behavior across multiple npm, pnpm, or Yarn packages, QAMap puts one safely narrowed file command per package first and retains each full package suite afterward. The same rule applies to working-tree analysis: an exactly related changed test can recover a low-confidence, review-required behavior contract and becomes the next repository validation when the inferred UI or device draft is not executable. Commit-backed intents also retain exact related changed test contracts. JavaScript, pytest, Go, Dart, and Minitest declarations and bounded assertions can supply repository evidence, but command selection still comes only from repository-declared commands. Flutter and Dart repositories receive focused changed-test commands before their full test and analysis commands. Custom shell pipelines stay broad. Python repositories can receive related pytest paths through a detected Compose service and container runner. Plain `qa` never starts Docker to verify that recommendation. An explicit `qa run` performs a bounded, non-project-code prerequisite probe inside the selected service. If a declared `uv` or Poetry wrapper is absent but the same test runner is present, QAMap executes the same focused targets without the wrapper; if neither is available, it returns `blocked` instead of starting the tests. These are commands to run, never pre-recorded pass results.
+
+### Short Package Scripts
+
+After installing QAMap as a development dependency, run `qamap init --scripts .` once. The initializer detects the repository package manager and adds these shortcuts without changing an existing script unless `--force` is passed:
+
+| Script | Installed command | Purpose |
+| --- | --- | --- |
+| `qa` | `qamap qa .` | Analyze committed changes on the current branch. |
+| `qa:local` | `qamap qa . --include-working-tree` | Include staged, unstaged, and untracked working-tree changes. |
+| `qa:run` | `qamap qa run .` | Execute the exact existing repository validation command selected after re-analysis. |
+| `qa:e2e` | `qamap e2e draft . --dry-run` | Preview the optional E2E draft without writing files. |
+
+For pnpm, these become `pnpm qa`, `pnpm qa:local`, `pnpm qa:run`, and `pnpm qa:e2e`. npm uses `npm run <script>`; Yarn and Bun use their normal script syntax. The generated commands omit a hard-coded base branch so QAMap can infer the repository default. Repositories that cannot infer a base can still pass `--base <ref>` through the script or use the full CLI command.
+
+`qamap review` compares a branch against a base ref for PR-style workflows. It separates newly introduced findings from risky files that already had findings on the base branch but were modified again, which helps reviewers notice when a PR touches known-dangerous surfaces such as committed `.env` files, MCP configs, or release scripts.
+
+`qamap verify` is the easiest PR-facing command. It combines `review`, `test-plan`, and `eval` into one report with review findings, readiness gates, suggested domain tests, suggested commands, and next actions.
+
+`qamap test-plan` turns changed file paths into a review-ready domain test checklist. It also discovers common validation commands from `package.json`, `pubspec.yaml`, `pyproject.toml`, `go.mod`, `Cargo.toml`, Gradle files, and Maven `pom.xml`. Add `--include-working-tree` for local, uncommitted changes while iterating.
+
+`qamap e2e plan` first reads behavior-bearing commits in the selected base/head range. Related `feat`, `fix`, `hotfix`, `perf`, and supporting `refactor` commits are grouped into change intents, then connected to added diff symbols. The result is an evidence-backed lifecycle and a set of runner-independent primary, failure, boundary, and state-transition scenarios. Low-confidence or working-tree-only intent remains review-required instead of becoming trusted regression policy.
+
+Most repositories need no annotations. When one important exported JavaScript or TypeScript symbol is repeatedly misunderstood, optional [`@qamapFlow`, `@qamapStage`, `@qamapOutcome`, and `@qamapRisk` JSDoc context](symbol-annotations.md) can refine its lifecycle. QAMap applies that context only when the declaration overlaps the diff; changing the comment alone cannot create a QA scenario.
+
+After that judgment, QAMap detects whether the target looks like Flutter, Expo/React Native, web, API/service, CLI, or another repository shape and selects a Maestro, Playwright, or manual output adapter. Flutter detection comes from the structured `pubspec.yaml` contract, so the presence of `ios/` or `android/` alone does not misclassify it as React Native. The plan compares scenario targets with existing test evidence, identifies required mocks and fixtures, and reports missing stable selectors such as `testID` or `data-testid`. Runner detection is an implementation detail, not the first value shown to the user.
+
+The plan also includes an execution profile: detected start command, test command, Playwright `baseURL`, mobile app id, runner config files, env fixture files, confidence, and blockers. This keeps generated E2E drafts honest about whether they are runnable candidates or still review-only scaffolds.
+
+When a repository does not already have the selected E2E runner, the plan includes a runner setup proposal instead of silently changing the project. The proposal explains why the runner fits the changed surface, which package command installs the library, which config/script files would be created, and the explicit acceptance command such as `qamap e2e setup . --runner playwright`.
+
+`qamap e2e setup` is the opt-in apply step. For Playwright it can create `playwright.config.ts`, `tests/e2e/`, a `test:e2e` script, and the first changed-flow Playwright spec. For Maestro it can create `.maestro/`, `.maestro/README.md`, a `test:e2e` script, and the first changed-flow YAML draft. Existing draft files are skipped unless `--force` is passed. It does not run package installation automatically; it prints the install command so teams can keep dependency policy under review.
+
+When run at a monorepo root, the E2E plan also reports changed app/package targets. This helps a maintainer move from a broad workspace diff to scoped commands such as `qamap e2e plan services/listing --workspace-root . --base origin/main --head HEAD`, where package-specific runner detection and flow naming are usually sharper.
+
+Each candidate flow also includes a flow language brief: actor, trigger, goal, success signal, reviewer question, and edge cases. When the diff does not surface an observable outcome, the success signal says so explicitly and the reviewer question asks what the outcome should be, instead of restating the flow title as its own proof. Intent-backed flows additionally retain the original commits, ordered lifecycle, QA scenarios, confidence, and review requirement so generated tests can be traced to evidence rather than only changed file names.
+
+The bootstrap section answers what must happen before generated drafts can be treated as real regression coverage. It does not block the preceding QA reasoning. For example, a testless web project can get optional automation work for Playwright setup, first draft generation, stable selector work, fixture/mock data, and missing validation evidence, plus recommended steps for `.qamap/manifest.yaml`, `.qamap/domains.yml`, `.qamap/flows.yml`, and local history recording.
+
+Run `qamap manifest init .` to create a baseline verification manifest. QAMap infers domains, flows, route/component anchors, checks, runner hints, source, and confidence from the current checkout.
+
+The scan reads up to 2,500 files by default (alphabetically, skipping vendor trees such as `node_modules`, `Pods`, `.gradle`, and build output). The init summary reports how many files were scanned, and warns when the scan stopped at the cap — on very large repositories rerun with `--max-files` so domains and flows are inferred from the whole project.
+
+Validation commands come from two sources, ground truth first: `package.json` scripts whose names look like verification (`test`, `lint`, `typecheck`, `check`, `e2e`, `coverage`, `build`, …) plus a detected pytest setup, then commands found in instruction docs — inline code spans (like a `pnpm test` mentioned in a sentence) anywhere, and bare command lines only when they sit inside fenced code blocks. Prose sentences that merely mention a tool name are not treated as commands. Scripts that block, open a UI, or mutate state (`test:watch`, `e2e:open`, `test:update`, `lint:fix`, …) are excluded. Safety rules are only harvested from prose lines that state a prohibition or obligation (`never …`, `do not …`, `절대/금지 …`); code blocks, CI YAML, and diagram fragments inside instruction docs are ignored.
+
+> **Important:** create the shared team baseline from the repository's default branch, after pulling the latest changes. QAMap does not silently switch branches or rewrite the repository state, so running `manifest init` from a feature branch creates a feature-branch snapshot, not the team's default QA map.
+
+```sh
+git switch main
+git pull
+qamap manifest context .
+qamap manifest init . --write .qamap/manifest.yaml
+```
+
+`qamap manifest context .` is a read-only preview of the repo-local knowledge QAMap can see before writing the manifest. It reports context sources such as `CONTEXT.md`, ADRs, goals, runbooks, agent instructions, harness files, and skills under agent directories (`.claude/`, `.codex/`, `.agent-core/`, `.github/instructions/`), then shows role classifications, validation commands, safety rules, and diagnostics for stale or missing context.
+
+After the baseline is committed, feature branches should usually run `manifest explain`, `e2e plan`, or `e2e draft` against the PR base such as `origin/main`. The manifest is not meant to be perfect on the first run. It is meant to start the feedback loop: QAMap recommends E2E work from the manifest, shows why a recommendation happened, and points to the manifest path to edit when the recommendation is wrong.
+
+Generated manifests include a `$schema` reference to `schema/qamap-manifest.schema.json`, so teams can validate and edit `.qamap/manifest.yaml` with a documented contract. See [docs/manifest.md](manifest.md) for the full field guide and adoption workflow.
+
+Use `qamap manifest validate .` before treating the manifest as shared team policy. It reports missing manifests, invalid YAML/schema shape, duplicate ids, missing domain paths, stale anchor files, suspicious route hints, and low-confidence inferred entries that should be reviewed.
+
+Use `qamap manifest explain . --base origin/main --head HEAD` when you want to understand one branch. It reads the git diff, lists the matched manifest domains/flows/checks, shows the declared entry route and required checks, and names the exact manifest path to update if the recommendation is wrong.
+
+When `.qamap/manifest.yaml` exists, `qamap verify`, `qamap e2e plan`, and `qamap e2e draft` include a Manifest Recommendations section:
+
+```txt
+Why this was recommended:
+- Changed files match anchors for the Bundle Submission Complete flow.
+
+Manifest evidence:
+- .qamap/manifest.yaml > flows.bundle-submission-complete.anchors
+
+Next actions:
+- Draft or review E2E coverage for the Bundle Submission Complete flow.
+- Cover the declared checks: Submit media link successfully; Show validation error for invalid media link.
+
+If this is wrong:
+- Update .qamap/manifest.yaml > flows.bundle-submission-complete.anchors
+
+Repair hints:
+- If these files do not belong to this flow, update .qamap/manifest.yaml > flows.bundle-submission-complete.anchors.
+- If the recommended assertions feel vague, rewrite .qamap/manifest.yaml > flows.bundle-submission-complete.checks in team language.
+```
+
+When a matched manifest flow has an entry route and checks, `qamap e2e draft` promotes it ahead of heuristic candidates. The generated Playwright, Maestro, or manual draft carries the manifest evidence, uses the manifest route as an entrypoint when possible, and turns manifest checks into draft steps and required coverage notes. If a check includes concrete hints such as `[data-testid=coupon-input]`, `with WELCOME10`, or optional `selector`, `value`, and `steps` fields, QAMap uses those facts before falling back to fuzzy selector inference. This is the core cost-saving loop: humans fix durable QA context once, then future PRs start from a stronger draft instead of a blank test file.
+
+Flow and scenario names prefer what the diff itself introduced: an added `aria-label`/`data-testid`/`testID`/placeholder value or button/link inner text with an action word names the journey ("Checkout Apply Coupon" instead of "Checkout primary journey"). Korean action labels qualify the same way — `저장하기` and 35 other common stems, with `~하기/~합니다`-style endings normalized — and draft filenames keep Hangul. When a diff changes only logic or styles (no labeled elements added), the surface's primary action-bearing control names the journey instead.
+
+The domain language section is intentionally less implementation-oriented than the raw file list. For example, changes under `src/features/in-app-purchase/` become terms such as `In App Purchase` and scenarios such as `In App Purchase primary journey`. When a changed component or service file names a concrete behavior, QAMap should prefer that behavior before the generic primary journey: `src/features/listing/components/MediaLinkSubmitModal.tsx` can become `Listing Media Link Submit`, and the generated draft file can become `.maestro/listing-media-link-submit.yaml`. When `.qamap/domains.yml` exists, declared product terms and routes receive higher confidence. When `.qamap/flows.yml` exists, team-approved flow names appear as preferred scenario names.
+
+If `.qamap/domains.yml` exists, `qamap e2e plan` also matches changed files against shared product or domain language:
+
+```yaml
+domains:
+  - id: billing
+    name: Billing
+    aliases:
+      - checkout
+      - subscription
+    files:
+      - src/features/billing/**
+    routes:
+      - /billing
+    scenarios:
+      - title: Billing primary journey
+        checks:
+          - Start from the normal billing entry point.
+          - Complete the primary billing action with realistic data.
+```
+
+Run `qamap domains init .` to create a starter domain manifest. Run `qamap domains suggest . --base origin/main --head HEAD` when you want QAMap to draft manifest entries from the current branch and classify each candidate as `commit-candidate`, `needs-review`, or `low-signal`. Use domains for naming and route hints; use core flows when the team wants to define a durable verification journey.
+
+If `.qamap/flows.yml` exists, `qamap e2e plan` also matches changed files against team-approved core flows. This lets maintainers encode the product or domain flows humans already care about:
+
+```yaml
+flows:
+  - id: checkout-purchase
+    name: Checkout purchase
+    priority: critical
+    domains:
+      - checkout
+    files:
+      - src/pages/checkout/**
+      - src/features/checkout/**
+    routes:
+      - /checkout
+    checks:
+      - Complete checkout with a valid payment method.
+      - Verify declined payment recovery.
+```
+
+Run `qamap flows init .` to create a starter manifest. Run `qamap flows suggest . --base origin/main --head HEAD` when you want QAMap to draft flow entries from changed files, inferred domain language, routes, and E2E checks, then classify which entries are close enough to review as shared policy. Unlike generated run history, `.qamap/flows.yml` is meant to be reviewed and committed when those flow definitions should become team policy.
+
+Pass `--record-history` when you want QAMap to keep a compact local snapshot of an E2E plan under `.qamap/runs/`. QAMap automatically protects `.qamap/runs/`, `.qamap/cache/`, `.qamap/tmp/`, and `.qamap/*.local.json` with `.gitignore` so generated history stays local by default. Shared project policy, such as `qamap.config.json`, `.qamap/domains.yml`, and `.qamap/flows.yml`, remains commit-friendly.
+
+`qamap e2e draft --dry-run` previews the same draft analysis without creating directories or files. Use it first when evaluating a new repository or PR. The output still includes planned file paths, self-checks, readiness status, action items, starter-code gaps, and execution blockers.
+
+`qamap e2e draft` writes draft files from that plan. Flutter, Expo, and React Native projects get Maestro YAML flows under `.maestro/` by default, web projects get Playwright specs under `tests/e2e/`, API/service projects get contract checklist drafts, and CLI packages get command verification checklists until a project-specific runner is documented. For web apps, QAMap recognizes common Next.js, React Router, Vite, Vue/Nuxt, Svelte, Remix, Astro, and Angular signals. It can infer routes from Next Pages Router files, Next App Router files such as `src/app/(group)/products/[id]/page.tsx`, React Router `path` objects, links, and imperative navigation calls. Drafts infer stable selectors such as `testID`, `accessibilityLabel`, `data-testid`, `aria-label`, placeholder text, role-based buttons or links, and visible text where possible. They also carry fixture/mock readiness notes and inferred API endpoint hints. When the repository already contains mock, fixture, or seed files, QAMap statically reads their contents and turns the fixture guidance into named instructions, including which handler file to extend for an uncovered endpoint or which exported data to review. These files remain integration evidence, not authority to invent a response body. A Playwright response scaffold is emitted only from a safe, exact OpenAPI or Swagger response example for an unambiguous endpoint and method. A usable JSON response schema keeps its documented scenarios and `schema-derived` provenance in the plan, while the draft remains partial until a schema-aware adapter or repository fixture materializes concrete values. Schema property names, fixture keys, endpoint names, and UI copy never become synthetic values. Endpoints changed by the pull request are observed rather than intercepted so the draft does not hide the contract under test. When selectors or route params are incomplete, QAMap prefers runnable starter code with safe smoke assertions and sample params over non-executable placeholder locators. Existing files are not overwritten unless `--force` is passed.
+
+The draft result is meant to be useful as a PR artifact, not only as generated files. Markdown and JSON output include:
+
+- `changeAnalysis`: commit-backed intents, confidence, review requirements, source evidence, lifecycle stages, and runner-independent QA scenarios
+- intent-backed draft files retain `intentId`, `intentConfidence`, `lifecycle`, and `qaScenarios`; generated files include the same evidence as comments
+- `languageBrief`: actor, trigger, goal, success signal, reviewer question, and edge cases for each draft file
+- `promotionStatus`: whether the draft is a `commit-candidate`, `needs-review`, or `low-signal`
+- `runnableStatus`: whether the draft is a `runnable-candidate`, `near-runnable`, or `review-only`
+- selectors carry `addedInDiff: true` when the value was introduced by the diff itself, so agents can bind actions to what the change added
+- `selfCheck`: static runner checks for generated draft structure, unresolved placeholders, starter-code quality, and the execution profile
+- `status`: whether the file was `preview`ed by `--dry-run`, `created`, or `skipped`
+- `actionItems`: required and recommended follow-up work, grouped by assertion, fixture, selector, runner, validation, and manifest
+- `actionSummary`: total required/recommended action counts, ready file count, and the most common action categories
+- `readinessSummary`: an overall 0-100 score, readiness level, self-check counts, starter-code gaps, execution blocker counts, and top blockers
+
+`runnable-candidate` means QAMap found no known blocker to trying the generated file with the detected local command. It is not a claim that the scenario is complete or that the PR is safe to merge. Missing failure coverage, unconfirmed fixture values, and other proof gaps remain visible as required or recommended action items and in the validation matrix. `near-runnable` means the file still has a concrete setup or execution gap; `review-only` means it should be used as design guidance rather than executed as automation.
+
+Playwright self-checks also reject false confidence from `body`-only smoke assertions. A failure route is compiled only when a stable action selector, visible failure copy, matching endpoint, and exact contract response example join. An unauthorized scenario needs a 401 or 403 example, validation needs a 400 or 422 example, and a server failure needs a 5xx example. Missing or mismatched evidence leaves the scenario unmapped instead of substituting another failure type.
+
+See [docs/e2e-output-examples.md](e2e-output-examples.md) for compact examples of web, mobile, API/service, CLI, test-light, and monorepo output.
+
+Generated Playwright drafts use the flow language as `test.step()` names so the file reads like the user journey it protects:
+
+```ts
+await test.step("Open route /checkout.", async () => {
+  await page.goto("/checkout");
+});
+
+await test.step("Complete checkout with a valid payment method.", async () => {
+  // Step intent: Complete checkout with a valid payment method.
+  await page.getByTestId("checkout-submit").click();
+});
+
+await test.step("Fill profile email.", async () => {
+  // Step intent: Fill profile email.
+  await page.getByPlaceholder("Profile email").fill("qamap@example.com");
+});
+```
+
+`qamap history init` prepares that local storage explicitly without running an analysis. It creates `.qamap/runs/`, `.qamap/cache/`, and `.qamap/tmp/`, then adds the generated-history ignore patterns to `.gitignore` idempotently.
+
+`qamap eval` scores whether a branch has enough validation evidence, changed-test coverage, intent capture, risk explanation, domain verification paths, and reviewable size. In GitHub Actions, QAMap can read the pull request body from the event payload and append the evaluation to the PR comment.

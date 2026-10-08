@@ -1,0 +1,20 @@
+{
+  "name": "qlynk-agent-builder",
+  "version": "1.1.1",
+  "description": "Interview clients and build verified Qlynk Agents.",
+  "author": {
+    "name": "Qlynk AI",
+    "email": "info@qlynk.site",
+    "url": "https://www.qlynk.site"
+  },
+  "homepage": "https://www.qlynk.site/agent-builder",
+  "repository": "https://github.com/randomzzguy/qlynk-agent-builder",
+  "license": "MIT",
+  "keywords": [
+    "qlynk",
+    "ai-agent",
+    "freelancer",
+    "client-onboarding",
+    "knowledge-base"
+  ]
+}

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Functional Options"
+  short_description: "Design extensible Go constructors"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-functional-options to design an extensible constructor for this Go API."

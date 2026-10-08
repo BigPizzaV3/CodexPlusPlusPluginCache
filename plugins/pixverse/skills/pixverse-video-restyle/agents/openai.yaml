@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Video Restyle"
+  short_description: "Restyle footage, keep motion"
+  default_prompt: "Use $pixverse-video-restyle to turn this clip into a claymation look while keeping every movement, cut and the original voice."
+policy:
+  allow_implicit_invocation: true

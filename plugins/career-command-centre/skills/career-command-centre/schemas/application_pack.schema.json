@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://career-command-centre.local/schemas/application-pack-v4.json",
+  "title": "Career Centre Application Pack Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "candidate", "role", "evidence", "document_settings", "cv", "cover_letter", "change_log"],
+  "properties": {
+    "schema_version": {"const": "4.0"},
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "headline", "contact"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "headline": {"type": "string"},
+        "contact": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["text", "url"],
+            "properties": {
+              "text": {"type": "string", "minLength": 1},
+              "url": {"type": ["string", "null"]}
+            }
+          }
+        }
+      }
+    },
+    "role": {"$ref": "role_dossier.schema.json"},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidence_id", "claim", "safe_wording", "source_type", "source_name", "source_excerpt", "confidence", "restrictions", "role_relevance", "captured_at"],
+        "properties": {
+          "evidence_id": {"type": "string"},
+          "claim": {"type": "string"},
+          "safe_wording": {"type": "string"},
+          "source_type": {"enum": ["current_cv", "historical_cv", "user_confirmed", "uploaded_evidence", "external_source"]},
+          "source_name": {"type": "string"},
+          "source_excerpt": {"type": "string"},
+          "confidence": {"enum": ["source_only", "user_confirmed", "externally_corroborated"]},
+          "restrictions": {"type": "array", "items": {"type": "string"}},
+          "role_relevance": {"type": "array", "items": {"type": "string"}},
+          "corroborating_sources": {"type": "array", "items": {"type": "string"}},
+          "captured_at": {"type": "string"}
+        }
+      }
+    },
+    "document_settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["template", "reference_template_name", "page_size", "page_target", "minimum_font_pt", "cv_only"],
+      "properties": {
+        "template": {"enum": ["professional", "executive", "reference"]},
+        "reference_template_name": {"type": ["string", "null"]},
+        "page_size": {"enum": ["A4", "Letter"]},
+        "page_target": {"enum": [1, 2]},
+        "minimum_font_pt": {"type": "number", "minimum": 9},
+        "cv_only": {"type": "boolean"}
+      }
+    },
+    "cv": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sections"],
+      "properties": {
+        "sections": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["heading", "type", "items", "page_break_before"],
+            "properties": {
+              "heading": {"type": "string", "minLength": 1},
+              "type": {"enum": ["paragraphs", "bullets", "skills", "experience"]},
+              "page_break_before": {"type": "boolean"},
+              "items": {"type": "array"}
+            }
+          }
+        }
+      }
+    },
+    "cover_letter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "date", "recipient", "salutation", "paragraphs", "closing", "signature"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "date": {"type": "string"},
+        "recipient": {"type": ["string", "null"]},
+        "salutation": {"type": "string"},
+        "paragraphs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_text"}
+        },
+        "closing": {"type": "string"},
+        "signature": {"type": "string"}
+      }
+    },
+    "change_log": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["included_evidence", "excluded_evidence", "keywords_included", "keywords_omitted", "ambiguities", "archetype"],
+      "properties": {
+        "included_evidence": {"type": "array", "items": {"type": "string"}},
+        "excluded_evidence": {"type": "array", "items": {"type": "string"}},
+        "keywords_included": {"type": "array", "items": {"type": "string"}},
+        "keywords_omitted": {"type": "array", "items": {"type": "string"}},
+        "ambiguities": {"type": "array", "items": {"type": "string"}},
+        "archetype": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "$defs": {
+    "evidence_text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "evidence_ids"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

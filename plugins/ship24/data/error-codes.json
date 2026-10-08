@@ -1,0 +1,131 @@
+{
+  "source": "https://docs.ship24.com/errors",
+  "responseFormat": {
+    "description": "Ship24 returns additional information in the HTTP response body when something goes wrong. These appear as an `errors` array within the response body. An `error` has up to two properties: `code` (code describing the error) and `message` (if available, a more descriptive message regarding the error).",
+    "example": {
+      "errors": [
+        {
+          "code": "validation_error",
+          "message": "Please make sure that destinationCountryCode contains only 2 or 3 characters."
+        },
+        {
+          "code": "validation_error",
+          "message": "Please make sure that destinationCountryCode is a valid country code and is in ISO 3166-1 alpha-2 or alpha-3 format."
+        }
+      ],
+      "data": null
+    }
+  },
+  "httpStatuses": [
+    {
+      "code": "200",
+      "label": "OK",
+      "description": "Everything worked as expected."
+    },
+    {
+      "code": "201",
+      "label": "Created",
+      "description": "Everything worked as expected."
+    },
+    {
+      "code": "207",
+      "label": "Multi-Status",
+      "description": "Some sub-requests failed while others succeeded (used in bulk operations)."
+    },
+    {
+      "code": "400",
+      "label": "Bad Request",
+      "description": "The request was unacceptable, often due to missing a required parameter."
+    },
+    {
+      "code": "401",
+      "label": "Unauthorized",
+      "description": "No valid API key provided."
+    },
+    {
+      "code": "402",
+      "label": "Request Failed",
+      "description": "The parameters were valid but, the request failed."
+    },
+    {
+      "code": "403",
+      "label": "Forbidden",
+      "description": "The request is not allowed due to insufficient permissions or endpoints limitations."
+    },
+    {
+      "code": "404",
+      "label": "Not Found",
+      "description": "The requested resource doesn't exist."
+    },
+    {
+      "code": "422",
+      "label": "Unprocessable Entity",
+      "description": "The request was well-formed but was unable to be followed due to semantic errors."
+    },
+    {
+      "code": "409",
+      "label": "Conflict",
+      "description": "The request conflicts with another request with the same payload or parameter made in parallel."
+    },
+    {
+      "code": "429",
+      "label": "Too Many Requests",
+      "description": "Too many requests hit the API too quickly. We recommend an exponential back-off of your requests."
+    },
+    {
+      "code": "500, 502, 503, 504",
+      "label": "Server Errors",
+      "description": "Something went wrong on Ship24's end."
+    }
+  ],
+  "errorCodes": [
+    {
+      "code": "validation_error",
+      "description": "One of the fields is not passing validation. Please refer to the details in `message`."
+    },
+    {
+      "code": "no_active_subscription",
+      "description": "No active subscription (free or paid) allows you to access this resource. [Please subscribe to a product](https://dashboard.ship24.com/onboarding) allowing the use of this resource."
+    },
+    {
+      "code": "quota_limit_reached",
+      "description": "Your shipments (trackers) or calls usage is above your quota for the billing period."
+    },
+    {
+      "code": "tracker_not_found",
+      "description": "The requested Tracker can't be found. Please make sure it has been created beforehand."
+    },
+    {
+      "code": "tracker_not_updatable",
+      "description": "The Tracker can't be updated. Usually, because the shipment corresponding to this Tracker has already been processed. (For example, if you create a Tracker on tracking `123456` on `dhl` to country `US` and, due to a data mistake, and you wish to change the courier to `fedex` to country `DE`, it is usually possible as long as Ship24 didn't find any trace of the shipment. However, it's not possible as soon as Ship24 detects the shipment."
+    },
+    {
+      "code": "shipping_date_outdated",
+      "description": "Trackers with a shippingDate over 180 days old will be rejected, as Ship24 won't track shipments older than 6 months."
+    },
+    {
+      "code": "parcel_not_found",
+      "description": "The shipment can't be found at the moment. It's usually because the shipment has been created recently and the first events are not yet available. Alternatively, you can try to provide more information about the shipment, such as `originCountryCode`, `destinationCountryCode`, `destinationPostCode`, and `shippingDate`."
+    },
+    {
+      "code": "request_conflict",
+      "description": "The HTTP request conflicts with another request with the same payload or parameter made in parallel and processed concurrently. In such cases, only one request will succeed, and the rest will be in conflict. For idempotent endpoints, the request may be retried later on without impact."
+    },
+    {
+      "code": "tracker_conflict",
+      "description": "A Tracker with similar conflicting parameters already exists. Please try to provide additional parameters, such as shippingDate and destinationCountryCode to differentiate your Tracker."
+    },
+    {
+      "code": "bulk_create_limit_exceeded",
+      "description": "The number of Trackers in the bulk creation request exceeds the limit."
+    },
+    {
+      "code": "processing_error",
+      "description": "An error occurred while processing the provided data."
+    },
+    {
+      "code": "webhook_url_missing",
+      "description": "No webhook URL has been provided while it is required to process the request."
+    }
+  ]
+}

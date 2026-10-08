@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Code Review"
+  short_description: "Review Go changes for correctness and style"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-code-review to review this Go change and rank findings by severity."

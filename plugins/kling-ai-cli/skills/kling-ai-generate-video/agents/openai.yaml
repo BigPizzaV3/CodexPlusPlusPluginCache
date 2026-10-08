@@ -1,0 +1,6 @@
+interface:
+  display_name: "Kling AI Video Generation"
+  short_description: "Generate videos and transfer motion with Kling AI"
+  default_prompt: "Use $kling-ai-generate-video to create one video through the local Kling CLI."
+policy:
+  allow_implicit_invocation: true

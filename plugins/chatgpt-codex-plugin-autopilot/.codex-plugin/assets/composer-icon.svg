@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Plugin Autopilot mark">
+  <rect width="512" height="512" rx="112" fill="#1F5EFF"/>
+  <path d="M142 154h228v54H142zm0 75h162v54H142zm0 75h228v54H142z" fill="#fff"/>
+  <circle cx="342" cy="256" r="35" fill="#fff"/>
+</svg>

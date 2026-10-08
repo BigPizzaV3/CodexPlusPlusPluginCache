@@ -1,0 +1,22 @@
+{
+  "name": "briefcase",
+  "version": "1.3.0",
+  "description": "Briefcase Ledger is AI-native accounting software for UK businesses and their accountants. Review what needs approval and why, read profit and loss, balance sheet and aged debtors, raise invoices, post journals and run month-end schedules. Also works for Xero and QuickBooks books through Briefcase Connect.",
+  "author": {
+    "name": "Briefcase",
+    "url": "https://briefcase.so"
+  },
+  "homepage": "https://briefcase.so",
+  "privacyPolicyUrl": "https://briefcase.so/privacy-policy",
+  "repository": "https://github.com/Briefcase-AI/briefcase-plugin",
+  "license": "MIT",
+  "keywords": [
+    "accounting",
+    "bookkeeping",
+    "financial-close",
+    "invoicing",
+    "management-accounts",
+    "xero",
+    "quickbooks"
+  ]
+}

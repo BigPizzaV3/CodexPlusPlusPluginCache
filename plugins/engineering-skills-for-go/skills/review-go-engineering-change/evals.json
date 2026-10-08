@@ -1,0 +1,208 @@
+{
+  "schema_version": 2,
+  "skill": "review-go-engineering-change",
+  "cases": [
+    {
+      "id": "route-general-go-diff",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review this Go PR changing an exported API, HTTP adapter, configuration, and shutdown path.",
+      "should_activate": true,
+      "reason": "General engineering review spans these boundaries."
+    },
+    {
+      "id": "avoid-ledger-diff",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review a ledger posting and refund state-machine change for money loss.",
+      "should_activate": false,
+      "reason": "Financial integrity requires review-go-fintech-change.",
+      "confuses_with": [
+        "review-go-fintech-change"
+      ]
+    },
+    {
+      "id": "quality-causal-finding",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review a diff that returns an internal buffer through a public API.",
+      "expected_invariants": [
+        "Identifies caller mutation schedule",
+        "Ties impact to changed line and ownership"
+      ],
+      "forbidden_outcomes": [
+        "Returns a generic style checklist"
+      ],
+      "graders": [
+        {
+          "id": "finding-mechanism",
+          "kind": "contains",
+          "required": [
+            "mutation",
+            "ownership"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-no-finding",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "A change is correct but differs from a preferred declaration style. Report findings.",
+      "expected_invariants": [
+        "Reports no correctness finding",
+        "Separates optional preference"
+      ],
+      "forbidden_outcomes": [
+        "Invents a defect from style alone"
+      ],
+      "graders": [
+        {
+          "id": "no-invented-defect",
+          "kind": "contains",
+          "required": [
+            "no",
+            "preference"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-service-shutdown-diff",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review this Go service change for production correctness. HTTP handlers call Submit, and handle reads and writes through db. Report only must-fix findings, each with a reachable failure schedule and the repair invariant; do not implement the change.\n\ntype App struct {\n    server    *http.Server\n    jobs      chan Job\n    workers   sync.WaitGroup\n    db        *sql.DB\n    telemetry *Exporter\n}\n\nfunc (a *App) Submit(job Job) {\n    a.jobs <- job\n}\n\nfunc (a *App) Run(ctx context.Context) error {\n    for range 8 {\n        a.workers.Add(1)\n        go func() {\n            defer a.workers.Done()\n            for job := range a.jobs {\n                _ = a.handle(ctx, job)\n            }\n        }()\n    }\n\n    go a.server.ListenAndServe()\n    <-ctx.Done()\n\n    _ = a.db.Close()\n    close(a.jobs)\n    _ = a.server.Shutdown(context.Background())\n    a.workers.Wait()\n    return a.telemetry.Flush(context.Background())\n}",
+      "expected_invariants": [
+        "Supervises ListenAndServe, distinguishes http.ErrServerClosed, and propagates an unexpected serve failure instead of waiting forever for external cancellation",
+        "Stops HTTP admission and all Submit senders before the jobs owner closes the channel, preventing a reachable send-on-closed panic",
+        "Joins or terminates workers before closing the database so an accepted job cannot run against a closed dependency or be silently discarded",
+        "Defines whether accepted jobs drain or cancel and gives workers an appropriate owned context instead of accidentally using the already-canceled service context",
+        "Bounds server shutdown, worker termination, and telemetry flush so a stuck handler, job, or exporter cannot block termination indefinitely"
+      ],
+      "forbidden_outcomes": [
+        "Approves closing the database before workers finish",
+        "Treats context.Background as a bounded shutdown context",
+        "Recommends only logging the ListenAndServe error without making server failure terminate Run"
+      ],
+      "graders": [
+        {
+          "id": "shutdown-review",
+          "kind": "contains",
+          "required": [
+            "shutdown",
+            "worker"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-client-compatibility-diff",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review this public Go client-library change for correctness and compatibility. External callers depend on these existing contracts: Result.Payload is caller-owned and remains stable after Fetch returns; errors.Is(err, ErrNotFound) detects absence; marshaling Result always emits count, including count: 0; Config.Timeout == 0 means the library adds no deadline beyond the caller's context; and each arbitrary UTF-8 key is one URL path segment. The upstream is untrusted and may return an enormous body, a malformed success body, any non-2xx status, or a body read error after partial bytes. The same Client is reused concurrently. There are no retry, distributed-state, or money semantics in scope. Report only must-fix findings, each with a concrete trigger and the repair invariant; do not implement the change.\n\nvar ErrNotFound = errors.New(\"item not found\")\n\nvar resultBuffers = sync.Pool{New: func() any { return new(bytes.Buffer) }}\n\ntype Config struct {\n\tBaseURL string\n\tTimeout time.Duration\n}\n\ntype Result struct {\n\tCount int `json:\"count,omitempty\"`\n\tPayload []byte `json:\"payload\"`\n}\n\ntype Client struct {\n\tbaseURL string\n\thttp *http.Client\n}\n\nfunc New(cfg Config) *Client {\n\ttimeout := cfg.Timeout\n\tif timeout == 0 {\n\t\ttimeout = 5 * time.Second\n\t}\n\treturn &Client{baseURL: cfg.BaseURL, http: &http.Client{Timeout: timeout}}\n}\n\nfunc (c *Client) Fetch(ctx context.Context, key string) (Result, error) {\n\treq, err := http.NewRequestWithContext(ctx, http.MethodGet, c.baseURL+\"/v1/items/\"+key, nil)\n\tif err != nil {\n\t\treturn Result{}, err\n\t}\n\tresp, err := c.http.Do(req)\n\tif err != nil {\n\t\treturn Result{}, err\n\t}\n\tdefer resp.Body.Close()\n\tif resp.StatusCode == http.StatusNotFound {\n\t\treturn Result{}, fmt.Errorf(\"fetch %q: %v\", key, ErrNotFound)\n\t}\n\n\tbuffer := resultBuffers.Get().(*bytes.Buffer)\n\tbuffer.Reset()\n\tdefer func() {\n\t\tbuffer.Reset()\n\t\tresultBuffers.Put(buffer)\n\t}()\n\tif _, err := io.Copy(buffer, resp.Body); err != nil {\n\t\treturn Result{Payload: buffer.Bytes()}, nil\n\t}\n\n\tvar result Result\n\tif err := json.Unmarshal(buffer.Bytes(), &result); err != nil {\n\t\treturn Result{}, err\n\t}\n\tresult.Payload = buffer.Bytes()\n\treturn result, nil\n}",
+      "expected_invariants": [
+        "Explains that formatting ErrNotFound with percent-v destroys errors.Is identity and requires wrapping with percent-w or returning an inspectable equivalent",
+        "Explains that Result.Payload aliases pooled storage reset and reused after return, and requires a caller-owned copy or a different lifetime contract before returning the buffer to the pool",
+        "Treats adding omitempty to count as a wire compatibility break for count zero and preserves the field's serialized presence",
+        "Preserves the documented zero-timeout contract instead of installing a five-second client-wide deadline that can preempt a longer caller context",
+        "Rejects decoding arbitrary non-2xx responses as successful Result values and requires explicit status classification before success decoding",
+        "Bounds response-body bytes before unbounded allocation and detects an oversized response rather than accepting a truncated success",
+        "Propagates a response-body read error and never returns partial pooled bytes as a successful Result",
+        "Builds the request URL structurally and escapes each arbitrary key as exactly one path segment instead of concatenating it into path or query syntax"
+      ],
+      "forbidden_outcomes": [
+        "Claims percent-v preserves errors.Is identity for ErrNotFound",
+        "Treats buffer.Bytes as caller-owned after the buffer is reset and returned to sync.Pool",
+        "Claims omitempty cannot change the public JSON contract",
+        "Approves decoding an upstream 500 response body as a successful Result",
+        "Approves the five-second default while claiming Config.Timeout zero still delegates deadline ownership only to the caller context"
+      ],
+      "graders": [
+        {
+          "id": "client-compatibility-review",
+          "kind": "contains",
+          "required": [
+            "ownership",
+            "status"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "quality-runtime-reload-cutover-diff",
+      "kind": "quality",
+      "split": "development",
+      "prompt": "Review this Go runtime-reload change for production correctness. An instance is already ready on validated config version 7. Watch delivery may be concurrent, duplicated, and out of order. Versions must never regress; an equivalent duplicate is a no-op and a conflicting duplicate is rejected. A candidate is valid only when its version is positive, AllowedOrigins is non-empty and contains no wildcard, every route limit is positive, and UpstreamServerName is non-empty. Malformed or invalid reloads must leave the last known-good state serving and ready while exposing reload failure separately. For every newly admitted operation, authorization, route limit, reported config version, and outbound TLS server name must come from one active version. Operations admitted before cutover may finish on their old version. The shared HTTP transport is already serving concurrent requests. There is no remote state replication, messaging, or money movement in scope. Report only must-fix findings, each with a concrete concurrent or failure schedule and the repair invariant; do not implement the change.\n\ntype Config struct {\n\tVersion int64\n\tAllowedOrigins []string\n\tRouteLimits map[string]int\n\tUpstreamServerName string\n}\n\ntype Runtime struct {\n\tcurrent atomic.Pointer[Config]\n\ttransport *http.Transport\n\tready atomic.Bool\n}\n\nfunc (r *Runtime) Reload(raw []byte) error {\n\tvar next Config\n\tif err := json.Unmarshal(raw, &next); err != nil {\n\t\tr.current.Store(&next)\n\t\tr.ready.Store(false)\n\t\treturn err\n\t}\n\n\tr.current.Store(&next)\n\tr.transport.TLSClientConfig = &tls.Config{\n\t\tServerName: next.UpstreamServerName,\n\t\tMinVersion: tls.VersionTLS12,\n\t}\n\tnext.AllowedOrigins[0] = \"*\"\n\tr.ready.Store(true)\n\treturn nil\n}\n\nfunc (r *Runtime) Policy(route, origin string) (version int64, limit int, allowed bool) {\n\tcfg := r.current.Load()\n\treturn cfg.Version, cfg.RouteLimits[route], slices.Contains(cfg.AllowedOrigins, origin)\n}\n\nfunc (r *Runtime) RoundTripper() http.RoundTripper {\n\treturn r.transport\n}\n\nfunc (r *Runtime) Ready() bool {\n\treturn r.ready.Load()\n}",
+      "expected_invariants": [
+        "Explains that a JSON decode error publishes a zero partial config and clears readiness, and requires leaving version 7 active and ready while recording reload failure separately",
+        "Requires complete semantic validation of version, origins, route limits, and TLS server name before any active state or transport effect is published",
+        "Explains that mutating AllowedOrigins after current.Store changes published authorization state and races with Policy, and requires immutable or privately copied state after publication",
+        "Explains that assigning TLSClientConfig on an in-use shared http.Transport is an unsafe concurrent mutation and can leave connection behavior inconsistent",
+        "Requires one atomically published immutable runtime snapshot containing both policy config and its outbound client or transport so a newly admitted operation cannot observe mixed versions",
+        "Serializes or compare-and-swaps reload publication by version so concurrent out-of-order delivery cannot regress state, equivalent duplicates are no-ops, and conflicting duplicates are rejected",
+        "Defines cutover ownership for the old transport so pre-cutover operations can finish, post-cutover operations use the new TLS state, and obsolete idle connections are retired without breaking in-flight work",
+        "Keeps readiness true whenever a usable last-known-good snapshot remains active and exposes reload failure separately from readiness"
+      ],
+      "forbidden_outcomes": [
+        "Claims atomic.Pointer makes mutation of the published slice safe",
+        "Approves changing TLSClientConfig on a shared in-use http.Transport",
+        "Approves setting readiness false for any failed reload even though version 7 remains usable",
+        "Uses last-writer-wins for lower or conflicting duplicate config versions",
+        "Claims separate current.Store and transport assignment form one atomic cutover"
+      ],
+      "graders": [
+        {
+          "id": "runtime-reload-cutover-review",
+          "kind": "contains",
+          "required": [
+            "ready",
+            "transport"
+          ],
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "route-production-go-review",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review this production Go service change across its exported API, tests, security boundary, shutdown path, and operational behavior.",
+      "should_activate": true,
+      "reason": "General production Go correctness spans the engineering collection without a dominant specialist invariant."
+    },
+    {
+      "id": "route-production-symptom-review",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Our Go deployment passes unit tests but leaks resources during shutdown and intermittently reports healthy before dependencies are ready. Review the change.",
+      "should_activate": false,
+      "reason": "The indirect symptoms have a dominant process-lifecycle and readiness owner rather than requiring a collection-wide review.",
+      "confuses_with": [
+        "go-production-operations"
+      ]
+    },
+    {
+      "id": "avoid-payment-consumer-integrity-review",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review a Go payment consumer whose timeout retry can authorize twice and whose delayed webhook can regress a captured payment.",
+      "should_activate": false,
+      "reason": "Financial integrity dominates even though messaging and general Go review are involved.",
+      "confuses_with": [
+        "review-go-fintech-change"
+      ]
+    },
+    {
+      "id": "avoid-typescript-ui-review",
+      "kind": "routing",
+      "split": "development",
+      "prompt": "Review this TypeScript design-system component for CSS accessibility and animation polish.",
+      "should_activate": false,
+      "reason": "The request is unrelated to Go."
+    }
+  ]
+}

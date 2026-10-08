@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "EcoCitizenz Ltd",
+    "url": "https://developers.ecocitizenz.com"
+  },
+  "description": "See what the AI agents in a workspace can reach: agent manifests, instructions, declared tools, MCP servers, permission policy and public proof references. Inspection only. Free.",
+  "homepage": "https://developers.ecocitizenz.com/agent-trust/",
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this workspace for agent trust evidence gaps and report the Review Priority.",
+      "What can this agent reach, who authorised it, and what has public proof?",
+      "Check the agent manifests, declared tools, MCP reach and permission policy in this repository."
+    ],
+    "developerName": "EcoCitizenz Ltd",
+    "displayName": "ECZ-ID Agent Trust",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Review what AI agents in a workspace can reach: agent manifests, instructions, declared tools, reachable MCP servers, permission policy and ECZ-ID public proof references. Inspection only. It helps identify declared reach, authority-related evidence and review gaps without turning the result into a trust or safety score.",
+    "privacyPolicyURL": "https://developers.ecocitizenz.com/plugins/agent-trust/privacy/",
+    "shortDescription": "Review agent reach in a repo",
+    "supportURL": "https://developers.ecocitizenz.com/plugins/agent-trust/support/",
+    "termsOfServiceURL": "https://developers.ecocitizenz.com/plugins/agent-trust/privacy/",
+    "websiteURL": "https://developers.ecocitizenz.com/agent-trust/"
+  },
+  "keywords": [
+    "ecz-id",
+    "agents",
+    "agent-identity",
+    "kya",
+    "authority",
+    "mcp",
+    "review"
+  ],
+  "license": "MIT",
+  "name": "eczid-agent-trust",
+  "repository": "https://github.com/Ecocitizenz/eczid-agent-plugins",
+  "skills": "./skills/",
+  "version": "0.1.1"
+}

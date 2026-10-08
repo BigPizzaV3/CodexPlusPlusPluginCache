@@ -1,0 +1,20 @@
+{
+  "name": "skill-risk-check",
+  "description": "Use before installing an agent skill or plugin; scan local files for risky instructions, permissions, downloads, and possible secret exposure without running the target.",
+  "version": "0.1.5",
+  "author": {
+    "name": "Orbral"
+  },
+  "homepage": "https://github.com/SpannDaMan/agent-skillguard",
+  "repository": "https://github.com/SpannDaMan/agent-skillguard",
+  "license": "MIT",
+  "keywords": [
+    "plugin-security",
+    "agent-skills",
+    "pre-install-scan",
+    "prompt-injection",
+    "supply-chain",
+    "sarif",
+    "claude-code"
+  ]
+}

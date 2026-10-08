@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "VillageSQL"
+  },
+  "description": "Skills for VillageSQL including building extensions from scratch and porting PostgreSQL extensions to VillageSQL.",
+  "interface": {
+    "brandColor": "#CC66FF",
+    "brandColorDark": "#CC66FF",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write",
+      "MySQL"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Help me build an extension for MySQL from scratch.",
+      "Port a PostgreSQL extension so I can run it on MySQL.",
+      "Add a custom function or custom data type to MySQL."
+    ],
+    "developerName": "VillageSQL",
+    "displayName": "VillageSQL Skills",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Skills for VillageSQL including building extensions from scratch and porting PostgreSQL extensions to VillageSQL.",
+    "privacyPolicyURL": "https://villagesql.com/privacy",
+    "shortDescription": "Builds extensions for MySQL",
+    "supportURL": "https://villagesql.com/contact",
+    "termsOfServiceURL": "https://villagesql.com/terms",
+    "websiteURL": "https://villagesql.com"
+  },
+  "keywords": [
+    "villagesql",
+    "mysql",
+    "extensions",
+    "database",
+    "developer-tools"
+  ],
+  "license": "Apache-2.0",
+  "name": "villagesql",
+  "repository": "https://github.com/villagesql/villagesql-skills",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

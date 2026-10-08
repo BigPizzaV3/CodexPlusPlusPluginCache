@@ -1,0 +1,7 @@
+{
+  "id": "workspace-exec",
+  "name": "Executive War Room Workspace",
+  "tenantId": "tenant-demo",
+  "capacityId": "capacity-f8",
+  "owners": ["exec.owner@example.com"]
+}

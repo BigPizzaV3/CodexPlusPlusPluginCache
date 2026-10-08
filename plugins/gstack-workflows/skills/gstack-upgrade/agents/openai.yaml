@@ -1,0 +1,8 @@
+interface:
+  display_name: "gstack Upgrade"
+  short_description: "Check and update an installed native gstack runtime only when the host can execute local commands..."
+  default_prompt: "Use gstack Upgrade for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

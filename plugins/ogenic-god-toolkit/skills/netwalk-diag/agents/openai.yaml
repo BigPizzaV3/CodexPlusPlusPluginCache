@@ -1,0 +1,4 @@
+interface:
+  display_name: "Netwalk Diag"
+  short_description: "Help with Netwalk Diag tasks"
+  default_prompt: "Use $netwalk-diag to handle this request with its specialist workflow."

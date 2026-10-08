@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 96" role="img" aria-label="ForgeMind logo">
+  <rect width="320" height="96" rx="16" fill="#0F172A"/>
+  <rect x="20" y="20" width="56" height="56" rx="12" fill="#2563EB"/>
+  <path d="M32 36h32v6H32zM32 54h32v6H32zM45 27h6v42h-6z" fill="#FFFFFF"/>
+  <circle cx="48" cy="48" r="7" fill="#14B8A6"/>
+  <text x="92" y="55" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF">ForgeMind</text>
+</svg>

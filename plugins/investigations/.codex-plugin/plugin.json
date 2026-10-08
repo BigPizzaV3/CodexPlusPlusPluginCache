@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Evidence handling, digital review, fraud analysis, OSINT, tracing, reporting, and whistleblower skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#334155",
+    "brandColorDark": "#AAB8CC",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Build or audit a defensible evidence record for this investigation.",
+      "Analyse this digital, transactional, or open-source material and identify evidential gaps.",
+      "Triage this report, trace the relevant flows, and draft neutral source-linked findings."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Investigations",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Seven reusable workflows covering chain of custody, digital evidence, fraud patterns, investigation reports, OSINT, transaction tracing, and whistleblower triage.",
+    "shortDescription": "Legal investigation workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "investigations",
+    "evidence",
+    "forensics",
+    "compliance"
+  ],
+  "license": "MIT",
+  "name": "investigations",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

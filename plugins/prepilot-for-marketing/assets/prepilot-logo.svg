@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480" role="img" aria-label="PrePilot.cloud logo">
+<title>PrePilot.cloud logo</title>
+<metadata>
+PrePilot.cloud logo asset generated from the supplied raster logo.
+Primary orange: #FE5F03. Badge dark: #0D1015.
+</metadata>
+<circle cx="240" cy="240" r="240" fill="#0D1015"/>
+<path d="M 146 118
+H 273
+C 296 118 318 127 334 144
+C 350 161 359 184 359 208
+C 359 234 350 258 333 276
+C 316 294 293 301 269 301
+H 207
+V 376
+H 146
+V 209
+H 201
+L 178 266
+L 206 254
+H 269
+C 288 254 303 235 303 211
+C 303 186 289 168 272 168
+H 146
+Z" fill="#FE5F03"/>
+</svg>

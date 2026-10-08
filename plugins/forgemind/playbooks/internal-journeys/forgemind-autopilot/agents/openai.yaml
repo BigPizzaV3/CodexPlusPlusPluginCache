@@ -1,0 +1,6 @@
+interface:
+  display_name: "ForgeMind Autopilot"
+  short_description: "Goal-driven autonomous delivery with evidence and recovery."
+  default_prompt: "Use $forgemind-autopilot to autonomously achieve this Codex goal end to end."
+policy:
+  allow_implicit_invocation: false

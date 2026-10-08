@@ -1,0 +1,9 @@
+interface:
+  display_name: "Plan DevEx Review"
+  short_description: "Review developer experience, time to first success, friction, and persona paths."
+  default_prompt: "Use Plan DevEx Review for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

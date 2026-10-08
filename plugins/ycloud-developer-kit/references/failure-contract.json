@@ -1,0 +1,2243 @@
+{
+  "$schema": "./failure-contract.schema.json",
+  "ambiguousOutcomePolicy": {
+    "authority": "developer_kit_policy",
+    "automaticRetry": false,
+    "requiredAction": "reconcile",
+    "signals": [
+      "timeout",
+      "connection_loss",
+      "response_lost"
+    ],
+    "state": "ambiguous_outcome"
+  },
+  "authorityLayers": [
+    {
+      "description": "Fields, headers, codes, and channels directly confirmed by YCloud public documentation or the pinned OpenAPI snapshot.",
+      "id": "confirmed_provider_contract"
+    },
+    {
+      "description": "Conservative classification and replay guidance. It is not a YCloud response guarantee.",
+      "id": "developer_kit_policy"
+    },
+    {
+      "description": "Retry budgets, deadlines, persistence, outbox/idempotency keys, queues, and deployment choices supplied by the integrating project.",
+      "id": "project_decision"
+    }
+  ],
+  "contractVersion": "failure-contract-v1",
+  "coverage": {
+    "coveredOperations": 88,
+    "mutationProfiles": 56,
+    "profilesWithOpenapiFailureResponseGap": 21,
+    "safeReadProfiles": 32
+  },
+  "decisionRules": [
+    {
+      "authority": "developer_kit_policy",
+      "mutationDecision": "correct_request",
+      "safeReadDecision": "correct_request",
+      "signal": "HTTP_400"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "mutationDecision": "reauthenticate_then_reconcile_before_new_attempt",
+      "safeReadDecision": "reauthenticate",
+      "signal": "HTTP_401"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "mutationDecision": "reauthorize_or_fix_precondition",
+      "safeReadDecision": "reauthorize_or_fix_precondition",
+      "signal": "HTTP_403"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "mutationDecision": "reconcile_if_previous_outcome_was_ambiguous",
+      "safeReadDecision": "return_not_found",
+      "signal": "HTTP_404"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "mutationDecision": "reconcile_without_blind_replay",
+      "safeReadDecision": "reconcile",
+      "signal": "HTTP_409"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "mutationDecision": "honor_retry_after_for_new_traffic_do_not_replay",
+      "safeReadDecision": "honor_retry_after_then_bounded_retry",
+      "signal": "HTTP_429"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "mutationDecision": "reconcile_ambiguous_outcome",
+      "safeReadDecision": "bounded_retry_if_budget_allows",
+      "signal": "HTTP_5XX_OR_503"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "mutationDecision": "ambiguous_outcome_reconcile_before_new_attempt",
+      "safeReadDecision": "bounded_retry_if_budget_allows",
+      "signal": "TIMEOUT_CONNECTION_LOSS_NO_RESPONSE"
+    },
+    {
+      "authority": "confirmed_provider_contract",
+      "mutationDecision": "await_retrieve_or_verified_message_updated_event",
+      "safeReadDecision": "not_applicable",
+      "signal": "QUEUED_ACCEPTED"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "mutationDecision": "preserve_and_fail_closed_no_replay",
+      "safeReadDecision": "preserve_and_fail_closed",
+      "signal": "UNKNOWN_CODE_OR_STATUS"
+    }
+  ],
+  "decisionVocabulary": [
+    "correct_request",
+    "reauthenticate",
+    "reauthorize",
+    "reconcile",
+    "wait",
+    "retry_if_replay_safe",
+    "await_async_status",
+    "do_not_retry",
+    "escalate",
+    "unknown"
+  ],
+  "errorEnvelope": {
+    "authority": "confirmed_provider_contract",
+    "controlFlowFields": [
+      "httpStatus",
+      "error.status",
+      "error.code"
+    ],
+    "derivedFields": [
+      "failureClass",
+      "transience",
+      "decision",
+      "automaticRetry"
+    ],
+    "diagnosticOnlyFields": [
+      "error.message"
+    ],
+    "properties": [
+      "status",
+      "code",
+      "message",
+      "target",
+      "docUrl",
+      "requestId",
+      "whatsappApiError"
+    ],
+    "required": [
+      "status",
+      "code"
+    ],
+    "wrapper": "error"
+  },
+  "idempotency": {
+    "externalId": {
+      "authority": "confirmed_provider_contract",
+      "grantsReplaySafety": false,
+      "role": "application_correlation"
+    },
+    "projectDecisionRequirements": [
+      "stable_operation_and_tenant_scope",
+      "durable_command_identity",
+      "request_digest_and_mismatch_conflict",
+      "retention_or_ttl",
+      "duplicate_in_progress_result",
+      "duplicate_completed_result",
+      "ambiguous_provider_outcome_reconciliation"
+    ],
+    "providerContract": {
+      "authority": "confirmed_provider_contract_gap",
+      "generalIdempotencyKey": "not_documented",
+      "mutationReplayGuarantee": "not_documented"
+    }
+  },
+  "operationProfiles": [
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": true,
+      "operationId": "balance-retrieve",
+      "owner": "ycloud-balance",
+      "path": "/balance",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": true,
+      "operationId": "contact-attributes-list",
+      "owner": "ycloud-contacts",
+      "path": "/contact/contacts/attributes",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "contact-create",
+      "owner": "ycloud-contacts",
+      "path": "/contact/contacts",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": false,
+      "operationId": "contact-delete",
+      "owner": "ycloud-contacts",
+      "path": "/contact/contacts/{id}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "contact-list",
+      "owner": "ycloud-contacts",
+      "path": "/contact/contacts",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "contact-note-create",
+      "owner": "ycloud-contacts",
+      "path": "/contact/contacts/{contactIdentifier}/notes",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": false,
+      "operationId": "contact-note-delete",
+      "owner": "ycloud-contacts",
+      "path": "/contact/notes/{noteId}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "contact-note-update",
+      "owner": "ycloud-contacts",
+      "path": "/contact/notes/{noteId}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "contact-notes-list",
+      "owner": "ycloud-contacts",
+      "path": "/contact/contacts/{contactIdentifier}/notes",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "contact-retrieve",
+      "owner": "ycloud-contacts",
+      "path": "/contact/contacts/{id}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "contact-update",
+      "owner": "ycloud-contacts",
+      "path": "/contact/contacts/{id}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": true,
+      "operationId": "custom_events-create-definition",
+      "owner": "ycloud-custom-events",
+      "path": "/event/definitions",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "custom_events-create-property-definition",
+      "owner": "ycloud-custom-events",
+      "path": "/event/definitions/{name}/properties",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "custom_events-retrieve-definition",
+      "owner": "ycloud-custom-events",
+      "path": "/event/definitions/{name}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": true,
+      "operationId": "custom_events-send-event",
+      "owner": "ycloud-custom-events",
+      "path": "/event/events",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "send"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "custom_events-update-definition",
+      "owner": "ycloud-custom-events",
+      "path": "/event/definitions/{name}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": false,
+      "operationId": "custom_events_delete-property-definition",
+      "owner": "ycloud-custom-events",
+      "path": "/event/definitions/{name}/properties/{propertyName}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "custom_events_update-property-definition",
+      "owner": "ycloud-custom-events",
+      "path": "/event/definitions/{name}/properties/{propertyName}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": true,
+      "operationId": "unsubscriber-create",
+      "owner": "ycloud-unsubscribers",
+      "path": "/unsubscribers",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": false,
+      "operationId": "unsubscriber-delete-by-customer-and-channel",
+      "owner": "ycloud-unsubscribers",
+      "path": "/unsubscribers/{customer}/{channel}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": true,
+      "operationId": "unsubscriber-list",
+      "owner": "ycloud-unsubscribers",
+      "path": "/unsubscribers",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "unsubscriber-list-all-by-customer",
+      "owner": "ycloud-unsubscribers",
+      "path": "/unsubscribers/{customer}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "unsubscriber-retrieve-by-customer-and-channel",
+      "owner": "ycloud-unsubscribers",
+      "path": "/unsubscribers/{customer}/{channel}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": true,
+      "operationId": "webhook_endpoint-create",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": false,
+      "operationId": "webhook_endpoint-delete",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints/{id}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": true,
+      "operationId": "webhook_endpoint-list",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "webhook_endpoint-retrieve",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints/{id}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "webhook_endpoint-rotate-secret",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints/{id}/rotateSecret",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "rotate"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "webhook_endpoint-update",
+      "owner": "ycloud-webhook-endpoints",
+      "path": "/webhookEndpoints/{id}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_business_account-list",
+      "owner": "ycloud-whatsapp-business-accounts",
+      "path": "/whatsapp/businessAccounts",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_business_account-retrieve",
+      "owner": "ycloud-whatsapp-business-accounts",
+      "path": "/whatsapp/businessAccounts/{id}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_call-accept",
+      "owner": "ycloud-whatsapp-calling",
+      "path": "/whatsapp/calls/accept",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_call-connect",
+      "owner": "ycloud-whatsapp-calling",
+      "path": "/whatsapp/calls/connect",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_call-download-media",
+      "owner": "ycloud-whatsapp-calling",
+      "path": "/whatsapp/calls/media/{mediaAssetId}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_call-pre-accept",
+      "owner": "ycloud-whatsapp-calling",
+      "path": "/whatsapp/calls/preAccept",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_call-reject",
+      "owner": "ycloud-whatsapp-calling",
+      "path": "/whatsapp/calls/reject",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_call-terminate",
+      "owner": "ycloud-whatsapp-calling",
+      "path": "/whatsapp/calls/terminate",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_flow-create",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_flow-delete",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_flow-deprecate",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}/deprecate",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_flow-list",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_flow-preview",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}/preview",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_flow-publish",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}/publish",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_flow-retrieve",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_flow-update-metadata",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}/metadata",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_flow-update-structure",
+      "owner": "ycloud-whatsapp-flows",
+      "path": "/whatsapp/flows/{flowId}/assets",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-approve-join-requests",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/joinRequests/approve",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-create",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-delete",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-list",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-list-join-requests",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/joinRequests",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-reject-join-requests",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/joinRequests/reject",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-remove-participants",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/groups/{groupId}/participants/remove",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-reset-invite-link",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/inviteLink/reset",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-retrieve",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-retrieve-invite-link",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/inviteLink",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-send-invite-link-message",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/inviteLink/messages",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "send"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_group-update-settings",
+      "owner": "ycloud-whatsapp-groups",
+      "path": "/whatsapp/{businessPhoneNumber}/groups/{groupId}/settings",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_inbound_message-mark-as-read",
+      "owner": "ycloud-whatsapp-inbound-messages",
+      "path": "/whatsapp/inboundMessages/{id}/markAsRead",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "401",
+        "403",
+        "404",
+        "429",
+        "500"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_inbound_message-typing",
+      "owner": "ycloud-whatsapp-inbound-messages",
+      "path": "/whatsapp/inboundMessages/{id}/typing",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_media-upload",
+      "owner": "ycloud-whatsapp-media",
+      "path": "/whatsapp/media/{phoneNumber}/upload",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "upload"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_message-retrieve",
+      "owner": "ycloud-whatsapp-messages",
+      "path": "/whatsapp/messages/{id}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "retrieval_observation",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_message-send",
+      "owner": "ycloud-whatsapp-messages",
+      "path": "/whatsapp/messages",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "queued_async_status",
+      "sideEffect": "send"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_message-send-directly",
+      "owner": "ycloud-whatsapp-messages",
+      "path": "/whatsapp/messages/sendDirectly",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_provider_response",
+      "sideEffect": "send"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-delete-business-username",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "403",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-delete-contact-book-entry",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/contactBook/{bsuid}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_phone_number-list",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-register",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/register",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-retrieve",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-retrieve-business-username",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-retrieve-business-username-suggestions",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername/suggestions",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-retrieve-commerce-settings",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/whatsappCommerceSettings",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-retrieve-profile",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/profile",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-retrieve-settings",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/settings",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-save-settings",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/settings",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-update-business-username",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/businessUsername",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-update-commerce-settings",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/whatsappCommerceSettings",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-update-displayName",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/displayName",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_phone_number-update-profile",
+      "owner": "ycloud-whatsapp-phone-numbers",
+      "path": "/whatsapp/phoneNumbers/{wabaId}/{phoneNumber}/profile",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "403",
+        "404",
+        "500"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_template-analytics",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates/analytics",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "reconcile",
+      "method": "POST",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_template-create",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "create"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_template-delete-by-name",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates/{wabaId}/{name}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "DELETE",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_template-delete-by-name-and-language",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates/{wabaId}/{name}/{language}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "delete"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_template-edit-by-name-and-language",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates/{wabaId}/{name}/{language}",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": true,
+      "operationId": "whatsapp_template-list",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "404"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_template-retrieve-by-name-and-language",
+      "owner": "ycloud-whatsapp-templates",
+      "path": "/whatsapp/templates/{wabaId}/{name}/{language}",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "conditional",
+      "declaredFailureStatuses": [
+        "400",
+        "403"
+      ],
+      "lostResponseDecision": "retry_if_replay_safe",
+      "method": "GET",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_waba-retrieve-automatic-creative-optimizations",
+      "owner": "ycloud-whatsapp-business-accounts",
+      "path": "/whatsapp/businessAccounts/{wabaId}/automatic-creative-optimizations",
+      "replaySafety": "replay_safe_read",
+      "resultChannel": "synchronous_read",
+      "sideEffect": "read"
+    },
+    {
+      "authority": "developer_kit_policy",
+      "automaticRetry": "never",
+      "declaredFailureStatuses": [
+        "400",
+        "403"
+      ],
+      "lostResponseDecision": "reconcile",
+      "method": "PATCH",
+      "openapiFailureResponseGap": false,
+      "operationId": "whatsapp_waba-update-automatic-creative-optimizations",
+      "owner": "ycloud-whatsapp-business-accounts",
+      "path": "/whatsapp/businessAccounts/{wabaId}/automatic-creative-optimizations",
+      "replaySafety": "not_confirmed",
+      "resultChannel": "synchronous_acceptance_or_result",
+      "sideEffect": "update"
+    }
+  ],
+  "responseHeaders": [
+    {
+      "authority": "confirmed_provider_contract",
+      "behavior": "preserve_for_correlation_and_support",
+      "name": "YCloud-Request-ID",
+      "valueType": "opaque_string"
+    },
+    {
+      "authority": "confirmed_provider_contract",
+      "behavior": "delay_related_traffic_without_granting_replay_safety",
+      "name": "Retry-After",
+      "valueType": "delay_seconds"
+    },
+    {
+      "authority": "confirmed_provider_contract",
+      "behavior": "parse_defensively",
+      "name": "RateLimit-Limit",
+      "valueType": "beta_structured_header"
+    },
+    {
+      "authority": "confirmed_provider_contract",
+      "behavior": "informational_parse_defensively",
+      "name": "RateLimit-Policy",
+      "valueType": "beta_structured_header"
+    },
+    {
+      "authority": "confirmed_provider_contract",
+      "behavior": "parse_defensively",
+      "name": "RateLimit-Remaining",
+      "valueType": "beta_non_negative_integer"
+    },
+    {
+      "authority": "confirmed_provider_contract",
+      "behavior": "parse_defensively",
+      "name": "RateLimit-Reset",
+      "valueType": "beta_delay_seconds"
+    }
+  ],
+  "retrievedAt": "2026-08-29",
+  "schemaVersion": 1,
+  "sources": {
+    "errors": {
+      "authority": "confirmed_provider_contract",
+      "url": "https://docs.ycloud.com/reference/errors"
+    },
+    "integration-boundaries": {
+      "authority": "developer_kit_policy",
+      "path": "references/integration-boundaries.md"
+    },
+    "meta-errors": {
+      "authority": "upstream_reference_unavailable_during_retrieval",
+      "url": "https://developers.facebook.com/docs/whatsapp/cloud-api/support/error-codes/"
+    },
+    "rate-limits": {
+      "authority": "confirmed_provider_contract",
+      "url": "https://docs.ycloud.com/reference/rate-limits"
+    },
+    "request-ids": {
+      "authority": "confirmed_provider_contract",
+      "url": "https://docs.ycloud.com/reference/request-ids"
+    },
+    "whatsapp-errors": {
+      "authority": "confirmed_provider_contract",
+      "url": "https://docs.ycloud.com/reference/whatsapp-errors"
+    }
+  },
+  "unknownPolicy": {
+    "authority": "developer_kit_policy",
+    "automaticRetry": false,
+    "decision": "unknown",
+    "messageTextControlsFlow": false,
+    "preserveOriginalCode": true,
+    "preserveUnknownFields": true
+  },
+  "whatsappErrorCodes": [
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "1",
+      "failureClass": "payload_or_upstream",
+      "observedHttpStatus": 500,
+      "source": "whatsapp-errors",
+      "transience": "unknown"
+    },
+    {
+      "action": "reauthorize",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "3",
+      "failureClass": "permission",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "reauthorize",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "10",
+      "failureClass": "permission",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "reauthenticate",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "190",
+      "failureClass": "authentication",
+      "observedHttpStatus": 401,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "reauthorize",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "200",
+      "failureClass": "permission",
+      "observedHttpStatus": 403,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "368",
+      "failureClass": "policy",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "retry_if_replay_safe",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "asynchronous_webhook"
+      ],
+      "code": "131000",
+      "failureClass": "upstream_unknown",
+      "observedHttpStatus": null,
+      "source": "whatsapp-errors",
+      "transience": "unknown"
+    },
+    {
+      "action": "reauthorize",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "131005",
+      "failureClass": "permission",
+      "observedHttpStatus": 403,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "131009",
+      "failureClass": "validation",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "131013",
+      "failureClass": "recipient",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "asynchronous_webhook"
+      ],
+      "code": "131026",
+      "failureClass": "undeliverable",
+      "observedHttpStatus": null,
+      "source": "whatsapp-errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "asynchronous_webhook"
+      ],
+      "code": "131031",
+      "failureClass": "policy",
+      "observedHttpStatus": null,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "131037",
+      "failureClass": "precondition",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "asynchronous_webhook"
+      ],
+      "code": "131047",
+      "failureClass": "service_window",
+      "observedHttpStatus": null,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "wait",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "asynchronous_webhook"
+      ],
+      "code": "131048",
+      "failureClass": "quality_rate_limit",
+      "observedHttpStatus": null,
+      "source": "whatsapp-errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "wait",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "asynchronous_webhook"
+      ],
+      "code": "131049",
+      "failureClass": "ecosystem_rate_limit",
+      "observedHttpStatus": null,
+      "source": "whatsapp-errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "asynchronous_webhook"
+      ],
+      "code": "131050",
+      "failureClass": "recipient_policy",
+      "observedHttpStatus": null,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response",
+        "asynchronous_webhook"
+      ],
+      "code": "131053",
+      "failureClass": "media",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "131055",
+      "failureClass": "method",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "wait",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response",
+        "asynchronous_webhook"
+      ],
+      "code": "131056",
+      "failureClass": "pair_rate_limit",
+      "observedHttpStatus": 429,
+      "source": "whatsapp-errors",
+      "transience": "transient"
+    },
+    {
+      "action": "retry_if_replay_safe",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "131057",
+      "failureClass": "maintenance",
+      "observedHttpStatus": 500,
+      "source": "whatsapp-errors",
+      "transience": "transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "131062",
+      "failureClass": "recipient",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "132005",
+      "failureClass": "validation",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "135000",
+      "failureClass": "validation",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "unknown"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "138000",
+      "failureClass": "calling_precondition",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "reconcile",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "138017",
+      "failureClass": "calling_conflict",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "channels": [
+        "synchronous_response"
+      ],
+      "code": "139000",
+      "failureClass": "integrity",
+      "observedHttpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    }
+  ],
+  "ycloudErrorCodes": [
+    {
+      "action": "reauthorize",
+      "authority": "confirmed_provider_contract",
+      "code": "ACCOUNT_LIMITED",
+      "failureClass": "authorization",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "wait",
+      "authority": "confirmed_provider_contract",
+      "code": "ACCOUNT_RATE_LIMITED",
+      "failureClass": "rate_limit",
+      "httpStatus": 429,
+      "source": "errors",
+      "transience": "transient"
+    },
+    {
+      "action": "escalate",
+      "authority": "confirmed_provider_contract",
+      "code": "ACCOUNT_UNAVAILABLE",
+      "failureClass": "availability",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "reconcile",
+      "authority": "confirmed_provider_contract",
+      "code": "ALREADY_EXISTS",
+      "failureClass": "conflict",
+      "httpStatus": 409,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "code": "BAD_REQUEST",
+      "failureClass": "validation",
+      "httpStatus": 400,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "code": "BALANCE_INSUFFICIENT",
+      "failureClass": "precondition",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "code": "CONTENT_PROHIBITED",
+      "failureClass": "policy",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "code": "CONTENT_TOO_LARGE",
+      "failureClass": "validation",
+      "httpStatus": 413,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "wait",
+      "authority": "confirmed_provider_contract",
+      "code": "EMAIL_DOMAIN_UNVERIFIED",
+      "failureClass": "precondition",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "reauthorize",
+      "authority": "confirmed_provider_contract",
+      "code": "FORBIDDEN",
+      "failureClass": "authorization",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "retry_if_replay_safe",
+      "authority": "confirmed_provider_contract",
+      "code": "INTERNAL_SERVER_ERROR",
+      "failureClass": "server",
+      "httpStatus": 500,
+      "source": "errors",
+      "transience": "transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "code": "MESSAGING_REGION_UNSUPPORTED",
+      "failureClass": "validation",
+      "httpStatus": 400,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "reconcile",
+      "authority": "confirmed_provider_contract",
+      "code": "NOT_FOUND",
+      "failureClass": "not_found",
+      "httpStatus": 404,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "code": "PARAM_INVALID",
+      "failureClass": "validation",
+      "httpStatus": 400,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "code": "PARAM_INVALID_LENGTH",
+      "failureClass": "validation",
+      "httpStatus": 400,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "code": "PARAM_MISSING",
+      "failureClass": "validation",
+      "httpStatus": 400,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "code": "PARAM_NOT_MATCH",
+      "failureClass": "validation",
+      "httpStatus": 400,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "code": "RECIPIENT_IN_BLOCK_LIST",
+      "failureClass": "recipient_policy",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "code": "RECIPIENT_UNSUBSCRIBED",
+      "failureClass": "recipient_policy",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "code": "SENDER_ID_UNAVAILABLE",
+      "failureClass": "precondition",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "wait",
+      "authority": "confirmed_provider_contract",
+      "code": "SENDER_RATE_LIMITED",
+      "failureClass": "rate_limit",
+      "httpStatus": 429,
+      "source": "errors",
+      "transience": "transient"
+    },
+    {
+      "action": "retry_if_replay_safe",
+      "authority": "confirmed_provider_contract",
+      "code": "SERVICE_UNAVAILABLE",
+      "failureClass": "server",
+      "httpStatus": 503,
+      "source": "errors",
+      "transience": "transient"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "code": "SMS_SIGNATURE_UNAVAILABLE",
+      "failureClass": "precondition",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "wait",
+      "authority": "confirmed_provider_contract",
+      "code": "TOO_MANY_REQUESTS",
+      "failureClass": "rate_limit",
+      "httpStatus": 429,
+      "source": "errors",
+      "transience": "transient"
+    },
+    {
+      "action": "reauthenticate",
+      "authority": "confirmed_provider_contract",
+      "code": "UNAUTHORIZED",
+      "failureClass": "authentication",
+      "httpStatus": 401,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "reauthorize",
+      "authority": "confirmed_provider_contract",
+      "code": "WHATSAPP_BUSINESS_ACCOUNT_UNAVAILABLE",
+      "failureClass": "authorization",
+      "httpStatus": 403,
+      "source": "whatsapp-errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "code": "WHATSAPP_DIRECT_SEND_UNSUPPORTED_COMPONENT",
+      "failureClass": "validation",
+      "httpStatus": 400,
+      "source": "whatsapp-errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "code": "WHATSAPP_PHONE_NUMBER_UNAVAILABLE",
+      "failureClass": "precondition",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "do_not_retry",
+      "authority": "confirmed_provider_contract",
+      "code": "WHATSAPP_TEMPLATE_UNAVAILABLE",
+      "failureClass": "precondition",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "conditional"
+    },
+    {
+      "action": "correct_request",
+      "authority": "confirmed_provider_contract",
+      "code": "WHATSAPP_TEMPLATE_UNEDITABLE",
+      "failureClass": "precondition",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "non_transient"
+    },
+    {
+      "action": "reauthorize",
+      "authority": "confirmed_provider_contract",
+      "code": "WHATSAPP_WABA_UNAVAILABLE",
+      "failureClass": "authorization",
+      "httpStatus": 403,
+      "source": "errors",
+      "transience": "conditional"
+    }
+  ]
+}

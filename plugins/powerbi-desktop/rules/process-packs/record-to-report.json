@@ -1,0 +1,26 @@
+{
+  "schema": "codex.powerbi.processRulePack.v1",
+  "id": "record-to-report",
+  "process": "RecordToReport",
+  "displayName": "Record to Report",
+  "kpiTerms": ["gl", "ledger", "account", "period", "journal", "close", "reconcile", "balance"],
+  "objects": [
+    { "name": "JournalEntry", "aliases": ["journal", "journalentry", "glentry"], "fields": [
+      { "name": "entryId", "aliases": ["EntryId", "JournalId", "DocumentId"], "required": true },
+      { "name": "glAccount", "aliases": ["GLAccount", "Account", "AccountId"], "required": true },
+      { "name": "postingDate", "aliases": ["PostingDate", "DocumentDate"], "required": true },
+      { "name": "period", "aliases": ["Period", "FiscalPeriod"], "required": true },
+      { "name": "amount", "aliases": ["Amount", "Balance"], "required": true }
+    ] },
+    { "name": "GLAccount", "aliases": ["glaccount", "account"], "fields": [
+      { "name": "glAccount", "aliases": ["GLAccount", "Account", "AccountId"], "required": true },
+      { "name": "accountType", "aliases": ["AccountType", "Type"], "required": false }
+    ] }
+  ],
+  "rules": [
+    { "id": "r2r.entry.account.required", "type": "requiredField", "severity": "High", "object": "JournalEntry", "field": "glAccount", "description": "Journal entry is missing GL account.", "ownerHint": "Finance close owner", "recommendedAction": "Correct account assignment before R2R reporting.", "releaseImpact": "No-Go" },
+    { "id": "r2r.entry.date.required", "type": "requiredField", "severity": "High", "object": "JournalEntry", "field": "postingDate", "description": "Journal entry is missing posting date.", "ownerHint": "Finance close owner", "recommendedAction": "Backfill posting date before period close analysis.", "releaseImpact": "No-Go" },
+    { "id": "r2r.entry.period.required", "type": "requiredField", "severity": "High", "object": "JournalEntry", "field": "period", "description": "Journal entry is missing fiscal period.", "ownerHint": "Finance close owner", "recommendedAction": "Correct fiscal period mapping.", "releaseImpact": "No-Go" },
+    { "id": "r2r.entry.account.orphan", "type": "orphan", "severity": "High", "object": "JournalEntry", "field": "glAccount", "parentObject": "GLAccount", "parentField": "glAccount", "description": "Journal entry references missing GL account master data.", "ownerHint": "Chart of accounts owner", "recommendedAction": "Reconcile GL account master data.", "releaseImpact": "No-Go" }
+  ]
+}

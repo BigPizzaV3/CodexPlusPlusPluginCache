@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "Benjamin Haire",
+    "url": "https://github.com/theisegoria"
+  },
+  "description": "Create, edit, preview, import, repair, and statically validate portable Modelica projects.",
+  "homepage": "https://github.com/theisegoria/chatgpt-skill-plugins",
+  "interface": {
+    "brandColor": "#FF7417",
+    "brandColorDark": "#FF7417",
+    "capabilities": [
+      "Write",
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create a visually annotated portable Modelica project for this physical system.",
+      "Add or replace standard visual annotations while preserving every untouched Modelica file byte-for-byte.",
+      "Import this package and create a deterministic structural SVG preview without compiling it."
+    ],
+    "developerName": "Benjamin Michael Haire",
+    "displayName": "Modelica Projects",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Turn physical-system descriptions into deterministic portable Modelica packages with standard visual annotations, topology-aware layout, source-preserving edits, structural previews, static validation, and optional local compiler evidence when explicitly requested.",
+    "privacyPolicyURL": "https://github.com/theisegoria/chatgpt-skill-plugins/blob/main/PRIVACY.md",
+    "shortDescription": "Create Modelica projects",
+    "supportURL": "https://github.com/theisegoria/chatgpt-skill-plugins/issues",
+    "termsOfServiceURL": "https://github.com/theisegoria/chatgpt-skill-plugins/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/theisegoria/chatgpt-skill-plugins"
+  },
+  "keywords": [
+    "modelica",
+    "physical-modeling",
+    "simulation"
+  ],
+  "license": "Apache-2.0",
+  "name": "modelica-projects",
+  "repository": "https://github.com/theisegoria/chatgpt-skill-plugins",
+  "skills": "./skills/",
+  "version": "2.1.0"
+}

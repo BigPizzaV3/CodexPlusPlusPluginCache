@@ -1,0 +1,46 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "email": "support@zohocatalyst.com",
+    "name": "Catalyst by Zoho",
+    "url": "https://catalyst.zoho.com/"
+  },
+  "description": "Catalyst by Zoho is a full-stack development platform for building web applications, APIs, automation workflows, and AI-powered software. The Codex plugin helps developers use Catalyst services directly from their coding workflow, making it easier to create backends, manage databases and storage, deploy applications, automate tasks, and integrate with Zoho and external services without switching between multiple tools.",
+  "homepage": "https://catalyst.zoho.com/",
+  "interface": {
+    "brandColor": "#226DB4",
+    "brandColorDark": "#4B96DD",
+    "capabilities": [
+      "MCP",
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Help me work with Catalyst by Zoho.",
+      "Show me available Catalyst by Zoho capabilities.",
+      "Guide my Catalyst project setup."
+    ],
+    "developerName": "Catalyst by Zoho",
+    "displayName": "Catalyst by Zoho",
+    "logo": "./assets/logo.png",
+    "longDescription": "Catalyst by Zoho plugin extends Codex with MCP-backed workflows and skills for building, managing, and operating Catalyst projects.",
+    "privacyPolicyURL": "https://www.zoho.com/privacy.html",
+    "shortDescription": "Build, deploy and host apps.",
+    "termsOfServiceURL": "https://www.zoho.com/en-in/terms.html",
+    "websiteURL": "https://catalyst.zoho.com/"
+  },
+  "keywords": [
+    "zoho",
+    "catalyst",
+    "serverless",
+    "mcp",
+    "cloud"
+  ],
+  "license": "MIT",
+  "name": "app-6a16bcb9a37081919b0db1d81010fb2f",
+  "repository": "https://github.com/catalystbyzoho",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

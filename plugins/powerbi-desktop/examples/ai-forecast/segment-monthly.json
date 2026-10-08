@@ -1,0 +1,65 @@
+{
+  "schema": "codex.powerbi.liveDmv.v1",
+  "rows": [
+    {
+      "dw Custtable[CustHierachy01]": "A - Germany",
+      "dw Inventtable[ProductLineHerachy01]": "P1 - Standard",
+      "Dates[Calendar Year]": 2025,
+      "Dates[Calendar MonthNumber]": 5,
+      "Dates[Calendar Month Year]": "May 2025",
+      "[Sales]": 1000.0,
+      "[Qty]": 10.0,
+      "[Budget]": 0.0,
+      "[ForecastRoll]": 0.0,
+      "[Backlog]": 0.0
+    },
+    {
+      "dw Custtable[CustHierachy01]": "A - Germany",
+      "dw Inventtable[ProductLineHerachy01]": "P1 - Standard",
+      "Dates[Calendar Year]": 2026,
+      "Dates[Calendar MonthNumber]": 1,
+      "Dates[Calendar Month Year]": "Jan 2026",
+      "[Sales]": 1200.0,
+      "[Qty]": 12.0,
+      "[Budget]": 1500.0,
+      "[ForecastRoll]": 1200.0,
+      "[Backlog]": 0.0
+    },
+    {
+      "dw Custtable[CustHierachy01]": "A - Germany",
+      "dw Inventtable[ProductLineHerachy01]": "P1 - Standard",
+      "Dates[Calendar Year]": 2026,
+      "Dates[Calendar MonthNumber]": 5,
+      "Dates[Calendar Month Year]": "May 2026",
+      "[Sales]": 400.0,
+      "[Qty]": 4.0,
+      "[Budget]": 1500.0,
+      "[ForecastRoll]": 1400.0,
+      "[Backlog]": 300.0
+    },
+    {
+      "dw Custtable[CustHierachy01]": "B - USA",
+      "dw Inventtable[ProductLineHerachy01]": "P2 - Sparse",
+      "Dates[Calendar Year]": 2025,
+      "Dates[Calendar MonthNumber]": 6,
+      "Dates[Calendar Month Year]": "Jun 2025",
+      "[Sales]": 500.0,
+      "[Qty]": 5.0,
+      "[Budget]": 0.0,
+      "[ForecastRoll]": 0.0,
+      "[Backlog]": 0.0
+    },
+    {
+      "dw Custtable[CustHierachy01]": "B - USA",
+      "dw Inventtable[ProductLineHerachy01]": "P2 - Sparse",
+      "Dates[Calendar Year]": 2026,
+      "Dates[Calendar MonthNumber]": 6,
+      "Dates[Calendar Month Year]": "Jun 2026",
+      "[Sales]": 0.0,
+      "[Qty]": 0.0,
+      "[Budget]": 600.0,
+      "[ForecastRoll]": 650.0,
+      "[Backlog]": 450.0
+    }
+  ]
+}

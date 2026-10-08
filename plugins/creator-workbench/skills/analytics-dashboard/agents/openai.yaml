@@ -1,0 +1,7 @@
+interface:
+  display_name: Analytics Dashboard
+  short_description: Analyze LinkedIn performance data
+  brand_color: '#E45B32'
+  default_prompt: Use $analytics-dashboard to analyze this LinkedIn export and build a dashboard when the workspace supports it.
+policy:
+  allow_implicit_invocation: true

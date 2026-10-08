@@ -1,0 +1,44 @@
+{
+  "name": "freckle",
+  "description": "Build with Freckle in your coding agent — AI-powered list building, enrichment, lead scoring, and saved Workflows through agent skills and the freckle CLI.",
+  "version": "1.0.390",
+  "author": {
+    "name": "Freckle"
+  },
+  "homepage": "https://freckle.io",
+  "repository": "https://github.com/freckle-io/agent-plugins",
+  "license": "MIT",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/bin/freckle\" --freckle-internal-enable-claude-auto-update-v1 >&2 || true",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/approve-cli.sh claude"
+          }
+        ]
+      },
+      {
+        "matcher": "Skill|WebFetch|WebSearch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/approve-skills.sh claude"
+          }
+        ]
+      }
+    ]
+  }
+}

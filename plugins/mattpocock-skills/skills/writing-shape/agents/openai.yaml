@@ -1,0 +1,9 @@
+interface:
+  display_name: Writing Shape
+  short_description: Shape raw material into an article
+  default_prompt: Use $writing-shape for this task
+policy:
+  allow_implicit_invocation: false
+  products:
+  - CHAT
+  - CODEX

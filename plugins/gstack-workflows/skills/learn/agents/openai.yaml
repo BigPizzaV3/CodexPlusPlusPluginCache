@@ -1,0 +1,9 @@
+interface:
+  display_name: "Learn"
+  short_description: "Capture, inspect, and maintain project learnings backed by observed evidence."
+  default_prompt: "Use Learn for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

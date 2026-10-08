@@ -1,0 +1,13 @@
+interface:
+  display_name: "Email Love Design System Migration"
+  short_description: "Migrate legacy email systems into Email Love"
+  default_prompt: "Use $email-love-design-system-migration to audit and migrate this legacy email design system."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "figma"
+      description: "Audit the source and build the target Figma file"
+      transport: "streamable_http"
+      url: "https://mcp.figma.com/mcp"
+policy:
+  allow_implicit_invocation: true

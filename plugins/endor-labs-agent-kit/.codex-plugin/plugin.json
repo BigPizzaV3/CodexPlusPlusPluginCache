@@ -1,0 +1,49 @@
+{
+  "author": {
+    "name": "Endor Labs",
+    "url": "https://www.endorlabs.com/"
+  },
+  "description": "Endor Labs security workflows and setup for Codex.",
+  "homepage": "https://github.com/endorlabs/ai-plugins",
+  "interface": {
+    "brandColor": "#26D07C",
+    "brandColorDark": "#2FD985",
+    "capabilities": [
+      "Security",
+      "Remediation",
+      "Investigation",
+      "Application Security",
+      "Agentic Workflows",
+      "Agentic Remediation",
+      "Agentic AppSec"
+    ],
+    "category": "Security",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use the SCA remediation agent to fix the P0 findings in this repo for my tenant.",
+      "Triage the top AI SAST findings for my repo and propose a PR to fix them.",
+      "Plan a safe dependency remediation using Endor Labs evidence."
+    ],
+    "developerName": "Endor Labs",
+    "displayName": "Endor Labs Agent Kit",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Packaged AppSec workflows for SCA remediation, AI SAST triage, CI/CD posture, malware response, findings review, Endor Labs setup, and more.",
+    "privacyPolicyURL": "https://www.endorlabs.com/legal/privacy-policy",
+    "shortDescription": "Endor Labs Agentic AppSec",
+    "supportURL": "https://www.endorlabs.com/lp/contact-us",
+    "termsOfServiceURL": "https://www.endorlabs.com/legal/terms-of-use",
+    "websiteURL": "https://www.endorlabs.com/"
+  },
+  "keywords": [
+    "endor-labs",
+    "security",
+    "sca",
+    "sast",
+    "codex"
+  ],
+  "license": "MIT",
+  "name": "endor-labs-agent-kit",
+  "repository": "https://github.com/endorlabs/ai-plugins",
+  "skills": "./skills/",
+  "version": "2.2.2"
+}

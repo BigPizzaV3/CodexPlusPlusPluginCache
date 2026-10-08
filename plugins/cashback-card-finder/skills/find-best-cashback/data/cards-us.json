@@ -1,0 +1,562 @@
+{
+  "schema_version": 1,
+  "country": "US",
+  "currency": "USD",
+  "as_of": "2026-05",
+  "provenance": "Model-knowledge snapshot, NOT a live feed. Issuers change rates, caps and exclusions without notice. Verify any rate that decides the recommendation against the issuer's own benefits or terms page before presenting it as current.",
+  "cards": [
+    {
+      "id": "amex-bcp",
+      "name": "American Express Blue Cash Preferred",
+      "issuer": "American Express",
+      "network": "amex",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 95,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 2.7,
+      "as_of": "2026-05",
+      "source": "https://www.americanexpress.com/us/credit-cards/card/blue-cash-preferred/",
+      "rules": [
+        {
+          "id": "supermarkets",
+          "label": "6% U.S. supermarkets",
+          "unit": "percent",
+          "rate": 6,
+          "match": {"categories": ["grocery"]},
+          "excludes": {
+            "categories": ["superstore", "warehouse_club"],
+            "merchants": ["walmart", "target", "costco", "sams-club"]
+          },
+          "cap": {"basis": "spend", "amount": 6000, "period": "year", "shared_key": "amex-bcp-grocery"},
+          "confidence": "high",
+          "note": "Superstores, warehouse clubs and meal-kit services are excluded; after the $6,000 annual cap the rate drops to 1%."
+        },
+        {
+          "id": "streaming",
+          "label": "6% select U.S. streaming",
+          "unit": "percent",
+          "rate": 6,
+          "match": {"categories": ["streaming"]},
+          "confidence": "medium",
+          "note": "Only services on Amex's published eligible-streaming list qualify."
+        },
+        {
+          "id": "gas",
+          "label": "3% U.S. gas stations",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["gas"]},
+          "excludes": {"categories": ["superstore", "warehouse_club"], "merchants": ["costco-gas"]},
+          "confidence": "high"
+        },
+        {
+          "id": "transit",
+          "label": "3% transit",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["transit", "rideshare"]},
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "id": "amex-bce",
+      "name": "American Express Blue Cash Everyday",
+      "issuer": "American Express",
+      "network": "amex",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 2.7,
+      "as_of": "2026-05",
+      "source": "https://www.americanexpress.com/us/credit-cards/card/blue-cash-everyday/",
+      "rules": [
+        {
+          "id": "supermarkets",
+          "label": "3% U.S. supermarkets",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["grocery"]},
+          "excludes": {"categories": ["superstore", "warehouse_club"], "merchants": ["walmart", "target", "costco"]},
+          "cap": {"basis": "spend", "amount": 6000, "period": "year", "shared_key": "amex-bce-grocery"},
+          "confidence": "high"
+        },
+        {
+          "id": "online-retail",
+          "label": "3% U.S. online retail",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["online_retail"]},
+          "cap": {"basis": "spend", "amount": 6000, "period": "year", "shared_key": "amex-bce-online"},
+          "confidence": "medium"
+        },
+        {
+          "id": "gas",
+          "label": "3% U.S. gas stations",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["gas"]},
+          "excludes": {"merchants": ["costco-gas"]},
+          "cap": {"basis": "spend", "amount": 6000, "period": "year", "shared_key": "amex-bce-gas"},
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "id": "chase-freedom-flex",
+      "name": "Chase Freedom Flex",
+      "issuer": "Chase",
+      "network": "mastercard",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 3,
+      "as_of": "2026-05",
+      "source": "https://creditcards.chase.com/cash-back-credit-cards/freedom/flex",
+      "rules": [
+        {
+          "id": "rotating",
+          "label": "5% rotating quarterly category",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"categories": ["__rotating__"]},
+          "cap": {"basis": "spend", "amount": 1500, "period": "quarter", "shared_key": "chase-rotating"},
+          "activation_required": true,
+          "confidence": "low",
+          "note": "The 5% category changes every quarter and must be activated. Look up the current quarter's list and pass the matching category in the purchase before trusting this rule."
+        },
+        {
+          "id": "dining",
+          "label": "3% dining",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["dining", "fast_food", "delivery"]},
+          "confidence": "high"
+        },
+        {
+          "id": "drugstore",
+          "label": "3% drugstores",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["drugstore"]},
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "id": "chase-freedom-unlimited",
+      "name": "Chase Freedom Unlimited",
+      "issuer": "Chase",
+      "network": "visa",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1.5,
+      "base_label": "1.5% everything else",
+      "foreign_transaction_fee_percent": 3,
+      "as_of": "2026-05",
+      "source": "https://creditcards.chase.com/cash-back-credit-cards/freedom/unlimited",
+      "rules": [
+        {
+          "id": "dining",
+          "label": "3% dining",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["dining", "fast_food", "delivery"]},
+          "confidence": "high"
+        },
+        {
+          "id": "drugstore",
+          "label": "3% drugstores",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["drugstore"]},
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "id": "citi-custom-cash",
+      "name": "Citi Custom Cash",
+      "issuer": "Citi",
+      "network": "mastercard",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 3,
+      "as_of": "2026-05",
+      "source": "https://www.citi.com/credit-cards/citi-custom-cash-credit-card",
+      "rules": [
+        {
+          "id": "top-category",
+          "label": "5% on your top eligible category this cycle",
+          "unit": "percent",
+          "rate": 5,
+          "match": {
+            "categories": ["grocery", "gas", "dining", "fast_food", "drugstore", "transit",
+                           "streaming", "home_improvement", "entertainment", "travel"]
+          },
+          "cap": {"basis": "spend", "amount": 500, "period": "month", "shared_key": "citi-custom"},
+          "confidence": "medium",
+          "note": "5% applies only to the single eligible category where the user spends the most in that billing cycle, capped at $500 of spend. If this purchase is not in their top category, it earns 1%. Confirm with the user before scoring it as the winner."
+        }
+      ]
+    },
+    {
+      "id": "citi-double-cash",
+      "name": "Citi Double Cash",
+      "issuer": "Citi",
+      "network": "mastercard",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 2,
+      "base_label": "2% on everything (1% buy + 1% pay)",
+      "foreign_transaction_fee_percent": 3,
+      "as_of": "2026-05",
+      "source": "https://www.citi.com/credit-cards/citi-double-cash-credit-card",
+      "rules": [],
+      "notes": "The second 1% only posts as the balance is paid off."
+    },
+    {
+      "id": "discover-it",
+      "name": "Discover it Cash Back",
+      "issuer": "Discover",
+      "network": "discover",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 0,
+      "as_of": "2026-05",
+      "source": "https://www.discover.com/credit-cards/cash-back/it-card.html",
+      "rules": [
+        {
+          "id": "rotating",
+          "label": "5% rotating quarterly category",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"categories": ["__rotating__"]},
+          "cap": {"basis": "spend", "amount": 1500, "period": "quarter", "shared_key": "discover-rotating"},
+          "activation_required": true,
+          "confidence": "low",
+          "note": "Quarterly category must be activated. Check the current calendar before applying."
+        }
+      ]
+    },
+    {
+      "id": "capital-one-savor",
+      "name": "Capital One Savor",
+      "issuer": "Capital One",
+      "network": "mastercard",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 0,
+      "as_of": "2026-05",
+      "source": "https://www.capitalone.com/credit-cards/savor-dining-rewards/",
+      "rules": [
+        {
+          "id": "dining-entertainment",
+          "label": "3% dining, entertainment, streaming and grocery",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["dining", "fast_food", "delivery", "entertainment", "streaming", "grocery"]},
+          "excludes": {"categories": ["superstore", "warehouse_club"], "merchants": ["walmart", "target"]},
+          "confidence": "high",
+          "note": "Grocery earning excludes superstores such as Walmart and Target."
+        }
+      ]
+    },
+    {
+      "id": "capital-one-quicksilver",
+      "name": "Capital One Quicksilver",
+      "issuer": "Capital One",
+      "network": "visa",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1.5,
+      "base_label": "1.5% on everything",
+      "foreign_transaction_fee_percent": 0,
+      "as_of": "2026-05",
+      "source": "https://www.capitalone.com/credit-cards/quicksilver/",
+      "rules": []
+    },
+    {
+      "id": "wells-fargo-active-cash",
+      "name": "Wells Fargo Active Cash",
+      "issuer": "Wells Fargo",
+      "network": "visa",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 2,
+      "base_label": "2% on everything",
+      "foreign_transaction_fee_percent": 3,
+      "as_of": "2026-05",
+      "source": "https://creditcards.wellsfargo.com/active-cash-credit-card/",
+      "rules": []
+    },
+    {
+      "id": "boa-customized-cash",
+      "name": "Bank of America Customized Cash Rewards",
+      "issuer": "Bank of America",
+      "network": "visa",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 3,
+      "as_of": "2026-05",
+      "source": "https://www.bankofamerica.com/credit-cards/products/cash-back-credit-card/",
+      "rules": [
+        {
+          "id": "choice",
+          "label": "3% in your chosen category",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["gas", "ev_charging", "online_retail", "dining", "travel", "drugstore", "home_improvement"]},
+          "cap": {"basis": "spend", "amount": 2500, "period": "quarter", "shared_key": "boa-combined"},
+          "confidence": "low",
+          "note": "Only one chosen category earns 3%. Ask which category the user selected before applying this."
+        },
+        {
+          "id": "grocery-wholesale",
+          "label": "2% grocery and wholesale clubs",
+          "unit": "percent",
+          "rate": 2,
+          "match": {"categories": ["grocery", "warehouse_club"]},
+          "cap": {"basis": "spend", "amount": 2500, "period": "quarter", "shared_key": "boa-combined"},
+          "confidence": "medium",
+          "note": "The 3% and 2% categories share one combined $2,500 quarterly cap. Preferred Rewards members earn a 25-75% bonus on top."
+        }
+      ]
+    },
+    {
+      "id": "amex-gold",
+      "name": "American Express Gold Card",
+      "issuer": "American Express",
+      "network": "amex",
+      "currency": "USD",
+      "reward_type": "points",
+      "point_value_cents": 1.8,
+      "annual_fee": 325,
+      "base_rate": 1,
+      "base_unit": "points_per_unit",
+      "foreign_transaction_fee_percent": 0,
+      "as_of": "2026-05",
+      "source": "https://www.americanexpress.com/us/credit-cards/card/gold-card/",
+      "rules": [
+        {
+          "id": "dining",
+          "label": "4x restaurants",
+          "unit": "points_per_unit",
+          "rate": 4,
+          "match": {"categories": ["dining", "fast_food", "delivery"]},
+          "cap": {"basis": "spend", "amount": 50000, "period": "year", "shared_key": "amex-gold-dining"},
+          "confidence": "high"
+        },
+        {
+          "id": "supermarkets",
+          "label": "4x U.S. supermarkets",
+          "unit": "points_per_unit",
+          "rate": 4,
+          "match": {"categories": ["grocery"]},
+          "excludes": {"categories": ["superstore", "warehouse_club"], "merchants": ["walmart", "target", "costco"]},
+          "cap": {"basis": "spend", "amount": 25000, "period": "year", "shared_key": "amex-gold-grocery"},
+          "confidence": "high"
+        },
+        {
+          "id": "flights",
+          "label": "3x flights booked direct or with Amex Travel",
+          "unit": "points_per_unit",
+          "rate": 3,
+          "match": {"categories": ["airline"]},
+          "confidence": "medium"
+        }
+      ],
+      "notes": "Membership Rewards points are only worth ~1.8c when transferred to airline partners; at 1c statement credit this card is much weaker than the headline multiplier suggests."
+    },
+    {
+      "id": "chase-sapphire-preferred",
+      "name": "Chase Sapphire Preferred",
+      "issuer": "Chase",
+      "network": "visa",
+      "currency": "USD",
+      "reward_type": "points",
+      "point_value_cents": 1.7,
+      "annual_fee": 95,
+      "base_rate": 1,
+      "base_unit": "points_per_unit",
+      "foreign_transaction_fee_percent": 0,
+      "as_of": "2026-05",
+      "source": "https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred",
+      "rules": [
+        {
+          "id": "dining",
+          "label": "3x dining",
+          "unit": "points_per_unit",
+          "rate": 3,
+          "match": {"categories": ["dining", "fast_food", "delivery"]},
+          "confidence": "high"
+        },
+        {
+          "id": "streaming",
+          "label": "3x select streaming",
+          "unit": "points_per_unit",
+          "rate": 3,
+          "match": {"categories": ["streaming"]},
+          "confidence": "medium"
+        },
+        {
+          "id": "travel",
+          "label": "2x travel",
+          "unit": "points_per_unit",
+          "rate": 2,
+          "match": {"categories": ["travel", "airline", "hotel", "transit", "rideshare"]},
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "id": "amazon-prime-visa",
+      "name": "Prime Visa (Chase)",
+      "issuer": "Chase",
+      "network": "visa",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 0,
+      "as_of": "2026-05",
+      "source": "https://www.amazon.com/creditcard",
+      "rules": [
+        {
+          "id": "amazon",
+          "label": "5% at Amazon and Whole Foods",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"merchants": ["amazon", "whole-foods"]},
+          "confidence": "high",
+          "note": "Requires an active Prime membership; without Prime the rate is 3%."
+        },
+        {
+          "id": "everyday",
+          "label": "2% dining, gas and transit",
+          "unit": "percent",
+          "rate": 2,
+          "match": {"categories": ["dining", "fast_food", "gas", "transit", "drugstore"]},
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "id": "target-redcard",
+      "name": "Target Circle Card",
+      "issuer": "TD Bank",
+      "network": "mastercard",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 0,
+      "base_label": "no earning outside Target",
+      "foreign_transaction_fee_percent": 3,
+      "as_of": "2026-05",
+      "source": "https://www.target.com/circlecard",
+      "rules": [
+        {
+          "id": "target",
+          "label": "5% off at Target",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"merchants": ["target"]},
+          "confidence": "high",
+          "note": "This is an instant 5% discount at checkout rather than accrued cashback, and it does not apply anywhere else."
+        }
+      ]
+    },
+    {
+      "id": "costco-anywhere-visa",
+      "name": "Costco Anywhere Visa (Citi)",
+      "issuer": "Citi",
+      "network": "visa",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 0,
+      "as_of": "2026-05",
+      "source": "https://www.citi.com/credit-cards/citi-costco-anywhere-visa-credit-card",
+      "rules": [
+        {
+          "id": "gas",
+          "label": "4% on eligible gas and EV charging",
+          "unit": "percent",
+          "rate": 4,
+          "match": {"categories": ["gas", "ev_charging"]},
+          "cap": {"basis": "spend", "amount": 7000, "period": "year", "shared_key": "costco-gas"},
+          "confidence": "high",
+          "note": "Drops to 1% after $7,000 of gas spend per year."
+        },
+        {
+          "id": "dining-travel",
+          "label": "3% restaurants and eligible travel",
+          "unit": "percent",
+          "rate": 3,
+          "match": {"categories": ["dining", "fast_food", "travel", "airline", "hotel"]},
+          "confidence": "high"
+        },
+        {
+          "id": "costco",
+          "label": "2% at Costco",
+          "unit": "percent",
+          "rate": 2,
+          "match": {"merchants": ["costco"]},
+          "confidence": "high"
+        }
+      ],
+      "notes": "Rewards pay out once a year as a certificate redeemable at Costco, not as ongoing statement credit."
+    },
+    {
+      "id": "us-bank-cash-plus",
+      "name": "U.S. Bank Cash+",
+      "issuer": "U.S. Bank",
+      "network": "visa",
+      "currency": "USD",
+      "reward_type": "cashback",
+      "annual_fee": 0,
+      "base_rate": 1,
+      "foreign_transaction_fee_percent": 3,
+      "as_of": "2026-05",
+      "source": "https://www.usbank.com/credit-cards/cash-plus-visa-signature-credit-card.html",
+      "rules": [
+        {
+          "id": "choice-5",
+          "label": "5% in two chosen categories",
+          "unit": "percent",
+          "rate": 5,
+          "match": {"categories": ["utility", "telecom", "streaming", "electronics", "home_improvement", "entertainment", "department_store"]},
+          "cap": {"basis": "spend", "amount": 2000, "period": "quarter", "shared_key": "usbank-5"},
+          "activation_required": true,
+          "confidence": "low",
+          "note": "Categories must be chosen each quarter. Confirm the user's selections before applying."
+        },
+        {
+          "id": "choice-2",
+          "label": "2% in one chosen everyday category",
+          "unit": "percent",
+          "rate": 2,
+          "match": {"categories": ["gas", "grocery", "dining"]},
+          "confidence": "low",
+          "note": "Only one everyday category is selected at a time."
+        }
+      ]
+    }
+  ]
+}

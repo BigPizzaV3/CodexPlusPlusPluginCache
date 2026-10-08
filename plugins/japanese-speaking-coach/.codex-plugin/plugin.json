@@ -1,0 +1,36 @@
+{
+  "author": {
+    "name": "Timothy Huang",
+    "url": "https://github.com/timothy-huang"
+  },
+  "description": "Voice-first Japanese speaking rehearsal with coaching in the learner's chosen first language.",
+  "homepage": "https://github.com/timothy-huang/japanese-speaking-coach#readme",
+  "interface": {
+    "brandColor": "#101A49",
+    "brandColorDark": "#B6C0EF",
+    "capabilities": [
+      "Interactive"
+    ],
+    "category": "Education & Research",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Rehearse rescheduling a restaurant reservation.",
+      "Practice explaining the Japanese culture of gift-giving to a friend.",
+      "Recommend me a speaking task based on my learning goals."
+    ],
+    "developerName": "Timothy Huang",
+    "displayName": "Japanese Speaking Coach",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Practice real Japanese interactions, explanations, and spoken summaries through attempt, focused repair, replay, and variation. Choose any coaching language while keeping the speaking task in Japanese.",
+    "privacyPolicyURL": "https://github.com/timothy-huang/japanese-speaking-coach",
+    "shortDescription": "Roleplay real-life scenarios",
+    "supportURL": "https://github.com/timothy-huang/japanese-speaking-coach/issues",
+    "termsOfServiceURL": "https://github.com/timothy-huang/japanese-speaking-coach",
+    "websiteURL": "https://github.com/timothy-huang/japanese-speaking-coach"
+  },
+  "license": "MIT",
+  "name": "japanese-speaking-coach",
+  "repository": "https://github.com/timothy-huang/japanese-speaking-coach",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

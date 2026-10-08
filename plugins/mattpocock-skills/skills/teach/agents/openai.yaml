@@ -1,0 +1,9 @@
+interface:
+  display_name: Teach
+  short_description: Teach a concept in a guided workspace
+  default_prompt: Use $teach for this task
+policy:
+  allow_implicit_invocation: false
+  products:
+  - CHAT
+  - CODEX

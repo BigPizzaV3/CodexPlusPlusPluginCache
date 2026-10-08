@@ -1,0 +1,57 @@
+{
+  "author": {
+    "name": "Mamdouh Aboammar",
+    "url": "https://github.com/imMamdouhaboammar"
+  },
+  "description": "A skills-only PrePilot marketing plugin for research, strategy, paid media, content, SEO, GEO/AEO, CRO, lifecycle, growth, measurement, launches, localization, and quality review.",
+  "interface": {
+    "brandColor": "#FE5F03",
+    "brandColorDark": "#FE5F03",
+    "capabilities": [
+      "Marketing request routing",
+      "Customer and competitor research",
+      "Positioning and messaging",
+      "Campaign and launch planning",
+      "Paid media planning and review",
+      "Copy and content production",
+      "SEO and GEO/AEO planning",
+      "CRO and funnel analysis",
+      "Lifecycle email planning",
+      "Growth experimentation",
+      "Analytics and measurement",
+      "MENA localization and quality review"
+    ],
+    "category": "Business & Operations",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Build a digital marketing plan from my current context and tell me what evidence is missing.",
+      "Audit this campaign and prioritize the changes most likely to matter.",
+      "Turn this brief into channel-ready marketing work with a clear measurement plan."
+    ],
+    "developerName": "Mamdouh Aboammar",
+    "displayName": "PrePilot Lite",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "A Lite Version Of PrePilot marketing plugin that turns broad marketing requests into focused workflows for research, strategy, campaigns, copy, content, paid media, SEO, GEO/AEO, CRO, lifecycle, growth experiments, analytics, launches, MENA localization, and final quality review. It is skills-only and does not require an MCP server or external account.",
+    "privacyPolicyURL": "https://app.prepilot-system-agency.space/privacy",
+    "shortDescription": "Practical marketing workflows",
+    "supportURL": "https://app.prepilot-system-agency.space/support",
+    "termsOfServiceURL": "https://app.prepilot-system-agency.space/terms",
+    "websiteURL": "https://app.prepilot-system-agency.space/"
+  },
+  "keywords": [
+    "marketing",
+    "strategy",
+    "copywriting",
+    "paid-media",
+    "seo",
+    "geo",
+    "cro",
+    "growth",
+    "analytics",
+    "prepilot"
+  ],
+  "license": "MIT",
+  "name": "prepilot-for-marketing",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

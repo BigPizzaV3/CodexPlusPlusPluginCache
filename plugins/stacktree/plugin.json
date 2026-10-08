@@ -1,0 +1,114 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "stacktree",
+  "version": "1.1.0",
+  "description": "Publish the pages you build to a private link that opens in any browser, with no account for the viewer. Links are unguessable by default, can carry a passcode or be limited to a company email domain, expire on a schedule, and update in place so a link you have already sent never goes stale.",
+  "author": {
+    "name": "Stacktree",
+    "url": "https://stacktr.ee"
+  },
+  "homepage": "https://stacktr.ee",
+  "repository": "https://github.com/stevysmith/stacktree-skill",
+  "license": "MIT",
+  "keywords": [
+    "html",
+    "publish",
+    "hosting",
+    "share",
+    "link",
+    "client-delivery",
+    "report",
+    "dashboard",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Stacktree",
+        "shortDescription": "Publish HTML to a private link",
+        "longDescription": "Stacktree turns the pages ChatGPT and Codex build for you into a private link anyone can open in a browser.\n\nAsk for a report, a proposal, a dashboard or a one-page site, then publish it in the same conversation. The page opens with no account and no sign-in, on a link that is private and unguessable by default. Revising the page replaces it in place, so a link you have already sent shows the latest version.\n\nStacktree is built for work that leaves the conversation: client deliverables, stakeholder updates, and anything someone outside your chat needs to see.\n- Add a passcode, or limit a page to people with an email address at one company.\n- Mint a named link for each recipient and see who opened it.\n- File pages under a client space, so everything for one customer lives at one address.\n- Let clients comment on the page itself, with no account. ChatGPT can read their comments, fix the page and mark each one resolved.\n- Set a page to expire, take it down, or put an earlier version back.\n\nPages are private by default. Links are unguessable, pages ask search engines not to index them, and a check before publishing looks for personal data and secrets in the page.\n\nStacktree needs a Stacktree account. You connect it the first time you publish.",
+        "developerName": "Yume Studios",
+        "category": "Productivity",
+        "capabilities": [
+          "Publish HTML pages to private links",
+          "Update a page in place at the same link",
+          "Passcode and company email gates",
+          "Named share links that show who opened them",
+          "Client spaces",
+          "Client comments on the page",
+          "Version history and restore"
+        ],
+        "websiteURL": "https://stacktr.ee",
+        "supportURL": "https://stacktr.ee/contact",
+        "privacyPolicyURL": "https://stacktr.ee/privacy",
+        "termsOfServiceURL": "https://stacktr.ee/terms",
+        "defaultPrompt": [
+          "Turn this into a web page and give me a private link to send.",
+          "Put a passcode on my latest Stacktree page.",
+          "Show me the comments clients left on my pages."
+        ],
+        "brandColor": "#4A32F9",
+        "brandColorDark": "#BD9AF4",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Publish a new page",
+              "prompt": "Use Stacktree to publish a one-page HTML site for a fictional coffee shop called Ember and give me the link.",
+              "tools_triggered": "publish_html",
+              "expected_behavior": "Returns the page's id and a private stacktr.ee link. The link opens in any browser without signing in, and the reply says when it expires or that it does not."
+            },
+            {
+              "description": "Add a passcode to an existing page",
+              "prompt": "Password-protect my latest Stacktree page with the passcode sesame.",
+              "tools_triggered": "list_sites, set_password",
+              "expected_behavior": "set_password returns ok. Opening the link now shows a passcode prompt, and sesame unlocks the page."
+            },
+            {
+              "description": "List pages (read-only)",
+              "prompt": "List my Stacktree pages and tell me how many there are.",
+              "tools_triggered": "list_sites",
+              "expected_behavior": "Returns the demo account's pages with titles and links, including the seeded Crumb bakery page and the Q3 report. Read-only, so no confirmation is asked for."
+            },
+            {
+              "description": "Update a page in place",
+              "prompt": "Change the headline on my Crumb page to 'Fresh daily'.",
+              "tools_triggered": "list_sites, get_site, update_site",
+              "expected_behavior": "ChatGPT asks to confirm, because the update replaces the page. update_site then returns the same id and link, and the link shows the new headline. No new link is created."
+            },
+            {
+              "description": "Read client comments and resolve one",
+              "prompt": "Check the comments on my Crumb page and mark the first one resolved.",
+              "tools_triggered": "list_sites, list_feedback, resolve_feedback",
+              "expected_behavior": "list_feedback returns the page's two seeded comments, unresolved first. resolve_feedback marks one resolved with a short note and returns ok."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Publishing a code package, not a web page",
+              "prompt": "Publish my npm package to the registry."
+            },
+            {
+              "description": "Posting to social networks",
+              "prompt": "Post this update to my LinkedIn and X accounts."
+            },
+            {
+              "description": "Deploying a full-stack app with a database",
+              "prompt": "Deploy my Next.js app with a Postgres database to production."
+            }
+          ]
+        },
+        "demo_recording_url": "https://stacktr.ee/demo/chatgpt-app-demo.mp4",
+        "commerce": false,
+        "commerce_description": "Stacktree does not sell products or process payments in ChatGPT."
+      },
+      "publication": {
+        "release_notes": "First release. Publish the pages ChatGPT and Codex build to a private link, with five skills for client deliverables, run reports, daily briefs and status pages that pick the right gate, expiry and link."
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

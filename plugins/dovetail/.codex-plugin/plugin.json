@@ -1,0 +1,33 @@
+{
+  "apps": "./.app.json",
+  "author": {
+    "name": "Dovetail",
+    "url": "https://dovetail.com"
+  },
+  "description": "Connect Dovetail inside ChatGPT to turn customer feedback into decisions without leaving your conversation. Search your Dovetail workspace for relevant projects, notes, docs, and themes, and get results back instantly. Ask things like \u201cSummarize top friction points impacting enterprise renewal conversations\u201d to surface evidence in seconds.",
+  "homepage": "https://dovetail.com",
+  "interface": {
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./assets/composer-icon.png",
+    "defaultPrompt": [
+      "Find the relevant customer insights in Dovetail"
+    ],
+    "developerName": "Dovetail",
+    "displayName": "Dovetail",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png",
+    "longDescription": "Connect Dovetail inside Codex to turn customer feedback into decisions without leaving your conversation. Search your Dovetail workspace for relevant projects, notes, docs, and themes, and get results back instantly. Ask things like \u201cSummarize top friction points impacting enterprise renewal conversations\u201d to surface evidence in seconds.",
+    "privacyPolicyURL": "https://dovetail.com/privacy/privacy-policy/",
+    "screenshots": [],
+    "shortDescription": "Turn feedback into decisions",
+    "supportURL": "https://docs.dovetail.com/",
+    "termsOfServiceURL": "https://dovetail.com/legal/user-terms-of-service/",
+    "websiteURL": "https://dovetail.com"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "name": "dovetail",
+  "repository": "https://github.com/openai/plugins",
+  "version": "1.0.0"
+}

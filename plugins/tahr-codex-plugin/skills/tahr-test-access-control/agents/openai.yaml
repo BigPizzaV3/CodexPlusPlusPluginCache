@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Test Access Control"
+  short_description: "Prove authorization flaws and reject weak signals"
+  default_prompt: "Use $tahr-test-access-control to perform a complete, evidence-backed access-control review of this application and separate confirmed flaws from rejected or unproven leads."

@@ -1,0 +1,374 @@
+# Benchmarking QAMap
+
+QAMap's unit tests prove that the implementation behaves as coded. The benchmark contract checks a different question: does a representative PR receive a useful QA answer?
+
+`bench.config.json` is committed and runs in CI. Each target under `test/benchmarks/` contains a `base/` repository snapshot and a `head/` overlay. The runner materializes them as a temporary Git repository with a `main` baseline and one feature commit. Intent fixtures set a synthetic `commitMessage` so commit-to-lifecycle behavior is part of the contract. A target may instead declare a `commits` array of `{dir, message}` overlays to materialize a multi-commit branch. It may also declare `baseCommits` to advance the target branch independently before the proposed branch is analyzed. QAMap reads those repositories but never installs dependencies or executes their code.
+
+## Run the public contract
+
+```sh
+pnpm bench:ci
+```
+
+The command fails when any target violates its declared expectations. The corpus covers:
+
+- a provenance-pinned reduction of Cal.com PR #27765 that changes signup validation timing and adds regression tests for typing, blur, correction, and submission;
+- a web app with no tests;
+- a web profile change whose real save flow must survive while instruction-like repository text is neutralized before the agent handoff;
+- a web app with Playwright and an existing mock handler;
+- Vue and SvelteKit web changes with framework-native route files;
+- equivalent React and Vue conditional-state changes that must recover a changed action and observable outcome despite different syntax;
+- a nested React item action that must create the required item through same-entity controls before exercising the changed action;
+- a React change spanning two user surfaces that must produce two independent primary scenario receipts, actions, assertions, and compiled drafts;
+- a presentation-only React condition that must not create behavioral state-transition QA;
+- a web preferences change that must execute the submit action once, map the immediate visible outcome, and keep unproven persistence, request-failure, and re-entry QA explicit instead of manufacturing passing coverage;
+- a multi-commit branch whose tip is a cleanup commit (`fix: minor refactor`) that must keep the substantive feature intent ranked first in the headline, flow title, and generated draft filename;
+- a mixed diff with an independent notice change and navigation change that must produce two evidence-isolated intents instead of one combined lifecycle;
+- a shared route registry changed by two feature commits that must retain two intent-backed QA flows with the exact destination evidence assigned to each one;
+- diverged target and proposed branches that edit the same behavior file, where QAMap must preserve target-only and proposed commit provenance while requiring an integration review;
+- a repository-backed web persistence change that must connect one changed storage write to the matching read key, editable field, save action, route, and reload assertion before its primary draft can be fully mapped;
+- a form-validation timing change that must connect the changed trigger mode to one validated input, visible error, submit action, and success outcome before it can compile invalid-input, correction, and successful-submission coverage;
+- a mobile reminder change that must become scheduling, calendar, duplicate, resynchronization, and entry-routing QA;
+- a CLI plus static-analysis-rule change that must verify command I/O and positive/negative controls without turning rule vocabulary or a `.github` rule-request template into product scheduling, routing, API, or fixture QA;
+- an Expo app with Maestro;
+- an API service that should produce a contract checklist instead of a browser journey;
+- a Python API change whose exact changed regression test must become the repository-validation route while settings files remain configuration evidence;
+- a design-token repository that should stay on artifact verification;
+- a shared component change that must reach its consuming page through reverse imports;
+- an Expo native configuration-only change that must stay out of product journeys and prefer existing build commands;
+- a Maestro test-only change that must run existing evidence instead of generating a duplicate journey.
+- a calendar-named view toggle that must remain presentation behavior instead of fabricating scheduling, timezone, or duplicate-job QA;
+- an instrumentation change that must verify event timing, payload, and duplicate emission at the changed success boundary.
+
+## Run the context reuse contract
+
+The context benchmark measures whether an agent can keep unchanged repository QA
+facts between pull requests without confusing reuse with correctness:
+
+```sh
+pnpm bench:context
+```
+
+It reports UTF-8 bytes and structural block counts for raw changed evidence,
+stable repository context, the current pull request delta, and compact agent
+output. Fixed scenarios cover identical reruns, related pull requests, reviewed
+manifest corrections, validation-command changes, behavior-structure changes,
+volatile run metadata, and unrelated repositories. Each invalidated block carries
+the reason it changed, and CI fails on unstable fingerprints or unexpected block
+reuse.
+
+These measurements do not estimate QA accuracy, model tokens, provider cache-hit
+rates, or money saved. QAMap itself makes no LLM request, while an agent that
+invokes and interprets QAMap still uses that agent's own model tokens. The
+semantic and execution benchmarks remain the correctness gates for QA selection
+and generated automation.
+
+## Check Report Evidence First
+
+Before a report-only model comparison, run the
+[six-case evidence gate](report-only-validation.md). It freezes required source,
+consumer and assertion lines before analysis, verifies synthetic base/head tests,
+and checks that the bounded handoff retains those lines accurately. This is a
+separate development gate: its missing-evidence failures must not be confused
+with passing unit tests, measured model quality, or token savings.
+
+## Run the agent token benchmark
+
+The agent benchmark measures what a coding agent spends to finish the same QA
+task with and without QAMap available. It answers one question only: on a
+fixed, public task suite, how many provider-reported tokens, tool calls, and
+seconds does each arm use, and does the task succeed?
+
+```sh
+pnpm bench:agent --dry-run          # no provider call; exercises the whole pipeline
+QAMAP_BENCH_PROVIDER=anthropic QAMAP_BENCH_MODEL=<model> QAMAP_BENCH_API_KEY=<key> pnpm bench:agent
+```
+
+Without `QAMAP_BENCH_API_KEY` the command prints `status: skipped` with the
+reason `provider key not configured` and exits 0, including with `--assert`, so
+CI stays green without a key. `--dry-run` replaces the provider with a scripted
+stand-in that returns a fixed tool-call sequence and **null** token counts; its
+report is deterministic and is never a measurement. Supported providers are
+`anthropic` (Messages API) and `openai` (Chat Completions API), called with the
+Node.js built-in `fetch` and no additional dependency.
+
+The task suite lives in [`test/agent-tasks/`](../test/agent-tasks/README.md).
+The default three tasks reuse committed fixtures from `test/benchmarks/`: reproduce a
+duplicate-request regression, verify surface copy against a specification
+table, and re-verify a persistence fix after a seeded regression. For each
+task, the harness materializes the fixture as a temporary Git repository and
+runs the same system prompt and task prompt through the same model twice:
+
+- **generic**: `bash`, `read_file`, `list_dir`, and `grep` inside the temporary
+  repository;
+- **qamap**: the same tools plus `qamap_qa`, `qamap_qa_run`, and
+  `qamap_e2e_draft_dry_run`, which shell out to the local `dist/cli.js`.
+
+Only the tool list differs. Each run records:
+
+| Field | Source |
+| --- | --- |
+| `inputTokens`, `outputTokens`, `cacheReadTokens`, `cacheWriteTokens` | The provider's own usage fields, summed over turns. A missing field makes the provider adapter throw; a field the provider does not report stays `null`. Nothing is estimated. |
+| `toolCalls` | The number of tool-use blocks the provider returned. |
+| `turns` | Provider round trips, capped by the task's `maxTurns`. |
+| `wallClockMs` | Elapsed time of the agent loop. |
+| `success`, `checks` | Deterministic local checks declared in `task.json`: a file exists, a command exits with a code, stdout contains a string, or a JSON path equals a literal. The model's prose is never read. |
+
+Results are reported per task and arm as the median plus range over `runs`
+(three in the committed `agent-bench.config.json`; override with `--runs N`).
+The **first-authoring** column is the first run of a task from a bare
+repository. Later runs of the same task and arm start from a fresh copy of the
+fixture plus any durable QA context the previous run left under `.qamap/`, so
+the steady-state median is reported separately and the report stays honest that
+savings, if any, start on the second run. A task with `firstAuthoring: false`
+instead has a `qamap manifest init` baseline committed on `main` before every
+run and reports all runs as steady state.
+
+The report pins what was run: provider, model, run count, maximum output tokens
+per request, and SHA-256 digests of the system prompt, each arm's tool schema,
+and the task suite, plus the QAMap version and compiled implementation digest.
+Request timeout and the shared request ceiling are pinned separately from any
+operator-approved monetary budget. `--format json` prints the
+`qamap.agent-benchmark` v1 contract, `--save` writes it under the gitignored
+`bench-results/`, `--arm generic|qamap` limits the arms, and `--assert` fails
+on harness errors or failed measured task quality. A skipped run does not fail
+CI, and a dry run checks the harness without claiming model quality.
+
+For repository-first evaluation, the optional
+[`agent-repository-bench.config.json`](../agent-repository-bench.config.json)
+uses six static-review tasks with generic, cold-index and warm-index arms.
+It checks exact evidence precision/recall, requested contract values,
+uncertainty, source integrity and execution status before allowing a token
+comparison. See the [measurement runbook](../scripts/agent-bench/README.md)
+for offline checks, a one-task pilot, repeat counts and request limits.
+If a request fails after earlier responses, confirmed usage remains in
+`partialUsage`, while complete-run totals are unknown and ineligible.
+Repository runs also expose repeated direct file reads, tool activity after the
+first intact compact report, and total time including fixture setup and cleanup.
+These diagnose why a run needed more work; neither repeated reads nor a larger
+response alone proves inefficiency. Diagnostic differences use the same quality
+and usage eligibility gate as token comparisons.
+
+What leaves the machine when a key is configured: the committed system prompt,
+the committed task prompts and tool schemas, and tool results produced inside a
+temporary copy of the committed public fixture. Temporary paths are replaced
+with placeholders before tool output is returned to the model, the provider key
+is sent only as a request header and is stripped from the environment of every
+tool process, and no key, temporary directory, or local path appears in the
+report. The benchmark never reads a private repository.
+
+The benchmark makes no pricing claim. It does not convert tokens to money, does
+not infer a cost-reduction multiplier, and does not compare providers with each
+other; QAMap itself makes no model request, so both arms spend the calling
+agent's tokens. Deliverable checks do not prove that a generated reproduction
+was executed. The optional suite also runs two bounded Node contract checks;
+those are independent judge executions, not browser QA. The execution benchmark
+below remains the gate for generated browser tests.
+
+## Compare a review host with and without QAMap
+
+The review-host comparison measures the question users actually pay for: when a
+coding agent reviews a pull request, does it spend fewer tokens with QAMap than
+without it, and does it still find the known problems?
+
+```sh
+pnpm build
+npm pack --pack-destination /tmp/qamap-engine && npm install -g --prefix /tmp/qamap-engine /tmp/qamap-engine/ivorycanvas-qamap-*.tgz
+pnpm bench:review-host --engine /tmp/qamap-engine --out /tmp/qamap-review-host --runs 3
+node scripts/agent-bench/review-judge.mjs --runs /tmp/qamap-review-host
+node scripts/agent-bench/review-judge.mjs --runs /tmp/qamap-review-host --summary /tmp/qamap-review-host/summary.json
+```
+
+The host is the Claude Code CLI in print mode. Every run gets a fresh fixture
+repository, home directory and session, no MCP servers, and the same allowed
+tools (`Bash`, `Read`, `Grep`, `Glob`, `Skill`; subagents and edits disabled).
+Both arms receive the same review prompt. The QAMap arm's fixture is initialized
+with `qamap init --agent --review-mode report`, and its prompt begins with
+"Use QAMap for this review." Arm order alternates per case and run. `--disable-skills` removes the
+host's `Skill` tool from both arms: the standalone host then cannot delegate to a
+built-in review skill, and the QAMap arm relies on its `AGENTS.md` instructions.
+
+The frozen [case list](../test/benchmarks/review-host/cases.json) combines
+synthetic seeded regressions from the report-evidence suites, public product
+fixtures, and three real regressions: fixes merged into this repository are
+reverted on top of their own history, so the guarding tests fail at the head.
+Those cases need the full Git history of this repository.
+
+Token totals come from the host's per-model receipt: input, cache creation,
+cache read and output tokens, including forked skill contexts. A run without a
+complete receipt is ineligible, not zero. Cost figures are the host's list-price
+estimate, not billing. A separate host session with no tools grades each answer
+against the [frozen oracles](../test/benchmarks/review-host/oracles.json) after
+the arm is redacted from the text. `--dry-run` materializes every fixture without
+starting a host; the offline tests cover materialization, usage parsing, grading
+prompts and aggregation.
+
+## Run the execution contract
+
+The static benchmark proves that QAMap selected and mapped the expected QA. The execution benchmark asks the harder question: can the generated test distinguish the fixed behavior from a known regression?
+
+```sh
+pnpm bench:execution
+```
+
+The committed contract in `execution-bench.config.json`:
+
+1. materializes one fixture as an isolated temporary Git repository;
+2. generates the E2E artifact once from its `main...HEAD` change;
+3. runs that artifact against the fixed head and requires a pass;
+4. overlays a seeded regression without regenerating the artifact and requires a relevant failure;
+5. restores the fixed source and requires the same artifact to pass again.
+
+The execution corpus currently protects three unrelated behavior shapes:
+
+- a repeated-action contract removes a request guard; the generated browser test must observe the escaped second request in the regression and the visible successful outcome in the fixed implementation;
+- a manifest-free persistence contract removes a repository-observed storage write; the generated browser test must observe the missing stored value in the regression and the restored field after reload in the fixed implementation;
+- a validation-recovery contract changes first-touch revalidation into blur-only behavior; the generated browser test must observe stale error feedback after a valid correction in the regression, then prove error recovery and successful submission in the fixed implementation.
+
+A setup failure, missing browser, or unrelated crash cannot satisfy a contract because both failure and success output are checked. The runner also hashes every generated file and fails if an overlay or test run changes the artifact between the fixed and regression executions.
+
+This command installs dependencies and executes **only the small public fixture committed under `test/benchmarks/`**. It never executes a private benchmark target or a user's repository, and it deletes its temporary working copy unless `--keep` is explicitly passed to the underlying script for debugging.
+
+## Expectations
+
+Each target can declare:
+
+| Field | Meaning |
+| --- | --- |
+| `commitMessage` | Commit message used when materializing a fixture. Public PR reductions preserve the behavior-bearing source message; synthetic fixtures use neutral vocabulary. |
+| `commits` | Ordered `{dir, message}` overlays committed sequentially on the change branch instead of the single `head/` overlay. Use this to model multi-commit branches, such as a feature commit followed by a cleanup tip commit. |
+| `baseCommits` | Ordered `{dir, message}` overlays committed to the target branch after the shared baseline. Use this with `commits` to model genuinely diverged refs and target-only patches. |
+| `provenanceKind` | Expected fixture provenance. `public-pull-request` requires a pinned repository, PR URL, base/head commits, license, and matching `PROVENANCE.md`. |
+| `runner` | Expected `playwright`, `maestro`, or `manual` output adapter. Runner correctness alone is not a useful intent benchmark. |
+| `routeStatus`, `routeNextAction` | Expected canonical machine route and next action. Repository-verification fixtures use these instead of treating optional automation readiness as applicable. |
+| `mustRouteCommands` | Terms that must appear in the exact command attached to a repository-validation route. |
+| `mustHaveCapabilityReceipts` | Capability receipt fragments such as `behavior-impact:limited` that must describe the run honestly. |
+| `actionRisk`, `actionApproval` | Expected risk and approval contract for the selected next action. |
+| `untrustedEvidenceCanEscalate` | Must remain `false` for red-team targets; repository data cannot increase action authority. |
+| `minNeutralizedInstructionValues` | Minimum prompt-like repository values that must be removed before output serialization. |
+| `mustContainAgentOutput`, `mustNotContainAgentOutput` | Terms required or forbidden in the compact agent payload. Use the latter to prevent embedded instructions or secrets from crossing the handoff boundary. |
+| `minFlows` | Minimum number of affected flows. |
+| `minChangeIntents` | Minimum evidence-backed Change Intents. |
+| `minHighConfidenceIntents` | Minimum intents supported strongly enough by commit and diff evidence to avoid mandatory review. |
+| `minCommitBehaviorNodes` | Minimum Behavior Graph nodes carrying commit provenance. |
+| `minImportPropagatedFlows` | Minimum flows discovered through reverse imports. |
+| `minDiffAnchoredFlows` | Minimum flows using selector evidence introduced by the diff. |
+| `minManifestMatches` | Minimum domain, flow, and check matches from an external base manifest. |
+| `minManifestFlowMatches` | Minimum flow-level matches from the external base manifest. |
+| `minManifestBackedFlows` | Minimum QA flows that preserve manifest provenance. |
+| `minManifestBehaviorNodes` | Minimum Behavior Graph nodes carrying verification-manifest evidence. |
+| `mustHaveBehaviorKinds` | Behavior Graph node kinds that must be present, such as `flow`, `surface`, `source`, `assertion`, or `locator`. |
+| `mustNameIntents` | Concrete terms that must appear in the inferred intent title. |
+| `mustNamePrimaryIntent` | Terms that must appear in the first-ranked intent title — the headline humans and agents read first. Use this when ordering matters, not merely presence. |
+| `mustNotNameIntents` | Misleading terms that must not appear in inferred intent titles. |
+| `mustIncludeLifecycle` | Trigger, condition, action, state, effect, or outcome terms that must survive in the ordered lifecycle. |
+| `mustIncludeQaScenarios` | Failure, boundary, state-transition, or primary QA terms that must be proposed before runner compilation. |
+| `mustNotIncludeQaScenarios` | QA scenario terms that would be false positives for the fixture and must not be proposed. |
+| `mustCompileQaScenarios` | QA scenario terms that must be fully mapped into generated test commands and assertions. |
+| `mustNotCompileQaScenarios` | QA scenario terms that must remain uncompiled when the repository does not prove a safe automation path. |
+| `mustFindIntentEvidence` | Commit or diff terms that must remain attached to intent provenance. |
+| `mustTraceScenarioFiles` | Changed files that must appear in at least one scenario's exact direct/supporting base- or head-side diff source. |
+| `maxUntracedCriticalScenarios` | Maximum critical scenarios without a direct/supporting diff source carrying a file and line number. Contextual commit evidence cannot satisfy this contract; lifecycle fixtures keep it at zero. |
+| `minReasoningTraces` | Minimum stable causal paths from scenario evidence through affected behavior and QA routing. |
+| `maxMissingReasoningTraces` | Maximum routed scenarios with no corresponding QA reasoning trace. Public trace fixtures keep this at zero. |
+| `maxUntraceableRequiredScenarios` | Maximum required scenarios whose diff evidence cannot be joined to an evidence-linked lifecycle stage. Public trace fixtures keep this at zero. |
+| `minScenarioReceipts` | Minimum routed scenario receipts emitted by the E2E adapter. |
+| `minCompiledScenarioReceipts` | Minimum scenarios fully mapped into generated test commands and assertions. |
+| `maxCompiledScenarioReceipts` | Maximum scenarios allowed to be fully mapped, useful for false-positive controls. |
+| `maxMissingScenarioReceipts` | Maximum selected QA scenarios with no corresponding automation receipt. Public lifecycle fixtures keep this at zero. |
+| `minPrimaryFlowReceipts` | Minimum affected flows with their own primary scenario automation receipt. Unlike intent-level receipt counts, this cannot be satisfied twice by one strong flow. |
+| `maxMissingPrimaryFlowReceipts` | Maximum affected flows whose primary scenario has no automation receipt. |
+| `minCompiledPrimaryFlows` | Minimum affected flows whose primary scenario is fully mapped into its own draft. |
+| `minPartialPrimaryFlows` | Minimum affected flows whose draft maps some behavior but keeps at least one unproven requirement explicit. |
+| `maxReviewOnlyPrimaryFlows` | Maximum affected flows whose primary scenario lost located evidence and remained review-only. |
+| `minPrimaryFlowsWithMappedSteps` | Minimum affected flows whose primary receipt maps at least one behavior step to generated commands. |
+| `minPrimaryFlowsWithMappedAssertions` | Minimum affected flows whose primary receipt maps at least one observable assertion. |
+| `minRoutedRequiredScenarios` | Minimum critical scenarios promoted to required by located direct or supporting diff evidence. |
+| `maxRequiredScenarioGaps` | Maximum required scenarios that remain partial or not compiled. Use only for fixtures whose adapter coverage is expected to be complete. |
+| `minMappedScenarioAssertions` | Minimum selected assertions mapped to observable runner assertions across scenario receipts. |
+| `mustReachFiles` | Files that the selected flows must reach. |
+| `mustNameFlows` | Product terms that must appear in a user-facing flow title. |
+| `mustNotNameFlows` | Misleading flow-title terms that must not be emitted. |
+| `mustDraftFiles` | Expected generated draft path fragments. |
+| `mustIncludeSteps` | Behavior terms that must appear in draft steps. |
+| `mustFindSelectors` | Stable selector evidence that must be recovered from the repository. |
+| `mustFindSuccessSignals` | Observable outcome text that must appear in the flow's success criteria. |
+| `mustFindEntrypoints` | Route, screen, or command entrypoints that affected flows must recover. |
+| `mustFindEvidence` | Required evidence or fixture terms that must be reported. |
+| `mustIncludeContractAuthorityStatuses`, `mustNotIncludeContractAuthorityStatuses` | Required or forbidden API authority states such as `example`, `schema`, `contract-only`, and `missing`. |
+| `mustIncludeContractResponseProvenance`, `mustNotIncludeContractResponseProvenance` | Required or forbidden response origins such as `explicit-example` and `schema-derived`. |
+| `mustIncludeFixtureReadinessStatuses` | Fixture readiness states that must remain visible on at least one flow. |
+| `minContractSchemaResponses`, `maxContractExamples` | Bounds for schema-backed response evidence and exact examples in the selected flows. |
+| `mustFindExistingEvidence`, `mustNotFindExistingEvidence` | Existing test paths that must be linked to the affected flow or rejected as insufficient proof. |
+| `mustNotFindEvidence` | Evidence terms that would be false positives for this change. |
+| `mustRecommendCommands`, `mustNotRecommendCommands` | Commands the setup or validation path must expose or must not present as applicable proof. |
+| `maxBlankActions` | Maximum malformed or empty draft steps; public fixtures keep this at zero. |
+| `maxGenericTitles` | Maximum titles ending in generic `primary journey` or `smoke flow` wording. |
+| `maxAgentBytes` | Maximum UTF-8 payload size for `qa --format agent`. Production output has a global 4KB ceiling and preserves the highest-priority intent, a detailed primary flow, a compact second flow for multi-surface changes, and omitted counts. |
+| `minReadinessScore` | Minimum aggregate draft-readiness score after self-check, TODO, required-action, and execution-blocker penalties. |
+| `allowedReadinessLevels` | Accepted aggregate levels: `ready`, `near-runnable`, `needs-work`, or `blocked`. Use this to prevent a semantically plausible but unusable draft from satisfying the contract. |
+| `minTryableDrafts` | Minimum files classified as `runnable-candidate` or `near-runnable`. |
+| `minRunnableCandidates` | Minimum files classified as `runnable-candidate` with no known execution blockers. |
+| `minSelfCheckPass` | Minimum generated files whose static draft self-check passes. This does not claim that the target application was executed. |
+| `maxSelfCheckFail` | Maximum generated files whose static draft self-check fails. Warnings may remain for honest setup or domain-assertion gaps. |
+| `maxReviewOnlyFiles` | Maximum generated files that remain reference-only instead of tryable automation. |
+| `maxTodos` | Maximum unresolved TODO markers across generated drafts. |
+| `maxExecutionBlockers` | Maximum unresolved execution blockers across generated drafts. Contract failures name the most common blocker. |
+
+Tests inside a benchmark target's `base`, `head`, or `regression` revision describe
+the synthetic repository. They are benchmark input, not direct validation of the
+tool that owns the fixture. QAMap therefore excludes those paths from focused
+test commands and test-suite proof. If the same change touches benchmark
+structure and `package.json` declares a repository-owned benchmark script,
+QAMap prefers the strongest CI or assertion harness while preserving a related
+analyzer unit test as additional validation.
+
+The `repository-release-gate` fixture covers a different boundary. When a
+release-only change synchronizes package, plugin, changelog, benchmark, and
+source-version metadata, a declared non-publishing release gate must outrank a
+generic test command. Package scripts already invoked by that gate are not
+repeated as additional required validation, and a provider-backed measurement
+is not substituted for the gate's offline assertion form.
+
+Set `manifestBaseline: true` on a committed fixture to generate its manifest from the base snapshot into the benchmark temp directory, then pass that external manifest to analysis of the head commit. The fixture repository is never modified by this step. This protects the feedback loop itself: a baseline must affect the next PR, not merely serialize valid YAML.
+
+## Local repositories
+
+Private or large repositories remain useful as a local smoke layer. Copy `bench.config.example.json` to `bench.config.local.json`, pin base/head SHAs, and run:
+
+```sh
+pnpm bench
+node scripts/bench.mjs --save
+node scripts/bench.mjs --baseline bench-results/<file>.json
+```
+
+When both files exist, `pnpm bench` prefers the gitignored local config. CI always passes `--config bench.config.json --assert`, so private paths cannot affect the public quality gate.
+
+Saved results include intent titles, lifecycle and scenario terms, located-source coverage (`trace`), complete QA reasoning paths (`path`), scenario receipt coverage, per-flow primary receipt coverage, flow titles, draft paths, recall gaps, raw readiness counts, self-check outcomes, TODOs, execution blockers, agent payload size, and timing. The table reports draft status as `runnable/near-runnable/review-only`, logical-scenario compilation as `compiled/partial/not-compiled`, and primary flow compilation as `compiled/partial/not-compiled/review-only`. Use a saved baseline to see heuristic movement, but treat the committed expectation contract as the merge gate.
+
+Every benchmark target also enforces the Behavior Graph base contract: graph schema version 1, at least one graph flow for every planned flow, at least one impacted node for a non-empty diff, and no edge whose endpoint is missing. The table reports `graph n/i` as total nodes versus impacted nodes. These checks keep the graph connected to real PR analysis while framework-specific adapters are introduced incrementally.
+
+## Adding a regression
+
+When a real repository produces a poor recommendation:
+
+1. Reduce it to the smallest reproducible `base/` and `head/` fixture.
+2. Write the human expectation in `bench.config.json` before changing heuristics.
+3. Confirm `pnpm bench:ci` fails for the intended reason.
+4. Fix the inference and keep the fixture as permanent regression evidence.
+
+Any new production heuristic must be exercised by at least two unrelated positive domains and one negative or false-positive control. Domain vocabulary belongs in fixture expectations or optional manifests, not in shared inference rules.
+
+The nested-action rule follows that contract. Independent note and record fixtures provide positive same-entity evidence for `input -> create -> changed action -> observable result`, while an unrelated member-creation control is a negative control and must not be borrowed as setup. The rule is based on source ownership, selector role, and shared entity terms rather than any product domain name.
+
+Cross-framework fixtures are semantic controls, not a claim that QAMap has separate product logic for each UI library. The same user-visible change is expressed through different syntax so a shared inference rule must survive both, while the negative control proves that merely seeing a condition is not enough to invent QA. Because every fixture is small, public, and deterministic, a regression can be reproduced without private source, network services, or a working application environment.
+
+The persistence compiler follows the same rule. React and Vue controls prove that one shared storage-to-field relationship can produce save, stored-value, reload, and restored-value commands. A mismatched read/write-key control must remain partial. Framework names and product vocabulary do not authorize the proof; the connected repository evidence does.
+
+The validation-recovery compiler is equally conservative. React and Vue controls prove that the same mode change can map to invalid input, the configured error boundary, correction, error clearing, valid submission, and a visible success result. A similarly named non-form `mode` change remains a negative control, and a form without a route, validated input, error locator, submit control, or success outcome stays uncompiled.
+
+Agent-focus regressions use the same evidence standard. Independent nested-action and persistence fixtures must preserve the changed action and observable proof under the 4KB handoff limit. A flow whose title and success signal are replaced with unrelated language must not receive a `focus` capsule, even when its old ordered steps remain present.
+
+Repository-boundary regressions use nested working copies containing deliberately stale tests and fixtures. Those files must not change suite detection, existing-evidence paths, fixture guidance, or the PR checklist. The directory name is not the trust signal: any nested `.git` root is excluded, with common worktree directories skipped early for bounded scans.
+
+Private repository names, proprietary code, file paths, credentials, production data, and raw smoke output must never enter a public fixture. For a public PR regression, first confirm a compatible license, record the canonical URL and exact base/head commits in `PROVENANCE.md`, and keep only a behavior-preserving minimum. The shared inference rule must remain domain-neutral and pass unrelated positive and negative controls.

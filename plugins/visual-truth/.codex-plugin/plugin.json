@@ -1,0 +1,46 @@
+{
+  "author": {
+    "email": "info@ultimatedesignstudios.com",
+    "name": "Derek Hanchi",
+    "url": "https://www.ultimatedesignstudios.com"
+  },
+  "description": "Familiar Duda, Squarespace, and Elementor visual editing for local websites, with precise Codex code handoff.",
+  "homepage": "https://visual-truth-editor.deriquehanche.chatgpt.site",
+  "interface": {
+    "brandColor": "#2477E8",
+    "brandColorDark": "#2477E8",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Add Visual Truth to this React project and open the editor.",
+      "Let me adjust this page visually, then make it durable code.",
+      "Compare this page at desktop, iPad, and phone sizes."
+    ],
+    "developerName": "Derek Hanchi",
+    "displayName": "Visual Truth",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Visual Truth adds a development-only editor to compatible React websites with switchable Duda, Squarespace, and Elementor workspaces. It keeps the canvas focused with top-layer editor chrome, direct Text + box or Box only resizing, 1/5/10px precision controls, semantic Layers, responsive scopes, ruler guides, smart actions, multi-selection, reusable components, data binding, opt-in privacy-first feedback, exact styling, and reviewable Make It Code output without shipping the editor overlay.",
+    "privacyPolicyURL": "https://visual-truth-editor.deriquehanche.chatgpt.site/privacy",
+    "shortDescription": "Edit websites visually",
+    "supportURL": "https://visual-truth-editor.deriquehanche.chatgpt.site/support",
+    "termsOfServiceURL": "https://visual-truth-editor.deriquehanche.chatgpt.site/terms",
+    "websiteURL": "https://visual-truth-editor.deriquehanche.chatgpt.site"
+  },
+  "keywords": [
+    "visual-editor",
+    "wysiwyg",
+    "react",
+    "vite",
+    "responsive-design",
+    "design-to-code",
+    "codex"
+  ],
+  "license": "MIT",
+  "name": "visual-truth",
+  "skills": "./skills/",
+  "version": "1.3.0"
+}

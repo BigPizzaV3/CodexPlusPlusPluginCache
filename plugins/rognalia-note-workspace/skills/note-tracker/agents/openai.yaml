@@ -1,0 +1,5 @@
+interface:
+  display_name: "note Workspace 参考指標"
+  short_description: "公開記事の参考指標を混ぜず、取得不能を0にせず履歴記録します"
+policy:
+  allow_implicit_invocation: true

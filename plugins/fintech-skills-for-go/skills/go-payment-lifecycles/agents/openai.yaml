@@ -1,0 +1,6 @@
+interface:
+  display_name: "Go Payment Lifecycles"
+  short_description: "Model payment evidence and transitions"
+  default_prompt: "Use $go-payment-lifecycles to design this Go payment state machine and ambiguity policy."
+policy:
+  allow_implicit_invocation: true

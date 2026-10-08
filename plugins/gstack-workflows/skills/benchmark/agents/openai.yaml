@@ -1,0 +1,9 @@
+interface:
+  display_name: "Benchmark"
+  short_description: "Measure performance and compare against a known baseline using available execution or browser tools."
+  default_prompt: "Use Benchmark for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

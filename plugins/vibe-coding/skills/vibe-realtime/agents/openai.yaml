@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Realtime interfaces"
+  short_description: "Client caches, optimistic updates and reconnection"
+  default_prompt: "Use $vibe-realtime to audit the selected realtime interfaces boundary."

@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Video Scripts"
+  short_description: "Complete spoken video scripts"
+  default_prompt: "Use $pixverse-video-script to write a complete Chinese explainer script for this topic, with spoken copy and visual intentions."
+policy:
+  allow_implicit_invocation: true

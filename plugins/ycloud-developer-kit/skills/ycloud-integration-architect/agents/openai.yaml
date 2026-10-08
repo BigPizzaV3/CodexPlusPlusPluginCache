@@ -1,0 +1,6 @@
+interface:
+  display_name: "YCloud Integration Architect"
+  short_description: "Design or implement cross-domain YCloud integrations"
+  default_prompt: "Use $ycloud-integration-architect to select a scope and design or implement a contract-aware YCloud integration."
+policy:
+  allow_implicit_invocation: true

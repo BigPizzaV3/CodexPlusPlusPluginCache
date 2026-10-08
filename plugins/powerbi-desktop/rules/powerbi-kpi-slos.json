@@ -1,0 +1,18 @@
+{
+  "schema": "codex.powerbi.kpiSlos.v1",
+  "default": {
+    "freshnessTargetHours": 24,
+    "severity": "Medium",
+    "actionHint": "Confirm owner, source refresh, KPI definition, and validation evidence."
+  },
+  "kpis": [
+    {
+      "metricName": "Total Sales",
+      "owner": "Sales Analytics",
+      "decisionCritical": true,
+      "freshnessTargetHours": 24,
+      "severity": "High",
+      "actionHint": "Confirm source refresh and Sales Analytics owner sign-off."
+    }
+  ]
+}

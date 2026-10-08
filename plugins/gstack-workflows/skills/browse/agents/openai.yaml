@@ -1,0 +1,9 @@
+interface:
+  display_name: "Browse"
+  short_description: "Drive the native gstack browser when available; otherwise use host browser capabilities without p..."
+  default_prompt: "Use Browse for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

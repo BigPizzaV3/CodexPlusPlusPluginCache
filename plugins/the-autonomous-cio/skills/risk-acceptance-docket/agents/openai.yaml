@@ -1,0 +1,5 @@
+interface:
+  display_name: "Risk Acceptance Docket"
+  short_description: "Explicit-only."
+policy:
+  allow_implicit_invocation: false

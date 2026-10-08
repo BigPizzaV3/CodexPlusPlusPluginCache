@@ -1,0 +1,39 @@
+{
+  "author": {
+    "name": "Human-Agent-Society",
+    "url": "https://github.com/Human-Agent-Society"
+  },
+  "description": "Guidance and references for building continual self-improvement workflows for agents with Reef.",
+  "homepage": "https://github.com/Human-Agent-Society/reef",
+  "interface": {
+    "capabilities": [
+      "Agent evaluation",
+      "Self-improvement workflow design"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Evaluate this agent workflow and identify the main weakness",
+      "Design an improvement loop for this agent",
+      "Turn these failures into a concrete agent improvement plan"
+    ],
+    "developerName": "RONALD FERRARI SOARES",
+    "displayName": "CRIADOR / Reef",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Guides structured evaluation, reflection, and iteration for improving agent behavior, prompts, workflows, and reliability.",
+    "shortDescription": "Agent improvement workflows"
+  },
+  "keywords": [
+    "agents",
+    "continual-learning",
+    "self-improvement",
+    "reef",
+    "harness",
+    "evaluation"
+  ],
+  "license": "Apache-2.0",
+  "name": "reef-agent-improvement",
+  "repository": "https://github.com/Human-Agent-Society/reef",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

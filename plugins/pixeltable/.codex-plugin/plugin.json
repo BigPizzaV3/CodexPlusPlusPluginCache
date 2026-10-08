@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "Pixeltable",
+    "url": "https://github.com/pixeltable"
+  },
+  "description": "Build multimodal AI applications with Pixeltable.",
+  "homepage": "https://docs.pixeltable.com/",
+  "interface": {
+    "brandColor": "#2563EB",
+    "brandColorDark": "#2563EB",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Build a RAG app over my documents, images, and videos",
+      "Turn this AI pipeline into one declarative Pixeltable app",
+      "Take this Pixeltable app from local development to Cloud"
+    ],
+    "developerName": "Pixeltable",
+    "displayName": "Pixeltable",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Build multimodal AI backends in one Python file. Pixeltable combines database, orchestration, indexing, and serving for images, video, audio, documents, and model outputs. Define transformations as computed columns in the schema; insert a row and the dependent pipeline runs incrementally. Run the same declarative app locally or on Pixeltable Cloud.",
+    "privacyPolicyURL": "https://www.pixeltable.com/privacy",
+    "shortDescription": "Unified multimodal backend",
+    "supportURL": "https://github.com/pixeltable/pixeltable/discussions",
+    "termsOfServiceURL": "https://www.pixeltable.com/terms",
+    "websiteURL": "https://docs.pixeltable.com/"
+  },
+  "keywords": [
+    "pixeltable",
+    "multimodal",
+    "rag",
+    "embeddings",
+    "agents",
+    "computed-columns"
+  ],
+  "license": "Apache-2.0",
+  "name": "pixeltable",
+  "repository": "https://github.com/pixeltable/pixeltable-skill",
+  "skills": "./skills/",
+  "version": "2.10.2"
+}

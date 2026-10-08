@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "David Rzepa",
+    "url": "https://github.com/david-rzepa"
+  },
+  "description": "Agentic engineering with durable goals for autonomous coding agents",
+  "homepage": "https://github.com/david-rzepa/zzzops",
+  "interface": {
+    "capabilities": [
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "Review and initialize this project's ZzzOps policy.",
+      "Capture a durable project goal with ZzzOps.",
+      "Work all available ZzzOps goals until blocked."
+    ],
+    "developerName": "David Rzepa",
+    "displayName": "ZzzOps",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "ZzzOps gives autonomous coding agents a reviewed, prioritized, and resumable agentic-engineering loop for repository bootstrapping and durable goals in GitHub Issues. It coordinates implementation only under reviewed project policy.",
+    "shortDescription": "Agentic engineering goals",
+    "websiteURL": "https://github.com/david-rzepa/zzzops"
+  },
+  "keywords": [
+    "agentic-engineering",
+    "coding-agents",
+    "autonomous-development",
+    "repository-bootstrap",
+    "goal-management",
+    "github-issues",
+    "codex",
+    "claude-code"
+  ],
+  "license": "Apache-2.0",
+  "name": "zzzops",
+  "repository": "https://github.com/david-rzepa/zzzops",
+  "skills": "./skills",
+  "version": "2.1.0"
+}

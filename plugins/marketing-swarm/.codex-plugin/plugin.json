@@ -1,0 +1,52 @@
+{
+  "author": {
+    "name": "Mamdouh Aboammar",
+    "url": "https://github.com/imMamdouhaboammar"
+  },
+  "description": "Coordinate paid-media diagnosis, budget scenarios, creative analysis, fatigue planning, causal attribution, campaign memory, and decision quality as a focused set of marketing Skills.",
+  "interface": {
+    "brandColor": "#1E5B43",
+    "brandColorDark": "#C9F36A",
+    "capabilities": [
+      "Marketing task routing",
+      "Campaign health diagnosis",
+      "Spend risk and pacing analysis",
+      "Cross-platform budget scenarios",
+      "Creative pattern analysis",
+      "Creative fatigue planning",
+      "Scenario and sensitivity analysis",
+      "Causal attribution review",
+      "Incrementality test review",
+      "Campaign memory comparison",
+      "Evidence and quality checks",
+      "Host file and Python workflows"
+    ],
+    "category": "Business & Operations",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Diagnose this paid-media account and tell me what matters first.",
+      "Compare these campaign and creative results, then propose the next tests.",
+      "Audit this attribution story and separate correlation from likely causal lift."
+    ],
+    "developerName": "Mamdouh Aboammar",
+    "displayName": "Marketing Swarm",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "A set of specialist marketing workflows for diagnosing campaign performance, evaluating spend risk and pacing, comparing budget allocations, breaking down creative patterns, planning creative refreshes, simulating scenarios, auditing attribution and incrementality, learning from campaign history, and checking recommendation quality. It works from data supplied by the user or data available through authorized host tools. It does not change live campaigns or budgets unless the current host separately exposes a compatible write-capable app and the user explicitly authorizes that action.",
+    "shortDescription": "Analyze paid media end to end"
+  },
+  "keywords": [
+    "marketing",
+    "paid-media",
+    "advertising",
+    "creative",
+    "attribution",
+    "incrementality",
+    "campaign-analysis",
+    "media-buying",
+    "performance-marketing"
+  ],
+  "license": "MIT",
+  "name": "marketing-swarm",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

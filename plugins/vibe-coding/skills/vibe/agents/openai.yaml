@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Vibe Coding"
+  short_description: "Choose a focused engineering workflow for Codex"
+  default_prompt: "Use $vibe to choose the workflow for this task."

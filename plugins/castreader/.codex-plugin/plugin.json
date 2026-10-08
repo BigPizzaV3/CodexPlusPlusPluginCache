@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "CAST AI PTE. LTD.",
+    "url": "https://voice.castreader.com"
+  },
+  "description": "Read formatted Codex answers with synchronized highlighting, build voice apps, and generate playable audio.",
+  "homepage": "https://voice.castreader.com/integrations/codex",
+  "interface": {
+    "brandColor": "#E9653B",
+    "brandColorDark": "#E9653B",
+    "capabilities": [
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Write a short English answer about reading, then read it aloud in the right-side page with synchronized word highlights.",
+      "Add a working text-to-speech feature to my app.",
+      "Generate an MP3 from this text and show the cost."
+    ],
+    "developerName": "CAST AI PTE. LTD.",
+    "displayName": "CastReader",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Read English Codex answers aloud in the right-side CastReader page, preserving headings, lists, tables, links and code while spoken words are highlighted. Try it in a new task: ask Codex to write a short English answer and read it aloud, or read an existing answer in the same task. Sign in to your existing CastReader account for 20 free AI reading minutes per day or unlimited ordinary reading with Pro. Audio is prepared ahead for continuous reading, with pause, resume and paragraph navigation. No developer API key is needed for answer reading.\n\nSeparately, build runnable voice features and generate MP3/WAV files with CastReader Voice API estimates and resumable jobs. Developer API credit is separate from consumer membership. This answer-reading release supports English and highlights the formatted reading page.",
+    "privacyPolicyURL": "https://castreader.com/privacy-policy",
+    "shortDescription": "Read answers aloud",
+    "supportURL": "https://voice.castreader.com/integrations/codex#support",
+    "termsOfServiceURL": "https://castreader.com/terms-of-service",
+    "websiteURL": "https://voice.castreader.com/integrations/codex"
+  },
+  "keywords": [
+    "text-to-speech",
+    "tts",
+    "audio",
+    "voice",
+    "codex",
+    "speech-api"
+  ],
+  "license": "MIT",
+  "name": "castreader",
+  "repository": "https://github.com/vinxu/castreader-codex",
+  "skills": "./skills/",
+  "version": "0.1.4"
+}

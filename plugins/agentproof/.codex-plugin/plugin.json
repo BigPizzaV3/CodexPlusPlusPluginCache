@@ -1,0 +1,43 @@
+{
+  "author": {
+    "email": "contact@hrevn.com",
+    "name": "Miguel Herrero",
+    "url": "https://github.com/miguel-herrero-systems"
+  },
+  "description": "Keep a local hash-only receipt of a new instrumented Codex session and verify it later.",
+  "homepage": "https://hrevn.com/en/agentproof-session-receipts/",
+  "interface": {
+    "brandColor": "#17C77B",
+    "brandColorDark": "#38E89C",
+    "capabilities": [
+      "Local capture",
+      "Receipt verification"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Start a new instrumented Codex session and leave a canonical local hash-only receipt.",
+      "Verify this AgentProof receipt locally against the current repository.",
+      "Explain what this AgentProof receipt establishes and what it does not."
+    ],
+    "developerName": "Miguel Herrero Burgos",
+    "displayName": "AgentProof",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Starts a new instrumented Codex CLI session and leaves a local, hash-only receipt of command events and checked repository states. Later, AgentProof validates the receipt and compares its recorded final file commitments with the current repository. The child runs non-interactively with Codex approvals disabled and retains the selected read-only or workspace-write sandbox. It does not capture the current Codex conversation or establish completeness, truth, authorship, work quality, compliance, payment authorization or settlement, and it uses no HREVN service or credential.",
+    "privacyPolicyURL": "https://hrevn.com/en/privacy/",
+    "shortDescription": "Local Codex session receipts",
+    "supportURL": "https://hrevn.com/en/contact/",
+    "termsOfServiceURL": "https://hrevn.com/en/legal/",
+    "websiteURL": "https://hrevn.com/en/agentproof-session-receipts/"
+  },
+  "keywords": [
+    "agent-evidence",
+    "codex",
+    "hash-chain",
+    "session-receipt"
+  ],
+  "license": "Apache-2.0",
+  "name": "agentproof",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

@@ -1,0 +1,5 @@
+interface:
+  display_name: Causal Forecasting
+  short_description: Counterfactual forecast scenarios
+policy:
+  allow_implicit_invocation: false

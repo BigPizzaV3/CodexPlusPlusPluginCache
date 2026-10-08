@@ -1,0 +1,46 @@
+{
+  "author": {
+    "name": "Antom",
+    "url": "https://www.antom.com/"
+  },
+  "description": "Antom payment integration guidance for ChatGPT and Codex.",
+  "homepage": "https://docs.antom.com/ac/ref/skill",
+  "interface": {
+    "brandColor": "#0A22AA",
+    "brandColorDark": "#556DF5",
+    "capabilities": [
+      "Interactive",
+      "Write",
+      "Research"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Help me choose the right Antom payment solution and integration mode for my business.",
+      "Help me integrate Antom One-time Payments into my application.",
+      "Validate my Antom integration, including signatures, notifications, and exception handling."
+    ],
+    "developerName": "Antom",
+    "displayName": "Antom Integration",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Choose the right Antom payment product and integration mode for your use case. Generate or review implementation code using official Antom documentation, troubleshoot API responses and payment notifications, plan Sandbox tests, and assess go-live readiness. It supports One-time Payments, Tokenized Payment, Subscription Payment, Checkout Page, Payment Element, and API-only integrations. This plugin provides guidance and code assistance only; it does not execute payments or access merchant accounts.",
+    "privacyPolicyURL": "https://docs.antom.com/ac/Platform/privacy",
+    "shortDescription": "Integrate payments with Antom",
+    "supportURL": "https://docs.antom.com/support",
+    "termsOfServiceURL": "https://docs.antom.com/ac/Platform/v92lsfhn",
+    "websiteURL": "https://docs.antom.com/"
+  },
+  "keywords": [
+    "antom",
+    "payments",
+    "payment-integration",
+    "checkout",
+    "subscription",
+    "tokenized-payment"
+  ],
+  "license": "MIT",
+  "name": "antom-integration",
+  "repository": "https://github.com/ant-intl/antom-ai-tools",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

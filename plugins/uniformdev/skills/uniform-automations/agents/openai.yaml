@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uniform Automations"
+  short_description: "Automate Uniform content events and syncs"
+  default_prompt: "Sync entries on publish with $uniform-automations"

@@ -1,0 +1,27 @@
+{
+  "author": {
+    "name": "Mert Sirakaya"
+  },
+  "description": "Codex plugin wrapper for the Short Circuit engineering operating-mode skill.",
+  "interface": {
+    "capabilities": [
+      "agentic orchestration, high qualified tests, strict python type checker discipline, design patterns"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Use Short Circuit for this coding task.",
+      "Start to implement project by following qualified tests, strict type checking and code quality branches.",
+      "Implement <task> using $short-circuit"
+    ],
+    "developerName": "Mert Sirakaya",
+    "displayName": "Short Circuit",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Short Circuit Codex packages the Short Circuit skill for Codex: planning, phase execution, fresh judgement, Python quality gates, agentic engineering, and cost-aware orchestration.",
+    "shortDescription": "Senior Python Engineer",
+    "websiteURL": "https://github.com/fswair/short-circuit-codex"
+  },
+  "name": "short-circuit-codex",
+  "skills": "./skills/",
+  "version": "0.2.0"
+}

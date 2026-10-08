@@ -1,0 +1,57 @@
+{
+  "author": {
+    "email": "support@yaps.ai",
+    "name": "Yaps AI",
+    "url": "https://www.yaps.ai"
+  },
+  "description": "Turn text into spoken audio, narration, or a voice-over with Yaps.",
+  "homepage": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins",
+  "interface": {
+    "brandColor": "#D4775B",
+    "brandColorDark": "#D4775B",
+    "capabilities": [
+      "Text to speech",
+      "WAV export",
+      "Local voices",
+      "Non-English voices",
+      "Narration",
+      "Voice-over generation"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Turn this text into a WAV file with Yaps.",
+      "Create narration from this text file.",
+      "Generate a voice-over from this script."
+    ],
+    "developerName": "Yaps AI",
+    "displayName": "Yaps Text to Speech",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Turn text or a text file into spoken audio, narration, or a voice-over with the local voices supplied by Yaps desktop. Pick the voice engine that matches the language of the text, including a multilingual voice for languages other than English, protect existing outputs, and save the generated WAV or PCM file. Requires a local-capable ChatGPT Desktop Work or Codex session; ChatGPT web and cloud sessions cannot reach the installed Yaps engine. Users can also run the feature directly in Yaps.",
+    "privacyPolicyURL": "https://www.yaps.ai/privacy",
+    "shortDescription": "Turn text into WAV audio",
+    "termsOfServiceURL": "https://www.yaps.ai/terms",
+    "websiteURL": "https://www.yaps.ai/codex?utm_source=codex&utm_medium=plugin&utm_campaign=official_plugins"
+  },
+  "keywords": [
+    "text-to-speech",
+    "tts",
+    "generate-audio",
+    "text-to-audio",
+    "voice-generator",
+    "ai-voice-generator",
+    "voice-over-generator",
+    "script-to-voice",
+    "speech-synthesis",
+    "multilingual-tts",
+    "wav-generator",
+    "narration",
+    "read-aloud"
+  ],
+  "license": "MIT",
+  "name": "yaps-text-to-speech",
+  "repository": "https://github.com/richawo/yaps-codex-plugin",
+  "skills": "./skills/",
+  "version": "0.1.11"
+}

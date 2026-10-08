@@ -1,0 +1,36 @@
+{
+  "name": "ship24",
+  "owner": {
+    "name": "Ship24",
+    "email": "contact@ship24.com",
+    "url": "https://www.ship24.com"
+  },
+  "metadata": {
+    "description": "Official Ship24 plugins for AI coding agents"
+  },
+  "plugins": [
+    {
+      "name": "ship24",
+      "source": "./",
+      "description": "Ship24 shipment tracking for AI coding agents: skills to integrate the Ship24 Tracking API, build webhook receivers, look up courier codes, map tracking statuses and troubleshoot errors, plus the Ship24 Tracking MCP server to track parcels live. Set SHIP24_API_KEY for live calls.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ship24"
+      },
+      "license": "MIT",
+      "homepage": "https://github.com/ship24/ship24-ai-plugin",
+      "category": "development",
+      "keywords": [
+        "ship24",
+        "tracking",
+        "shipment-tracking",
+        "package-tracking",
+        "parcel-tracking",
+        "courier",
+        "logistics",
+        "mcp",
+        "agent-skills"
+      ]
+    }
+  ]
+}

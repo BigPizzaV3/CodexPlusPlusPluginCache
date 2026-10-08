@@ -1,0 +1,22 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "team@fastrepl.com",
+    "name": "Fastrepl",
+    "url": "https://anarlog.so"
+  },
+  "description": "Search local Anarlog meetings or connect to Cloud with OAuth.",
+  "homepage": "https://docs.anarlog.so/agents/overview",
+  "keywords": [
+    "meetings",
+    "notes",
+    "transcripts",
+    "productivity",
+    "mcp",
+    "oauth"
+  ],
+  "license": "MIT",
+  "name": "anarlog",
+  "repository": "https://github.com/fastrepl/anarlog/tree/main/agent-plugins/anarlog",
+  "version": "1.3.0"
+}

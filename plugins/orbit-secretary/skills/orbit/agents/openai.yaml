@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orbit · 오르빗 비서"
+  short_description: "장기 Codex 작업을 취합하고 방향과 위임 범위를 검토하는 비서"
+  default_prompt: "$orbit 지난 보고 이후 작업을 취합하고 관리 방향을 제안해줘."

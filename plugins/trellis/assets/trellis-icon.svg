@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="A green vine climbing a fan trellis">
+  <defs>
+    <path id="leaf" d="M 0 0 C 17 -19 42 -18 51 0 C 39 20 16 21 0 0 Z"/>
+  </defs>
+  <style>
+    .iron { stroke: #626965; }
+    .vine { stroke: #4E7D3A; }
+    .shoot { stroke: #5E913F; }
+    .leaf-a { fill: #78A957; }
+    .leaf-b { fill: #3E772F; }
+    .earth { stroke: #AD8951; }
+    @media (prefers-color-scheme: dark) {
+      .iron { stroke: #C5CCC7; }
+      .vine { stroke: #79AE58; }
+      .shoot { stroke: #8CC36A; }
+      .leaf-a { fill: #92C46D; }
+      .leaf-b { fill: #5E9945; }
+      .earth { stroke: #C7A064; }
+    }
+  </style>
+
+  <path class="earth" d="M 92 438 Q 256 420 420 438" fill="none" stroke-width="18" stroke-linecap="round" opacity="0.62"/>
+
+  <g class="iron" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 150 430 L 170 168 Q 256 62 342 168 L 362 430"/>
+    <path d="M 256 430 L 256 82" stroke-width="16"/>
+    <path d="M 157 338 Q 256 327 355 338" stroke-width="10"/>
+    <path d="M 164 246 Q 256 235 348 246" stroke-width="10"/>
+    <path d="M 170 168 C 154 181 139 173 145 160 C 150 150 161 153 164 160" stroke-width="11"/>
+    <path d="M 342 168 C 358 181 373 173 367 160 C 362 150 351 153 348 160" stroke-width="11"/>
+  </g>
+
+  <path class="vine" d="M 157 431 C 178 392 145 370 166 339 C 187 308 221 350 248 323 C 274 297 239 273 257 245 C 274 219 249 207 258 190 C 265 176 281 182 299 171" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="shoot" d="M 299 171 C 319 157 337 164 344 182" fill="none" stroke-width="10" stroke-linecap="round"/>
+  <path class="shoot" d="M 165 341 C 143 334 136 316 149 307 C 161 300 172 311 164 321" fill="none" stroke-width="8" stroke-linecap="round"/>
+
+  <g>
+    <use href="#leaf" class="leaf-a" transform="translate(170 402) rotate(-24) scale(1.02)"/>
+    <use href="#leaf" class="leaf-b" transform="translate(144 371) rotate(204) scale(0.82)"/>
+    <use href="#leaf" class="leaf-a" transform="translate(188 344) rotate(-34) scale(1.02)"/>
+    <use href="#leaf" class="leaf-b" transform="translate(218 338) rotate(151) scale(0.82)"/>
+    <use href="#leaf" class="leaf-a" transform="translate(246 301) rotate(-24) scale(1.02)"/>
+    <use href="#leaf" class="leaf-b" transform="translate(231 267) rotate(203) scale(0.78)"/>
+    <use href="#leaf" class="leaf-a" transform="translate(266 246) rotate(-34) scale(0.91)"/>
+    <use href="#leaf" class="leaf-b" transform="translate(246 214) rotate(210) scale(0.70)"/>
+    <use href="#leaf" class="leaf-a" transform="translate(284 187) rotate(-19) scale(0.72)"/>
+  </g>
+</svg>

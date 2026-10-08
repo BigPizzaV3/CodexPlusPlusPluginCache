@@ -1,0 +1,56 @@
+{
+  "author": {
+    "name": "Cecil-IA Labs",
+    "url": "https://github.com/cecil-ia-labs"
+  },
+  "description": "Professional FFmpeg and FFprobe workflows with deterministic CLI, Skills, scripts, hardware acceleration, and declarative media pipelines.",
+  "homepage": "https://github.com/cecil-ia-labs/ffmpeg-dev#readme",
+  "interface": {
+    "brandColor": "#0B1220",
+    "brandColorDark": "#DFE6F4",
+    "capabilities": [
+      "Inspect media with FFprobe",
+      "Edit video and synchronize audio",
+      "Convert video, image, and audio formats",
+      "Compose clips, transitions, and slideshows",
+      "Diagnose and repair media issues",
+      "Plan live capture and streaming workflows",
+      "Author and validate declarative YAML pipelines",
+      "Select supported hardware acceleration"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "Inspect this media file and explain its streams, codecs, timing, and compatibility.",
+      "Trim this video, resize it to 1920x1080, and convert the result to H.264 MP4.",
+      "Create a reusable YAML pipeline that trims, speeds up, normalizes, and converts a video."
+    ],
+    "developerName": "Cecil-IA Labs",
+    "displayName": "Cecil-IA Labs FFmpeg",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Professional, deterministic FFmpeg and FFprobe workflows for ChatGPT and Codex. Inspect media, edit video and audio, convert formats, compose clips and slideshows, diagnose and repair media, plan streaming workflows, and author reusable YAML pipelines. The included Skills prefer the typed @cecilialabs/ffmpeg toolkit when executable tooling is available, with FFprobe preflight, explicit overwrite protection, transactional outputs, structured errors, and optional hardware acceleration. Executable workflows require Node.js 22+ and FFmpeg/FFprobe 6.1+; environments without command execution can still use the plugin to plan commands and author deterministic pipelines.",
+    "privacyPolicyURL": "https://github.com/cecil-ia-labs/ffmpeg-dev/blob/master/PRIVACY.md",
+    "shortDescription": "FFmpeg Toolkit for Agents",
+    "supportURL": "https://github.com/cecil-ia-labs/ffmpeg-dev/blob/master/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/cecil-ia-labs/ffmpeg-dev/blob/master/TERMS.md",
+    "websiteURL": "https://github.com/cecil-ia-labs/ffmpeg-dev"
+  },
+  "keywords": [
+    "ffmpeg",
+    "ffprobe",
+    "media",
+    "video",
+    "audio",
+    "streaming",
+    "agent-skills",
+    "typescript",
+    "cli"
+  ],
+  "license": "MIT",
+  "name": "cecilialabs-ffmpeg",
+  "repository": "https://github.com/cecil-ia-labs/ffmpeg-dev",
+  "skills": "./skills",
+  "version": "2.0.0"
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "ForgeMind Portfolio"
+  short_description: "Discover every defensible AI-native USP in this repository."
+  default_prompt: "Use $forgemind-portfolio to discover and prioritize all AI-native USP opportunities in this repository."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "socialclaw",
+  "version": "1.0.2",
+  "description": "Schedule, publish, and track social media posts on X, LinkedIn, Instagram, Threads, Facebook Pages, TikTok, YouTube, Reddit, Pinterest, WordPress, Discord, and Telegram.",
+  "author": {
+    "name": "SocialClaw",
+    "email": "hello@getsocialclaw.com",
+    "url": "https://getsocialclaw.com"
+  },
+  "homepage": "https://getsocialclaw.com/mcp",
+  "license": "MIT",
+  "keywords": [
+    "social media",
+    "scheduling",
+    "publishing",
+    "instagram",
+    "linkedin",
+    "tiktok",
+    "x",
+    "marketing"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "SocialClaw",
+        "shortDescription": "Schedule social media posts",
+        "longDescription": "SocialClaw is a social media scheduling and publishing tool. It lets ChatGPT write, schedule, and publish posts to the social accounts connected in your SocialClaw workspace: X, LinkedIn, Instagram, Threads, Facebook Pages, TikTok, YouTube, Reddit, Pinterest, WordPress, Discord, and Telegram. Before anything goes out, ChatGPT checks each post against the platform's rules and asks you to confirm. You can upload images and videos, see what is scheduled, retry or cancel posts, read post analytics, and reply to Instagram comments and messages. Sign in with your SocialClaw account to connect.",
+        "developerName": "SocialClaw",
+        "category": "Business & Operations",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://getsocialclaw.com",
+        "supportURL": "https://getsocialclaw.com/contact",
+        "privacyPolicyURL": "https://getsocialclaw.com/privacy",
+        "termsOfServiceURL": "https://getsocialclaw.com/terms",
+        "defaultPrompt": [
+          "Use SocialClaw to show which social accounts I have connected.",
+          "Use SocialClaw to schedule a LinkedIn post for tomorrow at 9am announcing our new feature.",
+          "Use SocialClaw to list my scheduled posts for this week."
+        ],
+        "brandColor": "#F82F2F",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "apps": "./.app.json"
+    }
+  }
+}

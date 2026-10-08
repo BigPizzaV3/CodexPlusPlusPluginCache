@@ -1,0 +1,7 @@
+interface:
+  display_name: "Coupon Hive"
+  short_description: "Find deals and real freebies"
+  default_prompt: "Use $coupon-hive to interview me, verify current deals or genuine freebies, and prepare a recurring watch only after I approve its scope and schedule."
+  icon_small: "./assets/icon.png"
+  icon_large: "./assets/icon.png"
+  brand_color: "#946900"

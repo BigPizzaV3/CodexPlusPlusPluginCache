@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Security & privacy"
+  short_description: "Security, privacy and audit logs"
+  default_prompt: "Use $vibe-security to audit the selected security & privacy boundary."

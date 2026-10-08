@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tahr Threat Model App"
+  short_description: "Threat-model an entire existing application"
+  default_prompt: "Use $tahr-threat-model-app to perform a full implementation-backed threat model of this entire existing application and produce validated security decisions and test handoffs."

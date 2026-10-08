@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ma Carveout Readiness"
+  short_description: "Explicit-only."
+policy:
+  allow_implicit_invocation: false

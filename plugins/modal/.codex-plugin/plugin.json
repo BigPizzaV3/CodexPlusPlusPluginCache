@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "Modal",
+    "url": "https://modal.com"
+  },
+  "description": "Installs the Modal CLI and Modal's official skill to help coding agents use its latest features. Modal is a platform for running AI workloads in the cloud with minimal configuration; key use cases include AI model training and inference, high-performance batch jobs, and sandboxed code execution. Modal offers official SDKs in Python, Go, and JavaScript/TypeScript, along with a CLI for interacting with the platform.",
+  "homepage": "https://modal.com/docs",
+  "interface": {
+    "capabilities": [
+      "Write Modal Apps and Functions",
+      "Run code on serverless GPUs",
+      "Scale batch and parallel jobs",
+      "Run untrusted code in Modal Sandboxes"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create a Modal app that runs a Python function on a GPU",
+      "Deploy this script as a scheduled Modal job",
+      "Run this untrusted code inside a Modal Sandbox"
+    ],
+    "developerName": "Modal Labs, Inc.",
+    "displayName": "Modal",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Modal is a platform for running AI workloads in the cloud with minimal configuration; key use cases include AI model training and inference, high-performance batch jobs, and sandboxed code execution. This plugin installs the Modal CLI and Modal's official skill to help coding agents use its latest features.",
+    "privacyPolicyURL": "https://modal.com/legal/privacy-policy",
+    "shortDescription": "Run AI workloads in the cloud",
+    "supportURL": "https://modal.com/slack",
+    "termsOfServiceURL": "https://modal.com/legal/terms",
+    "websiteURL": "https://modal.com"
+  },
+  "keywords": [
+    "modal",
+    "serverless",
+    "cloud-compute",
+    "gpu",
+    "batch-jobs",
+    "sandboxes"
+  ],
+  "license": "Apache-2.0",
+  "name": "modal",
+  "repository": "https://github.com/modal-labs/modal-client",
+  "skills": "./skills/",
+  "version": "1.5.3"
+}

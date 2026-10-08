@@ -1,0 +1,9 @@
+interface:
+  display_name: "Context Save"
+  short_description: "Save concise project context, decisions, git state, and remaining work into the workspace when wr..."
+  default_prompt: "Use Context Save for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

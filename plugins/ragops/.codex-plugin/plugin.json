@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Thang Luu",
+    "url": "https://github.com/thangldw"
+  },
+  "description": "Offline, explainable release gates and evidence bundles for RAG systems and AI agents.",
+  "homepage": "https://github.com/thangldw/ragops",
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Compare this candidate run with the accepted baseline.",
+      "Explain why this RAG release is blocked.",
+      "Create a review-ready release gate report."
+    ],
+    "developerName": "DUC THANG LUU",
+    "displayName": "RAGOps",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Compare recorded candidate behavior with an accepted baseline, localize regressions by policy and case, and produce verifiable release evidence without requiring a model provider.",
+    "privacyPolicyURL": "https://github.com/thangldw/ragops/blob/main/PRIVACY.md",
+    "shortDescription": "Gate AI releases with evidence",
+    "supportURL": "https://github.com/thangldw/ragops/blob/main/SUPPORT.md",
+    "termsOfServiceURL": "https://github.com/thangldw/ragops/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/thangldw/ragops"
+  },
+  "keywords": [
+    "rag",
+    "ai-agents",
+    "evaluation",
+    "release-gates",
+    "regression-testing"
+  ],
+  "license": "MIT",
+  "name": "ragops",
+  "repository": "https://github.com/thangldw/ragops",
+  "skills": "./skills/",
+  "version": "2.0.2"
+}

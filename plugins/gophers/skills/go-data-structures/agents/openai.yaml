@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Data Structures"
+  short_description: "Choose efficient Go data structures"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-data-structures to choose or optimize the data structures in this Go code."

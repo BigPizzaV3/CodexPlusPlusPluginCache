@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Infrastructure & background jobs"
+  short_description: "CI/CD, configuration and background jobs"
+  default_prompt: "Use $vibe-ops to audit the selected infrastructure & background jobs boundary."

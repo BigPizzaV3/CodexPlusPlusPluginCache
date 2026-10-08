@@ -1,0 +1,156 @@
+{
+  "generatedFrom": {
+    "definition": "foundry/plugins.json"
+  },
+  "detectors": [
+    {
+      "id": "agent.manifest",
+      "label": "Agent manifest / agent card",
+      "patterns": [
+        "(^|/)ecz-agent\\.json$",
+        "(^|/)agents?\\.json$",
+        "(^|/)agent\\.(ya?ml|toml)$",
+        "(^|/)agent-?card\\.json$",
+        "(^|/)\\.well-known/agent(-card)?\\.json$"
+      ]
+    },
+    {
+      "id": "agent.mcp",
+      "label": "MCP servers the agent can reach",
+      "patterns": [
+        "(^|/)\\.vscode/mcp\\.json$",
+        "(^|/)\\.mcp\\.json$",
+        "(^|/)mcp\\.json$",
+        "(^|/)claude_desktop_config\\.json$",
+        "(^|/)\\.cursor/mcp\\.json$",
+        "(^|/)\\.(codex|gemini|kiro|copilot)/mcp\\.json$"
+      ]
+    },
+    {
+      "id": "agent.permissions",
+      "label": "Permissions / allowlist policy",
+      "patterns": [
+        "permissions?\\.json$",
+        "allowlist",
+        "(^|/)\\.claude/settings(\\.local)?\\.json$",
+        "(^|/)policy\\.(json|ya?ml)$",
+        "guardrails?"
+      ]
+    },
+    {
+      "id": "agent.instructions",
+      "label": "Agent instructions / rules",
+      "patterns": [
+        "(^|/)AGENTS\\.md$",
+        "(^|/)CLAUDE\\.md$",
+        "(^|/)GEMINI\\.md$",
+        "(^|/)\\.cursorrules$",
+        "copilot-instructions\\.md$",
+        "(^|/)\\.claude/agents/",
+        "(^|/)\\.github/agents/",
+        "(^|/)\\.cursor/rules/"
+      ]
+    },
+    {
+      "id": "agent.tools",
+      "label": "Declared tools / functions",
+      "patterns": [
+        "(^|/)tools?\\.json$",
+        "(^|/)functions?\\.json$",
+        "tool-?definitions?",
+        "(^|/)openapi\\.(json|ya?ml)$",
+        "(^|/)swagger\\.(json|ya?ml)$"
+      ]
+    },
+    {
+      "id": "agent.framework",
+      "label": "Agent framework surface",
+      "patterns": [
+        "crewai",
+        "autogen",
+        "langgraph",
+        "langchain",
+        "semantic-?kernel",
+        "smolagents",
+        "pydantic-?ai",
+        "(^|/)agents?/",
+        "(^|/)agent\\.py$"
+      ]
+    },
+    {
+      "id": "agent.resolverRef",
+      "label": "ECZ-ID public proof reference",
+      "patterns": [
+        "(^|/)\\.well-known/ecz-[a-z0-9-]*\\.json$",
+        "(^|/)ecz-agent[a-z0-9-]*\\.json$",
+        "(^|/)ecz-id[a-z0-9-]*\\.json$"
+      ]
+    }
+  ],
+  "guidance": [
+    {
+      "detectorId": "agent.manifest",
+      "whyItMatters": "A manifest or agent card is where an agent declares what it is, who runs it and what it may do. Reviewers, platforms and counterparties start there.",
+      "reviewWhenObserved": "Check the declared name, operator, capabilities and any MCP servers it lists match what the code and configuration actually reach.",
+      "reviewWhenNotObserved": "If you publish an agent, declare it: an ecz-agent.json or agent card is the first thing a reviewer asks for.",
+      "weightWhenNotObserved": "high",
+      "capability": {
+        "label": "ECZ-ID Agent Trust for VS Code (Community, free forever)",
+        "url": "https://marketplace.visualstudio.com/items?itemName=ecocitizenz.eczid-ai-agents",
+        "note": "Agent-surface discovery, declared tool and capability visibility, workspace MCP relationships and change detection."
+      }
+    },
+    {
+      "detectorId": "agent.mcp",
+      "whyItMatters": "The MCP servers an agent can reach define its reach into systems and data. Each one is an authority grant.",
+      "reviewWhenObserved": "List every server, its transport and command basename, and the credential-shaped environment KEY NAMES (never values). Confirm the agent needs each one.",
+      "reviewWhenNotObserved": "Supporting evidence. An agent without MCP servers reaches only what its host gives it.",
+      "weightWhenNotObserved": "elevated"
+    },
+    {
+      "detectorId": "agent.permissions",
+      "whyItMatters": "Permission and allowlist policy is where authority is bounded: which tools, which paths, which commands. Without it, reach defaults to everything the host allows.",
+      "reviewWhenObserved": "Confirm the allow and deny lists name the tools the agent actually has, and that dangerous chains (read secrets then send) are not implicitly allowed.",
+      "reviewWhenNotObserved": "Add a permissions policy for the host in use, even a short one; it is the artefact that shows authority was decided rather than defaulted.",
+      "weightWhenNotObserved": "elevated",
+      "capability": {
+        "label": "Agent Trust Pro (VS Code): Authority Graph and dangerous action-chain indicators",
+        "url": "https://developers.ecocitizenz.com/agent-trust/",
+        "note": "Pro capabilities run in the VS Code extension; this plugin does not claim them."
+      }
+    },
+    {
+      "detectorId": "agent.instructions",
+      "whyItMatters": "Instruction files (AGENTS.md, CLAUDE.md, rules) shape behaviour and often grant implicit permissions in prose. They are part of the authority surface.",
+      "reviewWhenObserved": "Read them for implicit grants (run any command, ignore confirmations) and align them with the permissions policy.",
+      "reviewWhenNotObserved": "Supporting evidence only.",
+      "weightWhenNotObserved": "normal"
+    },
+    {
+      "detectorId": "agent.tools",
+      "whyItMatters": "Declared tool and function definitions are the agent's hands. A reviewer needs the list to judge reach.",
+      "reviewWhenObserved": "Compare the declared tools with what the manifest and permissions allow.",
+      "reviewWhenNotObserved": "Supporting evidence only.",
+      "weightWhenNotObserved": "normal"
+    },
+    {
+      "detectorId": "agent.framework",
+      "whyItMatters": "Framework files show which orchestration is in play and where tool wiring lives.",
+      "reviewWhenObserved": "Locate where tools and credentials are wired and confirm they match the declared surface.",
+      "reviewWhenNotObserved": "Supporting evidence only.",
+      "weightWhenNotObserved": "normal"
+    },
+    {
+      "detectorId": "agent.resolverRef",
+      "whyItMatters": "An ECZ-ID public proof reference lets a platform or counterparty check the agent's current public posture in Resolver. Absence is neutral.",
+      "reviewWhenObserved": "Run ecz_check_target on the referenced identifier and read the ResultState and ReasonCodes.",
+      "reviewWhenNotObserved": "If you operate the agent, a free ECZ-ID Agent Passport gives it a public, resolver-checkable identity.",
+      "weightWhenNotObserved": "normal",
+      "capability": {
+        "label": "Free ECZ-ID Agent Passport",
+        "url": "https://developers.ecocitizenz.com/agent-trust/",
+        "note": "Free, fast self-service via the Developer Gateway. Passport issuance is an ECZ-ID platform service, not a function of this plugin."
+      }
+    }
+  ]
+}

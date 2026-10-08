@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Comparative analysis, forum/jurisdiction analysis, issue-spotting, legislative history, precedent mapping, research synthesis, and statutory interpretation skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#0369A1",
+    "brandColorDark": "#5EC4FC",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Spot every issue and threshold problem in this fact pattern.",
+      "Map the authorities on this specific point.",
+      "Interpret this provision using the accepted canons, showing the reasoning."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Research",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Seven reusable legal research workflows covering comparative jurisdiction analysis, forum selection, issue-spotting, legislative history, precedent mapping, research synthesis, and statutory interpretation \u2014 all built around sourcing discipline rather than asserting legal facts from memory.",
+    "shortDescription": "Legal research workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "research",
+    "precedent",
+    "statutory-interpretation",
+    "comparative-law"
+  ],
+  "license": "MIT",
+  "name": "research",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

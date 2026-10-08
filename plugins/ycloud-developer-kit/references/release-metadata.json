@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "canonicalRepository": "https://docs.ycloud.com/reference",
+  "canonicalPath": "apis/ycloud-api-v2.yaml",
+  "canonicalRevision": "5ba1b652e00d27b1a3c097f012cff2da93df624c",
+  "canonicalSourceSha256": "080746758babdad4689efb35a6b7c24108b33afb527a80bb8e82d462ca8267ed",
+  "snapshotSha256": "8592bd4cc37186655a480dd86ce6bac6731543727327a2871d9103a0b8ed9e81",
+  "snapshotCorrections": [
+    {
+      "id": "template-name-underscores",
+      "original": "pattern: '[a-z0-9]{1,512}'",
+      "replacement": "pattern: '[a-z0-9_]{1,512}'",
+      "occurrences": 7,
+      "reason": "Allow underscores in template names, matching the current REST service validation and the snapshot's sample_whatsapp_template examples.",
+      "evidence": "REST revision 30882802a5dfb054c31989a7e22e7b57b969bf9a, yunpian-attila-rest-impl/src/main/java/com/yunpian/attila/rest/v2/facade/WhatsappFacadeServiceImpl.java, TEMPLATE_NAME_PATTERN = [_a-z0-9]{1,512}."
+    }
+  ],
+  "apiMajor": 2,
+  "pluginVersion": "0.7.9",
+  "governanceReleaseId": "developer-kit-2026-09-22",
+  "governanceManifestSha256": "c0556e019fc29b08213e2d6a86f5f162e8ba53bc34d8e853a77298edc7ddae8e",
+  "pluginPayloadSha256": "42794ed77bfd40fd29e08f240004c04ab2eeab64e446fb83454c6cf63729e915"
+}

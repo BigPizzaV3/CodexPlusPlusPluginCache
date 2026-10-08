@@ -1,0 +1,9 @@
+interface:
+  display_name: "Document Generate"
+  short_description: "Generate practical documentation from code and verified behavior."
+  default_prompt: "Use Document Generate for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

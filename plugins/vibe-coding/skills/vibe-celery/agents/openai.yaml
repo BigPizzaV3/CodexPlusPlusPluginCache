@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Celery"
+  short_description: "Celery task delivery, retries and worker shutdown"
+  default_prompt: "Use $vibe-celery to audit the selected celery boundary."

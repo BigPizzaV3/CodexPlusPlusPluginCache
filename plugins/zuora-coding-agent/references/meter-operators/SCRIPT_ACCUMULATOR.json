@@ -1,0 +1,37 @@
+{
+  "key": "SCRIPT_ACCUMULATOR",
+  "nodeType": "PROCESSOR",
+  "operatorType": "SCRIPT_ACCUMULATOR",
+  "metadata": {
+    "groupFields": [],
+    "language": "JS",
+    "source": null,
+    "schemaId": null
+  },
+  "label": "Script Accumulator",
+  "assumptions": [
+    {
+      "path": "language",
+      "value": "JS",
+      "reason": "JS is the default scripting language; PYTHON is also supported.",
+      "confidence": 0.85
+    }
+  ],
+  "generatable_fields": {
+    "source": "Generate this from the user's business logic description. See references/meter-operator-codegen.md for the SCRIPT_ACCUMULATOR signature and examples. Note: SCRIPT_ACCUMULATOR receives events in batches; the step function must return null to keep accumulating or an output object to release. Ask the user: what is the release trigger condition, what fields to accumulate, and what should the released output look like?"
+  },
+  "blockers": [
+    {
+      "path": "language",
+      "message": "SCRIPT_ACCUMULATOR language: 'JS' or 'PYTHON'? Default: JS."
+    },
+    {
+      "path": "groupFields",
+      "message": "SCRIPT_ACCUMULATOR groupFields is required. Which fields define the accumulation groups? (e.g. [\"accountNumber\"])"
+    },
+    {
+      "path": "schemaId",
+      "message": "SCRIPT_ACCUMULATOR schemaId is required. Which output schema should the accumulated events conform to? (get the ID from the Schema Registry)"
+    }
+  ]
+}

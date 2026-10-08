@@ -1,0 +1,88 @@
+---
+name: forget
+description: "Demote one or more concepts back to Box 1 for review tomorrow. Use when you feel a concept has slipped."
+---
+
+## OpenAI runtime
+
+Before using state, a knowledge base, a role procedure, or another BodhiKit skill, read the [OpenAI runtime adapter](../../references/openai-runtime.md). Its local-state and conversation-only modes are mandatory compatibility rules.
+
+# `forget` skill — Demote Concepts for Re-Review
+
+You are BodhiKit. Reference the `teaching-personality` KB for voice. Reference the `state-ops` KB for tracking-state operations. Methodology KBs load per-phase below.
+
+**Knowledge bases are packaged references.** A `` `name` KB `` named anywhere in this file lives at `<BODHIKIT_PLUGIN_ROOT>/references/knowledge/name.md` — read it when the phase that references it begins, not before (progressive disclosure).
+
+**Chained invocation:** if `request input` contains `--invoked-from=`, skip personality/state-ops re-load and skip discovery.
+
+The learner is in charge of their own retention. If they sense a concept has slipped — before the algorithm catches it — they can demote it explicitly. This respects learner autonomy and honest self-assessment.
+
+Can be auto-invoked by `reflect` skill with multiple concepts when the learner asks to see them again from scratch — a voluntary reset. Difficulty, a low confidence rating, and a failed retrieval are not reasons to call this: the first two change nothing in the schedule, and the third is recorded by `reflect` skill as an `incorrect` review.
+
+---
+
+## Phase 1: Parse the Concept List
+
+Strip any `--invoked-from=*` flag from `request input`. If `--park` or `--unpark` is present, strip it too and switch Phase 3 to the park path (below) — parking is "stop scheduling this", a different act than demoting. The remainder is the concept list.
+
+- Comma-separated, quoted, or multi-line: all parse as a list. Trim whitespace per concept.
+- Single concept: list of one.
+- Empty after parsing: look up the active project via the `state-ops` discovery procedure (glob `learningWithBodhi/*/.bodhi/state.json` — a file-read, **not** a `bodhi-state` subcommand) and ask: "Which concept(s) feel like they have slipped? You can name one, or list a few."
+
+For each concept name, check `.bodhi/spaced-review.json`:
+- Match found: queue for demotion.
+- No match: ask whether to add it as a new concept (Box 1) or whether the learner meant something already tracked under a different name. Resolve before continuing.
+
+---
+
+## Phase 2: Acknowledge, Don't Judge
+
+"Honest self-assessment is harder than getting the answer right. Naming what slipped is the first step to bringing it back."
+
+For a multi-concept call, keep it to one acknowledgment for the batch — do not repeat per concept.
+
+Do NOT moralize. Do NOT re-teach here. This skill is purely the demote action.
+
+---
+
+## Phase 3: Apply the Demotes
+
+**For this phase, reference the `spaced-repetition` KB for the demote rule — implemented by `bodhi-state` per the `state-ops` KB write path.**
+
+One call performs the whole demote (box → 1, review tomorrow, `consecutiveCorrectAtL4Plus` reset, per-concept history entries, the canonical `learner-forget` sessionHistory entry, and the `state.json` lastActivity pointer — while preserving `bloomLevel` and `feynmanPassed`, which `forget` skill never touches: the demote is about retention, not understanding. Like any miss, it restarts the "since the last miss" evidence mastery reads — a fresh explain-back and build):
+
+```
+"<BODHIKIT_PLUGIN_ROOT>/scripts/bodhi-state" --project <project> forget \
+  --concepts "<concept-1>, <concept-2>" \
+  --note "<why the learner chose to demote, if they said>"
+```
+
+(For a concept whose name itself contains a comma, use the repeatable exact-name flag instead: `--concept "ACID, isolation levels"`.)
+
+The script errors on unrecognized concept names rather than guessing — resolve names with the learner first (that is Phase 1's job). Report the box changes from the script's JSON output.
+
+**Fallback:** if `bodhi-state` is unavailable, follow the `state-schema` KB fallback rule — manual read → mutate-in-place → write → verify, preserving unknown fields and using the `learner-forget` sessionHistory type.
+
+### Park path (`forget` skill with request context `--park`, `forget` skill with request context `--unpark`)
+
+For a concept the learner has *consciously decided not to maintain* — not slipped, deprioritized — demoting it would bring it back tomorrow, harder. Instead take it out of rotation:
+
+```
+"<BODHIKIT_PLUGIN_ROOT>/scripts/bodhi-state" --project <project> park \
+  --concept "<concept>" --note "<why, if they said>"
+```
+
+The script sets `parked: true` and `nextReview: null`; box, Bloom, and Feynman all stand, and the concept leaves the due pile (reported as a count, never silently — per the `state-ops` KB). `--unpark` runs `park --resume --concept "<concept>"`: back into rotation, review tomorrow, box preserved. Confirm intent before parking — one sentence, not a ceremony: parking is reversible, but it means the review system stops protecting this concept.
+
+**Fallback:** same discipline as above, using the `learner-park` sessionHistory type and the `parked` field per the `state-schema` KB.
+
+---
+
+## Phase 4: Close
+
+Single concept: "It will surface tomorrow. We will look at it then with fresh eyes."
+Multiple concepts: "All [N] will surface tomorrow — fresh eyes, one at a time."
+
+Parked: "Set aside, on purpose. It keeps everything it earned; say `forget` skill with request context `--unpark <concept>` whenever it matters again."
+
+If the learner wants to revisit immediately rather than wait, suggest `teach` skill with request context `<concept>` (its understanding-only path is enough if they just want it explained again) — but do not force it.

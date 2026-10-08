@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "target": {
+    "name": "",
+    "repository": "",
+    "runtime": "",
+    "authorization_scope": []
+  },
+  "review_mode": "deep",
+  "summary": "",
+  "coverage": [
+    {
+      "lane": "attack-surface",
+      "status": "partial",
+      "evidence": [],
+      "gaps": ["Populate the inventory before claiming completion"]
+    }
+  ],
+  "findings": [],
+  "candidates": [],
+  "tested_no_issue": [],
+  "attack_chains": [],
+  "unresolved": []
+}

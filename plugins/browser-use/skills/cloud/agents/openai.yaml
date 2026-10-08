@@ -1,0 +1,9 @@
+interface:
+  display_name: Cloud
+  short_description: Design Browser Use Cloud integrations
+  default_prompt: Use $cloud to explain or review this hosted-browser integration design.
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

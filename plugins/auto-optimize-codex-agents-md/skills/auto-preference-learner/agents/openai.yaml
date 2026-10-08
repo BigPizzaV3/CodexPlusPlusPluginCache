@@ -1,0 +1,4 @@
+interface:
+  display_name: "Auto Preference Learner"
+  short_description: "Learn and retain durable Codex preferences"
+  default_prompt: "Use $auto-preference-learner to review my conversation history and suggest AGENTS.md improvements."

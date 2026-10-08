@@ -1,0 +1,9 @@
+interface:
+  display_name: Shipping And Launch
+  short_description: Prepares production launches
+  default_prompt: Use $shipping-and-launch for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

@@ -1,0 +1,9 @@
+interface:
+  display_name: "Marketing Memory"
+  short_description: "Reuse relevant campaign history"
+  default_prompt: "Compare this decision with our past campaign evidence and surface the cases that actually transfer."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

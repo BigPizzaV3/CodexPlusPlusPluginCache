@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Voiceover"
+  short_description: "Natural timed voiceover takes"
+  default_prompt: "Use $pixverse-voiceover to create natural Mandarin narration from this script and fit the marked sections to their time windows."
+policy:
+  allow_implicit_invocation: true

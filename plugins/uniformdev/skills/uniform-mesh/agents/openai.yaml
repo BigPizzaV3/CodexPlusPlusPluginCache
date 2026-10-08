@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uniform Mesh"
+  short_description: "Build Mesh integrations for the Uniform UI"
+  default_prompt: "Build a data connector with $uniform-mesh"

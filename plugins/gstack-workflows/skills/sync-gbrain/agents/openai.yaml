@@ -1,0 +1,8 @@
+interface:
+  display_name: "Sync Gbrain"
+  short_description: "Refresh gbrain project context only when the native local runtime is available and the user autho..."
+  default_prompt: "Use Sync Gbrain for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

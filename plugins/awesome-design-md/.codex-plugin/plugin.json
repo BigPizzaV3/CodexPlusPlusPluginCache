@@ -1,0 +1,38 @@
+{
+  "author": {
+    "name": "VoltAgent",
+    "url": "https://github.com/VoltAgent"
+  },
+  "description": "A curated design-reference library that helps coding agents apply analyzed visual systems from developer-focused websites to UI work.",
+  "homepage": "https://github.com/VoltAgent/awesome-design-md",
+  "interface": {
+    "capabilities": [
+      "UI design references",
+      "Design-system guidance"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this interface using the design reference library",
+      "Suggest a clearer visual hierarchy for this screen",
+      "Create a concise design direction for this product"
+    ],
+    "developerName": "RONALD FERRARI SOARES",
+    "displayName": "Awesome DESIGN.md",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Helps analyze and improve product and interface design using a curated DESIGN.md reference library and reusable design guidance.",
+    "shortDescription": "Design reference workflows"
+  },
+  "keywords": [
+    "design",
+    "ui",
+    "design-system",
+    "frontend",
+    "references"
+  ],
+  "license": "MIT",
+  "name": "awesome-design-md",
+  "repository": "https://github.com/VoltAgent/awesome-design-md",
+  "skills": "./skills/",
+  "version": "1.0.0"
+}

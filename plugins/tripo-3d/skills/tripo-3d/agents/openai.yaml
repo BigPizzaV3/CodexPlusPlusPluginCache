@@ -1,0 +1,12 @@
+interface:
+  display_name: "Generate a 3D asset"
+  short_description: "Turn a prompt or image into a model file in your project"
+  default_prompt: "Generate a low-poly treasure chest and put the GLB in my assets folder."
+
+policy:
+  # Phase 0 ships Codex-only: the skill drives the tripo CLI over a shell, which
+  # ChatGPT cannot do. The CHAT surface is served by the remote MCP server instead
+  # (see docs/review.md, phase 2).
+  products:
+    - CODEX
+  allow_implicit_invocation: true

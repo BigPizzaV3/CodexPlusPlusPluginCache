@@ -1,0 +1,78 @@
+#!/usr/bin/env node
+
+/**
+ * SessionStart check. Tells the user what MockFlow still needs, and nothing at
+ * all when everything already works.
+ *
+ * Node rather than sh so it runs on Windows too, and so it needs neither a
+ * POSIX shell nor curl. Node is a safe assumption: the bridge requires it.
+ *
+ * The user should never have to know that a helper program, a running daemon
+ * and a paired browser tab are three separate things. This reports only the
+ * first one that is missing, in plain language.
+ *
+ * Silence when healthy is deliberate: this runs on every session start, so any
+ * output in the normal case is pure noise.
+ */
+
+const { spawnSync } = require('child_process');
+
+const PORT = process.env.MFBRIDGE_PORT || 21196;
+
+function say(lines) { console.log(lines.join('\n')); process.exit(0); }
+
+/** Is `mockflow-bridge` on PATH? `where` on Windows, `command -v` elsewhere. */
+function onPath(bin) {
+	const win = process.platform === 'win32';
+	const r = win
+		? spawnSync('where', [bin], { stdio: 'ignore', windowsHide: true })
+		: spawnSync('sh', ['-c', 'command -v ' + bin], { stdio: 'ignore' });
+	return r.status === 0;
+}
+
+async function main() {
+	// 1. Is the helper installed?
+	if (!onPath('mockflow-bridge')) {
+		say([
+			'The MockFlow plugin is installed but its bridge helper is missing, so nothing can',
+			'be drawn on a board yet. It is a small local program, about 2MB, no account needed.',
+			'Offer to run this for the user before doing anything else with MockFlow:',
+			'  npm i -g @mockflow/mockflow-bridge',
+			'',
+			'Unless this shell is not the user\'s own computer. In a cloud or remote container',
+			'the bridge has nothing to pair with, because the board tab is open on their machine',
+			'and not this one. Then say drawing needs Codex running locally, either Codex',
+			'selected in the desktop app or the Codex CLI, and do not offer the install.'
+		]);
+	}
+
+	// 2 and 3. Daemon up, and any board paired? One call answers both.
+	let boards = null;
+	try {
+		const resp = await fetch('http://127.0.0.1:' + PORT + '/status',
+			{ signal: AbortSignal.timeout(2000) });
+		const data = await resp.json();
+		boards = (data.boards || []).length;
+	} catch (e) {
+		// Nothing answered, so no daemon is running. The bridge must be started by
+		// hand; this is the single most common reason board tools are missing.
+		say([
+			'The MockFlow bridge is installed but not running, so the board tools in this',
+			'session will not work. Tell the user to start it, then reload:',
+			'  mockflow-bridge'
+		]);
+	}
+
+	if (boards === 0) {
+		say([
+			'MockFlow is connected but no board is paired, so a drawing has nowhere to land.',
+			'Before drawing anything, tell the user to open their board at app.mockflow.com,',
+			'click "Connect Local Agent" at the top of Ask Mida, and enter the pairing code',
+			'shown by the bridge. This is a one time step per computer.'
+		]);
+	}
+
+	// Healthy. Say nothing.
+}
+
+main().catch(function() { process.exit(0); });

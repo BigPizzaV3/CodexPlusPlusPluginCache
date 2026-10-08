@@ -1,0 +1,4 @@
+interface:
+  display_name: "Yaps Subtitle Generator"
+  short_description: "Generate subtitles and SRT captions"
+  default_prompt: "Use $yaps-srt-generator to generate subtitles for this video."

@@ -1,0 +1,21 @@
+{
+  "name": "kata",
+  "description": "Marketplace for the Kata coding-reasoning coach.",
+  "version": "1.0.0",
+  "owner": {
+    "name": "Anderson Alves",
+    "url": "https://github.com/andersonmalves"
+  },
+  "plugins": [
+    {
+      "name": "kata",
+      "source": "./",
+      "description": "Coaches programming reasoning: attempt first, progressive hints, unaided transfer. Not a model trainer.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Anderson Alves",
+        "url": "https://github.com/andersonmalves"
+      }
+    }
+  ]
+}

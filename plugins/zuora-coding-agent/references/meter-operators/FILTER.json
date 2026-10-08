@@ -1,0 +1,83 @@
+{
+  "key": "FILTER",
+  "nodeType": "PROCESSOR",
+  "operatorType": "FILTER",
+  "metadata": {
+    "ruleCombiner": "and",
+    "rules": [
+      {
+        "sourceField": null,
+        "operator": null,
+        "value": null
+      }
+    ]
+  },
+  "label": "Filter",
+  "hints": {
+    "ruleCombiner": "and | or",
+    "rules[].operator": "gt | gte | lt | lte | equal | notEqual | contains | notContains | startsWith | notStartsWith | endsWith | notEndsWith | in | notIn | blank | notBlank"
+  },
+  "assumptions": [
+    {
+      "path": "ruleCombiner",
+      "value": "and",
+      "reason": "All conditions must pass \u2014 'and' is the standard default.",
+      "confidence": 0.95
+    }
+  ],
+  "blockers": [
+    {
+      "path": "ruleCombiner",
+      "allowed_values": ["and", "or"],
+      "message": "FILTER ruleCombiner '{ruleCombiner}' is not supported. Allowed values: and, or."
+    },
+    {
+      "path": "rules[0].sourceField",
+      "when": {
+        "path": "rules[0]",
+        "is_dict": false
+      },
+      "message": "FILTER rules are required. Provide at least one rule with sourceField and operator."
+    },
+    {
+      "path": "rules[0].sourceField",
+      "when": {
+        "path": "rules[0]",
+        "is_dict": true
+      },
+      "message": "FILTER sourceField is required. Which event field should be filtered on?"
+    },
+    {
+      "path": "rules[0].operator",
+      "when": {
+        "path": "rules[0]",
+        "is_dict": true
+      },
+      "message": "FILTER operator is required. Valid operators: gt, gte, lt, lte, equal, notEqual, contains, notContains, startsWith, notStartsWith, endsWith, notEndsWith, in, notIn, blank, notBlank"
+    },
+    {
+      "path": "rules[0].value",
+      "when_all": [
+        {
+          "path": "rules[0]",
+          "is_dict": true
+        },
+        {
+          "path": "rules[0].operator",
+          "not_in": [
+            "blank",
+            "notBlank"
+          ]
+        }
+      ],
+      "message_template": "FILTER value is required for operator '{rules[0].operator}'. What should the field be compared against?"
+    },
+    {
+      "iterate": "rules",
+      "item_field": "operator",
+      "item_allowed_values": ["gt", "gte", "lt", "lte", "equal", "notEqual", "contains", "notContains", "startsWith", "notStartsWith", "endsWith", "notEndsWith", "in", "notIn", "blank", "notBlank"],
+      "field_label_template": "rules[].operator",
+      "message_template": "FILTER rules[].operator '{operator}' is not valid. Allowed values: gt, gte, lt, lte, equal, notEqual, contains, notContains, startsWith, notStartsWith, endsWith, notEndsWith, in, notIn, blank, notBlank."
+    }
+  ]
+}

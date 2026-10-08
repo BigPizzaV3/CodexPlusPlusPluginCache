@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Saul Mart\u00ed"
+  },
+  "description": "Skills-only engineering toolkit bundling the complete upstream AI Hero, Ponytail, Addy Osmani Agent Skills, and Taste Skill collections with explicit EngineeringSuite command routing.",
+  "interface": {
+    "capabilities": [
+      "Technical research and source-driven investigation",
+      "Test-driven implementation, debugging, and code review",
+      "Architecture, planning, specifications, and task breakdown",
+      "Frontend engineering, UX, and visual design workflows",
+      "Code simplification, performance, security, and shipping guidance"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "EngineeringSuite /research investigate this technical question and report evidence",
+      "EngineeringSuite /tdd implement this change test-first",
+      "EngineeringSuite /taste review and redesign this interface"
+    ],
+    "developerName": "Saul Mart\u00ed",
+    "displayName": "EngineeringSuite",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "A skills-only engineering toolkit that bundles the complete vendored AI Hero / Matt Pocock, Ponytail, Addy Osmani Agent Skills, and Taste Skill collections, plus a dedicated EngineeringSuite router. Use commands such as EngineeringSuite /research, /tdd, /review, /taste, /audit, or an exact upstream skill name to route work to the requested skill. The upstream skill content is preserved and third-party licenses are included. This is a community integration and is not endorsed by the upstream authors.",
+    "shortDescription": "Engineering skill toolkit"
+  },
+  "keywords": [
+    "engineering",
+    "coding",
+    "research",
+    "tdd",
+    "code-review",
+    "frontend",
+    "design",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "engineering-suite",
+  "skills": "./skills/",
+  "version": "1.1.1"
+}

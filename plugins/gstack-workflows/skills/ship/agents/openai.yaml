@@ -1,0 +1,9 @@
+interface:
+  display_name: "Ship"
+  short_description: "Prepare a change for delivery by checking tests, review evidence, repository state, and release s..."
+  default_prompt: "Use Ship for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Go Distributed Change"
+  short_description: "Find distributed failure schedules"
+  default_prompt: "Use $review-go-distributed-change to review this Go diff for distributed failure schedules."
+policy:
+  allow_implicit_invocation: true

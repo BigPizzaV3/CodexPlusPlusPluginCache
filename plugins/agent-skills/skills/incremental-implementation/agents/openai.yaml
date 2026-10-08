@@ -1,0 +1,9 @@
+interface:
+  display_name: Incremental Implementation
+  short_description: Delivers changes incrementally in thin, verifiable slices
+  default_prompt: Use $incremental-implementation for this task
+policy:
+  allow_implicit_invocation: true
+  products:
+  - CHAT
+  - CODEX

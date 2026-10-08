@@ -1,0 +1,22 @@
+{
+  "name": "compound-writing",
+  "version": "2.4.1",
+  "description": "A writing toolbox for developing, drafting, and revising work using your voice, style, and optional audience context.",
+  "author": {
+    "name": "Every",
+    "email": "katie@every.to"
+  },
+  "keywords": [
+    "writing",
+    "editing",
+    "compound-writing",
+    "agent-native",
+    "ai-native-writing",
+    "style-guide",
+    "voice",
+    "workflow",
+    "audience"
+  ],
+  "repository": "https://github.com/EveryInc/compound-writing",
+  "license": "MIT"
+}

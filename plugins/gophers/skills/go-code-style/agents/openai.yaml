@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Code Style"
+  short_description: "Write clear and idiomatic Go code"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-code-style to improve this Go code for clarity and idiomatic style."

@@ -1,0 +1,44 @@
+{
+  "author": {
+    "name": "Sizhe Cheng",
+    "url": "https://github.com/SizheCheng"
+  },
+  "description": "Deterministic conformance checks for explicitly selected external memory bundles.",
+  "homepage": "https://github.com/SizheCheng/canonical-memory-verifier",
+  "interface": {
+    "brandColor": "#17233E",
+    "brandColorDark": "#C1CDE8",
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "composerIconDark": "./.codex-plugin/assets/composer-icon-dark.png",
+    "defaultPrompt": [
+      "Verify this external memory bundle before use.",
+      "Trace this current claim to its sources.",
+      "Check this bundle for remembered-authority replay."
+    ],
+    "developerName": "Sizhe Cheng",
+    "displayName": "Canonical Memory Verifier",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "A local, read-only verifier for source integrity, explicit supersession, deterministic current projection, declared source-reference tracing, and remembered-authority boundaries.",
+    "privacyPolicyURL": "https://github.com/SizheCheng/canonical-memory-verifier/blob/main/PRIVACY.md",
+    "shortDescription": "Verify imported agent memory",
+    "supportURL": "https://github.com/SizheCheng/canonical-memory-verifier/issues",
+    "termsOfServiceURL": "https://github.com/SizheCheng/canonical-memory-verifier/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/SizheCheng/canonical-memory-verifier"
+  },
+  "keywords": [
+    "agent-memory",
+    "provenance",
+    "supersession",
+    "verification"
+  ],
+  "license": "Apache-2.0",
+  "name": "canonical-memory-verifier",
+  "repository": "https://github.com/SizheCheng/canonical-memory-verifier",
+  "skills": "./skills/",
+  "version": "0.1.0"
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "email": "info@neutral.dev",
+    "name": "Vamsi Alluri"
+  },
+  "description": "Keep the guidance agents need close to the work they do.",
+  "homepage": "https://github.com/neutral/trellis",
+  "keywords": [
+    "agent-skills",
+    "knowledge-work",
+    "handbooks",
+    "practices",
+    "checks",
+    "playbooks"
+  ],
+  "license": "CC0-1.0",
+  "name": "trellis",
+  "repository": "https://github.com/neutral/trellis",
+  "version": "0.6.1"
+}

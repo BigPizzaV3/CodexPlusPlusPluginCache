@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · MCP"
+  short_description: "Verify MCP tools, transport and authorization"
+  default_prompt: "Use $vibe-mcp to audit this MCP server against its supported protocol version."

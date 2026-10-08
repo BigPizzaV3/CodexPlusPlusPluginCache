@@ -1,0 +1,4 @@
+[
+  { "id": "dataset-exec", "name": "Executive KPI Dataset", "type": "SemanticModel", "owner": "exec.owner@example.com", "endorsement": "Certified", "sensitivityLabel": "Highly Confidential", "workspaceId": "workspace-exec", "usageScore": 98, "trustScore": 88 },
+  { "id": "report-board", "name": "Board KPI Briefing", "type": "Report", "owner": "exec.owner@example.com", "sensitivityLabel": "Highly Confidential", "workspaceId": "workspace-exec", "usageScore": 97, "trustScore": 85 }
+]

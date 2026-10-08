@@ -1,0 +1,7 @@
+interface:
+  display_name: "Refactor Safely"
+  short_description: "Refactor behavior safely with verification"
+  default_prompt: "Improve this code without changing behavior."
+
+policy:
+  allow_implicit_invocation: true

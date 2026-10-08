@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">FFmpeg Media Toolkit dark-interface icon</title>
+  <desc id="desc">Rounded light media frame with a cyan play mark for dark interfaces.</desc>
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="#E6F9FF"/>
+  <rect x="28" y="31" width="72" height="66" rx="12" fill="none" stroke="#0B1220" stroke-width="8"/>
+  <path d="M55 48.5 82 64 55 79.5Z" fill="#0891B2"/>
+</svg>

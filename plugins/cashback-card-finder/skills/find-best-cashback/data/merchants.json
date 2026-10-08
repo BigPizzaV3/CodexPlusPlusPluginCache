@@ -1,0 +1,1176 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-05",
+  "provenance": "Model-knowledge snapshot of common merchant-category behaviour. Merchant category codes are set by the merchant's acquirer, not the card issuer, and can differ by location, franchise and payment channel. Treat every entry as a strong prior to verify, never as a guarantee.",
+  "category_vocabulary": [
+    "gas",
+    "ev_charging",
+    "convenience_store",
+    "grocery",
+    "superstore",
+    "warehouse_club",
+    "dining",
+    "fast_food",
+    "delivery",
+    "online_retail",
+    "department_store",
+    "drugstore",
+    "home_improvement",
+    "electronics",
+    "streaming",
+    "transit",
+    "rideshare",
+    "travel",
+    "airline",
+    "hotel",
+    "entertainment",
+    "apparel",
+    "telecom",
+    "utility",
+    "insurance",
+    "rent",
+    "wallet_load",
+    "government",
+    "education",
+    "jewellery",
+    "fuel_india"
+  ],
+  "merchants": {
+    "shell": {
+      "display_name": "Shell",
+      "countries": [
+        "US",
+        "GB",
+        "IN",
+        "CA"
+      ],
+      "aliases": [
+        "shell gas",
+        "shell petrol",
+        "shell station",
+        "shell oil"
+      ],
+      "default_channel": "pump",
+      "variants": {
+        "pump": {
+          "categories": [
+            "gas"
+          ],
+          "mcc": [
+            "5541",
+            "5542"
+          ],
+          "confidence": "high",
+          "caveats": [
+            "Pay-at-pump fuel almost always codes as a service station (5542)."
+          ]
+        },
+        "convenience_store": {
+          "categories": [
+            "gas",
+            "convenience_store"
+          ],
+          "mcc": [
+            "5541",
+            "5499"
+          ],
+          "confidence": "medium",
+          "caveats": [
+            "Merchandise bought inside the kiosk normally still codes to the station's own MCC, but franchise locations with a separate co-branded store (Shell Select, Circle K) can code 5499 and miss a gas bonus."
+          ]
+        },
+        "car_wash": {
+          "categories": [
+            "gas"
+          ],
+          "mcc": [
+            "7542",
+            "5542"
+          ],
+          "confidence": "low",
+          "caveats": [
+            "A standalone car wash can code 7542 and fall outside every gas category."
+          ]
+        },
+        "online": {
+          "categories": [
+            "gas"
+          ],
+          "mcc": [
+            "5542"
+          ],
+          "confidence": "low",
+          "caveats": [
+            "Shell app / Shell Fuel Rewards payments route through a processor that may code differently from the pump."
+          ]
+        }
+      },
+      "caveats": [
+        "Gift-card purchases at a fuel counter are excluded from bonus categories by most issuers."
+      ]
+    },
+    "bp": {
+      "display_name": "BP",
+      "countries": [
+        "US",
+        "GB"
+      ],
+      "aliases": [
+        "bp gas",
+        "bp petrol",
+        "amoco"
+      ],
+      "default_channel": "pump",
+      "variants": {
+        "pump": {
+          "categories": [
+            "gas"
+          ],
+          "mcc": [
+            "5541",
+            "5542"
+          ],
+          "confidence": "high"
+        },
+        "convenience_store": {
+          "categories": [
+            "gas",
+            "convenience_store"
+          ],
+          "mcc": [
+            "5541",
+            "5499"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "exxon": {
+      "display_name": "Exxon / Mobil",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "exxonmobil",
+        "mobil",
+        "esso"
+      ],
+      "default_channel": "pump",
+      "variants": {
+        "pump": {
+          "categories": [
+            "gas"
+          ],
+          "mcc": [
+            "5541",
+            "5542"
+          ],
+          "confidence": "high"
+        },
+        "convenience_store": {
+          "categories": [
+            "gas",
+            "convenience_store"
+          ],
+          "mcc": [
+            "5541",
+            "5499"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "chevron": {
+      "display_name": "Chevron / Texaco",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "texaco"
+      ],
+      "default_channel": "pump",
+      "variants": {
+        "pump": {
+          "categories": [
+            "gas"
+          ],
+          "mcc": [
+            "5541",
+            "5542"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "costco-gas": {
+      "display_name": "Costco Gas Station",
+      "countries": [
+        "US",
+        "CA",
+        "GB"
+      ],
+      "aliases": [
+        "costco fuel",
+        "costco petrol"
+      ],
+      "default_channel": "pump",
+      "variants": {
+        "pump": {
+          "categories": [
+            "gas"
+          ],
+          "mcc": [
+            "5542"
+          ],
+          "confidence": "high",
+          "caveats": [
+            "Costco fuel codes as gas even though the warehouse itself does not."
+          ]
+        }
+      },
+      "caveats": [
+        "Costco US accepts Visa only; Costco UK accepts Visa and Mastercard but not Amex."
+      ]
+    },
+    "walmart": {
+      "display_name": "Walmart",
+      "countries": [
+        "US",
+        "CA"
+      ],
+      "aliases": [
+        "wal-mart",
+        "walmart supercenter",
+        "walmart.com"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "superstore"
+          ],
+          "mcc": [
+            "5310",
+            "5311",
+            "5411"
+          ],
+          "confidence": "high",
+          "caveats": [
+            "Walmart Supercenters code as a discount store / superstore, which almost every US grocery bonus category explicitly excludes."
+          ]
+        },
+        "online": {
+          "categories": [
+            "superstore",
+            "online_retail"
+          ],
+          "mcc": [
+            "5310"
+          ],
+          "confidence": "medium",
+          "caveats": [
+            "Walmart.com may qualify for an 'online retail' or 'online grocery' category even when the physical store does not."
+          ]
+        },
+        "neighborhood_market": {
+          "merchant_id": "walmart-neighborhood-market",
+          "display_name": "Walmart Neighborhood Market",
+          "categories": [
+            "grocery"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "medium",
+          "caveats": [
+            "Walmart Neighborhood Market is a standalone grocery format that often codes 5411 and can escape the superstore exclusion that blocks the Supercenter. Confirm the store format before relying on this."
+          ]
+        },
+        "gas": {
+          "merchant_id": "walmart-gas",
+          "display_name": "Walmart fuel station",
+          "categories": [
+            "gas"
+          ],
+          "mcc": [
+            "5541"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "target": {
+      "display_name": "Target",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "target.com",
+        "supertarget"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "superstore",
+            "department_store"
+          ],
+          "mcc": [
+            "5310",
+            "5311"
+          ],
+          "confidence": "high",
+          "caveats": [
+            "Target codes as a discount store, not a supermarket, so grocery bonus categories generally do not apply even when buying food."
+          ]
+        },
+        "online": {
+          "categories": [
+            "superstore",
+            "online_retail"
+          ],
+          "mcc": [
+            "5310"
+          ],
+          "confidence": "medium"
+        }
+      },
+      "caveats": [
+        "Some cards carve out Target and Walmart by name rather than by category; check the exclusion list, not just the MCC."
+      ]
+    },
+    "costco": {
+      "display_name": "Costco Wholesale",
+      "countries": [
+        "US",
+        "CA",
+        "GB"
+      ],
+      "aliases": [
+        "costco warehouse",
+        "costco.com"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "warehouse_club"
+          ],
+          "mcc": [
+            "5300"
+          ],
+          "confidence": "high",
+          "caveats": [
+            "Wholesale clubs are excluded from nearly every grocery bonus category."
+          ]
+        },
+        "online": {
+          "categories": [
+            "warehouse_club",
+            "online_retail"
+          ],
+          "mcc": [
+            "5300"
+          ],
+          "confidence": "medium"
+        }
+      },
+      "caveats": [
+        "Costco US accepts Visa only in warehouse."
+      ]
+    },
+    "sams-club": {
+      "display_name": "Sam's Club",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "sams",
+        "sam's club"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "warehouse_club"
+          ],
+          "mcc": [
+            "5300"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "amazon": {
+      "display_name": "Amazon",
+      "countries": [
+        "US",
+        "GB",
+        "IN",
+        "CA"
+      ],
+      "aliases": [
+        "amazon.com",
+        "amazon.co.uk",
+        "amazon.in",
+        "amzn"
+      ],
+      "default_channel": "online",
+      "variants": {
+        "online": {
+          "categories": [
+            "online_retail"
+          ],
+          "mcc": [
+            "5942",
+            "5999"
+          ],
+          "confidence": "high",
+          "caveats": [
+            "Amazon third-party sellers and separate Amazon businesses (Fresh, Prime Video, AWS, gift cards) can bill under different descriptors and categories."
+          ]
+        }
+      }
+    },
+    "whole-foods": {
+      "display_name": "Whole Foods Market",
+      "countries": [
+        "US",
+        "GB"
+      ],
+      "aliases": [
+        "wholefoods",
+        "wfm"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "grocery"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "kroger": {
+      "display_name": "Kroger",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "ralphs",
+        "fred meyer",
+        "king soopers",
+        "harris teeter"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "grocery"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "high"
+        },
+        "gas": {
+          "categories": [
+            "gas"
+          ],
+          "mcc": [
+            "5541"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "safeway": {
+      "display_name": "Safeway / Albertsons",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "albertsons",
+        "vons",
+        "jewel-osco"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "grocery"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "trader-joes": {
+      "display_name": "Trader Joe's",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "trader joes"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "grocery"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "cvs": {
+      "display_name": "CVS Pharmacy",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "cvs pharmacy"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "drugstore"
+          ],
+          "mcc": [
+            "5912"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "walgreens": {
+      "display_name": "Walgreens",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "duane reade"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "drugstore"
+          ],
+          "mcc": [
+            "5912"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "home-depot": {
+      "display_name": "The Home Depot",
+      "countries": [
+        "US",
+        "CA"
+      ],
+      "aliases": [
+        "homedepot"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "home_improvement"
+          ],
+          "mcc": [
+            "5200"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "lowes": {
+      "display_name": "Lowe's",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "lowe's"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "home_improvement"
+          ],
+          "mcc": [
+            "5200"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "starbucks": {
+      "display_name": "Starbucks",
+      "countries": [
+        "US",
+        "GB",
+        "IN"
+      ],
+      "aliases": [],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "dining",
+            "fast_food"
+          ],
+          "mcc": [
+            "5814"
+          ],
+          "confidence": "high"
+        },
+        "app": {
+          "categories": [
+            "dining"
+          ],
+          "mcc": [
+            "5814"
+          ],
+          "confidence": "low",
+          "caveats": [
+            "Reloading a Starbucks Card in the app can code as a gift-card / stored-value purchase and be excluded."
+          ]
+        }
+      }
+    },
+    "mcdonalds": {
+      "display_name": "McDonald's",
+      "countries": [
+        "US",
+        "GB",
+        "IN"
+      ],
+      "aliases": [
+        "mcdonald's",
+        "mcd"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "dining",
+            "fast_food"
+          ],
+          "mcc": [
+            "5814"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "doordash": {
+      "display_name": "DoorDash",
+      "countries": [
+        "US"
+      ],
+      "aliases": [],
+      "default_channel": "delivery",
+      "variants": {
+        "delivery": {
+          "categories": [
+            "delivery",
+            "dining"
+          ],
+          "mcc": [
+            "5812",
+            "5814"
+          ],
+          "confidence": "medium",
+          "caveats": [
+            "DoorDash usually codes as restaurant, but DashMart and grocery orders can code differently."
+          ]
+        }
+      }
+    },
+    "uber": {
+      "display_name": "Uber",
+      "countries": [
+        "US",
+        "GB",
+        "IN"
+      ],
+      "aliases": [
+        "uber ride"
+      ],
+      "default_channel": "rideshare",
+      "variants": {
+        "rideshare": {
+          "categories": [
+            "rideshare",
+            "transit",
+            "travel"
+          ],
+          "mcc": [
+            "4121"
+          ],
+          "confidence": "high"
+        },
+        "delivery": {
+          "categories": [
+            "delivery",
+            "dining"
+          ],
+          "mcc": [
+            "5812"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "netflix": {
+      "display_name": "Netflix",
+      "countries": [
+        "US",
+        "GB",
+        "IN"
+      ],
+      "aliases": [],
+      "default_channel": "online",
+      "variants": {
+        "online": {
+          "categories": [
+            "streaming",
+            "entertainment"
+          ],
+          "mcc": [
+            "4899",
+            "7841"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "spotify": {
+      "display_name": "Spotify",
+      "countries": [
+        "US",
+        "GB",
+        "IN"
+      ],
+      "aliases": [],
+      "default_channel": "online",
+      "variants": {
+        "online": {
+          "categories": [
+            "streaming"
+          ],
+          "mcc": [
+            "5815",
+            "4899"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "best-buy": {
+      "display_name": "Best Buy",
+      "countries": [
+        "US"
+      ],
+      "aliases": [
+        "bestbuy"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "electronics"
+          ],
+          "mcc": [
+            "5732"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "indian-oil": {
+      "display_name": "Indian Oil",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [
+        "iocl",
+        "indianoil"
+      ],
+      "default_channel": "pump",
+      "variants": {
+        "pump": {
+          "categories": [
+            "fuel_india",
+            "gas"
+          ],
+          "mcc": [
+            "5541",
+            "5542"
+          ],
+          "confidence": "high",
+          "caveats": [
+            "Most Indian issuers award zero reward points on fuel and instead offer a 1% fuel surcharge waiver within a per-cycle cap."
+          ]
+        }
+      }
+    },
+    "hpcl": {
+      "display_name": "HP / Hindustan Petroleum",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [
+        "hp petrol",
+        "hindustan petroleum"
+      ],
+      "default_channel": "pump",
+      "variants": {
+        "pump": {
+          "categories": [
+            "fuel_india",
+            "gas"
+          ],
+          "mcc": [
+            "5541",
+            "5542"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "bharat-petroleum": {
+      "display_name": "Bharat Petroleum",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [
+        "bpcl",
+        "bharat petrol"
+      ],
+      "default_channel": "pump",
+      "variants": {
+        "pump": {
+          "categories": [
+            "fuel_india",
+            "gas"
+          ],
+          "mcc": [
+            "5541",
+            "5542"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "bigbasket": {
+      "display_name": "BigBasket",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [
+        "big basket",
+        "bbnow"
+      ],
+      "default_channel": "online",
+      "variants": {
+        "online": {
+          "categories": [
+            "grocery",
+            "online_retail"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "blinkit": {
+      "display_name": "Blinkit",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [
+        "grofers"
+      ],
+      "default_channel": "online",
+      "variants": {
+        "online": {
+          "categories": [
+            "grocery",
+            "delivery"
+          ],
+          "mcc": [
+            "5411",
+            "5499"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "zomato": {
+      "display_name": "Zomato",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [],
+      "default_channel": "delivery",
+      "variants": {
+        "delivery": {
+          "categories": [
+            "delivery",
+            "dining"
+          ],
+          "mcc": [
+            "5812",
+            "5814"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "swiggy": {
+      "display_name": "Swiggy",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [],
+      "default_channel": "delivery",
+      "variants": {
+        "delivery": {
+          "categories": [
+            "delivery",
+            "dining"
+          ],
+          "mcc": [
+            "5812",
+            "5814"
+          ],
+          "confidence": "medium"
+        },
+        "instamart": {
+          "categories": [
+            "grocery",
+            "delivery"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "low"
+        }
+      }
+    },
+    "flipkart": {
+      "display_name": "Flipkart",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [],
+      "default_channel": "online",
+      "variants": {
+        "online": {
+          "categories": [
+            "online_retail"
+          ],
+          "mcc": [
+            "5399",
+            "5999"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "dmart": {
+      "display_name": "DMart",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [
+        "avenue supermarts",
+        "d-mart"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "grocery",
+            "superstore"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "myntra": {
+      "display_name": "Myntra",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [],
+      "default_channel": "online",
+      "variants": {
+        "online": {
+          "categories": [
+            "apparel",
+            "online_retail"
+          ],
+          "mcc": [
+            "5651"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "irctc": {
+      "display_name": "IRCTC",
+      "countries": [
+        "IN"
+      ],
+      "aliases": [
+        "indian railways"
+      ],
+      "default_channel": "online",
+      "variants": {
+        "online": {
+          "categories": [
+            "travel",
+            "transit"
+          ],
+          "mcc": [
+            "4112"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "tesco": {
+      "display_name": "Tesco",
+      "countries": [
+        "GB"
+      ],
+      "aliases": [
+        "tesco express",
+        "tesco extra"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "grocery"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "high"
+        },
+        "gas": {
+          "categories": [
+            "gas"
+          ],
+          "mcc": [
+            "5541"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "sainsburys": {
+      "display_name": "Sainsbury's",
+      "countries": [
+        "GB"
+      ],
+      "aliases": [
+        "sainsbury's",
+        "sainsburys local"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "grocery"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "asda": {
+      "display_name": "Asda",
+      "countries": [
+        "GB"
+      ],
+      "aliases": [],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "grocery",
+            "superstore"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "medium"
+        }
+      }
+    },
+    "waitrose": {
+      "display_name": "Waitrose",
+      "countries": [
+        "GB"
+      ],
+      "aliases": [
+        "john lewis"
+      ],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "grocery"
+          ],
+          "mcc": [
+            "5411"
+          ],
+          "confidence": "high"
+        }
+      }
+    },
+    "boots": {
+      "display_name": "Boots",
+      "countries": [
+        "GB"
+      ],
+      "aliases": [],
+      "default_channel": "in_store",
+      "variants": {
+        "in_store": {
+          "categories": [
+            "drugstore"
+          ],
+          "mcc": [
+            "5912"
+          ],
+          "confidence": "high"
+        }
+      }
+    }
+  }
+}

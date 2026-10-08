@@ -1,0 +1,9 @@
+interface:
+  display_name: "Canary"
+  short_description: "Run post-deploy checks and surface regressions after a release."
+  default_prompt: "Use Canary for this task."
+policy:
+  products:
+    - CHAT
+    - CODEX
+  allow_implicit_invocation: true

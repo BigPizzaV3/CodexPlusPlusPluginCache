@@ -1,0 +1,12 @@
+{
+  "name": "oximy-reality-checks",
+  "version": "0.1.2",
+  "description": "Ten evidence-led checks for understanding what AI work touched, changed, remembered, and actually completed.",
+  "author": {
+    "name": "Oximy"
+  },
+  "repository": "https://github.com/OximyHQ/oximy-reality-checks",
+  "homepage": "https://github.com/OximyHQ/oximy-reality-checks#readme",
+  "license": "MIT",
+  "keywords": ["ai", "audit", "evidence", "privacy", "security", "workflows"]
+}

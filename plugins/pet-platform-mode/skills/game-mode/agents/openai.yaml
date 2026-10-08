@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Mode"
+  short_description: "Control your pet with Windowisp"
+  default_prompt: "Use $game-mode to turn Game Mode on."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ogenic God Toolkit"
+  short_description: "Help with Ogenic God Toolkit tasks"
+  default_prompt: "Use $ogenic-god-toolkit to handle this request with its specialist workflow."

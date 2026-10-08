@@ -1,0 +1,47 @@
+{
+  "author": {
+    "name": "Muhammed Enes Duran",
+    "url": "https://github.com/muend"
+  },
+  "description": "Measured Agent Skills for reliable geospatial analysis, engineering, modeling, and delivery.",
+  "homepage": "https://github.com/muend/geoai-skills",
+  "interface": {
+    "brandColor": "#08B6D4",
+    "brandColorDark": "#2BD9F7",
+    "capabilities": [
+      "Geospatial analysis",
+      "Spatial data engineering",
+      "Remote sensing",
+      "Spatial databases",
+      "Cartography"
+    ],
+    "category": "Data & Analytics",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Design a leakage-safe GeoAI workflow for my geospatial project.",
+      "Audit this spatial analysis for CRS, leakage, and uncertainty failures.",
+      "Plan a defensible remote-sensing change-detection workflow."
+    ],
+    "developerName": "Muhammed Enes Duran",
+    "displayName": "GeoAI Skills",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Eighteen measured Agent Skills for the full GeoAI lifecycle, with explicit safeguards for CRS, spatial leakage, uncertainty, provenance, and silent geospatial failure modes.",
+    "privacyPolicyURL": "https://github.com/muend/geoai-skills/blob/main/PRIVACY.md",
+    "shortDescription": "Measured geospatial workflows",
+    "supportURL": "https://github.com/muend/geoai-skills/issues",
+    "termsOfServiceURL": "https://github.com/muend/geoai-skills/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/muend/geoai-skills"
+  },
+  "keywords": [
+    "geoai",
+    "geospatial",
+    "remote-sensing",
+    "spatial-analysis",
+    "gis"
+  ],
+  "license": "MIT",
+  "name": "geoai-skills",
+  "repository": "https://github.com/muend/geoai-skills",
+  "skills": "./skills/",
+  "version": "0.4.0"
+}

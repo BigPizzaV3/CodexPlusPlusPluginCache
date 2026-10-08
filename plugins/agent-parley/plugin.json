@@ -1,0 +1,40 @@
+{
+  "name": "agent-parley",
+  "displayName": "Agent Parley",
+  "version": "0.14.0",
+  "protocol": 1,
+  "description": "Run several coding agents side by side on one repository. Each participant works in its own Git worktree, claims numbered issues before editing, announces advisory file reservations to the others, and hands work over explicitly with a summary and evidence instead of overwriting a peer.",
+  "author": {
+    "name": "Suneel Kaushik S",
+    "email": "suneel944@gmail.com"
+  },
+  "homepage": "https://github.com/suneel944/agent-parley",
+  "repository": "https://github.com/suneel944/agent-parley",
+  "license": "MIT",
+  "keywords": [
+    "agents",
+    "coordination",
+    "git-worktree",
+    "claude-code",
+    "codex",
+    "mcp"
+  ],
+  "interface": {
+    "displayName": "Agent Parley",
+    "shortDescription": "Coordinate agents on one repo",
+    "longDescription": "Agent Parley lets several coding agents work on one repository at the same time without overwriting each other. Each participant runs in its own Git worktree. Before editing, a participant claims a numbered issue, and the claim is visible to every other participant. File reservations are announced over MCP and are advisory: peers see a conflict and stop, but nothing on disk is locked. Work moves between participants through an explicit offer and accept, carrying a summary of the commit, the checks that ran, and what remains. Outcomes are reported as agent claims with evidence, never as independent verification. The skill reads coordination state through the agent-parley command line tool, which must be installed separately.",
+    "developerName": "Suneel Kaushik S",
+    "category": "Productivity",
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/icon.png",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Codex and I are both free here. Split the open v2.1 issues, claim my half, and tell Codex which ones are its to start.",
+      "Codex stalled on issue 42 and my lane is free. Take the handoff with its commit and checks, then finish the work here.",
+      "Codex reports issue 42 ready. Check its commit and evidence from my lane, then land it or hand it back with what to fix."
+    ]
+  }
+}

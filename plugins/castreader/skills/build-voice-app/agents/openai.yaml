@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build with CastReader"
+  short_description: "Deliver a runnable text-to-speech feature"
+  default_prompt: "Use $build-voice-app to add a working speech feature to my app."

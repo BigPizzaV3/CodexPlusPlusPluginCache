@@ -1,0 +1,8 @@
+interface:
+  display_name: "iOS Clean"
+  short_description: "Remove development-only iOS bridge wiring before release after verifying the target scope."
+  default_prompt: "Use iOS Clean for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

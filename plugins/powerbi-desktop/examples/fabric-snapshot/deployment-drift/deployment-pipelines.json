@@ -1,0 +1,3 @@
+[
+  { "id": "pipeline-drift", "name": "Sales Deployment", "stage": "Prod", "status": "DriftDetected", "workspaceId": "workspace-deploy", "driftCount": 3 }
+]

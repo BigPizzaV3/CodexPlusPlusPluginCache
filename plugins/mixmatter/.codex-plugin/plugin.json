@@ -1,0 +1,44 @@
+{
+  "author": {
+    "email": "galokview@outlook.com",
+    "name": "Fan Jiale / Galok",
+    "url": "https://www.galok.me"
+  },
+  "description": "A multi-skill creative plugin for source-aware image reconstruction, stickers, memes, and short motion.",
+  "homepage": "https://www.galok.me/mixmatter/",
+  "interface": {
+    "brandColor": "#126BFF",
+    "brandColorDark": "#126BFF",
+    "capabilities": [
+      "Write"
+    ],
+    "category": "Creativity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Turn this photo into a clean transparent sticker with a white edge.",
+      "Reconstruct this image as a bold editorial print while preserving the subject.",
+      "Animate this image into a subtle five-second seamless loop."
+    ],
+    "developerName": "Fan Jiale / Galok",
+    "displayName": "MixMatter",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "MixMatter provides four focused creative Skills for source-aware image reconstruction, transparent stickers, captioned memes, and short motion. It works directly in chat and lets ChatGPT use the appropriate Skill for each request.",
+    "privacyPolicyURL": "https://www.galok.me/mixmatter/privacy/",
+    "shortDescription": "Create images, stickers, memes",
+    "supportURL": "https://www.galok.me/mixmatter/support/",
+    "termsOfServiceURL": "https://www.galok.me/mixmatter/terms/",
+    "websiteURL": "https://www.galok.me/mixmatter/"
+  },
+  "keywords": [
+    "image-generation",
+    "art-direction",
+    "sticker",
+    "meme",
+    "motion"
+  ],
+  "license": "MIT",
+  "name": "mixmatter",
+  "repository": "https://github.com/Fanjiale-CN/MixMatter",
+  "skills": "./skills",
+  "version": "3.0.0"
+}

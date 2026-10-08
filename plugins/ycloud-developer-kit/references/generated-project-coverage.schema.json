@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ycloud.com/schemas/generated-project-coverage.schema.json",
+  "title": "YCloud generated-project evidence graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "baselineProfile", "adapterProfile", "operations", "scenarios"],
+  "properties": {
+    "schemaVersion": {"const": 2},
+    "baselineProfile": {"type": "string", "minLength": 1},
+    "adapterProfile": {"const": "typescript-fastify-vanilla-v1"},
+    "operations": {"type": "array", "items": {"$ref": "#/$defs/operationEvidence"}},
+    "scenarios": {"type": "array", "items": {"$ref": "#/$defs/scenarioEvidence"}}
+  },
+  "$defs": {
+    "evidenceId": {"type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+    "identifier": {"type": "string", "pattern": "^[A-Za-z_$][A-Za-z0-9_$]*$"},
+    "safeRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "handler": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false, "required": ["kind", "symbol"], "properties": {"kind": {"const": "named"}, "symbol": {"$ref": "#/$defs/identifier"}}},
+        {"type": "object", "additionalProperties": false, "required": ["kind"], "properties": {"kind": {"const": "inline"}}}
+      ]
+    },
+    "backendEvidence": {
+      "oneOf": [
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "kind", "path", "method", "route", "handler", "provider"],
+          "properties": {
+            "id": {"$ref": "#/$defs/evidenceId"}, "kind": {"const": "fastify-route-provider-call"},
+            "path": {"$ref": "#/$defs/safeRelativePath"}, "method": {"enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]},
+            "route": {"type": "string", "pattern": "^/"}, "handler": {"$ref": "#/$defs/handler"},
+            "provider": {"type": "object", "additionalProperties": false, "required": ["path", "symbol", "requestSymbol"], "properties": {"path": {"$ref": "#/$defs/safeRelativePath"}, "symbol": {"$ref": "#/$defs/identifier"}, "requestSymbol": {"$ref": "#/$defs/identifier"}}}
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "kind", "path", "symbol", "requestSymbol", "headerName"],
+          "properties": {"id": {"$ref": "#/$defs/evidenceId"}, "kind": {"const": "trusted-server-api-key-injection"}, "path": {"$ref": "#/$defs/safeRelativePath"}, "symbol": {"$ref": "#/$defs/identifier"}, "requestSymbol": {"$ref": "#/$defs/identifier"}, "headerName": {"const": "X-API-Key"}}
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "kind", "path", "method", "route", "handler", "verifier"],
+          "properties": {"id": {"$ref": "#/$defs/evidenceId"}, "kind": {"const": "fastify-webhook-receiver"}, "path": {"$ref": "#/$defs/safeRelativePath"}, "method": {"const": "POST"}, "route": {"type": "string", "pattern": "^/"}, "handler": {"$ref": "#/$defs/handler"}, "verifier": {"type": "object", "additionalProperties": false, "required": ["path", "symbol"], "properties": {"path": {"$ref": "#/$defs/safeRelativePath"}, "symbol": {"$ref": "#/$defs/identifier"}}}}
+        }
+      ]
+    },
+    "uiEvidence": {"oneOf": [
+      {"type": "object", "additionalProperties": false, "required": ["id", "kind", "path", "formId", "backendEvidenceId"], "properties": {"id": {"$ref": "#/$defs/evidenceId"}, "kind": {"const": "html-form-action"}, "path": {"$ref": "#/$defs/safeRelativePath"}, "formId": {"type": "string", "minLength": 1}, "backendEvidenceId": {"$ref": "#/$defs/evidenceId"}}},
+      {"type": "object", "additionalProperties": false, "required": ["id", "kind", "path", "observerId", "backendEvidenceId"], "properties": {"id": {"$ref": "#/$defs/evidenceId"}, "kind": {"const": "html-receiver-observer"}, "path": {"$ref": "#/$defs/safeRelativePath"}, "observerId": {"type": "string", "minLength": 1}, "backendEvidenceId": {"$ref": "#/$defs/evidenceId"}}}
+    ]},
+    "testEvidence": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "kind", "path", "testName", "targetEvidenceId", "appSymbol"],
+          "properties": {
+            "id": {"$ref": "#/$defs/evidenceId"},
+            "kind": {"const": "fastify-inject-test"},
+            "path": {"$ref": "#/$defs/safeRelativePath"},
+            "testName": {"type": "string", "minLength": 1},
+            "targetEvidenceId": {"$ref": "#/$defs/evidenceId"},
+            "appSymbol": {"$ref": "#/$defs/identifier"},
+            "expectedProviderRequest": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["method", "path", "contractDigest", "requestBodyPresent", "captureSymbol"],
+              "properties": {
+                "method": {"enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]},
+                "path": {"type": "string", "pattern": "^/"},
+                "contractDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                "requestBodyPresent": {"type": "boolean"},
+                "bodyFixtureJson": {"type": "string", "minLength": 1},
+                "captureSymbol": {"$ref": "#/$defs/identifier"}
+              }
+            },
+            "expectedProviderResponse": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["statusCode", "bodyPresent"],
+              "properties": {
+                "statusCode": {"type": "string", "pattern": "^2[0-9]{2}$"},
+                "contentType": {"type": "string", "minLength": 1},
+                "bodyPresent": {"type": "boolean"},
+                "bodyFixtureJson": {"type": "string", "minLength": 1}
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "kind", "path", "testName", "targetEvidenceId", "documentSymbol"],
+          "properties": {
+            "id": {"$ref": "#/$defs/evidenceId"},
+            "kind": {"const": "html-form-test"},
+            "path": {"$ref": "#/$defs/safeRelativePath"},
+            "testName": {"type": "string", "minLength": 1},
+            "targetEvidenceId": {"$ref": "#/$defs/evidenceId"},
+            "documentSymbol": {"$ref": "#/$defs/identifier"}
+          }
+        }
+        ,{
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "kind", "path", "testName", "targetEvidenceId", "targetSymbol"],
+          "properties": {"id": {"$ref": "#/$defs/evidenceId"}, "kind": {"const": "typescript-function-test"}, "path": {"$ref": "#/$defs/safeRelativePath"}, "testName": {"type": "string", "minLength": 1}, "targetEvidenceId": {"$ref": "#/$defs/evidenceId"}, "targetSymbol": {"$ref": "#/$defs/identifier"}}
+        }
+      ]
+    },
+    "scenarioChain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "testEvidenceIds"],
+      "properties": {
+        "id": {"$ref": "#/$defs/evidenceId"},
+        "kind": {"const": "scenario-test-chain"},
+        "testEvidenceIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/evidenceId"}
+        }
+      }
+    },
+    "operationEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operationId", "evidence"],
+      "properties": {
+        "operationId": {"type": "string", "minLength": 1},
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["backend", "ui", "tests"],
+          "properties": {
+            "backend": {"type": "array", "items": {"$ref": "#/$defs/backendEvidence"}},
+            "ui": {"type": "array", "items": {"$ref": "#/$defs/uiEvidence"}},
+            "tests": {"type": "array", "items": {"$ref": "#/$defs/testEvidence"}}
+          }
+        }
+      }
+    },
+    "scenarioEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scenarioId", "evidence"],
+      "properties": {
+        "scenarioId": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/scenarioChain"}}
+      }
+    }
+  }
+}

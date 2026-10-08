@@ -1,0 +1,5 @@
+interface:
+  display_name: Revenue Digital Twin
+  short_description: Revenue scenario modeling
+policy:
+  allow_implicit_invocation: false

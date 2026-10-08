@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Cost"
+  short_description: "Open an animated Codex usage dashboard in a Terminal window"
+  default_prompt: "Use $codex-cost to open my animated Codex usage dashboard."

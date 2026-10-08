@@ -1,0 +1,8 @@
+interface:
+  display_name: "Idea Generator"
+  short_description: "概念を交配・突然変異させて新しい発想を生成"
+  default_prompt: "Use $idea-generator to crossbreed concepts and generate five ideas at medium mutation."
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/icon.svg"
+policy:
+  allow_implicit_invocation: true

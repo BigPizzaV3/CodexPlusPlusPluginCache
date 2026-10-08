@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'none'"><title>CastReader · 朗读回答</title><link rel="stylesheet" href="style.css"></head>
+<body><main><header><span class="brand">CastReader</span><span class="tag">回答朗读</span></header>
+<article id="answer" aria-label="要朗读的回答"></article>
+<section class="player" aria-label="朗读控制"><p id="status" role="status">正在载入回答…</p><audio id="audio" controls preload="auto"></audio>
+<div class="controls"><button id="play" disabled>开始朗读</button><button id="stop" disabled>停止</button><label>语速 <select id="rate"><option value="0.75">0.75×</option><option selected value="1">1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label><label><input type="checkbox" id="follow" checked>跟随高亮</label></div>
+<small id="cost"></small></section><footer>朗读你交给 CastReader 的回答文本。<a href="answer.txt" download>保存文本</a></footer></main><script type="module" src="reader.mjs"></script></body></html>

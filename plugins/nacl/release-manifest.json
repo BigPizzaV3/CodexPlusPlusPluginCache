@@ -1,0 +1,975 @@
+{
+  "schemaVersion": 1,
+  "artifactType": "openai-skills-only-plugin",
+  "artifactName": "nacl-skills-only-0.2.2.zip",
+  "artifactLayout": "plugin-root",
+  "plugin": {
+    "name": "nacl",
+    "version": "0.2.2"
+  },
+  "source": {
+    "repository": "https://github.com/ITSalt/NaCl",
+    "commit": "c291c798fcfda697dd8d93f23ffc6d7e68528a5a",
+    "generatedPackage": "plugins/nacl"
+  },
+  "payload": {
+    "fileCount": 159,
+    "treeSha256": "0a878f129491753847d34a7a5e603210c0127cbd7a698c689fd1e88c2b6ebfd6",
+    "files": [
+      {
+        "path": ".codex-plugin/plugin.json",
+        "mode": "0644",
+        "size": 2805,
+        "sha256": "81de08593a81e092f17b4fc52bd0bcaaa4a77c15837f3072851db4d2857f8307"
+      },
+      {
+        "path": "LICENSE",
+        "mode": "0644",
+        "size": 1063,
+        "sha256": "af85fae2341fa52c01509a2c9b0f2db8499750c255c32573da56bf18c754708e"
+      },
+      {
+        "path": "assets/composer-icon.png",
+        "mode": "0644",
+        "size": 65737,
+        "sha256": "a09b04c2d1214db9cb751a6148a7fac04446949df0f65d0431b0cb3b21a43398"
+      },
+      {
+        "path": "assets/logo-dark.png",
+        "mode": "0644",
+        "size": 262488,
+        "sha256": "3186784ecdb0f3acc1441f6e8edf7a01841d131ffd152486baa6223148e379a8"
+      },
+      {
+        "path": "assets/logo.png",
+        "mode": "0644",
+        "size": 262488,
+        "sha256": "8fdccd60a31902a2c83cdcbe8bdd9c37e64d8a8941b8f830d15679c0bdc3325e"
+      },
+      {
+        "path": "skills/nacl-ba/SKILL.md",
+        "mode": "0644",
+        "size": 1291,
+        "sha256": "4fec3106255e08b93412fd703e26842c82c0601e2678d64f81c4055e32907713"
+      },
+      {
+        "path": "skills/nacl-ba/resources/references/skills-only-runtime-contract.md",
+        "mode": "0644",
+        "size": 7181,
+        "sha256": "1b8c8c07396eb63e8619ea0659433b6ad86913cc4332a98421cf13f5d46adf3d"
+      },
+      {
+        "path": "skills/nacl-ba/resources/references/workflow-gateway-contract.md",
+        "mode": "0644",
+        "size": 6832,
+        "sha256": "760495f59688a7f90fbbdc70d8936f43ea05047b5d8104418cc31a506366287a"
+      },
+      {
+        "path": "skills/nacl-ba/resources/references/workflow-gateway-map.json",
+        "mode": "0644",
+        "size": 13477,
+        "sha256": "8e94a7b0041ce77871769014212c8c57323776ba36b9a146a0f47720c0cd2853"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-analyze/SKILL.md",
+        "mode": "0644",
+        "size": 5132,
+        "sha256": "a889f48917d8bf8972569d2e53126146dd6d165ac2f5b7bf39192cc1813aed70"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-context/SKILL.md",
+        "mode": "0644",
+        "size": 4960,
+        "sha256": "f83b21963c0b0f0cba33a14fc2e513ed2643df20e0afad1ef92067f88b6adaf7"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-entities/SKILL.md",
+        "mode": "0644",
+        "size": 5611,
+        "sha256": "c447557f3c153556f00b126c5e2deccbec781ef9cff81fbb91fdf5a94fe9a279"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-from-board/SKILL.md",
+        "mode": "0644",
+        "size": 5790,
+        "sha256": "029561976b5c523fbfd32383cf7d668a43d938e1a06d4a137da4ce04d057229a"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-full/SKILL.md",
+        "mode": "0644",
+        "size": 10626,
+        "sha256": "f4cb44a638f624d92ba817bad9bf2c9061242a9434744f9b54c7f5bc1e179164"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-glossary/SKILL.md",
+        "mode": "0644",
+        "size": 4900,
+        "sha256": "aa158b9dee4fc550ad057d9a9420fdabb22d2d3c88e5f184bf40a91923eaca92"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-handoff/SKILL.md",
+        "mode": "0644",
+        "size": 5131,
+        "sha256": "389fb0d3d0383cae922695b9de4284acb296698da2b4e6e37395005c8792e544"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-import-doc/SKILL.md",
+        "mode": "0644",
+        "size": 4932,
+        "sha256": "3396a0ed840be813335d0adb195d349561988695576ee92bfb491b0c3db0a7da"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-process/SKILL.md",
+        "mode": "0644",
+        "size": 5121,
+        "sha256": "eac0801f0eff90e6903ed4ad9e46df947c30e247f25173a1e704bc64f72fc92a"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-roles/SKILL.md",
+        "mode": "0644",
+        "size": 4560,
+        "sha256": "d5e203a9b02b9387b817ba511fd0ff1ec78bc148e8f557cd8eda613fe471c84a"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-rules/SKILL.md",
+        "mode": "0644",
+        "size": 4890,
+        "sha256": "00c5abcdaeb9597abf8477eb6d72cc319d372f4a6edf2524a0d4209f161f2bee"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-sync/SKILL.md",
+        "mode": "0644",
+        "size": 4967,
+        "sha256": "6fba19301f43176c5c84368705ccf610f97ff7ea1de2213c1a17c35df337b8b5"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-validate/SKILL.md",
+        "mode": "0644",
+        "size": 4868,
+        "sha256": "03688c443050109530e5b8bf5382d8e95e090ff35d7aba5accfa9cdc1eb20185"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-ba-workflow/SKILL.md",
+        "mode": "0644",
+        "size": 5347,
+        "sha256": "7432757bc7a603c0f455f61cf330a03237a156c017d16b97e69931f4be458adc"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/nacl-core/SKILL.md",
+        "mode": "0644",
+        "size": 6840,
+        "sha256": "3300a37c47c3fe7d4f5bee110c0d4a3ae106de85315fd51abbb69405c8c99dc8"
+      },
+      {
+        "path": "skills/nacl-ba/resources/workflows/references/ba-codex-contract.md",
+        "mode": "0644",
+        "size": 4782,
+        "sha256": "ebc3b34048be26a35c07bbacf7ebc7b8e9327540d000b03fe07ab2368e01236e"
+      },
+      {
+        "path": "skills/nacl-diagnose/SKILL.md",
+        "mode": "0644",
+        "size": 1887,
+        "sha256": "8dbd5b1063dfdc4a50cd225a8a480cb9edeea7793c781e057d82267b6c4e6056"
+      },
+      {
+        "path": "skills/nacl-diagnose/resources/bootstrap/codex-config-contract.mjs",
+        "mode": "0644",
+        "size": 2664,
+        "sha256": "472bd60c2b940d7453b198220015f09bbe4fdbaeebbaa98130d63274e8c3a7a4"
+      },
+      {
+        "path": "skills/nacl-diagnose/resources/bootstrap/neo4j-mcp-supply.mjs",
+        "mode": "0644",
+        "size": 4292,
+        "sha256": "337ae604c6fa322a8ffb547ff3b706cd9e44b7acf0b498cb0215fa9ed369ea75"
+      },
+      {
+        "path": "skills/nacl-diagnose/resources/bootstrap/plan-project-graph.mjs",
+        "mode": "0644",
+        "size": 19639,
+        "sha256": "b9a651c044e658d03426d84c3fee2fb01c82cf3d2a877fe43076d496395b2284"
+      },
+      {
+        "path": "skills/nacl-diagnose/resources/references/skills-only-runtime-contract.md",
+        "mode": "0644",
+        "size": 7181,
+        "sha256": "1b8c8c07396eb63e8619ea0659433b6ad86913cc4332a98421cf13f5d46adf3d"
+      },
+      {
+        "path": "skills/nacl-diagnose/resources/workflows/nacl-tl-diagnose/SKILL.md",
+        "mode": "0644",
+        "size": 4389,
+        "sha256": "d5b1babc9d52d44a84cf975ec5fd444893641a9a0245be9c7de591ee499520d5"
+      },
+      {
+        "path": "skills/nacl-diagnose/resources/workflows/references/verification-evidence.md",
+        "mode": "0644",
+        "size": 14769,
+        "sha256": "a959eff5d60c3cee392a8e6dae2505b2f1bd831f01c34f2faebd2dd831f225f6"
+      },
+      {
+        "path": "skills/nacl-fix/SKILL.md",
+        "mode": "0644",
+        "size": 931,
+        "sha256": "419080fcb4fe4e45d109db941b76d9094b526e17cf16aeec4a408700fd2958bb"
+      },
+      {
+        "path": "skills/nacl-fix/resources/nacl-goal/checks/fix.sh",
+        "mode": "0644",
+        "size": 1812,
+        "sha256": "9055e0d70117da038db5841e418fb76cd40cb50eb6b664d8416a529c1c8c630d"
+      },
+      {
+        "path": "skills/nacl-fix/resources/references/skills-only-runtime-contract.md",
+        "mode": "0644",
+        "size": 7181,
+        "sha256": "1b8c8c07396eb63e8619ea0659433b6ad86913cc4332a98421cf13f5d46adf3d"
+      },
+      {
+        "path": "skills/nacl-fix/resources/workflows/nacl-tl-core/references/tl-codex-contract.md",
+        "mode": "0644",
+        "size": 5853,
+        "sha256": "0e46022933c9745bff30587e23f80bb867e76649d29f5df3c14c7e58ab8a6781"
+      },
+      {
+        "path": "skills/nacl-fix/resources/workflows/nacl-tl-fix/SKILL.md",
+        "mode": "0644",
+        "size": 27627,
+        "sha256": "47d59b6780f6db2e2b4119257eb3deaa7b31a3c586f0c4fd9802212aa632da0d"
+      },
+      {
+        "path": "skills/nacl-goal/SKILL.md",
+        "mode": "0644",
+        "size": 846,
+        "sha256": "ad46ce08e6b0f6899b09f24c2ded8bd36e94285f05ea9964a56358f9f8d809d8"
+      },
+      {
+        "path": "skills/nacl-goal/resources/references/skills-only-runtime-contract.md",
+        "mode": "0644",
+        "size": 7181,
+        "sha256": "1b8c8c07396eb63e8619ea0659433b6ad86913cc4332a98421cf13f5d46adf3d"
+      },
+      {
+        "path": "skills/nacl-goal/resources/references/workflow-gateway-contract.md",
+        "mode": "0644",
+        "size": 6832,
+        "sha256": "760495f59688a7f90fbbdc70d8936f43ea05047b5d8104418cc31a506366287a"
+      },
+      {
+        "path": "skills/nacl-goal/resources/references/workflow-gateway-map.json",
+        "mode": "0644",
+        "size": 13477,
+        "sha256": "8e94a7b0041ce77871769014212c8c57323776ba36b9a146a0f47720c0cd2853"
+      },
+      {
+        "path": "skills/nacl-goal/resources/workflows/nacl-goal/SKILL.md",
+        "mode": "0644",
+        "size": 13215,
+        "sha256": "c9752290a136b4f07b2cad2dd11ce26be23992c26e67f2bdca588bf045c13fb4"
+      },
+      {
+        "path": "skills/nacl-goal/resources/workflows/references/goal-codex-contract.md",
+        "mode": "0644",
+        "size": 1973,
+        "sha256": "9b7a035c6456efb16948d58b09ae334116876dee3f5d2f1f842a3d13f502296d"
+      },
+      {
+        "path": "skills/nacl-init/SKILL.md",
+        "mode": "0644",
+        "size": 6383,
+        "sha256": "27e6c14332951a8c15c3e3cd028d253c9d3e1ccd3850adc2b0a3d309120befc7"
+      },
+      {
+        "path": "skills/nacl-init/graph/migrations/001-gateway-foundation.json",
+        "mode": "0644",
+        "size": 510,
+        "sha256": "320481b3ad98cec6bbbc55ec24b86108c9be9945cbd4fdd3ac78dc14354d4ba7"
+      },
+      {
+        "path": "skills/nacl-init/graph/migrations/002-concurrency-foundation.json",
+        "mode": "0644",
+        "size": 1057,
+        "sha256": "8bf48a60b7af77b61440c0d8d1429768ec32ca21597574ef5e7a18c1db3aef90"
+      },
+      {
+        "path": "skills/nacl-init/graph/migrations/003-schema-resource-identity.json",
+        "mode": "0644",
+        "size": 372,
+        "sha256": "a0f6a5925eae88ae59e00baf056b1a29750ec40d97cfef7bdfd018f993bb40b2"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/apply-project-creation.mjs",
+        "mode": "0644",
+        "size": 4224,
+        "sha256": "ea9da60b33aae1661b22d15ff249ebd578cffc2202173972549b6d24070a8ff0"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/apply-project-schema.mjs",
+        "mode": "0644",
+        "size": 2660,
+        "sha256": "7aa39593d9e8d8d793df0525a695342c9944d7cc0ff6efc3d2f6172d7e94de3b"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/codex-config-contract.mjs",
+        "mode": "0644",
+        "size": 2664,
+        "sha256": "472bd60c2b940d7453b198220015f09bbe4fdbaeebbaa98130d63274e8c3a7a4"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/codex-config-guard.mjs",
+        "mode": "0644",
+        "size": 2618,
+        "sha256": "47f0a054c8e6e09325659171332ac9b492f8cfa3770c8792f5160846da004f1a"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/graph-docker-compose.yml",
+        "mode": "0644",
+        "size": 1402,
+        "sha256": "bd5ad14bd76f3021b42586872be48697290eac1e4d6155b695b4b61ad7dd0bac"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/install-pinned-neo4j-mcp.mjs",
+        "mode": "0644",
+        "size": 7920,
+        "sha256": "8838bf2f16d1778818b70d19666ae33f2e68d93e68cb3a1329d0e6d390a65731"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/neo4j-image-PROVENANCE.md",
+        "mode": "0644",
+        "size": 1448,
+        "sha256": "a0d3f0ee3c4ffdba728f271a99506e3b1014e98a1f5a58c7ee37c9727229142c"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/neo4j-mcp-release-PROVENANCE.md",
+        "mode": "0644",
+        "size": 885,
+        "sha256": "d2e09a752cdf7741f22af5749c9bd06c756c8782ff7adb7da956b19f72ed96ef"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/neo4j-mcp-release.pin",
+        "mode": "0644",
+        "size": 1431,
+        "sha256": "9acf630b3d1802fe201a5944f29c71c6f8acd322856f88ee8af3e81fb6647f7b"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/neo4j-mcp-supply.mjs",
+        "mode": "0644",
+        "size": 4292,
+        "sha256": "337ae604c6fa322a8ffb547ff3b706cd9e44b7acf0b498cb0215fa9ed369ea75"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/plan-project-creation.mjs",
+        "mode": "0644",
+        "size": 8352,
+        "sha256": "a7bf2faa18ab9159d740a0db73c1a97154281da0a413bbfb9ce448efe7a6b0ab"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/plan-project-graph.mjs",
+        "mode": "0644",
+        "size": 19639,
+        "sha256": "b9a651c044e658d03426d84c3fee2fb01c82cf3d2a877fe43076d496395b2284"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/preflight-project-graph.mjs",
+        "mode": "0644",
+        "size": 8434,
+        "sha256": "35722261546f00d93d85c5466b0a52de6fe212ce39760e9bcac305b59f21f08f"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/project-neo4j-launcher.mjs",
+        "mode": "0644",
+        "size": 4572,
+        "sha256": "a169c90da24c412c3df53142c31f9a2ae3799a40982e28d1ef17310941a10f4f"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/protected-env.ps1",
+        "mode": "0644",
+        "size": 4143,
+        "sha256": "f4dc777c1b7290a41f86f5a626a3cefa7790b8db15904cc39f277fd54e40164d"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/rollback-project-bootstrap.mjs",
+        "mode": "0644",
+        "size": 2959,
+        "sha256": "31bdedf67199bc1c8696b28c993a391cbd57a3c71f5cf0e253bde9a6fa4a8d78"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/setup-project-graph.ps1",
+        "mode": "0644",
+        "size": 16099,
+        "sha256": "e3ed764bbbc037abd9cf4955f26332434182ed23ac166064d54ab935fea6570a"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/setup-project-graph.sh",
+        "mode": "0644",
+        "size": 14352,
+        "sha256": "4b0f145fbfbb51d78cb9556994fbd57bf5f5fb77e03369d8f36f2a04e3b622fe"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/vendor/PROVENANCE.md",
+        "mode": "0644",
+        "size": 1176,
+        "sha256": "6e50b22d1cc737ce0f82fc4eaa1495b1464779d27d71cc1b13c7bf3aba093260"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/vendor/smol-toml-1.7.0.cjs",
+        "mode": "0644",
+        "size": 22404,
+        "sha256": "173006d8b690034d636c1af4dc6836db8dc6a708bcd4fea90c8d04ea250afa7d"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/vendor/smol-toml-LICENSE.txt",
+        "mode": "0644",
+        "size": 1499,
+        "sha256": "fa5659948374d4f555594f47f6da073b40dc503e921aeeece30df4362b3051a5"
+      },
+      {
+        "path": "skills/nacl-init/resources/bootstrap/write-codex-mcp-config.mjs",
+        "mode": "0644",
+        "size": 2646,
+        "sha256": "0ca4d51b84a218951aa73839576f721bd4e4bb30a4f6d8cef7c1641fe4ae22ab"
+      },
+      {
+        "path": "skills/nacl-init/resources/graph-infra/queries/ba-queries.cypher",
+        "mode": "0644",
+        "size": 11527,
+        "sha256": "c49faecb9d7a2c0e21e48c096cd311344db8225a28439f8d7a2b0530f9148952"
+      },
+      {
+        "path": "skills/nacl-init/resources/graph-infra/queries/handoff-queries.cypher",
+        "mode": "0644",
+        "size": 5287,
+        "sha256": "3b63dae66275152959573e9f3708590cf4f4783b1380cc2a172699ee5304c11d"
+      },
+      {
+        "path": "skills/nacl-init/resources/graph-infra/queries/sa-queries.cypher",
+        "mode": "0644",
+        "size": 29139,
+        "sha256": "e6dcc7942d7b247a9e6f98d1c57a5c5af61bd5cda53de0d3d6a3f084701b01b0"
+      },
+      {
+        "path": "skills/nacl-init/resources/graph-infra/queries/tl-queries.cypher",
+        "mode": "0644",
+        "size": 7858,
+        "sha256": "ea86a0cd9b69051d68e2ed88afe4a0736673ca4b17f3437d106cda7a68f9ccea"
+      },
+      {
+        "path": "skills/nacl-init/resources/graph-infra/queries/validation-queries.cypher",
+        "mode": "0644",
+        "size": 7777,
+        "sha256": "a2c3fd50b7fb3c36316434d0ba25833a91738a82ca743aa0521206cd793e6935"
+      },
+      {
+        "path": "skills/nacl-init/resources/graph-infra/schema/ba-schema.cypher",
+        "mode": "0644",
+        "size": 7805,
+        "sha256": "cafbd90bceca377469fb35a9e6820cdac30c22933d605fedab2410cf9bb7b0df"
+      },
+      {
+        "path": "skills/nacl-init/resources/graph-infra/schema/sa-schema.cypher",
+        "mode": "0644",
+        "size": 37327,
+        "sha256": "b06df66d20c46ad046c7b36326293b90ee3e1fd4892d3d848d96333b3d1aef6c"
+      },
+      {
+        "path": "skills/nacl-init/resources/graph-infra/schema/seed-data.cypher",
+        "mode": "0644",
+        "size": 46072,
+        "sha256": "7bf52b895bb03f0a59f7886cfb2345f0145038215ad1e29a763193ceb16b5e70"
+      },
+      {
+        "path": "skills/nacl-init/resources/graph-infra/schema/tl-schema.cypher",
+        "mode": "0644",
+        "size": 4526,
+        "sha256": "cc5ebbcdb1f14a478cdb3e4cc98544082c18aa7e7bb646a4339477ee14e6959b"
+      },
+      {
+        "path": "skills/nacl-init/resources/references/skills-only-runtime-contract.md",
+        "mode": "0644",
+        "size": 7181,
+        "sha256": "1b8c8c07396eb63e8619ea0659433b6ad86913cc4332a98421cf13f5d46adf3d"
+      },
+      {
+        "path": "skills/nacl-init/runtime/graph-gateway/catalog.mjs",
+        "mode": "0644",
+        "size": 3558,
+        "sha256": "84955161c4f6dfdb38c0553666ddf5207a33a0dd4d47e5039ccec2858311164b"
+      },
+      {
+        "path": "skills/nacl-init/runtime/graph-gateway/errors.mjs",
+        "mode": "0644",
+        "size": 1266,
+        "sha256": "458f7c8bdc8291cedb789bed668d62555fac209a3596f55a53d2085ba792e8d8"
+      },
+      {
+        "path": "skills/nacl-init/runtime/graph-gateway/migrations.mjs",
+        "mode": "0644",
+        "size": 8151,
+        "sha256": "a2ff45ad42e4d7c33ffd925a061d01b1f11b25ecd0fc3d4b5ca486bd1291bac9"
+      },
+      {
+        "path": "skills/nacl-init/runtime/graph-gateway/neo4j-http.mjs",
+        "mode": "0644",
+        "size": 5806,
+        "sha256": "355acc935e6af825e86f6cd302ad90c31aa8d128813feca2f717bbe948c5878e"
+      },
+      {
+        "path": "skills/nacl-migrate/SKILL.md",
+        "mode": "0644",
+        "size": 978,
+        "sha256": "52cfb996f35e8679d86f7a300e0883527ddca74afd5a7f9f1f7a9a92bf070cd1"
+      },
+      {
+        "path": "skills/nacl-migrate/resources/references/skills-only-runtime-contract.md",
+        "mode": "0644",
+        "size": 7181,
+        "sha256": "1b8c8c07396eb63e8619ea0659433b6ad86913cc4332a98421cf13f5d46adf3d"
+      },
+      {
+        "path": "skills/nacl-migrate/resources/references/workflow-gateway-contract.md",
+        "mode": "0644",
+        "size": 6832,
+        "sha256": "760495f59688a7f90fbbdc70d8936f43ea05047b5d8104418cc31a506366287a"
+      },
+      {
+        "path": "skills/nacl-migrate/resources/references/workflow-gateway-map.json",
+        "mode": "0644",
+        "size": 13477,
+        "sha256": "8e94a7b0041ce77871769014212c8c57323776ba36b9a146a0f47720c0cd2853"
+      },
+      {
+        "path": "skills/nacl-migrate/resources/workflows/nacl-migrate/SKILL.md",
+        "mode": "0644",
+        "size": 4343,
+        "sha256": "8d0a75749a96bdf2db80bac397ddeaf0a7895c33667ccef6a8e8230d2a07fd73"
+      },
+      {
+        "path": "skills/nacl-migrate/resources/workflows/nacl-migrate-ba/SKILL.md",
+        "mode": "0644",
+        "size": 2999,
+        "sha256": "4007a3ac5ed9985656e92c9c9e8bd9d913396507d2fc3891a669d2c1a572767d"
+      },
+      {
+        "path": "skills/nacl-migrate/resources/workflows/nacl-migrate-sa/SKILL.md",
+        "mode": "0644",
+        "size": 3525,
+        "sha256": "4894a99d6f279e6990876ed3e90aaa12d06349838da0bef4add647e138fdd80b"
+      },
+      {
+        "path": "skills/nacl-migrate/resources/workflows/references/migration-rules.md",
+        "mode": "0644",
+        "size": 2724,
+        "sha256": "482f3e3f7ec8005ff392012f884df351155d9e842486ee2d1d2fe54221983da0"
+      },
+      {
+        "path": "skills/nacl-publish/SKILL.md",
+        "mode": "0644",
+        "size": 924,
+        "sha256": "00be190c5c0263b7f4e04dbecfad2c037b995398f3beca27ef662ddce178a89c"
+      },
+      {
+        "path": "skills/nacl-publish/resources/nacl-tl-core/references/remote-mode-coordination.md",
+        "mode": "0644",
+        "size": 4625,
+        "sha256": "32a9616ff2803e6da98e65026e93f87668ee7d3067bac0d8309b966736ccef38"
+      },
+      {
+        "path": "skills/nacl-publish/resources/references/skills-only-runtime-contract.md",
+        "mode": "0644",
+        "size": 7181,
+        "sha256": "1b8c8c07396eb63e8619ea0659433b6ad86913cc4332a98421cf13f5d46adf3d"
+      },
+      {
+        "path": "skills/nacl-publish/resources/references/workflow-gateway-contract.md",
+        "mode": "0644",
+        "size": 6832,
+        "sha256": "760495f59688a7f90fbbdc70d8936f43ea05047b5d8104418cc31a506366287a"
+      },
+      {
+        "path": "skills/nacl-publish/resources/references/workflow-gateway-map.json",
+        "mode": "0644",
+        "size": 13477,
+        "sha256": "8e94a7b0041ce77871769014212c8c57323776ba36b9a146a0f47720c0cd2853"
+      },
+      {
+        "path": "skills/nacl-publish/resources/workflows/nacl-publish/SKILL.md",
+        "mode": "0644",
+        "size": 5706,
+        "sha256": "f3fc1193443ab4d38d964b42270fee04ee1be2ee1c7c2234cb361d7adc509162"
+      },
+      {
+        "path": "skills/nacl-publish/resources/workflows/nacl-render/SKILL.md",
+        "mode": "0644",
+        "size": 2849,
+        "sha256": "94c98db29d8266395fd34206c8608b89ceb0bd3e0a8e81fd75123f3d92e9bfaf"
+      },
+      {
+        "path": "skills/nacl-publish/resources/workflows/nacl-tl-deploy/SKILL.md",
+        "mode": "0644",
+        "size": 5514,
+        "sha256": "2538d6cee3d8cb85b272d38d0e27ffccfc20fc87310d2a3ba73df2cc5222ce45"
+      },
+      {
+        "path": "skills/nacl-publish/resources/workflows/nacl-tl-release/SKILL.md",
+        "mode": "0644",
+        "size": 12180,
+        "sha256": "4de77f54a3b288576c75940d534469d0185e6645252a4b380ee7e9287906fca6"
+      },
+      {
+        "path": "skills/nacl-publish/resources/workflows/nacl-tl-ship/SKILL.md",
+        "mode": "0644",
+        "size": 6181,
+        "sha256": "4939aadbcf2db27c6357e81dd4b8f62827272901d87e7f6245b652112b01d9a4"
+      },
+      {
+        "path": "skills/nacl-sa/SKILL.md",
+        "mode": "0644",
+        "size": 1172,
+        "sha256": "7d2aaaeb17c9d5e7b6da137d5f688c90754bd5cff53380aaa960c43b2c6175d3"
+      },
+      {
+        "path": "skills/nacl-sa/resources/nacl-goal/checks/validate.sh",
+        "mode": "0644",
+        "size": 2220,
+        "sha256": "698d59eae860138cb647ec48be30ad4c930e41cf82edbf9c63f4017a2b43fd49"
+      },
+      {
+        "path": "skills/nacl-sa/resources/references/skills-only-runtime-contract.md",
+        "mode": "0644",
+        "size": 7181,
+        "sha256": "1b8c8c07396eb63e8619ea0659433b6ad86913cc4332a98421cf13f5d46adf3d"
+      },
+      {
+        "path": "skills/nacl-sa/resources/references/workflow-gateway-contract.md",
+        "mode": "0644",
+        "size": 6832,
+        "sha256": "760495f59688a7f90fbbdc70d8936f43ea05047b5d8104418cc31a506366287a"
+      },
+      {
+        "path": "skills/nacl-sa/resources/references/workflow-gateway-map.json",
+        "mode": "0644",
+        "size": 13477,
+        "sha256": "8e94a7b0041ce77871769014212c8c57323776ba36b9a146a0f47720c0cd2853"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-core/SKILL.md",
+        "mode": "0644",
+        "size": 6840,
+        "sha256": "3300a37c47c3fe7d4f5bee110c0d4a3ae106de85315fd51abbb69405c8c99dc8"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-sa-architect/SKILL.md",
+        "mode": "0644",
+        "size": 16471,
+        "sha256": "d7fc65f9be054bce7bba21c78ac734f92509b5b9a7e3ed8da9c457096332566c"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-sa-domain/SKILL.md",
+        "mode": "0644",
+        "size": 5101,
+        "sha256": "24f2508e6b4a60d17c7bbb34a48743462a215f486243f62805248b1ccb1c4755"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-sa-feature/SKILL.md",
+        "mode": "0644",
+        "size": 7463,
+        "sha256": "37d08b687b899de2e3a7818724fc121b4aebbed67db41d66f5482c901cd57f8a"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-sa-finalize/SKILL.md",
+        "mode": "0644",
+        "size": 6156,
+        "sha256": "b01459327a6a7c4e2f440c3207e7c28c2d0a24b1d10038fefd77d8e19023bded"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-sa-flags/SKILL.md",
+        "mode": "0644",
+        "size": 4727,
+        "sha256": "9671caa132d53e654fdc8d6e0756fab0d660e39a481b61af99716834747b040f"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-sa-full/SKILL.md",
+        "mode": "0644",
+        "size": 12679,
+        "sha256": "44a46bc40d4ac064dad31fbbd36abf0afcaca048b78c933a098a3aba5890d53d"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-sa-roles/SKILL.md",
+        "mode": "0644",
+        "size": 4967,
+        "sha256": "348bd1aecbd8169ff126ad847ed27f40a34ea3766566e25788613262aaa2ee48"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-sa-uc/SKILL.md",
+        "mode": "0644",
+        "size": 27077,
+        "sha256": "5bc4d2665aa13ed8aab015152b42c513bd5699cc20098cc3f337fb8aeb4ad33c"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-sa-ui/SKILL.md",
+        "mode": "0644",
+        "size": 13437,
+        "sha256": "314a9d9ab88094bd00ecdd521fdc020c4759544cbece1a7a3c2993580d1642ba"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/nacl-sa-validate/SKILL.md",
+        "mode": "0644",
+        "size": 16155,
+        "sha256": "00da4073a99157f16fb69d8a0e8c4f719aa01fab858275878008d679dba27417"
+      },
+      {
+        "path": "skills/nacl-sa/resources/workflows/references/migration-rules.md",
+        "mode": "0644",
+        "size": 2724,
+        "sha256": "482f3e3f7ec8005ff392012f884df351155d9e842486ee2d1d2fe54221983da0"
+      },
+      {
+        "path": "skills/nacl-tl/SKILL.md",
+        "mode": "0644",
+        "size": 1019,
+        "sha256": "b47f174c61301ce44666718802fe2a18b24ad0629f62211305348cb215e9f4bb"
+      },
+      {
+        "path": "skills/nacl-tl/resources/nacl-goal/checks/fix.sh",
+        "mode": "0644",
+        "size": 1812,
+        "sha256": "9055e0d70117da038db5841e418fb76cd40cb50eb6b664d8416a529c1c8c630d"
+      },
+      {
+        "path": "skills/nacl-tl/resources/nacl-goal/checks/reopened-drain.sh",
+        "mode": "0644",
+        "size": 1163,
+        "sha256": "9b72a40202aba3f3916deb32363a4182b074ca87f985d1168a1f1730c604d7ca"
+      },
+      {
+        "path": "skills/nacl-tl/resources/nacl-goal/checks/wave.sh",
+        "mode": "0644",
+        "size": 1670,
+        "sha256": "ba8da79989ef0abee50a41072ebe49813a78512f4a84bfbdfdc09054b6f7436b"
+      },
+      {
+        "path": "skills/nacl-tl/resources/nacl-tl-core/references/remote-mode-coordination.md",
+        "mode": "0644",
+        "size": 4625,
+        "sha256": "32a9616ff2803e6da98e65026e93f87668ee7d3067bac0d8309b966736ccef38"
+      },
+      {
+        "path": "skills/nacl-tl/resources/references/skills-only-runtime-contract.md",
+        "mode": "0644",
+        "size": 7181,
+        "sha256": "1b8c8c07396eb63e8619ea0659433b6ad86913cc4332a98421cf13f5d46adf3d"
+      },
+      {
+        "path": "skills/nacl-tl/resources/references/workflow-gateway-contract.md",
+        "mode": "0644",
+        "size": 6832,
+        "sha256": "760495f59688a7f90fbbdc70d8936f43ea05047b5d8104418cc31a506366287a"
+      },
+      {
+        "path": "skills/nacl-tl/resources/references/workflow-gateway-map.json",
+        "mode": "0644",
+        "size": 13477,
+        "sha256": "8e94a7b0041ce77871769014212c8c57323776ba36b9a146a0f47720c0cd2853"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-conductor/SKILL.md",
+        "mode": "0644",
+        "size": 11405,
+        "sha256": "f729bf7f8e119a61e0eae9457349aef23db05a3ed33b054933492ed7a5627531"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-core/SKILL.md",
+        "mode": "0644",
+        "size": 4804,
+        "sha256": "7c304584682faa8c78b3711b1aaf5f7be97c748592e8d8884d34ba22cd89b513"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-core/references/tl-codex-contract.md",
+        "mode": "0644",
+        "size": 5853,
+        "sha256": "0e46022933c9745bff30587e23f80bb867e76649d29f5df3c14c7e58ab8a6781"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-deliver/SKILL.md",
+        "mode": "0644",
+        "size": 8876,
+        "sha256": "4e6b91606b0e59fffbeea2c56b65a3d334b5dd65693e0c4ba0aa08109f10ba9e"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-deploy/SKILL.md",
+        "mode": "0644",
+        "size": 5514,
+        "sha256": "2538d6cee3d8cb85b272d38d0e27ffccfc20fc87310d2a3ba73df2cc5222ce45"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-dev/SKILL.md",
+        "mode": "0644",
+        "size": 7772,
+        "sha256": "8505613753663e35922ffe97617580f337040cd3a9fe27b254139b5e4b22e716"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-dev-be/SKILL.md",
+        "mode": "0644",
+        "size": 4625,
+        "sha256": "e4268208984c1ad8e1a89bf912c229e303588c3e50441913baabbab033e70ebf"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-dev-fe/SKILL.md",
+        "mode": "0644",
+        "size": 6231,
+        "sha256": "70124688f7cec1355abef38bce19df2b1056f1c37545c23860c16fdb61c60470"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-diagnose/SKILL.md",
+        "mode": "0644",
+        "size": 4389,
+        "sha256": "d5b1babc9d52d44a84cf975ec5fd444893641a9a0245be9c7de591ee499520d5"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-docs/SKILL.md",
+        "mode": "0644",
+        "size": 3694,
+        "sha256": "898c2f38777bedf73ca0b87937a6b09d9ba7a48c6c6a7d4281d39f4247fdb11f"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-fix/SKILL.md",
+        "mode": "0644",
+        "size": 27627,
+        "sha256": "47d59b6780f6db2e2b4119257eb3deaa7b31a3c586f0c4fd9802212aa632da0d"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-full/SKILL.md",
+        "mode": "0644",
+        "size": 13918,
+        "sha256": "7fb9e822ce7da749b547fd3c85c5c4aa0db20f7f8493622e6ea67162d48f7e3c"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-hotfix/SKILL.md",
+        "mode": "0644",
+        "size": 7114,
+        "sha256": "87d5523d072497a8b833026a45ad63103e828cc4507b5677574c4397595f045b"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-intake/SKILL.md",
+        "mode": "0644",
+        "size": 7069,
+        "sha256": "70c0ed0c2b932def2a082345cadc136a2a1423b7325fcc61805770816f2c120f"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-next/SKILL.md",
+        "mode": "0644",
+        "size": 4425,
+        "sha256": "c9e86f45bfd04898c02a6ab1b607311a4e0ffd6a5f12b4ce1af0e2ffb3ec9f14"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-plan/SKILL.md",
+        "mode": "0644",
+        "size": 14651,
+        "sha256": "bdb5a74d3cb91f41deb64f1255f6723c8b23250d9ae87ef94fbc360989e770ab"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-qa/SKILL.md",
+        "mode": "0644",
+        "size": 10864,
+        "sha256": "2bbe3c372f609783789a156b9a7a509593b63fed560a2c5acf6465f1ff53b29b"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-reconcile/SKILL.md",
+        "mode": "0644",
+        "size": 3950,
+        "sha256": "e42b1a46777e20c0d2e109733d759578b68a082ee97d81205d2a8b05370bf376"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-regression-test/SKILL.md",
+        "mode": "0644",
+        "size": 4497,
+        "sha256": "e3890e06e9ddedf9a539443346e3fca8cac296efdaa12c67771fe58d9d92c539"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-release/SKILL.md",
+        "mode": "0644",
+        "size": 12180,
+        "sha256": "4de77f54a3b288576c75940d534469d0185e6645252a4b380ee7e9287906fca6"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-reopened/SKILL.md",
+        "mode": "0644",
+        "size": 7112,
+        "sha256": "7a0b03b3ceeb127eb80d51559e1d1f44c684ba951f06c6240c9974405edd24c5"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-review/SKILL.md",
+        "mode": "0644",
+        "size": 12811,
+        "sha256": "c3bafec1c2c94902c981c140fb1ed825e7460cca90ae7ed18bac1a029a432f38"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-ship/SKILL.md",
+        "mode": "0644",
+        "size": 6181,
+        "sha256": "4939aadbcf2db27c6357e81dd4b8f62827272901d87e7f6245b652112b01d9a4"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-status/SKILL.md",
+        "mode": "0644",
+        "size": 3722,
+        "sha256": "f80a917db7f7d6417a31a79d421784474f4f4917261c7e047179f69c3eb918d1"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-stubs/SKILL.md",
+        "mode": "0644",
+        "size": 12256,
+        "sha256": "403e2fcd94d1613fadd1b96dc93566c455b4c2f8d0ca66da1046581f21fbf19c"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-sync/SKILL.md",
+        "mode": "0644",
+        "size": 9940,
+        "sha256": "ecda2642f5ad4363ddf2001aa982efb36302d2dcecbdd42271f48b1d1cb7f452"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-verify/SKILL.md",
+        "mode": "0644",
+        "size": 3833,
+        "sha256": "1bcda8cb4da8dd60d8f061d3eb082fab3acc1059e659abb4b63b865eb174c253"
+      },
+      {
+        "path": "skills/nacl-tl/resources/workflows/nacl-tl-verify-code/SKILL.md",
+        "mode": "0644",
+        "size": 9449,
+        "sha256": "ec5b4835c244869af6ec9f875bdcd29e57207e25d5a816c7cc3285ea8177a47e"
+      },
+      {
+        "path": "skills/nacl-verify/SKILL.md",
+        "mode": "0644",
+        "size": 971,
+        "sha256": "65aa62ce5a55557c418091671cca016905136a58031faa8887d3ecd1f455db4f"
+      },
+      {
+        "path": "skills/nacl-verify/resources/references/skills-only-runtime-contract.md",
+        "mode": "0644",
+        "size": 7181,
+        "sha256": "1b8c8c07396eb63e8619ea0659433b6ad86913cc4332a98421cf13f5d46adf3d"
+      },
+      {
+        "path": "skills/nacl-verify/resources/workflows/nacl-tl-verify/SKILL.md",
+        "mode": "0644",
+        "size": 3833,
+        "sha256": "1bcda8cb4da8dd60d8f061d3eb082fab3acc1059e659abb4b63b865eb174c253"
+      },
+      {
+        "path": "skills/nacl-verify/resources/workflows/nacl-tl-verify-code/SKILL.md",
+        "mode": "0644",
+        "size": 9449,
+        "sha256": "ec5b4835c244869af6ec9f875bdcd29e57207e25d5a816c7cc3285ea8177a47e"
+      },
+      {
+        "path": "skills/nacl-verify/resources/workflows/references/verification-evidence.md",
+        "mode": "0644",
+        "size": 14769,
+        "sha256": "a959eff5d60c3cee392a8e6dae2505b2f1bd831f01c34f2faebd2dd831f225f6"
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vibe · Caching & freshness"
+  short_description: "Cache keys, invalidation and data freshness"
+  default_prompt: "Use $vibe-cache to audit the selected caching & freshness boundary."

@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Motion Design"
+  short_description: "Fast motion synced to music"
+  default_prompt: "Use $pixverse-motion-design to create a fast music-led opener, measure the audio beats, and time generated footage, exact titles and graphic accents to them in FFmpeg."
+policy:
+  allow_implicit_invocation: true

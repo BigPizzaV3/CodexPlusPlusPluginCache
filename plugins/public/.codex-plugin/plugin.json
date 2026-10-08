@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Government contract, India PIL and RTI, policy-note, and tender-compliance skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#1F2937",
+    "brandColorDark": "#C8D2E0",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Review this government contract or tender against the governing procurement framework.",
+      "Draft this India PIL, RTI application, or RTI appeal for the correct forum.",
+      "Turn this proposal into a decision-ready policy or cabinet note."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Public",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Six reusable public-law workflows covering government contracts, India public interest litigation and RTI, policy and cabinet notes, and tender compliance.",
+    "shortDescription": "Public law workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "public-law",
+    "government",
+    "RTI",
+    "procurement"
+  ],
+  "license": "MIT",
+  "name": "public",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "DNA-seeded-cytoplasm-gradient-watershed",
+  "methodVersion": "1",
+  "license": "SciPy and scikit-image BSD-3-Clause",
+  "runtime": {
+    "numpy": "2.3.5",
+    "scipy": "1.16.3",
+    "scikit-image": "0.26.0"
+  },
+  "reference": "https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.watershed",
+  "noPretrainedWeights": true,
+  "output": "estimated-fluorescence-cell-regions-not-verified-cells"
+}

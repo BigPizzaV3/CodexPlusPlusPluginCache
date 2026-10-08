@@ -1,0 +1,7 @@
+interface:
+  display_name: "Guide"
+  short_description: "Choose the next ForgeMind journey from your context and outcome."
+  default_prompt: "Use $forgemind-guide to choose the next safe ForgeMind action."
+policy:
+  allow_implicit_invocation: false
+

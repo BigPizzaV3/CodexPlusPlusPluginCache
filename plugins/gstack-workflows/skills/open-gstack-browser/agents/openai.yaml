@@ -1,0 +1,8 @@
+interface:
+  display_name: "Open gstack Browser"
+  short_description: "Open the native visible gstack browser only on a compatible local host."
+  default_prompt: "Use Open gstack Browser for this task."
+policy:
+  products:
+    - CODEX
+  allow_implicit_invocation: false

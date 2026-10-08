@@ -1,0 +1,187 @@
+{
+  "sourceDocs": [
+    "https://docs.zuora.com/en/zuora-cpq/development-resources/overview-of-zuora-cpq-development-resources",
+    "https://docs.zuora.com/en/zuora-cpq/development-resources/zuora-cpq-component-library"
+  ],
+  "notes": [
+    "Catalog aligned with cpq-patterns.md quote-creation flows.",
+    "For programmatic quote creation: after DML or renewQuote(), call new zqu.Quote(quoteId).buildAndSave() in a Queueable — never in batch execute().",
+    "For quote preview/metrics after creation, use zqu.MetricsUtil.getPreviewedInvoiceItems(Id) — not previewQuote(Id).",
+    "previewQuote() accepts zqu__Quote__c, not Id."
+  ],
+  "classes": [
+    {
+      "name": "zQuoteUtil",
+      "namespace": "zqu",
+      "methods": [
+        {
+          "name": "renewQuote",
+          "aliases": [],
+          "category": "quote lifecycle",
+          "description": "Renew an existing subscription quote. Query required fields before calling.",
+          "parameters": [
+            { "name": "quote", "type": "zqu__Quote__c" }
+          ],
+          "bulkPreferred": false,
+          "requiresFollowUp": ["buildAndSave"]
+        },
+        {
+          "name": "previewQuote",
+          "aliases": ["preview"],
+          "category": "quote lifecycle",
+          "description": "Preview a quote before sending to Zuora. Pass the quote SObject, not Id.",
+          "parameters": [
+            { "name": "quote", "type": "zqu__Quote__c" }
+          ],
+          "invalidArgumentPatterns": ["^\\s*\\w*Id\\s*$", "^\\s*'[a-zA-Z0-9]{15,18}'\\s*$"],
+          "bulkPreferred": false
+        },
+        {
+          "name": "sendQuoteToZuora",
+          "aliases": ["sendToZuora"],
+          "category": "quote lifecycle",
+          "description": "Send a quote to Zuora.",
+          "parameters": [
+            { "name": "quote", "type": "zqu__Quote__c" }
+          ],
+          "bulkPreferred": false
+        },
+        {
+          "name": "submitQuote",
+          "aliases": [],
+          "category": "quote lifecycle",
+          "description": "Submit a quote through CPQ flow.",
+          "parameters": [
+            { "name": "quote", "type": "zqu__Quote__c" }
+          ],
+          "bulkPreferred": false
+        },
+        {
+          "name": "calculateCharges",
+          "aliases": ["calculateCharge"],
+          "category": "pricing",
+          "description": "Calculate quote charge values.",
+          "parameters": [
+            { "name": "quote", "type": "zqu__Quote__c" }
+          ],
+          "bulkPreferred": true
+        },
+        {
+          "name": "getQuoteInfo",
+          "aliases": ["getQuote"],
+          "category": "read",
+          "description": "Read quote information.",
+          "parameters": [
+            { "name": "quoteId", "type": "Id" }
+          ],
+          "bulkPreferred": false
+        },
+        {
+          "name": "getProductRatePlans",
+          "aliases": ["getRatePlans"],
+          "category": "catalog",
+          "description": "Read product rate plans for quote customization.",
+          "parameters": [
+            { "name": "productId", "type": "Id" }
+          ],
+          "bulkPreferred": true
+        },
+        {
+          "name": "getZuoraConfigInformation",
+          "aliases": [],
+          "category": "config",
+          "description": "Retrieve Zuora configuration. Triggers queueables — avoid in batch execute().",
+          "parameters": [],
+          "bulkPreferred": false,
+          "queueableTriggering": true
+        }
+      ]
+    },
+    {
+      "name": "Quote",
+      "namespace": "zqu",
+      "instanceClass": true,
+      "methods": [
+        {
+          "name": "buildAndSave",
+          "aliases": ["buildandsave"],
+          "category": "quote lifecycle",
+          "description": "Load subscription products and persist quote state. Triggers queueables — call only in Queueable/@future, never in batch execute().",
+          "parameters": [],
+          "returnType": "zqu.Quote",
+          "bulkPreferred": false,
+          "queueableTriggering": true
+        }
+      ],
+      "constructors": [
+        {
+          "parameters": [{ "name": "quoteId", "type": "Id" }]
+        }
+      ]
+    },
+    {
+      "name": "MetricsUtil",
+      "namespace": "zqu",
+      "methods": [
+        {
+          "name": "getPreviewedInvoiceItems",
+          "aliases": [],
+          "category": "metrics",
+          "description": "Preview quote invoice items/metrics. Use for post-creation preview instead of previewQuote(Id).",
+          "parameters": [
+            { "name": "quoteId", "type": "Id" }
+          ],
+          "returnType": "zqu.MetricsUtil.InvoiceItemsResult",
+          "bulkPreferred": false,
+          "queueableTriggering": true
+        },
+        {
+          "name": "getExistingInvoiceItems",
+          "aliases": [],
+          "category": "metrics",
+          "description": "Read existing subscription invoice items/metrics.",
+          "parameters": [
+            { "name": "quoteId", "type": "Id" }
+          ],
+          "returnType": "zqu.MetricsUtil.InvoiceItemsResult",
+          "bulkPreferred": false,
+          "queueableTriggering": true
+        }
+      ]
+    },
+    {
+      "name": "QuoteRecalculateController",
+      "namespace": "zqu",
+      "methods": [
+        {
+          "name": "JR_recalculate",
+          "aliases": [],
+          "category": "metrics",
+          "description": "Recalculate and save metrics to quote. Triggers queueables.",
+          "parameters": [
+            { "name": "quoteId", "type": "Id" }
+          ],
+          "bulkPreferred": false,
+          "queueableTriggering": true
+        },
+        {
+          "name": "JR_recalculateInvoiceItemSummaries",
+          "aliases": [],
+          "category": "metrics",
+          "description": "Recalculate and save invoice item summaries. Triggers queueables.",
+          "parameters": [
+            { "name": "quoteId", "type": "Id" }
+          ],
+          "bulkPreferred": false,
+          "queueableTriggering": true
+        }
+      ]
+    }
+  ],
+  "objectNamespaces": [
+    "zqu__Quote__c",
+    "zqu__QuoteRatePlan__c",
+    "zqu__QuoteRatePlanCharge__c",
+    "zqu__QuoteAmendment__c"
+  ]
+}

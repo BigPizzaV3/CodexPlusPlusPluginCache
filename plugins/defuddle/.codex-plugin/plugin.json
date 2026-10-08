@@ -1,0 +1,39 @@
+{
+  "author": {
+    "name": "Obsidian",
+    "url": "https://github.com/kepano"
+  },
+  "description": "Workflow guidance and bundled source reference for extracting primary article content and metadata with Defuddle.",
+  "homepage": "https://github.com/kepano/defuddle",
+  "interface": {
+    "capabilities": [
+      "Article extraction guidance",
+      "HTML-to-Markdown workflows"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Extract the readable content from this page",
+      "Turn this noisy article into clean readable text",
+      "Identify the main article content and remove page clutter"
+    ],
+    "developerName": "RONALD FERRARI SOARES",
+    "displayName": "Defuddle",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Guides extraction of readable article content from noisy pages and documents. Actual fetching or page access depends on tools available in the host environment.",
+    "shortDescription": "Clean article extraction"
+  },
+  "keywords": [
+    "web",
+    "extraction",
+    "markdown",
+    "html",
+    "metadata",
+    "cli"
+  ],
+  "license": "MIT",
+  "name": "defuddle",
+  "repository": "https://github.com/kepano/defuddle",
+  "skills": "./skills/",
+  "version": "0.19.4"
+}

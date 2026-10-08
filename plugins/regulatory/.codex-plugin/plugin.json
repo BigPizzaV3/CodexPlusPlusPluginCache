@@ -1,0 +1,41 @@
+{
+  "author": {
+    "name": "Rohas Nagpal",
+    "url": "https://rohasnagpal.com"
+  },
+  "description": "Regulatory applicability, examinations, licences, change, filings, and sanctions-screening skills.",
+  "homepage": "https://github.com/rohasnagpal/legal-ai-skills",
+  "interface": {
+    "brandColor": "#4C1D95",
+    "brandColorDark": "#996AE2",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.svg",
+    "defaultPrompt": [
+      "Identify the current regulatory framework for this activity and document what remains unverified.",
+      "Prepare this regulatory response, licence application, or filing from authoritative requirements and evidence.",
+      "Document this sanctions screening or regulatory change review as a reproducible audit record."
+    ],
+    "developerName": "Rohas Nagpal",
+    "displayName": "Rohas Legal AI: Regulatory",
+    "logo": "./.codex-plugin/assets/logo.svg",
+    "longDescription": "Six reusable regulatory workflows covering applicability, examinations and show-cause responses, licences, change monitoring, filings, and reproducible sanctions screening.",
+    "shortDescription": "Regulatory law workflows",
+    "websiteURL": "https://github.com/rohasnagpal/legal-ai-skills"
+  },
+  "keywords": [
+    "legal",
+    "regulatory",
+    "compliance",
+    "licensing",
+    "sanctions"
+  ],
+  "license": "MIT",
+  "name": "regulatory",
+  "repository": "https://github.com/rohasnagpal/legal-ai-skills",
+  "skills": "./skills/",
+  "version": "0.2.1"
+}

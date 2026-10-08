@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "FLOWSTACK UI",
+    "url": "https://github.com/flowstack-ui"
+  },
+  "description": "Exact-version workflows for building, composing, reviewing, and maintaining FLOWSTACK UI.",
+  "homepage": "https://agents.brick-ui.com",
+  "interface": {
+    "brandColor": "#6D4AFF",
+    "brandColorDark": "#6D4AFF",
+    "capabilities": [
+      "Skills"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Build this interface with exact FLOWSTACK guidance.",
+      "Review this FLOWSTACK implementation.",
+      "Plan this FLOWSTACK package change."
+    ],
+    "developerName": "Swifty LLC",
+    "displayName": "FLOWSTACK UI",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Build, compose, review, and maintain FLOWSTACK interfaces using exact-version Agent Knowledge from installed Atom, Brick, Colors, and Theme packages. The plugin keeps finished interfaces Brick-first, validates package and ownership boundaries, and reports genuine component or product gaps instead of silently inventing APIs.",
+    "privacyPolicyURL": "https://github.com/flowstack-ui/plugin/blob/main/PRIVACY.md",
+    "shortDescription": "Build with FLOWSTACK guidance",
+    "supportURL": "https://github.com/flowstack-ui/plugin/issues",
+    "termsOfServiceURL": "https://github.com/flowstack-ui/plugin/blob/main/TERMS.md",
+    "websiteURL": "https://agents.brick-ui.com"
+  },
+  "keywords": [
+    "flowstack",
+    "brick-ui",
+    "atom-ui",
+    "design-system",
+    "skills"
+  ],
+  "license": "MIT",
+  "name": "flowstack-ui",
+  "repository": "https://github.com/flowstack-ui/plugin",
+  "skills": "./skills/",
+  "version": "0.1.2"
+}

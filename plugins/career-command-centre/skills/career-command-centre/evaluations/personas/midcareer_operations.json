@@ -1,0 +1,118 @@
+{
+  "persona_id": "P02",
+  "synthetic": true,
+  "profile": {
+    "name": "Jordan Lee",
+    "headline": "Customer Operations and Service Improvement Manager",
+    "location": "Toronto, Canada",
+    "contact": [
+      {"label": "email", "text": "jordan.lee@example.test", "url": "mailto:jordan.lee@example.test"}
+    ],
+    "work_rights": "Canadian citizen"
+  },
+  "preferences": {
+    "target_directions": ["Customer Operations Manager", "Service Design Manager", "Continuous Improvement Lead"],
+    "locations": ["Toronto", "Remote Canada"],
+    "remote_preference": "flexible",
+    "salary_minimum": 115000,
+    "currency": "CAD",
+    "employment_types": ["permanent", "fixed-term"],
+    "excluded_employers": [],
+    "excluded_role_patterns": ["commission only", "contact centre supervisor"],
+    "selectivity": "focused",
+    "source_preferences": {
+      "strategy": "automatic",
+      "preferred": [],
+      "excluded": []
+    },
+    "document_preferences": {
+      "format_mode": "smart_default",
+      "reference_template_name": null,
+      "page_strategy": "adaptive",
+      "section_order": ["Professional Summary", "Role-Match Experience", "Professional Experience", "Core Skills", "Education", "Recognition and Certification"],
+      "additional_sections": [],
+      "omitted_sections": [],
+      "cover_letter_mode": "paired",
+      "style_notes": []
+    }
+  },
+  "source_cv": {
+    "summary": "Customer operations manager with nine years in service delivery, complaint resolution, team leadership and continuous improvement.",
+    "experience": [
+      {
+        "role": "Customer Operations Manager",
+        "company": "Sunline Energy",
+        "location": "Toronto",
+        "dates": "2021–Present",
+        "bullets": [
+          "Managed 45 people across customer service, quality and workforce coordination.",
+          "Redesigned complaint triage and ownership, reducing average resolution time by 28% over nine months.",
+          "Introduced service metrics, weekly performance huddles and issue-escalation routines."
+        ]
+      },
+      {
+        "role": "Service Improvement Lead",
+        "company": "Coastal Insurance",
+        "location": "Toronto",
+        "dates": "2017–2021",
+        "bullets": [
+          "Mapped customer journeys and coordinated improvement work across service and claims teams.",
+          "Facilitated frontline workshops and translated recurring issues into workflow changes."
+        ]
+      }
+    ],
+    "skills": ["Customer operations", "Continuous improvement", "Complaint resolution", "Service metrics", "Team leadership", "Journey mapping"],
+    "education": ["Bachelor of Business, River City University"]
+  },
+  "evidence": [
+    {
+      "evidence_id": "EV-P02-001",
+      "claim": "Managed a 45-person customer operations function.",
+      "safe_wording": "Managed a 45-person customer operations function across service and quality teams.",
+      "source_type": "current_cv",
+      "source_name": "Jordan_Lee_Mock_CV.docx",
+      "source_excerpt": "Managed 45 people across customer service, quality and workforce coordination.",
+      "confidence": "source_only",
+      "restrictions": ["Do not increase team size or claim national accountability."],
+      "role_relevance": ["operations leadership"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P02-002",
+      "claim": "Reduced complaint resolution time by 28 percent.",
+      "safe_wording": "Reduced complaint resolution time by 28% through workflow redesign and service ownership changes.",
+      "source_type": "current_cv",
+      "source_name": "Jordan_Lee_Mock_CV.docx",
+      "source_excerpt": "Redesigned complaint triage and ownership, reducing average resolution time by 28% over nine months.",
+      "confidence": "source_only",
+      "restrictions": ["Retain the nine-month timeframe when useful."],
+      "role_relevance": ["continuous improvement", "service design"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P02-003",
+      "claim": "Implemented service metrics and weekly performance routines.",
+      "safe_wording": "Implemented service metrics and weekly performance routines for customer operations.",
+      "source_type": "current_cv",
+      "source_name": "Jordan_Lee_Mock_CV.docx",
+      "source_excerpt": "Introduced service metrics, weekly performance huddles and issue escalation routines.",
+      "confidence": "source_only",
+      "restrictions": ["Do not describe as enterprise analytics ownership."],
+      "role_relevance": ["operations", "performance"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    },
+    {
+      "evidence_id": "EV-P02-004",
+      "claim": "Completed a Bachelor of Business.",
+      "safe_wording": "Bachelor of Business.",
+      "source_type": "current_cv",
+      "source_name": "Jordan_Lee_Mock_CV.docx",
+      "source_excerpt": "Bachelor of Business, River City University.",
+      "confidence": "source_only",
+      "restrictions": ["Synthetic fixture only."],
+      "role_relevance": ["education"],
+      "captured_at": "2026-07-14T09:00:00+08:00"
+    }
+  ],
+  "expected_journey": "Assess a supplied fixed-term role, make duration and annualised salary explicit, and avoid overstating analytics depth."
+}

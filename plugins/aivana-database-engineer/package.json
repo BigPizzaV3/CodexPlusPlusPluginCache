@@ -1,0 +1,41 @@
+{
+  "name": "sqlserver-postgres-performance-advisor",
+  "version": "1.1.0",
+  "description": "AI-native governance-first SQL Server and PostgreSQL orchestration plugin.",
+  "private": true,
+  "license": "MIT",
+  "type": "commonjs",
+  "files": [
+    ".codex-plugin/",
+    "assets/",
+    "skills/",
+    "runtime/",
+    "scripts/",
+    "tests/",
+    "demos/",
+    "*.md",
+    "!PRD_COMPLETION_REPORT.md",
+    "LICENSE",
+    ".env.example"
+  ],
+  "scripts": {
+    "release:qualify": "node scripts/release-qualify.js",
+    "release:package": "node scripts/package-release.js",
+    "test": "node --require ./tests/setup.cjs --test tests/*.test.js",
+    "smoke": "node runtime/runTool.js production_readiness_check '{\"environment\":\"production\",\"engine\":\"postgres\"}'",
+    "readiness": "node scripts/plugin-readiness-report.js postgres production",
+    "readiness:strict": "node scripts/plugin-readiness-report.js postgres production --strict"
+  },
+  "dependencies": {
+    "@tediousjs/connection-string": "0.5.0",
+    "mssql": "^11.0.1",
+    "mysql2": "3.24.4",
+    "pg": "^8.13.1"
+  },
+  "optionalDependencies": {
+    "msnodesqlv8": "5.5.0"
+  },
+  "engines": {
+    "node": ">=22.16.0"
+  }
+}

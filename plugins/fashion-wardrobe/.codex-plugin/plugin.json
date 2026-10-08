@@ -1,0 +1,39 @@
+{
+  "author": {
+    "name": "Mohamed Sheir",
+    "url": "https://github.com/eng-samy"
+  },
+  "description": "Create fashion profiles, organize wardrobe items, visualize outfits, and try on eyewear while preserving identity.",
+  "homepage": "https://github.com/eng-samy/fashion-wardrobe-plugin",
+  "interface": {
+    "brandColor": "#6B4F3A",
+    "brandColorDark": "#C5A994",
+    "capabilities": [],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Create my fashion profile.",
+      "Create an outfit from my wardrobe.",
+      "Try these glasses on me."
+    ],
+    "developerName": "Mohamed Sheir",
+    "displayName": "Fashion Wardrobe",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Create guided fashion profiles and localized wardrobe try-ons on exact real image bases. Protect identity, pose, camera, inherited footwear and accessories; prohibit invented items and collages; quarantine failed candidates; verify every result before display; and composite eyewear without regenerating the face.",
+    "privacyPolicyURL": "https://github.com/eng-samy/fashion-wardrobe-plugin/blob/main/PRIVACY.md",
+    "shortDescription": "Visualize outfits. Try them on",
+    "termsOfServiceURL": "https://github.com/eng-samy/fashion-wardrobe-plugin/blob/main/TERMS.md"
+  },
+  "keywords": [
+    "fashion",
+    "wardrobe",
+    "outfits",
+    "virtual-try-on",
+    "eyewear"
+  ],
+  "license": "MIT",
+  "name": "fashion-wardrobe",
+  "repository": "https://github.com/eng-samy/fashion-wardrobe-plugin",
+  "skills": "./skills/",
+  "version": "1.1.2"
+}

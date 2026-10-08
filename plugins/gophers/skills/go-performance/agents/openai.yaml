@@ -1,0 +1,5 @@
+interface:
+  display_name: "Go Performance"
+  short_description: "Profile and optimize Go code with evidence"
+  brand_color: "#00ADD8"
+  default_prompt: "Use $go-performance to measure and optimize this Go performance problem."

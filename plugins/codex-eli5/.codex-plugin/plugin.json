@@ -1,0 +1,45 @@
+{
+  "author": {
+    "name": "\u5fb7\u8363 \u5f20",
+    "url": "https://github.com/zdrjson"
+  },
+  "description": "Turn complex topics into visual, beginner-friendly, single-file HTML explainers.",
+  "homepage": "https://github.com/zdrjson/codex-eli5#readme",
+  "interface": {
+    "brandColor": "#FF6B35",
+    "brandColorDark": "#FF6B35",
+    "capabilities": [
+      "Create",
+      "Visualize"
+    ],
+    "category": "Productivity",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Explain how DNS works with a visual ELI5 page.",
+      "How does the Discord bot work? Show the message flow as a visual ELI5 page.",
+      "Match this visual reference as an ELI5 HTML page."
+    ],
+    "developerName": "\u5fb7\u8363 \u5f20",
+    "displayName": "ELI5",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "logoDark": "./.codex-plugin/assets/logo-dark.png",
+    "longDescription": "Turn a difficult topic into a beginner-friendly, picture-first HTML explainer saved as one portable file. ELI5 uses large diagrams, plain language, and progressive steps so readers can follow the mechanism without a wall of text. For a normal topic, it creates an ordered visual walkthrough in the current workspace. When you provide a screenshot, video, or existing page as a reference, it first inspects that reference and follows its visible structure, spacing, palette, typography, and diagram language. CSS, JavaScript, and SVG stay inline by default, so the output needs no build step or hosted service. A bundled dependency-free checker verifies document structure, restrictive content security policy, self-contained resources, visible-word budget, and accessible names for inline SVGs. This skills-only plugin has no MCP server, hosted backend, account system, analytics, advertising, cookies, or developer-operated telemetry.",
+    "privacyPolicyURL": "https://github.com/zdrjson/codex-eli5/blob/main/PRIVACY.md",
+    "shortDescription": "Picture-first HTML explainers.",
+    "supportURL": "https://github.com/zdrjson/codex-eli5/issues",
+    "termsOfServiceURL": "https://github.com/zdrjson/codex-eli5/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/zdrjson/codex-eli5"
+  },
+  "keywords": [
+    "eli5",
+    "visual-explainer",
+    "education",
+    "html",
+    "learning"
+  ],
+  "license": "Apache-2.0",
+  "name": "codex-eli5",
+  "repository": "https://github.com/zdrjson/codex-eli5",
+  "skills": "./skills/",
+  "version": "0.2.6"
+}

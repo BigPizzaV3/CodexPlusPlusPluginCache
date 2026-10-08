@@ -1,0 +1,84 @@
+name: Skill bug or improvement
+description: Report a bug, suggest an improvement, or propose a scope change for an existing skill.
+title: "[Skill issue] <skill name> — <short summary>"
+labels:
+  - skill-issue
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For a brand-new skill, use the *Skill proposal* template instead.
+
+  - type: dropdown
+    id: skill_name
+    attributes:
+      label: Which skill?
+      description: One issue per skill. Pick **Other** if it isn't listed yet.
+      options:
+        - apu-memory-tuner
+        - local-ai-app-integration
+        - local-ai-use
+        - Other (name it in the details below)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue_kind
+    attributes:
+      label: Kind
+      options:
+        - "Improvement — existing skill should behave differently"
+        - "Bug — existing skill is broken"
+        - "Scope — scope of existing skill should change"
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Describe the issue
+      description: |
+        Fill in the section that matches what you picked above.
+
+        - **Improvement**: how should the skill's strategy, instructions, or behavior change, and why?
+        - **Bug**: what you asked the agent to do, what you expected the skill to do, what actually happened (full agent output / error helps), and minimal repro steps.
+        - **Scope**: should the skill's scope be **decreased**, **increased**, or **shifted**? Be specific about which triggers/use cases to add or remove.
+        - **Something else**: describe what's going on and what you'd like to see happen.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### Environment (required for Improvement and Bug; optional for Scope)
+
+  - type: input
+    id: system
+    attributes:
+      label: System / hardware
+      placeholder: e.g. AMD Ryzen™ AI Max+ 395, or MI300X, or Ryzen 9 7950X + RX 7900 XTX
+
+  - type: input
+    id: os
+    attributes:
+      label: OS and version
+      placeholder: e.g. Windows 11 23H2, Ubuntu 24.04, macOS 14.5
+
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Which agent did you use?
+      options:
+        - "Cursor"
+        - "Claude Code"
+        - "Claude Desktop"
+        - "Codex CLI"
+        - "GitHub Copilot"
+        - "Other (describe in details above)"
+
+  - type: input
+    id: model
+    attributes:
+      label: Model and Effort Level
+      placeholder: e.g. Claude Opus 4.7 High

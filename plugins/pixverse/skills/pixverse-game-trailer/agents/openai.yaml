@@ -1,0 +1,6 @@
+interface:
+  display_name: "PixVerse Game Trailers"
+  short_description: "Create game teaser videos"
+  default_prompt: "Use $pixverse-game-trailer to create a game teaser showing the core player action."
+policy:
+  allow_implicit_invocation: true

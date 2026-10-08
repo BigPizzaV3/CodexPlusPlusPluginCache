@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Coordinator"
+  short_description: "Keep parallel Codex tasks from crossing wires"
+  default_prompt: "Use $codex-coordinator to reuse related local tasks and coordinate this goal in complete bounded lanes on the current shared checkout, without background monitoring."

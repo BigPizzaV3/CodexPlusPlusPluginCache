@@ -1,0 +1,43 @@
+{
+  "author": {
+    "name": "EcoCitizenz Ltd",
+    "url": "https://developers.ecocitizenz.com"
+  },
+  "description": "See which API surfaces a workspace exposes, how they are secured and whether they carry public proof: OpenAPI / GraphQL / AsyncAPI contracts, catalogues, auth configuration, disclosure contacts and contract tests. Inspection only. Free.",
+  "homepage": "https://developers.ecocitizenz.com/agent-trust/api-passport/",
+  "interface": {
+    "capabilities": [
+      "Read"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./.codex-plugin/assets/composer-icon.png",
+    "defaultPrompt": [
+      "Review this workspace for API trust evidence gaps and report the Review Priority.",
+      "Which API surfaces does this workspace expose, how are they secured, and what has public proof?",
+      "Check this repository for API contracts, authentication configuration and security disclosure evidence."
+    ],
+    "developerName": "EcoCitizenz Ltd",
+    "displayName": "ECZ-ID API Trust",
+    "logo": "./.codex-plugin/assets/logo.png",
+    "longDescription": "Review the API surfaces in a workspace: OpenAPI, GraphQL and AsyncAPI contracts, catalogues, authentication and authorisation configuration, security disclosure contacts, contract tests and ECZ-ID public proof references. Inspection only, filename and path only. It does not test an endpoint or read a secret.",
+    "privacyPolicyURL": "https://developers.ecocitizenz.com/plugins/api-trust/privacy/",
+    "shortDescription": "Review API surfaces in a repo",
+    "supportURL": "https://developers.ecocitizenz.com/plugins/api-trust/support/",
+    "termsOfServiceURL": "https://developers.ecocitizenz.com/plugins/api-trust/terms/",
+    "websiteURL": "https://developers.ecocitizenz.com/agent-trust/api-passport/"
+  },
+  "keywords": [
+    "ecz-id",
+    "api",
+    "openapi",
+    "graphql",
+    "api-security",
+    "api-passport",
+    "review"
+  ],
+  "license": "MIT",
+  "name": "eczid-api-trust",
+  "repository": "https://github.com/Ecocitizenz/eczid-agent-plugins",
+  "skills": "./skills/",
+  "version": "0.1.1"
+}

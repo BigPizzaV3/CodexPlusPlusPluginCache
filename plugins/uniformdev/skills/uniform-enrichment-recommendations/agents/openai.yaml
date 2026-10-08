@@ -1,0 +1,4 @@
+interface:
+  display_name: "Uniform Recommendations"
+  short_description: "Personalized, relevance-ranked content"
+  default_prompt: "Add recommendations with $uniform-enrichment-recommendations"
