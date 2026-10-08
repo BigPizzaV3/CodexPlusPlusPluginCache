@@ -79,7 +79,15 @@
     "UNDECLARED means the inspected plugin manifest has no license field; it does not prove redistribution is forbidden.",
     "Independent packages with undeclared licenses and explicit license-file references received a second root-license-file check.",
     "No signed download URLs, account credentials, or creator account IDs are published.",
-    "Existing published packages were retained; package contents are unmodified.",
+    "Existing published packages were retained; package contents are retained, with explicitly recorded Git line-ending normalization.",
     "New packages received integrity, credential-marker and component-path checks; they were not batch-installed."
-  ]
+  ],
+  "gitLineEndingNormalization": {
+    "packages": [
+      "arabic-word-production",
+      "ship24"
+    ],
+    "files": 28,
+    "semanticChanges": false
+  }
 }
